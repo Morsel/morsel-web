@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html data-ng-app="Morsel" data-ng-controller="AppCtrl">
+  <head>
+    <title data-ng-bind="pageTitle"></title>
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="masthead">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+                <li data-ui-route="/home" data-ng-class="{active:$uiRoute}">
+                  <a href="#/home">
+                    <i class="glyphicon glyphicon-home"></i>
+                    Home
+                  </a>
+                </li>
+                <li data-ui-route="/about" data-ng-class="{active:$uiRoute}">
+                  <a href="#/about">
+                    <i class="glyphicon glyphicon-info-sign"></i>
+                    About
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" data-ui-view="main"></div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

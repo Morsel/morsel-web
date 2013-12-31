@@ -1,0 +1,125 @@
+//This file is essentially a copy of '../../vendor/sass-bootstrap/lib/bootstrap.scss' except we only want to include the components that we're using for now.
+
+// Import our variables
+@import "_variables.scss";
+
+@import "../../vendor/sass-bootstrap/lib/mixins";
+
+// Reset
+@import "../../vendor/sass-bootstrap/lib/normalize";
+@import "../../vendor/sass-bootstrap/lib/print";
+
+// Core CSS
+@import "../../vendor/sass-bootstrap/lib/scaffolding";
+@import "../../vendor/sass-bootstrap/lib/type";
+//@import "../../vendor/sass-bootstrap/lib/code";
+@import "../../vendor/sass-bootstrap/lib/grid";
+@import "../../vendor/sass-bootstrap/lib/tables";
+@import "../../vendor/sass-bootstrap/lib/forms";
+@import "../../vendor/sass-bootstrap/lib/buttons";
+
+// Components
+//@import "../../vendor/sass-bootstrap/lib/component-animations";
+@import "../../vendor/sass-bootstrap/lib/glyphicons";
+//@import "../../vendor/sass-bootstrap/lib/dropdowns";
+@import "../../vendor/sass-bootstrap/lib/button-groups";
+//@import "../../vendor/sass-bootstrap/lib/input-groups";
+@import "../../vendor/sass-bootstrap/lib/navs";
+@import "../../vendor/sass-bootstrap/lib/navbar";
+//@import "../../vendor/sass-bootstrap/lib/breadcrumbs";
+//@import "../../vendor/sass-bootstrap/lib/pagination";
+//@import "../../vendor/sass-bootstrap/lib/pager";
+//@import "../../vendor/sass-bootstrap/lib/labels";
+//@import "../../vendor/sass-bootstrap/lib/badges";
+//@import "../../vendor/sass-bootstrap/lib/jumbotron";
+//@import "../../vendor/sass-bootstrap/lib/thumbnails";
+//@import "../../vendor/sass-bootstrap/lib/alerts";
+//@import "../../vendor/sass-bootstrap/lib/progress-bars";
+//@import "../../vendor/sass-bootstrap/lib/media";
+//@import "../../vendor/sass-bootstrap/lib/list-group";
+//@import "../../vendor/sass-bootstrap/lib/panels";
+//@import "../../vendor/sass-bootstrap/lib/wells";
+//@import "../../vendor/sass-bootstrap/lib/close";
+
+// Components w/ JavaScript
+//@import "../../vendor/sass-bootstrap/lib/modals";
+//@import "../../vendor/sass-bootstrap/lib/tooltip";
+//@import "../../vendor/sass-bootstrap/lib/popovers";
+//@import "../../vendor/sass-bootstrap/lib/carousel";
+
+// Utility classes
+@import "../../vendor/sass-bootstrap/lib/utilities";
+@import "../../vendor/sass-bootstrap/lib/responsive-utilities";
+
+
+
+.page-header {
+  margin-top: 60px;
+
+  &:first-child {
+    margin-top: 20px;
+  }
+}
+
+h2 {
+  margin: 20px 0;
+  color: #666;
+}
+
+
+/**
+ * Navigation
+ */
+
+.navbar {
+  .navbar-inner {
+    padding: 0;
+  }
+
+  .nav {
+    margin: 0;
+    display: table;
+    width: 100%;
+
+    li {
+      display: table-cell;
+      width: 1%;
+      float: none;
+
+      a {
+        font-weight: bold;
+        text-align: center;
+        //border-left: 1px solid rgba(255, 255, 255, 0.75);
+        border-right: 1px solid rgba(0, 0, 0, .1);
+      }
+      
+      &:first-child a {
+        border-left: 0;
+        border-radius: 3px 0 0 3px;
+      }
+      
+      &:last-child a {
+        border-right: 0;
+        border-radius: 3px 0 0 3px;
+      }
+    }
+  }
+}
+
+
+/**
+ * Footer
+ */
+
+.footer {
+  margin-top: 80px;
+
+  .footer-inner {
+    padding: 40px 0;
+    border-top: 1px solid #DDD;
+  }
+}
+
+
+@import "../app/home/home.scss";
+

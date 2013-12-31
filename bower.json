@@ -1,0 +1,15 @@
+{
+  "name": "Morsel",
+  "version": "0.0.1",
+  "devDependencies": {
+    "angular": "~1.0.7",
+    "angular-mocks": "~1.0.7",
+    "angular-bootstrap": "~0.3.0",
+    "angular-ui-router": "~0.0.1",
+    "angular-ui-utils": "~0.0.3",
+    "bower-angular-placeholders": "~0.0.2",
+    "ngInfiniteScroll": "1.0.0",
+    "restangular": "",
+    "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0"
+  }
+}
