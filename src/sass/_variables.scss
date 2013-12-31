@@ -1,8 +1,11 @@
-// Overwrite bootstrap vars with our own
+// Overwrite any bootstrap vars with our own
 
-//colors
-$gray: #ff0000;
 $icon-font-path: "vendor/";
 
 // Core Bootstrap variables and mixins
 @import "../../vendor/sass-bootstrap/lib/_variables.scss";
+
+// Our variables
+
+// Colors
+$bg-main: $gray;
