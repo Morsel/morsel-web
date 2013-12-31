@@ -7,7 +7,7 @@ The Website for Morsel!
 Setup
 ==========
 
-1. Install Node, Grunt, Bower
+1. Install Node, Bower
 2. Clone repo
 3. $ npm install
 4. $ bower install
