@@ -1,7 +1,7 @@
 morsel-web
 ==========
 
-The Website for Morsel
+The Website for Morsel!
 
 
 Setup
