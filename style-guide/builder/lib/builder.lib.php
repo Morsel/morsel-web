@@ -304,7 +304,7 @@ class Buildr {
 			
 			while ($k < $c) {
 				
-				shuffle($listItems);
+				//shuffle($listItems);
 				$itemsArray = array();
 				$this->d->listItems->$numbers[$k-1] = new stdClass();
 				
