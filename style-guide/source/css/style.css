@@ -4,7 +4,40 @@ These are styles related to the styleguide implementation of Morsel. any actual 
 
 */
 
+a:link {
+	color: #f0cf69;
+}
+
 body {
   background-color: white;
   padding: 15px;
+}
+
+blockquote {
+	font-family: "Helvetica", "Arial", sans-serif;
+	font-weight: lighter;
+	color: #93a590;
+}
+
+p, ul, li, dl, dt, dd {
+	font-family: "Helvetica", "Arial", sans-serif;
+	font-weight: lighter;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: #e96144;
+	font-family: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+}
+
+h1.subheading, h2.subheading, h3.subheading, h4.subheading, h5.subheading, h6.subheading {
+	color: #93a590;
+	font-family: "Helvetica", "Arial", sans-serif;
+}
+
+.font-primary {
+	font-family: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+}
+
+.font-secondary {
+	font-family: "Helvetica", "Arial", sans-serif;
 }

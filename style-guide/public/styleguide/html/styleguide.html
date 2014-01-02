@@ -31,6 +31,18 @@
 		<span class="sg-swatch morsel-tertiary"></span>
 		<span class="sg-label">.morsel-tertiary</span>
 	</li>
+	<li>
+		<span class="sg-swatch morsel-interface"></span>
+		<span class="sg-label">.morsel-interface</span>
+	</li>
+	<li>
+		<span class="sg-swatch morsel-light-content"></span>
+		<span class="sg-label">.morsel-light-content</span>
+	</li>
+	<li>
+		<span class="sg-swatch morsel-dark-content"></span>
+		<span class="sg-label">.morsel-dark-content</span>
+	</li>
 </ul>
 							<div class="sg-code" style="display: none">
 								<h3 class="sg-code-head">HTML</h3>
@@ -49,6 +61,18 @@
 		&lt;span class=&quot;sg-swatch morsel-tertiary&quot;&gt;&lt;/span&gt;
 		&lt;span class=&quot;sg-label&quot;&gt;.morsel-tertiary&lt;/span&gt;
 	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;span class=&quot;sg-swatch morsel-interface&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;sg-label&quot;&gt;.morsel-interface&lt;/span&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;span class=&quot;sg-swatch morsel-light-content&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;sg-label&quot;&gt;.morsel-light-content&lt;/span&gt;
+	&lt;/li&gt;
+	&lt;li&gt;
+		&lt;span class=&quot;sg-swatch morsel-dark-content&quot;&gt;&lt;/span&gt;
+		&lt;span class=&quot;sg-label&quot;&gt;.morsel-dark-content&lt;/span&gt;
+	&lt;/li&gt;
 &lt;/ul&gt;
 									</code>
 								</pre>
@@ -58,22 +82,22 @@
 					<div class="sg-pattern">
 						<h2 class="sg-pattern-head" ><a href="../../patterns/00-atoms-00-global-01-fonts/00-atoms-00-global-01-fonts.html" class="patternLink" data-patternpartial="atoms-fonts">Fonts</a></h2>
 						<div class="sg-pattern-body">
-							<p>Primary font: "HelveticaNeue", "Helvetica", "Arial", sans-serif;</p>
-<p><em>Primary font italic: "HelveticaNeue", "Helvetica", "Arial", sans-serif;</em></p>
-<p><strong>Primary font bold: "HelveticaNeue", "Helvetica", "Arial", sans-serif;</strong></p>
-<p class="font-secondary">Secondary font: Georgia, Times, "Times New Roman", serif;</p>
-<p class="font-secondary"><em>Secondary font italic: Georgia, Times, "Times New Roman", serif;</em></p>
-<p class="font-secondary"><strong>Secondary font bold: Georgia, Times, "Times New Roman", serif;</strong></p>
+							<p class="font-primary">Primary font: "HelveticaNeue", "Arial", sans-serif;</p>
+<p class="font-primary"><em>Primary font italic: "HelveticaNeue", "Arial", sans-serif;</em></p>
+<p class="font-primary"><strong>Primary font bold: "HelveticaNeue", "Arial", sans-serif;</strong></p>
+<p class="font-secondary">Secondary font: "Helvetica", Times, "Times New Roman", serif;</p>
+<p class="font-secondary"><em>Secondary font italic: "Helvetica", Times, "Times New Roman", serif;</em></p>
+<p class="font-secondary"><strong>Secondary font bold: "Helvetica", Times, "Times New Roman", serif;</strong></p>
 							<div class="sg-code" style="display: none">
 								<h3 class="sg-code-head">HTML</h3>
 								<pre class="sg-code-html">
 									<code>
-										&lt;p&gt;Primary font: &quot;HelveticaNeue&quot;, &quot;Helvetica&quot;, &quot;Arial&quot;, sans-serif;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Primary font italic: &quot;HelveticaNeue&quot;, &quot;Helvetica&quot;, &quot;Arial&quot;, sans-serif;&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Primary font bold: &quot;HelveticaNeue&quot;, &quot;Helvetica&quot;, &quot;Arial&quot;, sans-serif;&lt;/strong&gt;&lt;/p&gt;
-&lt;p class=&quot;font-secondary&quot;&gt;Secondary font: Georgia, Times, &quot;Times New Roman&quot;, serif;&lt;/p&gt;
-&lt;p class=&quot;font-secondary&quot;&gt;&lt;em&gt;Secondary font italic: Georgia, Times, &quot;Times New Roman&quot;, serif;&lt;/em&gt;&lt;/p&gt;
-&lt;p class=&quot;font-secondary&quot;&gt;&lt;strong&gt;Secondary font bold: Georgia, Times, &quot;Times New Roman&quot;, serif;&lt;/strong&gt;&lt;/p&gt;
+										&lt;p class=&quot;font-primary&quot;&gt;Primary font: &quot;HelveticaNeue&quot;, &quot;Arial&quot;, sans-serif;&lt;/p&gt;
+&lt;p class=&quot;font-primary&quot;&gt;&lt;em&gt;Primary font italic: &quot;HelveticaNeue&quot;, &quot;Arial&quot;, sans-serif;&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;font-primary&quot;&gt;&lt;strong&gt;Primary font bold: &quot;HelveticaNeue&quot;, &quot;Arial&quot;, sans-serif;&lt;/strong&gt;&lt;/p&gt;
+&lt;p class=&quot;font-secondary&quot;&gt;Secondary font: &quot;Helvetica&quot;, Times, &quot;Times New Roman&quot;, serif;&lt;/p&gt;
+&lt;p class=&quot;font-secondary&quot;&gt;&lt;em&gt;Secondary font italic: &quot;Helvetica&quot;, Times, &quot;Times New Roman&quot;, serif;&lt;/em&gt;&lt;/p&gt;
+&lt;p class=&quot;font-secondary&quot;&gt;&lt;strong&gt;Secondary font bold: &quot;Helvetica&quot;, Times, &quot;Times New Roman&quot;, serif;&lt;/strong&gt;&lt;/p&gt;
 									</code>
 								</pre>
 							</div>
@@ -2047,10 +2071,17 @@ p q r s t u v w x y z { | } ~
 		</form>		<ul class="comment-list">
 				<li class="comment-container">
 					<div class="comment-meta">
-		<img src="http://placeimg.com/100/100/tech/grayscale" alt="Avatar" />						<h4 class="comment-name"><a href="#">Plinius Sloane</a></h4>
+		<img src="http://placeimg.com/100/100/people" alt="Avatar" />						<h4 class="comment-name"><a href="#">Junius Koolen</a></h4>
 					</div>
 					<div class="comment-text">
-						<p>The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migrate? Knights of Ni, we are but simple travelers who seek the enchanter who lives beyond these woods. You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person! I blow my nose at you, so-called Ah-thoor Keeng, you and all your silly English K-n-n-n-n-n-n-n-niggits!</p>
+						<p>Fizzle crazy tortor. Sed rizzle. Ass pimpin' dolor dapibizzle turpis tempizzle fo shizzle my nizzle. Maurizzle pellentesque its fo rizzle izzle turpis. Get down get down we gonna chung nizzle. Shizzlin dizzle eleifend rhoncizzle break it down. In yo ghetto platea dictumst. Bling bling dapibizzle. Curabitur break yo neck, yall fo, pretizzle eu, go to hizzle dope, own yo' vitae, nunc. Bizzle suscipizzle. Ass semper velit sizzle fo.</p>
+					</div>
+				</li>				<li class="comment-container">
+					<div class="comment-meta">
+		<img src="http://placeimg.com/100/100/animals" alt="Avatar" />						<h4 class="comment-name"><a href="#">Duane Wilms</a></h4>
+					</div>
+					<div class="comment-text">
+						<p>Fanny pack ullamco et veniam semiotics. Shoreditch PBR reprehenderit cliche, magna Tonx aesthetic. Narwhal photo booth DIY aute post-ironic anim. Vice cliche brunch est before they sold out fap, street art Odd Future fashion axe messenger bag nihil Tonx tattooed. Nihil hashtag incididunt, do eu art party Banksy jean shorts four loko typewriter.</p>
 					</div>
 				</li>				<li class="comment-container">
 					<div class="comment-meta">
@@ -2061,24 +2092,17 @@ p q r s t u v w x y z { | } ~
 					</div>
 				</li>				<li class="comment-container">
 					<div class="comment-meta">
-		<img src="http://placeimg.com/100/100/any" alt="Avatar" />						<h4 class="comment-name"><a href="#">Bertil Aaij</a></h4>
+		<img src="http://placeimg.com/100/100/tech" alt="Avatar" />						<h4 class="comment-name"><a href="#">Teun Richard</a></h4>
 					</div>
 					<div class="comment-text">
-						<p>Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year. And the good thing about dogs... is they got different dogs for different people. Like pit bulls. The dog of dogs. Pit bull can be the right man's best friend... or the wrong man's worst enemy. You going to give me a dog for a pet, give me a pit bull.</p>
+						<p>Boudin sausage jerky pastrami ground round salami biltong. Sausage fatback strip steak doner pork loin, pork belly drumstick ham short loin hamburger shankle. Short ribs sirloin rump tri-tip beef biltong. Meatball pig salami, jowl pork loin fatback short loin drumstick andouille.</p>
 					</div>
 				</li>				<li class="comment-container">
 					<div class="comment-meta">
-		<img src="http://placeimg.com/100/100/any/grayscale" alt="Avatar" />						<h4 class="comment-name"><a href="#">Freyr Hines</a></h4>
+		<img src="http://placeimg.com/100/100/tech/grayscale" alt="Avatar" />						<h4 class="comment-name"><a href="#">Plinius Sloane</a></h4>
 					</div>
 					<div class="comment-text">
-						<p>Wufoo diigo grockit sifteo divvyshot, unigo zooomr revver. Edmodo appjet joyent skype bubbli jajah zoodles joukuu xobni hojoki edmodo appjet, mozy mzinga akismet yuntaa joost yuntaa geni tivo insala yoono chumby, grockit sococo loopt zanga etsy cloudera koofers empressr jiglu blippy. Omgpop lanyrd joukuu sococo zimbra airbnb movity jibjab, foodzie.</p>
-					</div>
-				</li>				<li class="comment-container">
-					<div class="comment-meta">
-		<img src="http://placeimg.com/100/100/arch" alt="Avatar" />						<h4 class="comment-name"><a href="#">Fergus Althuis</a></h4>
-					</div>
-					<div class="comment-text">
-						<p>Beats all you've ever saw, been in trouble with the law since the day they was born. Straight'nin' the curve, flat'nin' the hills. Someday the mountain might get 'em, but the law never will. Makin' their way, the only way they know how, that's just a little bit more than the law will allow. Just good ol' boys, wouldn't change if they could, fightin' the system like a true modern day Robin Hood.</p>
+						<p>The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migrate? Knights of Ni, we are but simple travelers who seek the enchanter who lives beyond these woods. You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person! I blow my nose at you, so-called Ah-thoor Keeng, you and all your silly English K-n-n-n-n-n-n-n-niggits!</p>
 					</div>
 				</li>		</ul>
 	</div>
@@ -2126,10 +2150,17 @@ p q r s t u v w x y z { | } ~
 		&lt;/form&gt;		&lt;ul class=&quot;comment-list&quot;&gt;
 				&lt;li class=&quot;comment-container&quot;&gt;
 					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;http://placeimg.com/100/100/tech/grayscale&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Plinius Sloane&lt;/a&gt;&lt;/h4&gt;
+		&lt;img src=&quot;http://placeimg.com/100/100/people&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Junius Koolen&lt;/a&gt;&lt;/h4&gt;
 					&lt;/div&gt;
 					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migrate? Knights of Ni, we are but simple travelers who seek the enchanter who lives beyond these woods. You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person! I blow my nose at you, so-called Ah-thoor Keeng, you and all your silly English K-n-n-n-n-n-n-n-niggits!&lt;/p&gt;
+						&lt;p&gt;Fizzle crazy tortor. Sed rizzle. Ass pimpin' dolor dapibizzle turpis tempizzle fo shizzle my nizzle. Maurizzle pellentesque its fo rizzle izzle turpis. Get down get down we gonna chung nizzle. Shizzlin dizzle eleifend rhoncizzle break it down. In yo ghetto platea dictumst. Bling bling dapibizzle. Curabitur break yo neck, yall fo, pretizzle eu, go to hizzle dope, own yo' vitae, nunc. Bizzle suscipizzle. Ass semper velit sizzle fo.&lt;/p&gt;
+					&lt;/div&gt;
+				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
+					&lt;div class=&quot;comment-meta&quot;&gt;
+		&lt;img src=&quot;http://placeimg.com/100/100/animals&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Duane Wilms&lt;/a&gt;&lt;/h4&gt;
+					&lt;/div&gt;
+					&lt;div class=&quot;comment-text&quot;&gt;
+						&lt;p&gt;Fanny pack ullamco et veniam semiotics. Shoreditch PBR reprehenderit cliche, magna Tonx aesthetic. Narwhal photo booth DIY aute post-ironic anim. Vice cliche brunch est before they sold out fap, street art Odd Future fashion axe messenger bag nihil Tonx tattooed. Nihil hashtag incididunt, do eu art party Banksy jean shorts four loko typewriter.&lt;/p&gt;
 					&lt;/div&gt;
 				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
 					&lt;div class=&quot;comment-meta&quot;&gt;
@@ -2140,24 +2171,17 @@ p q r s t u v w x y z { | } ~
 					&lt;/div&gt;
 				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
 					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;http://placeimg.com/100/100/any&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Bertil Aaij&lt;/a&gt;&lt;/h4&gt;
+		&lt;img src=&quot;http://placeimg.com/100/100/tech&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Teun Richard&lt;/a&gt;&lt;/h4&gt;
 					&lt;/div&gt;
 					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;Especially dogs. Dogs are the best. Every time you come home, they act like they haven't seen you in a year. And the good thing about dogs... is they got different dogs for different people. Like pit bulls. The dog of dogs. Pit bull can be the right man's best friend... or the wrong man's worst enemy. You going to give me a dog for a pet, give me a pit bull.&lt;/p&gt;
+						&lt;p&gt;Boudin sausage jerky pastrami ground round salami biltong. Sausage fatback strip steak doner pork loin, pork belly drumstick ham short loin hamburger shankle. Short ribs sirloin rump tri-tip beef biltong. Meatball pig salami, jowl pork loin fatback short loin drumstick andouille.&lt;/p&gt;
 					&lt;/div&gt;
 				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
 					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;http://placeimg.com/100/100/any/grayscale&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Freyr Hines&lt;/a&gt;&lt;/h4&gt;
+		&lt;img src=&quot;http://placeimg.com/100/100/tech/grayscale&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Plinius Sloane&lt;/a&gt;&lt;/h4&gt;
 					&lt;/div&gt;
 					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;Wufoo diigo grockit sifteo divvyshot, unigo zooomr revver. Edmodo appjet joyent skype bubbli jajah zoodles joukuu xobni hojoki edmodo appjet, mozy mzinga akismet yuntaa joost yuntaa geni tivo insala yoono chumby, grockit sococo loopt zanga etsy cloudera koofers empressr jiglu blippy. Omgpop lanyrd joukuu sococo zimbra airbnb movity jibjab, foodzie.&lt;/p&gt;
-					&lt;/div&gt;
-				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
-					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;http://placeimg.com/100/100/arch&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Fergus Althuis&lt;/a&gt;&lt;/h4&gt;
-					&lt;/div&gt;
-					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;Beats all you've ever saw, been in trouble with the law since the day they was born. Straight'nin' the curve, flat'nin' the hills. Someday the mountain might get 'em, but the law never will. Makin' their way, the only way they know how, that's just a little bit more than the law will allow. Just good ol' boys, wouldn't change if they could, fightin' the system like a true modern day Robin Hood.&lt;/p&gt;
+						&lt;p&gt;The Knights Who Say Ni demand a sacrifice! …Are you suggesting that coconuts migrate? Knights of Ni, we are but simple travelers who seek the enchanter who lives beyond these woods. You don't frighten us, English pig-dogs! Go and boil your bottoms, sons of a silly person! I blow my nose at you, so-called Ah-thoor Keeng, you and all your silly English K-n-n-n-n-n-n-n-niggits!&lt;/p&gt;
 					&lt;/div&gt;
 				&lt;/li&gt;		&lt;/ul&gt;
 	&lt;/div&gt;
