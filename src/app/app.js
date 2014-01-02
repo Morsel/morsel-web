@@ -3,6 +3,8 @@ angular.module( 'Morsel', [
   'templates-common',
   'Morsel.home',
   'Morsel.about',
+  'Morsel.dashboard',
+  'Morsel.profile',
   'ui.state',
   'ui.route'
 ])
