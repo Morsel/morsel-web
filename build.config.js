@@ -74,4 +74,18 @@ module.exports = {
       'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
     ]
   },
+
+  /*
+   * A list of all the files that we could potentially update regardint the style guide
+  */
+
+  styleguide_files: [
+    'style-guide/source/**/*.mustache',
+    'style-guide/source/**/*.json',
+    'style-guide/source/**/*.js',
+    'style-guide/source/**/*.css',
+    'style-guide/source/**/*.png',
+    'style-guide/source/**/*.jpg',
+    'style-guide/source/**/*.gif'
+  ]
 };

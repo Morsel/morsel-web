@@ -15,6 +15,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
+  grunt.loadNpmTasks('grunt-shell');
 
   /**
    * Load in our build configuration file.
@@ -456,6 +457,28 @@ module.exports = function ( grunt ) {
         options: {
           livereload: false
         }
+      },
+
+      /**
+       * When a style guide file changes, rebuild the style guide
+       */
+      style: {
+        files: [
+          '<%= styleguide_files %>'
+        ],
+        tasks: [ 'shell:style' ]
+      }
+    },
+
+    /*
+     * Used to generate our style guide
+     */
+    shell: {
+      style: {
+        command: 'php style-guide/builder/builder.php -g',
+        options: {
+          stdout: true
+        }
       }
     }
   };
@@ -483,7 +506,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'sass:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
+    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'shell:style', 'karmaconfig',
     'karma:continuous' 
   ]);
 

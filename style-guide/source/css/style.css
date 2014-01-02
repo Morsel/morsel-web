@@ -1,0 +1,10 @@
+/*
+
+These are styles related to the styleguide implementation of Morsel. any actual styles should be updated in /src/sass
+
+*/
+
+body {
+  background-color: white;
+  padding: 15px;
+}
