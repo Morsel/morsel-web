@@ -1,43 +1,48 @@
 /*
-
 These are styles related to the styleguide implementation of Morsel. any actual styles should be updated in /src/sass
-
 */
-
-a:link {
-	color: #f0cf69;
-}
-
+/* line 8, style.scss */
 body {
   background-color: white;
   padding: 15px;
 }
 
-blockquote {
-	font-family: "Helvetica", "Arial", sans-serif;
-	font-weight: lighter;
-	color: #93a590;
+/* line 14, style.scss */
+.morsel-primary {
+  background-color: #e96144;
 }
 
-p, ul, li, dl, dt, dd {
-	font-family: "Helvetica", "Arial", sans-serif;
-	font-weight: lighter;
+/* line 18, style.scss */
+.morsel-secondary {
+  background-color: #f0cf69;
 }
 
-h1, h2, h3, h4, h5, h6 {
-	color: #e96144;
-	font-family: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+/* line 22, style.scss */
+.morsel-tertiary {
+  background-color: #51ba3c;
 }
 
-h1.subheading, h2.subheading, h3.subheading, h4.subheading, h5.subheading, h6.subheading {
-	color: #93a590;
-	font-family: "Helvetica", "Arial", sans-serif;
+/* line 26, style.scss */
+.morsel-interface {
+  background-color: #e2ddd7;
 }
 
+/* line 30, style.scss */
+.morsel-light-content {
+  background-color: #93a590;
+}
+
+/* line 34, style.scss */
+.morsel-dark-content {
+  background-color: #394038;
+}
+
+/* line 39, style.scss */
 .font-primary {
-	font-family: "HelveticaNeue", "Helvetica", "Arial", sans-serif;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+/* line 43, style.scss */
 .font-secondary {
-	font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "Helvetica", "Arial", sans-serif;
 }

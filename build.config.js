@@ -83,7 +83,7 @@ module.exports = {
     'style-guide/source/**/*.mustache',
     'style-guide/source/**/*.json',
     'style-guide/source/**/*.js',
-    'style-guide/source/**/*.css',
+    'style-guide/source/**/*.scss',
     'style-guide/source/**/*.png',
     'style-guide/source/**/*.jpg',
     'style-guide/source/**/*.gif'

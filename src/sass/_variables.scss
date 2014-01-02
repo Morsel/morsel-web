@@ -1,17 +1,23 @@
-// Overwrite any bootstrap vars with our own
-
-$icon-font-path: "vendor/";
-
-// Core Bootstrap variables and mixins
-@import "../../vendor/sass-bootstrap/lib/_variables.scss";
-
 // Our variables
 
 // Colors
-$bg-main: $gray;
 $morsel-primary: #e96144;
 $morsel-secondary: #f0cf69;
 $morsel-tertiary: #51ba3c;
 $morsel-interface: #e2ddd7;
 $morsel-light-content: #93a590;
 $morsel-dark-content: #394038;
+
+// Overwrite any bootstrap vars with our own
+
+$icon-font-path:              "vendor/";
+$body-bg: gray;
+
+//fonts
+$font-family-base:            "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-secondary:       "Helvetica", "Arial", sans-serif;
+$headings-color:              $morsel-primary;
+$link-color: $morsel-secondary;
+
+// Core Bootstrap variables and mixins
+@import "../../vendor/sass-bootstrap/lib/_variables.scss";

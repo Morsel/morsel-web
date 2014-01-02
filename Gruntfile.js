@@ -475,9 +475,15 @@ module.exports = function ( grunt ) {
      */
     shell: {
       style: {
-        command: 'php style-guide/builder/builder.php -g',
+        command: [
+          'compass compile',
+          'php builder/builder.php -g'
+        ].join('&&'),
         options: {
-          stdout: true
+          stdout: true,
+          execOptions: {
+            cwd: 'style-guide'
+          }
         }
       }
     }

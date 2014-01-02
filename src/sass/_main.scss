@@ -1,27 +1,14 @@
 body {
-  background-color: $bg-main;
+  font-weight: lighter;
 }
 
-.morsel-primary {
-  background-color: $morsel-primary;
+.subheading {
+  color: $morsel-light-content;
+  font-family: $font-family-secondary;
 }
 
-.morsel-secondary {
-  background-color: $morsel-secondary;
-}
-
-.morsel-tertiary {
-  background-color: $morsel-tertiary;
-}
-
-.morsel-interface {
-  background-color: $morsel-interface;
-}
-
-.morsel-light-content {
-  background-color: $morsel-light-content;
-}
-
-.morsel-dark-content {
-  background-color: $morsel-dark-content;
+blockquote {
+  font-family: $font-family-secondary;
+  font-weight: 100;
+  color: $morsel-light-content;
 }

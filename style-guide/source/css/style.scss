@@ -1,0 +1,46 @@
+/*
+These are styles related to the styleguide implementation of Morsel. any actual styles should be updated in /src/sass
+*/
+
+@import "../../../src/sass/_variables.scss";
+
+//make our body color different so we can differentiate the style guide
+body {
+  background-color: white;
+  padding: 15px;
+}
+
+//color swatches - classes won't be used in prod
+.morsel-primary {
+  background-color: $morsel-primary;
+}
+
+.morsel-secondary {
+  background-color: $morsel-secondary;
+}
+
+.morsel-tertiary {
+  background-color: $morsel-tertiary;
+}
+
+.morsel-interface {
+  background-color: $morsel-interface;
+}
+
+.morsel-light-content {
+  background-color: $morsel-light-content;
+}
+
+.morsel-dark-content {
+  background-color: $morsel-dark-content;
+}
+
+//text
+.font-primary {
+  font-family: $font-family-base;
+}
+
+.font-secondary {
+  font-family: $font-family-secondary;
+}
+
