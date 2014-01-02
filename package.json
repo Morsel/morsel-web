@@ -13,6 +13,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "bower": "*",
     "grunt": "~0.4.1",
     "grunt-contrib-sass": "~0.6.0",
     "grunt-contrib-clean": "~0.4.1",
