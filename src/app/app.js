@@ -5,12 +5,17 @@ angular.module( 'Morsel', [
   'Morsel.about',
   'Morsel.dashboard',
   'Morsel.profile',
+  'restangular',
   'ui.state',
   'ui.route'
 ])
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider ) {
   $urlRouterProvider.otherwise( '/home' );
+
+  //Restangular configuration
+  //use placeholder REST API for now
+  RestangularProvider.setBaseUrl('http://jsonplaceholder.typicode.com/');
 })
 
 .run( function run () {

@@ -2,7 +2,7 @@ angular.module( 'Morsel.profile', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'profile', {
-    url: '/profile',
+    url: '/profile/:username',
     views: {
       "main": {
         controller: 'ProfileCtrl',
@@ -13,5 +13,10 @@ angular.module( 'Morsel.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, Restangular ) {
+  var posts = Restangular.one('posts', 1);
+
+  posts.get().then(function(post) {
+    $scope.post = post;
+  });
 });

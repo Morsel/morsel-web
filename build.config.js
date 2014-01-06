@@ -61,9 +61,11 @@ module.exports = {
     js: [
       'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'vendor/bower-angular-placeholders/angular-placeholders.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
-      'vendor/angular-ui-utils/modules/route/route.js'
+      'vendor/angular-ui-utils/modules/route/route.js',
+      'vendor/bower-angular-placeholders/angular-placeholders.js',
+      'vendor/lodash/dist/lodash.js',
+      'vendor/restangular/dist/restangular.js'
     ],
     css: [
     ],
