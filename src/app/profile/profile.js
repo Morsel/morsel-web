@@ -14,9 +14,9 @@ angular.module( 'Morsel.profile', [])
 })
 
 .controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, Restangular ) {
-  var posts = Restangular.one('posts', 1);
+  var users = Restangular.one('users', 1);
 
-  posts.get().then(function(post) {
-    $scope.post = post;
+  users.get().then(function(user) {
+    $scope.user = user;
   });
 });
