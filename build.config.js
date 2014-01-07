@@ -65,6 +65,7 @@ module.exports = {
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/bower-angular-placeholders/angular-placeholders.js',
       'vendor/lodash/dist/lodash.js',
+      'vendor/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'vendor/restangular/dist/restangular.js'
     ],
     css: [

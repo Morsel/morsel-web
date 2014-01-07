@@ -8,7 +8,7 @@
     "angular-ui-router": "~0.0.1",
     "angular-ui-utils": "~0.0.3",
     "bower-angular-placeholders": "~0.0.2",
-    "ngInfiniteScroll": "1.0.0",
+    "ngInfiniteScroll": "git://github.com/arusanov/ngInfiniteScroll.git#e0b672ead5917431d5105df56c481e5d3cdee487",
     "restangular": "",
     "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0"
   }
