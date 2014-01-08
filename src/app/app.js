@@ -15,7 +15,8 @@ angular.module( 'Morsel', [
 
   //Restangular configuration
   //use placeholder REST API for now
-  RestangularProvider.setBaseUrl('http://jsonplaceholder.typicode.com/');
+  RestangularProvider.setBaseUrl('http://api.reddit.com/');//'http://jsonplaceholder.typicode.com/'); //'http://morsel-api-staging.herokuapp.com/api/'
+  RestangularProvider.setDefaultRequestParams({api_key: "1"});
 })
 
 .run( function run () {

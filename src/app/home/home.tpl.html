@@ -3,3 +3,21 @@
   <p>Scaffold for Morsel</p>
 </div>
 
+<div>
+  <div infinite-scroll="morselPosts.nextPage()" infinite-scroll-disabled="morselPosts.busy" infinite-scroll-distance="1">
+    <div ng-repeat="post in morselPosts.posts" style="height:500px">
+      <span>
+        <a ng-href="{{post.url}}" target="_blank">{{post.title}}</a>
+      </span>
+      <small>by {{post.creator_id}} -
+      </small>
+      <div ng-repeat="morsel in post.morsels">
+        <span>{{morsel.description}}</span>
+        <img ng-src="{{morsel.photo_url}}" />
+      </div>
+      <div style="clear: both;"></div>
+    </div>
+    <div ng-show="morselPosts.busy">Loading data...</div>
+  </div>
+</div>
+

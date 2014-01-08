@@ -1,6 +1,6 @@
 angular.module( 'Morsel.profile', [
   'infinite-scroll',
-  'morselData'
+  'reddit'
   ])
 
 .config(function config( $stateProvider ) {

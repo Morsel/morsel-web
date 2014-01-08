@@ -1,4 +1,4 @@
-angular.module( 'morselData', [] )
+angular.module( 'reddit', [] )
 
 // Reddit constructor function to encapsulate HTTP and pagination logic
 .factory('Reddit', function($http) {

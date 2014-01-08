@@ -4,7 +4,7 @@
 
 <div>
   <div infinite-scroll='reddit.nextPage()' infinite-scroll-disabled='reddit.busy' infinite-scroll-distance='1'>
-    <div ng-repeat='item in reddit.items' style="height:500px">
+    <div ng-repeat='item in reddit.items' style="height:500px; border: 1px solid blue;">
       <span class='score'>{{item.score}}</span>
       <span class='title'>
         <a ng-href='{{item.url}}' target='_blank'>{{item.title}}</a>
