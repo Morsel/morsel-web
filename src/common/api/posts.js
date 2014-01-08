@@ -11,5 +11,11 @@ angular.module( 'Morsel.apiPosts', [] )
     });
   };
 
+  Posts.getPost = function(postId) {
+    return RestangularPosts.get(postId).then(function(data) {
+      return data;
+    });
+  };
+
   return Posts;
 });

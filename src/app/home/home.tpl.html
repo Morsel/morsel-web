@@ -5,7 +5,7 @@
 
 <div ng-repeat="post in posts" style="height:500px">
   <span>
-    <a ng-href="/users/{{post.creator.id}}/post/{{post.id}}" target="_blank">{{post.title}}</a>
+    <a ng-href="#/users/{{post.creator.id}}/post/{{post.id}}">This is a link to: {{post.title}}</a>
   </span>
   <small>by {{post.creator_id}}</small>
   <div ng-repeat="morsel in post.morsels">
