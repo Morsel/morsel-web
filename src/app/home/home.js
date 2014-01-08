@@ -1,7 +1,6 @@
 angular.module( 'Morsel.home', [
   'ui.state',
-  'infinite-scroll',
-  'allMorselPosts'
+  'infinite-scroll'
 ])
 
 .config(function config( $stateProvider ) {
@@ -17,6 +16,6 @@ angular.module( 'Morsel.home', [
   });
 })
 
-.controller( 'HomeCtrl', function HomeController( $scope, AllMorselPosts ) {
-  $scope.morselPosts = new AllMorselPosts();
+.controller( 'HomeCtrl', function HomeController( $scope, ApiPosts ) {
+  $scope.posts = ApiPosts.getPosts();
 });

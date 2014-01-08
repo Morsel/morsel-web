@@ -5,6 +5,7 @@ angular.module( 'Morsel', [
   'Morsel.about',
   'Morsel.dashboard',
   'Morsel.profile',
+  'Morsel.apiPosts',
   'restangular',
   'ui.state',
   'ui.route'
