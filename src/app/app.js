@@ -7,9 +7,12 @@ angular.module( 'Morsel', [
   'Morsel.post',
   'Morsel.profile',
   'Morsel.apiPosts',
+  'Morsel.apiUsers',
   'restangular',
   'ui.state',
-  'ui.route'
+  'ui.route',
+  //fakes
+  'Morsel.reddit'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider ) {

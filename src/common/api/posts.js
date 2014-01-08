@@ -1,6 +1,6 @@
 angular.module( 'Morsel.apiPosts', [] )
 
-// ApiPosts is the middleman for dealing with /post requests
+// ApiPosts is the middleman for dealing with /posts requests
 .factory('ApiPosts', function($http, Restangular) {
   var Posts = {},
       RestangularPosts = Restangular.all('posts');

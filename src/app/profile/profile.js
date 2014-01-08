@@ -1,11 +1,8 @@
-angular.module( 'Morsel.profile', [
-  'infinite-scroll',
-  'reddit'
-  ])
+angular.module( 'Morsel.profile', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'profile', {
-    url: '/profile/:username',
+    url: '/users/:userId',
     views: {
       "main": {
         controller: 'ProfileCtrl',
@@ -16,12 +13,7 @@ angular.module( 'Morsel.profile', [
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, Restangular, Reddit ) {
-  var users = Restangular.one('users', 1);
-
-  users.get().then(function(user) {
-    $scope.user = user;
-  });
-
-  $scope.reddit = new Reddit();
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers ) {
+  $scope.userId = $stateParams.userId;
+  $scope.posts = ApiUsers.getPosts($stateParams.userId);
 });
