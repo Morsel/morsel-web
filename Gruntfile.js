@@ -509,6 +509,7 @@ module.exports = function ( grunt ) {
       },
       styletoheroku: {
         command: [
+          'touch testfile.txt',
           'git add .',
           'git commit -a -m "automatically pushed style guide"',
           'git push heroku master'
