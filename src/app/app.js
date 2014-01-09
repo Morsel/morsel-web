@@ -14,12 +14,13 @@ angular.module( 'Morsel', [
   //fakes
   'Morsel.reddit'
 ])
+.constant('APIURL', 'http://morsel-api-staging.herokuapp.com/api')
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
   $urlRouterProvider.otherwise( '/home' );
 
   //Restangular configuration
-  RestangularProvider.setBaseUrl('http://morsel-api-staging.herokuapp.com/api/');
+  RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setDefaultRequestParams({api_key: "1"});
   RestangularProvider.setRequestSuffix('.json');
 })
