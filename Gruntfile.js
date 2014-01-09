@@ -510,7 +510,7 @@ module.exports = function ( grunt ) {
       styletoheroku: {
         command: [
           'git add .',
-          'git commit -m "automatically pushed style guide"',
+          'git commit -a -m "automatically pushed style guide"',
           'git push heroku master'
         ].join('&&'),
         options: {
