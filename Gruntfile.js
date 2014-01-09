@@ -94,7 +94,7 @@ module.exports = function ( grunt ) {
             cwd: 'src/assets',
             expand: true
           }
-       ]   
+       ]
       },
       build_vendor_assets: {
         files: [
@@ -105,7 +105,7 @@ module.exports = function ( grunt ) {
             expand: true,
             flatten: true
           }
-       ]   
+       ]
       },
       build_appjs: {
         files: [
@@ -123,6 +123,27 @@ module.exports = function ( grunt ) {
             src: [ '<%= vendor_files.js %>' ],
             dest: '<%= build_dir %>/',
             cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      //copy the site's built css file into the style guide folder
+      build_style_guide_css: {
+        files: [
+          {
+            src: [ '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'],
+            dest: '<%= styleguide_dir %>/public/css/site-style.css',
+            cwd: '.'
+          }
+        ]
+      },
+      //copy the whole style guide over into the other folder
+      build_style_guide: {
+        files: [
+          {
+            src: [ '**', '!WHAR_INDEX'],
+            dest: '<%= styleguidepublic_dir %>/',
+            cwd: '<%= styleguide_dir %>/public/',
             expand: true
           }
         ]
@@ -466,7 +487,7 @@ module.exports = function ( grunt ) {
         files: [
           '<%= styleguide_files %>'
         ],
-        tasks: [ 'shell:style' ]
+        tasks: [ 'shell:style', 'copy:build_style_guide_css', 'copy:build_style_guide' ]
       }
     },
 
@@ -483,6 +504,19 @@ module.exports = function ( grunt ) {
           stdout: true,
           execOptions: {
             cwd: 'style-guide'
+          }
+        }
+      },
+      styletoheroku: {
+        command: [
+          'git add .',
+          'git commit -m "automatically pushed style guide"',
+          'git push heroku master'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<% styleguidepublic_dir %>'
           }
         }
       }
@@ -512,8 +546,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [
     'clean', 'html2js', 'jshint', 'sass:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'shell:style', 'karmaconfig',
-    'karma:continuous' 
+    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'shell:style', 'copy:build_style_guide_css', 'copy:build_style_guide', 'shell:styletoheroku', 'karmaconfig', 'karma:continuous' 
   ]);
 
   /**

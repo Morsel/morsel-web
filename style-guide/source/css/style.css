@@ -5,44 +5,45 @@ These are styles related to the styleguide implementation of Morsel. any actual 
 body {
   background-color: white;
   padding: 15px;
+  margin: 0;
 }
 
-/* line 14, style.scss */
+/* line 15, style.scss */
 .morsel-primary {
   background-color: #e96144;
 }
 
-/* line 18, style.scss */
+/* line 19, style.scss */
 .morsel-secondary {
   background-color: #f0cf69;
 }
 
-/* line 22, style.scss */
+/* line 23, style.scss */
 .morsel-tertiary {
   background-color: #51ba3c;
 }
 
-/* line 26, style.scss */
+/* line 27, style.scss */
 .morsel-interface {
   background-color: #e2ddd7;
 }
 
-/* line 30, style.scss */
+/* line 31, style.scss */
 .morsel-light-content {
   background-color: #93a590;
 }
 
-/* line 34, style.scss */
+/* line 35, style.scss */
 .morsel-dark-content {
   background-color: #394038;
 }
 
-/* line 39, style.scss */
+/* line 40, style.scss */
 .font-primary {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* line 43, style.scss */
+/* line 44, style.scss */
 .font-secondary {
   font-family: "Helvetica", "Arial", sans-serif;
 }
