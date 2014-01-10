@@ -5565,7 +5565,28 @@ img {
   cursor: pointer;
 }
 
-/* line 1, ../../src/app/home/home.scss */
+/* line 1, ../../src/app/home/_home.scss */
 .home-page {
   text-align: center;
+}
+
+/* line 1, ../../src/app/feed/_feed.scss */
+.feed {
+  border: 1px solid blue;
+  padding: 10px;
+  margin: 10px;
+}
+
+/* line 7, ../../src/app/feed/_feed.scss */
+.post {
+  border: 1px solid red;
+  padding: 10px;
+  margin: 10px;
+}
+
+/* line 13, ../../src/app/feed/_feed.scss */
+.morsel {
+  border: 1px solid green;
+  padding: 10px;
+  margin: 10px;
 }

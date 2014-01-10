@@ -1,10 +1,12 @@
-<div ng-repeat="post in posts" style="height:500px">
-  <span>
-    <a ng-href="#/users/{{post.creator.id}}/post/{{post.id}}">This is a link to: {{post.title}}</a>
-  </span>
-  <div ng-repeat="morsel in post.morsels">
-    <span>{{morsel.description}}</span>
-    <img ng-src="{{morsel.photo_url}}" />
-  </div>
-  <div style="clear: both;"></div>
+<div ng-repeat="post in posts" class="post">
+  <p>title: {{post.title}}</p>
+  <a href="#/users/{{post.creator.id}}">
+    <img ng-src="{{post.creator.profile_url}}" />
+  </a>
+  <a ng-href="#/users/{{post.creator.id}}/post/{{post.id}}">
+    <div ng-repeat="morsel in post.morsels" class="morsel">
+      <span>{{morsel.description}}</span>
+      <img ng-src="{{morsel.photo_url}}" />
+    </div>
+  </a>
 </div>
