@@ -3,13 +3,5 @@
 <p>needs profile image from API</p>
 <p>needs job description from API</p>
 <p>needs # hearts from API</p>
-<div ng-repeat="post in user.posts" style="height:500px">
-  <span>
-    <a ng-href="#/users/{{post.creator.id}}/post/{{post.id}}">This is a link to: {{post.title}}</a>
-  </span>
-  <div ng-repeat="morsel in post.morsels">
-    <span>{{morsel.description}}</span>
-    <img ng-src="{{morsel.photo_url}}" />
-  </div>
-  <div style="clear: both;"></div>
-</div>
+
+<div feed posts="user.posts"></div>

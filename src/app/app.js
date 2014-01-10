@@ -4,6 +4,7 @@ angular.module( 'Morsel', [
   'Morsel.home',
   'Morsel.about',
   'Morsel.dashboard',
+  'Morsel.feed',
   'Morsel.post',
   'Morsel.profile',
   'Morsel.apiPosts',
