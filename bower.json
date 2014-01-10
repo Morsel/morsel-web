@@ -2,8 +2,8 @@
   "name": "Morsel",
   "version": "0.0.1",
   "devDependencies": {
-    "angular": "~1.0.7",
-    "angular-mocks": "~1.0.7",
+    "angular": "1.2.7",
+    "angular-mocks": "1.2.7",
     "angular-bootstrap": "~0.3.0",
     "angular-ui-router": "~0.0.1",
     "angular-ui-utils": "~0.0.3",
@@ -11,5 +11,8 @@
     "ngInfiniteScroll": "git://github.com/arusanov/ngInfiniteScroll.git#e0b672ead5917431d5105df56c481e5d3cdee487",
     "restangular": "",
     "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0"
+  },
+  "resolutions": {
+    "angular": "1.2.7"
   }
 }
