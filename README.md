@@ -14,4 +14,4 @@ Setup
    b. To build (for dev) without style guide: grunt build-no-style
    c. To push style guide to heroku: grunt pushstyle
    d. For continuous dev: grunt watch
-   e. To build (for production): grunt compile 
+   e. To build (for production): grunt compile
