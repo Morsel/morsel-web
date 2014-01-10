@@ -11,7 +11,7 @@ module.exports = {
   compile_dir: 'bin',
   styleguide_dir: 'style-guide',
   //for copying style guide into a public spot
-  styleguidepublic_dir: '../morsel-style-guide',
+  styleguidepublic_dir: '../morsel-style-guide/',
 
   /**
    * This is a collection of file patterns that refer to our app code (the
