@@ -14,6 +14,5 @@ angular.module( 'Morsel.profile', [])
 })
 
 .controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers ) {
-  $scope.userId = $stateParams.userId;
-  $scope.posts = ApiUsers.getPosts($stateParams.userId);
+  $scope.user = ApiUsers.getUser($stateParams.userId).$object;
 });

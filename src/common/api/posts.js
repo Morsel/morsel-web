@@ -6,15 +6,11 @@ angular.module( 'Morsel.apiPosts', [] )
       RestangularPosts = Restangular.all('posts');
 
   Posts.getPosts = function() {
-    return RestangularPosts.getList().then(function(data) {
-      return data;
-    });
+    return RestangularPosts.getList();
   };
 
   Posts.getPost = function(postId) {
-    return RestangularPosts.get(postId).then(function(data) {
-      return data;
-    });
+    return RestangularPosts.get(postId);
   };
 
   return Posts;
