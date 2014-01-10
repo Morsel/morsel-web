@@ -15,3 +15,5 @@ Setup
    c. To push style guide to heroku: grunt pushstyle
    d. For continuous dev: grunt watch
    e. To build (for production): grunt compile
+
+BOOYAH!
