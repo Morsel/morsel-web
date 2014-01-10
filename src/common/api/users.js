@@ -5,6 +5,12 @@ angular.module( 'Morsel.apiUsers', [] )
   var Users = {},
       RestangularUsers = Restangular.all('users');
 
+  Users.getUser = function(userId) {
+    return RestangularUsers.get(userId).then(function(data) {
+      return data;
+    });
+  };
+
   Users.getPosts = function(userId) {
     return Restangular.one('users', userId).one('posts').get().then(function(data) {
       return data;
