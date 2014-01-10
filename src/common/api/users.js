@@ -6,11 +6,11 @@ angular.module( 'Morsel.apiUsers', [] )
       RestangularUsers = Restangular.all('users');
 
   Users.getUser = function(userId) {
-    return RestangularUsers.get(userId).$object;
+    return RestangularUsers.get(userId);
   };
 
   Users.getPosts = function(userId) {
-    return Restangular.one('users', userId).one('posts').get().$object;
+    return Restangular.one('users', userId).one('posts').get();
   };
 
   return Users;

@@ -1,1 +1,10 @@
-<h1>This is individual post #{{post.id}}</h1>
+<p>title: {{title}}</p>
+<a href="#/users/{{creator_id}}">
+  <img ng-src="{{creator.photo_url}}" />
+</a>
+<a ng-href="#/users/{{creator_id}}/post/{{id}}">
+  <div ng-repeat="morsel in morsels" class="morsel">
+    <span>{{morsel.description}}</span>
+    <img ng-src="{{morsel.photo_url}}" />
+  </div>
+</a>
