@@ -4,13 +4,25 @@ angular.module( 'Morsel', [
   'Morsel.home',
   'Morsel.about',
   'Morsel.dashboard',
+  'Morsel.post',
   'Morsel.profile',
+  'Morsel.apiPosts',
+  'Morsel.apiUsers',
+  'restangular',
   'ui.state',
-  'ui.route'
+  'ui.route',
+  //fakes
+  'Morsel.reddit'
 ])
+.constant('APIURL', 'http://morsel-api-staging.herokuapp.com/api')
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
   $urlRouterProvider.otherwise( '/home' );
+
+  //Restangular configuration
+  RestangularProvider.setBaseUrl(APIURL);
+  RestangularProvider.setDefaultRequestParams({api_key: "1"});
+  RestangularProvider.setRequestSuffix('.json');
 })
 
 .run( function run () {

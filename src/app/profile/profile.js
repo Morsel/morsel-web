@@ -2,7 +2,7 @@ angular.module( 'Morsel.profile', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'profile', {
-    url: '/profile',
+    url: '/users/:userId',
     views: {
       "main": {
         controller: 'ProfileCtrl',
@@ -13,5 +13,7 @@ angular.module( 'Morsel.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers ) {
+  $scope.userId = $stateParams.userId;
+  $scope.posts = ApiUsers.getPosts($stateParams.userId);
 });

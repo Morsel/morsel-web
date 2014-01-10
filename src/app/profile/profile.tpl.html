@@ -1,2 +1,12 @@
-<h1>This is a user's profile page!</h1>
+<h1>This is user #{{userId}}'s profile page!</h1>
 
+<div ng-repeat="post in posts" style="height:500px">
+  <span>
+    <a ng-href="#/users/{{post.creator.id}}/post/{{post.id}}">This is a link to: {{post.title}}</a>
+  </span>
+  <div ng-repeat="morsel in post.morsels">
+    <span>{{morsel.description}}</span>
+    <img ng-src="{{morsel.photo_url}}" />
+  </div>
+  <div style="clear: both;"></div>
+</div>

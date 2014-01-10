@@ -9,6 +9,9 @@ module.exports = {
    */
   build_dir: 'build',
   compile_dir: 'bin',
+  styleguide_dir: 'style-guide',
+  //for copying style guide into a public spot
+  styleguidepublic_dir: '../morsel-style-guide/',
 
   /**
    * This is a collection of file patterns that refer to our app code (the
@@ -61,9 +64,12 @@ module.exports = {
     js: [
       'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'vendor/bower-angular-placeholders/angular-placeholders.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
-      'vendor/angular-ui-utils/modules/route/route.js'
+      'vendor/angular-ui-utils/modules/route/route.js',
+      'vendor/bower-angular-placeholders/angular-placeholders.js',
+      'vendor/lodash/dist/lodash.js',
+      'vendor/ngInfiniteScroll/build/ng-infinite-scroll.js',
+      'vendor/restangular/dist/restangular.js'
     ],
     css: [
     ],

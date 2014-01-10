@@ -94,7 +94,7 @@ module.exports = function ( grunt ) {
             cwd: 'src/assets',
             expand: true
           }
-       ]   
+       ]
       },
       build_vendor_assets: {
         files: [
@@ -105,7 +105,7 @@ module.exports = function ( grunt ) {
             expand: true,
             flatten: true
           }
-       ]   
+       ]
       },
       build_appjs: {
         files: [
@@ -123,6 +123,27 @@ module.exports = function ( grunt ) {
             src: [ '<%= vendor_files.js %>' ],
             dest: '<%= build_dir %>/',
             cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      //copy the site's built css file into the style guide folder
+      build_style_guide_css: {
+        files: [
+          {
+            src: [ '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'],
+            dest: '<%= styleguide_dir %>/public/css/site-style.css',
+            cwd: '.'
+          }
+        ]
+      },
+      //copy the whole style guide over into the other folder
+      build_style_guide: {
+        files: [
+          {
+            src: [ '**', '!WHAR_INDEX'],
+            dest: '<%= styleguidepublic_dir %>',
+            cwd: '<%= styleguide_dir %>/public/',
             expand: true
           }
         ]
@@ -442,7 +463,7 @@ module.exports = function ( grunt ) {
        */
       sass: {
         files: [ 'src/**/*.scss' ],
-        tasks: [ 'sass:build' ]
+        tasks: [ 'sass:build', 'style' ]
       },
 
       /**
@@ -466,7 +487,7 @@ module.exports = function ( grunt ) {
         files: [
           '<%= styleguide_files %>'
         ],
-        tasks: [ 'shell:style' ]
+        tasks: [ 'style' ]
       }
     },
 
@@ -483,6 +504,19 @@ module.exports = function ( grunt ) {
           stdout: true,
           execOptions: {
             cwd: 'style-guide'
+          }
+        }
+      },
+      styletoheroku: {
+        command: [
+          'git add .',
+          'git commit -a -m "automatically pushed style guide"',
+          'git push heroku master'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= styleguidepublic_dir %>'
           }
         }
       }
@@ -509,13 +543,28 @@ module.exports = function ( grunt ) {
   /**
    * The `build` task gets your app ready to run for development and testing.
    */
-  grunt.registerTask( 'build', [
+  grunt.registerTask( 'build', [ 'build-no-style', 'style']);
+
+  /**
+   * The `style` task builds the style guide locally
+   */
+  grunt.registerTask( 'style', [ 'shell:style', 'copy:build_style_guide_css', 'copy:build_style_guide' ]);
+
+  /**
+   * The `pushstyle` task pushes the style guide to heroku
+   */
+  grunt.registerTask( 'pushstyle', [ 'shell:styletoheroku' ]);
+
+  /**
+   * The `build-no-style` task builds without the style guide
+   */
+   grunt.registerTask( 'build-no-style', [
     'clean', 'html2js', 'jshint', 'sass:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'shell:style', 'karmaconfig',
-    'karma:continuous' 
+    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig', 'karma:continuous'
   ]);
 
+ 
   /**
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
