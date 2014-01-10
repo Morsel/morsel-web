@@ -11,49 +11,42 @@
 
   </head>
   <body>
-    <div class="container">
-      <div class="masthead">
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="container">
-              <ul class="nav">
-                <li data-ui-route="/home" data-ng-class="{active:$uiRoute}">
-                  <a href="#/home">
-                    <i class="glyphicon glyphicon-home"></i>
-                    Home
-                  </a>
-                </li>
-                <li data-ui-route="/about" data-ng-class="{active:$uiRoute}">
-                  <a href="#/about">
-                    <i class="glyphicon glyphicon-info-sign"></i>
-                    About
-                  </a>
-                </li>
-                <li data-ui-route="/dashboard" data-ng-class="{active:$uiRoute}">
-                  <a href="#/dashboard">
-                    <i class="glyphicon glyphicon-fire"></i>
-                    Dashboard
-                  </a>
-                </li>
-                <li data-ui-route="/users/1" data-ng-class="{active:$uiRoute}">
-                  <a href="#/users/1">
-                    <i class="glyphicon glyphicon-user"></i>
-                    Profile
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <span data-ui-route="/dashboard" data-ng-class="{active:$uiRoute}"><a class="navbar-brand" href="#/home"><i class="glyphicon glyphicon-home"></i>Home</a></span>
       </div>
-    </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li data-ui-route="/about" data-ng-class="{active:$uiRoute}"><a href="#/about"><i class="glyphicon glyphicon-info-sign"></i>About</a></li>
+          <li data-ui-route="/dashboard" data-ng-class="{active:$uiRoute}"><a href="#/dashboard"><i class="glyphicon glyphicon-fire"></i>Dashboard</a></li>
+        </ul>
+        <form class="navbar-form navbar-left" role="search">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+          <li data-ui-route="/users/20" data-ng-class="{active:$uiRoute}"><a href="#/users/20"><i class="glyphicon glyphicon-user"></i>Profile</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
 
     <div class="container" data-ui-view="main"></div>
 
     <footer class="footer">
       <div class="container">
         <div class="footer-inner">
-
+        Morsel!
         </div>
       </div>
     </footer>
