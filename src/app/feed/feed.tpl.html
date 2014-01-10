@@ -7,6 +7,7 @@
     <div ng-repeat="morsel in post.morsels" class="morsel">
       <span>{{morsel.description}}</span>
       <img ng-src="{{morsel.photo_url}}" />
+      <p>user {{isExists(morsel.liked) && 'has' || 'hasnt'}} liked this</p>
     </div>
   </a>
 </div>
