@@ -14,5 +14,5 @@ angular.module( 'Morsel.postDetail', [])
 })
 
 .controller( 'PostDetailCtrl', function ProfileCtrl( $scope, $stateParams, ApiPosts ) {
-  $scope.post = ApiPosts.getPost($stateParams.postId);
+  $scope.post = ApiPosts.getPost($stateParams.postId).$object;
 });
