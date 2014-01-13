@@ -1,13 +1,15 @@
-<div ng-repeat="post in posts" class="post">
-  <p>title: {{post.title}}</p>
-  <a href="#/users/{{post.creator.id}}">
-    <img ng-src="{{post.creator.photo_url}}" />
+<li ng-repeat="post in posts" class="post">
+  <h3 class="post-title">title: {{post.title}}</h3>
+  <a href="#/users/{{post.creator.id}}" class="profile-pic-link">
+    <img ng-src="{{post.creator.photo_url}}" class="img-circle profile-pic" />
   </a>
-  <a ng-href="#/users/{{post.creator.id}}/post/{{post.id}}">
-    <div ng-repeat="morsel in post.morsels" class="morsel">
-      <span>{{morsel.description}}</span>
+  <carousel interval="none" class="morsels">
+    <slide ng-repeat="morsel in post.morsels" active="slide.active" class="morsel">
+      <!--<a ng-href="#/users/{{post.creator.id}}/post/{{post.id}}">-->
+      <p class="morsel-description">{{morsel.description}}</p>
+      <span class="like-morsel">user {{isExists(morsel.liked) && 'has' || 'hasnt'}} liked this</span>
       <img ng-src="{{morsel.photo_url}}" />
-      <p>user {{isExists(morsel.liked) && 'has' || 'hasnt'}} liked this</p>
-    </div>
-  </a>
-</div>
+      <!--</a>-->
+    </li>
+  </carousel>
+</li>
