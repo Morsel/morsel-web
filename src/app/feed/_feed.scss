@@ -9,7 +9,7 @@
   height: $morselHeight;
 
   & + .post {
-    display: none;
+    //display: none;
   }
 
   .post-title {
@@ -51,13 +51,24 @@
   height: $morselHeight;
   overflow: hidden;
 
+  .bg-image {
+    height: $morselHeight;
+    background-position: 50% 50%;
+  }
+
   .morsel-description {
     position: absolute;
     bottom: 5px;
     left: 10px;
   }
 
-  img {
-    width: 100%;
+  .like-morsel {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }

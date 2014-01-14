@@ -1,17 +1,22 @@
 angular.module( 'Morsel', [
   'templates-app',
   'templates-common',
-  'Morsel.home',
+  //app
   'Morsel.about',
   'Morsel.dashboard',
   'Morsel.feed',
+  'Morsel.home',
   'Morsel.morsel',
   'Morsel.post',
   'Morsel.postDetail',
   'Morsel.profile',
+  //common
+  'Morsel.bgImage',
+  //API
   'Morsel.apiMorsels',
   'Morsel.apiPosts',
   'Morsel.apiUsers',
+  //libs
   'restangular',
   'ui.state',
   'ui.route',
