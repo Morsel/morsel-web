@@ -13,6 +13,6 @@ angular.module( 'Morsel.postDetail', [])
   });
 })
 
-.controller( 'PostDetailCtrl', function ProfileCtrl( $scope, $stateParams, ApiPosts ) {
+.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts ) {
   $scope.post = ApiPosts.getPost($stateParams.postId).$object;
 });
