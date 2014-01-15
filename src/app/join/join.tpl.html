@@ -1,0 +1,25 @@
+<form name="join_form" method="post" ng-controller="JoinCtrl" ng-submit="joinMorsel()" novalidate>
+  <label for="first-name">First Name</label>
+  <input type="text" name="first_name" id="first-name" placeholder="John" ng-model="first_name" autofocus />
+
+  <label for="last-name">Last Name</label>
+  <input type="text" name="last_name" id="last-name" placeholder="Smith" ng-model="last_name" />
+
+  <label for="title">Title</label>
+  <input type="text" name="title" id="title" placeholder="Executive Chef at McDonalds" ng-model="title" />
+
+  <label for="email">Email</label>
+  <input type="email" ng-model="email" name="email" id="email" placeholder="Email" required />
+  <span ng-show="form.email.$dirty && form.email.$error.email">Email is invalid</span>
+
+  <label for="password">Password</label>
+  <input type="password" name="password" id="password" ng-model="password" required match="verification" />
+  <span ng-show="form.password.$dirty && form.password.$error.required">Please enter a password</span>
+
+  <label for="verification">Repeat password</label>
+  <input type="password" name="verification" id="verification" ng-model="verification" required match="password" />
+  <span ng-show="form.verification.$dirty && form.verification.$error.required">Please repeat your password</span>
+  <span ng-show="form.verification.$dirty && form.verification.$error.match && !form.verification.$error.required">Passwords don't match</span>
+
+  <input type="submit" value="Sign up" ng-disabled="form.$invalid" />
+</form>

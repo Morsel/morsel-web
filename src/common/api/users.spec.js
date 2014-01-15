@@ -29,6 +29,10 @@ describe( 'ApiUsers factory', function() {
     expect(ApiUsers.getUser).toBeDefined();
   }));
 
+  it( 'should contain a newUser function', inject(function(ApiUsers) {
+    expect(ApiUsers.newUser).toBeDefined();
+  }));
+
   describe('function getPosts', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
@@ -64,6 +68,27 @@ describe( 'ApiUsers factory', function() {
     it( 'should return an object', inject(function(ApiUsers) {
       var resolvedValue;
       ApiUsers.getUser(1).then(function (data) {
+        resolvedValue = data;
+      });
+      httpBackend.flush();
+      expect(sanitizeRestangularAll(resolvedValue)).toEqual(jasmine.any(Object));
+    }));
+  });
+
+  describe('function newUser', function() {
+    beforeEach(inject(function (_$httpBackend_, APIURL) {
+      httpBackend = _$httpBackend_;
+      httpBackend.expectPOST(APIURL+'/users.json?api_key=1').respond('[{"name":"tester"},{"name":"tester2"}]');
+    }));
+
+    afterEach(function () {
+      httpBackend.verifyNoOutstandingExpectation();
+      httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it( 'should return an object', inject(function(ApiUsers) {
+      var resolvedValue;
+      ApiUsers.newUser('email@test.com', 'testpassword', 'testfirst', 'testlast', 'testtitle').then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();

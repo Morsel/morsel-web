@@ -6,6 +6,7 @@ angular.module( 'Morsel', [
   'Morsel.dashboard',
   'Morsel.feed',
   'Morsel.home',
+  'Morsel.join',
   'Morsel.morsel',
   'Morsel.post',
   'Morsel.postDetail',
