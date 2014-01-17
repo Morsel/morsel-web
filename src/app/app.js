@@ -44,10 +44,7 @@ angular.module( 'Morsel', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, userData ) {
   Auth.setupInterceptor();
-  userData.then(function(data){
-    console.log(data);
-    $scope.currentUser = data;
-  });
+  updateUserData();
 
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     //if non logged in user tries to access a restricted route
@@ -62,7 +59,14 @@ angular.module( 'Morsel', [
       $scope.pageTitle = toState.data.pageTitle + ' | Morsel' ;
     }
     $scope.isLoggedIn = Auth.isLoggedIn();
-    $scope.currentUser = userData;
+    updateUserData();
   });
+
+  function updateUserData() {
+    userData.then(function(data){
+      $scope.currentUserName = data.first_name;
+      $scope.currentUserId = data.id;
+    });
+  }
 });
 
