@@ -148,7 +148,7 @@ angular.module( 'Morsel.auth', [
       });
     } else {
       //they're anonymous
-      Auth.resetUser();
+      Auth._resetUser();
       $timeout(function(){deferred.resolve(Auth.currentUser);}, 0);
     }
 
