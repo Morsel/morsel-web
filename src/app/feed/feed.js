@@ -1,5 +1,6 @@
 angular.module( 'Morsel.feed', [])
 
+//directive for a feed object, a collection of posts
 .directive('feed', function() {
   return {
     restrict : 'EA',

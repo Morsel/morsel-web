@@ -1,5 +1,6 @@
 angular.module( 'Morsel.morsel', [])
 
+//directive for an individual morsel
 .directive('morsel', function(ApiMorsels) {
   return {
     restrict : 'EA',
