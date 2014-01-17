@@ -16,6 +16,6 @@ angular.module( 'Morsel.home', [
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, ApiPosts ) {
-  $scope.posts = ApiPosts.getPosts().$object;
+.controller( 'HomeCtrl', function HomeCtrl( $scope, Auth ) {
+  $scope.welcomeUserName = Auth.currentUser.first_name;
 });

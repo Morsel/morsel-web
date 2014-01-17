@@ -13,24 +13,41 @@ angular.module( 'Morsel.apiUsers', [] )
     return Restangular.one('users', userId).one('posts').get();
   };
 
-  Users.newUser = function(email, password, firstName, lastName, title) {
+  Users.newUser = function(userData) {
     var deferred = $q.defer();
 
-    return RestangularUsers.post(angular.toJson({
-      'user': {
-        'email': email,
-        'password': password,
-        'first_name': firstName,
-        'last_name': lastName,
-        'title': title
-      }
-    })).then(function(resp){
-      console.log(resp);
-      deferred.resolve();
+    RestangularUsers.post(angular.toJson(userData)).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){
-      console.log(resp);
-      deferred.reject();
+      deferred.reject(Restangular.stripRestangular(resp));
     });
+
+    return deferred.promise;
   };
+
+  Users.loginUser = function(userData) {
+    var deferred = $q.defer();
+
+    Restangular.one('users').post('sign_in', angular.toJson(userData)).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.getUserData = function(userId) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', userId).get().then(function(resp){
+      deferred.resolve(resp);
+    }, function(resp){
+      deferred.reject(resp);
+    });
+
+    return deferred.promise;
+  };
+
   return Users;
 });

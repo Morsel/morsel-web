@@ -15,12 +15,27 @@ angular.module( 'Morsel.join', [
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, $stateParams, ApiUsers ) {
-  $scope.joinMorsel = function() {
-    ApiUsers.newUser($scope.email, $scope.password, $scope.first_name, $scope.last_name, $scope.title).then(function() {
-      console.log('congrats, new user');
-    }, function() {
-      console.log('denied');
+.controller( 'JoinCtrl', function JoinCtrl( $scope, $stateParams, Auth ) {
+  $scope.serverErrors = [];
+
+  $scope.join = function() {
+    var userData = {
+      'user': {
+        'email': $scope.email,
+        'password': $scope.password,
+        'first_name': $scope.first_name,
+        'last_name': $scope.last_name,
+        'title': $scope.title
+      }
+    };
+
+    $scope.serverErrors = [];
+
+    Auth.join(userData, function() {
+      console.log('welcome '+Auth.currentUser.first_name);
+      //$location.path('/thanks');
+    }, function(resp) {
+      $scope.serverErrors = resp.data.errors;
     });
   };
 });

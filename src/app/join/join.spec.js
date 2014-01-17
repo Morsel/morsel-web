@@ -6,7 +6,7 @@ describe( 'Join controller', function() {
     $controller('JoinCtrl', {$scope: $scope});
   }));
 
-  it( 'should contain a joinMorsel function', inject( function(){
-    expect($scope.joinMorsel).toBeDefined();
+  it( 'should contain a join function', inject( function(){
+    expect($scope.join).toBeDefined();
   }));
 });

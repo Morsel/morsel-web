@@ -32,7 +32,7 @@ describe( 'ApiMorsels factory', function() {
   describe('function likeMorsel', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectPOST(APIURL+'/morsels/1/like.json?api_key=1').respond('OK');
+      httpBackend.expectPOST(APIURL+'/morsels/1/like.json').respond('OK');
     }));
 
     afterEach(function () {
@@ -53,7 +53,7 @@ describe( 'ApiMorsels factory', function() {
   describe('function unlikeMorsel', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectDELETE(APIURL+'/morsels/1/like.json?api_key=1').respond('OK');
+      httpBackend.expectDELETE(APIURL+'/morsels/1/like.json').respond('OK');
     }));
 
     afterEach(function () {

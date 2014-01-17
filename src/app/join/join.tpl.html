@@ -1,4 +1,6 @@
-<form name="join_form" method="post" ng-controller="JoinCtrl" ng-submit="joinMorsel()" novalidate>
+<form name="form" method="post" ng-controller="JoinCtrl" ng-submit="join()" novalidate>
+  <span ng-repeat="serverError in serverErrors">{{serverError.msg}}</span>
+
   <label for="first-name">First Name</label>
   <input type="text" name="first_name" id="first-name" placeholder="John" ng-model="first_name" autofocus />
 

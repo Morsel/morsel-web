@@ -13,7 +13,13 @@ angular.module( 'Morsel.dashboard', [
         templateUrl: 'dashboard/dashboard.tpl.html'
       }
     },
-    data:{ pageTitle: 'Dashboard' }
+    data:{pageTitle: 'Dashboard' },
+    access: {
+      restricted : true
+    },
+    resolve: {
+      loggedInUser : 'userData'
+    }
   });
 })
 

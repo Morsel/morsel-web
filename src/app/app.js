@@ -7,12 +7,17 @@ angular.module( 'Morsel', [
   'Morsel.feed',
   'Morsel.home',
   'Morsel.join',
+  'Morsel.login',
+  'Morsel.logout',
   'Morsel.morsel',
+  'Morsel.myfeed',
   'Morsel.post',
   'Morsel.postDetail',
   'Morsel.profile',
   //common
+  'Morsel.auth',
   'Morsel.bgImage',
+  'Morsel.userData',
   //API
   'Morsel.apiMorsels',
   'Morsel.apiPosts',
@@ -31,20 +36,33 @@ angular.module( 'Morsel', [
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
-  RestangularProvider.setDefaultRequestParams({api_key: "1"});
   RestangularProvider.setRequestSuffix('.json');
 })
 
 .run( function run () {
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, userData ) {
+  Auth.setupInterceptor();
+  userData.then(function(data){
+    console.log(data);
+    $scope.currentUser = data;
+  });
+
+  $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    //if non logged in user tries to access a restricted route
+    if(toState.access && toState.access.restricted && !Auth.isLoggedIn()) {
+      event.preventDefault();
+      $location.path('/login');
+    }
+  });
+
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Morsel' ;
     }
+    $scope.isLoggedIn = Auth.isLoggedIn();
+    $scope.currentUser = userData;
   });
-})
-
-;
+});
 
