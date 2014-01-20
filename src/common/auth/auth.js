@@ -71,9 +71,14 @@ angular.module( 'Morsel.auth', [
         storedUserAuthToken = Auth._getSavedUserAuthToken();
 
     if(savedUserId && storedUserAuthToken) {
-      Restangular.setDefaultRequestParams({api_key: savedUserId + ':' + storedUserAuthToken});
+      Restangular.setDefaultRequestParams({
+        device: 'web',
+        api_key: savedUserId + ':' + storedUserAuthToken
+      });
     } else {
-      Restangular.setDefaultRequestParams();
+      Restangular.setDefaultRequestParams({
+        device: 'web'
+      });
     }
   };
 
