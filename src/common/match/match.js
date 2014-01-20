@@ -1,6 +1,7 @@
 // http://codepen.io/brunoscopelliti/pen/ECyka
 angular.module( 'Morsel.match', [] )
 
+//set validation based on multiple inputs
 .directive('match', [function () {
   return {
     require: 'ngModel',

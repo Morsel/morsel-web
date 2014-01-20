@@ -37,9 +37,11 @@ angular.module( 'Morsel.apiUsers', [] )
     return deferred.promise;
   };
 
+  //called on initial app load if we have user info in storage
   Users.getUserData = function(userId) {
     var deferred = $q.defer();
 
+    //THIS METHOD WILL EVENTUALLY CHANGE...
     Restangular.one('users', userId).get().then(function(resp){
       deferred.resolve(resp);
     }, function(resp){

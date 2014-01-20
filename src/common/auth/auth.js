@@ -2,10 +2,14 @@ angular.module( 'Morsel.auth', [
   'ngStorage'
 ] )
 
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q){
+// Auth is used for all user authentication interactions
+.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout){
   var Auth = {};
-  
-  Auth.blankUser = function() { 
+
+  //"private" methods, for my own sanity
+
+  //an anonymous user
+  Auth._blankUser = function() { 
     return {
       'id': '',
       'email': null,
@@ -19,91 +23,145 @@ angular.module( 'Morsel.auth', [
     };
   };
 
-  Auth.currentUser = Auth.blankUser();
+  //start with an anonymous user
+  Auth._resetUser = function() {
+    Auth.currentUser = Auth._blankUser();
+  };
 
-  Auth.forgetUser = function() {
+  //remove user data from storage
+  Auth._forgetUser = function() {
     delete $window.localStorage.userId;
     delete $window.localStorage.auth_token;
   };
 
-  Auth.saveUser = function() {
+  //add user data to storage
+  Auth._saveUser = function() {
     if(Auth.currentUser.id && Auth.currentUser.auth_token) {
       $window.localStorage.userId = Auth.currentUser.id;
       $window.localStorage.auth_token = Auth.currentUser.auth_token;
     }
   };
 
-  Auth.getSavedUserId = function() {
+  //get userid from storage
+  Auth._getSavedUserId = function() {
     return $window.localStorage.userId || null;
   };
 
-  Auth.getSavedUserAuthToken = function() {
+  //get userauthtoken from storage
+  Auth._getSavedUserAuthToken = function() {
     return $window.localStorage.auth_token || null;
   };
 
-  Auth.getCurrentUser = function() {
-    return Auth.currentUser;
-  };
-
-  Auth.updateUser = function(userData) {
+  //update the current user and save her
+  Auth._updateUser = function(userData) {
     _.extend(Auth.currentUser, Restangular.stripRestangular(userData));
-    Auth.saveUser();
-    Auth.resetApiKey();
+    Auth._saveUser();
+    Auth._resetApiKey();
   };
 
-  Auth.clearUser = function() {
-    Auth.updateUser(Auth.blankUser());
-    Auth.forgetUser();
+  //forget the user in our app
+  Auth._clearUser = function() {
+    Auth._updateUser(Auth._blankUser());
+    Auth._forgetUser();
   };
 
-  Auth.join = function(userData, success, error) {
-    ApiUsers.newUser(userData).then(function(loggedInUser) {
-      Auth.updateUser(loggedInUser);
-      success();
-    }, function(resp){
-      Auth.clearUser();
-      error(resp);
-    });
-  };
-
-  Auth.login = function(userData, success, error) {
-    ApiUsers.loginUser(userData).then(function(loggedInUser) {
-      Auth.updateUser(loggedInUser);
-      success();
-    }, function(resp){
-      Auth.clearUser();
-      error(resp);
-    });
-  };
-
-  Auth.logout = function(userData) {
-    Auth.clearUser();
-    $location.path('/home');
-  };
-
-  Auth.isLoggedIn = function() {
-    return Auth.getSavedUserId() && Auth.getSavedUserAuthToken();
-  };
-
-  Auth.resetApiKey = function() {
-    var savedUserId = Auth.getSavedUserId(),
-        storedUserAuthToken = Auth.getSavedUserAuthToken();
+  //adjust the API key for current user
+  Auth._resetApiKey = function() {
+    var savedUserId = Auth._getSavedUserId(),
+        storedUserAuthToken = Auth._getSavedUserAuthToken();
 
     if(savedUserId && storedUserAuthToken) {
-      Restangular.setDefaultRequestParams({api_key: savedUserId + ':' + storedUserAuthToken});
+      Restangular.setDefaultRequestParams({
+        device: 'web',
+        api_key: savedUserId + ':' + storedUserAuthToken
+      });
     } else {
-      Restangular.setDefaultRequestParams();
+      Restangular.setDefaultRequestParams({
+        device: 'web'
+      });
     }
   };
 
+  //public stuff
+
+  //create a new user
+  Auth.join = function(userData, success, error) {
+    ApiUsers.newUser(userData).then(function(loggedInUser) {
+      Auth._updateUser(loggedInUser);
+      success();
+    }, function(resp){
+      Auth._clearUser();
+      error(resp);
+    });
+  };
+
+  //log in an existing user
+  Auth.login = function(userData, success, error) {
+    ApiUsers.loginUser(userData).then(function(loggedInUser) {
+      Auth._updateUser(loggedInUser);
+      success();
+    }, function(resp){
+      Auth._clearUser();
+      error(resp);
+    });
+  };
+
+  //log out a user
+  Auth.logout = function(userData) {
+    Auth._clearUser();
+    $location.path('/home');
+  };
+
+  //check if a user is logged in
+  Auth.isLoggedIn = function() {
+    return Auth._getSavedUserId() && Auth._getSavedUserAuthToken();
+  };
+
+  //intercept our API calls
   Auth.setupInterceptor = function() {
     Restangular.setErrorInterceptor(function(response) {
-      if (response.status ===401) {
-        Auth.clearUser();
+      //if an API call is ever blocked by restricted access, we log the user out for security
+      if (response.status === 401) {
+        Auth._clearUser();
         $location.path('/login');
       }
     });
   };
+
+  //return a promise about data for our current user
+  Auth.getUserData = function() {
+    var deferred = $q.defer(),
+        savedUserId = Auth._getSavedUserId();
+
+    //if we have a currentUser in our app
+    if(Auth.currentUser && Auth.currentUser.id && Auth.currentUser.auth_token) {
+      //return her
+      $timeout(function(){deferred.resolve(Auth.currentUser);}, 0);
+    } else if(savedUserId) {
+      //if there's a user id saved
+      //reset our key
+      Auth._resetApiKey();
+      //get the rest of the users data from the server
+      ApiUsers.getUserData(savedUserId).then(function(loggedInUser) {
+        //update the app's user
+        Auth._updateUser(loggedInUser);
+        deferred.resolve(Auth.currentUser);
+      }, function() {
+        //oops. must have been a faulty user. go anonymous for now
+        Auth._clearUser();
+        deferred.resolve(Auth.currentUser);
+      });
+    } else {
+      //they're anonymous
+      Auth._resetUser();
+      $timeout(function(){deferred.resolve(Auth.currentUser);}, 0);
+    }
+
+    return deferred.promise;
+  };
+
+  //to start, reset our user
+  Auth._resetUser();
 
   return Auth;
 });

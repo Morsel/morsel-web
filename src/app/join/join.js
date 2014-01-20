@@ -15,9 +15,11 @@ angular.module( 'Morsel.join', [
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, $stateParams, Auth ) {
+.controller( 'JoinCtrl', function JoinCtrl( $scope, $stateParams, Auth, $location ) {
+  //any errors to be displayed from server
   $scope.serverErrors = [];
 
+  //called on submit of join form
   $scope.join = function() {
     var userData = {
       'user': {
@@ -32,8 +34,8 @@ angular.module( 'Morsel.join', [
     $scope.serverErrors = [];
 
     Auth.join(userData, function() {
-      console.log('welcome '+Auth.currentUser.first_name);
-      //$location.path('/thanks');
+      //if successfully joined, send to their feed
+      $location.path('/myfeed');
     }, function(resp) {
       $scope.serverErrors = resp.data.errors;
     });
