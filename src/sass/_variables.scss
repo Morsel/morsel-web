@@ -3,12 +3,15 @@
 $morselHeight: 400px;
 
 // Colors
-$morsel-primary: #e96144;
-$morsel-secondary: #f0cf69;
-$morsel-tertiary: #51ba3c;
-$morsel-interface: #e2ddd7;
-$morsel-light-content: #93a590;
-$morsel-dark-content: #394038;
+$morsel-primary: #e96144; //salmon
+$morsel-secondary: #51ba3d; //green
+$morsel-tertiary: #f0cf69; //yellow
+$morsel-background: #FFFFFF; //white
+$morsel-light: #e2ddd7; //light gray
+$morsel-medium: #93a590; //medium gray
+$morsel-dark: #394038; //dark gray
+$morsel-light-content: $morsel-dark;
+$morsel-dark-content: $morsel-light;
 
 // Overwrite any bootstrap vars with our own
 

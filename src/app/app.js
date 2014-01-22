@@ -31,7 +31,7 @@ angular.module( 'Morsel', [
   'Morsel.reddit'
 ])
 //the URL to use for our API
-.constant('APIURL', 'http://morsel-api-staging.herokuapp.com/api')
+.constant('APIURL', 'https://morsel-api-staging.herokuapp.com/api')
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
   //if we don't recognize the URL, send it to the homepage for now
