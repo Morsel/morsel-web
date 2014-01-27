@@ -391,12 +391,12 @@ textarea {
 
 /* line 43, ../../vendor/sass-bootstrap/lib/_scaffolding.scss */
 a {
-  color: #f0cf69;
+  color: #51ba3d;
   text-decoration: none;
 }
 /* line 48, ../../vendor/sass-bootstrap/lib/_scaffolding.scss */
 a:hover, a:focus {
-  color: #e9b923;
+  color: #38802a;
   text-decoration: underline;
 }
 /* line 53, ../../vendor/sass-bootstrap/lib/_scaffolding.scss */
@@ -2802,7 +2802,7 @@ textarea.input-lg {
 
 /* line 83, ../../vendor/sass-bootstrap/lib/_buttons.scss */
 .btn-link {
-  color: #f0cf69;
+  color: #51ba3d;
   font-weight: normal;
   cursor: pointer;
   border-radius: 0;
@@ -2819,7 +2819,7 @@ textarea.input-lg {
 }
 /* line 103, ../../vendor/sass-bootstrap/lib/_buttons.scss */
 .btn-link:hover, .btn-link:focus {
-  color: #e9b923;
+  color: #38802a;
   text-decoration: underline;
   background-color: transparent;
 }
@@ -4199,12 +4199,12 @@ input[type="button"].btn-block {
 /* line 48, ../../vendor/sass-bootstrap/lib/_navs.scss */
 .nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
   background-color: #eeeeee;
-  border-color: #f0cf69;
+  border-color: #51ba3d;
 }
 /* line 52, ../../vendor/sass-bootstrap/lib/_navs.scss */
 .nav .open > a .caret, .nav .open > a:hover .caret, .nav .open > a:focus .caret {
-  border-top-color: #e9b923;
-  border-bottom-color: #e9b923;
+  border-top-color: #38802a;
+  border-bottom-color: #38802a;
 }
 /* line 64, ../../vendor/sass-bootstrap/lib/_navs.scss */
 .nav .nav-divider {
@@ -4354,14 +4354,14 @@ input[type="button"].btn-block {
 
 /* line 247, ../../vendor/sass-bootstrap/lib/_navs.scss */
 .nav .caret {
-  border-top-color: #f0cf69;
-  border-bottom-color: #f0cf69;
+  border-top-color: #51ba3d;
+  border-bottom-color: #51ba3d;
 }
 
 /* line 251, ../../vendor/sass-bootstrap/lib/_navs.scss */
 .nav a:hover .caret {
-  border-top-color: #e9b923;
-  border-bottom-color: #e9b923;
+  border-top-color: #38802a;
+  border-bottom-color: #38802a;
 }
 
 /* line 257, ../../vendor/sass-bootstrap/lib/_navs.scss */
@@ -5763,7 +5763,7 @@ body {
 
 /* line 5, ../../src/sass/_main.scss */
 .subheading {
-  color: #93a590;
+  color: #394038;
   font-family: "Helvetica", "Arial", sans-serif;
 }
 
@@ -5771,7 +5771,7 @@ body {
 blockquote {
   font-family: "Helvetica", "Arial", sans-serif;
   font-weight: 100;
-  color: #93a590;
+  color: #394038;
 }
 
 /* line 16, ../../src/sass/_main.scss */

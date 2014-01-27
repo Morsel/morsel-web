@@ -15,27 +15,27 @@ body {
 
 /* line 19, style.scss */
 .morsel-secondary {
-  background-color: #f0cf69;
+  background-color: #51ba3d;
 }
 
 /* line 23, style.scss */
 .morsel-tertiary {
-  background-color: #51ba3c;
+  background-color: #f0cf69;
 }
 
 /* line 27, style.scss */
 .morsel-interface {
-  background-color: #e2ddd7;
+  background-color: #93a590;
 }
 
 /* line 31, style.scss */
 .morsel-light-content {
-  background-color: #93a590;
+  background-color: #394038;
 }
 
 /* line 35, style.scss */
 .morsel-dark-content {
-  background-color: #394038;
+  background-color: #e2ddd7;
 }
 
 /* line 40, style.scss */
