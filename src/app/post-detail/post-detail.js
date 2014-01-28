@@ -1,4 +1,6 @@
-angular.module( 'Morsel.postDetail', [])
+angular.module( 'Morsel.postDetail', [
+  'Morsel.morselSwipe'
+])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'postDetail', {

@@ -2,8 +2,8 @@
 <a href="#/users/{{post.creator.id}}" class="profile-pic-link">
   <img ng-src="{{post.creator.photo_url}}" class="img-circle profile-pic" />
 </a>
-<carousel interval="none" class="morsels">
-  <slide ng-repeat="morsel in post.morsels" active="slide.active" class="morsel">
+<div class="morsels">
+  <div ng-repeat="morsel in post.morsels" class="morsel">
     <div morsel="morsel"></div>
-  </slide>
-</carousel>
+  </div>
+</div>
