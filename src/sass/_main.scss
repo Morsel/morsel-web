@@ -1,16 +1,18 @@
 body {
-  font-weight: lighter;
+  background-color: $morsel-background;
+  margin: 0px;
+  color: $morsel-dark;
 }
 
 .subheading {
-  color: $morsel-light-content;
+  color: $morsel-light;
   font-family: $font-family-secondary;
 }
 
 blockquote {
   font-family: $font-family-secondary;
   font-weight: 100;
-  color: $morsel-light-content;
+  color: $morsel-light;
 }
 
 img {
@@ -28,4 +30,41 @@ img {
 .profile-pic {
   width: 100px;
   height: 100px;
+}
+
+.container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.user-info {
+  padding: 10px 15px;
+  overflow: hidden;
+
+  div {
+    padding-left: $profile-pic-margin*2 + $profile-pic-small;
+
+    & + div {
+      text-align: left;
+    }
+  }
+
+  p {
+    color: $morsel-medium;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0;
+  }
+
+  img {
+    height: $profile-pic-small;
+    width: $profile-pic-small;
+    margin: 0 $profile-pic-margin;
+    float: left;
+  }
 }

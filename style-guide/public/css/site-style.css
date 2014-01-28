@@ -1,3 +1,4 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
 /*! normalize.css v2.1.3 | MIT License | git.io/normalize */
 /* line 22, ../../vendor/sass-bootstrap/lib/_normalize.scss */
 article,
@@ -245,116 +246,6 @@ table {
   border-spacing: 0;
 }
 
-@media print {
-  /* line 8, ../../vendor/sass-bootstrap/lib/_print.scss */
-  * {
-    text-shadow: none !important;
-    color: #000 !important;
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  /* line 16, ../../vendor/sass-bootstrap/lib/_print.scss */
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
-
-  /* line 20, ../../vendor/sass-bootstrap/lib/_print.scss */
-  a[href]:after {
-    content: " (" attr(href) ")";
-  }
-
-  /* line 24, ../../vendor/sass-bootstrap/lib/_print.scss */
-  abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
-
-  /* line 30, ../../vendor/sass-bootstrap/lib/_print.scss */
-  a[href^="javascript:"]:after,
-  a[href^="#"]:after {
-    content: "";
-  }
-
-  /* line 35, ../../vendor/sass-bootstrap/lib/_print.scss */
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
-
-  /* line 40, ../../vendor/sass-bootstrap/lib/_print.scss */
-  thead {
-    display: table-header-group;
-  }
-
-  /* line 45, ../../vendor/sass-bootstrap/lib/_print.scss */
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
-
-  /* line 49, ../../vendor/sass-bootstrap/lib/_print.scss */
-  img {
-    max-width: 100% !important;
-  }
-
-  @page {
-    margin: 2cm .5cm;
-}
-
-  /* line 59, ../../vendor/sass-bootstrap/lib/_print.scss */
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  /* line 65, ../../vendor/sass-bootstrap/lib/_print.scss */
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
-
-  /* line 71, ../../vendor/sass-bootstrap/lib/_print.scss */
-  select {
-    background: #fff !important;
-  }
-
-  /* line 76, ../../vendor/sass-bootstrap/lib/_print.scss */
-  .navbar {
-    display: none;
-  }
-
-  /* line 81, ../../vendor/sass-bootstrap/lib/_print.scss */
-  .table td,
-  .table th {
-    background-color: #fff !important;
-  }
-
-  /* line 87, ../../vendor/sass-bootstrap/lib/_print.scss */
-  .btn > .caret,
-  .dropup > .btn > .caret {
-    border-top-color: #000 !important;
-  }
-
-  /* line 91, ../../vendor/sass-bootstrap/lib/_print.scss */
-  .label {
-    border: 1px solid #000;
-  }
-
-  /* line 95, ../../vendor/sass-bootstrap/lib/_print.scss */
-  .table {
-    border-collapse: collapse !important;
-  }
-
-  /* line 100, ../../vendor/sass-bootstrap/lib/_print.scss */
-  .table-bordered th,
-  .table-bordered td {
-    border: 1px solid #ddd !important;
-  }
-}
 /* line 10, ../../vendor/sass-bootstrap/lib/_scaffolding.scss */
 *,
 *:before,
@@ -372,7 +263,7 @@ html {
 
 /* line 22, ../../vendor/sass-bootstrap/lib/_scaffolding.scss */
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue Light", "Helvetica Neue", "Roboto Slab", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857;
   color: #333333;
@@ -560,7 +451,7 @@ cite {
 /* line 79, ../../vendor/sass-bootstrap/lib/_type.scss */
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Helvetica Neue Light", "Helvetica Neue", "Roboto Slab", Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
   color: #e96144;
@@ -2643,20 +2534,20 @@ textarea.input-lg {
 /* line 58, ../../vendor/sass-bootstrap/lib/_buttons.scss */
 .btn-primary {
   color: white;
-  background-color: #428bca;
-  border-color: #357ebd;
+  background-color: #e96144;
+  border-color: #e64e2d;
 }
 /* line 470, ../../vendor/sass-bootstrap/lib/_mixins.scss */
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
   color: white;
-  background-color: #3276b1;
-  border-color: #285e8e;
+  background-color: #e5421f;
+  border-color: #c03417;
 }
 /* line 475, ../../vendor/sass-bootstrap/lib/_mixins.scss */
 .open .btn-primary.dropdown-toggle {
   color: white;
-  background-color: #3276b1;
-  border-color: #285e8e;
+  background-color: #e5421f;
+  border-color: #c03417;
 }
 /* line 481, ../../vendor/sass-bootstrap/lib/_mixins.scss */
 .btn-primary:active, .btn-primary.active {
@@ -2668,8 +2559,8 @@ textarea.input-lg {
 }
 /* line 494, ../../vendor/sass-bootstrap/lib/_mixins.scss */
 .btn-primary.disabled, .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled:active, .btn-primary.disabled.active, .btn-primary[disabled], .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled]:active, .btn-primary[disabled].active, fieldset[disabled] .btn-primary, fieldset[disabled] .btn-primary:hover, fieldset[disabled] .btn-primary:focus, fieldset[disabled] .btn-primary:active, fieldset[disabled] .btn-primary.active {
-  background-color: #428bca;
-  border-color: #357ebd;
+  background-color: #e96144;
+  border-color: #e64e2d;
 }
 
 /* line 62, ../../vendor/sass-bootstrap/lib/_buttons.scss */
@@ -5538,41 +5429,82 @@ td.visible-print {
 }
 /* line 1, ../../src/sass/_main.scss */
 body {
-  font-weight: lighter;
+  background-color: white;
+  margin: 0px;
+  color: #394038;
 }
 
-/* line 5, ../../src/sass/_main.scss */
+/* line 7, ../../src/sass/_main.scss */
 .subheading {
-  color: #394038;
-  font-family: "Helvetica", "Arial", sans-serif;
+  color: #e2ddd7;
+  font-family: "Roboto Slab", "Helvetica", "Arial", sans-serif;
 }
 
-/* line 10, ../../src/sass/_main.scss */
+/* line 12, ../../src/sass/_main.scss */
 blockquote {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "Roboto Slab", "Helvetica", "Arial", sans-serif;
   font-weight: 100;
-  color: #394038;
+  color: #e2ddd7;
 }
 
-/* line 16, ../../src/sass/_main.scss */
+/* line 18, ../../src/sass/_main.scss */
 img {
   max-width: 100%;
 }
 
-/* line 20, ../../src/sass/_main.scss */
+/* line 22, ../../src/sass/_main.scss */
 .nav a {
   cursor: pointer;
 }
 
-/* line 24, ../../src/sass/_main.scss */
+/* line 26, ../../src/sass/_main.scss */
 .profile-pic-link {
   display: inline-block;
 }
 
-/* line 28, ../../src/sass/_main.scss */
+/* line 30, ../../src/sass/_main.scss */
 .profile-pic {
   width: 100px;
   height: 100px;
+}
+
+/* line 35, ../../src/sass/_main.scss */
+.container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* line 40, ../../src/sass/_main.scss */
+.user-info {
+  padding: 10px 15px;
+  overflow: hidden;
+}
+/* line 44, ../../src/sass/_main.scss */
+.user-info div {
+  padding-left: 115px;
+}
+/* line 47, ../../src/sass/_main.scss */
+.user-info div + div {
+  text-align: left;
+}
+/* line 52, ../../src/sass/_main.scss */
+.user-info p {
+  color: #93a590;
+  font-size: 16px;
+  margin-top: 10px;
+}
+/* line 58, ../../src/sass/_main.scss */
+.user-info h2 {
+  font-size: 20px;
+  line-height: 20px;
+  margin: 0;
+}
+/* line 64, ../../src/sass/_main.scss */
+.user-info img {
+  height: 75px;
+  width: 75px;
+  margin: 0 20px;
+  float: left;
 }
 
 /* line 1, ../../src/app/home/_home.scss */
@@ -5692,13 +5624,46 @@ img {
   padding: 30px 20px;
 }
 
-/* line 38, ../../src/sass/_morsels.scss */
+@media (min-width: 768px) {
+  /* line 41, ../../src/sass/_morsels.scss */
+  .morsels .morsel .morsel-img {
+    height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 49, ../../src/sass/_morsels.scss */
+  .prev-morsel {
+    left: -75px;
+  }
+
+  /* line 53, ../../src/sass/_morsels.scss */
+  .next-morsel {
+    right: -75px;
+  }
+
+  /* line 58, ../../src/sass/_morsels.scss */
+  .post .container {
+    width: 750px;
+  }
+
+  /* line 63, ../../src/sass/_morsels.scss */
+  #cboxClose {
+    top: -70px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 71, ../../src/sass/_morsels.scss */
+  .morsels .morsel .morsel-img {
+    height: 640px;
+  }
+}
+/* line 79, ../../src/sass/_morsels.scss */
 .rn-carousel-container {
   overflow: hidden;
   position: relative;
 }
 
-/* line 42, ../../src/sass/_morsels.scss */
+/* line 83, ../../src/sass/_morsels.scss */
 .rn-carousel-slides {
   -webkit-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
@@ -5710,7 +5675,7 @@ img {
   margin: 0;
 }
 
-/* line 52, ../../src/sass/_morsels.scss */
+/* line 93, ../../src/sass/_morsels.scss */
 .rn-carousel-slide {
   white-space: normal;
   vertical-align: top;
@@ -5723,7 +5688,7 @@ img {
 }
 
 /* indicators */
-/* line 63, ../../src/sass/_morsels.scss */
+/* line 104, ../../src/sass/_morsels.scss */
 .rn-carousel-indicator {
   width: 100%;
   text-align: center;
@@ -5735,7 +5700,7 @@ img {
   cursor: pointer;
 }
 
-/* line 72, ../../src/sass/_morsels.scss */
+/* line 113, ../../src/sass/_morsels.scss */
 .rn-carousel-indicator span {
   -webkit-transition: color .2s ease-out;
   transition: color .2s ease-out;
@@ -5743,18 +5708,18 @@ img {
   color: #333;
 }
 
-/* line 77, ../../src/sass/_morsels.scss */
+/* line 118, ../../src/sass/_morsels.scss */
 .rn-carousel-indicator span:before {
   content: "\25cf";
 }
 
-/* line 79, ../../src/sass/_morsels.scss */
+/* line 120, ../../src/sass/_morsels.scss */
 .rn-carousel-indicator .active {
   color: white;
 }
 
 /* controls */
-/* line 83, ../../src/sass/_morsels.scss */
+/* line 124, ../../src/sass/_morsels.scss */
 .rn-carousel-control {
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
@@ -5766,27 +5731,27 @@ img {
   cursor: pointer;
 }
 
-/* line 92, ../../src/sass/_morsels.scss */
+/* line 133, ../../src/sass/_morsels.scss */
 .rn-carousel-control:hover {
   opacity: 1;
 }
 
-/* line 94, ../../src/sass/_morsels.scss */
+/* line 135, ../../src/sass/_morsels.scss */
 .rn-carousel-control.rn-carousel-control-prev {
   left: 0.5em;
 }
 
-/* line 96, ../../src/sass/_morsels.scss */
+/* line 137, ../../src/sass/_morsels.scss */
 .rn-carousel-control.rn-carousel-control-prev:before {
   content: "<";
 }
 
-/* line 98, ../../src/sass/_morsels.scss */
+/* line 139, ../../src/sass/_morsels.scss */
 .rn-carousel-control.rn-carousel-control-next {
   right: 0.5em;
 }
 
-/* line 100, ../../src/sass/_morsels.scss */
+/* line 141, ../../src/sass/_morsels.scss */
 .rn-carousel-control.rn-carousel-control-next:before {
   content: ">";
 }

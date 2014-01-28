@@ -35,6 +35,47 @@
   }
 }
 
+@media (min-width: $screen-sm-min) {
+  .morsels {
+    .morsel {
+      .morsel-img {
+        height: 400px;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .prev-morsel {
+    left: -75px;
+  }
+
+  .next-morsel {
+    right: -75px;
+  }
+
+  .post {
+    .container {
+      width: $container-sm;
+    }
+  }
+
+  #cboxClose{
+    top:-70px;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .morsels {
+    .morsel {
+      .morsel-img {
+        height: 640px;
+      }
+    }
+  }
+}
+
+//carousel stuff, for now
 .rn-carousel-container {
   overflow: hidden;
   position: relative; }

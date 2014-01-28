@@ -1,3 +1,13 @@
+<div class="container">
+  <div class="user-info">
+    <img src="{{post.creator.photos._80x80}}" class="img-circle" />
+    <div>
+      <p id="created-at"></p>
+      <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+    </div>
+  </div>
+</div>
+      
 <p>title: {{title}}</p>
 <a href="#/users/{{post.creator.id}}">
   <img ng-src="{{post.creator.photo_url}}" />

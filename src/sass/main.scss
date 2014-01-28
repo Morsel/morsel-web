@@ -7,7 +7,7 @@
 
 // Reset
 @import "../../vendor/sass-bootstrap/lib/normalize";
-@import "../../vendor/sass-bootstrap/lib/print";
+//@import "../../vendor/sass-bootstrap/lib/print";
 
 // Core CSS
 @import "../../vendor/sass-bootstrap/lib/scaffolding";
@@ -57,5 +57,3 @@
 @import "../app/home/_home.scss";
 @import "../app/feed/_feed.scss";
 @import "_morsels.scss";
-
-
