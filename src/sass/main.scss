@@ -45,7 +45,7 @@
 //@import "../../vendor/sass-bootstrap/lib/modals";
 //@import "../../vendor/sass-bootstrap/lib/tooltip";
 //@import "../../vendor/sass-bootstrap/lib/popovers";
-@import "../../vendor/sass-bootstrap/lib/carousel";
+//@import "../../vendor/sass-bootstrap/lib/carousel";
 
 // Utility classes
 @import "../../vendor/sass-bootstrap/lib/utilities";
@@ -56,5 +56,6 @@
 @import "_main.scss";
 @import "../app/home/_home.scss";
 @import "../app/feed/_feed.scss";
+@import "_morsels.scss";
 
 

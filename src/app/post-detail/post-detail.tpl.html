@@ -2,8 +2,17 @@
 <a href="#/users/{{post.creator.id}}">
   <img ng-src="{{post.creator.photo_url}}" />
 </a>
-<div ng-repeat="morsel in post.morsels" class="morsel">
-  <span>{{morsel.description}}</span>
-  <img ng-src="{{morsel.photo_url}}" />
-  <p>user {{isExists(morsel.liked) && 'has' || 'hasnt'}} liked this</p>
+
+<div class="container">
+  <div class="morsels-wrap">
+    <ul rn-carousel rn-carousel-buffered rn-carousel-control rn-carousel-indicator class="ng-cloak morsels">
+      <li ng-repeat="morsel in post.morsels" class="morsel">
+        <p>user {{isExists(morsel.liked) && 'has' || 'hasnt'}} liked this</p>
+        <div class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
+        <div class="morsel-content">
+          <p>{{morsel.description}}</p>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

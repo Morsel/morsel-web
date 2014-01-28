@@ -25,50 +25,50 @@
     right: 10px;
     bottom: 10px;
   }
-}
 
-.morsels {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0;
-  padding: 0;
-  width: 100%;
+  .morsels {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 
-  .carousel-indicators {
-    right: 20px;
-    top: 10px;
-    left: auto;
-    bottom: auto;
-    width: auto;
-    margin-left: auto;
+    .carousel-indicators {
+      right: 20px;
+      top: 10px;
+      left: auto;
+      bottom: auto;
+      width: auto;
+      margin-left: auto;
+    }
   }
-}
 
-.morsel {
-  margin: 0;
-  padding: 0;
-  height: $morselHeight;
-  overflow: hidden;
-
-  .bg-image {
+  .morsel {
+    margin: 0;
+    padding: 0;
     height: $morselHeight;
-    background-position: 50% 50%;
-  }
+    overflow: hidden;
 
-  .morsel-description {
-    position: absolute;
-    bottom: 5px;
-    left: 10px;
-  }
+    .bg-image {
+      height: $morselHeight;
+      background-position: 50% 50%;
+    }
 
-  .like-morsel {
-    position: absolute;
-    top: 50px;
-    left: 50px;
+    .morsel-description {
+      position: absolute;
+      bottom: 5px;
+      left: 10px;
+    }
 
-    &:hover {
-      cursor: pointer;
+    .like-morsel {
+      position: absolute;
+      top: 50px;
+      left: 50px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
