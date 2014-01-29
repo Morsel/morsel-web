@@ -1,5 +1,4 @@
 /**
- * derived from:
  * Angular Carousel - Mobile friendly touch carousel for AngularJS
  * @version v0.1.6 - 2014-01-21
  * @link http://revolunet.github.com/angular-carousel
@@ -65,9 +64,7 @@ angular.module('Morsel.morselSwipe')
     angular.module('Morsel.morselSwipe')
 
     .directive('morselSwipe', ['$swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
-        // internal ids to allow multiple instances
-        var carouselId = 0,
-            // used to compute the sliding speed
+        var // used to compute the sliding speed
             timeConstant = 75,
             // in container % how much we need to drag to trigger the slide change
             moveTreshold = 0.05,
@@ -79,7 +76,7 @@ angular.module('Morsel.morselSwipe')
             scope: true,
             compile: function(tElement, tAttributes) {
                 // use the compile phase to customize the DOM
-                var morsels = tElement.find('morsels'),
+                var morsels = angular.element(document.querySelector('[morsels]')),
                     firstChildAttributes = morsels.children()[0].attributes,
                     isRepeatBased = false,
                     isBuffered = false,
@@ -122,8 +119,6 @@ angular.module('Morsel.morselSwipe')
 
                 return function(scope, iElement, iAttributes, containerCtrl) {
 
-                    carouselId++;
-
                     var containerWidth,
                         transformProperty,
                         pressed,
@@ -133,10 +128,11 @@ angular.module('Morsel.morselSwipe')
                         destination,
                         slidesCount = 0,
                         // javascript based animation easing
-                        timestamp;
+                        timestamp,
+                        indicatorDiv = iElement.find('morselSwipeSpot');
 
                     // add a wrapper div that will hide the overflow
-                    var carousel = morsels.wrap("<div id='carousel-" + carouselId +"' class='morsel-swipe-container'></div>"),
+                    var carousel = morsels.wrap("<div class='morsel-swipe-container'></div>"),
                         container = carousel.parent();
 
                     // if indicator or controls, setup the watch
@@ -148,18 +144,17 @@ angular.module('Morsel.morselSwipe')
                         scope.$watch('indicatorIndex', function(newValue) {
                             goToSlide(newValue, true);
                         });
-
                     }
 
                     // enable carousel indicator
                     if (angular.isDefined(iAttributes.morselSwipeIndicator)) {
-                        var indicator = $compile("<div id='carousel-" + carouselId +"-indicator' index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-indicators class='morsel-swipe-indicator'></div>")(scope);
-                        container.append(indicator);
+                        var indicator = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-indicators class='morsel-swipe-indicator'></div>")(scope);
+                        indicatorDiv.replaceWith(indicator);
                     }
 
                     // enable carousel controls
                     if (angular.isDefined(iAttributes.morselSwipeControl)) {
-                        var controls = $compile("<div id='carousel-" + carouselId +"-controls' index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-controls class='morsel-swipe-controls'></div>")(scope);
+                        var controls = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-controls class='morsel-swipe-controls'></div>")(scope);
                         container.append(controls);
                     }
 
@@ -200,12 +195,12 @@ angular.module('Morsel.morselSwipe')
                             }
                             updateIndicatorArray();
                             if (!containerWidth) {
-                                updateContainerWidth();
+                              updateContainerWidth();
                             }
                             goToSlide(scope.carouselIndex);
                         });
                     } else {
-                        slidesCount = iElement.children().length;
+                        slidesCount = morsels.children().length;
                         updateIndicatorArray();
                         updateContainerWidth();
                     }
@@ -214,7 +209,7 @@ angular.module('Morsel.morselSwipe')
                         // generate an array to be used by the indicators
                         var items = [];
                         for (var i = 0; i < slidesCount; i++) {
-                            items[i] = i;
+                          items[i] = i;
                         }
                         scope.carouselIndicatorArray = items;
                     }
@@ -459,5 +454,23 @@ angular.module('Morsel.morselSwipe')
             }
         };
     }]);
+
+})();
+
+(function() {
+    "use strict";
+
+    angular.module('Morsel.morselSwipe')
+
+    .filter('carouselSlice', function() {
+        return function(collection, start, size) {
+            if (angular.isArray(collection)) {
+                return collection.slice(start, start + size);
+            } else if (angular.isObject(collection)) {
+                // dont try to slice collections :)
+                return collection;
+            }
+        };
+    });
 
 })();

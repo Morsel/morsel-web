@@ -5659,91 +5659,17 @@ img {
 
 /* line 74, ../../src/sass/_morsels.scss */
 .morsels {
-  overflow: hidden;
   position: relative;
-}
-/* line 78, ../../src/sass/_morsels.scss */
-.morsels .morsel {
-  height: auto !important;
-  width: 100%;
-  position: relative;
-}
-/* line 83, ../../src/sass/_morsels.scss */
-.morsels .morsel .morsel-img {
-  background-position: 50% 50%;
-  background-size: cover;
-  height: 275px;
-}
-/* line 88, ../../src/sass/_morsels.scss */
-.morsels .morsel .morsel-img:hover {
-  cursor: pointer;
-}
-/* line 93, ../../src/sass/_morsels.scss */
-.morsels .morsel .morsel-content {
-  padding: 30px 40px;
-  font-weight: 300;
-}
-/* line 97, ../../src/sass/_morsels.scss */
-.morsels .morsel .morsel-content.text-morsel {
-  text-align: center;
-  font-size: 16px;
-  line-height: 24px;
-  padding: 30px 20px;
-}
-
-@media (min-width: 768px) {
-  /* line 110, ../../src/sass/_morsels.scss */
-  .morsels .morsel .morsel-img {
-    height: 400px;
-  }
-}
-@media (min-width: 992px) {
-  /* line 118, ../../src/sass/_morsels.scss */
-  .prev-morsel {
-    left: -75px;
-  }
-
-  /* line 122, ../../src/sass/_morsels.scss */
-  .next-morsel {
-    right: -75px;
-  }
-
-  /* line 127, ../../src/sass/_morsels.scss */
-  .post .container {
-    width: 750px;
-  }
-
-  /* line 132, ../../src/sass/_morsels.scss */
-  #cboxClose {
-    top: -70px;
-  }
-}
-@media (min-width: 1200px) {
-  /* line 140, ../../src/sass/_morsels.scss */
-  .morsels .morsel .morsel-img {
-    height: 640px;
-  }
-}
-/* line 148, ../../src/sass/_morsels.scss */
-.morsel-swipe-container {
-  overflow: hidden;
-  position: relative;
-}
-
-/* line 152, ../../src/sass/_morsels.scss */
-.morsel-swipe-slides {
   -webkit-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
-  position: relative;
   white-space: nowrap;
   overflow: visible;
   padding: 0;
   margin: 0;
 }
-
-/* line 162, ../../src/sass/_morsels.scss */
-.morsel-swipe-slide {
+/* line 85, ../../src/sass/_morsels.scss */
+.morsels .morsel {
   white-space: normal;
   vertical-align: top;
   display: inline-block;
@@ -5753,9 +5679,70 @@ img {
   -ms-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+/* line 95, ../../src/sass/_morsels.scss */
+.morsels .morsel .morsel-img {
+  background-position: 50% 50%;
+  background-size: cover;
+  height: 275px;
+}
+/* line 100, ../../src/sass/_morsels.scss */
+.morsels .morsel .morsel-img:hover {
+  cursor: pointer;
+}
+/* line 105, ../../src/sass/_morsels.scss */
+.morsels .morsel .morsel-content {
+  padding: 30px 40px;
+  font-weight: 300;
+}
+/* line 109, ../../src/sass/_morsels.scss */
+.morsels .morsel .morsel-content.text-morsel {
+  text-align: center;
+  font-size: 16px;
+  line-height: 24px;
+  padding: 30px 20px;
+}
+
+@media (min-width: 768px) {
+  /* line 122, ../../src/sass/_morsels.scss */
+  .morsels .morsel .morsel-img {
+    height: 400px;
+  }
+}
+@media (min-width: 992px) {
+  /* line 130, ../../src/sass/_morsels.scss */
+  .prev-morsel {
+    left: -75px;
+  }
+
+  /* line 134, ../../src/sass/_morsels.scss */
+  .next-morsel {
+    right: -75px;
+  }
+
+  /* line 139, ../../src/sass/_morsels.scss */
+  .post .container {
+    width: 750px;
+  }
+
+  /* line 144, ../../src/sass/_morsels.scss */
+  #cboxClose {
+    top: -70px;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 152, ../../src/sass/_morsels.scss */
+  .morsels .morsel .morsel-img {
+    height: 640px;
+  }
+}
+/* line 160, ../../src/sass/_morsels.scss */
+.morsel-swipe-container {
+  overflow: hidden;
+  position: relative;
+}
 
 /* indicators */
-/* line 173, ../../src/sass/_morsels.scss */
+/* line 165, ../../src/sass/_morsels.scss */
 .morsel-swipe-indicator {
   width: 100%;
   text-align: center;
@@ -5767,7 +5754,7 @@ img {
   cursor: pointer;
 }
 
-/* line 182, ../../src/sass/_morsels.scss */
+/* line 174, ../../src/sass/_morsels.scss */
 .morsel-swipe-indicator span {
   -webkit-transition: color .2s ease-out;
   transition: color .2s ease-out;
@@ -5775,18 +5762,18 @@ img {
   color: #333;
 }
 
-/* line 187, ../../src/sass/_morsels.scss */
+/* line 179, ../../src/sass/_morsels.scss */
 .morsel-swipe-indicator span:before {
   content: "\25cf";
 }
 
-/* line 189, ../../src/sass/_morsels.scss */
+/* line 181, ../../src/sass/_morsels.scss */
 .morsel-swipe-indicator .active {
   color: white;
 }
 
 /* controls */
-/* line 193, ../../src/sass/_morsels.scss */
+/* line 185, ../../src/sass/_morsels.scss */
 .morsel-swipe-control {
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
@@ -5798,27 +5785,27 @@ img {
   cursor: pointer;
 }
 
-/* line 202, ../../src/sass/_morsels.scss */
+/* line 194, ../../src/sass/_morsels.scss */
 .morsel-swipe-control:hover {
   opacity: 1;
 }
 
-/* line 204, ../../src/sass/_morsels.scss */
+/* line 196, ../../src/sass/_morsels.scss */
 .morsel-swipe-control.morsel-swipe-control-prev {
   left: 0.5em;
 }
 
-/* line 206, ../../src/sass/_morsels.scss */
+/* line 198, ../../src/sass/_morsels.scss */
 .morsel-swipe-control.morsel-swipe-control-prev:before {
   content: "<";
 }
 
-/* line 208, ../../src/sass/_morsels.scss */
+/* line 200, ../../src/sass/_morsels.scss */
 .morsel-swipe-control.morsel-swipe-control-next {
   right: 0.5em;
 }
 
-/* line 210, ../../src/sass/_morsels.scss */
+/* line 202, ../../src/sass/_morsels.scss */
 .morsel-swipe-control.morsel-swipe-control-next:before {
   content: ">";
 }
