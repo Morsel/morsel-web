@@ -1,3 +1,72 @@
+.morsels-nav {
+  h1 {
+    font-size: 22px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    text-align: center;
+    font-weight: lighter;
+    color: $morsel-dark;
+  }
+
+  .nav {
+    background-color: $morsel-light;
+    padding: 0 15px;
+
+    div {
+      padding-left: $logo-margin*2 + $logo-sm-width;
+    }
+
+    a {
+      margin: $logo-margin;
+      float: left;
+
+      img {
+        width: $logo-sm-width;
+      }
+    }
+  }
+
+  .morsel-nav {
+    display: block;
+    text-align: center;
+    padding: 0;
+
+    li {
+      list-style: none;
+      width: 12px;
+      height: 12px;
+      background-color: white;
+      border-radius: 50%;
+      margin: 0 2px;
+      display: inline-block;
+
+      &:hover, &:focus {
+        cursor: pointer;
+      }
+
+      &.active {
+        background-color: $morsel-primary;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .morsels-nav .nav {
+    div {
+      padding-left: $logo-margin*2 + $logo-md-width;
+    }
+
+    a img {
+      width: $logo-md-width
+    }
+  }
+}
+
 .morsels-wrap {
   position: relative;
 }
@@ -76,11 +145,11 @@
 }
 
 //carousel stuff, for now
-.rn-carousel-container {
+.morsel-swipe-container {
   overflow: hidden;
   position: relative; }
 
-.rn-carousel-slides {
+.morsel-swipe-slides {
   -webkit-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
@@ -90,7 +159,7 @@
   padding: 0;
   margin: 0; }
 
-.rn-carousel-slide {
+.morsel-swipe-slide {
   white-space: normal;
   vertical-align: top;
   display: inline-block;
@@ -101,7 +170,7 @@
   backface-visibility: hidden; }
 
 /* indicators */
-.rn-carousel-indicator {
+.morsel-swipe-indicator {
   width: 100%;
   text-align: center;
   height: 20px;
@@ -110,18 +179,18 @@
   position: relative;
   bottom: 0;
   cursor: pointer; }
-  .rn-carousel-indicator span {
+  .morsel-swipe-indicator span {
     -webkit-transition: color .2s ease-out;
     transition: color .2s ease-out;
     padding: 0 5px;
     color: #333; }
-    .rn-carousel-indicator span:before {
+    .morsel-swipe-indicator span:before {
       content: "\25cf"; }
-  .rn-carousel-indicator .active {
+  .morsel-swipe-indicator .active {
     color: white; }
 
 /* controls */
-.rn-carousel-control {
+.morsel-swipe-control {
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
   font-size: 30px;
@@ -130,13 +199,13 @@
   margin-top: -35px;
   opacity: 0.75;
   cursor: pointer; }
-  .rn-carousel-control:hover {
+  .morsel-swipe-control:hover {
     opacity: 1; }
-  .rn-carousel-control.rn-carousel-control-prev {
+  .morsel-swipe-control.morsel-swipe-control-prev {
     left: 0.5em; }
-    .rn-carousel-control.rn-carousel-control-prev:before {
+    .morsel-swipe-control.morsel-swipe-control-prev:before {
       content: "<"; }
-  .rn-carousel-control.rn-carousel-control-next {
+  .morsel-swipe-control.morsel-swipe-control-next {
     right: 0.5em; }
-    .rn-carousel-control.rn-carousel-control-next:before {
+    .morsel-swipe-control.morsel-swipe-control-next:before {
       content: ">"; }

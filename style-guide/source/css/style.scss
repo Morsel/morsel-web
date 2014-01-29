@@ -25,15 +25,19 @@ body {
 }
 
 .morsel-interface {
+  background-color: $morsel-background;
+}
+
+.morsel-light {
+  background-color: $morsel-light;
+}
+
+.morsel-medium {
   background-color: $morsel-medium;
 }
 
-.morsel-light-content {
-  background-color: $morsel-light-content;
-}
-
-.morsel-dark-content {
-  background-color: $morsel-dark-content;
+.morsel-dark {
+  background-color: $morsel-dark;
 }
 
 //text

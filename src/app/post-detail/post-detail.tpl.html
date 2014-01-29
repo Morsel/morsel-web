@@ -1,28 +1,36 @@
-<div class="container">
-  <div class="user-info">
-    <img src="{{post.creator.photos._80x80}}" class="img-circle" />
-    <div>
-      <p id="created-at"></p>
-      <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+<div morsel-swipe>
+  <div class="morsels-nav">
+    <div class="nav">
+      <div class="container">
+        <a href="/">
+          <img src="assets/images/morsel-icon.png" class="visible-xs" />
+          <img src="assets/images/morsel.png" class="hidden-xs" />
+        </a>
+        <div>
+          <h1>{{post.title}}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="user-info">
+        <img ng-src="{{post.creator.photos._80x80}}" class="img-circle" />
+        <div>
+          <p id="created-at"></p>
+          <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-      
-<p>title: {{title}}</p>
-<a href="#/users/{{post.creator.id}}">
-  <img ng-src="{{post.creator.photo_url}}" />
-</a>
 
-<div class="container">
-  <div class="morsels-wrap">
-    <ul rn-carousel rn-carousel-buffered rn-carousel-control rn-carousel-indicator class="ng-cloak morsels">
+  <div class="container">
+    <morsels morsel-swipe-buffered morsel-swipe-control morsel-swipe-indicator class="ng-cloak morsels">
       <li ng-repeat="morsel in post.morsels" class="morsel">
         <p>user {{isExists(morsel.liked) && 'has' || 'hasnt'}} liked this</p>
-        <div class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
-        <div class="morsel-content">
+        <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
+        <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
           <p>{{morsel.description}}</p>
         </div>
       </li>
-    </ul>
+    </morsels>
   </div>
 </div>

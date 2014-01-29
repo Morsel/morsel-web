@@ -26,7 +26,14 @@ angular.module( 'Morsel.postDetail', [
 
   //check and make sure we pulled an id from the URL
   if(postId) {
-    $scope.post = ApiPosts.getPost(postId).$object;
+    ApiPosts.getPost(postId).then(function(postData){
+      _.each(postData.morsels, function() {
+      });
+
+      $scope.post = postData;
+    }, function() {
+
+    });
   } else {
     //if not, send to profile page
     $location.path('/'+$scope.params.username);

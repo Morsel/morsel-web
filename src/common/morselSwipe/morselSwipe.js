@@ -1,7 +1,8 @@
 /**
+ * derived from:
  * Angular Carousel - Mobile friendly touch carousel for AngularJS
  * @version v0.1.6 - 2014-01-21
- * @link http://revolunet.github.com/Morsel.morselSwipe
+ * @link http://revolunet.github.com/angular-carousel
  * @author Julien Bouquillon <julien@revolunet.com>
  * @license MIT License, http://www.opensource.org/licenses/MIT
  */
@@ -9,7 +10,7 @@
 
 /*
 Angular touch carousel with CSS GPU accel and slide buffering
-http://github.com/revolunet/Morsel.morselSwipe
+http://github.com/revolunet/angular-carousel
 
 */
 
@@ -19,7 +20,7 @@ angular.module('Morsel.morselSwipe', [
 
 angular.module('Morsel.morselSwipe')
 
-.directive('rnCarouselControls', [function() {
+.directive('morselSwipeControls', [function() {
   return {
     restrict: 'A',
     replace: true,
@@ -35,16 +36,16 @@ angular.module('Morsel.morselSwipe')
         scope.index++;
       };
     },
-    template: '<div class="rn-carousel-controls">' +
-                '<span class="rn-carousel-control rn-carousel-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
-                '<span class="rn-carousel-control rn-carousel-control-next" ng-click="next()" ng-if="index < items.length - 1"></span>' +
+    template: '<div class="morsel-swipe-controls">' +
+                '<span class="morsel-swipe-control morsel-swipe-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
+                '<span class="morsel-swipe-control morsel-swipe-control-next" ng-click="next()" ng-if="index < items.length - 1"></span>' +
               '</div>'
   };
 }]);
 
 angular.module('Morsel.morselSwipe')
 
-.directive('rnCarouselIndicators', [function() {
+.directive('morselSwipeIndicators', [function() {
   return {
     restrict: 'A',
     replace: true,
@@ -52,7 +53,7 @@ angular.module('Morsel.morselSwipe')
       items: '=',
       index: '='
     },
-    template: '<div class="rn-carousel-indicator">' +
+    template: '<div class="morsel-swipe-indicator">' +
                 '<span ng-repeat="item in items" ng-click="$parent.index=$index" ng-class="{active: $index==$parent.index}"></span>' +
               '</div>'
   };
@@ -63,7 +64,7 @@ angular.module('Morsel.morselSwipe')
 
     angular.module('Morsel.morselSwipe')
 
-    .directive('rnCarousel', ['$swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
+    .directive('morselSwipe', ['$swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
         // internal ids to allow multiple instances
         var carouselId = 0,
             // used to compute the sliding speed
@@ -78,7 +79,8 @@ angular.module('Morsel.morselSwipe')
             scope: true,
             compile: function(tElement, tAttributes) {
                 // use the compile phase to customize the DOM
-                var firstChildAttributes = tElement.children()[0].attributes,
+                var morsels = tElement.find('morsels'),
+                    firstChildAttributes = morsels.children()[0].attributes,
                     isRepeatBased = false,
                     isBuffered = false,
                     slidesCount = 0,
@@ -87,8 +89,8 @@ angular.module('Morsel.morselSwipe')
                     repeatCollection;
 
                 // add CSS classes
-                tElement.addClass('rn-carousel-slides');
-                tElement.children().addClass('rn-carousel-slide');
+                morsels.addClass('morsel-swipe-slides');
+                morsels.children().addClass('morsel-swipe-slide');
 
                 // try to find an ngRepeat expression
                 // at this point, the attributes are not yet normalized so we need to try various syntax
@@ -103,7 +105,7 @@ angular.module('Morsel.morselSwipe')
                         repeatCollection = exprMatch[2];
 
                         if (repeatItem) {
-                            if (angular.isDefined(tAttributes['rnCarouselBuffered'])) {
+                            if (angular.isDefined(tAttributes['morselSwipeBuffered'])) {
                                 // update the current ngRepeat expression and add a slice operator if buffered
                                 isBuffered = true;
                                 repeatAttribute.value = repeatItem + ' in ' + repeatCollection + '|carouselSlice:carouselBufferIndex:carouselBufferSize';
@@ -134,11 +136,11 @@ angular.module('Morsel.morselSwipe')
                         timestamp;
 
                     // add a wrapper div that will hide the overflow
-                    var carousel = iElement.wrap("<div id='carousel-" + carouselId +"' class='rn-carousel-container'></div>"),
+                    var carousel = morsels.wrap("<div id='carousel-" + carouselId +"' class='morsel-swipe-container'></div>"),
                         container = carousel.parent();
 
                     // if indicator or controls, setup the watch
-                    if (angular.isDefined(iAttributes.rnCarouselIndicator) || angular.isDefined(iAttributes.rnCarouselControl)) {
+                    if (angular.isDefined(iAttributes.morselSwipeIndicator) || angular.isDefined(iAttributes.morselSwipeControl)) {
                         updateIndicatorArray();
                         scope.$watch('carouselIndex', function(newValue) {
                             scope.indicatorIndex = newValue;
@@ -150,14 +152,14 @@ angular.module('Morsel.morselSwipe')
                     }
 
                     // enable carousel indicator
-                    if (angular.isDefined(iAttributes.rnCarouselIndicator)) {
-                        var indicator = $compile("<div id='carousel-" + carouselId +"-indicator' index='indicatorIndex' items='carouselIndicatorArray' rn-carousel-indicators class='rn-carousel-indicator'></div>")(scope);
+                    if (angular.isDefined(iAttributes.morselSwipeIndicator)) {
+                        var indicator = $compile("<div id='carousel-" + carouselId +"-indicator' index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-indicators class='morsel-swipe-indicator'></div>")(scope);
                         container.append(indicator);
                     }
 
                     // enable carousel controls
-                    if (angular.isDefined(iAttributes.rnCarouselControl)) {
-                        var controls = $compile("<div id='carousel-" + carouselId +"-controls' index='indicatorIndex' items='carouselIndicatorArray' rn-carousel-controls class='rn-carousel-controls'></div>")(scope);
+                    if (angular.isDefined(iAttributes.morselSwipeControl)) {
+                        var controls = $compile("<div id='carousel-" + carouselId +"-controls' index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-controls class='morsel-swipe-controls'></div>")(scope);
                         container.append(controls);
                     }
 
@@ -166,8 +168,8 @@ angular.module('Morsel.morselSwipe')
                     scope.carouselIndex = 0;
 
                     // handle index databinding
-                    if (iAttributes.rnCarouselIndex) {
-                        var indexModel = $parse(iAttributes.rnCarouselIndex);
+                    if (iAttributes.morselSwipeIndex) {
+                        var indexModel = $parse(iAttributes.morselSwipeIndex);
                         if (angular.isFunction(indexModel.assign)) {
                             /* check if this property is assignable then watch it */
                             scope.$watch('carouselIndex', function(newValue) {
@@ -181,9 +183,9 @@ angular.module('Morsel.morselSwipe')
                               }
                             });
                             isIndexBound = true;
-                        } else if (!isNaN(iAttributes.rnCarouselIndex)) {
+                        } else if (!isNaN(iAttributes.morselSwipeIndex)) {
                           /* if user just set an initial number, set it */
-                          scope.carouselIndex = parseInt(iAttributes.rnCarouselIndex, 10);
+                          scope.carouselIndex = parseInt(iAttributes.morselSwipeIndex, 10);
                         }
                     }
 
@@ -403,7 +405,7 @@ angular.module('Morsel.morselSwipe')
                         return false;
                     }
 
-                    iAttributes.$observe('rnCarouselSwipe', function(newValue, oldValue) {
+                    iAttributes.$observe('morselSwipeSwipe', function(newValue, oldValue) {
                         // only bind swipe when it's not switched off
                         if(newValue !== 'false' && newValue !== 'off') {
                             $swipe.bind(carousel, {
@@ -457,23 +459,5 @@ angular.module('Morsel.morselSwipe')
             }
         };
     }]);
-
-})();
-
-(function() {
-    "use strict";
-
-    angular.module('Morsel.morselSwipe')
-
-    .filter('carouselSlice', function() {
-        return function(collection, start, size) {
-            if (angular.isArray(collection)) {
-                return collection.slice(start, start + size);
-            } else if (angular.isObject(collection)) {
-                // dont try to slice collections :)
-                return collection;
-            }
-        };
-    });
 
 })();
