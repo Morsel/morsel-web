@@ -8,7 +8,7 @@
 /*global angular */
 
 /*
-Angular touch carousel with CSS GPU accel and slide buffering
+Angular touch carousel with CSS GPU accel and slide 
 http://github.com/revolunet/angular-carousel
 
 */
@@ -52,7 +52,7 @@ angular.module('Morsel.morselSwipe')
       items: '=',
       index: '='
     },
-    template: '<div class="morsel-swipe-indicator">' +
+    template: '<div class="morsel-indicators">' +
                 '<span ng-repeat="item in items" ng-click="$parent.index=$index" ng-class="{active: $index==$parent.index}"></span>' +
               '</div>'
   };
@@ -77,45 +77,11 @@ angular.module('Morsel.morselSwipe')
             compile: function(tElement, tAttributes) {
                 // use the compile phase to customize the DOM
                 var morsels = angular.element(document.querySelector('[morsels]')),
-                    firstChildAttributes = morsels.children()[0].attributes,
-                    isRepeatBased = false,
-                    isBuffered = false,
+                    morselLi = morsels.children()[0],
                     slidesCount = 0,
                     isIndexBound = false,
-                    repeatItem,
-                    repeatCollection;
-
-                // add CSS classes
-                morsels.addClass('morsel-swipe-slides');
-                morsels.children().addClass('morsel-swipe-slide');
-
-                // try to find an ngRepeat expression
-                // at this point, the attributes are not yet normalized so we need to try various syntax
-                ['ng-repeat', 'data-ng-repeat', 'x-ng-repeat'].every(function(attr) {
-                    var repeatAttribute = firstChildAttributes[attr];
-                    if (angular.isDefined(repeatAttribute)) {
-                        // ngRepeat regexp extracted from angular 1.2.7 src
-                        var exprMatch = repeatAttribute.value.match(/^\s*([\s\S]+?)\s+in\s+([\s\S]+?)(?:\s+track\s+by\s+([\s\S]+?))?\s*$/),
-                            trackProperty = exprMatch[3];
-
-                        repeatItem = exprMatch[1];
-                        repeatCollection = exprMatch[2];
-
-                        if (repeatItem) {
-                            if (angular.isDefined(tAttributes['morselSwipeBuffered'])) {
-                                // update the current ngRepeat expression and add a slice operator if buffered
-                                isBuffered = true;
-                                repeatAttribute.value = repeatItem + ' in ' + repeatCollection + '|carouselSlice:carouselBufferIndex:carouselBufferSize';
-                                if (trackProperty) {
-                                    repeatAttribute.value += ' track by ' + trackProperty;
-                                }
-                            }
-                            isRepeatBased = true;
-                            return false;
-                        }
-                    }
-                    return true;
-                });
+                    repeatItem = 'morsel',
+                    repeatCollection = 'post.morsels';
 
                 return function(scope, iElement, iAttributes, containerCtrl) {
 
@@ -158,8 +124,6 @@ angular.module('Morsel.morselSwipe')
                         container.append(controls);
                     }
 
-                    scope.carouselBufferIndex = 0;
-                    scope.carouselBufferSize = 5;
                     scope.carouselIndex = 0;
 
                     // handle index databinding
@@ -185,25 +149,19 @@ angular.module('Morsel.morselSwipe')
                     }
 
                     // watch the given collection
-                    if (isRepeatBased) {
-                        scope.$watchCollection(repeatCollection, function(newValue, oldValue) {
-                            slidesCount = 0;
-                            if (angular.isArray(newValue)) {
-                                slidesCount = newValue.length;
-                            } else if (angular.isObject(newValue)) {
-                                slidesCount = Object.keys(newValue).length;
-                            }
-                            updateIndicatorArray();
-                            if (!containerWidth) {
-                              updateContainerWidth();
-                            }
-                            goToSlide(scope.carouselIndex);
-                        });
-                    } else {
-                        slidesCount = morsels.children().length;
+                    scope.$watchCollection(repeatCollection, function(newValue, oldValue) {
+                        slidesCount = 0;
+                        if (angular.isArray(newValue)) {
+                            slidesCount = newValue.length;
+                        } else if (angular.isObject(newValue)) {
+                            slidesCount = Object.keys(newValue).length;
+                        }
                         updateIndicatorArray();
-                        updateContainerWidth();
-                    }
+                        if (!containerWidth) {
+                          updateContainerWidth();
+                        }
+                        goToSlide(scope.carouselIndex);
+                    });
 
                     function updateIndicatorArray() {
                         // generate an array to be used by the indicators
@@ -241,7 +199,6 @@ angular.module('Morsel.morselSwipe')
 
                         offset = x;
                         var move = -Math.round(offset);
-                        move += (scope.carouselBufferIndex * containerWidth);
                         carousel[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
                     }
 
@@ -267,22 +224,6 @@ angular.module('Morsel.morselSwipe')
                         return (idx >= slidesCount) ? slidesCount: (idx <= 0) ? 0 : idx;
                     }
 
-                    function updateBufferIndex() {
-                        // update and cap te buffer index
-                        var bufferIndex = 0;
-                        var bufferEdgeSize = (scope.carouselBufferSize - 1) / 2;
-                        if (isBuffered) {
-                            if (scope.carouselIndex <= bufferEdgeSize) {
-                                bufferIndex = 0;
-                            } else if (scope.carouselIndex > slidesCount - scope.carouselBufferSize) {
-                                bufferIndex = slidesCount - scope.carouselBufferSize;
-                            } else {
-                                bufferIndex = scope.carouselIndex - bufferEdgeSize;
-                            }
-                        }
-                        scope.carouselBufferIndex = bufferIndex;
-                    }
-
                     function goToSlide(i, animate) {
                         if (isNaN(i)) {
                             i = scope.carouselIndex;
@@ -295,7 +236,6 @@ angular.module('Morsel.morselSwipe')
                             return;
                         }
                         scope.carouselIndex = capIndex(i);
-                        updateBufferIndex();
                         // if outside of angular scope, trigger angular digest cycle
                         // use local digest only for perfs if no index bound
                         if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {
@@ -454,23 +394,5 @@ angular.module('Morsel.morselSwipe')
             }
         };
     }]);
-
-})();
-
-(function() {
-    "use strict";
-
-    angular.module('Morsel.morselSwipe')
-
-    .filter('carouselSlice', function() {
-        return function(collection, start, size) {
-            if (angular.isArray(collection)) {
-                return collection.slice(start, start + size);
-            } else if (angular.isObject(collection)) {
-                // dont try to slice collections :)
-                return collection;
-            }
-        };
-    });
 
 })();
