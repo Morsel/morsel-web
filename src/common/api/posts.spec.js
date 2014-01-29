@@ -32,7 +32,7 @@ describe( 'ApiPosts factory', function() {
   describe('function getPosts', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/posts.json').respond('[{"name":"tester"},{"name":"tester2"}]');
+      httpBackend.expectGET(APIURL+'/posts.json').respond('{"data":""}');
     }));
 
     afterEach(function () {
@@ -53,7 +53,7 @@ describe( 'ApiPosts factory', function() {
   describe('function getPost', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/posts/1.json').respond('[{"name":"tester"}]');
+      httpBackend.expectGET(APIURL+'/posts/1.json').respond('{"data":{}}');
     }));
 
     afterEach(function () {
