@@ -4,6 +4,7 @@ angular.module( 'Morsel.morselLike', [] )
 .directive('morselLike', function(ApiMorsels){
   return {
     scope: false,
+    replace: true,
     link: function(scope, element, attrs) {
       scope.toggleMorselLike = function() {
         if(scope.morsel.liked) {
