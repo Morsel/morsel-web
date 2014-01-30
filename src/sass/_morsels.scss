@@ -143,7 +143,7 @@
 
   .post-detail {
     .container {
-      width: $container-sm;
+      width: $morsel-pic-big;
     }
   }
 }
@@ -152,7 +152,7 @@
   .morsels {
     .morsel {
       .morsel-img {
-        height: 640px;
+        height: $morsel-pic-big;
       }
     }
   }

@@ -31,6 +31,11 @@ $font-family-secondary:       "Roboto Slab", "Helvetica", "Arial", sans-serif;
 $headings-color:              $morsel-primary;
 $link-color: $morsel-secondary;
 
+//image sizes
+
+//morsels
+$morsel-pic-big: 640px;
+
 // Core Bootstrap variables and mixins
 @import "../../vendor/sass-bootstrap/lib/_variables.scss";
 

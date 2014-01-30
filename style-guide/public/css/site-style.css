@@ -5729,7 +5729,7 @@ img {
 
   /* line 145, ../../src/sass/_morsels.scss */
   .post-detail .container {
-    width: 750px;
+    width: 640px;
   }
 }
 @media (min-width: 1200px) {
