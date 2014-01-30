@@ -5508,6 +5508,17 @@ img {
   float: left;
 }
 
+/* line 73, ../../src/sass/_common.scss */
+.like-morsel {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+}
+/* line 78, ../../src/sass/_common.scss */
+.like-morsel:hover {
+  cursor: pointer;
+}
+
 /* line 1, ../../src/app/home/_home.scss */
 .home-page {
   text-align: center;
@@ -5574,16 +5585,6 @@ img {
   position: absolute;
   bottom: 5px;
   left: 10px;
-}
-/* line 64, ../../src/app/feed/_feed.scss */
-.post .morsel .like-morsel {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-}
-/* line 69, ../../src/app/feed/_feed.scss */
-.post .morsel .like-morsel:hover {
-  cursor: pointer;
 }
 
 /* line 2, ../../src/sass/_morsels.scss */

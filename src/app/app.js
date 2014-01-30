@@ -18,6 +18,7 @@ angular.module( 'Morsel', [
   //common
   'Morsel.auth',
   'Morsel.bgImage',
+  'Morsel.morselLike',
   'Morsel.userData',
   //API
   'Morsel.apiMorsels',

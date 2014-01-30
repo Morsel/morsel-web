@@ -26,7 +26,7 @@
   <div class="container">
     <ul morsels class="ng-cloak morsels morsel-swipe-slides">
       <li ng-repeat="morsel in post.morsels" class="morsel morsel-swipe-slide">
-        <p>user {{isExists(morsel.liked) && 'has' || 'hasnt'}} liked this</p>
+        <i morsel-like></i>
         <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
         <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
           <p>{{morsel.description}}</p>

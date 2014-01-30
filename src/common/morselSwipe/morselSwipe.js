@@ -61,9 +61,6 @@ angular.module('Morsel.morselSwipe', [
     scope: {
       timeAgo: '='
     },
-    link: function(scope, element, attrs) {
-      console.log('here');
-    },
     template: '<p am-time-ago="timeAgo"></p>'
   };
 }])
