@@ -135,6 +135,14 @@ header {
   }
 }
 
+.side-nav-trigger {
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+}
+
 @media (min-width: $screen-md-min) {
   header {
     background-color: $morsel-light;
@@ -162,7 +170,7 @@ header {
     display: none;
   }
 
-  .menu-opener {
+  .side-nav-trigger {
     display: none;
   }
 }

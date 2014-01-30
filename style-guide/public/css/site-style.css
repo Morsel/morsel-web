@@ -4803,46 +4803,50 @@ header nav {
   display: none;
 }
 
+/* line 138, ../../src/sass/_common.scss */
+.side-nav-trigger {
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+}
+
 @media (min-width: 992px) {
-  /* line 139, ../../src/sass/_common.scss */
+  /* line 147, ../../src/sass/_common.scss */
   header {
     background-color: #e2ddd7;
   }
-  /* line 142, ../../src/sass/_common.scss */
+  /* line 150, ../../src/sass/_common.scss */
   header nav {
     display: block;
   }
-  /* line 145, ../../src/sass/_common.scss */
+  /* line 153, ../../src/sass/_common.scss */
   header nav ul {
     list-style: none;
     overflow: hidden;
   }
-  /* line 149, ../../src/sass/_common.scss */
+  /* line 157, ../../src/sass/_common.scss */
   header nav ul li {
     float: left;
   }
 
-  /* line 156, ../../src/sass/_common.scss */
+  /* line 164, ../../src/sass/_common.scss */
   .site.open {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
   }
 
-  /* line 161, ../../src/sass/_common.scss */
+  /* line 169, ../../src/sass/_common.scss */
   .side-nav {
     display: none;
   }
 
-  /* line 165, ../../src/sass/_common.scss */
-  .menu-opener {
+  /* line 173, ../../src/sass/_common.scss */
+  .side-nav-trigger {
     display: none;
   }
 }
-/* line 1, ../../src/app/home/_home.scss */
-.home-page {
-  text-align: center;
-}
-
 /* line 1, ../../src/app/feed/_feed.scss */
 .feed {
   padding: 10px 0;
@@ -4906,45 +4910,35 @@ header nav {
   left: 10px;
 }
 
-/* line 2, ../../src/sass/_morsels.scss */
-.morsels-nav h1 {
+/* line 1, ../../src/app/home/_home.scss */
+.home-page {
+  text-align: center;
+}
+
+/* line 2, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .post-header {
+  background-color: #e2ddd7;
+  padding: 20px 0 10px;
+}
+/* line 6, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .post-header h1 {
+  width: 90%;
+  margin: 0 auto 10px;
   font-size: 22px;
+  font-weight: lighter;
+  text-align: center;
+  color: #394038;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
   overflow: hidden;
-  text-align: center;
-  font-weight: lighter;
-  color: #394038;
 }
-/* line 15, ../../src/sass/_morsels.scss */
-.morsels-nav .nav {
-  background-color: #e2ddd7;
-  padding: 0 15px;
-}
-/* line 19, ../../src/sass/_morsels.scss */
-.morsels-nav .nav div {
-  padding-left: 80px;
-}
-/* line 23, ../../src/sass/_morsels.scss */
-.morsels-nav .nav a {
-  margin: 15px;
-  float: left;
-}
-/* line 27, ../../src/sass/_morsels.scss */
-.morsels-nav .nav a img {
-  width: 50px;
-}
-/* line 33, ../../src/sass/_morsels.scss */
-.morsels-nav .morsel-indicators {
+/* line 18, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .post-header .morsel-indicators {
   display: block;
   text-align: center;
-  padding: 0 !important;
 }
-/* line 38, ../../src/sass/_morsels.scss */
-.morsels-nav .morsel-indicators span {
+/* line 22, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .post-header .morsel-indicators span {
   width: 12px;
   height: 12px;
   background-color: white;
@@ -4953,32 +4947,16 @@ header nav {
   display: inline-block;
   transition: background-color .2s ease-out;
 }
-/* line 47, ../../src/sass/_morsels.scss */
-.morsels-nav .morsel-indicators span:hover, .morsels-nav .morsel-indicators span:focus {
+/* line 31, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .post-header .morsel-indicators span:hover, .post-detail .post-header .morsel-indicators span:focus {
   cursor: pointer;
 }
-/* line 51, ../../src/sass/_morsels.scss */
-.morsels-nav .morsel-indicators span.active {
+/* line 35, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .post-header .morsel-indicators span.active {
   background-color: #e96144;
 }
-
-@media (min-width: 768px) {
-  /* line 60, ../../src/sass/_morsels.scss */
-  .morsels-nav .nav div {
-    padding-left: 150px;
-  }
-  /* line 64, ../../src/sass/_morsels.scss */
-  .morsels-nav .nav a img {
-    width: 120px;
-  }
-}
-/* line 70, ../../src/sass/_morsels.scss */
-.morsels-wrap {
-  position: relative;
-}
-
-/* line 74, ../../src/sass/_morsels.scss */
-.morsels {
+/* line 42, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsels {
   position: relative;
   -webkit-transform: translate3d(0, 0, 0);
   -ms-transform: translate3d(0, 0, 0);
@@ -4988,8 +4966,8 @@ header nav {
   padding: 0;
   margin: 0;
 }
-/* line 85, ../../src/sass/_morsels.scss */
-.morsels .morsel {
+/* line 53, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsels .morsel {
   position: relative;
   white-space: normal;
   vertical-align: top;
@@ -5000,66 +4978,35 @@ header nav {
   -ms-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* line 96, ../../src/sass/_morsels.scss */
-.morsels .morsel .morsel-img {
+/* line 64, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsels .morsel .morsel-img {
   background-position: 50% 50%;
   background-size: cover;
   height: 275px;
 }
-/* line 101, ../../src/sass/_morsels.scss */
-.morsels .morsel .morsel-img:hover {
+/* line 69, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsels .morsel .morsel-img:hover {
   cursor: pointer;
 }
-/* line 106, ../../src/sass/_morsels.scss */
-.morsels .morsel .morsel-content {
+/* line 74, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsels .morsel .morsel-content {
   padding: 30px 40px;
   font-weight: 300;
 }
-/* line 110, ../../src/sass/_morsels.scss */
-.morsels .morsel .morsel-content.text-morsel {
+/* line 78, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsels .morsel .morsel-content.text-morsel {
   text-align: center;
   font-size: 16px;
   line-height: 24px;
   padding: 30px 20px;
 }
-
-/* line 120, ../../src/sass/_morsels.scss */
-.morsel-swipe-container {
+/* line 88, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsels-container {
   overflow: hidden;
   position: relative;
 }
-
-@media (min-width: 768px) {
-  /* line 128, ../../src/sass/_morsels.scss */
-  .morsels .morsel .morsel-img {
-    height: 400px;
-  }
-}
-@media (min-width: 992px) {
-  /* line 136, ../../src/sass/_morsels.scss */
-  .prev-morsel {
-    left: -75px;
-  }
-
-  /* line 140, ../../src/sass/_morsels.scss */
-  .next-morsel {
-    right: -75px;
-  }
-
-  /* line 145, ../../src/sass/_morsels.scss */
-  .post-detail .container {
-    width: 640px;
-  }
-}
-@media (min-width: 1200px) {
-  /* line 154, ../../src/sass/_morsels.scss */
-  .morsels .morsel .morsel-img {
-    height: 640px;
-  }
-}
-/* controls */
-/* line 164, ../../src/sass/_morsels.scss */
-.morsel-swipe-control {
+/* line 93, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsel-controls {
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
   font-size: 30px;
@@ -5069,28 +5016,42 @@ header nav {
   opacity: 0.75;
   cursor: pointer;
 }
-
-/* line 173, ../../src/sass/_morsels.scss */
-.morsel-swipe-control:hover {
+/* line 103, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsel-controls.morsel-swipe-control-prev {
+  left: 0.5em;
+}
+/* line 106, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsel-controls.morsel-swipe-control-prev:before {
+  content: "<";
+}
+/* line 111, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsel-controls.morsel-swipe-control-right {
+  right: 0.5em;
+}
+/* line 114, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsel-controls.morsel-swipe-control-right:before {
+  content: "<";
+}
+/* line 119, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .morsel-controls:hover {
   opacity: 1;
 }
 
-/* line 175, ../../src/sass/_morsels.scss */
-.morsel-swipe-control.morsel-swipe-control-prev {
-  left: 0.5em;
+@media (min-width: 768px) {
+  /* line 129, ../../src/app/post-detail/_post-detail.scss */
+  .post-detail .morsels .morsel .morsel-img {
+    height: 400px;
+  }
 }
-
-/* line 177, ../../src/sass/_morsels.scss */
-.morsel-swipe-control.morsel-swipe-control-prev:before {
-  content: "<";
+@media (min-width: 992px) {
+  /* line 139, ../../src/app/post-detail/_post-detail.scss */
+  .post-detail .container {
+    width: 640px;
+  }
 }
-
-/* line 179, ../../src/sass/_morsels.scss */
-.morsel-swipe-control.morsel-swipe-control-next {
-  right: 0.5em;
-}
-
-/* line 181, ../../src/sass/_morsels.scss */
-.morsel-swipe-control.morsel-swipe-control-next:before {
-  content: ">";
+@media (min-width: 1200px) {
+  /* line 149, ../../src/app/post-detail/_post-detail.scss */
+  .post-detail .morsels .morsel .morsel-img {
+    height: 640px;
+  }
 }

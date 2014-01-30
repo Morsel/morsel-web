@@ -6,7 +6,7 @@
 .post {
   width: 100%;
   position: relative;
-  height: $morselHeight;
+  height: $morselFeedHeight;
 
   & + .post {
     //display: none;
@@ -47,11 +47,11 @@
   .morsel {
     margin: 0;
     padding: 0;
-    height: $morselHeight;
+    height: $morselFeedHeight;
     overflow: hidden;
 
     .bg-image {
-      height: $morselHeight;
+      height: $morselFeedHeight;
       background-position: 50% 50%;
     }
 

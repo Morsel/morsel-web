@@ -1,31 +1,23 @@
 <div morsel-swipe class="post-detail">
-  <div class="morsels-nav">
-    <div class="nav">
-      <div class="container">
-        <a href="/">
-          <img src="assets/images/morsel-icon.png" class="visible-xs" />
-          <img src="assets/images/morsel.png" class="hidden-xs" />
-        </a>
-        <div>
-          <h1>{{post.title}}</h1>
-          <morselSwipeSpot></morselSwipeSpot>
-        </div>
-      </div>
-    </div>
+  <div class="post-header">
     <div class="container">
-      <div class="user-info">
-        <img ng-src="{{post.creator.photos._80x80}}" class="img-circle" />
-        <div>
-          <morselPostedAtSpot></morselPostedAtSpot>
-          <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
-        </div>
+      <h1>{{post.title}}</h1>
+      <morselSwipeSpot></morselSwipeSpot>
+    </div>
+  </div>
+  <div class="container">
+    <div class="user-info">
+      <img ng-src="{{post.creator.photos._80x80}}" class="img-circle" />
+      <div>
+        <morselPostedAtSpot></morselPostedAtSpot>
+        <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <ul morsels class="ng-cloak morsels morsel-swipe-slides">
-      <li ng-repeat="morsel in post.morsels" class="morsel morsel-swipe-slide">
+    <ul morsels class="morsels">
+      <li ng-repeat="morsel in post.morsels" class="morsel">
         <i morsel-like></i>
         <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
         <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">

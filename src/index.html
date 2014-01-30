@@ -43,7 +43,9 @@
 
       <div id="site" ng-class="{site: true, open:menuOpen}">
         <header>
-          <a ng-click="menuOpen = !menuOpen" class="menu-opener">menu</a>
+          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger">
+            <img src="assets/images/morsel-icon.png"/>
+          </a>
           <nav role="navigation">
             <ul>
               <li ui-route="/home" ng-class="{active:$uiRoute}">
