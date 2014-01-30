@@ -1,5 +1,5 @@
 body {
-  background-color: $morsel-background;
+  background-color: $morsel-light;
   margin: 0px;
   color: $morsel-dark;
 }
@@ -83,13 +83,14 @@ img {
 //side nav
 .page-wrapper {
   width: 100%;
+  height: 100%;
   overflow-x: hidden;
   background: inherit;
-  position: relative;
+  position: absolute;
 }
 
 .side-nav {
-  background: #4A4D4E;
+  background: $morsel-light;
   position: absolute;
   width: 100%;
   z-index: 1;
@@ -98,10 +99,11 @@ img {
 }
 
 .site {
+  background-color: $morsel-background;
   width: 100%;
+  min-height: 100%;
   position: relative;
   z-index: 10;
-  background: inherit;
   left: 0;
   transition: all 0.2s ease-out;
   -webkit-transition: all 0.2s ease-out;
@@ -123,9 +125,44 @@ img {
   }
 }
 
-@media (min-width: $screen-sm-min) {
+.main-view {
+  overflow: auto;
+}
+
+header {
+  nav {
+    display: none;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  header {
+    background-color: $morsel-light;
+
+    nav {
+      display: block;
+      
+      ul {
+        list-style: none;
+        overflow: hidden;
+
+        li {
+          float: left;
+        }
+      }
+    }
+  }
+
   .site.open {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
+  }
+
+  .side-nav {
+    display: none;
+  }
+
+  .menu-opener {
+    display: none;
   }
 }
