@@ -1,23 +1,12 @@
-/**
- * Angular Carousel - Mobile friendly touch carousel for AngularJS
- * @version v0.1.6 - 2014-01-21
- * @link http://revolunet.github.com/angular-carousel
- * @author Julien Bouquillon <julien@revolunet.com>
- * @license MIT License, http://www.opensource.org/licenses/MIT
- */
-/*global angular */
-
 /*
-Angular touch carousel with CSS GPU accel and slide 
-http://github.com/revolunet/angular-carousel
-
+ * Adapted from: http://github.com/revolunet/angular-carousel
 */
 
 angular.module('Morsel.morselSwipe', [
     'ngTouch'
 ])
 
-.directive('morselSwipeControls', [function() {
+.directive('morselControls', [function() {
   return {
     restrict: 'A',
     replace: true,
@@ -33,14 +22,14 @@ angular.module('Morsel.morselSwipe', [
         scope.index++;
       };
     },
-    template: '<div class="morsel-swipe-controls">' +
-                '<span class="morsel-swipe-control morsel-swipe-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
-                '<span class="morsel-swipe-control morsel-swipe-control-next" ng-click="next()" ng-if="index < items.length - 1"></span>' +
+    template: '<div>' +
+                '<span class="morsel-control morsel-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
+                '<span class="morsel-control morsel-control-next" ng-click="next()" ng-if="index < items.length - 1"></span>' +
               '</div>'
   };
 }])
 
-.directive('morselSwipeIndicators', [function() {
+.directive('morselIndicators', [function() {
   return {
     restrict: 'A',
     replace: true,
@@ -112,15 +101,15 @@ angular.module('Morsel.morselSwipe', [
                 });
 
                 // enable carousel indicator
-                var indicator = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-indicators class='morsel-swipe-indicator'></div>")(scope);
-                iElement.find('morselSwipeSpot').replaceWith(indicator);
+                var indicator = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-indicators></div>")(scope);
+                iElement.find('morselIndicators').replaceWith(indicator);
 
-                var controls = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-controls class='morsel-controls'></div>")(scope);
+                var controls = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-controls></div>")(scope);
                 container.append(controls);
 
                 // enable created at stamp
                 var createdAt = $compile("<div time-ago='morselsData[indicatorIndex].created_at' morsel-posted-at></div>")(scope);
-                iElement.find('morselPostedAtSpot').replaceWith(createdAt);
+                iElement.find('morselPostedAt').replaceWith(createdAt);
 
                 scope.carouselIndex = 0;
 

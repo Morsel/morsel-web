@@ -2,14 +2,14 @@
   <div class="post-header">
     <div class="container">
       <h1>{{post.title}}</h1>
-      <morselSwipeSpot></morselSwipeSpot>
+      <morselIndicators></morselIndicators>
     </div>
   </div>
   <div class="container">
     <div class="user-info">
       <img ng-src="{{post.creator.photos._80x80}}" class="img-circle" />
       <div>
-        <morselPostedAtSpot></morselPostedAtSpot>
+        <morselPostedAt></morselPostedAt>
         <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
       </div>
     </div>
