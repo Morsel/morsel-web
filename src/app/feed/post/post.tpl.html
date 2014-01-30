@@ -1,8 +1,8 @@
 <h3 class="post-title">title: {{post.title}}</h3>
-<a href="#/users/{{post.creator.id}}" class="profile-pic-link">
-  <img ng-src="{{post.creator.photo_url}}" class="img-circle profile-pic" />
+<a href="#/{{post.creator.username}}" class="profile-pic-link">
+  <img ng-src="{{post.creator.photos._144x144}}" class="img-circle profile-pic" />
 </a>
-<div class="morsels">
+<div class="morsels" ng-click="showPostDetails()">
   <div ng-repeat="morsel in post.morsels" class="morsel">
     <div morsel="morsel"></div>
   </div>

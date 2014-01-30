@@ -4,12 +4,13 @@ angular.module( 'Morsel.morsel', [])
 .directive('morsel', function() {
   return {
     restrict : 'EA',
-    transclude : false,
+    replace: true,
     templateUrl : 'feed/post/morsel/morsel.tpl.html',
     scope: {
        morsel: "="
     },
     link : function(scope, element, attrs) {
+
     }
   };
 });

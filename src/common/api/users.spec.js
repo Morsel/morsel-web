@@ -57,7 +57,7 @@ describe( 'ApiUsers factory', function() {
   describe('function getUser', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/users/1.json').respond('{"data":{}}');
+      httpBackend.expectGET(APIURL+'/users/testuser.json').respond('{"data":{}}');
     }));
 
     afterEach(function () {
@@ -67,7 +67,7 @@ describe( 'ApiUsers factory', function() {
 
     it( 'should return an object', inject(function(ApiUsers) {
       var resolvedValue;
-      ApiUsers.getUser(1).then(function (data) {
+      ApiUsers.getUser('testuser').then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();
