@@ -5622,7 +5622,7 @@ img {
 .morsels-nav .morsel-indicators {
   display: block;
   text-align: center;
-  padding: 0;
+  padding: 0 !important;
 }
 /* line 38, ../../src/sass/_morsels.scss */
 .morsels-nav .morsel-indicators span {
@@ -5728,23 +5728,18 @@ img {
   }
 
   /* line 145, ../../src/sass/_morsels.scss */
-  .post .container {
+  .post-detail .container {
     width: 750px;
-  }
-
-  /* line 150, ../../src/sass/_morsels.scss */
-  #cboxClose {
-    top: -70px;
   }
 }
 @media (min-width: 1200px) {
-  /* line 158, ../../src/sass/_morsels.scss */
+  /* line 154, ../../src/sass/_morsels.scss */
   .morsels .morsel .morsel-img {
     height: 640px;
   }
 }
 /* controls */
-/* line 168, ../../src/sass/_morsels.scss */
+/* line 164, ../../src/sass/_morsels.scss */
 .morsel-swipe-control {
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
@@ -5756,27 +5751,27 @@ img {
   cursor: pointer;
 }
 
-/* line 177, ../../src/sass/_morsels.scss */
+/* line 173, ../../src/sass/_morsels.scss */
 .morsel-swipe-control:hover {
   opacity: 1;
 }
 
-/* line 179, ../../src/sass/_morsels.scss */
+/* line 175, ../../src/sass/_morsels.scss */
 .morsel-swipe-control.morsel-swipe-control-prev {
   left: 0.5em;
 }
 
-/* line 181, ../../src/sass/_morsels.scss */
+/* line 177, ../../src/sass/_morsels.scss */
 .morsel-swipe-control.morsel-swipe-control-prev:before {
   content: "<";
 }
 
-/* line 183, ../../src/sass/_morsels.scss */
+/* line 179, ../../src/sass/_morsels.scss */
 .morsel-swipe-control.morsel-swipe-control-next {
   right: 0.5em;
 }
 
-/* line 185, ../../src/sass/_morsels.scss */
+/* line 181, ../../src/sass/_morsels.scss */
 .morsel-swipe-control.morsel-swipe-control-next:before {
   content: ">";
 }

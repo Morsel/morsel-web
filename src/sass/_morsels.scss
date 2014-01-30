@@ -33,7 +33,7 @@
   .morsel-indicators {
     display: block;
     text-align: center;
-    padding: 0;
+    padding: 0 !important;
 
     span {
       width: 12px;
@@ -141,14 +141,10 @@
     right: -75px;
   }
 
-  .post {
+  .post-detail {
     .container {
       width: $container-sm;
     }
-  }
-
-  #cboxClose{
-    top:-70px;
   }
 }
 
