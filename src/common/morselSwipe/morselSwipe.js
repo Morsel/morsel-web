@@ -15,9 +15,7 @@ http://github.com/revolunet/angular-carousel
 
 angular.module('Morsel.morselSwipe', [
     'ngTouch'
-]);
-
-angular.module('Morsel.morselSwipe')
+])
 
 .directive('morselSwipeControls', [function() {
   return {
@@ -40,9 +38,7 @@ angular.module('Morsel.morselSwipe')
                 '<span class="morsel-swipe-control morsel-swipe-control-next" ng-click="next()" ng-if="index < items.length - 1"></span>' +
               '</div>'
   };
-}]);
-
-angular.module('Morsel.morselSwipe')
+}])
 
 .directive('morselSwipeIndicators', [function() {
   return {
@@ -56,343 +52,348 @@ angular.module('Morsel.morselSwipe')
                 '<span ng-repeat="item in items" ng-click="$parent.index=$index" ng-class="{active: $index==$parent.index}"></span>' +
               '</div>'
   };
-}]);
+}])
 
-(function() {
-    "use strict";
+.directive('morselPostedAt', [function() {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      timeAgo: '='
+    },
+    link: function(scope, element, attrs) {
+      console.log('here');
+    },
+    template: '<p am-time-ago="timeAgo"></p>'
+  };
+}])
 
-    angular.module('Morsel.morselSwipe')
+.directive('morselSwipe', ['$swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
+    var // used to compute the sliding speed
+        timeConstant = 75,
+        // in container % how much we need to drag to trigger the slide change
+        moveTreshold = 0.05,
+        // in absolute pixels, at which distance the slide stick to the edge on release
+        rubberTreshold = 3;
 
-    .directive('morselSwipe', ['$swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
-        var // used to compute the sliding speed
-            timeConstant = 75,
-            // in container % how much we need to drag to trigger the slide change
-            moveTreshold = 0.05,
-            // in absolute pixels, at which distance the slide stick to the edge on release
-            rubberTreshold = 3;
+    return {
+        restrict: 'A',
+        scope: true,
+        compile: function(tElement, tAttributes) {
+            // use the compile phase to customize the DOM
+            var morsels = angular.element(document.querySelector('[morsels]')),
+                morselLi = morsels.children()[0],
+                slidesCount = 0,
+                isIndexBound = false,
+                repeatCollection = 'post.morsels';
 
-        return {
-            restrict: 'A',
-            scope: true,
-            compile: function(tElement, tAttributes) {
-                // use the compile phase to customize the DOM
-                var morsels = angular.element(document.querySelector('[morsels]')),
-                    morselLi = morsels.children()[0],
+            return function(scope, iElement, iAttributes, containerCtrl) {
+
+                var containerWidth,
+                    transformProperty,
+                    pressed,
+                    startX,
+                    amplitude,
+                    offset = 0,
+                    destination,
                     slidesCount = 0,
-                    isIndexBound = false,
-                    repeatItem = 'morsel',
-                    repeatCollection = 'post.morsels';
+                    // javascript based animation easing
+                    timestamp;
 
-                return function(scope, iElement, iAttributes, containerCtrl) {
+                // add a wrapper div that will hide the overflow
+                var carousel = morsels.wrap("<div class='morsel-swipe-container'></div>"),
+                    container = carousel.parent();
 
-                    var containerWidth,
-                        transformProperty,
-                        pressed,
-                        startX,
-                        amplitude,
-                        offset = 0,
-                        destination,
-                        slidesCount = 0,
-                        // javascript based animation easing
-                        timestamp,
-                        indicatorDiv = iElement.find('morselSwipeSpot');
+                // if indicator or controls, setup the watch
 
-                    // add a wrapper div that will hide the overflow
-                    var carousel = morsels.wrap("<div class='morsel-swipe-container'></div>"),
-                        container = carousel.parent();
+                updateIndicatorArray();
+                scope.$watch('carouselIndex', function(newValue) {
+                  scope.indicatorIndex = newValue;
+                });
+                scope.$watch('indicatorIndex', function(newValue) {
+                  goToSlide(newValue, true);
+                });
 
-                    // if indicator or controls, setup the watch
-                    if (angular.isDefined(iAttributes.morselSwipeIndicator) || angular.isDefined(iAttributes.morselSwipeControl)) {
-                        updateIndicatorArray();
+                // enable carousel indicator
+                var indicator = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-indicators class='morsel-swipe-indicator'></div>")(scope);
+                iElement.find('morselSwipeSpot').replaceWith(indicator);
+
+                var controls = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-controls class='morsel-swipe-controls'></div>")(scope);
+                container.append(controls);
+
+                // enable created at stamp
+                var createdAt = $compile("<div time-ago='morselsData[indicatorIndex].created_at' morsel-posted-at></div>")(scope);
+                iElement.find('morselPostedAtSpot').replaceWith(createdAt);
+
+                scope.carouselIndex = 0;
+
+                // handle index databinding
+                if (iAttributes.morselSwipeIndex) {
+                    var indexModel = $parse(iAttributes.morselSwipeIndex);
+                    if (angular.isFunction(indexModel.assign)) {
+                        /* check if this property is assignable then watch it */
                         scope.$watch('carouselIndex', function(newValue) {
-                            scope.indicatorIndex = newValue;
+                            indexModel.assign(scope.$parent, newValue);
                         });
-                        scope.$watch('indicatorIndex', function(newValue) {
+                        scope.carouselIndex = indexModel(scope);
+                        scope.$parent.$watch(indexModel, function(newValue, oldValue) {
+                          if (newValue!==undefined) {
+                            // todo: ensure valid
                             goToSlide(newValue, true);
+                          }
                         });
+                        isIndexBound = true;
+                    } else if (!isNaN(iAttributes.morselSwipeIndex)) {
+                      /* if user just set an initial number, set it */
+                      scope.carouselIndex = parseInt(iAttributes.morselSwipeIndex, 10);
+                    }
+                }
+
+                // watch the given collection
+                scope.$watchCollection(repeatCollection, function(newValue, oldValue) {
+                    //store our morsel data in scope so we can display it elsewhere in the view
+                    scope.morselsData = newValue;
+                    slidesCount = 0;
+                    if (angular.isArray(newValue)) {
+                        slidesCount = newValue.length;
+                    } else if (angular.isObject(newValue)) {
+                        slidesCount = Object.keys(newValue).length;
+                    }
+                    updateIndicatorArray();
+                    if (!containerWidth) {
+                      updateContainerWidth();
+                    }
+                    goToSlide(scope.carouselIndex);
+                });
+
+                function updateIndicatorArray() {
+                    // generate an array to be used by the indicators
+                    var items = [];
+                    for (var i = 0; i < slidesCount; i++) {
+                      items[i] = i;
+                    }
+                    scope.carouselIndicatorArray = items;
+                }
+
+                function getCarouselWidth() {
+                   // container.css('width', 'auto');
+                    var slides = carousel.children();
+                    if (slides.length === 0) {
+                        containerWidth = carousel[0].getBoundingClientRect().width;
+                    } else {
+                        containerWidth = slides[0].getBoundingClientRect().width;
+                    }
+                    // console.log('getCarouselWidth', containerWidth);
+                    return Math.floor(containerWidth);
+                }
+
+                function updateContainerWidth() {
+                    // force the carousel container width to match the first slide width
+                    container.css('width', '100%');
+                    container.css('width', getCarouselWidth() + 'px');
+                }
+
+                function scroll(x) {
+                    // use CSS 3D transform to move the carousel
+                    //console.log('scroll', x, 'index', scope.carouselIndex);
+                    if (isNaN(x)) {
+                        x = scope.carouselIndex * containerWidth;
                     }
 
-                    // enable carousel indicator
-                    if (angular.isDefined(iAttributes.morselSwipeIndicator)) {
-                        var indicator = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-indicators class='morsel-swipe-indicator'></div>")(scope);
-                        indicatorDiv.replaceWith(indicator);
-                    }
+                    offset = x;
+                    var move = -Math.round(offset);
+                    carousel[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
+                }
 
-                    // enable carousel controls
-                    if (angular.isDefined(iAttributes.morselSwipeControl)) {
-                        var controls = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-swipe-controls class='morsel-swipe-controls'></div>")(scope);
-                        container.append(controls);
-                    }
+                function autoScroll() {
+                    // scroll smoothly to "destination" until we reach it
+                    // using requestAnimationFrame
+                    var elapsed, delta;
 
-                    scope.carouselIndex = 0;
-
-                    // handle index databinding
-                    if (iAttributes.morselSwipeIndex) {
-                        var indexModel = $parse(iAttributes.morselSwipeIndex);
-                        if (angular.isFunction(indexModel.assign)) {
-                            /* check if this property is assignable then watch it */
-                            scope.$watch('carouselIndex', function(newValue) {
-                                indexModel.assign(scope.$parent, newValue);
-                            });
-                            scope.carouselIndex = indexModel(scope);
-                            scope.$parent.$watch(indexModel, function(newValue, oldValue) {
-                              if (newValue!==undefined) {
-                                // todo: ensure valid
-                                goToSlide(newValue, true);
-                              }
-                            });
-                            isIndexBound = true;
-                        } else if (!isNaN(iAttributes.morselSwipeIndex)) {
-                          /* if user just set an initial number, set it */
-                          scope.carouselIndex = parseInt(iAttributes.morselSwipeIndex, 10);
-                        }
-                    }
-
-                    // watch the given collection
-                    scope.$watchCollection(repeatCollection, function(newValue, oldValue) {
-                        slidesCount = 0;
-                        if (angular.isArray(newValue)) {
-                            slidesCount = newValue.length;
-                        } else if (angular.isObject(newValue)) {
-                            slidesCount = Object.keys(newValue).length;
-                        }
-                        updateIndicatorArray();
-                        if (!containerWidth) {
-                          updateContainerWidth();
-                        }
-                        goToSlide(scope.carouselIndex);
-                    });
-
-                    function updateIndicatorArray() {
-                        // generate an array to be used by the indicators
-                        var items = [];
-                        for (var i = 0; i < slidesCount; i++) {
-                          items[i] = i;
-                        }
-                        scope.carouselIndicatorArray = items;
-                    }
-
-                    function getCarouselWidth() {
-                       // container.css('width', 'auto');
-                        var slides = carousel.children();
-                        if (slides.length === 0) {
-                            containerWidth = carousel[0].getBoundingClientRect().width;
+                    if (amplitude) {
+                        elapsed = Date.now() - timestamp;
+                        delta = amplitude * Math.exp(-elapsed / timeConstant);
+                        if (delta > rubberTreshold || delta < -rubberTreshold) {
+                            scroll(destination - delta);
+                            requestAnimationFrame(autoScroll);
                         } else {
-                            containerWidth = slides[0].getBoundingClientRect().width;
-                        }
-                        // console.log('getCarouselWidth', containerWidth);
-                        return Math.floor(containerWidth);
-                    }
-
-                    function updateContainerWidth() {
-                        // force the carousel container width to match the first slide width
-                        container.css('width', '100%');
-                        container.css('width', getCarouselWidth() + 'px');
-                    }
-
-                    function scroll(x) {
-                        // use CSS 3D transform to move the carousel
-                        //console.log('scroll', x, 'index', scope.carouselIndex);
-                        if (isNaN(x)) {
-                            x = scope.carouselIndex * containerWidth;
-                        }
-
-                        offset = x;
-                        var move = -Math.round(offset);
-                        carousel[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
-                    }
-
-                    function autoScroll() {
-                        // scroll smoothly to "destination" until we reach it
-                        // using requestAnimationFrame
-                        var elapsed, delta;
-
-                        if (amplitude) {
-                            elapsed = Date.now() - timestamp;
-                            delta = amplitude * Math.exp(-elapsed / timeConstant);
-                            if (delta > rubberTreshold || delta < -rubberTreshold) {
-                                scroll(destination - delta);
-                                requestAnimationFrame(autoScroll);
-                            } else {
-                                goToSlide(destination / containerWidth);
-                            }
+                            goToSlide(destination / containerWidth);
                         }
                     }
+                }
 
-                    function capIndex(idx) {
-                        // ensure given index it inside bounds
-                        return (idx >= slidesCount) ? slidesCount: (idx <= 0) ? 0 : idx;
+                function capIndex(idx) {
+                    // ensure given index it inside bounds
+                    return (idx >= slidesCount) ? slidesCount: (idx <= 0) ? 0 : idx;
+                }
+
+                function goToSlide(i, animate) {
+                    if (isNaN(i)) {
+                        i = scope.carouselIndex;
                     }
-
-                    function goToSlide(i, animate) {
-                        if (isNaN(i)) {
-                            i = scope.carouselIndex;
+                    if (animate) {
+                        // simulate a swipe so we have the standard animation
+                        // used when external binding index is updated or touch canceed
+                        offset = (i * containerWidth);
+                        swipeEnd(null, null, true);
+                        return;
+                    }
+                    scope.carouselIndex = capIndex(i);
+                    // if outside of angular scope, trigger angular digest cycle
+                    // use local digest only for perfs if no index bound
+                    if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {
+                        if (isIndexBound) {
+                            scope.$apply();
+                        } else {
+                            scope.$digest();
                         }
-                        if (animate) {
-                            // simulate a swipe so we have the standard animation
-                            // used when external binding index is updated or touch canceed
-                            offset = (i * containerWidth);
-                            swipeEnd(null, null, true);
-                            return;
+                    }
+                    scroll();
+                }
+
+                function getAbsMoveTreshold() {
+                    // return min pixels required to move a slide
+                    return moveTreshold * containerWidth;
+                }
+
+                function documentMouseUpEvent(event) {
+                    // in case we click outside the carousel, trigger a fake swipeEnd
+                    swipeEnd({
+                        x: event.clientX,
+                        y: event.clientY
+                    }, event);
+                }
+
+                function capPosition(x) {
+                    // limit position if start or end of slides
+                    var position = x;
+                    if (scope.carouselIndex===0) {
+                        position = Math.max(-getAbsMoveTreshold(), position);
+                    } else if (scope.carouselIndex===slidesCount-1) {
+                        position = Math.min(((slidesCount-1)*containerWidth + getAbsMoveTreshold()), position);
+                    }
+                    return position;
+                }
+
+                function swipeStart(coords, event) {
+                    //console.log('swipeStart', coords, event);
+                    $document.bind('mouseup', documentMouseUpEvent);
+                    pressed = true;
+                    startX = coords.x;
+
+                    amplitude = 0;
+                    timestamp = Date.now();
+
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
+
+                function swipeMove(coords, event) {
+                    //console.log('swipeMove', coords, event);
+                    var x, delta;
+                    if (pressed) {
+                        x = coords.x;
+                        delta = startX - x;
+                        if (delta > 2 || delta < -2) {
+                            startX = x;
+                            requestAnimationFrame(function() {
+                                scroll(capPosition(offset + delta));
+                            });
                         }
-                        scope.carouselIndex = capIndex(i);
-                        // if outside of angular scope, trigger angular digest cycle
-                        // use local digest only for perfs if no index bound
-                        if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {
-                            if (isIndexBound) {
-                                scope.$apply();
-                            } else {
-                                scope.$digest();
-                            }
-                        }
-                        scroll();
                     }
+                    event.preventDefault();
+                    event.stopPropagation();
+                    return false;
+                }
 
-                    function getAbsMoveTreshold() {
-                        // return min pixels required to move a slide
-                        return moveTreshold * containerWidth;
+                function swipeEnd(coords, event, forceAnimation) {
+                    //console.log('swipeEnd', 'scope.carouselIndex', scope.carouselIndex);
+                    $document.unbind('mouseup', documentMouseUpEvent);
+                    pressed = false;
+
+                    destination = offset;
+
+                    var minMove = getAbsMoveTreshold(),
+                        currentOffset = (scope.carouselIndex * containerWidth),
+                        absMove = currentOffset - destination,
+                        slidesMove = -Math[absMove>=0?'ceil':'floor'](absMove / containerWidth),
+                        shouldMove = Math.abs(absMove) > minMove;
+
+                    if ((slidesMove + scope.carouselIndex) >= slidesCount ) {
+                        slidesMove = slidesCount - 1 - scope.carouselIndex;
                     }
-
-                    function documentMouseUpEvent(event) {
-                        // in case we click outside the carousel, trigger a fake swipeEnd
-                        swipeEnd({
-                            x: event.clientX,
-                            y: event.clientY
-                        }, event);
+                    if ((slidesMove + scope.carouselIndex) < 0) {
+                        slidesMove = -scope.carouselIndex;
                     }
+                    var moveOffset = shouldMove?slidesMove:0;
 
-                    function capPosition(x) {
-                        // limit position if start or end of slides
-                        var position = x;
-                        if (scope.carouselIndex===0) {
-                            position = Math.max(-getAbsMoveTreshold(), position);
-                        } else if (scope.carouselIndex===slidesCount-1) {
-                            position = Math.min(((slidesCount-1)*containerWidth + getAbsMoveTreshold()), position);
-                        }
-                        return position;
+                    destination = (moveOffset + scope.carouselIndex) * containerWidth;
+                    amplitude = destination - offset;
+                    timestamp = Date.now();
+                    if (forceAnimation) {
+                        amplitude = offset - currentOffset;
                     }
+                    requestAnimationFrame(autoScroll);
 
-                    function swipeStart(coords, event) {
-                        //console.log('swipeStart', coords, event);
-                        $document.bind('mouseup', documentMouseUpEvent);
-                        pressed = true;
-                        startX = coords.x;
-
-                        amplitude = 0;
-                        timestamp = Date.now();
-
+                    if (event) {
                         event.preventDefault();
                         event.stopPropagation();
-                        return false;
                     }
+                    return false;
+                }
 
-                    function swipeMove(coords, event) {
-                        //console.log('swipeMove', coords, event);
-                        var x, delta;
-                        if (pressed) {
-                            x = coords.x;
-                            delta = startX - x;
-                            if (delta > 2 || delta < -2) {
-                                startX = x;
-                                requestAnimationFrame(function() {
-                                    scroll(capPosition(offset + delta));
-                                });
+                iAttributes.$observe('morselSwipeSwipe', function(newValue, oldValue) {
+                    // only bind swipe when it's not switched off
+                    if(newValue !== 'false' && newValue !== 'off') {
+                        $swipe.bind(carousel, {
+                            start: swipeStart,
+                            move: swipeMove,
+                            end: swipeEnd,
+                            cancel: function(event) {
+                              swipeEnd({}, event);
                             }
-                        }
-                        event.preventDefault();
-                        event.stopPropagation();
+                        });
+                    } else {
+                        // unbind swipe when it's switched off
+                        carousel.unbind();
+                    }
+                });
+
+                // initialise first slide only if no binding
+                // if so, the binding will trigger the first init
+                if (!isIndexBound) {
+                    goToSlide(scope.carouselIndex);
+                }
+
+                // detect supported CSS property
+                transformProperty = 'transform';
+                ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
+                    var e = prefix + 'Transform';
+                    if (typeof document.body.style[e] !== 'undefined') {
+                        transformProperty = e;
                         return false;
                     }
+                    return true;
+                });
 
-                    function swipeEnd(coords, event, forceAnimation) {
-                        //console.log('swipeEnd', 'scope.carouselIndex', scope.carouselIndex);
-                        $document.unbind('mouseup', documentMouseUpEvent);
-                        pressed = false;
+                function onOrientationChange() {
+                    updateContainerWidth();
+                    goToSlide();
+                }
 
-                        destination = offset;
+                // handle orientation change
+                var winEl = angular.element($window);
+                winEl.bind('orientationchange', onOrientationChange);
+                winEl.bind('resize', onOrientationChange);
 
-                        var minMove = getAbsMoveTreshold(),
-                            currentOffset = (scope.carouselIndex * containerWidth),
-                            absMove = currentOffset - destination,
-                            slidesMove = -Math[absMove>=0?'ceil':'floor'](absMove / containerWidth),
-                            shouldMove = Math.abs(absMove) > minMove;
+                scope.$on('$destroy', function() {
+                    $document.unbind('mouseup', documentMouseUpEvent);
+                    winEl.unbind('orientationchange', onOrientationChange);
+                    winEl.unbind('resize', onOrientationChange);
+                });
 
-                        if ((slidesMove + scope.carouselIndex) >= slidesCount ) {
-                            slidesMove = slidesCount - 1 - scope.carouselIndex;
-                        }
-                        if ((slidesMove + scope.carouselIndex) < 0) {
-                            slidesMove = -scope.carouselIndex;
-                        }
-                        var moveOffset = shouldMove?slidesMove:0;
-
-                        destination = (moveOffset + scope.carouselIndex) * containerWidth;
-                        amplitude = destination - offset;
-                        timestamp = Date.now();
-                        if (forceAnimation) {
-                            amplitude = offset - currentOffset;
-                        }
-                        requestAnimationFrame(autoScroll);
-
-                        if (event) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        return false;
-                    }
-
-                    iAttributes.$observe('morselSwipeSwipe', function(newValue, oldValue) {
-                        // only bind swipe when it's not switched off
-                        if(newValue !== 'false' && newValue !== 'off') {
-                            $swipe.bind(carousel, {
-                                start: swipeStart,
-                                move: swipeMove,
-                                end: swipeEnd,
-                                cancel: function(event) {
-                                  swipeEnd({}, event);
-                                }
-                            });
-                        } else {
-                            // unbind swipe when it's switched off
-                            carousel.unbind();
-                        }
-                    });
-
-                    // initialise first slide only if no binding
-                    // if so, the binding will trigger the first init
-                    if (!isIndexBound) {
-                        goToSlide(scope.carouselIndex);
-                    }
-
-                    // detect supported CSS property
-                    transformProperty = 'transform';
-                    ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
-                        var e = prefix + 'Transform';
-                        if (typeof document.body.style[e] !== 'undefined') {
-                            transformProperty = e;
-                            return false;
-                        }
-                        return true;
-                    });
-
-                    function onOrientationChange() {
-                        updateContainerWidth();
-                        goToSlide();
-                    }
-
-                    // handle orientation change
-                    var winEl = angular.element($window);
-                    winEl.bind('orientationchange', onOrientationChange);
-                    winEl.bind('resize', onOrientationChange);
-
-                    scope.$on('$destroy', function() {
-                        $document.unbind('mouseup', documentMouseUpEvent);
-                        winEl.unbind('orientationchange', onOrientationChange);
-                        winEl.unbind('resize', onOrientationChange);
-                    });
-
-                };
-            }
-        };
-    }]);
-
-})();
+            };
+        }
+    };
+}]);

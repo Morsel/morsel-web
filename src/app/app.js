@@ -24,6 +24,7 @@ angular.module( 'Morsel', [
   'Morsel.apiPosts',
   'Morsel.apiUsers',
   //libs
+  'angularMoment',
   'restangular',
   'ui.state',
   'ui.route',
@@ -55,7 +56,8 @@ angular.module( 'Morsel', [
     });
 })
 
-.run( function run () {
+.run( function run ($window) {
+  $window.moment.lang('en');
 })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, userData ) {
