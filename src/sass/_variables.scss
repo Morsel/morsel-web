@@ -6,6 +6,7 @@ $morsel-background: #FFFFFF; //white
 $morsel-light: #e2ddd7; //light gray
 $morsel-medium: #93a590; //medium gray
 $morsel-dark: #394038; //dark gray
+$morsel-light-off: #dfcfc0;
 
 //fonts
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
@@ -33,6 +34,9 @@ $profile-pic-l: 144px;
 
 //feed
 $morselFeedHeight: 400px;
+
+//layout
+$sidenav-width: 250px;
 
 
 // Core Bootstrap variables and mixins

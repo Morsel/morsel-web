@@ -19,7 +19,8 @@ angular.module( 'Morsel.auth', [
       'created_at': null,
       'photo_url': null,
       'title': null,
-      'auth_token': '' 
+      'auth_token': '',
+      'username': null
     };
   };
 

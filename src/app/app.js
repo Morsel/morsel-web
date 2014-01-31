@@ -29,9 +29,7 @@ angular.module( 'Morsel', [
   'angularMoment',
   'restangular',
   'ui.state',
-  'ui.route',
-  //fakes
-  'Morsel.reddit'
+  'ui.route'
 ])
 //the URL to use for our API
 .constant('APIURL', 'http://api-staging.eatmorsel.com')
@@ -91,9 +89,15 @@ angular.module( 'Morsel', [
   //refresh user data
   function updateUserData() {
     userData.then(function(data){
-      $scope.currentUserName = data.first_name;
+      $scope.currentUsername = data.username;
       $scope.currentUserId = data.id;
+      $scope.fullName = data.first_name + ' ' + data.last_name;
     });
   }
+
+  $scope.goTo = function(path) {
+    $location.path(path);
+    $scope.menuOpen = false;
+  };
 });
 

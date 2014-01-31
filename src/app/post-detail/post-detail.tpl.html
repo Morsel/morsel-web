@@ -1,4 +1,4 @@
-<div morsel-swipe class="post-detail">
+<div morsel-swipe="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}" class="post-detail">
   <div class="post-header">
     <div class="container">
       <h1>{{post.title}}</h1>
@@ -17,7 +17,7 @@
 
   <div class="container">
     <ul morsels class="morsels">
-      <li ng-repeat="morsel in post.morsels" class="morsel">
+      <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
         <i morsel-like></i>
         <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
         <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">

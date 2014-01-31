@@ -1,9 +1,127 @@
+//page layout
+
 body {
   background-color: $morsel-light;
   margin: 0px;
   color: $morsel-dark;
 }
 
+.container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.page-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: inherit;
+  position: absolute;
+}
+
+.main-view {
+  overflow: auto;
+}
+
+//side nav and header
+.side-nav {
+  $sidenavpadding: 15px;
+
+  background: $morsel-light-off;
+  position: absolute;
+  width: $sidenav-width;
+  z-index: 1;
+  height: 100%;
+  left: 0;
+
+  .user-info {
+    div {
+      a {
+        color: $morsel-primary;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: $sidenavpadding;
+    margin: 30px 0 0;
+
+    li {
+      border-bottom: 1px solid $morsel-medium;
+
+      a {
+        color: $morsel-medium;
+        display: block;
+        padding: 15px 3px 15px 50px;
+      }
+
+      &.active {
+        a {
+          color: $morsel-primary;
+        }
+      }
+    }
+
+    & + ul {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      li {
+        border-bottom: 0;
+        border-top: 1px solid $morsel-medium;
+      }
+    }
+  }
+}
+
+.site {
+  background-color: $morsel-background;
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  z-index: 10;
+  left: 0;
+  transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+
+  &.open {
+    transform: translate3d($sidenav-width, 0, 0);
+    -webkit-transform: translate3d($sidenav-width, 0, 0);
+  }
+}
+
+header {
+  nav {
+    display: none;
+  }
+}
+
+.side-nav-trigger {
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+  padding-left: 50px;
+
+  &:before {
+    width: 40px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAkCAMAAADM4ogkAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF6GFD////cj2vHAAAAAJ0Uk5T/wDltzBKAAAAH0lEQVR42mJgGAKAkUgwqnDoKxxNj6MKR9MjSQAgwADV2gPB3CP5ZgAAAABJRU5ErkJggg==);
+
+    background-position: 50% 50%;
+    content: ' ';
+    position: absolute;
+    left: 0;
+  }
+}
+
+//general image styles
 img {
   max-width: 100%;
 }
@@ -32,11 +150,49 @@ img {
   }
 }
 
-.container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
+.user-info {
+  padding: 10px 15px;
+  overflow: hidden;
+
+  //default size is $profile-pic-s
+  $profile-pic-margin: 20px;
+  div {
+    padding-left: $profile-pic-margin*2 + $profile-pic-s;
+  }
+
+  .profile-pic-link {
+    margin: 0 $profile-pic-margin;
+    float: left;
+  }
+
+  p {
+    color: $morsel-medium;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0;
+    color: $morsel-dark;
+  }
+
+  &.user-info-xs {
+    $profile-pic-margin: 10px;
+    div {
+      padding-left: $profile-pic-margin*2 + $profile-pic-xs;
+    }
+
+    .profile-pic-link {
+      margin: 0 $profile-pic-margin;
+      float: left;
+    }
+  }
 }
 
+
+//commonly used items
 .like-morsel {
   position: absolute;
   top: 50px;
@@ -47,69 +203,7 @@ img {
   }
 }
 
-//side nav
-.page-wrapper {
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
-  background: inherit;
-  position: absolute;
-}
-
-.side-nav {
-  background: $morsel-light;
-  position: absolute;
-  width: 100%;
-  z-index: 1;
-  height: 100%;
-  left: 0;
-}
-
-.site {
-  background-color: $morsel-background;
-  width: 100%;
-  min-height: 100%;
-  position: relative;
-  z-index: 10;
-  left: 0;
-  transition: all 0.2s ease-out;
-  -webkit-transition: all 0.2s ease-out;
-  transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
-
-  &:before {
-    position: absolute;
-    content: '';
-    left: -4px;
-    height: 100%;
-    width: 4px;
-    background: #3B3E3E;
-  }
-
-  &.open {
-    transform: translate3d(250px, 0, 0);
-    -webkit-transform: translate3d(250px, 0, 0);
-  }
-}
-
-.main-view {
-  overflow: auto;
-}
-
-header {
-  nav {
-    display: none;
-  }
-}
-
-.side-nav-trigger {
-  display: block;
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  cursor: pointer;
-}
-
+//media queries
 @media (min-width: $screen-md-min) {
   header {
     background-color: $morsel-light;

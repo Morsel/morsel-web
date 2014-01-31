@@ -35,6 +35,7 @@ angular.module('Morsel.userImage', [])
         if(scope.userPhotos && scope.userPhotos[photoSize]) {
           return scope.userPhotos[photoSize];
         } else {
+          //placeholder avatar
           return '';
         }
         

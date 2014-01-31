@@ -27,6 +27,8 @@ angular.module( 'Morsel.postDetail', [
   //check and make sure we pulled an id from the URL
   if(postId) {
     ApiPosts.getPost(postId).then(function(postData){
+      $scope.postMorselNumber = (postMorselNumber > postData.morsels.length ? 1 : postMorselNumber) || 1;
+
       _.each(postData.morsels, function() {
       });
 
