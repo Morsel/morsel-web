@@ -4690,8 +4690,12 @@ body {
   height: 100%;
   left: 0;
 }
+/* line 35, ../../src/sass/_common.scss */
+.side-nav li.active {
+  background-color: #93a590;
+}
 
-/* line 36, ../../src/sass/_common.scss */
+/* line 40, ../../src/sass/_common.scss */
 .site {
   background-color: white;
   width: 100%;
@@ -4704,7 +4708,7 @@ body {
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 48, ../../src/sass/_common.scss */
+/* line 52, ../../src/sass/_common.scss */
 .site:before {
   position: absolute;
   content: '';
@@ -4713,18 +4717,18 @@ body {
   width: 4px;
   background: #3B3E3E;
 }
-/* line 57, ../../src/sass/_common.scss */
+/* line 61, ../../src/sass/_common.scss */
 .site.open {
   transform: translate3d(250px, 0, 0);
   -webkit-transform: translate3d(250px, 0, 0);
 }
 
-/* line 64, ../../src/sass/_common.scss */
+/* line 68, ../../src/sass/_common.scss */
 header nav {
   display: none;
 }
 
-/* line 69, ../../src/sass/_common.scss */
+/* line 73, ../../src/sass/_common.scss */
 .side-nav-trigger {
   display: block;
   position: absolute;
@@ -4733,7 +4737,7 @@ header nav {
   cursor: pointer;
   padding-left: 50px;
 }
-/* line 77, ../../src/sass/_common.scss */
+/* line 81, ../../src/sass/_common.scss */
 .side-nav-trigger:before {
   width: 40px;
   height: 100%;
@@ -4745,78 +4749,78 @@ header nav {
   left: 0;
 }
 
-/* line 91, ../../src/sass/_common.scss */
+/* line 95, ../../src/sass/_common.scss */
 img {
   max-width: 100%;
 }
 
-/* line 95, ../../src/sass/_common.scss */
+/* line 99, ../../src/sass/_common.scss */
 .profile-pic-link {
   display: inline-block;
 }
-/* line 98, ../../src/sass/_common.scss */
+/* line 102, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-xs {
   width: 40px;
   height: 40px;
 }
-/* line 103, ../../src/sass/_common.scss */
+/* line 107, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-s {
   width: 72px;
   height: 72px;
 }
-/* line 108, ../../src/sass/_common.scss */
+/* line 112, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-m {
   width: 80px;
   height: 80px;
 }
-/* line 113, ../../src/sass/_common.scss */
+/* line 117, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-l {
   width: 144px;
   height: 144px;
 }
 
-/* line 121, ../../src/sass/_common.scss */
+/* line 125, ../../src/sass/_common.scss */
 .like-morsel {
   position: absolute;
   top: 50px;
   left: 50px;
 }
-/* line 126, ../../src/sass/_common.scss */
+/* line 130, ../../src/sass/_common.scss */
 .like-morsel:hover {
   cursor: pointer;
 }
 
 @media (min-width: 992px) {
-  /* line 133, ../../src/sass/_common.scss */
+  /* line 137, ../../src/sass/_common.scss */
   header {
     background-color: #e2ddd7;
   }
-  /* line 136, ../../src/sass/_common.scss */
+  /* line 140, ../../src/sass/_common.scss */
   header nav {
     display: block;
   }
-  /* line 139, ../../src/sass/_common.scss */
+  /* line 143, ../../src/sass/_common.scss */
   header nav ul {
     list-style: none;
     overflow: hidden;
   }
-  /* line 143, ../../src/sass/_common.scss */
+  /* line 147, ../../src/sass/_common.scss */
   header nav ul li {
     float: left;
   }
 
-  /* line 150, ../../src/sass/_common.scss */
+  /* line 154, ../../src/sass/_common.scss */
   .site.open {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
   }
 
-  /* line 155, ../../src/sass/_common.scss */
+  /* line 159, ../../src/sass/_common.scss */
   .side-nav {
     display: none;
   }
 
-  /* line 159, ../../src/sass/_common.scss */
+  /* line 163, ../../src/sass/_common.scss */
   .side-nav-trigger {
     display: none;
   }

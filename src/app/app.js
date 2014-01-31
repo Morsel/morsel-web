@@ -89,9 +89,14 @@ angular.module( 'Morsel', [
   //refresh user data
   function updateUserData() {
     userData.then(function(data){
-      $scope.currentUserName = data.first_name;
+      $scope.currentUsername = data.username;
       $scope.currentUserId = data.id;
     });
   }
+
+  $scope.goTo = function(path) {
+    $location.path(path);
+    $scope.menuOpen = false;
+  };
 });
 

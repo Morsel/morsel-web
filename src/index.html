@@ -15,28 +15,28 @@
       <nav class="side-nav" role="navigation">
         <ul>
           <li ui-route="/home" ng-class="{active:$uiRoute}">
-            <a href="#/home">Home</a>
+            <a ng-click="goTo('home')">Home</a>
           </li>
           <li ui-route="/about" ng-class="{active:$uiRoute}">
-            <a href="#/about">About</a>
+            <a ng-click="goTo('about')">About</a>
           </li>
           <li ui-route="/myfeed" ng-class="{active:$uiRoute}">
-            <a href="#/myfeed" ng-show="isLoggedIn">My Feed</a>
+            <a ng-click="goTo('myfeed')" ng-show="isLoggedIn">My Feed</a>
           </li>
           <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-            <a href="#/dashboard">Dashboard</a>
+            <a ng-click="goTo('dashboard')">Dashboard</a>
           </li>
-          <li ui-route="/users/{{currentUserId}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-            <a ng-href="#/users/{{currentUserId}}">Profile</a>
+          <li ui-route="/{{currentUsername}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+            <a ng-click="goTo(currentUsername)">Profile</a>
           </li>
-          <li ui-route="/logout" ng-show="isLoggedIn">
-            <a ui-route="/logout" href="#/logout">Logout</a>
+          <li ng-show="isLoggedIn">
+            <a ng-click="goTo('logout')">Logout</a>
           </li>
-          <li ui-route="/login" ng-hide="isLoggedIn">
-            <a ui-route="/login" href="#/login">Login</a>
+          <li ng-hide="isLoggedIn">
+            <a ng-click="goTo('login')">Login</a>
           </li>
-          <li ui-route="/users/{{currentUserId}}" ng-hide="isLoggedIn">
-            <a ui-route="/join" href="#/join">Join</a>
+          <li ng-hide="isLoggedIn">
+            <a ng-click="goTo('join')">Join</a>
           </li>
         </ul>
       </nav>
@@ -49,28 +49,28 @@
           <nav role="navigation">
             <ul>
               <li ui-route="/home" ng-class="{active:$uiRoute}">
-                <a href="#/home">Home</a>
+                <a ng-click="goTo('home')">Home</a>
               </li>
               <li ui-route="/about" ng-class="{active:$uiRoute}">
-                <a href="#/about">About</a>
+                <a ng-click="goTo('about')">About</a>
               </li>
               <li ui-route="/myfeed" ng-class="{active:$uiRoute}">
-                <a href="#/myfeed" ng-show="isLoggedIn">My Feed</a>
+                <a ng-click="goTo('myfeed')" ng-show="isLoggedIn">My Feed</a>
               </li>
               <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-                <a href="#/dashboard">Dashboard</a>
+                <a ng-click="goTo('dashboard')">Dashboard</a>
               </li>
-              <li ui-route="/users/{{currentUserId}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-                <a ng-href="#/users/{{currentUserId}}">Profile</a>
+              <li ui-route="/{{currentUsername}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+                <a ng-click="goTo(currentUsername)">Profile</a>
               </li>
-              <li ui-route="/logout" ng-show="isLoggedIn">
-                <a ui-route="/logout" href="#/logout">Logout</a>
+              <li ng-show="isLoggedIn">
+                <a ng-click="goTo('logout')">Logout</a>
               </li>
-              <li ui-route="/login" ng-hide="isLoggedIn">
-                <a ui-route="/login" href="#/login">Login</a>
+              <li ng-hide="isLoggedIn">
+                <a ng-click="goTo('login')">Login</a>
               </li>
-              <li ui-route="/users/{{currentUserId}}" ng-hide="isLoggedIn">
-                <a ui-route="/join" href="#/join">Join</a>
+              <li ng-hide="isLoggedIn">
+                <a ng-click="goTo('join')">Join</a>
               </li>
             </ul>
           </nav>
