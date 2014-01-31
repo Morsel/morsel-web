@@ -25,15 +25,42 @@ body {
 
 //side nav and header
 .side-nav {
-  background: $morsel-light;
+  background: $morsel-light-off;
   position: absolute;
-  width: 100%;
+  width: $sidenav-width;
   z-index: 1;
   height: 100%;
   left: 0;
+  padding: 15px;
 
-  li.active {
-    background-color: $morsel-medium;
+  .user-info {
+    div {
+      a {
+        color: $morsel-primary;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 0;
+
+    li {
+      border-bottom: 1px solid $morsel-medium;
+
+      a {
+        color: $morsel-medium;
+        display: block;
+        padding: 15px 3px 15px 50px;
+      }
+
+      &.active {
+        a {
+          color: $morsel-primary;
+        }
+      }
+    }
   }
 }
 
@@ -49,18 +76,9 @@ body {
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
 
-  &:before {
-    position: absolute;
-    content: '';
-    left: -4px;
-    height: 100%;
-    width: 4px;
-    background: #3B3E3E;
-  }
-
   &.open {
-    transform: translate3d(250px, 0, 0);
-    -webkit-transform: translate3d(250px, 0, 0);
+    transform: translate3d($sidenav-width, 0, 0);
+    -webkit-transform: translate3d($sidenav-width, 0, 0);
   }
 }
 
@@ -117,6 +135,49 @@ img {
   &.profile-pic-l {
     width: $profile-pic-l;
     height: $profile-pic-l;
+  }
+}
+
+.user-info {
+  padding: 10px 15px;
+  overflow: hidden;
+
+  //default size is $profile-pic-s
+  $profile-pic-margin: 20px;
+  div {
+    padding-left: $profile-pic-margin*2 + $profile-pic-s;
+  }
+
+  .profile-pic-link {
+    margin: 0 $profile-pic-margin;
+    float: left;
+  }
+
+  p {
+    color: $morsel-medium;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  h2 {
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0;
+    color: $morsel-dark;
+  }
+
+  &.user-info-xs {
+    padding: 0;
+
+    $profile-pic-margin: 10px;
+    div {
+      padding-left: $profile-pic-margin*2 + $profile-pic-xs;
+    }
+
+    .profile-pic-link {
+      margin: 0 $profile-pic-margin;
+      float: left;
+    }
   }
 }
 

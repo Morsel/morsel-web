@@ -91,6 +91,7 @@ angular.module( 'Morsel', [
     userData.then(function(data){
       $scope.currentUsername = data.username;
       $scope.currentUserId = data.id;
+      $scope.fullName = data.first_name + ' ' + data.last_name;
     });
   }
 
