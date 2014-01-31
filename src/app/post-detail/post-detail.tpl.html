@@ -1,25 +1,26 @@
-<div class="container">
-  <div class="user-info">
-    <img src="{{post.creator.photos._80x80}}" class="img-circle" />
-    <div>
-      <p id="created-at"></p>
-      <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+<div morsel-swipe class="post-detail">
+  <div class="post-header">
+    <div class="container">
+      <h1>{{post.title}}</h1>
+      <morselIndicators></morselIndicators>
     </div>
   </div>
-</div>
-      
-<p>title: {{title}}</p>
-<a href="#/users/{{post.creator.id}}">
-  <img ng-src="{{post.creator.photo_url}}" />
-</a>
+  <div class="container">
+    <div class="user-info">
+      <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-m"></div>
+      <div>
+        <morselPostedAt></morselPostedAt>
+        <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+      </div>
+    </div>
+  </div>
 
-<div class="container">
-  <div class="morsels-wrap">
-    <ul rn-carousel rn-carousel-buffered rn-carousel-control rn-carousel-indicator class="ng-cloak morsels">
+  <div class="container">
+    <ul morsels class="morsels">
       <li ng-repeat="morsel in post.morsels" class="morsel">
-        <p>user {{isExists(morsel.liked) && 'has' || 'hasnt'}} liked this</p>
-        <div class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
-        <div class="morsel-content">
+        <i morsel-like></i>
+        <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
+        <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
           <p>{{morsel.description}}</p>
         </div>
       </li>

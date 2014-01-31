@@ -1,0 +1,143 @@
+body {
+  background-color: $morsel-light;
+  margin: 0px;
+  color: $morsel-dark;
+}
+
+img {
+  max-width: 100%;
+}
+
+.profile-pic-link {
+  display: inline-block;
+
+  &.profile-pic-xs {
+    width: $profile-pic-xs;
+    height: $profile-pic-xs;
+  }
+
+  &.profile-pic-s {
+    width: $profile-pic-s;
+    height: $profile-pic-s;
+  }
+
+  &.profile-pic-m {
+    width: $profile-pic-m;
+    height: $profile-pic-m;
+  }
+  
+  &.profile-pic-l {
+    width: $profile-pic-l;
+    height: $profile-pic-l;
+  }
+}
+
+.container {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.like-morsel {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+//side nav
+.page-wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background: inherit;
+  position: absolute;
+}
+
+.side-nav {
+  background: $morsel-light;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+  height: 100%;
+  left: 0;
+}
+
+.site {
+  background-color: $morsel-background;
+  width: 100%;
+  min-height: 100%;
+  position: relative;
+  z-index: 10;
+  left: 0;
+  transition: all 0.2s ease-out;
+  -webkit-transition: all 0.2s ease-out;
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+
+  &:before {
+    position: absolute;
+    content: '';
+    left: -4px;
+    height: 100%;
+    width: 4px;
+    background: #3B3E3E;
+  }
+
+  &.open {
+    transform: translate3d(250px, 0, 0);
+    -webkit-transform: translate3d(250px, 0, 0);
+  }
+}
+
+.main-view {
+  overflow: auto;
+}
+
+header {
+  nav {
+    display: none;
+  }
+}
+
+.side-nav-trigger {
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+}
+
+@media (min-width: $screen-md-min) {
+  header {
+    background-color: $morsel-light;
+
+    nav {
+      display: block;
+      
+      ul {
+        list-style: none;
+        overflow: hidden;
+
+        li {
+          float: left;
+        }
+      }
+    }
+  }
+
+  .site.open {
+    transform: translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+  }
+
+  .side-nav {
+    display: none;
+  }
+
+  .side-nav-trigger {
+    display: none;
+  }
+}

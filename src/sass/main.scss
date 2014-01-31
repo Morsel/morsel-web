@@ -24,8 +24,8 @@
 //@import "../../vendor/sass-bootstrap/lib/dropdowns";
 @import "../../vendor/sass-bootstrap/lib/button-groups";
 //@import "../../vendor/sass-bootstrap/lib/input-groups";
-@import "../../vendor/sass-bootstrap/lib/navs";
-@import "../../vendor/sass-bootstrap/lib/navbar";
+//@import "../../vendor/sass-bootstrap/lib/navs";
+//@import "../../vendor/sass-bootstrap/lib/navbar";
 //@import "../../vendor/sass-bootstrap/lib/breadcrumbs";
 //@import "../../vendor/sass-bootstrap/lib/pagination";
 //@import "../../vendor/sass-bootstrap/lib/pager";
@@ -53,7 +53,8 @@
 
 
 // Import component styles
-@import "_main.scss";
-@import "../app/home/_home.scss";
+@import "_common.scss";
+
 @import "../app/feed/_feed.scss";
-@import "_morsels.scss";
+@import "../app/home/_home.scss";
+@import "../app/post-detail/_post-detail.scss";

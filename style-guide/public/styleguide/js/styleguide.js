@@ -4,6 +4,10 @@
 		sh = document.body.clientHeight, //Viewport Height
 		minViewportWidth = 240, //Minimum Size for Viewport
 		maxViewportWidth = 2600, //Maxiumum Size for Viewport
+		breakXS = 480,
+		breakS = 768,
+		breakM = 992,
+		breakL = 1200,
 		viewportResizeHandleWidth = 14, //Width of the viewport drag-to-resize handle
 		$sgViewport = $('#sg-viewport'), //Viewport element
 		$sizePx = $('.sg-size-px'), //Px size input element in toolbar
@@ -65,12 +69,20 @@
 	
 	//Size View Events
 
+	//Click Size Extra Small Button
+	$('#sg-size-xs').on("click", function(e){
+		e.preventDefault();
+		killDisco();
+		killHay();
+		sizeiframe(getRandom(minViewportWidth,breakXS));
+	});
+
 	//Click Size Small Button
 	$('#sg-size-s').on("click", function(e){
 		e.preventDefault();
 		killDisco();
 		killHay();
-		sizeiframe(getRandom(minViewportWidth,500));
+		sizeiframe(getRandom(breakXS,breakS));
 	});
 	
 	//Click Size Medium Button
@@ -78,7 +90,7 @@
 		e.preventDefault();
 		killDisco();
 		killHay();
-		sizeiframe(getRandom(500,800));
+		sizeiframe(getRandom(breakS,breakM));
 	});
 	
 	//Click Size Large Button
@@ -86,7 +98,7 @@
 		e.preventDefault();
 		killDisco();
 		killHay();
-		sizeiframe(getRandom(800,1200));
+		sizeiframe(getRandom(breakM,breakL));
 	});
 
 	//Click Full Width Button

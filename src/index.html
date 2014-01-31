@@ -11,28 +11,23 @@
 
   </head>
   <body>
-    <nav class="navbar navbar-default" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" toggle="collapse" target="#bs-example-navbar-collapse-1">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <span ui-route="/home" ng-class="{active:$uiRoute}"><a class="navbar-brand" href="#/home"><i class="glyphicon glyphicon-home"></i>Home</a></span>
-      </div>
-
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav">
-          <li ui-route="/about" ng-class="{active:$uiRoute}"><a href="#/about"><i class="glyphicon glyphicon-info-sign"></i>About</a></li>
-          <li ui-route="/myfeed" ng-class="{active:$uiRoute}"><a href="#/myfeed" ng-show="isLoggedIn"><i class="glyphicon glyphicon-film"></i>My Feed</a></li>
-          <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn"><a href="#/dashboard"><i class="glyphicon glyphicon-fire"></i>Dashboard</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
+    <div class="page-wrapper">
+      <nav class="side-nav" role="navigation">
+        <ul>
+          <li ui-route="/home" ng-class="{active:$uiRoute}">
+            <a href="#/home">Home</a>
+          </li>
+          <li ui-route="/about" ng-class="{active:$uiRoute}">
+            <a href="#/about">About</a>
+          </li>
+          <li ui-route="/myfeed" ng-class="{active:$uiRoute}">
+            <a href="#/myfeed" ng-show="isLoggedIn">My Feed</a>
+          </li>
+          <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+            <a href="#/dashboard">Dashboard</a>
+          </li>
           <li ui-route="/users/{{currentUserId}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-            <a ng-href="#/users/{{currentUserId}}"><i class="glyphicon glyphicon-user"></i>Profile</a>
+            <a ng-href="#/users/{{currentUserId}}">Profile</a>
           </li>
           <li ui-route="/logout" ng-show="isLoggedIn">
             <a ui-route="/logout" href="#/logout">Logout</a>
@@ -44,16 +39,53 @@
             <a ui-route="/join" href="#/join">Join</a>
           </li>
         </ul>
-      </div><!-- /.navbar-collapse -->
-    </nav>
-    <div ui-view="main"></div>
+      </nav>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="footer-inner">
-        Morsel!
-        </div>
+      <div id="site" ng-class="{site: true, open:menuOpen}">
+        <header>
+          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger">
+            <img src="assets/images/morsel-icon.png"/>
+          </a>
+          <nav role="navigation">
+            <ul>
+              <li ui-route="/home" ng-class="{active:$uiRoute}">
+                <a href="#/home">Home</a>
+              </li>
+              <li ui-route="/about" ng-class="{active:$uiRoute}">
+                <a href="#/about">About</a>
+              </li>
+              <li ui-route="/myfeed" ng-class="{active:$uiRoute}">
+                <a href="#/myfeed" ng-show="isLoggedIn">My Feed</a>
+              </li>
+              <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+                <a href="#/dashboard">Dashboard</a>
+              </li>
+              <li ui-route="/users/{{currentUserId}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+                <a ng-href="#/users/{{currentUserId}}">Profile</a>
+              </li>
+              <li ui-route="/logout" ng-show="isLoggedIn">
+                <a ui-route="/logout" href="#/logout">Logout</a>
+              </li>
+              <li ui-route="/login" ng-hide="isLoggedIn">
+                <a ui-route="/login" href="#/login">Login</a>
+              </li>
+              <li ui-route="/users/{{currentUserId}}" ng-hide="isLoggedIn">
+                <a ui-route="/join" href="#/join">Join</a>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
+        <div ui-view="main" class="main-view"></div>
+
+        <footer class="footer">
+          <div class="container">
+            <div class="footer-inner">
+            Morsel!
+            </div>
+          </div>
+        </footer>
       </div>
-    </footer>
+    </div>
   </body>
 </html>

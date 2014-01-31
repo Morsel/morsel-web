@@ -36,7 +36,7 @@ describe( 'ApiUsers factory', function() {
   describe('function getPosts', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/users/1/posts.json').respond('[{"name":"tester"},{"name":"tester2"}]');
+      httpBackend.expectGET(APIURL+'/users/1/posts.json').respond('{"data":{}}');
     }));
 
     afterEach(function () {
@@ -57,7 +57,7 @@ describe( 'ApiUsers factory', function() {
   describe('function getUser', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/users/1.json').respond('[{"name":"tester"},{"name":"tester2"}]');
+      httpBackend.expectGET(APIURL+'/users/testuser.json').respond('{"data":{}}');
     }));
 
     afterEach(function () {
@@ -67,7 +67,7 @@ describe( 'ApiUsers factory', function() {
 
     it( 'should return an object', inject(function(ApiUsers) {
       var resolvedValue;
-      ApiUsers.getUser(1).then(function (data) {
+      ApiUsers.getUser('testuser').then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();
@@ -78,7 +78,7 @@ describe( 'ApiUsers factory', function() {
   describe('function newUser', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectPOST(APIURL+'/users.json').respond('[{"name":"tester"},{"name":"tester2"}]');
+      httpBackend.expectPOST(APIURL+'/users.json').respond('{"data":{}}');
     }));
 
     afterEach(function () {

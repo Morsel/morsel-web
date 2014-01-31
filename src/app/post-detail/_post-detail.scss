@@ -1,0 +1,186 @@
+.post-detail {
+  .post-header {
+    background-color: $morsel-light;
+    padding: 20px 0 10px;
+
+    h1 {
+      width: 90%;
+      margin: 0 auto 10px;
+      font-size: 22px;
+      font-weight: lighter;
+      text-align: center;
+      color: $morsel-dark;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .morsel-indicators {
+      display: block;
+      text-align: center;
+
+      span {
+        width: 12px;
+        height: 12px;
+        background-color: white;
+        border-radius: 50%;
+        margin: 0 2px;
+        display: inline-block;
+        transition: background-color .2s ease-out;
+
+        &:hover, &:focus {
+          cursor: pointer;
+        }
+
+        &.active {
+          background-color: $morsel-primary;
+        }
+      }
+    }
+  }
+
+  .container {
+    max-width: $morsel-pic-big;
+  }
+
+  .user-info {
+    $profile-pic-margin: 20px;
+
+    padding: 10px 15px;
+    overflow: hidden;
+
+    div {
+      padding-left: $profile-pic-margin*2 + $profile-pic-s;
+
+      & + div {
+        text-align: left;
+      }
+    }
+
+    p {
+      color: $morsel-medium;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: 20px;
+      line-height: 20px;
+      margin: 0;
+      color: $morsel-dark;
+    }
+
+    .profile-pic-link {
+      height: $profile-pic-s;
+      width: $profile-pic-s;
+      margin: 0 $profile-pic-margin;
+      float: left;
+    }
+  }
+
+  .morsels {
+    position: relative;
+    //@include transform3d(0,0,0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    white-space: nowrap;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+
+    .morsel {
+      position: relative;
+      white-space: normal;
+      vertical-align: top;
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      -ms-backface-visibility: hidden;
+      backface-visibility: hidden;
+
+      .morsel-img {
+        background-position: 50% 50%;
+        background-size: cover;
+        height: 275px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .morsel-content {
+        padding: 30px 40px;
+        font-weight: 300;
+
+        &.text-morsel {
+          text-align: center;
+          font-size: 16px;
+          line-height: 24px;
+          padding: 30px 20px;
+        }
+      }
+    }
+  }
+
+  .morsels-container {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .morsel-control {
+    -webkit-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    margin-top: -35px;
+    opacity: 0.75;
+    cursor: pointer;
+
+    &.morsel-control-prev {
+      left: 0.5em;
+
+      &:before {
+        content: "<";
+      }
+    }
+
+    &.morsel-control-next {
+      right: 0.5em;
+
+      &:before {
+        content: ">";
+      }
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .post-detail {
+    .morsels {
+      .morsel {
+        .morsel-img {
+          height: 400px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .post-detail {
+    .morsels {
+      .morsel {
+        .morsel-img {
+          height: $morsel-pic-big;
+        }
+      }
+    }
+  }
+}

@@ -18,12 +18,15 @@ angular.module( 'Morsel', [
   //common
   'Morsel.auth',
   'Morsel.bgImage',
+  'Morsel.morselLike',
   'Morsel.userData',
+  'Morsel.userImage',
   //API
   'Morsel.apiMorsels',
   'Morsel.apiPosts',
   'Morsel.apiUsers',
   //libs
+  'angularMoment',
   'restangular',
   'ui.state',
   'ui.route',
@@ -40,9 +43,23 @@ angular.module( 'Morsel', [
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
+  RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
+      // This is a get for a list
+      var newResponse;
+      if (operation === "get") {
+        // Here we're returning an Array which has one special property metadata with our extra information
+        newResponse = response.data;
+        newResponse.metadata = response.meta;
+      } else {
+        // This is an element
+        newResponse = response.data;
+      }
+      return newResponse;
+    });
 })
 
-.run( function run () {
+.run( function run ($window) {
+  $window.moment.lang('en');
 })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, userData ) {
