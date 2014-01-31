@@ -1,7 +1,3 @@
-// Our variables
-
-$morselFeedHeight: 400px;
-
 // Colors
 $morsel-primary: #e96144; //salmon
 $morsel-secondary: #51ba3d; //green
@@ -10,31 +6,34 @@ $morsel-background: #FFFFFF; //white
 $morsel-light: #e2ddd7; //light gray
 $morsel-medium: #93a590; //medium gray
 $morsel-dark: #394038; //dark gray
-$profile-pic-small: 75px;
-$profile-pic-margin: 20px;
-$logo-margin: 15px;
-$logo-sm-width: 50px;
-$logo-md-width: 120px;
-$btn-primary-bg: $morsel-primary;
-
-
-// Overwrite any bootstrap vars with our own
-
-$icon-font-path:              "vendor/";
-$body-bg: gray;
 
 //fonts
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
 $font-family-base:            "Helvetica Neue Light", "Helvetica Neue", "Roboto Slab", Helvetica, Arial, sans-serif !default;
 $font-family-secondary:       "Roboto Slab", "Helvetica", "Arial", sans-serif;
+$icon-font-path:              "vendor/";
 
+//backgrounds
+$btn-primary-bg: $morsel-primary;
+$body-bg: gray;
+
+//typography
 $headings-color:              $morsel-primary;
 $link-color: $morsel-secondary;
 
-//image sizes
-
+//images
 //morsels
 $morsel-pic-big: 640px;
+
+//users
+$profile-pic-xs: 40px;
+$profile-pic-s: 72px;
+$profile-pic-m: 80px;
+$profile-pic-l: 144px;
+
+//feed
+$morselFeedHeight: 400px;
+
 
 // Core Bootstrap variables and mixins
 @import "../../vendor/sass-bootstrap/lib/_variables.scss";

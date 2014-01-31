@@ -43,6 +43,41 @@
     max-width: $morsel-pic-big;
   }
 
+  .user-info {
+    $profile-pic-margin: 20px;
+
+    padding: 10px 15px;
+    overflow: hidden;
+
+    div {
+      padding-left: $profile-pic-margin*2 + $profile-pic-s;
+
+      & + div {
+        text-align: left;
+      }
+    }
+
+    p {
+      color: $morsel-medium;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: 20px;
+      line-height: 20px;
+      margin: 0;
+      color: $morsel-dark;
+    }
+
+    .profile-pic-link {
+      height: $profile-pic-s;
+      width: $profile-pic-s;
+      margin: 0 $profile-pic-margin;
+      float: left;
+    }
+  }
+
   .morsels {
     position: relative;
     //@include transform3d(0,0,0);

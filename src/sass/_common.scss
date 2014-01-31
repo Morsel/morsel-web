@@ -4,70 +4,37 @@ body {
   color: $morsel-dark;
 }
 
-.subheading {
-  color: $morsel-light;
-  font-family: $font-family-secondary;
-}
-
-blockquote {
-  font-family: $font-family-secondary;
-  font-weight: 100;
-  color: $morsel-light;
-}
-
 img {
   max-width: 100%;
 }
 
-.nav a {
-  cursor: pointer;
-}
-
 .profile-pic-link {
   display: inline-block;
-}
 
-.profile-pic {
-  width: 100px;
-  height: 100px;
+  &.profile-pic-xs {
+    width: $profile-pic-xs;
+    height: $profile-pic-xs;
+  }
+
+  &.profile-pic-s {
+    width: $profile-pic-s;
+    height: $profile-pic-s;
+  }
+
+  &.profile-pic-m {
+    width: $profile-pic-m;
+    height: $profile-pic-m;
+  }
+  
+  &.profile-pic-l {
+    width: $profile-pic-l;
+    height: $profile-pic-l;
+  }
 }
 
 .container {
   padding-left: 0 !important;
   padding-right: 0 !important;
-}
-
-.user-info {
-  padding: 10px 15px;
-  overflow: hidden;
-
-  div {
-    padding-left: $profile-pic-margin*2 + $profile-pic-small;
-
-    & + div {
-      text-align: left;
-    }
-  }
-
-  p {
-    color: $morsel-medium;
-    font-size: 16px;
-    margin-top: 10px;
-  }
-
-  h2 {
-    font-size: 20px;
-    line-height: 20px;
-    margin: 0;
-    color: $morsel-dark;
-  }
-
-  img {
-    height: $profile-pic-small;
-    width: $profile-pic-small;
-    margin: 0 $profile-pic-margin;
-    float: left;
-  }
 }
 
 .like-morsel {

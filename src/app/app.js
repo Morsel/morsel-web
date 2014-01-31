@@ -20,6 +20,7 @@ angular.module( 'Morsel', [
   'Morsel.bgImage',
   'Morsel.morselLike',
   'Morsel.userData',
+  'Morsel.userImage',
   //API
   'Morsel.apiMorsels',
   'Morsel.apiPosts',
