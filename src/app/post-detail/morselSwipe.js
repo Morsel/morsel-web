@@ -88,7 +88,7 @@ angular.module('Morsel.morselSwipe', [
                     timestamp;
 
                 // add a wrapper div that will hide the overflow
-                var carousel = morsels.wrap("<div class='morsels-container'></div>"),
+                var carousel = morsels.wrap('<div class="morsels-container"></div>'),
                     container = carousel.parent();
 
                 // if indicator or controls, setup the watch
@@ -102,14 +102,14 @@ angular.module('Morsel.morselSwipe', [
                 });
 
                 // enable carousel indicator
-                var indicator = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' indicators-disabled='indicatorsDisabled' morsel-indicators></div>")(scope);
+                var indicator = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" indicators-disabled="indicatorsDisabled" morsel-indicators></div>')(scope);
                 iElement.find('morselIndicators').replaceWith(indicator);
 
-                var controls = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-controls></div>")(scope);
+                var controls = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" morsel-controls></div>')(scope);
                 container.append(controls);
 
                 // enable created at stamp
-                var createdAt = $compile("<div time-ago='morselsData[indicatorIndex].created_at' morsel-posted-at></div>")(scope);
+                var createdAt = $compile('<div time-ago="morselsData[indicatorIndex].created_at" morsel-posted-at></div>')(scope);
                 iElement.find('morselPostedAt').replaceWith(createdAt);
 
                 scope.carouselIndex = 0;
