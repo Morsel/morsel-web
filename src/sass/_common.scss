@@ -72,6 +72,19 @@ header {
   top: 15px;
   left: 15px;
   cursor: pointer;
+  padding-left: 50px;
+
+  &:before {
+    width: 40px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAkCAMAAADM4ogkAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF6GFD////cj2vHAAAAAJ0Uk5T/wDltzBKAAAAH0lEQVR42mJgGAKAkUgwqnDoKxxNj6MKR9MjSQAgwADV2gPB3CP5ZgAAAABJRU5ErkJggg==);
+
+    background-position: 50% 50%;
+    content: ' ';
+    position: absolute;
+    left: 0;
+  }
 }
 
 //general image styles

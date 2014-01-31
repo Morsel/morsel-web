@@ -4731,80 +4731,92 @@ header nav {
   top: 15px;
   left: 15px;
   cursor: pointer;
+  padding-left: 50px;
+}
+/* line 77, ../../src/sass/_common.scss */
+.side-nav-trigger:before {
+  width: 40px;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAkCAMAAADM4ogkAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF6GFD////cj2vHAAAAAJ0Uk5T/wDltzBKAAAAH0lEQVR42mJgGAKAkUgwqnDoKxxNj6MKR9MjSQAgwADV2gPB3CP5ZgAAAABJRU5ErkJggg==);
+  background-position: 50% 50%;
+  content: ' ';
+  position: absolute;
+  left: 0;
 }
 
-/* line 78, ../../src/sass/_common.scss */
+/* line 91, ../../src/sass/_common.scss */
 img {
   max-width: 100%;
 }
 
-/* line 82, ../../src/sass/_common.scss */
+/* line 95, ../../src/sass/_common.scss */
 .profile-pic-link {
   display: inline-block;
 }
-/* line 85, ../../src/sass/_common.scss */
+/* line 98, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-xs {
   width: 40px;
   height: 40px;
 }
-/* line 90, ../../src/sass/_common.scss */
+/* line 103, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-s {
   width: 72px;
   height: 72px;
 }
-/* line 95, ../../src/sass/_common.scss */
+/* line 108, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-m {
   width: 80px;
   height: 80px;
 }
-/* line 100, ../../src/sass/_common.scss */
+/* line 113, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-l {
   width: 144px;
   height: 144px;
 }
 
-/* line 108, ../../src/sass/_common.scss */
+/* line 121, ../../src/sass/_common.scss */
 .like-morsel {
   position: absolute;
   top: 50px;
   left: 50px;
 }
-/* line 113, ../../src/sass/_common.scss */
+/* line 126, ../../src/sass/_common.scss */
 .like-morsel:hover {
   cursor: pointer;
 }
 
 @media (min-width: 992px) {
-  /* line 120, ../../src/sass/_common.scss */
+  /* line 133, ../../src/sass/_common.scss */
   header {
     background-color: #e2ddd7;
   }
-  /* line 123, ../../src/sass/_common.scss */
+  /* line 136, ../../src/sass/_common.scss */
   header nav {
     display: block;
   }
-  /* line 126, ../../src/sass/_common.scss */
+  /* line 139, ../../src/sass/_common.scss */
   header nav ul {
     list-style: none;
     overflow: hidden;
   }
-  /* line 130, ../../src/sass/_common.scss */
+  /* line 143, ../../src/sass/_common.scss */
   header nav ul li {
     float: left;
   }
 
-  /* line 137, ../../src/sass/_common.scss */
+  /* line 150, ../../src/sass/_common.scss */
   .site.open {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
   }
 
-  /* line 142, ../../src/sass/_common.scss */
+  /* line 155, ../../src/sass/_common.scss */
   .side-nav {
     display: none;
   }
 
-  /* line 146, ../../src/sass/_common.scss */
+  /* line 159, ../../src/sass/_common.scss */
   .side-nav-trigger {
     display: none;
   }
