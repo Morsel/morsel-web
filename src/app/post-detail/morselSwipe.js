@@ -115,27 +115,13 @@ angular.module('Morsel.morselSwipe', [
         scope.carouselIndex = 0;
 
         // handle index databinding
-        if (iAttributes.morselSwipeIndex) {
-          var indexModel = $parse(iAttributes.morselSwipeIndex);
-
-          if (angular.isFunction(indexModel.assign)) {
-            /* check if this property is assignable then watch it */
-            scope.$watch('carouselIndex', function(newValue) {
-              indexModel.assign(scope.$parent, newValue);
-            });
-            scope.carouselIndex = indexModel(scope);
-            scope.$parent.$watch(indexModel, function(newValue, oldValue) {
-              if (newValue!==undefined) {
-                // todo: ensure valid
-                goToSlide(newValue, true);
-              }
-            });
-            isIndexBound = true;
-          } else if (!isNaN(iAttributes.morselSwipeIndex)) {
-            /* if user just set an initial number, set it */
-            scope.carouselIndex = parseInt(iAttributes.morselSwipeIndex, 10);
+        //if (iAttributes.morselSwipeIndex) {
+        iAttributes.$observe('morselSwipeIndex', function(newValue, oldValue) {
+          if(!isNaN(newValue)) {
+            //carousel starts at 0
+            scope.carouselIndex = newValue - 1;
           }
-        }
+        });
 
         // watch the given collection
         scope.$watchCollection(repeatCollection, function(newValue, oldValue) {
