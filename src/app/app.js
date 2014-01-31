@@ -29,9 +29,7 @@ angular.module( 'Morsel', [
   'angularMoment',
   'restangular',
   'ui.state',
-  'ui.route',
-  //fakes
-  'Morsel.reddit'
+  'ui.route'
 ])
 //the URL to use for our API
 .constant('APIURL', 'http://api-staging.eatmorsel.com')
