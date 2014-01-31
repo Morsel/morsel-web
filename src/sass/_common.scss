@@ -25,13 +25,14 @@ body {
 
 //side nav and header
 .side-nav {
+  $sidenavpadding: 15px;
+
   background: $morsel-light-off;
   position: absolute;
   width: $sidenav-width;
   z-index: 1;
   height: 100%;
   left: 0;
-  padding: 15px;
 
   .user-info {
     div {
@@ -43,7 +44,7 @@ body {
 
   ul {
     list-style: none;
-    padding: 0;
+    padding: $sidenavpadding;
     margin: 30px 0 0;
 
     li {
@@ -59,6 +60,17 @@ body {
         a {
           color: $morsel-primary;
         }
+      }
+    }
+
+    & + ul {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+
+      li {
+        border-bottom: 0;
+        border-top: 1px solid $morsel-medium;
       }
     }
   }
@@ -167,8 +179,6 @@ img {
   }
 
   &.user-info-xs {
-    padding: 0;
-
     $profile-pic-margin: 10px;
     div {
       padding-left: $profile-pic-margin*2 + $profile-pic-xs;
