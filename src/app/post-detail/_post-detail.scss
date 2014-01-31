@@ -36,6 +36,10 @@
           background-color: $morsel-primary;
         }
       }
+
+      &.disabled {
+        visibility: hidden;
+      }
     }
   }
 

@@ -35,9 +35,10 @@ angular.module('Morsel.morselSwipe', [
     replace: true,
     scope: {
       items: '=',
-      index: '='
+      index: '=',
+      disabled: '=indicatorsDisabled'
     },
-    template: '<div class="morsel-indicators">' +
+    template: '<div ng-class="{\'morsel-indicators\' : true, disabled : disabled}">' +
                 '<span ng-repeat="item in items" ng-click="$parent.index=$index" ng-class="{active: $index==$parent.index}"></span>' +
               '</div>'
   };
@@ -101,7 +102,7 @@ angular.module('Morsel.morselSwipe', [
                 });
 
                 // enable carousel indicator
-                var indicator = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-indicators></div>")(scope);
+                var indicator = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' indicators-disabled='indicatorsDisabled' morsel-indicators></div>")(scope);
                 iElement.find('morselIndicators').replaceWith(indicator);
 
                 var controls = $compile("<div index='indicatorIndex' items='carouselIndicatorArray' morsel-controls></div>")(scope);
@@ -329,7 +330,7 @@ angular.module('Morsel.morselSwipe', [
                     return false;
                 }
 
-                iAttributes.$observe('morselSwipeSwipe', function(newValue, oldValue) {
+                iAttributes.$observe('morselSwipe', function(newValue, oldValue) {
                     // only bind swipe when it's not switched off
                     if(newValue !== 'false' && newValue !== 'off') {
                         $swipe.bind(carousel, {
@@ -340,7 +341,13 @@ angular.module('Morsel.morselSwipe', [
                               swipeEnd({}, event);
                             }
                         });
+
+                        //enable indicators
+                        scope.indicatorsDisabled = false;
                     } else {
+                        //disable indicators
+                        scope.indicatorsDisabled = true;
+
                         // unbind swipe when it's switched off
                         carousel.unbind();
                     }

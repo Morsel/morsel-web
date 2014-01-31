@@ -4929,44 +4929,48 @@ img {
 .post-detail .post-header .morsel-indicators span.active {
   background-color: #e96144;
 }
-/* line 42, ../../src/app/post-detail/_post-detail.scss */
+/* line 40, ../../src/app/post-detail/_post-detail.scss */
+.post-detail .post-header .morsel-indicators.disabled {
+  visibility: hidden;
+}
+/* line 46, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .container {
   max-width: 640px;
 }
-/* line 46, ../../src/app/post-detail/_post-detail.scss */
+/* line 50, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .user-info {
   padding: 10px 15px;
   overflow: hidden;
 }
-/* line 52, ../../src/app/post-detail/_post-detail.scss */
+/* line 56, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .user-info div {
   padding-left: 112px;
 }
-/* line 55, ../../src/app/post-detail/_post-detail.scss */
+/* line 59, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .user-info div + div {
   text-align: left;
 }
-/* line 60, ../../src/app/post-detail/_post-detail.scss */
+/* line 64, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .user-info p {
   color: #93a590;
   font-size: 16px;
   margin-top: 10px;
 }
-/* line 66, ../../src/app/post-detail/_post-detail.scss */
+/* line 70, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .user-info h2 {
   font-size: 20px;
   line-height: 20px;
   margin: 0;
   color: #394038;
 }
-/* line 73, ../../src/app/post-detail/_post-detail.scss */
+/* line 77, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .user-info .profile-pic-link {
   height: 72px;
   width: 72px;
   margin: 0 20px;
   float: left;
 }
-/* line 81, ../../src/app/post-detail/_post-detail.scss */
+/* line 85, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels {
   position: relative;
   -webkit-transform: translate3d(0, 0, 0);
@@ -4977,7 +4981,7 @@ img {
   padding: 0;
   margin: 0;
 }
-/* line 92, ../../src/app/post-detail/_post-detail.scss */
+/* line 96, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel {
   position: relative;
   white-space: normal;
@@ -4989,34 +4993,34 @@ img {
   -ms-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* line 103, ../../src/app/post-detail/_post-detail.scss */
+/* line 107, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel .morsel-img {
   background-position: 50% 50%;
   background-size: cover;
   height: 275px;
 }
-/* line 108, ../../src/app/post-detail/_post-detail.scss */
+/* line 112, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel .morsel-img:hover {
   cursor: pointer;
 }
-/* line 113, ../../src/app/post-detail/_post-detail.scss */
+/* line 117, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel .morsel-content {
   padding: 30px 40px;
   font-weight: 300;
 }
-/* line 117, ../../src/app/post-detail/_post-detail.scss */
+/* line 121, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel .morsel-content.text-morsel {
   text-align: center;
   font-size: 16px;
   line-height: 24px;
   padding: 30px 20px;
 }
-/* line 127, ../../src/app/post-detail/_post-detail.scss */
+/* line 131, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels-container {
   overflow: hidden;
   position: relative;
 }
-/* line 132, ../../src/app/post-detail/_post-detail.scss */
+/* line 136, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control {
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
@@ -5027,35 +5031,35 @@ img {
   opacity: 0.75;
   cursor: pointer;
 }
-/* line 142, ../../src/app/post-detail/_post-detail.scss */
+/* line 146, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control.morsel-control-prev {
   left: 0.5em;
 }
-/* line 145, ../../src/app/post-detail/_post-detail.scss */
+/* line 149, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control.morsel-control-prev:before {
   content: "<";
 }
-/* line 150, ../../src/app/post-detail/_post-detail.scss */
+/* line 154, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control.morsel-control-next {
   right: 0.5em;
 }
-/* line 153, ../../src/app/post-detail/_post-detail.scss */
+/* line 157, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control.morsel-control-next:before {
   content: ">";
 }
-/* line 158, ../../src/app/post-detail/_post-detail.scss */
+/* line 162, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control:hover {
   opacity: 1;
 }
 
 @media (min-width: 768px) {
-  /* line 168, ../../src/app/post-detail/_post-detail.scss */
+  /* line 172, ../../src/app/post-detail/_post-detail.scss */
   .post-detail .morsels .morsel .morsel-img {
     height: 400px;
   }
 }
 @media (min-width: 1200px) {
-  /* line 180, ../../src/app/post-detail/_post-detail.scss */
+  /* line 184, ../../src/app/post-detail/_post-detail.scss */
   .post-detail .morsels .morsel .morsel-img {
     height: 640px;
   }
