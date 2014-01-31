@@ -17,7 +17,7 @@
 
   <div class="container">
     <ul morsels class="morsels">
-      <li ng-repeat="morsel in post.morsels | orderBy:sort_order" class="morsel">
+      <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
         <i morsel-like></i>
         <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
         <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
