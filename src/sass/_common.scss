@@ -1,35 +1,9 @@
+//page layout
+
 body {
   background-color: $morsel-light;
   margin: 0px;
   color: $morsel-dark;
-}
-
-img {
-  max-width: 100%;
-}
-
-.profile-pic-link {
-  display: inline-block;
-
-  &.profile-pic-xs {
-    width: $profile-pic-xs;
-    height: $profile-pic-xs;
-  }
-
-  &.profile-pic-s {
-    width: $profile-pic-s;
-    height: $profile-pic-s;
-  }
-
-  &.profile-pic-m {
-    width: $profile-pic-m;
-    height: $profile-pic-m;
-  }
-  
-  &.profile-pic-l {
-    width: $profile-pic-l;
-    height: $profile-pic-l;
-  }
 }
 
 .container {
@@ -37,17 +11,6 @@ img {
   padding-right: 0 !important;
 }
 
-.like-morsel {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-//side nav
 .page-wrapper {
   width: 100%;
   height: 100%;
@@ -56,6 +19,11 @@ img {
   position: absolute;
 }
 
+.main-view {
+  overflow: auto;
+}
+
+//side nav and header
 .side-nav {
   background: $morsel-light;
   position: absolute;
@@ -92,10 +60,6 @@ img {
   }
 }
 
-.main-view {
-  overflow: auto;
-}
-
 header {
   nav {
     display: none;
@@ -110,6 +74,48 @@ header {
   cursor: pointer;
 }
 
+//general image styles
+img {
+  max-width: 100%;
+}
+
+.profile-pic-link {
+  display: inline-block;
+
+  &.profile-pic-xs {
+    width: $profile-pic-xs;
+    height: $profile-pic-xs;
+  }
+
+  &.profile-pic-s {
+    width: $profile-pic-s;
+    height: $profile-pic-s;
+  }
+
+  &.profile-pic-m {
+    width: $profile-pic-m;
+    height: $profile-pic-m;
+  }
+  
+  &.profile-pic-l {
+    width: $profile-pic-l;
+    height: $profile-pic-l;
+  }
+}
+
+
+//commonly used items
+.like-morsel {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+//media queries
 @media (min-width: $screen-md-min) {
   header {
     background-color: $morsel-light;
