@@ -6,8 +6,7 @@ angular.module( 'Morsel.apiUsers', [] )
       RestangularUsers = Restangular.all('users');
 
   Users.getUser = function(username) {
-    //return RestangularUsers.get(username);
-    return RestangularUsers.get(2); //return JV until https://www.pivotaltracker.com/story/show/63469656 is complete
+    return RestangularUsers.get(username);
   };
 
   Users.getPosts = function(userId) {
