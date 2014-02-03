@@ -4743,7 +4743,7 @@ body {
 .site.open:after {
   content: ' ';
   position: absolute;
-  background-color: rgba(1, 1, 1, 0.3);
+  background-color: rgba(1, 1, 1, 0.6);
   width: 100%;
   height: 100%;
   display: block;

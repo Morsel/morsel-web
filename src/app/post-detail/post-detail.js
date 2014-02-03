@@ -11,10 +11,7 @@ angular.module( 'Morsel.postDetail', [
         templateUrl: 'post-detail/post-detail.tpl.html'
       }
     },
-    data:{ pageTitle: 'Post Detail' },
-    resolve: {
-      loggedInUser : 'userData'
-    }
+    data:{ pageTitle: 'Post Detail' }
   });
 })
 
