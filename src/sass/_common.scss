@@ -87,6 +87,18 @@ body {
   &.open {
     transform: translate3d($sidenav-width, 0, 0);
     -webkit-transform: translate3d($sidenav-width, 0, 0);
+
+    &:after {
+      content: ' ';
+      position: absolute;
+      background-color: rgba(1,1,1,.6);
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 100;
+      top: 0;
+      left: 0;
+    }
   }
 }
 
@@ -103,6 +115,7 @@ header {
   left: 15px;
   cursor: pointer;
   padding-left: 50px;
+  z-index: 101;
 
   &:before {
     width: 40px;
@@ -233,6 +246,10 @@ img {
   .site.open {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
+
+    &:after {
+      display: none;
+    }
   }
 
   .side-nav {
