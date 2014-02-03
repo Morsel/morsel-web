@@ -19,10 +19,6 @@ body {
   position: absolute;
 }
 
-.main-view {
-  overflow: auto;
-}
-
 //side nav and header
 .side-nav {
   $sidenavpadding: 15px;
@@ -148,6 +144,10 @@ img {
     width: $profile-pic-l;
     height: $profile-pic-l;
   }
+
+  img {
+    border: 2px solid white;
+  }
 }
 
 .user-info {
@@ -201,6 +201,14 @@ img {
   &:hover {
     cursor: pointer;
   }
+}
+
+.morsel-icon {
+  background-image: url(images/icons/morsel-icon.png);
+  background-size: cover;
+  height: 14px;
+  width: 14px;
+  display: inline-block;
 }
 
 //media queries

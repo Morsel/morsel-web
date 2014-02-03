@@ -4676,12 +4676,7 @@ body {
   position: absolute;
 }
 
-/* line 22, ../../src/sass/_common.scss */
-.main-view {
-  overflow: auto;
-}
-
-/* line 27, ../../src/sass/_common.scss */
+/* line 23, ../../src/sass/_common.scss */
 .side-nav {
   background: #dfcfc0;
   position: absolute;
@@ -4690,43 +4685,43 @@ body {
   height: 100%;
   left: 0;
 }
-/* line 39, ../../src/sass/_common.scss */
+/* line 35, ../../src/sass/_common.scss */
 .side-nav .user-info div a {
   color: #e96144;
 }
-/* line 45, ../../src/sass/_common.scss */
+/* line 41, ../../src/sass/_common.scss */
 .side-nav ul {
   list-style: none;
   padding: 15px;
   margin: 30px 0 0;
 }
-/* line 50, ../../src/sass/_common.scss */
+/* line 46, ../../src/sass/_common.scss */
 .side-nav ul li {
   border-bottom: 1px solid #93a590;
 }
-/* line 53, ../../src/sass/_common.scss */
+/* line 49, ../../src/sass/_common.scss */
 .side-nav ul li a {
   color: #93a590;
   display: block;
   padding: 15px 3px 15px 50px;
 }
-/* line 60, ../../src/sass/_common.scss */
+/* line 56, ../../src/sass/_common.scss */
 .side-nav ul li.active a {
   color: #e96144;
 }
-/* line 66, ../../src/sass/_common.scss */
+/* line 62, ../../src/sass/_common.scss */
 .side-nav ul + ul {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
-/* line 71, ../../src/sass/_common.scss */
+/* line 67, ../../src/sass/_common.scss */
 .side-nav ul + ul li {
   border-bottom: 0;
   border-top: 1px solid #93a590;
 }
 
-/* line 79, ../../src/sass/_common.scss */
+/* line 75, ../../src/sass/_common.scss */
 .site {
   background-color: white;
   width: 100%;
@@ -4739,18 +4734,18 @@ body {
   transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
 }
-/* line 91, ../../src/sass/_common.scss */
+/* line 87, ../../src/sass/_common.scss */
 .site.open {
   transform: translate3d(250px, 0, 0);
   -webkit-transform: translate3d(250px, 0, 0);
 }
 
-/* line 98, ../../src/sass/_common.scss */
+/* line 94, ../../src/sass/_common.scss */
 header nav {
   display: none;
 }
 
-/* line 103, ../../src/sass/_common.scss */
+/* line 99, ../../src/sass/_common.scss */
 .side-nav-trigger {
   display: block;
   position: absolute;
@@ -4759,7 +4754,7 @@ header nav {
   cursor: pointer;
   padding-left: 50px;
 }
-/* line 111, ../../src/sass/_common.scss */
+/* line 107, ../../src/sass/_common.scss */
 .side-nav-trigger:before {
   width: 40px;
   height: 100%;
@@ -4771,34 +4766,38 @@ header nav {
   left: 0;
 }
 
-/* line 125, ../../src/sass/_common.scss */
+/* line 121, ../../src/sass/_common.scss */
 img {
   max-width: 100%;
 }
 
-/* line 129, ../../src/sass/_common.scss */
+/* line 125, ../../src/sass/_common.scss */
 .profile-pic-link {
   display: inline-block;
 }
-/* line 132, ../../src/sass/_common.scss */
+/* line 128, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-xs {
   width: 40px;
   height: 40px;
 }
-/* line 137, ../../src/sass/_common.scss */
+/* line 133, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-s {
   width: 72px;
   height: 72px;
 }
-/* line 142, ../../src/sass/_common.scss */
+/* line 138, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-m {
   width: 80px;
   height: 80px;
 }
-/* line 147, ../../src/sass/_common.scss */
+/* line 143, ../../src/sass/_common.scss */
 .profile-pic-link.profile-pic-l {
   width: 144px;
   height: 144px;
+}
+/* line 148, ../../src/sass/_common.scss */
+.profile-pic-link img {
+  border: 2px solid white;
 }
 
 /* line 153, ../../src/sass/_common.scss */
@@ -4849,37 +4848,46 @@ img {
   cursor: pointer;
 }
 
+/* line 206, ../../src/sass/_common.scss */
+.morsel-icon {
+  background-image: url(images/icons/morsel-icon.png);
+  background-size: cover;
+  height: 14px;
+  width: 14px;
+  display: inline-block;
+}
+
 @media (min-width: 992px) {
-  /* line 208, ../../src/sass/_common.scss */
+  /* line 216, ../../src/sass/_common.scss */
   header {
     background-color: #e2ddd7;
   }
-  /* line 211, ../../src/sass/_common.scss */
+  /* line 219, ../../src/sass/_common.scss */
   header nav {
     display: block;
   }
-  /* line 214, ../../src/sass/_common.scss */
+  /* line 222, ../../src/sass/_common.scss */
   header nav ul {
     list-style: none;
     overflow: hidden;
   }
-  /* line 218, ../../src/sass/_common.scss */
+  /* line 226, ../../src/sass/_common.scss */
   header nav ul li {
     float: left;
   }
 
-  /* line 225, ../../src/sass/_common.scss */
+  /* line 233, ../../src/sass/_common.scss */
   .site.open {
     transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
   }
 
-  /* line 230, ../../src/sass/_common.scss */
+  /* line 238, ../../src/sass/_common.scss */
   .side-nav {
     display: none;
   }
 
-  /* line 234, ../../src/sass/_common.scss */
+  /* line 242, ../../src/sass/_common.scss */
   .side-nav-trigger {
     display: none;
   }
@@ -4956,8 +4964,9 @@ img {
 .post-detail .post-header {
   background-color: #e2ddd7;
   padding: 20px 0 10px;
+  height: 85px;
 }
-/* line 6, ../../src/app/post-detail/_post-detail.scss */
+/* line 7, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .post-header h1 {
   width: 90%;
   margin: 0 auto 10px;
@@ -4969,12 +4978,12 @@ img {
   white-space: nowrap;
   overflow: hidden;
 }
-/* line 18, ../../src/app/post-detail/_post-detail.scss */
+/* line 19, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .post-header .morsel-indicators {
   display: block;
   text-align: center;
 }
-/* line 22, ../../src/app/post-detail/_post-detail.scss */
+/* line 23, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .post-header .morsel-indicators span {
   width: 12px;
   height: 12px;
@@ -4984,23 +4993,23 @@ img {
   display: inline-block;
   transition: background-color .2s ease-out;
 }
-/* line 31, ../../src/app/post-detail/_post-detail.scss */
+/* line 32, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .post-header .morsel-indicators span:hover, .post-detail .post-header .morsel-indicators span:focus {
   cursor: pointer;
 }
-/* line 35, ../../src/app/post-detail/_post-detail.scss */
+/* line 36, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .post-header .morsel-indicators span.active {
   background-color: #e96144;
 }
-/* line 40, ../../src/app/post-detail/_post-detail.scss */
+/* line 41, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .post-header .morsel-indicators.disabled {
   visibility: hidden;
 }
-/* line 46, ../../src/app/post-detail/_post-detail.scss */
+/* line 47, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .container {
   max-width: 640px;
 }
-/* line 50, ../../src/app/post-detail/_post-detail.scss */
+/* line 51, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels {
   position: relative;
   -webkit-transform: translate3d(0, 0, 0);
@@ -5011,7 +5020,7 @@ img {
   padding: 0;
   margin: 0;
 }
-/* line 61, ../../src/app/post-detail/_post-detail.scss */
+/* line 62, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel {
   position: relative;
   white-space: normal;
@@ -5023,34 +5032,34 @@ img {
   -ms-backface-visibility: hidden;
   backface-visibility: hidden;
 }
-/* line 72, ../../src/app/post-detail/_post-detail.scss */
+/* line 73, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel .morsel-img {
   background-position: 50% 50%;
   background-size: cover;
   height: 275px;
 }
-/* line 77, ../../src/app/post-detail/_post-detail.scss */
+/* line 78, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel .morsel-img:hover {
   cursor: pointer;
 }
-/* line 82, ../../src/app/post-detail/_post-detail.scss */
+/* line 83, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel .morsel-content {
   padding: 30px 40px;
   font-weight: 300;
 }
-/* line 86, ../../src/app/post-detail/_post-detail.scss */
+/* line 87, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels .morsel .morsel-content.text-morsel {
   text-align: center;
   font-size: 16px;
   line-height: 24px;
   padding: 30px 20px;
 }
-/* line 96, ../../src/app/post-detail/_post-detail.scss */
+/* line 97, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsels-container {
   overflow: hidden;
   position: relative;
 }
-/* line 101, ../../src/app/post-detail/_post-detail.scss */
+/* line 102, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control {
   -webkit-transition: opacity 0.2s ease-out;
   transition: opacity 0.2s ease-out;
@@ -5061,36 +5070,60 @@ img {
   opacity: 0.75;
   cursor: pointer;
 }
-/* line 111, ../../src/app/post-detail/_post-detail.scss */
+/* line 112, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control.morsel-control-prev {
   left: 0.5em;
 }
-/* line 114, ../../src/app/post-detail/_post-detail.scss */
+/* line 115, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control.morsel-control-prev:before {
   content: "<";
 }
-/* line 119, ../../src/app/post-detail/_post-detail.scss */
+/* line 120, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control.morsel-control-next {
   right: 0.5em;
 }
-/* line 122, ../../src/app/post-detail/_post-detail.scss */
+/* line 123, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control.morsel-control-next:before {
   content: ">";
 }
-/* line 127, ../../src/app/post-detail/_post-detail.scss */
+/* line 128, ../../src/app/post-detail/_post-detail.scss */
 .post-detail .morsel-control:hover {
   opacity: 1;
 }
 
 @media (min-width: 768px) {
-  /* line 137, ../../src/app/post-detail/_post-detail.scss */
+  /* line 138, ../../src/app/post-detail/_post-detail.scss */
   .post-detail .morsels .morsel .morsel-img {
     height: 400px;
   }
 }
 @media (min-width: 1200px) {
-  /* line 149, ../../src/app/post-detail/_post-detail.scss */
+  /* line 150, ../../src/app/post-detail/_post-detail.scss */
   .post-detail .morsels .morsel .morsel-img {
     height: 640px;
   }
+}
+/* line 1, ../../src/app/profile/_profile.scss */
+.profile {
+  padding-top: 85px;
+}
+/* line 4, ../../src/app/profile/_profile.scss */
+.profile .user-info {
+  background-color: rgba(147, 165, 144, 0.5);
+}
+/* line 9, ../../src/app/profile/_profile.scss */
+.profile .user-info > div h1 {
+  color: #e2ddd7;
+}
+/* line 13, ../../src/app/profile/_profile.scss */
+.profile .user-info > div span {
+  display: inline-block;
+  margin-right: 15px;
+  font-size: 16px;
+  color: #e2ddd7;
+}
+/* line 20, ../../src/app/profile/_profile.scss */
+.profile .user-info > div p {
+  clear: both;
+  color: #e2ddd7;
 }
