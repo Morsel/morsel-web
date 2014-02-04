@@ -1,5 +1,7 @@
 //This file is essentially a copy of '../../vendor/sass-bootstrap/lib/bootstrap.scss' except we only want to include the components that we're using for now.
 
+@import "compass";
+
 // Import our variables
 @import "_variables.scss";
 

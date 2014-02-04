@@ -11,7 +11,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-bump');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
@@ -171,7 +171,7 @@ module.exports = function ( grunt ) {
       build_css: {
         src: [
           '<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= build_dir %>/assets/main.css'
         ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
       },
@@ -227,27 +227,28 @@ module.exports = function ( grunt ) {
     },
 
     /**
-     * `sass` handles our SCSS compilation and uglification automatically.
+     * `compass` handles our SCSS compilation and uglification automatically.
      * Only our `main.scss` file is included in compilation; all other files
      * must be imported from this file.
      */
-    sass: {
+    compass: {
       build: {
-        files: {
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css' : 'src/sass/main.scss'
-        },
         options: {
-          style: 'expanded',
-          lineNumbers: true,
-          noCache: true
+          //sassDir: 'src/sass/main.scss',
+          //cssDir: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css',
+          sassDir: 'src/sass',
+          cssDir: '<%= build_dir %>/assets',
+          trace: true,
+          outputStyle: 'expanded',
+          debugInfo: true,
+          assetCacheBuster: false
         }
       },
       compile: {
-        files: {
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css': 'src/sass/main.scss'
-        },
         options: {
-          style: 'compressed'
+          sassDir: 'src/sass',
+          cssDir: '<%= build_dir %>/assets',
+          outputStyle: 'compressed'
         }
       }
     },
@@ -461,9 +462,9 @@ module.exports = function ( grunt ) {
       /**
        * When the CSS files change, we need to compile and minify them.
        */
-      sass: {
+      compass: {
         files: [ 'src/**/*.scss' ],
-        tasks: [ 'sass:build', 'style' ]
+        tasks: [ 'compass:build', 'concat:build_css', 'style' ]
       },
 
       /**
@@ -559,7 +560,7 @@ module.exports = function ( grunt ) {
    * The `build-no-style` task builds without the style guide
    */
    grunt.registerTask( 'build-no-style', [
-    'clean', 'html2js', 'jshint', 'sass:build',
+    'clean', 'html2js', 'jshint', 'compass:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig', 'karma:continuous'
   ]);
@@ -570,7 +571,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'sass:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
+    'compass:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
   ]);
 
   /**
