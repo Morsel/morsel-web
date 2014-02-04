@@ -157,20 +157,16 @@ img {
     width: $profile-pic-l;
     height: $profile-pic-l;
   }
-
-  img {
-    border: 2px solid white;
-  }
 }
 
 .user-info {
-  padding: 10px 15px;
+  padding: 15px;
   overflow: hidden;
 
   //default size is $profile-pic-s
   $profile-pic-margin: 20px;
-  div {
-    padding-left: $profile-pic-margin*2 + $profile-pic-s;
+  > div {
+    float: left;
   }
 
   .profile-pic-link {
@@ -180,22 +176,24 @@ img {
 
   p {
     color: $morsel-medium;
-    font-size: 16px;
-    margin-top: 10px;
+    font-size: 12px;
+    margin: 0;
   }
 
   h2 {
-    font-size: 20px;
-    line-height: 20px;
-    margin: 0;
+    font-size: 16px;
+    line-height: 18px;
+    margin: 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: $morsel-dark;
   }
 
   &.user-info-xs {
+    padding: 15px;
+
     $profile-pic-margin: 10px;
-    div {
-      padding-left: $profile-pic-margin*2 + $profile-pic-xs;
-    }
 
     .profile-pic-link {
       margin: 0 $profile-pic-margin;

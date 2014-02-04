@@ -9,9 +9,9 @@ $morsel-dark: #394038; //dark gray
 $morsel-light-off: #dfcfc0;
 
 //fonts
-@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,300);
-$font-family-base:            "Helvetica Neue Light", "Helvetica Neue", "Roboto Slab", Helvetica, Arial, sans-serif !default;
-$font-family-secondary:       "Roboto Slab", "Helvetica", "Arial", sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
+$font-family-base:            "Roboto Condensed", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-secondary:       "Roboto Condensed", "Helvetica", "Arial", sans-serif;
 $icon-font-path:              "vendor/";
 
 //backgrounds
