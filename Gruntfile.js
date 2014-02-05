@@ -241,7 +241,9 @@ module.exports = function ( grunt ) {
           trace: true,
           outputStyle: 'expanded',
           debugInfo: true,
-          assetCacheBuster: false
+          assetCacheBuster: false,
+          imagesDir: 'src/assets/images',
+          relativeAssets: true
         }
       },
       compile: {

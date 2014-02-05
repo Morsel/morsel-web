@@ -53,11 +53,13 @@
 @import "../../vendor/sass-bootstrap/lib/utilities";
 @import "../../vendor/sass-bootstrap/lib/responsive-utilities";
 
+// Import sprites
+@import "spritesheets/_sidenav";
 
 // Import component styles
-@import "_common.scss";
+@import "_common";
 
-@import "../app/feed/_feed.scss";
-@import "../app/home/_home.scss";
-@import "../app/post-detail/_post-detail.scss";
-@import "../app/profile/_profile.scss";
+@import "../app/feed/_feed";
+@import "../app/home/_home";
+@import "../app/post-detail/_post-detail";
+@import "../app/profile/_profile";

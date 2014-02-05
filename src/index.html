@@ -20,6 +20,13 @@
             <a ng-click="goTo(currentUsername)">View Profile</a>
           </div>
         </div>
+        <span>Feeds</span>
+        <ul>
+          <li ui-route="/myfeed" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+            <a ng-click="goTo('myfeed')"><i class="sidenav-feed"></i>My Feed</a>
+          </li>
+        </ul>
+        <span>Other</span>
         <ul>
           <li ui-route="/home" ng-class="{active:$uiRoute}">
             <a ng-click="goTo('home')">Home</a>
@@ -27,16 +34,14 @@
           <li ui-route="/about" ng-class="{active:$uiRoute}">
             <a ng-click="goTo('about')">About</a>
           </li>
-          <li ui-route="/myfeed" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-            <a ng-click="goTo('myfeed')">My Feed</a>
-          </li>
           <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
             <a ng-click="goTo('dashboard')">Dashboard</a>
           </li>
         </ul>
+        <span>Settings</span>
         <ul>
           <li ng-show="isLoggedIn">
-            <a ng-click="goTo('logout')">Logout</a>
+            <a ng-click="goTo('logout')"><i class="sidenav-logout"></i>Logout</a>
           </li>
           <li ng-hide="isLoggedIn">
             <a ng-click="goTo('login')">Login</a>
@@ -49,9 +54,7 @@
 
       <div id="site" ng-class="{site: true, open:menuOpen}">
         <header>
-          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger">
-            <img src="assets/images/icons/morsel-icon.png"/>
-          </a>
+          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
           <nav role="navigation">
             <ul>
               <li ui-route="/home" ng-class="{active:$uiRoute}">

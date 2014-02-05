@@ -1,0 +1,4 @@
+$sidenav-sprite-dimensions: true;
+$sidenav-sprite-inline: false;
+@import "spritesheets/sidenav/*.png";
+@include all-sidenav-sprites;

@@ -4654,6 +4654,88 @@ td.visible-print {
     display: none !important;
   }
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/spritesheets\/sidenav\/\*\.png}line{font-family:\00003122}}
+.sidenav-sprite, .sidenav-account-settings, .sidenav-add-morsel, .sidenav-app-settings, .sidenav-drafts, .sidenav-feed, .sidenav-logout, .sidenav-people, .sidenav-restaurants, .sidenav-tags, .sidenav-terms, .sidenav-trending {
+  background: url('../../src/assets/images/spritesheets/sidenav-s21739da7e1.png') no-repeat;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-account-settings {
+  background-position: 0 -23px;
+  height: 23px;
+  width: 23px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-add-morsel {
+  background-position: 0 -46px;
+  height: 23px;
+  width: 23px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-app-settings {
+  background-position: 0 0;
+  height: 23px;
+  width: 23px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-drafts {
+  background-position: 0 -69px;
+  height: 23px;
+  width: 23px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-feed {
+  background-position: 0 -221px;
+  height: 16px;
+  width: 23px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-logout {
+  background-position: 0 -175px;
+  height: 23px;
+  width: 20px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-people {
+  background-position: 0 -138px;
+  height: 21px;
+  width: 22px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-restaurants {
+  background-position: 0 -92px;
+  height: 23px;
+  width: 21px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-tags {
+  background-position: 0 -115px;
+  height: 23px;
+  width: 23px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-terms {
+  background-position: 0 -198px;
+  height: 23px;
+  width: 18px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Library\/Ruby\/Gems\/2\.0\.0\/gems\/compass-0\.12\.2\/frameworks\/compass\/stylesheets\/compass\/utilities\/sprites\/_base\.scss}line{font-family:\0000360}}
+.sidenav-trending {
+  background-position: 0 -159px;
+  height: 16px;
+  width: 23px;
+}
+
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\000033}}
 body {
   background-color: #e2ddd7;
@@ -4676,52 +4758,73 @@ body {
   position: absolute;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000323}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000325}}
+a:hover {
+  cursor: pointer;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000331}}
+h1 {
+  margin-top: 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000336}}
 .side-nav {
-  background: #dfcfc0;
+  background: white;
   position: absolute;
   width: 250px;
   z-index: 1;
   height: 100%;
   left: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000335}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000346}}
 .side-nav .user-info div a {
   color: #e96144;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000341}}
-.side-nav ul {
-  list-style: none;
-  padding: 15px;
-  margin: 30px 0 0;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000346}}
-.side-nav ul li {
-  border-bottom: 1px solid #93a590;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000349}}
-.side-nav ul li a {
-  color: #93a590;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000352}}
+.side-nav > span {
+  background: #f3f1ef;
+  padding: 15px 20px 15px 30px;
   display: block;
-  padding: 15px 3px 15px 50px;
-}
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000356}}
-.side-nav ul li.active a {
   color: #e96144;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000362}}
-.side-nav ul + ul {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
+.side-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000367}}
-.side-nav ul + ul li {
-  border-bottom: 0;
-  border-top: 1px solid #93a590;
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000368}}
+.side-nav ul li + li {
+  border-top: 1px solid #f3f1ef;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000372}}
+.side-nav ul li a {
+  background-color: #e2ddd7;
+  color: #394038;
+  display: block;
+  padding: 15px 20px 15px 30px;
+  font-size: 16px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000379}}
+.side-nav ul li a i {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 15px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000385}}
+.side-nav ul li a:hover, .side-nav ul li a:focus {
+  background-color: #51ba3d;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000391}}
+.side-nav ul li.active a {
+  background-color: #51ba3d;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000375}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000399}}
 .site {
   background-color: white;
   width: 100%;
@@ -4729,21 +4832,22 @@ body {
   position: relative;
   z-index: 10;
   left: 0;
-  transition: all 0.2s ease-out;
   -webkit-transition: all 0.2s ease-out;
-  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease-out;
   -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000387}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003110}}
 .site.open {
-  transform: translate3d(250px, 0, 0);
   -webkit-transform: translate3d(250px, 0, 0);
+  transform: translate3d(250px, 0, 0);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\0000391}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003113}}
 .site.open:after {
   content: ' ';
   position: absolute;
-  background-color: rgba(1, 1, 1, 0.6);
+  background-color: rgba(1, 1, 1, 0.5);
   width: 100%;
   height: 100%;
   display: block;
@@ -4751,23 +4855,33 @@ body {
   top: 0;
   left: 0;
 }
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003125}}
+.site.open .side-nav-trigger {
+  left: 55px;
+}
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003106}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003132}}
 header nav {
   display: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003111}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003137}}
 .side-nav-trigger {
   display: block;
   position: absolute;
   top: 15px;
   left: 15px;
   cursor: pointer;
-  padding-left: 50px;
   z-index: 101;
+  background-image: url(images/icons/morsel-icon.png);
+  background-size: cover;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  -webkit-transition: left 0.2s 0.2s ease-in-out;
+  transition: left 0.2s 0.2s ease-in-out;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003120}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003151}}
 .side-nav-trigger:before {
   width: 40px;
   height: 100%;
@@ -4776,60 +4890,60 @@ header nav {
   background-position: 50% 50%;
   content: ' ';
   position: absolute;
-  left: 0;
+  left: -45px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003134}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003165}}
 img {
   max-width: 100%;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003138}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003169}}
 .profile-pic-link {
   display: inline-block;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003141}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003172}}
 .profile-pic-link.profile-pic-xs {
   width: 40px;
   height: 40px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003146}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003177}}
 .profile-pic-link.profile-pic-s {
   width: 72px;
   height: 72px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003151}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003182}}
 .profile-pic-link.profile-pic-m {
   width: 80px;
   height: 80px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003156}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003187}}
 .profile-pic-link.profile-pic-l {
   width: 144px;
   height: 144px;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003162}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003193}}
 .user-info {
   padding: 15px;
   overflow: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003168}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003199}}
 .user-info > div {
   float: left;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003172}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003203}}
 .user-info .profile-pic-link {
   margin: 0 20px;
   float: left;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003177}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003208}}
 .user-info p {
   color: #93a590;
   font-size: 12px;
   margin: 0;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003183}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003214}}
 .user-info h2 {
   font-size: 16px;
   line-height: 18px;
@@ -4839,28 +4953,28 @@ img {
   text-overflow: ellipsis;
   color: #394038;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003193}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003224}}
 .user-info.user-info-xs {
   padding: 15px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003198}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003229}}
 .user-info.user-info-xs .profile-pic-link {
   margin: 0 10px;
   float: left;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003207}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003238}}
 .like-morsel {
   position: absolute;
   top: 50px;
   left: 50px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003212}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003243}}
 .like-morsel:hover {
   cursor: pointer;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003217}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003248}}
 .morsel-icon {
   background-image: url(images/icons/morsel-icon.png);
   background-size: cover;
@@ -4870,40 +4984,40 @@ img {
 }
 
 @media (min-width: 992px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003227}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003258}}
   header {
     background-color: #e2ddd7;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003230}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003261}}
   header nav {
     display: block;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003233}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003264}}
   header nav ul {
     list-style: none;
     overflow: hidden;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003237}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003268}}
   header nav ul li {
     float: left;
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003244}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003275}}
   .site.open {
-    transform: translate3d(0, 0, 0);
     -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003248}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003279}}
   .site.open:after {
     display: none;
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003253}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003284}}
   .side-nav {
     display: none;
   }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003257}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003288}}
   .side-nav-trigger {
     display: none;
   }
