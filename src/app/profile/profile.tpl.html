@@ -1,5 +1,12 @@
-<h1>{{user.first_name}} {{user.last_name}}'s profile page!</h1>
-<img ng-src="{{user.photo_url}}" />
-<p>needs # hearts from API</p>
-
-<ul feed posts="user.posts" class="feed"></ul>
+<div class="profile">
+  <div class="user-info">
+    <div user-image username="user.username" user-photos="user.photos" class="profile-pic-m"></div>
+    <div>
+      <h1>{{user.first_name}} {{user.last_name}}</h1>
+      <span><i class="glyphicon glyphicon-heart"></i>{{user.like_count}}</span>
+      <span><i class="morsel-icon"></i>{{user.morsel_count}}</span>
+      <p>{{user.bio}}</p>
+    </div>
+  </div>
+  <ul feed posts="user.posts" class="feed"></ul>
+</div>

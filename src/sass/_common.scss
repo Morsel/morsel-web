@@ -6,11 +6,6 @@ body {
   color: $morsel-dark;
 }
 
-.container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
 .page-wrapper {
   width: 100%;
   height: 100%;
@@ -19,15 +14,22 @@ body {
   position: absolute;
 }
 
-.main-view {
-  overflow: auto;
+//general
+
+a {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+//type
+h1 {
+  margin-top: 0;
 }
 
 //side nav and header
 .side-nav {
-  $sidenavpadding: 15px;
-
-  background: $morsel-light-off;
+  background: $morsel-background;
   position: absolute;
   width: $sidenav-width;
   z-index: 1;
@@ -42,35 +44,48 @@ body {
     }
   }
 
+  > span {
+    background: $morsel-light-off;
+    padding: 15px 20px 15px 30px;
+    display: block;
+    color: $morsel-primary;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
   ul {
     list-style: none;
-    padding: $sidenavpadding;
-    margin: 30px 0 0;
+    padding: 0;
+    margin: 0;
 
     li {
-      border-bottom: 1px solid $morsel-medium;
+      & + li {
+        border-top: 1px solid $morsel-light-off;
+      }
 
       a {
-        color: $morsel-medium;
+        background-color: $morsel-light;
+        color: $morsel-dark;
         display: block;
-        padding: 15px 3px 15px 50px;
+        padding: 15px 20px 15px 30px;
+        font-size: 16px;
+
+        i {
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 15px;
+        }
+
+        &:hover, &:focus {
+          background-color: $morsel-secondary;
+        }
       }
 
       &.active {
         a {
-          color: $morsel-primary;
+          background-color: $morsel-secondary;
         }
-      }
-    }
-
-    & + ul {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-
-      li {
-        border-bottom: 0;
-        border-top: 1px solid $morsel-medium;
       }
     }
   }
@@ -83,14 +98,28 @@ body {
   position: relative;
   z-index: 10;
   left: 0;
-  transition: all 0.2s ease-out;
-  -webkit-transition: all 0.2s ease-out;
-  transform: translate3d(0, 0, 0);
-  -webkit-transform: translate3d(0, 0, 0);
+  @include transition(all .2s ease-out);
+  @include translate3d(0, 0, 0);
+  overflow: hidden;
 
   &.open {
-    transform: translate3d($sidenav-width, 0, 0);
-    -webkit-transform: translate3d($sidenav-width, 0, 0);
+    @include translate3d($sidenav-width, 0, 0);
+
+    &:after {
+      content: ' ';
+      position: absolute;
+      background-color: rgba(1,1,1,.5);
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 100;
+      top: 0;
+      left: 0;
+    }
+
+    .side-nav-trigger {
+      left: 55px;
+    }
   }
 }
 
@@ -100,13 +129,23 @@ header {
   }
 }
 
+footer {
+  background-color: $morsel-light;
+}
+
 .side-nav-trigger {
   display: block;
   position: absolute;
   top: 15px;
   left: 15px;
   cursor: pointer;
-  padding-left: 50px;
+  z-index: 101;
+  background-image: url(images/icons/morsel-icon.png);
+  background-size: cover;
+  height: 40px;
+  width: 40px;
+  display: inline-block;
+  @include transition(left .2s .2s ease-in-out);
 
   &:before {
     width: 40px;
@@ -117,7 +156,7 @@ header {
     background-position: 50% 50%;
     content: ' ';
     position: absolute;
-    left: 0;
+    left: -45px;
   }
 }
 
@@ -151,13 +190,13 @@ img {
 }
 
 .user-info {
-  padding: 10px 15px;
+  padding: 15px;
   overflow: hidden;
 
   //default size is $profile-pic-s
   $profile-pic-margin: 20px;
-  div {
-    padding-left: $profile-pic-margin*2 + $profile-pic-s;
+  > div {
+    float: left;
   }
 
   .profile-pic-link {
@@ -167,22 +206,24 @@ img {
 
   p {
     color: $morsel-medium;
-    font-size: 16px;
-    margin-top: 10px;
+    font-size: 12px;
+    margin: 0;
   }
 
   h2 {
-    font-size: 20px;
-    line-height: 20px;
-    margin: 0;
+    font-size: 16px;
+    line-height: 18px;
+    margin: 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: $morsel-dark;
   }
 
   &.user-info-xs {
+    padding: 15px;
+
     $profile-pic-margin: 10px;
-    div {
-      padding-left: $profile-pic-margin*2 + $profile-pic-xs;
-    }
 
     .profile-pic-link {
       margin: 0 $profile-pic-margin;
@@ -201,6 +242,14 @@ img {
   &:hover {
     cursor: pointer;
   }
+}
+
+.morsel-icon {
+  background-image: url(images/icons/morsel-icon.png);
+  background-size: cover;
+  height: 14px;
+  width: 14px;
+  display: inline-block;
 }
 
 //media queries
@@ -223,8 +272,12 @@ img {
   }
 
   .site.open {
-    transform: translate3d(0, 0, 0);
-    -webkit-transform: translate3d(0, 0, 0);
+    @include translate3d(0, 0, 0);
+
+
+    &:after {
+      display: none;
+    }
   }
 
   .side-nav {

@@ -101,12 +101,15 @@ angular.module('Morsel.morselSwipe', [
           goToSlide(newValue, true);
         });
 
-        // enable carousel indicator
-        var indicator = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" indicators-disabled="indicatorsDisabled" morsel-indicators></div>')(scope);
-        iElement.find('morselIndicators').replaceWith(indicator);
+        // enable two sets of carousel indicators
+        var indicatorTop = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" indicators-disabled="indicatorsDisabled" morsel-indicators></div>')(scope);
+        iElement.find('morselIndicatorTop').replaceWith(indicatorTop);
+
+        var indicatorBottom = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" indicators-disabled="indicatorsDisabled" morsel-indicators></div>')(scope);
+        iElement.find('morselIndicatorBottom').replaceWith(indicatorBottom);
 
         var controls = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" morsel-controls></div>')(scope);
-        container.append(controls);
+        iElement.find('morselControls').append(controls);
 
         // enable created at stamp
         var createdAt = $compile('<div time-ago="morselsData[indicatorIndex].created_at" morsel-posted-at></div>')(scope);
