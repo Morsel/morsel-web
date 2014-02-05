@@ -6,11 +6,6 @@ body {
   color: $morsel-dark;
 }
 
-.container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
 .page-wrapper {
   width: 100%;
   height: 100%;
@@ -132,6 +127,10 @@ header {
   nav {
     display: none;
   }
+}
+
+footer {
+  background-color: $morsel-light;
 }
 
 .side-nav-trigger {

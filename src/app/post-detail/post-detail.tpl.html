@@ -2,29 +2,33 @@
   <div class="post-header">
     <div class="container">
       <h1>{{post.title}}</h1>
-      <morselIndicators></morselIndicators>
+      <morselIndicatorTop></morselIndicatorTop>
     </div>
   </div>
-  <div class="container">
-    <div class="user-info user-info-xs">
-      <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
-      <div>
-        <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
-        <morselPostedAt></morselPostedAt>
+  <div class="container post-container">
+    <div class="post-info">
+      <h1>{{post.title}}</h1>
+      <div class="user-info user-info-xs">
+        <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
+        <div>
+          <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+          <morselPostedAt></morselPostedAt>
+        </div>
       </div>
     </div>
-  </div>
-
-  <div class="container">
-    <ul morsels class="morsels">
-      <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
-        <i morsel-like></i>
-        <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
-        <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
-          <p>{{morsel.description}}</p>
-        </div>
-      </li>
-    </ul>
+    <div class="morsels-wrap">
+      <morselControls></morselControls>
+      <morselIndicatorBottom></morselIndicatorBottom>
+      <ul morsels class="morsels">
+        <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
+          <i morsel-like></i>
+          <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
+          <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
+            <p>{{morsel.description}}</p>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
   <div class="blur-bg" style="background-image: url(https://morsel-staging.s3.amazonaws.com/morsel-photos/17/_640x640_3f39252d-656a-4670-8e19-ae1f8409c285.jpg);"></div>
 </div>
