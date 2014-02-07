@@ -24,10 +24,12 @@ angular.module( 'Morsel.join', [
     var userData = {
       'user': {
         'email': $scope.email,
+        'username': $scope.username,
         'password': $scope.password,
         'first_name': $scope.first_name,
         'last_name': $scope.last_name,
-        'title': $scope.title
+        'title': $scope.title,
+        'bio': $scope.bio
       }
     };
 

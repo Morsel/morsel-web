@@ -4,6 +4,7 @@ angular.module( 'Morsel', [
   'templates-common',
   //app
   'Morsel.about',
+  'Morsel.addMorsel',
   'Morsel.dashboard',
   'Morsel.feed',
   'Morsel.home',
@@ -26,6 +27,7 @@ angular.module( 'Morsel', [
   'Morsel.apiPosts',
   'Morsel.apiUsers',
   //libs
+  'angularFileUpload',
   'angularMoment',
   'restangular',
   'ui.state',

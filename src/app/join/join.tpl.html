@@ -10,6 +10,9 @@
   <label for="title">Title</label>
   <input type="text" name="title" id="title" placeholder="Executive Chef at McDonalds" ng-model="title" />
 
+    <label for="username">Username</label>
+  <input type="text" name="username" id="username" placeholder="slimychef923" ng-model="username" />
+
   <label for="email">Email</label>
   <input type="email" ng-model="email" name="email" id="email" placeholder="Email" required />
   <span ng-show="form.email.$dirty && form.email.$error.email">Email is invalid</span>
@@ -22,6 +25,9 @@
   <input type="password" name="verification" id="verification" ng-model="verification" required match="password" />
   <span ng-show="form.verification.$dirty && form.verification.$error.required">Please repeat your password</span>
   <span ng-show="form.verification.$dirty && form.verification.$error.match && !form.verification.$error.required">Passwords don't match</span>
+
+  <label for="bio">Bio</label>
+  <textarea ng-model="bio" name="bio" id="bio" placeholder="Tell us a little about yourself"></textarea>
 
   <input type="submit" value="Sign up" ng-disabled="form.$invalid" />
 </form>
