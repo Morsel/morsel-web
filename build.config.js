@@ -72,6 +72,7 @@ module.exports = {
       'vendor/moment/moment.js',
       'vendor/lodash/dist/lodash.js',
       'vendor/ng-file-upload/angular-file-upload.js',
+      'vendor/ng-file-upload/angular-file-upload-shim.js',
       'vendor/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'vendor/ngstorage/ngStorage.js',
       'vendor/restangular/dist/restangular.js'

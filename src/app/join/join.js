@@ -29,7 +29,8 @@ angular.module( 'Morsel.join', [
         'first_name': $scope.first_name,
         'last_name': $scope.last_name,
         'title': $scope.title,
-        'bio': $scope.bio
+        'bio': $scope.bio,
+        'photo': $scope.photo
       }
     };
 
