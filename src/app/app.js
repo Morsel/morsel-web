@@ -48,7 +48,7 @@ angular.module( 'Morsel', [
 .constant('DEVICEKEY', 'client[device]')
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
-.constant('VERSIONVALUE', MorselConfig.version)
+.constant('VERSIONVALUE', window.MorselConfig.version)
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};

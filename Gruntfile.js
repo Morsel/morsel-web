@@ -536,7 +536,7 @@ module.exports = function ( grunt ) {
    * before watching for changes.
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build', 'karma:unit', 'delta' ] );
+  grunt.registerTask( 'watch', [ 'build-no-style', 'karma:unit', 'delta' ] );
 
   /**
    * The default task is to build and compile.
@@ -634,7 +634,18 @@ module.exports = function ( grunt ) {
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
-            scripts: jsFiles
+            scripts: jsFiles,
+            buildDir: grunt.config('build_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy( 'karma/karma-config.tpl.js', grunt.config( 'build_dir' ) + '/karma-config.js', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            version: grunt.config( 'pkg.version' )
           }
         });
       }
