@@ -3,12 +3,13 @@ angular.module( 'Morsel.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE){
+.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE){
   var Auth = {},
       defaultRequestParams = {};
 
   //our fallback
   defaultRequestParams[DEVICEKEY] = DEVICEVALUE;
+  defaultRequestParams[VERSIONKEY] = VERSIONVALUE;
 
   //"private" methods, for my own sanity
 

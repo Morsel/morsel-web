@@ -1,7 +1,7 @@
 angular.module( 'Morsel.apiUploads', [] )
 
 // ApiUploads is the middleman for dealing with requests potentially involving uploading images
-.factory('ApiUploads', function($http, Restangular, $q, $upload, APIURL, DEVICEKEY, DEVICEVALUE) {
+.factory('ApiUploads', function($http, Restangular, $q, $upload, APIURL, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE) {
   var Uploads = {};
 
   Uploads.upload = function(uploadData, file, filename, apiPath, httpType, onProgress) {
@@ -9,7 +9,7 @@ angular.module( 'Morsel.apiUploads', [] )
 
     //use angular upload and returned promise
     $upload.upload({
-      url : APIURL + '/'+apiPath+'.json?'+DEVICEKEY+'+'+DEVICEVALUE,
+      url : APIURL + '/'+apiPath+'.json?'+DEVICEKEY+'='+DEVICEVALUE+'&'+VERSIONKEY+'='+VERSIONVALUE,
       method: httpType,
       data: uploadData,
       file: file,
