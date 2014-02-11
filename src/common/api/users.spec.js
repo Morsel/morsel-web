@@ -88,7 +88,15 @@ describe( 'ApiUsers factory', function() {
 
     it( 'should return an object', inject(function(ApiUsers) {
       var resolvedValue;
-      ApiUsers.newUser('email@test.com', 'testpassword', 'testfirst', 'testlast', 'testtitle').then(function (data) {
+      ApiUsers.newUser({
+        user: {
+          'email': 'email@test.com',
+          'password': 'testpassword',
+          'first_name': 'testfirst',
+          'last_name': 'testlast',
+          'title': 'testtitle'
+        }
+      }, null, function(){}).then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();

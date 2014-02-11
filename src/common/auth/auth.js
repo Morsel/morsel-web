@@ -3,8 +3,12 @@ angular.module( 'Morsel.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, $upload, APIURL){
-  var Auth = {};
+.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE){
+  var Auth = {},
+      defaultRequestParams = {};
+
+  //our fallback
+  defaultRequestParams[DEVICEKEY] = DEVICEVALUE;
 
   //"private" methods, for my own sanity
 
@@ -33,6 +37,8 @@ angular.module( 'Morsel.auth', [
   Auth._forgetUser = function() {
     delete $window.localStorage.userId;
     delete $window.localStorage.auth_token;
+
+    Auth._resetApiKey();
   };
 
   //add user data to storage
@@ -69,17 +75,15 @@ angular.module( 'Morsel.auth', [
   //adjust the API key for current user
   Auth._resetApiKey = function() {
     var savedUserId = Auth._getSavedUserId(),
-        storedUserAuthToken = Auth._getSavedUserAuthToken();
+        storedUserAuthToken = Auth._getSavedUserAuthToken(),
+        requestParams = _.clone(defaultRequestParams);
 
     if(savedUserId && storedUserAuthToken) {
-      Restangular.setDefaultRequestParams({
-        'client[device]': 'web',
-        'api_key': savedUserId + ':' + storedUserAuthToken
-      });
+      requestParams['api_key'] = savedUserId + ':' + storedUserAuthToken;
+
+      Restangular.setDefaultRequestParams(requestParams);
     } else {
-      Restangular.setDefaultRequestParams({
-        'client[device]': 'web'
-      });
+      Auth.resetAPIParams();
     }
   };
 
@@ -87,46 +91,13 @@ angular.module( 'Morsel.auth', [
 
   //create a new user
   Auth.join = function(userData, photo, onSuccess, onError, onProgress) {
-
-    if(photo) {
-      //use angular upload with photo
-      $upload.upload({
-        url : APIURL + '/users.json?client[device]=web',
-        method: 'POST',
-        data: userData,
-        file: photo,
-        fileFormDataName: 'user[photo]'
-      })
-      .success(function(data, status, headers, config) {
-        Auth._updateUser({
-          data: data,
-          status: status,
-          headers: headers,
-          config: config
-        });
-        onSuccess();
-      })
-      .error(function(data, status, headers, config){
-        Auth._clearUser();
-        onError({
-          data: data,
-          status: status,
-          headers: headers,
-          config: config
-        });
-      })
-      .progress(onProgress);
-    } else {
-      //no photo - use normal restangular post
-      ApiUsers.newUser(userData).then(function(loggedInUser) {
-        Auth._updateUser(loggedInUser);
-        onSuccess();
-      }, function(resp){
-        console.log(resp);
-        Auth._clearUser();
-        onError(resp);
-      });
-    }
+    ApiUsers.newUser(userData, photo, onProgress).then(function(loggedInUser) {
+      Auth._updateUser(loggedInUser);
+      onSuccess();
+    }, function(resp){
+      Auth._clearUser();
+      onError(resp);
+    });
   };
 
   //log in an existing user
@@ -160,6 +131,11 @@ angular.module( 'Morsel.auth', [
         $location.path('/login');
       }
     });
+  };
+
+  //Reset API params to the default
+  Auth.resetAPIParams = function() {
+    Restangular.setDefaultRequestParams(defaultRequestParams);
   };
 
   //return a promise about data for our current user
