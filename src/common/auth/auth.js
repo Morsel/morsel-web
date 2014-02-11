@@ -3,7 +3,7 @@ angular.module( 'Morsel.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout){
+.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, $upload, APIURL){
   var Auth = {};
 
   //"private" methods, for my own sanity
@@ -85,25 +85,48 @@ angular.module( 'Morsel.auth', [
 
   //public stuff
 
-  //update with a new user
-  Auth.joined = function(newUser) {
-    Auth._updateUser(newUser);
-  };
-
-  //clear the new user
-  Auth.clearCurrentUser = function() {
-    Auth._clearUser();
-  };
-
   //create a new user
-  Auth.join = function(userData, success, error) {
-    ApiUsers.newUser(userData).then(function(loggedInUser) {
-      Auth._updateUser(loggedInUser);
-      success();
-    }, function(resp){
-      Auth._clearUser();
-      error(resp);
-    });
+  Auth.join = function(userData, photo, onSuccess, onError, onProgress) {
+
+    if(photo) {
+      //use angular upload with photo
+      $upload.upload({
+        url : APIURL + '/users.json?client[device]=web',
+        method: 'POST',
+        data: userData,
+        file: photo,
+        fileFormDataName: 'user[photo]'
+      })
+      .success(function(data, status, headers, config) {
+        Auth._updateUser({
+          data: data,
+          status: status,
+          headers: headers,
+          config: config
+        });
+        onSuccess();
+      })
+      .error(function(data, status, headers, config){
+        Auth._clearUser();
+        onError({
+          data: data,
+          status: status,
+          headers: headers,
+          config: config
+        });
+      })
+      .progress(onProgress);
+    } else {
+      //no photo - use normal restangular post
+      ApiUsers.newUser(userData).then(function(loggedInUser) {
+        Auth._updateUser(loggedInUser);
+        onSuccess();
+      }, function(resp){
+        console.log(resp);
+        Auth._clearUser();
+        onError(resp);
+      });
+    }
   };
 
   //log in an existing user
