@@ -83,7 +83,7 @@ angular.module( 'Morsel.join', [
 
       //user angular upload with photo
       this.upload = $upload.upload({
-        url : APIURL + '/users.json?device=web',
+        url : APIURL + '/users.json?client[device]=web',
         method: 'POST',
         data: formattedData,
         file: this.selectedFile,
