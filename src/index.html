@@ -26,6 +26,12 @@
             <a ng-click="goTo('myfeed')"><i class="sidenav-feed"></i>My Feed</a>
           </li>
         </ul>
+        <span>Create</span>
+        <ul>
+          <li ui-route="/add-morsel" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+            <a ng-click="goTo('add-morsel')"><i class="sidenav-add-morsel"></i>My Feed</a>
+          </li>
+        </ul>
         <span>Other</span>
         <ul>
           <li ui-route="/home" ng-class="{active:$uiRoute}">
@@ -62,6 +68,9 @@
               </li>
               <li ui-route="/about" ng-class="{active:$uiRoute}">
                 <a ng-click="goTo('about')">About</a>
+              </li>
+              <li ng-show="isLoggedIn" ui-route="/add-morsel" ng-class="{active:$uiRoute}">
+                <a ng-click="goTo('add-morsel')">Add Morsel</a>
               </li>
               <li ui-route="/myfeed" ng-class="{active:$uiRoute}">
                 <a ng-click="goTo('myfeed')" ng-show="isLoggedIn">My Feed</a>

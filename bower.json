@@ -12,7 +12,8 @@
     "ngInfiniteScroll": "git://github.com/arusanov/ngInfiniteScroll.git#e0b672ead5917431d5105df56c481e5d3cdee487",
     "ngstorage": "~0.3.0",
     "restangular": "",
-    "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0"
+    "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0",
+    "ng-file-upload": "~1.2.7"
   },
   "resolutions": {
     "angular": "1.2.7"

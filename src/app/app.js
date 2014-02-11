@@ -4,6 +4,7 @@ angular.module( 'Morsel', [
   'templates-common',
   //app
   'Morsel.about',
+  'Morsel.addMorsel',
   'Morsel.dashboard',
   'Morsel.feed',
   'Morsel.home',
@@ -26,6 +27,7 @@ angular.module( 'Morsel', [
   'Morsel.apiPosts',
   'Morsel.apiUsers',
   //libs
+  'angularFileUpload',
   'angularMoment',
   'restangular',
   'ui.state',
@@ -33,7 +35,10 @@ angular.module( 'Morsel', [
 ])
 //the URL to use for our API
 .constant('APIURL', 'http://api-staging.eatmorsel.com')
-
+//dev
+//.constant('APIURL', 'http://barf')
+//marty
+//.constant('APIURL', 'http://192.168.48.102:3000/')
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
   //if we don't recognize the URL, send it to the homepage for now
   $urlRouterProvider.otherwise( '/home' );
