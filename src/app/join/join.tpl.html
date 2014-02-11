@@ -1,4 +1,4 @@
-<form name="form" method="post" ng-controller="JoinCtrl" ng-submit="join()" novalidate>
+<form name="form" method="post" ng-submit="join()" novalidate>
   <span ng-repeat="serverError in serverErrors">{{serverError.msg}}</span>
 
   <label for="first-name">First Name</label>
@@ -30,7 +30,21 @@
   <textarea ng-model="bio" name="bio" id="bio" placeholder="Tell us a little about yourself"></textarea>
 
   <label for="photo">Photo</label>
-   <input type="file" name="photo" id="photo" ng-model="photo" />
+  <input type="file" id="photo" ng-file-select="onFileSelect($files)">
 
-  <input type="submit" value="Sign up" ng-disabled="form.$invalid" />
+  <input type="submit" value="Sign up" ng-disabled="form.$invalid"  />
 </form>
+
+<div class="upload-div">
+  <div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true" style="height:200px;width:200px;background-color:gray">or drop files here</div>
+  <div ng-show="!dropSupported">HTML5 Drop File is not supported on this browser</div>
+
+  <div ng-show="selectedFile != null">
+    <div class="sel-file" >
+      <img ng-show="dataUrl" ng-src="{{dataUrl}}">
+      <span class="progress" ng-show="progress >= 0">           
+        <div style="width:{{progress}}%">{{progress}}%</div>
+      </span>
+    </div>
+  </div>
+</div>

@@ -85,6 +85,16 @@ angular.module( 'Morsel.auth', [
 
   //public stuff
 
+  //update with a new user
+  Auth.joined = function(newUser) {
+    Auth._updateUser(newUser);
+  };
+
+  //clear the new user
+  Auth.clearCurrentUser = function() {
+    Auth._clearUser();
+  };
+
   //create a new user
   Auth.join = function(userData, success, error) {
     ApiUsers.newUser(userData).then(function(loggedInUser) {

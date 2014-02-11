@@ -1,8 +1,9 @@
-<div class="upload-div">
+<!--<div class="upload-div">
   <input type="text" ng-model="morsel.description"> model object to be sent with the file.<br/>
-  choose a single file: <input type="file" ng-file-select="onFileSelect($files)">
+  choose a single file: <morselUploadButton></morselUploadButton>
   <div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true">or drop files here</div>
   <div ng-show="!dropSupported">HTML5 Drop File is not supported on this browser</div>
+  <div>{{morselUpload}}</div>
   <br/>
   <input type="checkbox" ng-model="uploadRightAway">Upload right away
   <br/>
@@ -16,7 +17,7 @@
       <button class="button" ng-click="start($index)" ng-show="progress[$index] < 0">Start</button>
       <span class="progress" ng-show="progress[$index] >= 0">           
         <div style="width:{{progress[$index]}}%">{{progress[$index]}}%</div>
-      </span>       
+      </span>
       <button class="button" ng-click="abort($index)" ng-show="hasUploader($index) && progress[$index] < 100">Abort</button>
       {{f.name}} - size: {{f.size}}B - type: {{f.type}}
     </div>
@@ -37,4 +38,4 @@
       </li>
     </ul>
   </div>
-</div>
+</div>-->
