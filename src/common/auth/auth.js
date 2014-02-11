@@ -3,8 +3,12 @@ angular.module( 'Morsel.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout){
-  var Auth = {};
+.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE){
+  var Auth = {},
+      defaultRequestParams = {};
+
+  //our fallback
+  defaultRequestParams[DEVICEKEY] = DEVICEVALUE;
 
   //"private" methods, for my own sanity
 
@@ -33,6 +37,8 @@ angular.module( 'Morsel.auth', [
   Auth._forgetUser = function() {
     delete $window.localStorage.userId;
     delete $window.localStorage.auth_token;
+
+    Auth._resetApiKey();
   };
 
   //add user data to storage
@@ -69,40 +75,28 @@ angular.module( 'Morsel.auth', [
   //adjust the API key for current user
   Auth._resetApiKey = function() {
     var savedUserId = Auth._getSavedUserId(),
-        storedUserAuthToken = Auth._getSavedUserAuthToken();
+        storedUserAuthToken = Auth._getSavedUserAuthToken(),
+        requestParams = _.clone(defaultRequestParams);
 
     if(savedUserId && storedUserAuthToken) {
-      Restangular.setDefaultRequestParams({
-        device: 'web',
-        api_key: savedUserId + ':' + storedUserAuthToken
-      });
+      requestParams['api_key'] = savedUserId + ':' + storedUserAuthToken;
+
+      Restangular.setDefaultRequestParams(requestParams);
     } else {
-      Restangular.setDefaultRequestParams({
-        device: 'web'
-      });
+      Auth.resetAPIParams();
     }
   };
 
   //public stuff
 
-  //update with a new user
-  Auth.joined = function(newUser) {
-    Auth._updateUser(newUser);
-  };
-
-  //clear the new user
-  Auth.clearCurrentUser = function() {
-    Auth._clearUser();
-  };
-
   //create a new user
-  Auth.join = function(userData, success, error) {
-    ApiUsers.newUser(userData).then(function(loggedInUser) {
+  Auth.join = function(userData, photo, onSuccess, onError, onProgress) {
+    ApiUsers.newUser(userData, photo, onProgress).then(function(loggedInUser) {
       Auth._updateUser(loggedInUser);
-      success();
+      onSuccess();
     }, function(resp){
       Auth._clearUser();
-      error(resp);
+      onError(resp);
     });
   };
 
@@ -137,6 +131,11 @@ angular.module( 'Morsel.auth', [
         $location.path('/login');
       }
     });
+  };
+
+  //Reset API params to the default
+  Auth.resetAPIParams = function() {
+    Restangular.setDefaultRequestParams(defaultRequestParams);
   };
 
   //return a promise about data for our current user

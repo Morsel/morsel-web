@@ -1,7 +1,7 @@
 angular.module( 'Morsel.apiUsers', [] )
 
 // ApiUsers is the middleman for dealing with /users requests
-.factory('ApiUsers', function($http, Restangular, $q) {
+.factory('ApiUsers', function($http, Restangular, $q, ApiUploads) {
   var Users = {},
       RestangularUsers = Restangular.all('users');
 
@@ -13,14 +13,24 @@ angular.module( 'Morsel.apiUsers', [] )
     return Restangular.one('users', userId).one('posts').get();
   };
 
-  Users.newUser = function(userData) {
+  Users.newUser = function(userData, photo, onProgress) {
     var deferred = $q.defer();
 
-    RestangularUsers.post(angular.toJson(userData)).then(function(resp){
-      deferred.resolve(Restangular.stripRestangular(resp));
-    }, function(resp){
-      deferred.reject(Restangular.stripRestangular(resp));
-    });
+    /*if(photo) {
+      //use angular upload with photo
+      ApiUploads.upload(userData, photo, 'user[photo]', 'users', 'POST', onProgress).then(function(resp){
+        deferred.resolve(resp);
+      }, function(resp){
+        deferred.reject(resp);
+      });
+    } else {*/
+      //no photo - use normal restangular post
+      RestangularUsers.post(angular.toJson(userData)).then(function(resp){
+        deferred.resolve(Restangular.stripRestangular(resp));
+      }, function(resp){
+        deferred.reject(Restangular.stripRestangular(resp));
+      });
+    //}
 
     return deferred.promise;
   };

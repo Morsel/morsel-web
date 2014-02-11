@@ -15,7 +15,7 @@ angular.module( 'Morsel.join', [
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, $stateParams, Auth, $upload, $location, $timeout, APIURL ) {
+.controller( 'JoinCtrl', function JoinCtrl( $scope, Auth, $location, $timeout ) {
 
   //any errors to be displayed from server
   $scope.serverErrors = [];
@@ -70,7 +70,7 @@ angular.module( 'Morsel.join', [
         },
         formattedData = {};
 
-    //if there's an image to upload, use form-data
+    //if there's an image to upload
     if(this.selectedFile) {
       //need to reformat this data a bit for a multi-part POST
       for(var i in uploadData) {
@@ -79,43 +79,24 @@ angular.module( 'Morsel.join', [
         }
       }
 
-      this.progress = 0;
-
-      //user angular upload with photo
-      this.upload = $upload.upload({
-        url : APIURL + '/users.json?device=web',
-        method: 'POST',
-        data: formattedData,
-        file: this.selectedFile,
-        fileFormDataName: 'user[photo]'
-      })
-      .success(onSuccess)
-      .error(onError)
-      .progress(onProgress);
-    } else {
-      //otherwise use a normal Restangular upload
-      Auth.join(uploadData, function() {
-        //if successfully joined, send to their feed
-        $location.path('/myfeed');
-      }, function(resp) {
-        $scope.serverErrors = resp.data.errors;
-      });
+      uploadData = formattedData;
+      //reset our progress
+      $scope.progress = 0;
     }
+
+    //call our join to take care of the heavy lifting
+    Auth.join(uploadData, this.selectedFile, onSuccess, onError, onProgress);
   };
 
   function onSuccess(resp) {
-    Auth.joined(resp.data);
-
     //if successfully joined, send to their feed
     $location.path('/myfeed');
   }
 
   function onError(resp) {
-    Auth.clearCurrentUser();
-
-    if(resp.errors) {
+    if(resp.data.errors) {
       //show our errors
-      $scope.serverErrors = resp.errors;
+      $scope.serverErrors = resp.data.errors;
     }
   }
 

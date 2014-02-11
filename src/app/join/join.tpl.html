@@ -1,5 +1,7 @@
 <form name="form" method="post" ng-submit="join()" novalidate>
-  <span ng-repeat="serverError in serverErrors">{{serverError.msg}}</span>
+  <div ng-repeat="(inputName, inputErrors) in serverErrors">
+    <p ng-repeat="inputError in inputErrors">{{inputName}} {{inputError}}</p>
+  </div>
 
   <label for="first-name">First Name</label>
   <input type="text" name="first_name" id="first-name" placeholder="John" ng-model="first_name" autofocus />

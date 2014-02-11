@@ -25,6 +25,7 @@ angular.module( 'Morsel', [
   //API
   'Morsel.apiMorsels',
   'Morsel.apiPosts',
+  'Morsel.apiUploads',
   'Morsel.apiUsers',
   //libs
   'angularFileUpload',
@@ -33,13 +34,23 @@ angular.module( 'Morsel', [
   'ui.state',
   'ui.route'
 ])
+
+//define some constants for the app
+
 //the URL to use for our API
 .constant('APIURL', 'http://api-staging.eatmorsel.com')
 //dev
 //.constant('APIURL', 'http://barf')
 //marty
 //.constant('APIURL', 'http://192.168.48.102:3000/')
+
+//for any API requests
+.constant('DEVICEKEY', 'client[device]')
+.constant('DEVICEVALUE', 'web')
+
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
+  var defaultRequestParams = {};
+
   //if we don't recognize the URL, send it to the homepage for now
   $urlRouterProvider.otherwise( '/home' );
 
@@ -47,18 +58,18 @@ angular.module( 'Morsel', [
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
   RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
-      // This is a get for a list
-      var newResponse;
-      if (operation === "get") {
-        // Here we're returning an Array which has one special property metadata with our extra information
-        newResponse = response.data;
-        newResponse.metadata = response.meta;
-      } else {
-        // This is an element
-        newResponse = response.data;
-      }
-      return newResponse;
-    });
+    // This is a get for a list
+    var newResponse;
+    if (operation === "get") {
+      // Here we're returning an Array which has one special property metadata with our extra information
+      newResponse = response.data;
+      newResponse.metadata = response.meta;
+    } else {
+      // This is an element
+      newResponse = response.data;
+    }
+    return newResponse;
+  });
 })
 
 .run( function run ($window) {
@@ -67,6 +78,8 @@ angular.module( 'Morsel', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, userData ) {
   Auth.setupInterceptor();
+  Auth.resetAPIParams();
+
   //initial fetching of user data for header/footer
   updateUserData();
 
