@@ -16,21 +16,21 @@ angular.module( 'Morsel.apiUsers', [] )
   Users.newUser = function(userData, photo, onProgress) {
     var deferred = $q.defer();
 
-    /*if(photo) {
+    if(photo) {
       //use angular upload with photo
       ApiUploads.upload(userData, photo, 'user[photo]', 'users', 'POST', onProgress).then(function(resp){
         deferred.resolve(resp);
       }, function(resp){
         deferred.reject(resp);
       });
-    } else {*/
+    } else {
       //no photo - use normal restangular post
       RestangularUsers.post(angular.toJson(userData)).then(function(resp){
         deferred.resolve(Restangular.stripRestangular(resp));
       }, function(resp){
         deferred.reject(Restangular.stripRestangular(resp));
       });
-    //}
+    }
 
     return deferred.promise;
   };
