@@ -29,22 +29,39 @@ angular.module( 'Morsel.apiMorsels', [] )
     return deferred.promise;
   };
 
-  Morsels.addMorsel = function(morselData, photo, onSuccess, onError, onProgress) {
-    if(photo) {
-      //use angular upload with photo
-      ApiUploads.upload(morselData, photo, 'morsel[photo]', 'morsels', 'POST', onProgress).then(function(resp){
-        onSuccess();
+  Morsels.addMorsel = function(morselData) {
+    var deferred = $q.defer(),
+        fd,
+        k;
+
+    //if morsel has a photo, need to use a multi-part request
+    if(morselData.morsel.photo) {
+      //create a new formdata object to hold all our data
+      fd = new FormData();
+
+      //loop through our data and append to fd
+      for(k in morselData.morsel) {
+        if(morselData.morsel[k]) {
+          fd.append('morsel['+k+']', morselData.morsel[k]);
+        }
+      }
+
+      //use our restangular multi-part post
+      ApiUploads.upload('morsels', fd).then(function(resp){
+        deferred.resolve(resp);
       }, function(resp){
-        onError(resp);
+        deferred.reject(resp);
       });
     } else {
       //no photo - use normal restangular post
       RestangularMorsels.post(angular.toJson(morselData)).then(function(resp){
-        onSuccess();
+        deferred.resolve(Restangular.stripRestangular(resp));
       }, function(resp){
-        onError(Restangular.stripRestangular(resp));
+        deferred.reject(Restangular.stripRestangular(resp));
       });
     }
+
+    return deferred.promise;
   };
 
   return Morsels;
