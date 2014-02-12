@@ -9,10 +9,7 @@ angular.module( 'Morsel.profile', [])
         templateUrl: 'profile/profile.tpl.html'
       }
     },
-    data:{ pageTitle: 'Profile' },
-    resolve: {
-      loggedInUser : 'userData'
-    }
+    data:{ pageTitle: 'Profile' }
   });
 })
 

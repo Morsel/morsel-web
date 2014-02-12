@@ -16,12 +16,14 @@ angular.module( 'Morsel.myfeed', [
       restricted : true
     },
     resolve: {
-      loggedInUser : 'userData'
+      hasCurrentUser : function(Auth) {
+        return Auth.hasCurrentUser();
+      }
     }
   });
 })
 
-.controller( 'MyFeedCtrl', function MyFeedCtrl( $scope, ApiPosts, loggedInUser ) {
+.controller( 'MyFeedCtrl', function MyFeedCtrl( $scope, ApiPosts, Auth) {
   $scope.posts = ApiPosts.getPosts().$object;
-  $scope.welcomeUserName = loggedInUser.first_name;
+  $scope.welcomeUserName = Auth.getCurrentUser().first_name;
 });

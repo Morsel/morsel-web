@@ -16,9 +16,6 @@ angular.module( 'Morsel.dashboard', [
     data:{pageTitle: 'Dashboard' },
     access: {
       restricted : true
-    },
-    resolve: {
-      loggedInUser : 'userData'
     }
   });
 })
