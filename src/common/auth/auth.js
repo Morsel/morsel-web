@@ -94,8 +94,8 @@ angular.module( 'Morsel.auth', [
   //public stuff
 
   //create a new user
-  Auth.join = function(userData, photo, onSuccess, onError, onProgress) {
-    ApiUsers.newUser(userData, photo, onProgress).then(function(loggedInUser) {
+  Auth.join = function(uploadUserData, onSuccess, onError) {
+    ApiUsers.newUser(uploadUserData).then(function(loggedInUser) {
       Auth._updateUser(loggedInUser);
       onSuccess();
     }, function(resp){

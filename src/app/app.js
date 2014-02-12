@@ -27,7 +27,6 @@ angular.module( 'Morsel', [
   'Morsel.apiUploads',
   'Morsel.apiUsers',
   //libs
-  'angularFileUpload',
   'angularMoment',
   'restangular',
   'ui.state',
