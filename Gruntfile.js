@@ -234,8 +234,6 @@ module.exports = function ( grunt ) {
     compass: {
       build: {
         options: {
-          //sassDir: 'src/sass/main.scss',
-          //cssDir: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css',
           sassDir: 'src/sass',
           cssDir: '<%= build_dir %>/assets',
           trace: true,
@@ -250,7 +248,12 @@ module.exports = function ( grunt ) {
         options: {
           sassDir: 'src/sass',
           cssDir: '<%= build_dir %>/assets',
-          outputStyle: 'compressed'
+          trace: false,
+          outputStyle: 'compressed',
+          debugInfo: false,
+          assetCacheBuster: true,
+          imagesDir: 'src/assets/images',
+          relativeAssets: true
         }
       }
     },
