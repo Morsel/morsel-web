@@ -151,7 +151,7 @@ module.exports = function ( grunt ) {
       compile_assets: {
         files: [
           {
-            src: [ '**' ],
+            src: [ '**', '!*.css' ],
             dest: '<%= compile_dir %>/assets',
             cwd: '<%= build_dir %>/assets',
             expand: true
@@ -174,6 +174,13 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/assets/main.css'
         ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+      },
+      compile_css: {
+        src: [
+          '<%= vendor_files.css %>',
+          '<%= compile_dir %>/assets/main.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
       },
       /**
        * The `compile_js` target is the concatenation of our application source
@@ -203,9 +210,9 @@ module.exports = function ( grunt ) {
       compile: {
         files: [
           {
-            src: [ '<%= app_files.js %>' ],
-            cwd: '<%= build_dir %>',
-            dest: '<%= build_dir %>',
+            src: [ 'assets/<%= pkg.name %>-<%= pkg.version %>.js' ],
+            cwd: '<%= compile_dir %>',
+            dest: '<%= compile_dir %>',
             expand: true
           }
         ]
@@ -247,7 +254,7 @@ module.exports = function ( grunt ) {
       compile: {
         options: {
           sassDir: 'src/sass',
-          cssDir: '<%= build_dir %>/assets',
+          cssDir: '<%= compile_dir %>/assets',
           trace: false,
           outputStyle: 'compressed',
           debugInfo: false,
@@ -368,7 +375,6 @@ module.exports = function ( grunt ) {
         dir: '<%= compile_dir %>',
         src: [
           '<%= concat.compile_js.dest %>',
-          '<%= vendor_files.css %>',
           '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
       }
@@ -576,7 +582,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'compass:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
+    'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', /*'uglify', */'index:compile'
   ]);
 
   /**
