@@ -38,7 +38,6 @@ angular.module( 'Morsel.join', [
   $scope.onFileSelect = function($files) {
     //we only allow one file - pull the first
     $scope.selectedFile = $files[0];
-    $scope.progress = 0;
     if ($scope.upload) {
       $scope.upload.abort();
     }
@@ -53,7 +52,6 @@ angular.module( 'Morsel.join', [
       
       setPreview(fileReader);
     }
-    $scope.progress = -1;
   };
 
   $scope.join = function() {
@@ -65,27 +63,13 @@ angular.module( 'Morsel.join', [
             'first_name': $scope.first_name,
             'last_name': $scope.last_name,
             'title': $scope.title,
-            'bio': $scope.bio || ''
+            'bio': $scope.bio,
+            'photo': this.selectedFile || null
           }
-        },
-        formattedData = {};
-
-    //if there's an image to upload
-    if(this.selectedFile) {
-      //need to reformat this data a bit for a multi-part POST
-      for(var i in uploadData) {
-        for(var j in uploadData[i]) {
-          formattedData[i+'['+j+']'] = uploadData[i][j];
-        }
-      }
-
-      uploadData = formattedData;
-      //reset our progress
-      $scope.progress = 0;
-    }
+        };
 
     //call our join to take care of the heavy lifting
-    Auth.join(uploadData, this.selectedFile, onSuccess, onError, onProgress);
+    Auth.join(uploadData, onSuccess, onError);
   };
 
   function onSuccess(resp) {
@@ -98,10 +82,5 @@ angular.module( 'Morsel.join', [
       //show our errors
       $scope.serverErrors = resp.data.errors;
     }
-  }
-
-  function onProgress(evt) {
-    console.log('progress');
-    $scope.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total, 10));
   }
 });

@@ -3,12 +3,16 @@ angular.module( 'Morsel.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE){
+.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE){
   var Auth = {},
-      defaultRequestParams = {};
+      defaultRequestParams = {},
+      hasLoadedUser = $q.defer();
 
   //our fallback
   defaultRequestParams[DEVICEKEY] = DEVICEVALUE;
+  defaultRequestParams[VERSIONKEY] = VERSIONVALUE;
+
+  //"private" methods, for my own sanity
 
   //"private" methods, for my own sanity
 
@@ -30,7 +34,7 @@ angular.module( 'Morsel.auth', [
 
   //start with an anonymous user
   Auth._resetUser = function() {
-    Auth.currentUser = Auth._blankUser();
+    Auth._currentUser = Auth._blankUser();
   };
 
   //remove user data from storage
@@ -43,9 +47,9 @@ angular.module( 'Morsel.auth', [
 
   //add user data to storage
   Auth._saveUser = function() {
-    if(Auth.currentUser.id && Auth.currentUser.auth_token) {
-      $window.localStorage.userId = Auth.currentUser.id;
-      $window.localStorage.auth_token = Auth.currentUser.auth_token;
+    if(Auth._currentUser.id && Auth._currentUser.auth_token) {
+      $window.localStorage.userId = Auth._currentUser.id;
+      $window.localStorage.auth_token = Auth._currentUser.auth_token;
     }
   };
 
@@ -61,7 +65,7 @@ angular.module( 'Morsel.auth', [
 
   //update the current user and save her
   Auth._updateUser = function(userData) {
-    _.extend(Auth.currentUser, Restangular.stripRestangular(userData));
+    _.extend(Auth._currentUser, Restangular.stripRestangular(userData));
     Auth._saveUser();
     Auth._resetApiKey();
   };
@@ -90,8 +94,8 @@ angular.module( 'Morsel.auth', [
   //public stuff
 
   //create a new user
-  Auth.join = function(userData, photo, onSuccess, onError, onProgress) {
-    ApiUsers.newUser(userData, photo, onProgress).then(function(loggedInUser) {
+  Auth.join = function(uploadUserData, onSuccess, onError) {
+    ApiUsers.newUser(uploadUserData).then(function(loggedInUser) {
       Auth._updateUser(loggedInUser);
       onSuccess();
     }, function(resp){
@@ -139,14 +143,13 @@ angular.module( 'Morsel.auth', [
   };
 
   //return a promise about data for our current user
-  Auth.getUserData = function() {
-    var deferred = $q.defer(),
-        savedUserId = Auth._getSavedUserId();
+  Auth.setInitialUserData = function() {
+    var savedUserId = Auth._getSavedUserId();
 
     //if we have a currentUser in our app
-    if(Auth.currentUser && Auth.currentUser.id && Auth.currentUser.auth_token) {
+    if(Auth._currentUser && Auth._currentUser.id && Auth._currentUser.auth_token) {
       //return her
-      $timeout(function(){deferred.resolve(Auth.currentUser);}, 0);
+      $timeout(function(){hasLoadedUser.resolve(Auth._currentUser);}, 0);
     } else if(savedUserId) {
       //if there's a user id saved
       //reset our key
@@ -155,19 +158,27 @@ angular.module( 'Morsel.auth', [
       ApiUsers.getUserData(savedUserId).then(function(loggedInUser) {
         //update the app's user
         Auth._updateUser(loggedInUser);
-        deferred.resolve(Auth.currentUser);
+        hasLoadedUser.resolve(Auth._currentUser);
       }, function() {
         //oops. must have been a faulty user. go anonymous for now
         Auth._clearUser();
-        deferred.resolve(Auth.currentUser);
+        hasLoadedUser.resolve(Auth._currentUser);
       });
     } else {
       //they're anonymous
       Auth._resetUser();
-      $timeout(function(){deferred.resolve(Auth.currentUser);}, 0);
+      $timeout(function(){hasLoadedUser.resolve(Auth._currentUser);}, 0);
     }
 
-    return deferred.promise;
+    return hasLoadedUser.promise;
+  };
+
+  Auth.getCurrentUser = function() {
+    return Auth._currentUser;
+  };
+
+  Auth.hasCurrentUser = function() {
+    return hasLoadedUser.promise;
   };
 
   //to start, reset our user

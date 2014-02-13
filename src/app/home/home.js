@@ -12,10 +12,15 @@ angular.module( 'Morsel.home', [
         templateUrl: 'home/home.tpl.html'
       }
     },
-    data:{ pageTitle: 'Home' }
+    data:{ pageTitle: 'Home' },
+    resolve: {
+      hasCurrentUser : function(Auth) {
+        return Auth.hasCurrentUser();
+      }
+    }
   });
 })
 
 .controller( 'HomeCtrl', function HomeCtrl( $scope, Auth ) {
-  $scope.welcomeUserName = Auth.currentUser.first_name;
+  $scope.welcomeUserName = Auth.getCurrentUser().first_name;
 });

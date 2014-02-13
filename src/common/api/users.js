@@ -13,24 +13,37 @@ angular.module( 'Morsel.apiUsers', [] )
     return Restangular.one('users', userId).one('posts').get();
   };
 
-  Users.newUser = function(userData, photo, onProgress) {
-    var deferred = $q.defer();
+  Users.newUser = function(userData) {
+    var deferred = $q.defer(),
+        fd,
+        k;
 
-    /*if(photo) {
-      //use angular upload with photo
-      ApiUploads.upload(userData, photo, 'user[photo]', 'users', 'POST', onProgress).then(function(resp){
+    //if user has a photo, need to use a multi-part request
+    if(userData.user.photo) {
+      //create a new formdata object to hold all our data
+      fd = new FormData();
+
+      //loop through our data and append to fd
+      for(k in userData.user) {
+        if(userData.user[k]) {
+          fd.append('user['+k+']', userData.user[k]);
+        }
+      }
+
+      //use our restangular multi-part post
+      ApiUploads.upload('users', fd).then(function(resp){
         deferred.resolve(resp);
       }, function(resp){
         deferred.reject(resp);
       });
-    } else {*/
+    } else {
       //no photo - use normal restangular post
       RestangularUsers.post(angular.toJson(userData)).then(function(resp){
         deferred.resolve(Restangular.stripRestangular(resp));
       }, function(resp){
         deferred.reject(Restangular.stripRestangular(resp));
       });
-    //}
+    }
 
     return deferred.promise;
   };

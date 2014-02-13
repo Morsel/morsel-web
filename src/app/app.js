@@ -20,7 +20,6 @@ angular.module( 'Morsel', [
   'Morsel.auth',
   'Morsel.bgImage',
   'Morsel.morselLike',
-  'Morsel.userData',
   'Morsel.userImage',
   //API
   'Morsel.apiMorsels',
@@ -28,7 +27,6 @@ angular.module( 'Morsel', [
   'Morsel.apiUploads',
   'Morsel.apiUsers',
   //libs
-  'angularFileUpload',
   'angularMoment',
   'restangular',
   'ui.state',
@@ -47,6 +45,8 @@ angular.module( 'Morsel', [
 //for any API requests
 .constant('DEVICEKEY', 'client[device]')
 .constant('DEVICEVALUE', 'web')
+.constant('VERSIONKEY', 'client[version]')
+.constant('VERSIONVALUE', window.MorselConfig.version)
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};
@@ -76,12 +76,16 @@ angular.module( 'Morsel', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, userData ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth ) {
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
   //initial fetching of user data for header/footer
-  updateUserData();
+  Auth.setInitialUserData().then(function(){
+    updateUserData();
+  }, function() {
+    console.log('Trouble initiating user...');
+  });
 
   //when a user starts to access a new route
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
@@ -106,11 +110,11 @@ angular.module( 'Morsel', [
 
   //refresh user data
   function updateUserData() {
-    userData.then(function(data){
-      $scope.currentUsername = data.username;
-      $scope.currentUserId = data.id;
-      $scope.fullName = data.first_name + ' ' + data.last_name;
-    });
+    var currentUser = Auth.getCurrentUser();
+
+    $scope.currentUsername = currentUser.username;
+    $scope.currentUserId = currentUser.id;
+    $scope.fullName = currentUser.first_name + ' ' + currentUser.last_name;
   }
 
   $scope.goTo = function(path) {
