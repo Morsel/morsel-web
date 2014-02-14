@@ -381,6 +381,28 @@ module.exports = function ( grunt ) {
     },
 
     /**
+     * The `appserver` task compiles the `server.js` file as a Grunt template.
+     */
+    appserver: {
+
+      build: {
+        dir: '<%= build_dir %>',
+        src: [
+          'appserver.tpl.js',
+          'Procfile'
+        ]
+      },
+
+      compile: {
+        dir: '<%= compile_dir %>',
+        src: [
+          'appserver.tpl.js',
+          'Procfile'
+        ]
+      }
+    },
+
+    /**
      * This task compiles the karma template so that changes to its file array
      * don't have to be managed manually.
      */
@@ -573,7 +595,7 @@ module.exports = function ( grunt ) {
    grunt.registerTask( 'build-no-style', [
     'clean', 'html2js', 'jshint', 'compass:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig', 'karma:continuous'
+    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig', 'karma:continuous', 'appserver:build'
   ]);
 
  
@@ -582,7 +604,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', /*'uglify', */'index:compile'
+    'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', /*'uglify', */'index:compile', 'appserver:compile'
   ]);
 
   /**
@@ -655,6 +677,34 @@ module.exports = function ( grunt ) {
         return grunt.template.process( contents, {
           data: {
             version: grunt.config( 'pkg.version' )
+          }
+        });
+      }
+    });
+  });
+
+  /** 
+   * The server.js template includes the node/express server that's generated
+   * based on dynamic names calculated in this Gruntfile. This task assembles
+   * the list into variables for the template to use and then runs the
+   * compilation.
+   */
+  grunt.registerMultiTask( 'appserver', 'Process server.js template', function () {
+    grunt.file.copy('server.tpl.js', this.data.dir + '/server.js', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          //don't need to pass anything at the moment
+          data: {
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('Procfile', this.data.dir + '/Procfile', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          //don't need to pass anything at the moment
+          data: {
           }
         });
       }
