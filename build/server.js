@@ -6,6 +6,10 @@ app.configure(function(){
   app.use(app.router);
 });
 
+app.get('/', function(req, res){
+  res.sendfile('index.html');
+});
+
 //index
 app.get('*', function(req, res){
   res.sendfile('index.html');
