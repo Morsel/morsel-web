@@ -22,6 +22,11 @@ app.listen(5000);
 var express = require("express");
 var app = express();
 
+app.configure(function(){
+  app.use('/assets', express.static(__dirname + '/assets'));
+  app.use(app.router);
+});
+
 app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
