@@ -551,7 +551,7 @@ module.exports = function ( grunt ) {
         command: [
           'git add .',
           'git commit -a -m "automatically pushed to dev"',
-          'git push push_dev master'
+          'git push push_dev master -f'
         ].join('&&'),
         options: {
           stdout: true,
