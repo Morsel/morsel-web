@@ -17,14 +17,17 @@ angular.module( 'Morsel.postDetail', [
 
 .controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, $location ) {
   var postDetailsArr = $stateParams.postDetails.split('/'),
-      postId = postDetailsArr[0],
-      postSlug = postDetailsArr[1],
-      postMorselNumber = postDetailsArr[2];
+      postIdSlug = postDetailsArr[0],
+      postMorselNumber = parseInt(postDetailsArr[1], 10);
 
-  //check and make sure we pulled an id from the URL
-  if(postId) {
-    ApiPosts.getPost(postId).then(function(postData){
-      $scope.postMorselNumber = (postMorselNumber > postData.morsels.length ? 1 : postMorselNumber) || 1;
+  //check and make sure we pulled an idslug from the URL
+  if(postIdSlug) {
+    ApiPosts.getPost(postIdSlug).then(function(postData){
+      if(isNaN(postMorselNumber) || postMorselNumber > postData.morsels.length) {
+        $scope.postMorselNumber = 1;
+      } else {
+        $scope.postMorselNumber = postMorselNumber;
+      }
 
       _.each(postData.morsels, function() {
       });
