@@ -112,7 +112,7 @@ angular.module('Morsel.morselSwipe', [
         iElement.find('morselControls').append(controls);
 
         // enable created at stamp
-        var createdAt = $compile('<div time-ago="morselsData[indicatorIndex].created_at" morsel-posted-at></div>')(scope);
+        var createdAt = $compile('<div time-ago="post.morsels[indicatorIndex].created_at" morsel-posted-at></div>')(scope);
         iElement.find('morselPostedAt').replaceWith(createdAt);
 
         scope.carouselIndex = 0;
@@ -128,8 +128,6 @@ angular.module('Morsel.morselSwipe', [
 
         // watch the given collection
         scope.$watchCollection(repeatCollection, function(newValue, oldValue) {
-          //store our morsel data in scope so we can display it elsewhere in the view
-          scope.morselsData = newValue;
           slidesCount = 0;
           if (angular.isArray(newValue)) {
             slidesCount = newValue.length;

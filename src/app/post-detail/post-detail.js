@@ -20,6 +20,8 @@ angular.module( 'Morsel.postDetail', [
       postIdSlug = postDetailsArr[0],
       postMorselNumber = parseInt(postDetailsArr[1], 10);
 
+  $scope.post = {};
+
   //check and make sure we pulled an idslug from the URL
   if(postIdSlug) {
     ApiPosts.getPost(postIdSlug).then(function(postData){
