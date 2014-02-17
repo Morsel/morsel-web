@@ -1,6 +1,6 @@
 {
   "author": "Chris Zamierowski",
-  "name": "Morsel_Push_Test",
+  "name": "<% release_name %>",
   "version": "0.1.0",
   "homepage": "",
   "licenses": {

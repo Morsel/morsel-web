@@ -56,7 +56,9 @@ module.exports = function ( grunt ) {
       options: {
         files: [
           "package.json", 
-          "bower.json"
+          "bower.json",
+          "<% build_dir %>/package.json",
+          "<% compile_dir %>/package.json"
         ],
         commit: true,
         commitMessage: 'chore(release): v%VERSION%',
@@ -144,6 +146,16 @@ module.exports = function ( grunt ) {
             src: [ '**', '!WHAR_INDEX'],
             dest: '<%= styleguidepublic_dir %>',
             cwd: '<%= styleguide_dir %>/public/',
+            expand: true
+          }
+        ]
+      },
+      build_deploy: {
+        files: [
+          {
+            src: [ '**' ],
+            dest: '<%= build_deploy_dir %>',
+            cwd: '<%= build_dir %>',
             expand: true
           }
         ]
@@ -526,9 +538,28 @@ module.exports = function ( grunt ) {
     },
 
     /*
-     * Used to generate our style guide
+     * Used to execute shell commands
      */
     shell: {
+      build_deploy_init: {
+        command: 'sh <%= serverconfig_dir %>/server_init.sh <%= build_deploy_dir %> <%= dev_repo %> push_dev',
+        options: {
+          stdout: true
+        }
+      },
+      build_deploy_push: {
+        command: [
+          'git add .',
+          'git commit -a -m "automatically pushed to dev"',
+          'git push push_dev master -f'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= build_deploy_dir %>'
+          }
+        }
+      },
       style: {
         command: [
           'compass compile',
@@ -592,11 +623,14 @@ module.exports = function ( grunt ) {
   /**
    * The `build-no-style` task builds without the style guide
    */
-   grunt.registerTask( 'build-no-style', [
+  grunt.registerTask( 'build-no-style', [
     'clean', 'html2js', 'jshint', 'compass:build',
     'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig', 'karma:continuous', 'appserver:build'
+    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
+    'karma:continuous'
   ]);
+
+  grunt.registerTask( 'push-dev', [ 'shell:build_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:build_deploy_push' ]);
 
  
   /**
@@ -689,8 +723,10 @@ module.exports = function ( grunt ) {
    * the list into variables for the template to use and then runs the
    * compilation.
    */
-  grunt.registerMultiTask( 'appserver', 'Process server.js template', function () {
-    grunt.file.copy('server.tpl.js', this.data.dir + '/server.js', { 
+  grunt.registerMultiTask( 'appserver', 'Process server files', function () {
+    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
+
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/server.tpl.js', this.data.dir + '/server.js', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           //don't need to pass anything at the moment
@@ -700,11 +736,21 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('Procfile', this.data.dir + '/Procfile', { 
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/Procfile', this.data.dir + '/Procfile', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           //don't need to pass anything at the moment
           data: {
+          }
+        });
+      }
+    });
+
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/package.tpl.json', this.data.dir + '/package.json', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            release_name: grunt.config(dirRE+'_name')
           }
         });
       }

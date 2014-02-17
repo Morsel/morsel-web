@@ -9,9 +9,18 @@ module.exports = {
    */
   build_dir: 'build',
   compile_dir: 'bin',
+  build_deploy_dir: '../morsel-deploy-dev',
+  build_dir_name: 'Morsel - Dev',
+  compile_deploy_dir: '../morsel-deploy-prod',
+  compile_dir_name: 'Morsel',
+  serverconfig_dir: 'server-config',
   styleguide_dir: 'style-guide',
   //for copying style guide into a public spot
   styleguidepublic_dir: '../morsel-style-guide/',
+
+  dev_repo: 'git@heroku.com:eatmorsel-dev.git',
+  staging_repo: 'git@heroku.com:eatmorsel-staging.git',
+  prod_repo: 'git@heroku.com:eatmorsel.git',
 
   /**
    * This is a collection of file patterns that refer to our app code (the
