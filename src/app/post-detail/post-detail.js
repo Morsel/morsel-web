@@ -66,4 +66,13 @@ angular.module( 'Morsel.postDetail', [
       }
     }
   };
+
+  $scope.addComment = function() {
+    ApiMorsels.postComment(this.morsel.id, this.addCommentDescription).then(function(commentData){
+      console.log(commentData);
+//      morsel.comments = commentData;
+    }, function() {
+      console.log('error');
+    });
+  };
 });

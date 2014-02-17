@@ -11,7 +11,7 @@
       <div class="user-info user-info-xs">
         <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
         <div>
-          <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+          <h2 class="user-info-main">{{post.creator.first_name}} {{post.creator.last_name}}</h2>
           <morselPostedAt></morselPostedAt>
         </div>
       </div>
@@ -26,20 +26,25 @@
           <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
             <p>{{morsel.description}}</p>
           </div>
-          <ul ng-show="morsel.comments" class="morsel-comments morsel-content">
-            <li ng-repeat="comment in morsel.comments">
-              <div class="user-info user-info-xs">
-                <a href="#/{{username}}" class="profile-pic-link">
-                  <img ng-src="https://morsel-staging.s3.amazonaws.com/user-photos/38/_40x40_90ea6a33-fbf6-4673-a064-4c08c09566c7.jpg" class="img-circle" />
-                </a>
-                <div>
-                  <h5>Jason Vincent{{comment.first_name}} {{comment.last_name}}</h5>
-                  <div am-time-ago="2014-02-05T16:50:39.004Z"></div>
-                  <p>{{comment.description}}</p>
+          <div class="morsel-content">
+            <ul ng-show="morsel.comments" class="morsel-comments">
+              <li ng-repeat="comment in morsel.comments">
+                <div class="user-info user-info-xs">
+                  <div user-image username="comment.username" user-photos="comment.photos" class="profile-pic-xs"></div>
+                  <div>
+                    <h5 class="user-info-main">PLACEHOLDER NAME{{comment.first_name}} {{comment.last_name}} <span am-time-ago="comment.created_at" class="comment-time-ago"></span></h5>
+                    <p class="user-info-sub">{{comment.description}}</p>
+                  </div>
                 </div>
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+            <div class="add-comment-morsel">
+              <form ng-submit="addComment()" name="addCommentForm" novalidate>
+                <textarea ng-model="addCommentDescription" placeholder="Write your comment" required></textarea>
+                <input type="submit" value="Add Comment" ng-disabled="form.$invalid" />
+              </form>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
