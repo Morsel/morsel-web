@@ -64,5 +64,17 @@ angular.module( 'Morsel.apiMorsels', [] )
     return deferred.promise;
   };
 
+  Morsels.getComments = function(morselId) {
+    var deferred = $q.defer();
+
+    Restangular.one('morsels', morselId).getList('comments').then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Morsels;
 });

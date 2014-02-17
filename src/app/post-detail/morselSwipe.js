@@ -283,6 +283,8 @@ angular.module('Morsel.morselSwipe', [
         }
 
         function swipeEnd(coords, event, forceAnimation) {
+          var newMorselId;
+
           //console.log('swipeEnd', 'scope.carouselIndex', scope.carouselIndex);
           $document.unbind('mouseup', documentMouseUpEvent);
           pressed = false;
@@ -310,6 +312,13 @@ angular.module('Morsel.morselSwipe', [
             amplitude = offset - currentOffset;
           }
           requestAnimationFrame(autoScroll);
+
+          //we swiped to a new morsel, we should do some stuff
+          if(shouldMove && moveOffset) {
+            newMorselId = scope.post.morsels[scope.carouselIndex + moveOffset].id;
+            //update our comments
+            scope.getComments(newMorselId);
+          }
 
           if (event) {
             event.preventDefault();

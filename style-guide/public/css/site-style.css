@@ -4943,7 +4943,7 @@ img {
   margin: 0;
 }
 @media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/sass\/_common\.scss}line{font-family:\00003213}}
-.user-info h2 {
+.user-info h2, .user-info h5 {
   font-size: 16px;
   line-height: 18px;
   margin: 2px 0;
@@ -5180,7 +5180,24 @@ img {
   line-height: 34px;
   padding: 30px 30px;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\0000394}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\0000391}}
+.post-detail .morsels .morsel .morsel-content + .morsel-content {
+  margin-top: 20px;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\0000396}}
+.post-detail .morsels .morsel .morsel-comments {
+  padding-top: 10px;
+  list-style: none;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003100}}
+.post-detail .morsels .morsel .morsel-comments li {
+  padding: 15px 0;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003103}}
+.post-detail .morsels .morsel .morsel-comments li + li {
+  border-top: 1px solid #e2ddd7;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003111}}
 .post-detail .morsels-container {
   overflow: hidden;
   position: relative;
@@ -5189,12 +5206,12 @@ img {
   background-repeat: repeat;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAICAIAAAC+k6JsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADRJREFUeNpi/PnzJwMMfPv2jQmZw8XFxYTMATKYkDkgPjIHxAdygEIIPhAjC0HNgwsBBBgAZt0a3cE2YmkAAAAASUVORK5CYII=);
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003103}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003120}}
 .post-detail .morsel-indicators {
   display: block;
   text-align: center;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003107}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003124}}
 .post-detail .morsel-indicators span {
   width: 10px;
   height: 10px;
@@ -5205,39 +5222,39 @@ img {
   -webkit-transition: background-color 0.2s ease-out;
   transition: background-color 0.2s ease-out;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003116}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003133}}
 .post-detail .morsel-indicators span:hover, .post-detail .morsel-indicators span:focus {
   cursor: pointer;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003120}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003137}}
 .post-detail .morsel-indicators span.active {
   background-color: #e96144;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003125}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003142}}
 .post-detail .morsel-indicators.disabled {
   visibility: hidden;
 }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003130}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003147}}
 .post-detail .blur-bg {
   display: none;
 }
 
 @media (min-width: 640px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003137}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003154}}
   .post-detail .post-header {
     -webkit-box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 1px 7px 0px rgba(0, 0, 0, 0.5);
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003140}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003157}}
   .post-detail .post-header .container {
     max-width: 640px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003145}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003162}}
   .post-detail .post-container {
     -webkit-box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.5);
     box-shadow: 0px 4px 7px 0px rgba(0, 0, 0, 0.5);
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003149}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003166}}
   .post-detail .blur-bg {
     position: absolute;
     width: 100%;
@@ -5259,16 +5276,16 @@ img {
   }
 }
 @media (min-width: 768px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003172}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003189}}
   .post-detail .post-header {
     padding-left: 0;
     padding-right: 0;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003179}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003196}}
   .post-detail .morsels .morsel .morsel-img {
     height: 400px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003185}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003202}}
   .post-detail .morsel-control {
     width: 60px;
     height: 60px;
@@ -5279,32 +5296,32 @@ img {
     background-color: #e96144;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAiCAYAAADMDo5aAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlNJREFUeNrsmttqwkAQhj1Qz+LL9BF6KSjSGy8K9Tl62xYRPCCCIioGQRR7W1uKglJbUPoyvaxF0gmdwLYkO+agskl++K80szufcZPdGb8syz4LOgMPwA9oEXWJvgJ/m46igDTpIHgi/+oLnLMQ61TO4dxlzCVoNpYViGP5r5QJZQSCmGEgqhqbhWkW4lDWljKxtAAQ0xoQVQ3NwAwYXAmC4D44r/N5CFwQYF0s4Fy1lMccg4daI5VfqS/z9QgOCXBHhnCuPPWN3Jn7DhwA94iBn8BhgdbIMM6Zpx7mbgtIP7hDDPgMjgj41I7g3HnqIANLIJUAbWKgF3BMQIiqY5gDT20KJgWxSQwwFxwiC3NO5NrkweRBbBCBFw6ByMJcEDk39GDqQawRAZcOg8jCXBK517RgagWrEoFewQkHQlSdwBx5qlIgy0SAN3DSwRBVJzFXnsp6IEvEhe/glAsgqk5hzjyV/oO8Jy7YuAwiC3NDsFHY+ZRF8xZ2ijecXeQH+AL86XOnUuAZ+JzznbuAz5M9wlu4SNy+axf/tdcEm6L3sDnAw0Z1hbhw5aLXnxXBomLHC3ncwRDjdryQq1vEurdF1FV93y2id2hh06EFC7NFBJ456BhtRuTaMnOMZvRgNyowxOihD3ZZmF0Xlxq6dpQajBS/poJUENlK4vSYxS+2HCu5qBwrHaIcy8IcEBOYCAByQuQwMNptYfTQYge+Bo90Pt+CJQGOGCScq5ZGmOPuGN1oek1UWYHWyOypm6i02vq2Arf1be1o6/N7jab2NJr+CDAAfkGbVy1Usc0AAAAASUVORK5CYII=);
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003197}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003214}}
   .post-detail .morsel-control:hover {
     cursor: pointer;
     background-color: #87392b;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003202}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003219}}
   .post-detail .morsel-control.disabled {
     display: none !important;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003207}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003224}}
   .post-detail .morsel-control-prev {
     background-position: 18px center;
     left: 0;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003212}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003229}}
   .post-detail .morsel-control-next {
     background-position: -41px center;
     right: 0;
   }
 }
 @media (min-width: 992px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003222}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003239}}
   .post-detail .post-header {
     display: none;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003227}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003244}}
   .post-detail .post-info h1 {
     float: left;
     max-width: 400px;
@@ -5315,29 +5332,29 @@ img {
     line-height: 70px;
     color: #394038;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003239}}
-  .post-detail .user-info {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003255}}
+  .post-detail .post-info .user-info {
     float: right;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003242}}
-  .post-detail .user-info div {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003258}}
+  .post-detail .post-info .user-info div {
     float: right;
     text-align: right;
     max-width: 240px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003248}}
-  .post-detail .user-info .profile-pic-link {
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003264}}
+  .post-detail .post-info .user-info .profile-pic-link {
     float: right;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003253}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003270}}
   .post-detail .morsel-control-prev {
     left: -70px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003257}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003274}}
   .post-detail .morsel-control-next {
     right: -70px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003262}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003279}}
   .post-detail .morsels-wrap .morsel-indicators {
     background-color: rgba(0, 0, 0, 0.2);
     display: inline-block;
@@ -5347,21 +5364,21 @@ img {
     z-index: 10;
     padding: 10px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003271}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003288}}
   .post-detail .morsels-wrap .morsel-indicators span {
     float: left;
   }
 }
 @media (min-width: 1200px) {
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003283}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003300}}
   .post-detail .morsels .morsel .morsel-img {
     height: 425px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003289}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003306}}
   .post-detail .morsel-control {
     top: 182.5px;
   }
-@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003294}}
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Applications\/MAMP\/htdocs\/morsel-web\/src\/app\/post-detail\/_post-detail\.scss}line{font-family:\00003311}}
   .post-detail .morsels-wrap .morsel-nav {
     top: 395px;
   }

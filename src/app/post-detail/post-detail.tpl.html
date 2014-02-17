@@ -26,6 +26,20 @@
           <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
             <p>{{morsel.description}}</p>
           </div>
+          <ul ng-show="morsel.comments" class="morsel-comments morsel-content">
+            <li ng-repeat="comment in morsel.comments">
+              <div class="user-info user-info-xs">
+                <a href="#/{{username}}" class="profile-pic-link">
+                  <img ng-src="https://morsel-staging.s3.amazonaws.com/user-photos/38/_40x40_90ea6a33-fbf6-4673-a064-4c08c09566c7.jpg" class="img-circle" />
+                </a>
+                <div>
+                  <h5>Jason Vincent{{comment.first_name}} {{comment.last_name}}</h5>
+                  <div am-time-ago="2014-02-05T16:50:39.004Z"></div>
+                  <p>{{comment.description}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
         </li>
       </ul>
     </div>

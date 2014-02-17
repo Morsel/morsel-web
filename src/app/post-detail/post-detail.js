@@ -15,7 +15,7 @@ angular.module( 'Morsel.postDetail', [
   });
 })
 
-.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, $location ) {
+.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiMorsels, $location ) {
   var postDetailsArr = $stateParams.postDetails.split('/'),
       postIdSlug = postDetailsArr[0],
       postMorselNumber = parseInt(postDetailsArr[1], 10);
@@ -31,10 +31,10 @@ angular.module( 'Morsel.postDetail', [
         $scope.postMorselNumber = postMorselNumber;
       }
 
-      _.each(postData.morsels, function() {
-      });
-
       $scope.post = postData;
+
+      //get comments for initial morsel
+      $scope.getComments(postData.morsels[$scope.postMorselNumber - 1].id);
     }, function() {
 
     });
@@ -42,4 +42,28 @@ angular.module( 'Morsel.postDetail', [
     //if not, send to profile page
     $location.path('/'+$scope.params.username);
   }
+
+  //fetch comments for the current morsel
+  $scope.getComments = function(morselId) {
+    var morsel;
+
+    //make sure we have our post data
+    if($scope.post) {
+      morsel = $scope.post.morsels.filter(function(m) {
+        return m.id === morselId;
+      })[0];
+
+      //make sure we have a valid morsel
+      if(morsel) {
+        //if we don't have our comments cached already
+        if(!morsel.comments) {
+          ApiMorsels.getComments(morselId).then(function(commentData){
+            morsel.comments = commentData;
+          }, function() {
+            console.log('error');
+          });
+        }
+      }
+    }
+  };
 });
