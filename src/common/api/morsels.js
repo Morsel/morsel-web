@@ -80,7 +80,9 @@ angular.module( 'Morsel.apiMorsels', [] )
     var deferred = $q.defer();
 
     Restangular.one('morsels', morselId).post('comments', {
-      'comment[description]': comment
+      comment: {
+        description: comment
+      }
     }).then(function(resp){
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){

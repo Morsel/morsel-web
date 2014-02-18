@@ -49,9 +49,7 @@ angular.module( 'Morsel.postDetail', [
 
     //make sure we have our post data
     if($scope.post) {
-      morsel = $scope.post.morsels.filter(function(m) {
-        return m.id === morselId;
-      })[0];
+      morsel = filterMorselsById(morselId);
 
       //make sure we have a valid morsel
       if(morsel) {
@@ -68,11 +66,26 @@ angular.module( 'Morsel.postDetail', [
   };
 
   $scope.addComment = function() {
-    ApiMorsels.postComment(this.morsel.id, this.addCommentDescription).then(function(commentData){
-      console.log(commentData);
-//      morsel.comments = commentData;
+    var commentScope = this;
+
+    ApiMorsels.postComment(commentScope.morsel.id, commentScope.addCommentDescription).then(function(commentData){
+      var morsel = filterMorselsById(commentData.morsel_id);
+
+      if(morsel.comments) {
+        morsel.comments.push(commentData);
+      } else {
+        morsel.comments = commentData;
+      }
+      //clear comment textarea
+      commentScope.addCommentDescription = '';
     }, function() {
       console.log('error');
     });
   };
+
+  function filterMorselsById(morselId) {
+    return $scope.post.morsels.filter(function(m) {
+      return m.id === morselId;
+    })[0];
+  }
 });
