@@ -9,7 +9,7 @@
     <div class="post-info">
       <h1>{{post.title}}</h1>
       <div class="user-info user-info-xs">
-        <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
+        <div user-image username="post.creator.username" user-photos="post.creator.photos" user-image-size="profile-pic-xs"></div>
         <div>
           <h2 class="user-info-main">{{post.creator.first_name}} {{post.creator.last_name}}</h2>
           <morselPostedAt></morselPostedAt>
@@ -27,13 +27,16 @@
             <p>{{morsel.description}}</p>
           </div>
           <div class="morsel-content">
+            <h4 class="comments-header">Comments <i class="common-comments"></i></h4>
+            <hr />
             <ul ng-show="morsel.comments" class="morsel-comments">
               <li ng-repeat="comment in morsel.comments">
-                <div class="user-info user-info-xs">
-                  <div user-image username="comment.username" user-photos="comment.photos" class="profile-pic-xs"></div>
+                <div class="user-info user-info-s">
+                  <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
                   <div>
-                    <h5 class="user-info-main">PLACEHOLDER NAME{{comment.first_name}} {{comment.last_name}} <span am-time-ago="comment.created_at" class="comment-time-ago"></span></h5>
-                    <p class="user-info-sub">{{comment.description}}</p>
+                    <span am-time-ago="comment.created_at" class="comment-time-ago user-info-sub"></span>
+                    <h5 class="user-info-main">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
+                    <p class="comment-description">{{comment.description}}</p>
                   </div>
                 </div>
               </li>

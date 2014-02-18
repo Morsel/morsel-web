@@ -7,13 +7,13 @@ angular.module('Morsel.userImage', [])
     scope: {
       username: '=',
       userPhotos: '=',
-      size: '@class'
+      userImageSize: '@'
     },
     link: function(scope) {
       scope.returnPhoto = function(){
         var photoSize;
 
-        switch(scope.size) {
+        switch(scope.userImageSize) {
           case 'profile-pic-xs':
             photoSize = '_40x40';
             break;
@@ -41,7 +41,7 @@ angular.module('Morsel.userImage', [])
         
       };
     },
-    template: '<a href="#/{{username}}" class="profile-pic-link">' +
+    template: '<a href="#/{{username}}" class="profile-pic-link {{userImageSize}}">' +
                 '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
               '</a>'
   };

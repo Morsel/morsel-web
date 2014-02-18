@@ -93,14 +93,23 @@ $morsel-indicator-size: 10px;
         }
       }
 
+      .comments-header {
+        font-size: 26px;
+        color: $morsel-medium;
+
+        i {
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 5px;
+        }
+      }
+
       .morsel-comments {
         padding: 0;
         margin: 0;
         list-style: none;
 
         li {
-          padding: 15px 0;
-
           & + li {
             border-top: 1px solid $morsel-light;
           }
@@ -111,15 +120,14 @@ $morsel-indicator-size: 10px;
             }
 
             .user-info-sub {
-              font-size: 14px;
-              color: $morsel-dark;
+              font-style: italic;
             }
           }
 
-          .comment-time-ago {
-            color: $morsel-medium;
-            font-size: 12px;
-            margin: 0;
+          .comment-description {
+            font-size: 14px;
+            color: $morsel-dark;
+            margin-top: 10px;
           }
         }
       }
