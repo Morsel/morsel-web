@@ -60,6 +60,9 @@
 // Import component styles
 @import "_common";
 
+//import shared styles
+@import "shared/_comments";
+
 @import "../app/feed/_feed";
 @import "../app/home/_home";
 @import "../app/post-detail/_post-detail";

@@ -678,12 +678,12 @@ p q r s t u v w x y z { | } ~
 						<div class="sg-pattern">
 							<h2 class="sg-pattern-head" ><a href="../../patterns/00-atoms-03-images-04-avatar/00-atoms-03-images-04-avatar.html" class="patternLink" data-patternpartial="atoms-avatar">Avatar</a></h2>
 							<div class="sg-pattern-body">
-								<img src="../../images/fpo_avatar.png" alt="Avatar" />
+								<img src="../../images/fpo_avatar.png" alt="Avatar" class="img-circle" />
 								<div class="sg-code" style="display: none">
 									<h3 class="sg-code-head">HTML</h3>
 									<pre class="sg-code-html">
 										<code>
-											&lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; /&gt;
+											&lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; class=&quot;img-circle&quot; /&gt;
 										</code>
 									</pre>
 								</div>
@@ -1562,13 +1562,16 @@ p q r s t u v w x y z { | } ~
 						<div class="sg-pattern">
 							<h2 class="sg-pattern-head" ><a href="../../patterns/01-molecules-06-components-02-single-comment/01-molecules-06-components-02-single-comment.html" class="patternLink" data-patternpartial="molecules-single-comment">Single Comment</a></h2>
 							<div class="sg-pattern-body">
-								<li class="comment-container">
-	<div class="comment-meta">
-		<img src="../../images/fpo_avatar.png" alt="Avatar" />		<h4 class="comment-name"><a href="#">Lacy Way</a></h4>
-	</div>
-	<div class="comment-text">
-		<p>So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
-	</div>
+								<li class="morsel-comment">
+  <div class="user-info user-info-s">
+    <a href="#" class="profile-pic-link profile-pic-s">
+      <img src="../../images/fpo_avatar.png" alt="Avatar" class="img-circle" />    </a>
+    <div>
+      <span class="comment-time-ago user-info-sub">18 Days ago</span>
+      <h5 class="user-info-main">Lacy Way</h5>
+      <p class="comment-description">So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
+    </div>
+  </div>
 </li>
 								<div class="sg-code" style="display: none">
 										<div class="sg-code-contains">
@@ -1578,13 +1581,16 @@ p q r s t u v w x y z { | } ~
 									<h3 class="sg-code-head">HTML</h3>
 									<pre class="sg-code-html">
 										<code>
-											&lt;li class=&quot;comment-container&quot;&gt;
-	&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; /&gt;		&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Lacy Way&lt;/a&gt;&lt;/h4&gt;
-	&lt;/div&gt;
-	&lt;div class=&quot;comment-text&quot;&gt;
-		&lt;p&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
-	&lt;/div&gt;
+											&lt;li class=&quot;morsel-comment&quot;&gt;
+  &lt;div class=&quot;user-info user-info-s&quot;&gt;
+    &lt;a href=&quot;#&quot; class=&quot;profile-pic-link profile-pic-s&quot;&gt;
+      &lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; class=&quot;img-circle&quot; /&gt;    &lt;/a&gt;
+    &lt;div&gt;
+      &lt;span class=&quot;comment-time-ago user-info-sub&quot;&gt;18 Days ago&lt;/span&gt;
+      &lt;h5 class=&quot;user-info-main&quot;&gt;Lacy Way&lt;/h5&gt;
+      &lt;p class=&quot;comment-description&quot;&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 &lt;/li&gt;
 										</code>
 									</pre>
@@ -1686,137 +1692,127 @@ p q r s t u v w x y z { | } ~
 						<div class="sg-pattern">
 							<h2 class="sg-pattern-head" ><a href="../../patterns/02-organisms-02-comments-00-comment-thread/02-organisms-02-comments-00-comment-thread.html" class="patternLink" data-patternpartial="organisms-comment-thread">Comment Thread</a></h2>
 							<div class="sg-pattern-body">
-								<section class="comments section">
-	<div class="comments-container" id="comments-container">
-		<h2 class="section-title">59 Comments</h2>
-		<form class="comment-form">
-			<fieldset>
-				<div class="field-container">
-					<label for="comment-name">Name</label>
-					<input id="comment-name" type="text" placeholder="Enter Your Name" />
-				</div>
-				<div class="field-container">
-					<label for="comment-email">Email</label>
-					<input id="comment-email" type="email" placeholder="Your email address" />
-				</div>
-				<div class="field-container">
-					<label for="comment-url">URL</label>
-					<input id="comment-url" type="url" placeholder="Website if you got one" />
-				</div>
-				<div class="field-container">
-					<label for="comment-field">Comment</label>
-					<textarea id="comment-field" rows="5" placeholder="Write you comment here"></textarea>
-				</div>
-			</fieldset>
-		</form>		<ul class="comment-list">
-				<li class="comment-container">
-					<div class="comment-meta">
-		<img src="../../images/fpo_avatar.png" alt="Avatar" />						<h4 class="comment-name"><a href="#">Lacy Way</a></h4>
-					</div>
-					<div class="comment-text">
-						<p>So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
-					</div>
-				</li>				<li class="comment-container">
-					<div class="comment-meta">
-		<img src="../../images/fpo_avatar.png" alt="Avatar" />						<h4 class="comment-name"><a href="#">Lacy Way</a></h4>
-					</div>
-					<div class="comment-text">
-						<p>So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
-					</div>
-				</li>				<li class="comment-container">
-					<div class="comment-meta">
-		<img src="../../images/fpo_avatar.png" alt="Avatar" />						<h4 class="comment-name"><a href="#">Lacy Way</a></h4>
-					</div>
-					<div class="comment-text">
-						<p>So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
-					</div>
-				</li>				<li class="comment-container">
-					<div class="comment-meta">
-		<img src="../../images/fpo_avatar.png" alt="Avatar" />						<h4 class="comment-name"><a href="#">Lacy Way</a></h4>
-					</div>
-					<div class="comment-text">
-						<p>So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
-					</div>
-				</li>				<li class="comment-container">
-					<div class="comment-meta">
-		<img src="../../images/fpo_avatar.png" alt="Avatar" />						<h4 class="comment-name"><a href="#">Lacy Way</a></h4>
-					</div>
-					<div class="comment-text">
-						<p>So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
-					</div>
-				</li>		</ul>
-	</div>
-</section>
+								<div class="morsel-content morsel-comments">
+  <h4 class="comments-header">Comments <i class="common-comments"></i></h4>
+  <hr />
+  <ul class="morsel-comments">
+			<li class="morsel-comment">
+			  <div class="user-info user-info-s">
+			    <a href="#" class="profile-pic-link profile-pic-s">
+      <img src="../../images/fpo_avatar.png" alt="Avatar" class="img-circle" />			    </a>
+			    <div>
+			      <span class="comment-time-ago user-info-sub">18 Days ago</span>
+			      <h5 class="user-info-main">Lacy Way</h5>
+			      <p class="comment-description">So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
+			    </div>
+			  </div>
+			</li>			<li class="morsel-comment">
+			  <div class="user-info user-info-s">
+			    <a href="#" class="profile-pic-link profile-pic-s">
+      <img src="../../images/fpo_avatar.png" alt="Avatar" class="img-circle" />			    </a>
+			    <div>
+			      <span class="comment-time-ago user-info-sub">18 Days ago</span>
+			      <h5 class="user-info-main">Lacy Way</h5>
+			      <p class="comment-description">So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
+			    </div>
+			  </div>
+			</li>			<li class="morsel-comment">
+			  <div class="user-info user-info-s">
+			    <a href="#" class="profile-pic-link profile-pic-s">
+      <img src="../../images/fpo_avatar.png" alt="Avatar" class="img-circle" />			    </a>
+			    <div>
+			      <span class="comment-time-ago user-info-sub">18 Days ago</span>
+			      <h5 class="user-info-main">Lacy Way</h5>
+			      <p class="comment-description">So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.</p>
+			    </div>
+			  </div>
+			</li>	</ul>
+  <form class="comment-form">
+  	<fieldset>
+  		<div class="field-container">
+  			<label for="comment-name">Name</label>
+  			<input id="comment-name" type="text" placeholder="Enter Your Name" />
+  		</div>
+  		<div class="field-container">
+  			<label for="comment-email">Email</label>
+  			<input id="comment-email" type="email" placeholder="Your email address" />
+  		</div>
+  		<div class="field-container">
+  			<label for="comment-url">URL</label>
+  			<input id="comment-url" type="url" placeholder="Website if you got one" />
+  		</div>
+  		<div class="field-container">
+  			<label for="comment-field">Comment</label>
+  			<textarea id="comment-field" rows="5" placeholder="Write you comment here"></textarea>
+  		</div>
+  	</fieldset>
+  </form></div>
+
 								<div class="sg-code" style="display: none">
 										<div class="sg-code-contains">
 											This pattern contains: 
-												<a href="../../patterns/01-molecules-04-forms-01-comment-form/01-molecules-04-forms-01-comment-form.html"><code>molecules-comment-form</code><a>
 												<a href="../../patterns/01-molecules-06-components-02-single-comment/01-molecules-06-components-02-single-comment.html"><code>molecules-single-comment</code><a>
+												<a href="../../patterns/01-molecules-04-forms-01-comment-form/01-molecules-04-forms-01-comment-form.html"><code>molecules-comment-form</code><a>
 										</div>
 									<h3 class="sg-code-head">HTML</h3>
 									<pre class="sg-code-html">
 										<code>
-											&lt;section class=&quot;comments section&quot;&gt;
-	&lt;div class=&quot;comments-container&quot; id=&quot;comments-container&quot;&gt;
-		&lt;h2 class=&quot;section-title&quot;&gt;59 Comments&lt;/h2&gt;
-		&lt;form class=&quot;comment-form&quot;&gt;
-			&lt;fieldset&gt;
-				&lt;div class=&quot;field-container&quot;&gt;
-					&lt;label for=&quot;comment-name&quot;&gt;Name&lt;/label&gt;
-					&lt;input id=&quot;comment-name&quot; type=&quot;text&quot; placeholder=&quot;Enter Your Name&quot; /&gt;
-				&lt;/div&gt;
-				&lt;div class=&quot;field-container&quot;&gt;
-					&lt;label for=&quot;comment-email&quot;&gt;Email&lt;/label&gt;
-					&lt;input id=&quot;comment-email&quot; type=&quot;email&quot; placeholder=&quot;Your email address&quot; /&gt;
-				&lt;/div&gt;
-				&lt;div class=&quot;field-container&quot;&gt;
-					&lt;label for=&quot;comment-url&quot;&gt;URL&lt;/label&gt;
-					&lt;input id=&quot;comment-url&quot; type=&quot;url&quot; placeholder=&quot;Website if you got one&quot; /&gt;
-				&lt;/div&gt;
-				&lt;div class=&quot;field-container&quot;&gt;
-					&lt;label for=&quot;comment-field&quot;&gt;Comment&lt;/label&gt;
-					&lt;textarea id=&quot;comment-field&quot; rows=&quot;5&quot; placeholder=&quot;Write you comment here&quot;&gt;&lt;/textarea&gt;
-				&lt;/div&gt;
-			&lt;/fieldset&gt;
-		&lt;/form&gt;		&lt;ul class=&quot;comment-list&quot;&gt;
-				&lt;li class=&quot;comment-container&quot;&gt;
-					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Lacy Way&lt;/a&gt;&lt;/h4&gt;
-					&lt;/div&gt;
-					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
-					&lt;/div&gt;
-				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
-					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Lacy Way&lt;/a&gt;&lt;/h4&gt;
-					&lt;/div&gt;
-					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
-					&lt;/div&gt;
-				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
-					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Lacy Way&lt;/a&gt;&lt;/h4&gt;
-					&lt;/div&gt;
-					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
-					&lt;/div&gt;
-				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
-					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Lacy Way&lt;/a&gt;&lt;/h4&gt;
-					&lt;/div&gt;
-					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
-					&lt;/div&gt;
-				&lt;/li&gt;				&lt;li class=&quot;comment-container&quot;&gt;
-					&lt;div class=&quot;comment-meta&quot;&gt;
-		&lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; /&gt;						&lt;h4 class=&quot;comment-name&quot;&gt;&lt;a href=&quot;#&quot;&gt;Lacy Way&lt;/a&gt;&lt;/h4&gt;
-					&lt;/div&gt;
-					&lt;div class=&quot;comment-text&quot;&gt;
-						&lt;p&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
-					&lt;/div&gt;
-				&lt;/li&gt;		&lt;/ul&gt;
-	&lt;/div&gt;
-&lt;/section&gt;
+											&lt;div class=&quot;morsel-content morsel-comments&quot;&gt;
+  &lt;h4 class=&quot;comments-header&quot;&gt;Comments &lt;i class=&quot;common-comments&quot;&gt;&lt;/i&gt;&lt;/h4&gt;
+  &lt;hr /&gt;
+  &lt;ul class=&quot;morsel-comments&quot;&gt;
+			&lt;li class=&quot;morsel-comment&quot;&gt;
+			  &lt;div class=&quot;user-info user-info-s&quot;&gt;
+			    &lt;a href=&quot;#&quot; class=&quot;profile-pic-link profile-pic-s&quot;&gt;
+      &lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; class=&quot;img-circle&quot; /&gt;			    &lt;/a&gt;
+			    &lt;div&gt;
+			      &lt;span class=&quot;comment-time-ago user-info-sub&quot;&gt;18 Days ago&lt;/span&gt;
+			      &lt;h5 class=&quot;user-info-main&quot;&gt;Lacy Way&lt;/h5&gt;
+			      &lt;p class=&quot;comment-description&quot;&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
+			    &lt;/div&gt;
+			  &lt;/div&gt;
+			&lt;/li&gt;			&lt;li class=&quot;morsel-comment&quot;&gt;
+			  &lt;div class=&quot;user-info user-info-s&quot;&gt;
+			    &lt;a href=&quot;#&quot; class=&quot;profile-pic-link profile-pic-s&quot;&gt;
+      &lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; class=&quot;img-circle&quot; /&gt;			    &lt;/a&gt;
+			    &lt;div&gt;
+			      &lt;span class=&quot;comment-time-ago user-info-sub&quot;&gt;18 Days ago&lt;/span&gt;
+			      &lt;h5 class=&quot;user-info-main&quot;&gt;Lacy Way&lt;/h5&gt;
+			      &lt;p class=&quot;comment-description&quot;&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
+			    &lt;/div&gt;
+			  &lt;/div&gt;
+			&lt;/li&gt;			&lt;li class=&quot;morsel-comment&quot;&gt;
+			  &lt;div class=&quot;user-info user-info-s&quot;&gt;
+			    &lt;a href=&quot;#&quot; class=&quot;profile-pic-link profile-pic-s&quot;&gt;
+      &lt;img src=&quot;../../images/fpo_avatar.png&quot; alt=&quot;Avatar&quot; class=&quot;img-circle&quot; /&gt;			    &lt;/a&gt;
+			    &lt;div&gt;
+			      &lt;span class=&quot;comment-time-ago user-info-sub&quot;&gt;18 Days ago&lt;/span&gt;
+			      &lt;h5 class=&quot;user-info-main&quot;&gt;Lacy Way&lt;/h5&gt;
+			      &lt;p class=&quot;comment-description&quot;&gt;So, setting about it as methodically as men might smoke out a wasps' nest, the Martians spread this strange stifling vapour over the Londonward country. The horns of the crescent slowly moved apart, until at last they formed a line from Hanwell to Coombe and Malden. All night through their destructive tubes advanced.&lt;/p&gt;
+			    &lt;/div&gt;
+			  &lt;/div&gt;
+			&lt;/li&gt;	&lt;/ul&gt;
+  &lt;form class=&quot;comment-form&quot;&gt;
+  	&lt;fieldset&gt;
+  		&lt;div class=&quot;field-container&quot;&gt;
+  			&lt;label for=&quot;comment-name&quot;&gt;Name&lt;/label&gt;
+  			&lt;input id=&quot;comment-name&quot; type=&quot;text&quot; placeholder=&quot;Enter Your Name&quot; /&gt;
+  		&lt;/div&gt;
+  		&lt;div class=&quot;field-container&quot;&gt;
+  			&lt;label for=&quot;comment-email&quot;&gt;Email&lt;/label&gt;
+  			&lt;input id=&quot;comment-email&quot; type=&quot;email&quot; placeholder=&quot;Your email address&quot; /&gt;
+  		&lt;/div&gt;
+  		&lt;div class=&quot;field-container&quot;&gt;
+  			&lt;label for=&quot;comment-url&quot;&gt;URL&lt;/label&gt;
+  			&lt;input id=&quot;comment-url&quot; type=&quot;url&quot; placeholder=&quot;Website if you got one&quot; /&gt;
+  		&lt;/div&gt;
+  		&lt;div class=&quot;field-container&quot;&gt;
+  			&lt;label for=&quot;comment-field&quot;&gt;Comment&lt;/label&gt;
+  			&lt;textarea id=&quot;comment-field&quot; rows=&quot;5&quot; placeholder=&quot;Write you comment here&quot;&gt;&lt;/textarea&gt;
+  		&lt;/div&gt;
+  	&lt;/fieldset&gt;
+  &lt;/form&gt;&lt;/div&gt;
+
 										</code>
 									</pre>
 								</div>

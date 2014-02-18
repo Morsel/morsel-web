@@ -1,11 +1,10 @@
-<section class="comments section">
-	<div class="comments-container" id="comments-container">
-		<h2 class="section-title">59 Comments</h2>
-		{{> molecules-comment-form }} 
-		<ul class="comment-list">
-			{{#listItems.five}}
-				{{> molecules-single-comment }} 
-			{{/listItems.five}}
-		</ul>
-	</div>
-</section>
+<div class="morsel-content morsel-comments">
+  <h4 class="comments-header">Comments <i class="common-comments"></i></h4>
+  <hr />
+  <ul class="morsel-comments">
+		{{#listItems.three}}
+			{{> molecules-single-comment }} 
+		{{/listItems.three}}
+	</ul>
+  {{> molecules-comment-form }} 
+</div>

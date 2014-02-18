@@ -1,9 +1,12 @@
-<li class="comment-container">
-	<div class="comment-meta">
-		{{> atoms-avatar }}
-		<h4 class="comment-name"><a href="#">{{name.first}} {{name.last}}</a></h4>
-	</div>
-	<div class="comment-text">
-		<p>{{description}}</p>
-	</div>
+<li class="morsel-comment">
+  <div class="user-info user-info-s">
+    <a href="#" class="profile-pic-link profile-pic-s">
+      {{> atoms-avatar }}
+    </a>
+    <div>
+      <span class="comment-time-ago user-info-sub">18 Days ago</span>
+      <h5 class="user-info-main">{{name.first}} {{name.last}}</h5>
+      <p class="comment-description">{{description}}</p>
+    </div>
+  </div>
 </li>

@@ -26,11 +26,11 @@
           <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
             <p>{{morsel.description}}</p>
           </div>
-          <div class="morsel-content">
+          <div class="morsel-content morsel-comments">
             <h4 class="comments-header">Comments <i class="common-comments"></i></h4>
             <hr />
             <ul ng-show="morsel.comments" class="morsel-comments">
-              <li ng-repeat="comment in morsel.comments">
+              <li ng-repeat="comment in morsel.comments" class="morsel-comment">
                 <div class="user-info user-info-s">
                   <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
                   <div>
