@@ -1,7 +1,7 @@
 //page layout
 
 body {
-  background-color: $morsel-light;
+  background: $morsel-light url(images/bg/light-line.png) left top repeat;
   margin: 0px;
   color: $morsel-dark;
 }
@@ -22,9 +22,37 @@ a {
   }
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    line-height: 22px;
+    font-size: 14px;
+
+    &:before {
+      content: '-';
+      height: 100%;
+      padding-right: 5px;
+      display: inline-block;
+    }
+  }
+}
+
 //type
 h1 {
-  margin-top: 0;
+  margin: 25px 0;
+  color: $morsel-medium;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 22px;
 }
 
 //side nav and header
