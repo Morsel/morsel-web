@@ -758,86 +758,82 @@ p q r s t u v w x y z { | } ~
 						<div class="sg-pattern">
 							<h2 class="sg-pattern-head" ><a href="../../patterns/00-atoms-04-forms-00-text-fields/00-atoms-04-forms-00-text-fields.html" class="patternLink" data-patternpartial="atoms-text-fields">Text Fields</a></h2>
 							<div class="sg-pattern-body">
-								<fieldset>
-    <div class="field-container">
-        <label for="text">Text Input <abbr title="Required">*</abbr></label>
-        <input id="text" type="text" placeholder="Text Input">
-    </div>
-    <div class="field-container">
-        <label for="password">Password</label>
-        <input id="password" type="password" placeholder="Type your Password">
-    </div>
-    <div class="field-container">
-        <label for="webaddress">Web Address</label>
-        <input id="webaddress" type="url" placeholder="http://yoursite.com">
-    </div>
-    <div class="field-container">
-        <label for="emailaddress">Email Address</label>
-        <input id="emailaddress" type="email" placeholder="name@email.com">
-    </div>
-    <div class="field-container">
-        <label for="search">Search</label>
-        <input id="search" type="search" placeholder="Enter Search Term">
-    </div>
-    <div class="field-container">
-        <label for="text">Number Input <abbr title="Required">*</abbr></label>
-        <input id="text" type="number" placeholder="Enter a Number" pattern="[0-9]*">
-    </div>
-    <div class="field-container">
-        <label for="textarea">Textarea</label>
-        <textarea id="textarea" rows="8" cols="48" placeholder="Enter your message here"></textarea>
-    </div>
-    <div class="field-container">
-        <label class="error">Error Input</label>
-        <input class="is-error" type="text" placeholder="Text Input">
-    </div>
-    <div class="field-container">
-        <label  class="valid">Valid</label>
-        <input  class="is-valid" type="text" placeholder="Text Input">
-    </div>
-</fieldset>
+								<form role="form">
+  <div class="form-group">
+    <label for="text" class="control-label">Text Input <abbr title="Required">*</abbr></label>
+    <input class="form-control" id="text" type="text" placeholder="Text Input">
+  </div>
+  <div class="form-group">
+    <label for="password" class="control-label">Password</label>
+    <input class="form-control" id="password" type="password" placeholder="Type your Password">
+  </div>
+  <div class="form-group">
+    <label for="webaddress" class="control-label">Web Address</label>
+    <input class="form-control" id="webaddress" type="url" placeholder="http://yoursite.com">
+    <p class="help-block">Example block-level help text here.</p>
+  </div>
+  <div class="form-group">
+    <label for="search" class="control-label">Search</label>
+    <input class="form-control" id="search" type="search" placeholder="Enter Search Term">
+  </div>
+  <div class="form-group">
+    <label for="text" class="control-label">Number Input <abbr title="Required">*</abbr></label>
+    <input class="form-control" id="text" type="number" placeholder="Enter a Number" pattern="[0-9]*">
+  </div>
+  <div class="form-group">
+    <label for="textarea" class="control-label">Textarea</label>
+    <textarea class="form-control" id="textarea" rows="3" placeholder="Enter your message here"></textarea>
+  </div>
+  <div class="form-group has-error">
+    <label class="control-label">Error Input</label>
+    <input class="form-control" class="is-error" type="text" placeholder="Text Input">
+    <p class="help-block">This thing is invalid</p>
+  </div>
+  <div class="form-group has-success">
+    <label class="control-label">Valid</label>
+    <input class="form-control" class="is-valid" type="text" placeholder="Text Input">
+  </div>
+</form>
 								<div class="sg-code" style="display: none">
 									<h3 class="sg-code-head">HTML</h3>
 									<pre class="sg-code-html">
 										<code>
-											&lt;fieldset&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label for=&quot;text&quot;&gt;Text Input &lt;abbr title=&quot;Required&quot;&gt;*&lt;/abbr&gt;&lt;/label&gt;
-        &lt;input id=&quot;text&quot; type=&quot;text&quot; placeholder=&quot;Text Input&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt;
-        &lt;input id=&quot;password&quot; type=&quot;password&quot; placeholder=&quot;Type your Password&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label for=&quot;webaddress&quot;&gt;Web Address&lt;/label&gt;
-        &lt;input id=&quot;webaddress&quot; type=&quot;url&quot; placeholder=&quot;http://yoursite.com&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label for=&quot;emailaddress&quot;&gt;Email Address&lt;/label&gt;
-        &lt;input id=&quot;emailaddress&quot; type=&quot;email&quot; placeholder=&quot;name@email.com&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label for=&quot;search&quot;&gt;Search&lt;/label&gt;
-        &lt;input id=&quot;search&quot; type=&quot;search&quot; placeholder=&quot;Enter Search Term&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label for=&quot;text&quot;&gt;Number Input &lt;abbr title=&quot;Required&quot;&gt;*&lt;/abbr&gt;&lt;/label&gt;
-        &lt;input id=&quot;text&quot; type=&quot;number&quot; placeholder=&quot;Enter a Number&quot; pattern=&quot;[0-9]*&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label for=&quot;textarea&quot;&gt;Textarea&lt;/label&gt;
-        &lt;textarea id=&quot;textarea&quot; rows=&quot;8&quot; cols=&quot;48&quot; placeholder=&quot;Enter your message here&quot;&gt;&lt;/textarea&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label class=&quot;error&quot;&gt;Error Input&lt;/label&gt;
-        &lt;input class=&quot;is-error&quot; type=&quot;text&quot; placeholder=&quot;Text Input&quot;&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label  class=&quot;valid&quot;&gt;Valid&lt;/label&gt;
-        &lt;input  class=&quot;is-valid&quot; type=&quot;text&quot; placeholder=&quot;Text Input&quot;&gt;
-    &lt;/div&gt;
-&lt;/fieldset&gt;
+											&lt;form role=&quot;form&quot;&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;label for=&quot;text&quot; class=&quot;control-label&quot;&gt;Text Input &lt;abbr title=&quot;Required&quot;&gt;*&lt;/abbr&gt;&lt;/label&gt;
+    &lt;input class=&quot;form-control&quot; id=&quot;text&quot; type=&quot;text&quot; placeholder=&quot;Text Input&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;label for=&quot;password&quot; class=&quot;control-label&quot;&gt;Password&lt;/label&gt;
+    &lt;input class=&quot;form-control&quot; id=&quot;password&quot; type=&quot;password&quot; placeholder=&quot;Type your Password&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;label for=&quot;webaddress&quot; class=&quot;control-label&quot;&gt;Web Address&lt;/label&gt;
+    &lt;input class=&quot;form-control&quot; id=&quot;webaddress&quot; type=&quot;url&quot; placeholder=&quot;http://yoursite.com&quot;&gt;
+    &lt;p class=&quot;help-block&quot;&gt;Example block-level help text here.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;label for=&quot;search&quot; class=&quot;control-label&quot;&gt;Search&lt;/label&gt;
+    &lt;input class=&quot;form-control&quot; id=&quot;search&quot; type=&quot;search&quot; placeholder=&quot;Enter Search Term&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;label for=&quot;text&quot; class=&quot;control-label&quot;&gt;Number Input &lt;abbr title=&quot;Required&quot;&gt;*&lt;/abbr&gt;&lt;/label&gt;
+    &lt;input class=&quot;form-control&quot; id=&quot;text&quot; type=&quot;number&quot; placeholder=&quot;Enter a Number&quot; pattern=&quot;[0-9]*&quot;&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;label for=&quot;textarea&quot; class=&quot;control-label&quot;&gt;Textarea&lt;/label&gt;
+    &lt;textarea class=&quot;form-control&quot; id=&quot;textarea&quot; rows=&quot;3&quot; placeholder=&quot;Enter your message here&quot;&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;form-group has-error&quot;&gt;
+    &lt;label class=&quot;control-label&quot;&gt;Error Input&lt;/label&gt;
+    &lt;input class=&quot;form-control&quot; class=&quot;is-error&quot; type=&quot;text&quot; placeholder=&quot;Text Input&quot;&gt;
+    &lt;p class=&quot;help-block&quot;&gt;This thing is invalid&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;form-group has-success&quot;&gt;
+    &lt;label class=&quot;control-label&quot;&gt;Valid&lt;/label&gt;
+    &lt;input class=&quot;form-control&quot; class=&quot;is-valid&quot; type=&quot;text&quot; placeholder=&quot;Text Input&quot;&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
 										</code>
 									</pre>
 								</div>
@@ -846,34 +842,34 @@ p q r s t u v w x y z { | } ~
 						<div class="sg-pattern">
 							<h2 class="sg-pattern-head" ><a href="../../patterns/00-atoms-04-forms-01-select-menu/00-atoms-04-forms-01-select-menu.html" class="patternLink" data-patternpartial="atoms-select-menu">Select Menu</a></h2>
 							<div class="sg-pattern-body">
-								<fieldset>
-    <div class="field-container">
-        <label for="select">Select</label>
-        <select id="select">
-            <optgroup label="Option Group">
-                <option>Option One</option>
-                <option>Option Two</option>
-                <option>Option Three</option>
-            </optgroup>
-        </select>
-    </div>
-</fieldset>
+								<form role="form">
+  <div class="form-group">
+    <label for="select">Select</label>
+    <select id="select" class="form-control">
+      <optgroup label="Option Group">
+          <option>Option One</option>
+          <option>Option Two</option>
+          <option>Option Three</option>
+      </optgroup>
+    </select>
+  </div>
+</form>
 								<div class="sg-code" style="display: none">
 									<h3 class="sg-code-head">HTML</h3>
 									<pre class="sg-code-html">
 										<code>
-											&lt;fieldset&gt;
-    &lt;div class=&quot;field-container&quot;&gt;
-        &lt;label for=&quot;select&quot;&gt;Select&lt;/label&gt;
-        &lt;select id=&quot;select&quot;&gt;
-            &lt;optgroup label=&quot;Option Group&quot;&gt;
-                &lt;option&gt;Option One&lt;/option&gt;
-                &lt;option&gt;Option Two&lt;/option&gt;
-                &lt;option&gt;Option Three&lt;/option&gt;
-            &lt;/optgroup&gt;
-        &lt;/select&gt;
-    &lt;/div&gt;
-&lt;/fieldset&gt;
+											&lt;form role=&quot;form&quot;&gt;
+  &lt;div class=&quot;form-group&quot;&gt;
+    &lt;label for=&quot;select&quot;&gt;Select&lt;/label&gt;
+    &lt;select id=&quot;select&quot; class=&quot;form-control&quot;&gt;
+      &lt;optgroup label=&quot;Option Group&quot;&gt;
+          &lt;option&gt;Option One&lt;/option&gt;
+          &lt;option&gt;Option Two&lt;/option&gt;
+          &lt;option&gt;Option Three&lt;/option&gt;
+      &lt;/optgroup&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
 										</code>
 									</pre>
 								</div>
@@ -882,29 +878,67 @@ p q r s t u v w x y z { | } ~
 						<div class="sg-pattern">
 							<h2 class="sg-pattern-head" ><a href="../../patterns/00-atoms-04-forms-02-checkbox/00-atoms-04-forms-02-checkbox.html" class="patternLink" data-patternpartial="atoms-checkbox">Checkbox</a></h2>
 							<div class="sg-pattern-body">
-								<form action="#">
-    <fieldset class="options">
-        <legend>Checkbox <abbr title="Required">*</abbr></legend>
-        <ul>
-            <li><label for="checkbox1"><input id="checkbox1" name="checkbox" type="checkbox" checked="checked"> Choice A</label></li>
-            <li><label for="checkbox2"><input id="checkbox2" name="checkbox" type="checkbox"> Choice B</label></li>
-            <li><label for="checkbox3"><input id="checkbox3" name="checkbox" type="checkbox"> Choice C</label></li>
-        </ul>
-    </fieldset>
+								<form role="form">
+  <label class="checkbox-inline">
+    <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+  </label>
+  <label class="checkbox-inline">
+    <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+  </label>
+  <label class="checkbox-inline">
+    <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+  </label>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      Option one is this and that&mdash;be sure to include why it's great
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      Option two is this and that&mdash;be sure to include why it's great
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      Option three is this and that&mdash;be sure to include why it's great
+    </label>
+  </div>
 </form>
 								<div class="sg-code" style="display: none">
 									<h3 class="sg-code-head">HTML</h3>
 									<pre class="sg-code-html">
 										<code>
-											&lt;form action=&quot;#&quot;&gt;
-    &lt;fieldset class=&quot;options&quot;&gt;
-        &lt;legend&gt;Checkbox &lt;abbr title=&quot;Required&quot;&gt;*&lt;/abbr&gt;&lt;/legend&gt;
-        &lt;ul&gt;
-            &lt;li&gt;&lt;label for=&quot;checkbox1&quot;&gt;&lt;input id=&quot;checkbox1&quot; name=&quot;checkbox&quot; type=&quot;checkbox&quot; checked=&quot;checked&quot;&gt; Choice A&lt;/label&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;label for=&quot;checkbox2&quot;&gt;&lt;input id=&quot;checkbox2&quot; name=&quot;checkbox&quot; type=&quot;checkbox&quot;&gt; Choice B&lt;/label&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;label for=&quot;checkbox3&quot;&gt;&lt;input id=&quot;checkbox3&quot; name=&quot;checkbox&quot; type=&quot;checkbox&quot;&gt; Choice C&lt;/label&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/fieldset&gt;
+											&lt;form role=&quot;form&quot;&gt;
+  &lt;label class=&quot;checkbox-inline&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox1&quot; value=&quot;option1&quot;&gt; 1
+  &lt;/label&gt;
+  &lt;label class=&quot;checkbox-inline&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox2&quot; value=&quot;option2&quot;&gt; 2
+  &lt;/label&gt;
+  &lt;label class=&quot;checkbox-inline&quot;&gt;
+    &lt;input type=&quot;checkbox&quot; id=&quot;inlineCheckbox3&quot; value=&quot;option3&quot;&gt; 3
+  &lt;/label&gt;
+  &lt;div class=&quot;checkbox&quot;&gt;
+    &lt;label&gt;
+      &lt;input type=&quot;checkbox&quot; value=&quot;&quot;&gt;
+      Option one is this and that&amp;mdash;be sure to include why it's great
+    &lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;checkbox&quot;&gt;
+    &lt;label&gt;
+      &lt;input type=&quot;checkbox&quot; value=&quot;&quot;&gt;
+      Option two is this and that&amp;mdash;be sure to include why it's great
+    &lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;checkbox&quot;&gt;
+    &lt;label&gt;
+      &lt;input type=&quot;checkbox&quot; value=&quot;&quot;&gt;
+      Option three is this and that&amp;mdash;be sure to include why it's great
+    &lt;/label&gt;
+  &lt;/div&gt;
 &lt;/form&gt;
 										</code>
 									</pre>
@@ -914,29 +948,37 @@ p q r s t u v w x y z { | } ~
 						<div class="sg-pattern">
 							<h2 class="sg-pattern-head" ><a href="../../patterns/00-atoms-04-forms-03-radio-buttons/00-atoms-04-forms-03-radio-buttons.html" class="patternLink" data-patternpartial="atoms-radio-buttons">Radio Buttons</a></h2>
 							<div class="sg-pattern-body">
-								<form action="#">
-    <fieldset class="options">
-        <legend>Radio</legend>
-        <ul>
-            <li><label for="radio1"><input id="radio1" name="radio" type="radio" class="radio" checked="checked"> Option 1</label></li>
-            <li><label for="radio2"><input id="radio2" name="radio" type="radio" class="radio"> Option 2</label></li>
-            <li><label for="radio3"><input id="radio3" name="radio" type="radio" class="radio"> Option 3</label></li>
-        </ul>
-    </fieldset>
+								<form role="form">
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+      Option one is this and that&mdash;be sure to include why it's great
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+      Option two can be something else and selecting it will deselect option one
+    </label>
+  </div>
 </form>
 								<div class="sg-code" style="display: none">
 									<h3 class="sg-code-head">HTML</h3>
 									<pre class="sg-code-html">
 										<code>
-											&lt;form action=&quot;#&quot;&gt;
-    &lt;fieldset class=&quot;options&quot;&gt;
-        &lt;legend&gt;Radio&lt;/legend&gt;
-        &lt;ul&gt;
-            &lt;li&gt;&lt;label for=&quot;radio1&quot;&gt;&lt;input id=&quot;radio1&quot; name=&quot;radio&quot; type=&quot;radio&quot; class=&quot;radio&quot; checked=&quot;checked&quot;&gt; Option 1&lt;/label&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;label for=&quot;radio2&quot;&gt;&lt;input id=&quot;radio2&quot; name=&quot;radio&quot; type=&quot;radio&quot; class=&quot;radio&quot;&gt; Option 2&lt;/label&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;label for=&quot;radio3&quot;&gt;&lt;input id=&quot;radio3&quot; name=&quot;radio&quot; type=&quot;radio&quot; class=&quot;radio&quot;&gt; Option 3&lt;/label&gt;&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/fieldset&gt;
+											&lt;form role=&quot;form&quot;&gt;
+  &lt;div class=&quot;radio&quot;&gt;
+    &lt;label&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;optionsRadios&quot; id=&quot;optionsRadios1&quot; value=&quot;option1&quot; checked&gt;
+      Option one is this and that&amp;mdash;be sure to include why it's great
+    &lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;radio&quot;&gt;
+    &lt;label&gt;
+      &lt;input type=&quot;radio&quot; name=&quot;optionsRadios&quot; id=&quot;optionsRadios2&quot; value=&quot;option2&quot;&gt;
+      Option two can be something else and selecting it will deselect option one
+    &lt;/label&gt;
+  &lt;/div&gt;
 &lt;/form&gt;
 										</code>
 									</pre>
@@ -944,32 +986,104 @@ p q r s t u v w x y z { | } ~
 							</div>
 						</div>
 						<div class="sg-pattern">
-							<h2 class="sg-pattern-head" ><a href="../../patterns/00-atoms-04-forms-04-html5-inputs/00-atoms-04-forms-04-html5-inputs.html" class="patternLink" data-patternpartial="atoms-html5-inputs">Html5 Inputs</a></h2>
+							<h2 class="sg-pattern-head" ><a href="../../patterns/00-atoms-04-forms-04-disabled-inputs/00-atoms-04-forms-04-disabled-inputs.html" class="patternLink" data-patternpartial="atoms-disabled-inputs">Disabled Inputs</a></h2>
 							<div class="sg-pattern-body">
-									<fieldset>
-    <div class="field-container"><label for="ic">Color input</label> <input type="color" id="ic" value="#000000"></div>
-    <div class="field-container"><label for="in">Number input</label> <input type="number" id="in" min="0" max="10" value="5"></div>
-    <div class="field-container"><label for="ir">Range input</label> <input type="range" id="ir" value="10"></div>
-    <div class="field-container"><label for="idd">Date input</label> <input type="date" id="idd" value="1970-01-01"></div>
-    <div class="field-container"><label for="idm">Month input</label> <input type="month" id="idm" value="1970-01"></div>
-    <div class="field-container"><label for="idw">Week input</label> <input type="week" id="idw" value="1970-W01"></div>
-    <div class="field-container"><label for="idt">Datetime input</label> <input type="datetime" id="idt" value="1970-01-01T00:00:00Z"></div>
-    <div class="field-container"><label for="idtl">Datetime-local input</label> <input type="datetime-local" id="idtl" value="1970-01-01T00:00"></div>
-</fieldset>
+								<form role="form">
+  <fieldset disabled>
+    <div class="form-group">
+      <label for="text" class="control-label">Text Input <abbr title="Required">*</abbr></label>
+      <input class="form-control" id="text" type="text" placeholder="Text Input">
+    </div>
+    <div class="form-group">
+      <label for="textarea" class="control-label">Textarea</label>
+      <textarea class="form-control" id="textarea" rows="3" placeholder="Enter your message here"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="select">Select</label>
+      <select id="select" class="form-control">
+        <optgroup label="Option Group">
+            <option>Option One</option>
+            <option>Option Two</option>
+            <option>Option Three</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="">
+        Option two is this and that&mdash;be sure to include why it's great
+      </label>
+    </div>
+    <div class="checkbox">
+      <label>
+        <input type="checkbox" value="">
+        Option three is this and that&mdash;be sure to include why it's great
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+        Option one is this and that&mdash;be sure to include why it's great
+      </label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+        Option two can be something else and selecting it will deselect option one
+      </label>
+    </div>
+  </fieldset>
+</form>
 								<div class="sg-code" style="display: none">
 									<h3 class="sg-code-head">HTML</h3>
 									<pre class="sg-code-html">
 										<code>
-												&lt;fieldset&gt;
-    &lt;div class=&quot;field-container&quot;&gt;&lt;label for=&quot;ic&quot;&gt;Color input&lt;/label&gt; &lt;input type=&quot;color&quot; id=&quot;ic&quot; value=&quot;#000000&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;&lt;label for=&quot;in&quot;&gt;Number input&lt;/label&gt; &lt;input type=&quot;number&quot; id=&quot;in&quot; min=&quot;0&quot; max=&quot;10&quot; value=&quot;5&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;&lt;label for=&quot;ir&quot;&gt;Range input&lt;/label&gt; &lt;input type=&quot;range&quot; id=&quot;ir&quot; value=&quot;10&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;&lt;label for=&quot;idd&quot;&gt;Date input&lt;/label&gt; &lt;input type=&quot;date&quot; id=&quot;idd&quot; value=&quot;1970-01-01&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;&lt;label for=&quot;idm&quot;&gt;Month input&lt;/label&gt; &lt;input type=&quot;month&quot; id=&quot;idm&quot; value=&quot;1970-01&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;&lt;label for=&quot;idw&quot;&gt;Week input&lt;/label&gt; &lt;input type=&quot;week&quot; id=&quot;idw&quot; value=&quot;1970-W01&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;&lt;label for=&quot;idt&quot;&gt;Datetime input&lt;/label&gt; &lt;input type=&quot;datetime&quot; id=&quot;idt&quot; value=&quot;1970-01-01T00:00:00Z&quot;&gt;&lt;/div&gt;
-    &lt;div class=&quot;field-container&quot;&gt;&lt;label for=&quot;idtl&quot;&gt;Datetime-local input&lt;/label&gt; &lt;input type=&quot;datetime-local&quot; id=&quot;idtl&quot; value=&quot;1970-01-01T00:00&quot;&gt;&lt;/div&gt;
-&lt;/fieldset&gt;
+											&lt;form role=&quot;form&quot;&gt;
+  &lt;fieldset disabled&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label for=&quot;text&quot; class=&quot;control-label&quot;&gt;Text Input &lt;abbr title=&quot;Required&quot;&gt;*&lt;/abbr&gt;&lt;/label&gt;
+      &lt;input class=&quot;form-control&quot; id=&quot;text&quot; type=&quot;text&quot; placeholder=&quot;Text Input&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label for=&quot;textarea&quot; class=&quot;control-label&quot;&gt;Textarea&lt;/label&gt;
+      &lt;textarea class=&quot;form-control&quot; id=&quot;textarea&quot; rows=&quot;3&quot; placeholder=&quot;Enter your message here&quot;&gt;&lt;/textarea&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;form-group&quot;&gt;
+      &lt;label for=&quot;select&quot;&gt;Select&lt;/label&gt;
+      &lt;select id=&quot;select&quot; class=&quot;form-control&quot;&gt;
+        &lt;optgroup label=&quot;Option Group&quot;&gt;
+            &lt;option&gt;Option One&lt;/option&gt;
+            &lt;option&gt;Option Two&lt;/option&gt;
+            &lt;option&gt;Option Three&lt;/option&gt;
+        &lt;/optgroup&gt;
+      &lt;/select&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;checkbox&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;checkbox&quot; value=&quot;&quot;&gt;
+        Option two is this and that&amp;mdash;be sure to include why it's great
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;checkbox&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;checkbox&quot; value=&quot;&quot;&gt;
+        Option three is this and that&amp;mdash;be sure to include why it's great
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;radio&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;optionsRadios&quot; id=&quot;optionsRadios1&quot; value=&quot;option1&quot; checked&gt;
+        Option one is this and that&amp;mdash;be sure to include why it's great
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;radio&quot;&gt;
+      &lt;label&gt;
+        &lt;input type=&quot;radio&quot; name=&quot;optionsRadios&quot; id=&quot;optionsRadios2&quot; value=&quot;option2&quot;&gt;
+        Option two can be something else and selecting it will deselect option one
+      &lt;/label&gt;
+    &lt;/div&gt;
+  &lt;/fieldset&gt;
+&lt;/form&gt;
 										</code>
 									</pre>
 								</div>

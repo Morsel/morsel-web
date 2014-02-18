@@ -3,7 +3,6 @@
 body {
   background-color: white;
   margin: 0px;
-  color: $morsel-dark;
 }
 
 .page-wrapper {
@@ -46,6 +45,12 @@ h2 {
 p {
   font-size: 14px;
   line-height: 22px;
+}
+
+//forms
+label {
+  font-family: $font-family-secondary;
+  font-weight: normal;
 }
 
 //side nav and header
