@@ -21,6 +21,8 @@ angular.module( 'Morsel', [
   'Morsel.bgImage',
   'Morsel.morselLike',
   'Morsel.userImage',
+  //filters
+  'Morsel.reverse',
   //API
   'Morsel.apiMorsels',
   'Morsel.apiPosts',

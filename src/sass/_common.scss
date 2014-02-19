@@ -47,6 +47,7 @@ h2, .h2 {
 
 h3, .h3 {
   color: $morsel-dark;
+  text-transform: none;
 
   a {
     color: $morsel-dark;
@@ -67,6 +68,7 @@ h5, .h5 {
   color: $morsel-dark;
   font-family: $font-family-base;
   font-weight: 400;
+  text-transform: none;
 
   a {
     color: $morsel-dark;
@@ -77,6 +79,7 @@ h6, .h6 {
   color: $morsel-dark;
   font-family: $font-family-base;
   font-weight: 300;
+  text-transform: none;
 
   a {
     color: $morsel-dark;

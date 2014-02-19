@@ -11,7 +11,7 @@
       <div class="user-info user-info-xs">
         <div user-image username="post.creator.username" user-photos="post.creator.photos" user-image-size="profile-pic-xs"></div>
         <div>
-          <h2 class="user-info-main">{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+          <h2 class="user-info-main h3">{{post.creator.first_name}} {{post.creator.last_name}}</h2>
           <morselPostedAt></morselPostedAt>
         </div>
       </div>
@@ -30,7 +30,7 @@
             <h4 class="comments-header h2">Comments <span ng-show="morsel.comments.length > 0">({{morsel.comments.length}})</span><i class="common-comments"></i></h4>
             <hr />
             <ul ng-show="morsel.comments">
-              <li ng-repeat="comment in morsel.comments" class="morsel-comment">
+              <li ng-repeat="comment in morsel.comments | reverse" class="morsel-comment">
                 <div class="user-info user-info-s">
                   <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
                   <div>
