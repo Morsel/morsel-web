@@ -102,7 +102,24 @@
         <footer class="footer">
           <div class="container">
             <div class="footer-inner">
-            Morsel!
+              <a ng-click="goTo('home')" class="text-hide morsel-link">Morsel</a>
+              <a ng-click="goTo('join')" class="btn btn-primary">Sign Up</a>
+              <form role="form">
+                <input class="form-control" type="text" placeholder="Search chefs, dishes, ingredients" />
+              </form>
+              <nav role="navigation">
+                <ul class="">
+                  <li ui-route="/add-morsel">
+                    <a ng-click="goTo('add-morsel')">Add Morsel</a>
+                  </li>
+                  <li ui-route="/myfeed">
+                    <a ng-click="goTo('myfeed')" ng-show="isLoggedIn">My Feed</a>
+                  </li>
+                  <li>
+                    <a ng-click="">Get The App</a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </footer>
