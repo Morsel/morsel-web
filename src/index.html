@@ -66,11 +66,9 @@
       <div id="site" ng-class="{site: true, open:menuOpen}">
         <header>
           <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
+          <a ng-click="goTo('home')"><h1 class="text-hide">Morsel</h1></a>
           <nav role="navigation">
             <ul>
-              <li ui-route="/home" ng-class="{active:$uiRoute}">
-                <a ng-click="goTo('home')">Home</a>
-              </li>
               <li ui-route="/about" ng-class="{active:$uiRoute}">
                 <a ng-click="goTo('about')">About</a>
               </li>

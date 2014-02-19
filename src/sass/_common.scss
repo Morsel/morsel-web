@@ -298,6 +298,10 @@ hr {
   header {
     background-color: $morsel-light;
 
+    h1 {
+      background-image: url(images/logos/morsel-header.png);
+    }
+
     nav {
       display: block;
       
