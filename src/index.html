@@ -21,8 +21,8 @@
         <div class="user-info user-info-xs">
           <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
           <div>
-            <h2 ng-bind="fullName"></h2>
-            <a ng-click="goTo(currentUsername)">View Profile</a>
+            <h2 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h2>
+            <a ng-click="goTo(currentUser.username)">View Profile</a>
           </div>
         </div>
         <span>Feeds</span>
@@ -81,8 +81,8 @@
               <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
                 <a ng-click="goTo('dashboard')">Dashboard</a>
               </li>
-              <li ui-route="/{{currentUsername}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-                <a ng-click="goTo(currentUsername)">Profile</a>
+              <li ui-route="/{{currentUser.username}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+                <a ng-click="goTo(currentUser.username)">Profile</a>
               </li>
               <li ng-show="isLoggedIn">
                 <a ng-click="goTo('logout')">Logout</a>

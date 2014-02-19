@@ -110,11 +110,7 @@ angular.module( 'Morsel', [
 
   //refresh user data
   function updateUserData() {
-    var currentUser = Auth.getCurrentUser();
-
-    $scope.currentUsername = currentUser.username;
-    $scope.currentUserId = currentUser.id;
-    $scope.fullName = currentUser.first_name + ' ' + currentUser.last_name;
+    $scope.currentUser = Auth.getCurrentUser();
   }
 
   $scope.goTo = function(path) {
