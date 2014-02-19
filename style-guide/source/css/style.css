@@ -47,120 +47,130 @@ body {
   font-weight: 700;
 }
 
-/* line 62, style.scss */
+/* line 59, style.scss */
+.sg-colors li {
+  margin: 0 1.2em 0.2em 0;
+  width: 8em;
+}
+/* line 65, style.scss */
 .sg-colors li.morsel-primary .sg-swatch {
   background-color: #e96144;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-primary .sg-label:after {
   content: "morsel-primary: #e96144";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-primary-light .sg-swatch {
   background-color: #e86144;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-primary-light .sg-label:after {
   content: "morsel-primary-light: #e86144";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-primary-dark .sg-swatch {
   background-color: #87392b;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-primary-dark .sg-label:after {
   content: "morsel-primary-dark: #87392b";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-primary-bright .sg-swatch {
   background-color: #d62600;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-primary-bright .sg-label:after {
   content: "morsel-primary-bright: #d62600";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-secondary .sg-swatch {
   background-color: #51ba3d;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-secondary .sg-label:after {
   content: "morsel-secondary: #51ba3d";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-secondary-bright .sg-swatch {
   background-color: #31961c;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-secondary-bright .sg-label:after {
   content: "morsel-secondary-bright: #31961c";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-tertiary .sg-swatch {
   background-color: #f0cf69;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-tertiary .sg-label:after {
   content: "morsel-tertiary: #f0cf69";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-background .sg-swatch {
   background-color: white;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-background .sg-label:after {
   content: "morsel-background: white";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-light .sg-swatch {
   background-color: #e2ddd7;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-light .sg-label:after {
   content: "morsel-light: #e2ddd7";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-medium .sg-swatch {
   background-color: #93a491;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-medium .sg-label:after {
   content: "morsel-medium: #93a491";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-dark .sg-swatch {
   background-color: #394038;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-dark .sg-label:after {
   content: "morsel-dark: #394038";
   display: inline-block;
 }
-/* line 62, style.scss */
+/* line 65, style.scss */
 .sg-colors li.morsel-light-off .sg-swatch {
   background-color: #f3f1ef;
 }
-/* line 66, style.scss */
+/* line 69, style.scss */
 .sg-colors li.morsel-light-off .sg-label:after {
   content: "morsel-light-off: #f3f1ef";
   display: inline-block;
 }
-/* line 73, style.scss */
+/* line 76, style.scss */
 .sg-colors li:before {
   display: none;
 }
-/* line 78, style.scss */
+/* line 81, style.scss */
 .sg-colors .sg-colors-sub {
   border: 0;
   padding: 0;
+  display: block;
+}
+/* line 86, style.scss */
+.sg-colors .sg-colors-sub .sg-colors {
+  margin: 0;
 }

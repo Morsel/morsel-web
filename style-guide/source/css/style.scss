@@ -57,6 +57,9 @@ body {
 //color swatches
 .sg-colors {
   li {
+    margin: 0 1.2em 0.2em 0;
+    width: 8em;
+
     @each $color in $colorPalette {
       &.#{nth($color, 1)} {
         .sg-swatch {
@@ -78,5 +81,10 @@ body {
   .sg-colors-sub {
     border: 0;
     padding: 0;
+    display: block;
+
+    .sg-colors {
+      margin: 0;
+    }
   }
 }
