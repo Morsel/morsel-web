@@ -27,13 +27,60 @@ ul {
 }
 
 //type
-h1 {
+h1, .h1 {
   margin: 25px 0;
-  color: $morsel-medium;
+  text-transform: uppercase;
+
+  a {
+    color: $headings-color;
+  }
 }
 
-h2 {
-  font-size: 18px;
+h2, .h2 {
+  margin: 25px 0;
+  text-transform: uppercase;
+
+  a {
+    color: $headings-color;
+  }
+}
+
+h3, .h3 {
+  color: $morsel-dark;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h4, .h4 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h5, .h5 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+  text-transform: uppercase;
+  font-weight: 400;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h6, .h6 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+  font-weight: 300;
+
+  a {
+    color: $morsel-dark;
+  }
 }
 
 p {
