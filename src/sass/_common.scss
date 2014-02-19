@@ -346,6 +346,11 @@ hr {
   color: $morsel-medium;
 }
 
+.loader {
+  width: 100%;
+  background: url(images/icons/loader.gif) center center no-repeat;
+  height: 100px;
+}
 //media queries
 @media (min-width: $screen-md-min) {
   header {
