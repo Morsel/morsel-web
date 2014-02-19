@@ -48,9 +48,9 @@ $headings-font-weight: 700;
 
 $font-size-h1: 64px;
 $font-size-h2: 26px;
-$font-size-h3: 18px;
-$font-size-h4: 18px;
-$font-size-h5: 16px;
+$font-size-h3: 20px;
+$font-size-h4: 20px;
+$font-size-h5: 18px;
 $font-size-h6: 14px;
 
 $link-color: $morsel-primary-light;
@@ -84,9 +84,11 @@ $input-height-base: 33px;
 
 //buttons
 $btn-default-color: white;
-$btn-default-bg: $morsel-secondary-bright;
+$btn-default-bg: $morsel-secondary;
+$btn-default-border: darken($morsel-secondary, 5%);
 
-$btn-primary-bg: $morsel-primary-bright;
+$btn-primary-bg: $morsel-primary;
+$btn-primary-border: darken($morsel-primary, 5%);
 
 // Core Bootstrap variables and mixins
 @import "../../vendor/sass-bootstrap/lib/_variables.scss";

@@ -27,23 +27,26 @@
             <p>{{morsel.description}}</p>
           </div>
           <div class="morsel-content morsel-comments">
-            <h4 class="comments-header">Comments <i class="common-comments"></i></h4>
+            <h4 class="comments-header h2">Comments <span ng-show="morsel.comments.length > 0">({{morsel.comments.length}})</span><i class="common-comments"></i></h4>
             <hr />
-            <ul ng-show="morsel.comments" class="morsel-comments">
+            <ul ng-show="morsel.comments">
               <li ng-repeat="comment in morsel.comments" class="morsel-comment">
                 <div class="user-info user-info-s">
                   <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
                   <div>
                     <span am-time-ago="comment.created_at" class="time-ago"></span>
-                    <h5 class="user-info-main h3">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
+                    <h5 class="user-info-main">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
                     <p class="comment-description">{{comment.description}}</p>
                   </div>
                 </div>
               </li>
             </ul>
+            <div ng-hide="morsel.comments.length > 0" class="empty-state">
+              <p>There are no comments</p>
+            </div>
             <div class="add-comment-morsel">
               <div class="user-info user-info-s">
-                <div user-image username="" user-photos="" user-image-size="profile-pic-s"></div>
+                <div user-image username="currentUser.username" user-photos="currentUser.photos" user-image-size="profile-pic-s"></div>
                 <div>
                   <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
                     <div class="form-group">
