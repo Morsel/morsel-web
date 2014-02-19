@@ -15,11 +15,11 @@ body > .container {
 
 /* line 18, style.scss */
 .font-primary {
-  font-family: "Roboto", "Helvetica", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 /* line 21, style.scss */
 .font-primary:after {
-  content: '"Roboto", "Helvetica", Helvetica, Arial, sans-serif';
+  content: '"Roboto", Helvetica, Arial, sans-serif';
 }
 /* line 26, style.scss */
 .font-primary.italic:after {

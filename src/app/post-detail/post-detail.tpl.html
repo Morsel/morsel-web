@@ -35,17 +35,24 @@
                   <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
                   <div>
                     <span am-time-ago="comment.created_at" class="time-ago"></span>
-                    <h5 class="user-info-main">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
+                    <h5 class="user-info-main h3">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
                     <p class="comment-description">{{comment.description}}</p>
                   </div>
                 </div>
               </li>
             </ul>
             <div class="add-comment-morsel">
-              <form ng-submit="addComment()" name="addCommentForm" novalidate>
-                <textarea ng-model="addCommentDescription" placeholder="Write your comment" required></textarea>
-                <input type="submit" value="Add Comment" ng-disabled="form.$invalid" />
-              </form>
+              <div class="user-info user-info-s">
+                <div user-image username="" user-photos="" user-image-size="profile-pic-s"></div>
+                <div>
+                  <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
+                    <div class="form-group">
+                      <textarea class="form-control" rows="3" ng-model="addCommentDescription" placeholder="Write your comment" required></textarea>
+                    </div>
+                    <button type="submit" ng-disabled="addCommentForm.$invalid" class="btn btn-primary">Add Comment</button>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
         </li>
