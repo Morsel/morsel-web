@@ -4,16 +4,36 @@ $morsel-secondary: #51ba3d; //green
 $morsel-tertiary: #f0cf69; //yellow
 $morsel-background: #FFFFFF; //white
 $morsel-light: #e2ddd7; //light gray
-$morsel-medium: #93a590; //medium gray
+$morsel-medium: #93a491; //medium gray
 $morsel-dark: #394038; //dark gray
 $morsel-light-off: #f3f1ef;
-
+$morsel-primary-light: #e86144;
 $morsel-primary-dark: #87392b;
+$morsel-primary-bright: #d62600;
+$morsel-secondary-bright: #31961c;
+$morsel-lightest: #fbfbfa;
+
+$colorPalette: 
+  morsel-primary $morsel-primary,
+  morsel-primary-light $morsel-primary-light,
+  morsel-primary-dark $morsel-primary-dark,
+  morsel-primary-bright $morsel-primary-bright,
+  morsel-secondary $morsel-secondary,
+  morsel-secondary-bright $morsel-secondary-bright,
+  morsel-tertiary $morsel-tertiary,
+  morsel-background $morsel-background,
+  morsel-light $morsel-light,
+  morsel-medium $morsel-medium,
+  morsel-dark $morsel-dark,
+  morsel-light-off $morsel-light-off;
+  
+
 
 //fonts
-@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300);
-$font-family-base:            "Roboto Condensed", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
-$font-family-secondary:       "Roboto Condensed", "Helvetica", "Arial", sans-serif;
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400);
+$font-family-base:            "Roboto", "Helvetica", Helvetica, Arial, sans-serif !default;
+$font-family-secondary:       "Roboto Slab", "Helvetica Neue Light", "Helvetica Neue", "Arial", sans-serif;
 $icon-font-path:              "vendor/";
 
 //backgrounds
@@ -21,8 +41,14 @@ $btn-primary-bg: $morsel-primary;
 $body-bg: gray;
 
 //typography
-$headings-color:              $morsel-primary;
-$link-color: $morsel-secondary;
+$headings-color: $morsel-dark;
+$headings-font-family: $font-family-secondary;
+$headings-font-weight: 700;
+
+$font-size-h1: 26px;
+
+$link-color: $morsel-primary-light;
+$text-color: $morsel-dark;
 
 //images
 //morsels
@@ -46,6 +72,15 @@ $morselFeedHeight: 400px;
 $sidenav-width: 250px;
 $mobile-header-height: 85px;
 
+//forms
+$input-bg: $morsel-lightest;
+$input-height-base: 40px;
+
+//buttons
+$btn-default-color: white;
+$btn-default-bg: $morsel-secondary-bright;
+
+$btn-primary-bg: $morsel-primary-bright;
 
 // Core Bootstrap variables and mixins
 @import "../../vendor/sass-bootstrap/lib/_variables.scss";

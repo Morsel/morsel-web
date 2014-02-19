@@ -1,0 +1,41 @@
+.morsel-comments {
+  .comments-header {
+    font-size: 26px;
+    color: $morsel-medium;
+
+    i {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 5px;
+    }
+  }
+  
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.morsel-comment {
+  list-style: none;
+  
+  & + .morsel-comment {
+    border-top: 1px solid $morsel-light;
+  }
+
+  .user-info {
+    > div {
+      float: none;
+    }
+
+    .time-ago {
+      font-style: italic;
+    }
+  }
+
+  .comment-description {
+    font-size: 14px;
+    color: $morsel-dark;
+    margin-top: 10px;
+  }
+}

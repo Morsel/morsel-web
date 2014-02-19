@@ -1,9 +1,8 @@
 //page layout
 
 body {
-  background-color: $morsel-light;
+  background-color: white;
   margin: 0px;
-  color: $morsel-dark;
 }
 
 .page-wrapper {
@@ -22,9 +21,40 @@ a {
   }
 }
 
+ul {
+  margin: 0 0 0 12px;
+  padding: 0;
+  list-style-image: url('data:image/gif;base64,R0lGODlhBQAKAIABAAAAAP///yH5BAEAAAEALAAAAAAFAAoAAAIIjI+ZwKwPUQEAOw==');
+
+  li {
+    line-height: 22px;
+    font-size: 14px;
+  }
+}
+
 //type
 h1 {
-  margin-top: 0;
+  margin: 25px 0;
+  color: $morsel-medium;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+p {
+  font-size: 14px;
+  line-height: 22px;
+}
+
+//forms
+label {
+  font-family: $font-family-secondary;
+  font-weight: normal;
+}
+
+button[type="submit"] {
+  float: right;
 }
 
 //side nav and header
@@ -204,13 +234,7 @@ img {
     float: left;
   }
 
-  p {
-    color: $morsel-medium;
-    font-size: 12px;
-    margin: 0;
-  }
-
-  h2 {
+  .user-info-main {
     font-size: 16px;
     line-height: 18px;
     margin: 2px 0;
@@ -218,6 +242,7 @@ img {
     overflow: hidden;
     text-overflow: ellipsis;
     color: $morsel-dark;
+    display: block;
   }
 
   &.user-info-xs {
@@ -232,6 +257,10 @@ img {
   }
 }
 
+.caption {
+  color: $morsel-medium;
+  font-style: italic;
+}
 
 //commonly used items
 .like-morsel {
@@ -250,6 +279,18 @@ img {
   height: 14px;
   width: 14px;
   display: inline-block;
+}
+
+hr {
+  background-image: url(images/bg/dark-line.png);
+  height: 4px;
+  border: 0;
+}
+
+.time-ago {
+  color: $morsel-medium;
+  font-size: 12px;
+  margin: 0;
 }
 
 //media queries

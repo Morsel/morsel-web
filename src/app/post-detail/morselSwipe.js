@@ -51,7 +51,7 @@ angular.module('Morsel.morselSwipe', [
     scope: {
       timeAgo: '='
     },
-    template: '<p am-time-ago="timeAgo"></p>'
+    template: '<p am-time-ago="timeAgo" class="time-ago"></p>'
   };
 }])
 
@@ -71,6 +71,7 @@ angular.module('Morsel.morselSwipe', [
       var morsels = angular.element(document.querySelector('[morsels]')),
           morselLi = morsels.children()[0],
           slidesCount = 0,
+          swipeMoved = false,
           isIndexBound = false,
           repeatCollection = 'post.morsels';
 
@@ -112,7 +113,7 @@ angular.module('Morsel.morselSwipe', [
         iElement.find('morselControls').append(controls);
 
         // enable created at stamp
-        var createdAt = $compile('<div time-ago="morselsData[indicatorIndex].created_at" morsel-posted-at></div>')(scope);
+        var createdAt = $compile('<div time-ago="post.morsels[indicatorIndex].created_at" morsel-posted-at></div>')(scope);
         iElement.find('morselPostedAt').replaceWith(createdAt);
 
         scope.carouselIndex = 0;
@@ -128,8 +129,6 @@ angular.module('Morsel.morselSwipe', [
 
         // watch the given collection
         scope.$watchCollection(repeatCollection, function(newValue, oldValue) {
-          //store our morsel data in scope so we can display it elsewhere in the view
-          scope.morselsData = newValue;
           slidesCount = 0;
           if (angular.isArray(newValue)) {
             slidesCount = newValue.length;
@@ -235,6 +234,7 @@ angular.module('Morsel.morselSwipe', [
 
         function documentMouseUpEvent(event) {
           // in case we click outside the carousel, trigger a fake swipeEnd
+          swipeMoved = true;
           swipeEnd({
             x: event.clientX,
             y: event.clientY
@@ -253,17 +253,23 @@ angular.module('Morsel.morselSwipe', [
         }
 
         function swipeStart(coords, event) {
-          //console.log('swipeStart', coords, event);
-          $document.bind('mouseup', documentMouseUpEvent);
-          pressed = true;
-          startX = coords.x;
+          var tagCheck = event.target.tagName.toUpperCase();
 
-          amplitude = 0;
-          timestamp = Date.now();
+          if(tagCheck === 'INPUT' || tagCheck === 'TEXTAREA') {
+            return false;
+          } else {
+            //console.log('swipeStart', coords, event);
+            $document.bind('mouseup', documentMouseUpEvent);
+            pressed = true;
+            startX = coords.x;
 
-          event.preventDefault();
-          event.stopPropagation();
-          return false;
+            amplitude = 0;
+            timestamp = Date.now();
+
+            event.preventDefault();
+            event.stopPropagation();
+            return false;
+          }
         }
 
         function swipeMove(coords, event) {
@@ -273,6 +279,7 @@ angular.module('Morsel.morselSwipe', [
             x = coords.x;
             delta = startX - x;
             if (delta > 2 || delta < -2) {
+              swipeMoved = true;
               startX = x;
               requestAnimationFrame(function() {
                 scroll(capPosition(offset + delta));
@@ -285,9 +292,17 @@ angular.module('Morsel.morselSwipe', [
         }
 
         function swipeEnd(coords, event, forceAnimation) {
+          var newMorselId;
+
+          // Prevent clicks on buttons inside slider to trigger "swipeEnd" event on touchend/mouseup
+          if(event && !swipeMoved) {
+            return;
+          }
+
           //console.log('swipeEnd', 'scope.carouselIndex', scope.carouselIndex);
           $document.unbind('mouseup', documentMouseUpEvent);
           pressed = false;
+          swipeMoved = false;
 
           destination = offset;
 
@@ -312,6 +327,13 @@ angular.module('Morsel.morselSwipe', [
             amplitude = offset - currentOffset;
           }
           requestAnimationFrame(autoScroll);
+
+          //we swiped to a new morsel, we should do some stuff
+          if(shouldMove && moveOffset) {
+            newMorselId = scope.post.morsels[scope.carouselIndex + moveOffset].id;
+            //update our comments
+            scope.getComments(newMorselId);
+          }
 
           if (event) {
             event.preventDefault();

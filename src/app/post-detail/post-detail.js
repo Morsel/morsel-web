@@ -15,10 +15,12 @@ angular.module( 'Morsel.postDetail', [
   });
 })
 
-.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, $location ) {
+.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiMorsels, $location ) {
   var postDetailsArr = $stateParams.postDetails.split('/'),
       postIdSlug = postDetailsArr[0],
       postMorselNumber = parseInt(postDetailsArr[1], 10);
+
+  $scope.post = {};
 
   //check and make sure we pulled an idslug from the URL
   if(postIdSlug) {
@@ -29,15 +31,61 @@ angular.module( 'Morsel.postDetail', [
         $scope.postMorselNumber = postMorselNumber;
       }
 
-      _.each(postData.morsels, function() {
-      });
-
       $scope.post = postData;
+
+      //get comments for initial morsel
+      $scope.getComments(postData.morsels[$scope.postMorselNumber - 1].id);
     }, function() {
 
     });
   } else {
     //if not, send to profile page
     $location.path('/'+$scope.params.username);
+  }
+
+  //fetch comments for the current morsel
+  $scope.getComments = function(morselId) {
+    var morsel;
+
+    //make sure we have our post data
+    if($scope.post) {
+      morsel = filterMorselsById(morselId);
+
+      //make sure we have a valid morsel
+      if(morsel) {
+        //if we don't have our comments cached already
+        if(!morsel.comments) {
+          ApiMorsels.getComments(morselId).then(function(commentData){
+            morsel.comments = commentData;
+          }, function() {
+            console.log('error');
+          });
+        }
+      }
+    }
+  };
+
+  $scope.addComment = function() {
+    var commentScope = this;
+
+    ApiMorsels.postComment(commentScope.morsel.id, commentScope.addCommentDescription).then(function(commentData){
+      var morsel = filterMorselsById(commentData.morsel_id);
+
+      if(morsel.comments) {
+        morsel.comments.push(commentData);
+      } else {
+        morsel.comments = commentData;
+      }
+      //clear comment textarea
+      commentScope.addCommentDescription = '';
+    }, function() {
+      console.log('error');
+    });
+  };
+
+  function filterMorselsById(morselId) {
+    return $scope.post.morsels.filter(function(m) {
+      return m.id === morselId;
+    })[0];
   }
 });

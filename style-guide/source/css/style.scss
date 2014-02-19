@@ -6,45 +6,85 @@ These are styles related to the styleguide implementation of Morsel. any actual 
 
 //make our body color different so we can differentiate the style guide
 body {
-  background-color: white;
-  padding: 15px;
   margin: 0;
 }
-
-//color swatches - classes won't be used in prod
-.morsel-primary {
-  background-color: $morsel-primary;
+.container {
+  background-color: white;
 }
-
-.morsel-secondary {
-  background-color: $morsel-secondary;
-}
-
-.morsel-tertiary {
-  background-color: $morsel-tertiary;
-}
-
-.morsel-interface {
-  background-color: $morsel-background;
-}
-
-.morsel-light {
-  background-color: $morsel-light;
-}
-
-.morsel-medium {
-  background-color: $morsel-medium;
-}
-
-.morsel-dark {
-  background-color: $morsel-dark;
-}
-
 //text
 .font-primary {
   font-family: $font-family-base;
+
+  &:after {
+    content: '#{$font-family-base}';
+  }
+
+  &.italic {
+    &:after {
+      font-style: italic;
+    }
+  }
+
+  &.light {
+    &:after {
+      font-weight: 300;
+    }
+  }
 }
 
 .font-secondary {
   font-family: $font-family-secondary;
+
+  &:after {
+    content: '#{$font-family-secondary}';
+  }
+
+  &.italic {
+    &:after {
+      font-style: italic;
+    }
+  }
+
+  &.bold {
+    &:after {
+      font-weight: 700;
+    }
+  }
+}
+
+//styleguide style
+
+//color swatches
+.sg-colors {
+  li {
+    margin: 0 1.2em 0.2em 0;
+    width: 8em;
+
+    @each $color in $colorPalette {
+      &.#{nth($color, 1)} {
+        .sg-swatch {
+          background-color: nth($color, 2);
+        }
+        
+        .sg-label:after {
+          content: '#{nth($color, 1)}: #{nth($color, 2)}';
+          display: inline-block;
+        }
+      }
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+
+  .sg-colors-sub {
+    border: 0;
+    padding: 0;
+    display: block;
+
+    .sg-colors {
+      margin: 0;
+    }
+  }
 }

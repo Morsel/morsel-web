@@ -1,10 +1,29 @@
-<form action="#">
-    <fieldset class="options">
-        <legend>Checkbox <abbr title="Required">*</abbr></legend>
-        <ul>
-            <li><label for="checkbox1"><input id="checkbox1" name="checkbox" type="checkbox" checked="checked"> Choice A</label></li>
-            <li><label for="checkbox2"><input id="checkbox2" name="checkbox" type="checkbox"> Choice B</label></li>
-            <li><label for="checkbox3"><input id="checkbox3" name="checkbox" type="checkbox"> Choice C</label></li>
-        </ul>
-    </fieldset>
+<form role="form">
+  <label class="checkbox-inline">
+    <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+  </label>
+  <label class="checkbox-inline">
+    <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+  </label>
+  <label class="checkbox-inline">
+    <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+  </label>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      Option one is this and that&mdash;be sure to include why it's great
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      Option two is this and that&mdash;be sure to include why it's great
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      Option three is this and that&mdash;be sure to include why it's great
+    </label>
+  </div>
 </form>

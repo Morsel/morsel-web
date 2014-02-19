@@ -9,9 +9,9 @@
     <div class="post-info">
       <h1>{{post.title}}</h1>
       <div class="user-info user-info-xs">
-        <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
+        <div user-image username="post.creator.username" user-photos="post.creator.photos" user-image-size="profile-pic-xs"></div>
         <div>
-          <h2>{{post.creator.first_name}} {{post.creator.last_name}}</h2>
+          <h2 class="user-info-main">{{post.creator.first_name}} {{post.creator.last_name}}</h2>
           <morselPostedAt></morselPostedAt>
         </div>
       </div>
@@ -25,6 +25,28 @@
           <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
           <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
             <p>{{morsel.description}}</p>
+          </div>
+          <div class="morsel-content morsel-comments">
+            <h4 class="comments-header">Comments <i class="common-comments"></i></h4>
+            <hr />
+            <ul ng-show="morsel.comments" class="morsel-comments">
+              <li ng-repeat="comment in morsel.comments" class="morsel-comment">
+                <div class="user-info user-info-s">
+                  <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
+                  <div>
+                    <span am-time-ago="comment.created_at" class="time-ago"></span>
+                    <h5 class="user-info-main">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
+                    <p class="comment-description">{{comment.description}}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="add-comment-morsel">
+              <form ng-submit="addComment()" name="addCommentForm" novalidate>
+                <textarea ng-model="addCommentDescription" placeholder="Write your comment" required></textarea>
+                <input type="submit" value="Add Comment" ng-disabled="form.$invalid" />
+              </form>
+            </div>
           </div>
         </li>
       </ul>

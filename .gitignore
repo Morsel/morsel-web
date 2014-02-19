@@ -6,4 +6,4 @@ node_modules/
 vendor/
 .sass-cache/
 .DS_Store
-style-guide/public/latest-change.txt
+style-guide/public

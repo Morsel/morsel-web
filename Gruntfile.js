@@ -139,6 +139,17 @@ module.exports = function ( grunt ) {
           }
         ]
       },
+      //copy the site's images into the style guide folder
+      build_style_guide_images: {
+        files: [
+          {
+            src: [ '**'],
+            dest: '<%= styleguide_dir %>/public/css/images',
+            cwd: '<%= build_dir %>/assets/images',
+            expand: true
+          }
+        ]
+      },
       //copy the whole style guide over into the other folder
       build_style_guide: {
         files: [
@@ -613,7 +624,7 @@ module.exports = function ( grunt ) {
   /**
    * The `style` task builds the style guide locally
    */
-  grunt.registerTask( 'style', [ 'shell:style', 'copy:build_style_guide_css', 'copy:build_style_guide' ]);
+  grunt.registerTask( 'style', [ 'shell:style', 'copy:build_style_guide_css', 'copy:build_style_guide_images', 'copy:build_style_guide' ]);
 
   /**
    * The `pushstyle` task pushes the style guide to heroku
