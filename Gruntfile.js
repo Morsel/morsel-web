@@ -627,11 +627,6 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'style', [ 'shell:style', 'copy:build_style_guide_css', 'copy:build_style_guide_images', 'copy:build_style_guide' ]);
 
   /**
-   * The `pushstyle` task pushes the style guide to heroku
-   */
-  grunt.registerTask( 'pushstyle', [ 'shell:styletoheroku' ]);
-
-  /**
    * The `build-no-style` task builds without the style guide
    */
   grunt.registerTask( 'build-no-style', [
@@ -640,9 +635,6 @@ module.exports = function ( grunt ) {
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
     'karma:continuous'
   ]);
-
-  grunt.registerTask( 'push-dev', [ 'shell:build_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:build_deploy_push' ]);
-
  
   /**
    * The `compile` task gets your app ready for deployment by concatenating and
@@ -651,6 +643,20 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'compile', [
     'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', /*'uglify', */'index:compile', 'appserver:compile'
   ]);
+
+  /*
+   * PUSHING TO SERVERS
+   */
+
+  /**
+   * The `push-style` task pushes the style guide to heroku (style.eatmorsel.com)
+   */
+  grunt.registerTask( 'push-style', [ 'shell:styletoheroku' ]);
+
+  /**
+   * The `push-dev` task pushes the site to heroku (dev.eatmorsel.com)
+   */
+  grunt.registerTask( 'push-dev', [ 'shell:build_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:build_deploy_push' ]);
 
   /**
    * A utility function to get all app JavaScript sources.
