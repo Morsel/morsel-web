@@ -15,7 +15,7 @@ angular.module( 'Morsel.join', [
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, Auth, $location, $timeout ) {
+.controller( 'JoinCtrl', function JoinCtrl( $scope, Auth, $location, $timeout, $parse ) {
 
   //any errors to be displayed from server
   $scope.serverErrors = [];
@@ -68,8 +68,17 @@ angular.module( 'Morsel.join', [
           }
         };
 
-    //call our join to take care of the heavy lifting
-    Auth.join(uploadData, onSuccess, onError);
+    $scope.triedSubmit = $scope.triedSubmit ? $scope.triedSubmit : {};
+    $scope.triedSubmit.joinForm = true;
+
+    //check if everything is valid
+    if($scope.joinForm.$valid) {
+      //call our join to take care of the heavy lifting
+      Auth.join(uploadData, onSuccess, onError);
+    } else {
+      alert('not valid');
+      //$scope.triedSubmit.joinForm = true;
+    }
   };
 
   function onSuccess(resp) {
@@ -78,9 +87,29 @@ angular.module( 'Morsel.join', [
   }
 
   function onError(resp) {
+    var fieldName,
+        fnEnglish,
+        message,
+        serverMessage;
+
+    $scope.triedSubmit = false;
+
     if(resp.data.errors) {
       //show our errors
       $scope.serverErrors = resp.data.errors;
+
+      /*for (fieldName in resp.data.errors) {
+        fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
+        message = resp.data.errors[fieldName];
+        uiMessage = $parse('joinForm.'+fieldName+'.$error.serverMessage');
+
+            if($scope.joinForm[fieldName]) {
+              $scope.joinForm[fieldName].$setValidity('server-'+fieldName, false, $scope.joinForm);
+              $scope.joinForm[fieldName].$invalid = true;
+            }
+              uiMessage.assign($scope, fnEnglish+' '+message);
+          //}
+      }*/
     }
   }
 });

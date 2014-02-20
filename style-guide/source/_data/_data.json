@@ -13,7 +13,7 @@
 			"alt": "Square Thumbnail"
 		},
 		"avatar" : {
-			"src" : "../../images/fpo_avatar.png",
+			"src" : "../../css/images/utility/avatar.jpg",
 			"alt" : "Person Name"
 		}
 	},

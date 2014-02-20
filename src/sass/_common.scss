@@ -7,6 +7,10 @@
   position: absolute;
 }
 
+.morsel-bg {
+  background-color: $morsel-background;
+}
+
 //general
 
 a {
@@ -93,9 +97,21 @@ p {
 }
 
 //forms
+.padded-form {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
 label {
   font-family: $font-family-secondary;
   font-weight: normal;
+
+  &.required {
+    &:after {
+      content: '*';
+      color: $brand-danger;
+    }
+  }
 }
 
 button[type="submit"] {
@@ -354,6 +370,102 @@ hr {
   background: url(images/icons/loader.gif) center center no-repeat;
   height: 100px;
 }
+
+form {
+  .avatar-add {
+    display: block;
+    background-image: url(images/utility/avatar.jpg);
+    height: $profile-pic-l;
+    width: $profile-pic-l;
+    margin: 0 auto 10px;
+    position: relative;
+
+    .plus-sign {
+      line-height: $profile-pic-l;
+      text-align: center;
+      z-index: 5;
+      font-size: $profile-pic-l/2;
+      display: block;
+      @include transition(all .2s ease-in-out);
+      @include opacity(.7);
+    }
+
+    &:hover {
+      .plus-sign {
+        @include opacity(.9);
+        color: $morsel-primary;
+      }
+    }
+
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      font-size: 50px;
+      cursor: pointer;
+      @include opacity(0);
+    }
+
+    .avatar-preview {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 8;
+      width: 100%;
+      height: 100%;
+      background-color: $morsel-background;
+
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+  }
+  .drop-box {
+    display: none;
+  }
+}
+
+@media (min-width: $screen-xs-min) {
+  form {
+    .avatar-add {
+      &:hover {
+        .drop-box {
+          border: 2px dashed $morsel-primary;
+        }
+      }
+    }
+    .drop-box {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 9;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .container-max-xs {
+    width: $screen-xs;
+
+    &.container-shadow {
+      @include container-shadow();
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  //to be put on .container or equivalent
+  .container-shadow {
+    @include container-shadow();
+  }
+}
+
 //media queries
 @media (min-width: $screen-md-min) {
   header {

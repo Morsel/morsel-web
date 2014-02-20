@@ -31,6 +31,7 @@ angular.module( 'Morsel', [
   //libs
   'angularMoment',
   'restangular',
+  'ui.bootstrap',
   'ui.state',
   'ui.route'
 ])

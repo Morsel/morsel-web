@@ -31,7 +31,6 @@ $morsel-indicator-size: 10px;
   }
 
   .post-info {
-    background-color: white;
     overflow: hidden;
     height: $post-info-height;
 
@@ -97,7 +96,6 @@ $morsel-indicator-size: 10px;
   .morsels-container {
     overflow: hidden;
     position: relative;
-    background-color: white;
     background-position: top left;
     background-repeat: repeat;
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAICAIAAAC+k6JsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADRJREFUeNpi/PnzJwMMfPv2jQmZw8XFxYTMATKYkDkgPjIHxAdygEIIPhAjC0HNgwsBBBgAZt0a3cE2YmkAAAAASUVORK5CYII=);
@@ -137,16 +135,16 @@ $morsel-indicator-size: 10px;
 
 @media (min-width: $morsel-max-width) {
   .post-detail {
+    //need this here since it's not a standard breakpoint
+    .container-shadow {
+      @include container-shadow();
+    }
     .post-header {
       @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
 
       .container {
         max-width: $morsel-max-width;
       }
-    }
-
-    .post-container {
-      @include box-shadow(0px 4px 7px 0px rgba(0, 0, 0, 0.5));
     }
 
     .blur-bg {
