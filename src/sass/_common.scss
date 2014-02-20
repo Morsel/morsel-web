@@ -1,16 +1,14 @@
 //page layout
-
-body {
-  background-color: white;
-  margin: 0px;
-}
-
 .page-wrapper {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
   background: inherit;
   position: absolute;
+}
+
+.morsel-bg {
+  background-color: $morsel-background;
 }
 
 //general
@@ -33,24 +31,87 @@ ul {
 }
 
 //type
-h1 {
+h1, .h1 {
   margin: 25px 0;
-  color: $morsel-medium;
+  text-transform: uppercase;
+
+  a {
+    color: $headings-color;
+  }
 }
 
-h2 {
-  font-size: 18px;
+h2, .h2 {
+  margin: 25px 0;
+  text-transform: uppercase;
+
+  a {
+    color: $headings-color;
+  }
+}
+
+h3, .h3 {
+  color: $morsel-dark;
+  text-transform: none;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h4, .h4 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+  text-transform: uppercase;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h5, .h5 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+  font-weight: 400;
+  text-transform: none;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h6, .h6 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+  font-weight: 300;
+  text-transform: none;
+
+  a {
+    color: $morsel-dark;
+  }
 }
 
 p {
   font-size: 14px;
   line-height: 22px;
+  font-weight: 300;
 }
 
 //forms
+.padded-form {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
 label {
   font-family: $font-family-secondary;
   font-weight: normal;
+
+  &.required {
+    &:after {
+      content: '*';
+      color: $brand-danger;
+    }
+  }
 }
 
 button[type="submit"] {
@@ -122,7 +183,7 @@ button[type="submit"] {
 }
 
 .site {
-  background-color: $morsel-background;
+  background: $morsel-background url(images/bg/tile.png) left top repeat;
   width: 100%;
   min-height: 100%;
   position: relative;
@@ -160,7 +221,11 @@ header {
 }
 
 footer {
-  background-color: $morsel-light;
+  height: 20px;
+
+  .container {
+    display: none;
+  }
 }
 
 .side-nav-trigger {
@@ -225,6 +290,7 @@ img {
 
   //default size is $profile-pic-s
   $profile-pic-margin: 20px;
+
   > div {
     float: left;
   }
@@ -232,16 +298,17 @@ img {
   .profile-pic-link {
     margin: 0 $profile-pic-margin;
     float: left;
+
+    & + div {
+      margin-left: $profile-pic-s + 2*$profile-pic-margin;
+    }
   }
 
   .user-info-main {
-    font-size: 16px;
-    line-height: 18px;
     margin: 2px 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: $morsel-dark;
     display: block;
   }
 
@@ -293,10 +360,120 @@ hr {
   margin: 0;
 }
 
+.empty-state {
+  text-align: center;
+  color: $morsel-medium;
+}
+
+.loader {
+  width: 100%;
+  background: url(images/icons/loader.gif) center center no-repeat;
+  height: 100px;
+}
+
+form {
+  .avatar-add {
+    display: block;
+    background-image: url(images/utility/avatar.jpg);
+    height: $profile-pic-l;
+    width: $profile-pic-l;
+    margin: 0 auto 10px;
+    position: relative;
+
+    .plus-sign {
+      line-height: $profile-pic-l;
+      text-align: center;
+      z-index: 5;
+      font-size: $profile-pic-l/2;
+      display: block;
+      @include transition(all .2s ease-in-out);
+      @include opacity(.7);
+    }
+
+    &:hover {
+      .plus-sign {
+        @include opacity(.9);
+        color: $morsel-primary;
+      }
+    }
+
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 10;
+      width: 100%;
+      height: 100%;
+      font-size: 50px;
+      cursor: pointer;
+      @include opacity(0);
+    }
+
+    .avatar-preview {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 8;
+      width: 100%;
+      height: 100%;
+      background-color: $morsel-background;
+
+      img {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+    }
+  }
+  .drop-box {
+    display: none;
+  }
+}
+
+@media (min-width: $screen-xs-min) {
+  form {
+    .avatar-add {
+      &:hover {
+        .drop-box {
+          border: 2px dashed $morsel-primary;
+        }
+      }
+    }
+    .drop-box {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 9;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .container-max-xs {
+    width: $screen-xs;
+
+    &.container-shadow {
+      @include container-shadow();
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  //to be put on .container or equivalent
+  .container-shadow {
+    @include container-shadow();
+  }
+}
+
 //media queries
 @media (min-width: $screen-md-min) {
   header {
     background-color: $morsel-light;
+
+    h1 {
+      background-image: url(images/logos/morsel-header.png);
+    }
 
     nav {
       display: block;
@@ -309,6 +486,58 @@ hr {
           float: left;
         }
       }
+    }
+  }
+
+  nav {
+    ul {
+      overflow: hidden;
+    }
+
+    li {
+      list-style: none;
+      float: left;
+      margin-right: 15px;
+
+      a {
+        color: $morsel-dark;
+        text-transform: uppercase;
+        font-size: 16px;
+      }
+    }
+  }
+
+  footer {
+    height: auto;
+    background-color: $morsel-off-white;
+    overflow: hidden;
+    padding: 10px 0;
+    margin-top: 20px;
+    @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
+
+    .container {
+      display: block;
+    }
+
+    .morsel-link {
+      background-image: url(images/logos/morsel-text.png);
+      width: 90px;
+      height: 40px;
+      display: block;
+      float: left;
+    }
+
+    form {
+      margin-right: 15px;
+    }
+
+    nav li {
+      line-height: $input-height-base;
+    }
+
+    nav, form, .btn{
+      float: right;
+      margin-top: 3px;
     }
   }
 

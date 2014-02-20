@@ -7,170 +7,170 @@ These are styles related to the styleguide implementation of Morsel. any actual 
 body {
   margin: 0;
 }
-
 /* line 11, style.scss */
-.container {
+body > .container {
   background-color: white;
+  width: auto;
 }
 
-/* line 15, style.scss */
-.font-primary {
-  font-family: "Roboto", "Helvetica", Helvetica, Arial, sans-serif;
-}
 /* line 18, style.scss */
-.font-primary:after {
-  content: '"Roboto", "Helvetica", Helvetica, Arial, sans-serif';
+.font-primary {
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
-/* line 23, style.scss */
+/* line 21, style.scss */
+.font-primary:after {
+  content: '"Roboto", Helvetica, Arial, sans-serif';
+}
+/* line 26, style.scss */
 .font-primary.italic:after {
   font-style: italic;
 }
-/* line 29, style.scss */
+/* line 32, style.scss */
 .font-primary.light:after {
   font-weight: 300;
 }
 
-/* line 35, style.scss */
+/* line 38, style.scss */
 .font-secondary {
   font-family: "Roboto Slab", "Helvetica Neue Light", "Helvetica Neue", "Arial", sans-serif;
 }
-/* line 38, style.scss */
+/* line 41, style.scss */
 .font-secondary:after {
   content: '"Roboto Slab", "Helvetica Neue Light", "Helvetica Neue", "Arial", sans-serif';
 }
-/* line 43, style.scss */
+/* line 46, style.scss */
 .font-secondary.italic:after {
   font-style: italic;
 }
-/* line 49, style.scss */
+/* line 52, style.scss */
 .font-secondary.bold:after {
   font-weight: 700;
 }
 
-/* line 59, style.scss */
+/* line 62, style.scss */
 .sg-colors li {
   margin: 0 1.2em 0.2em 0;
   width: 8em;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-primary .sg-swatch {
   background-color: #e96144;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-primary .sg-label:after {
   content: "morsel-primary: #e96144";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-primary-light .sg-swatch {
   background-color: #e86144;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-primary-light .sg-label:after {
   content: "morsel-primary-light: #e86144";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-primary-dark .sg-swatch {
   background-color: #87392b;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-primary-dark .sg-label:after {
   content: "morsel-primary-dark: #87392b";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-primary-bright .sg-swatch {
   background-color: #d62600;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-primary-bright .sg-label:after {
   content: "morsel-primary-bright: #d62600";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-secondary .sg-swatch {
   background-color: #51ba3d;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-secondary .sg-label:after {
   content: "morsel-secondary: #51ba3d";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-secondary-bright .sg-swatch {
   background-color: #31961c;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-secondary-bright .sg-label:after {
   content: "morsel-secondary-bright: #31961c";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-tertiary .sg-swatch {
   background-color: #f0cf69;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-tertiary .sg-label:after {
   content: "morsel-tertiary: #f0cf69";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-background .sg-swatch {
   background-color: white;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-background .sg-label:after {
   content: "morsel-background: white";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-light .sg-swatch {
   background-color: #e2ddd7;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-light .sg-label:after {
   content: "morsel-light: #e2ddd7";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-medium .sg-swatch {
   background-color: #93a491;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-medium .sg-label:after {
   content: "morsel-medium: #93a491";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-dark .sg-swatch {
   background-color: #394038;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-dark .sg-label:after {
   content: "morsel-dark: #394038";
   display: inline-block;
 }
-/* line 65, style.scss */
+/* line 68, style.scss */
 .sg-colors li.morsel-light-off .sg-swatch {
   background-color: #f3f1ef;
 }
-/* line 69, style.scss */
+/* line 72, style.scss */
 .sg-colors li.morsel-light-off .sg-label:after {
   content: "morsel-light-off: #f3f1ef";
   display: inline-block;
 }
-/* line 76, style.scss */
+/* line 79, style.scss */
 .sg-colors li:before {
   display: none;
 }
-/* line 81, style.scss */
+/* line 84, style.scss */
 .sg-colors .sg-colors-sub {
   border: 0;
   padding: 0;
   display: block;
 }
-/* line 86, style.scss */
+/* line 89, style.scss */
 .sg-colors .sg-colors-sub .sg-colors {
   margin: 0;
 }

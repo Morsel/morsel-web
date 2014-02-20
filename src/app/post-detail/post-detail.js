@@ -72,7 +72,7 @@ angular.module( 'Morsel.postDetail', [
       var morsel = filterMorselsById(commentData.morsel_id);
 
       if(morsel.comments) {
-        morsel.comments.push(commentData);
+        morsel.comments.unshift(commentData);
       } else {
         morsel.comments = commentData;
       }

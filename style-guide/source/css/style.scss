@@ -7,10 +7,13 @@ These are styles related to the styleguide implementation of Morsel. any actual 
 //make our body color different so we can differentiate the style guide
 body {
   margin: 0;
+
+  > .container {
+    background-color: white;
+    width: auto;
+  }
 }
-.container {
-  background-color: white;
-}
+
 //text
 .font-primary {
   font-family: $font-family-base;

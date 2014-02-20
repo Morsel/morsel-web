@@ -21,8 +21,8 @@
         <div class="user-info user-info-xs">
           <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
           <div>
-            <h2 ng-bind="fullName"></h2>
-            <a ng-click="goTo(currentUsername)">View Profile</a>
+            <h2 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h2>
+            <a ng-click="goTo(currentUser.username)">View Profile</a>
           </div>
         </div>
         <span>Feeds</span>
@@ -66,11 +66,9 @@
       <div id="site" ng-class="{site: true, open:menuOpen}">
         <header>
           <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
+          <a ng-click="goTo('home')"><h1 class="text-hide">Morsel</h1></a>
           <nav role="navigation">
             <ul>
-              <li ui-route="/home" ng-class="{active:$uiRoute}">
-                <a ng-click="goTo('home')">Home</a>
-              </li>
               <li ui-route="/about" ng-class="{active:$uiRoute}">
                 <a ng-click="goTo('about')">About</a>
               </li>
@@ -83,8 +81,8 @@
               <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
                 <a ng-click="goTo('dashboard')">Dashboard</a>
               </li>
-              <li ui-route="/{{currentUsername}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-                <a ng-click="goTo(currentUsername)">Profile</a>
+              <li ui-route="/{{currentUser.username}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+                <a ng-click="goTo(currentUser.username)">Profile</a>
               </li>
               <li ng-show="isLoggedIn">
                 <a ng-click="goTo('logout')">Logout</a>
@@ -104,7 +102,24 @@
         <footer class="footer">
           <div class="container">
             <div class="footer-inner">
-            Morsel!
+              <a ng-click="goTo('home')" class="text-hide morsel-link">Morsel</a>
+              <a ng-click="goTo('join')" class="btn btn-primary">Sign Up</a>
+              <form role="form">
+                <input class="form-control" type="text" placeholder="Search chefs, dishes, ingredients" />
+              </form>
+              <nav role="navigation">
+                <ul class="">
+                  <li ui-route="/add-morsel">
+                    <a ng-click="goTo('add-morsel')">Add Morsel</a>
+                  </li>
+                  <li ui-route="/myfeed">
+                    <a ng-click="goTo('myfeed')" ng-show="isLoggedIn">My Feed</a>
+                  </li>
+                  <li>
+                    <a ng-click="">Get The App</a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </footer>
