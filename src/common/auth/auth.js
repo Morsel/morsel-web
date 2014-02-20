@@ -155,7 +155,7 @@ angular.module( 'Morsel.auth', [
       //reset our key
       Auth._resetApiKey();
       //get the rest of the users data from the server
-      ApiUsers.getUserData(savedUserId).then(function(loggedInUser) {
+      ApiUsers.getMyData().then(function(loggedInUser) {
         //update the app's user
         Auth._updateUser(loggedInUser);
         hasLoadedUser.resolve(Auth._currentUser);
