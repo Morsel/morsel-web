@@ -5,8 +5,8 @@ angular.module( 'Morsel.apiPosts', [] )
   var Posts = {},
       RestangularPosts = Restangular.all('posts');
 
-  Posts.getPosts = function() {
-    return RestangularPosts.getList();
+  Posts.getFeed = function() {
+    return Restangular.one('feed').get();
   };
 
   Posts.getPost = function(postId) {

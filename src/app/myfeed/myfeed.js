@@ -24,6 +24,6 @@ angular.module( 'Morsel.myfeed', [
 })
 
 .controller( 'MyFeedCtrl', function MyFeedCtrl( $scope, ApiPosts, Auth) {
-  $scope.posts = ApiPosts.getPosts().$object;
+  $scope.feed = ApiPosts.getFeed().$object;
   $scope.welcomeUserName = Auth.getCurrentUser().first_name;
 });
