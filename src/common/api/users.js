@@ -9,8 +9,8 @@ angular.module( 'Morsel.apiUsers', [] )
     return RestangularUsers.get(username);
   };
 
-  Users.getPosts = function(userId) {
-    return Restangular.one('users', userId).one('posts').get();
+  Users.getFeed = function(userId) {
+    return Restangular.one('users', userId).one('feed').get();
   };
 
   Users.newUser = function(userData) {
