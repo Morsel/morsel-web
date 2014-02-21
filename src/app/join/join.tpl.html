@@ -30,28 +30,36 @@
           <label class="control-label" for="title">Title</label>
           <input class="form-control" type="text" id="title" placeholder="Executive Chef at John's Grill" ng-model="title" />
         </div>
-        <div class="form-group" >
+        <div class="form-group" ng-class="{'has-error':(joinForm.username.$dirty && joinForm.username.$error.required) || joinForm.username.$error.server}">
           <label class="control-label required" for="username">Username</label>
-          <input class="form-control" type="text" id="username" placeholder="johnnyboy" ng-model="username" name="username" required />
+          <input class="form-control" type="text" id="username" placeholder="johnnyboy" ng-model="username" name="username" required ng-change="removeServerError('username')" />
+          <span ng-show="joinForm.username.$dirty && joinForm.username.$error.required" class="help-block">Username is required</span>
+          <span ng-show="joinForm.username.$error.serverErrors && joinForm.username.$error.server" class="help-block" ng-repeat="message in joinForm.username.$error.serverErrors">{{message}}</span>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': (joinForm.email.$dirty && (joinForm.email.$error.required || joinForm.email.$error.email)) || joinForm.email.$error.server}">
           <label class="control-label required" for="email">Email</label>
-          <input class="form-control" type="email" ng-model="email" id="email" placeholder="johnsmith@example.com" name="email" required />
+          <input class="form-control" type="email" ng-model="email" id="email" placeholder="johnsmith@example.com" name="email" required ng-change="removeServerError('email')"/>
+          <span ng-show="joinForm.email.$dirty && joinForm.email.$error.required" class="help-block">E-mail is required</span>
+          <span ng-show="joinForm.email.$dirty && joinForm.email.$error.email" class="help-block">E-mail is invalid</span>
+          <span ng-show="joinForm.email.$error.serverErrors && joinForm.email.$error.server" class="help-block" ng-repeat="message in joinForm.email.$error.serverErrors">{{message}}</span>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': joinForm.password.$dirty && joinForm.password.$error.required}">
           <label class="control-label required" for="password">Password</label>
           <input class="form-control" type="password" id="password" ng-model="password" required match="verification" name="password" />
+          <span ng-show="joinForm.password.$dirty && joinForm.password.$error.required" class="help-block">Password is required</span>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-class="{'has-error': (joinForm.verification.$dirty && (joinForm.verification.$error.required || joinForm.verification.$error.match))}">
           <label class="control-label required" for="verification">Repeat password</label>
           <input class="form-control" type="password" id="verification" ng-model="verification" required match="password" name="verification" />
+          <span ng-show="joinForm.verification.$dirty && joinForm.verification.$error.match" class="help-block">Passwords don't match</span>
         </div>
         <div class="form-group">
           <label class="control-label" for="bio">Bio</label>
           <textarea class="form-control" ng-model="bio" id="bio" placeholder="Tell us a little about yourself"></textarea>
         </div>
-        <button type="submit" class="btn btn-primary" ng-disabled="joinForm.$invalid">Sign Up</button>
+        <span class="btn-submit-wrap" tooltip-placement="left" tooltip="{{joinForm.$error.required ? 'Please complete all required fields' : 'Please correct errors in indicated fields'}}" tooltip-trigger="{{{true:'mouseenter', false:'never'}[joinForm.$invalid]}}"><button type="submit" class="btn btn-primary" ng-disabled="joinForm.$invalid">Sign Up</button></span>
       </div>
     </div>
   </form>
 </div>
+

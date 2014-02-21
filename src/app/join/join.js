@@ -68,16 +68,10 @@ angular.module( 'Morsel.join', [
           }
         };
 
-    $scope.triedSubmit = $scope.triedSubmit ? $scope.triedSubmit : {};
-    $scope.triedSubmit.joinForm = true;
-
     //check if everything is valid
     if($scope.joinForm.$valid) {
       //call our join to take care of the heavy lifting
       Auth.join(uploadData, onSuccess, onError);
-    } else {
-      alert('not valid');
-      //$scope.triedSubmit.joinForm = true;
     }
   };
 
@@ -89,27 +83,35 @@ angular.module( 'Morsel.join', [
   function onError(resp) {
     var fieldName,
         fnEnglish,
-        message,
-        serverMessage;
-
-    $scope.triedSubmit = false;
+        serverErrors,
+        i;
 
     if(resp.data.errors) {
-      //show our errors
-      $scope.serverErrors = resp.data.errors;
-
-      /*for (fieldName in resp.data.errors) {
+      //go through each type of error
+      for (fieldName in resp.data.errors) {
+        //we need an english phrase for the field name
         fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
-        message = resp.data.errors[fieldName];
-        uiMessage = $parse('joinForm.'+fieldName+'.$error.serverMessage');
+        //get the errors for this field
+        serverErrors = resp.data.errors[fieldName];
 
-            if($scope.joinForm[fieldName]) {
-              $scope.joinForm[fieldName].$setValidity('server-'+fieldName, false, $scope.joinForm);
-              $scope.joinForm[fieldName].$invalid = true;
-            }
-              uiMessage.assign($scope, fnEnglish+' '+message);
-          //}
-      }*/
+        //make good english
+        for(i=0; i<serverErrors.length; i++) {
+          serverErrors[i] = fnEnglish+' '+serverErrors[i];
+        }
+
+        //make sure there's a field associated with it
+        if($scope.joinForm[fieldName]) {
+          //set field as invalid
+          $scope.joinForm[fieldName].$setValidity('server', false, $scope.joinForm);
+          //put errors in model
+          $scope.joinForm[fieldName].$error.serverErrors = serverErrors;
+        }
+      }
     }
   }
+
+  //to be called onchange so we don't prevent form submit for server errors
+  $scope.removeServerError = function(fieldName) {
+    $scope.joinForm[fieldName].$setValidity('server', true, $scope.joinForm);
+  };
 });
