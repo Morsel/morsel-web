@@ -1,6 +1,4 @@
-angular.module( 'Morsel.join', [
-  'Morsel.match'
-])
+angular.module( 'Morsel.join', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'join', {
@@ -19,6 +17,15 @@ angular.module( 'Morsel.join', [
 
   //any errors to be displayed from server
   $scope.serverErrors = [];
+  $scope.joinModel = {};
+
+  //custom validation configs for password verification
+  $scope.customMatchVer = {
+    'match': {
+      'matches': 'password',
+      'message': 'Passwords don\'t match'
+    }
+  };
 
   $scope.abort = function() {
     $scope.upload.abort(); 
@@ -57,13 +64,13 @@ angular.module( 'Morsel.join', [
   $scope.join = function() {
     var uploadData = {
           user: {
-            'email': $scope.email,
-            'username': $scope.username,
-            'password': $scope.password,
-            'first_name': $scope.first_name,
-            'last_name': $scope.last_name,
-            'title': $scope.title,
-            'bio': $scope.bio,
+            'email': $scope.joinModel.email,
+            'username': $scope.joinModel.username,
+            'password': $scope.joinModel.password,
+            'first_name': $scope.joinModel.first_name,
+            'last_name': $scope.joinModel.last_name,
+            'title': $scope.joinModel.title,
+            'bio': $scope.joinModel.bio,
             'photo': this.selectedFile || null
           }
         };
@@ -109,9 +116,4 @@ angular.module( 'Morsel.join', [
       }
     }
   }
-
-  //to be called onchange so we don't prevent form submit for server errors
-  $scope.removeServerError = function(fieldName) {
-    $scope.joinForm[fieldName].$setValidity('server', true, $scope.joinForm);
-  };
 });

@@ -1,0 +1,10 @@
+<div class="form-group" ng-class="{'has-error': (inForm[inputName].$dirty && hasClientError()) || inForm[inputName].$error.server}">
+  <label class="control-label" ng-class="{'required':required === 'true'}" for="{{inputName}}">{{enName}}</label>
+  <input class="form-control" ng-model="formModel[inputName]" id="{{inputName}}" placeholder="{{placeholder}}" name="{{inputName}}" ng-change="removeServerError()" ng-attr="customValAttrs" ng-required="{{required}}" type="{{type}}"/>
+
+  <span ng-repeat="(errorType, message) in builtInErrorMessages">
+    <span ng-show="inForm[inputName].$dirty && inForm[inputName].$error[errorType]" class="help-block">{{message}}</span>
+  </span>
+
+  <span ng-show="inForm[inputName].$error.serverErrors && inForm[inputName].$error.server" class="help-block" ng-repeat="message in inForm[inputName].$error.serverErrors">{{message}}</span>
+</div>
