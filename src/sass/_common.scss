@@ -118,6 +118,11 @@ button[type="submit"] {
   float: right;
 }
 
+.btn-submit-wrap {
+  float: right;
+  display: inline-block;
+}
+
 //side nav and header
 .side-nav {
   background: $morsel-background;

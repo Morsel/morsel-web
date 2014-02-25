@@ -45,7 +45,7 @@
             <div ng-show="morsel.comments && morsel.comments.length === 0" class="empty-state">
               <p>There are no comments</p>
             </div>
-            <div class="add-comment-morsel">
+            <div class="add-comment-morsel" ng-show="isLoggedIn">
               <div class="user-info user-info-s">
                 <div user-image username="currentUser.username" user-photos="currentUser.photos" user-image-size="profile-pic-s"></div>
                 <div>

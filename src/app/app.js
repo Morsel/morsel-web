@@ -19,8 +19,12 @@ angular.module( 'Morsel', [
   //common
   'Morsel.auth',
   'Morsel.bgImage',
+  'Morsel.formNameFix',
+  'Morsel.handleErrors',
   'Morsel.morselLike',
+  'Morsel.submitBtn',
   'Morsel.userImage',
+  'Morsel.validatedInput',
   //filters
   'Morsel.reverse',
   //API

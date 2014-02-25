@@ -21,18 +21,18 @@ describe( 'ApiPosts factory', function() {
     expect(ApiPosts).not.toEqual(null);
   }));
 
-  it( 'should contain a getPosts function', inject(function(ApiPosts) {
-    expect(ApiPosts.getPosts).toBeDefined();
+  it( 'should contain a getFeed function', inject(function(ApiPosts) {
+    expect(ApiPosts.getFeed).toBeDefined();
   }));
 
   it( 'should contain a getPost function', inject(function(ApiPosts) {
     expect(ApiPosts.getPost).toBeDefined();
   }));
 
-  describe('function getPosts', function() {
+  describe('function getFeed', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/posts.json').respond('{"data":[]}');
+      httpBackend.expectGET(APIURL+'/feed.json').respond('{"data":[]}');
     }));
 
     afterEach(function () {
@@ -42,7 +42,7 @@ describe( 'ApiPosts factory', function() {
 
     it( 'should return an object', inject(function(ApiPosts) {
       var resolvedValue;
-      ApiPosts.getPosts().then(function (data) {
+      ApiPosts.getFeed().then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();

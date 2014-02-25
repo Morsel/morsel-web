@@ -1,0 +1,5 @@
+<div class="form-group">
+  <span class="btn-submit-wrap" tooltip-placement="left" tooltip="{{form.$error.required ? 'Please complete all required fields' : 'Please correct errors in indicated fields'}}" tooltip-trigger="{{{true:'mouseenter', false:'never'}[form.$invalid]}}">
+    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">{{copy}}</button>
+  </span>
+</div>
