@@ -17,6 +17,8 @@ module.exports = {
   styleguide_dir: 'style-guide',
   //for copying style guide into a public spot
   styleguidepublic_dir: '../morsel-style-guide/',
+  blog_dir: 'blog/src',
+  blog_deploy_dir: 'blog',
 
   dev_repo: 'git@heroku.com:eatmorsel-dev.git',
   staging_repo: 'git@heroku.com:eatmorsel-staging.git',

@@ -180,6 +180,16 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+      blog: {
+        files: [
+          {
+            src: [ '*.php', '*.txt', 'screenshot.png', 'images/*', 'xml/*' ],
+            dest: '<%= blog_deploy_dir %>/ellen',
+            cwd: '<%= blog_dir %>',
+            expand: true
+          }
+        ]
       }
     },
 
@@ -595,7 +605,30 @@ module.exports = function ( grunt ) {
             cwd: '<%= styleguidepublic_dir %>'
           }
         }
-      }
+      },
+      blog: {
+        command: [
+          'compass compile',
+          'zip -r ellen ellen'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= blog_deploy_dir %>'
+          }
+        }
+      },
+      blog_deploy_push: {
+        command: [
+          'scp -r ellen morsel_wp1@insights.eatmorsel.com:/home/morsel_wp1/insights.eatmorsel.com/wp-content/themes/'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= blog_deploy_dir %>'
+          }
+        }
+      },
     }
   };
 
@@ -635,6 +668,11 @@ module.exports = function ( grunt ) {
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
     'karma:continuous'
   ]);
+
+  /**
+   * The `blog` task builds the blog
+   */
+  grunt.registerTask( 'blog', [ 'copy:blog', 'shell:blog' ]);
  
   /**
    * The `compile` task gets your app ready for deployment by concatenating and
@@ -657,6 +695,11 @@ module.exports = function ( grunt ) {
    * The `push-dev` task pushes the site to heroku (dev.eatmorsel.com)
    */
   grunt.registerTask( 'push-dev', [ 'shell:build_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:build_deploy_push' ]);
+
+  /**
+   * The `push-blog` task pushes the blog to insights.eatmorsel.com over ssh
+   */
+  grunt.registerTask( 'push-blog', [ 'shell:blog_deploy_push' ]);
 
   /**
    * A utility function to get all app JavaScript sources.
