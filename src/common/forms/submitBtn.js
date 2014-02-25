@@ -5,7 +5,8 @@ angular.module('Morsel.submitBtn', [])
     restrict: 'EA',
     replace: true,
     scope: {
-      form: '=submitBtnForm'
+      form: '=submitBtnForm',
+      copy: '@submitBtnCopy'
     },
     link: function(scope) {
     },

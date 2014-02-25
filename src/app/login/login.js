@@ -13,26 +13,31 @@ angular.module( 'Morsel.login', [])
   });
 })
 
-.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $location ) {
-  //any errors to be displayed from server
-  $scope.serverErrors = [];
+.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $location, HandleErrors ) {
+  //model to store our join data
+  $scope.loginModel = {};
 
   //called on submit of login form
   $scope.login = function() {
     var userData = {
       'user': {
-        'email': $scope.email,
-        'password': $scope.password
+        'email': $scope.loginModel.email,
+        'password': $scope.loginModel.password
       }
     };
 
-    $scope.serverErrors = [];
-
-    Auth.login(userData, function() {
-      //if successfully logged in, send to their feed
+    //check if everything is valid
+    if($scope.loginForm.$valid) {
+      Auth.login(userData, onSuccess, onError);
+    }
+    
+    function onSuccess(resp) {
+      //if successfully joined, send to their feed
       $location.path('/myfeed');
-    }, function(resp) {
-      $scope.serverErrors = resp.data.errors;
-    });
+    }
+
+    function onError(resp) {
+      HandleErrors.onError(resp, $scope.loginForm);
+    }
   };
 });

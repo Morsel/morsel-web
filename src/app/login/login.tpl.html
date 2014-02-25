@@ -2,24 +2,11 @@
   <form name="loginForm" method="post" ng-submit="login()" class="padded-form" novalidate>
     <div class="row">
       <div class="col-md-12">
-        <div ng-repeat="(inputName, inputErrors) in serverErrors">
-          <p ng-repeat="inputError in inputErrors">{{inputName}} {{inputError}}</p>
-        </div>
+        <input validated-input val-form="loginForm" val-en-name="Email" val-type="email" val-name="email" val-form-model="loginModel" val-placeholder="johnsmith@example.com" val-required="true" />
 
-        <div class="form-group">
-          <label class="control-label" for="email">Email</label>
-          <input class="form-control" type="email" ng-model="email" id="email" placeholder="johnsmith@example.com" name="email" required />
-          <span ng-show="form.email.$dirty && form.email.$error.email" class="help-block">Email is invalid</span>
-        </div>
+        <input validated-input val-form="loginForm" val-en-name="Password" val-type="password" val-name="password" val-form-model="loginModel" val-required="true" />
 
-        <div class="form-group">
-          <label class="control-label" for="password">Password</label>
-          <input class="form-control" type="password" id="password" ng-model="password" name="password" required/>
-          <span ng-show="form.password.$dirty && form.password.$error.required" class="hel-block">Please enter a password</span>
-        </div>
-
-        <button type="submit" class="btn btn-primary" ng-disabled="loginForm.$invalid">Log In</button>
+        <button submit-btn submit-btn-form="loginForm" submit-btn-copy="Login"></button>
       </div>
     </div>
   </form>
-</div>
