@@ -20,6 +20,7 @@ angular.module( 'Morsel', [
   'Morsel.auth',
   'Morsel.bgImage',
   'Morsel.formNameFix',
+  'Morsel.handleErrors',
   'Morsel.morselLike',
   'Morsel.submitBtn',
   'Morsel.userImage',

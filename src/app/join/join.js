@@ -13,10 +13,9 @@ angular.module( 'Morsel.join', [])
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, Auth, $location, $timeout, $parse ) {
+.controller( 'JoinCtrl', function JoinCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors ) {
 
-  //any errors to be displayed from server
-  $scope.serverErrors = [];
+  //model to store our join data
   $scope.joinModel = {};
 
   //custom validation configs for password verification
@@ -27,6 +26,8 @@ angular.module( 'Morsel.join', [])
     }
   };
 
+  //file upload stuff (should be moved eventually...)
+  //abort upload
   $scope.abort = function() {
     $scope.upload.abort(); 
     $scope.upload = null;
@@ -61,6 +62,7 @@ angular.module( 'Morsel.join', [])
     }
   };
 
+  //submit our form
   $scope.join = function() {
     var uploadData = {
           user: {
@@ -88,32 +90,6 @@ angular.module( 'Morsel.join', [])
   }
 
   function onError(resp) {
-    var fieldName,
-        fnEnglish,
-        serverErrors,
-        i;
-
-    if(resp.data.errors) {
-      //go through each type of error
-      for (fieldName in resp.data.errors) {
-        //we need an english phrase for the field name
-        fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
-        //get the errors for this field
-        serverErrors = resp.data.errors[fieldName];
-
-        //make good english
-        for(i=0; i<serverErrors.length; i++) {
-          serverErrors[i] = fnEnglish+' '+serverErrors[i];
-        }
-
-        //make sure there's a field associated with it
-        if($scope.joinForm[fieldName]) {
-          //set field as invalid
-          $scope.joinForm[fieldName].$setValidity('server', false, $scope.joinForm);
-          //put errors in model
-          $scope.joinForm[fieldName].$error.serverErrors = serverErrors;
-        }
-      }
-    }
+    HandleErrors.onError(resp, $scope.joinForm);
   }
 });
