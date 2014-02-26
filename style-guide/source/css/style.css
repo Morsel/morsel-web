@@ -174,3 +174,8 @@ body > .container {
 .sg-colors .sg-colors-sub .sg-colors {
   margin: 0;
 }
+
+/* line 95, style.scss */
+header {
+  margin-bottom: 50px;
+}
