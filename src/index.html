@@ -18,8 +18,8 @@
   </head>
   <body>
     <div class="page-wrapper">
-      <nav class="side-nav" role="navigation">
-        <div class="user-info user-info-xs">
+      <nav class="side-nav" ng-class="{open:menuOpen}" role="navigation">
+        <div class="user-info user-info-xs" ng-show="isLoggedIn">
           <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
           <div>
             <h2 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h2>
