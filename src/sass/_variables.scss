@@ -27,8 +27,6 @@ $colorPalette:
   morsel-medium $morsel-medium,
   morsel-dark $morsel-dark,
   morsel-light-off $morsel-light-off;
-  
-
 
 //fonts
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab:400,700);
@@ -90,6 +88,16 @@ $btn-default-border: darken($morsel-secondary, 5%);
 
 $btn-primary-bg: $morsel-primary;
 $btn-primary-border: darken($morsel-primary, 5%);
+
+//social
+$socialPalette: 
+  facebook #2a5e9d,
+  twitter #00c2f6,
+  linkedin #0073a3,
+  pinterest #cd1e23,
+  stumbleupon #ff4d20,
+  google-plus #ee3e18,
+  expand #c5c5c5;
 
 // Core Bootstrap variables and mixins
 @import "../../vendor/sass-bootstrap/lib/_variables.scss";
