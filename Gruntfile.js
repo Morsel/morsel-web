@@ -280,7 +280,7 @@ module.exports = function ( grunt ) {
           outputStyle: 'expanded',
           debugInfo: true,
           assetCacheBuster: false,
-          imagesDir: 'src/assets/images',
+          imagesDir: '<%= build_dir %>/assets/images',
           relativeAssets: true
         }
       },
@@ -292,7 +292,7 @@ module.exports = function ( grunt ) {
           outputStyle: 'compressed',
           debugInfo: false,
           assetCacheBuster: true,
-          imagesDir: 'src/assets/images',
+          imagesDir: '<%= compile_dir %>/assets/images',
           relativeAssets: true
         }
       }
@@ -663,8 +663,8 @@ module.exports = function ( grunt ) {
    * The `build-no-style` task builds without the style guide
    */
   grunt.registerTask( 'build-no-style', [
-    'clean', 'html2js', 'jshint', 'compass:build',
-    'concat:build_css', 'copy:build_app_assets', 'copy:build_vendor_assets',
+    'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
+    'concat:build_css', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
     'karma:continuous'
   ]);
