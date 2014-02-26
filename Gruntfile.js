@@ -628,7 +628,7 @@ module.exports = function ( grunt ) {
             cwd: '<%= blog_deploy_dir %>'
           }
         }
-      },
+      }
     }
   };
 

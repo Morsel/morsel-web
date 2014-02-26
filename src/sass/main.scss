@@ -66,9 +66,11 @@
 // Import component styles
 @import "_common";
 
+
 //import shared styles
 @import "shared/_comments";
 @import "shared/_general";
+@import "shared/_layout";
 
 @import "../app/feed/_feed";
 @import "../app/home/_home";
