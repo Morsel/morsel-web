@@ -1,0 +1,42 @@
+/*
+  Theme Name: ellen
+  Description: Make the words like nice and shit.
+  Author: Morsel
+  Author URI: http://www.eatmorsel.com/
+  Version: 2.5.0
+ 
+  Tags: black, white, photography, clean, simple, plain
+ 
+  Template: genesis
+  Template Version: 2.0.0
+*/
+
+/* Modified from: */
+
+/*
+  Theme Name: jane
+  Description: A chic and simple premium WordPress Theme.
+  Author: Lindsey Riel
+  Author URI: http://www.prettydarncute.com/
+  Version: 2.0.0
+ 
+  Tags: black, white, photography, clean, simple, plain
+ 
+  Template: genesis
+  Template Version: 2.0.0
+*/
+//This file is essentially a copy of '../../../../../../../../../vendor/sass-bootstrap/lib/bootstrap.scss' except we only want to include the components that we're using for now.
+
+@import "compass";
+
+@import "../../../vendor/sass-bootstrap/lib/mixins";
+
+// Import our variables
+@import "../../../src/sass/_variables.scss";
+@import "../../../vendor/sass-bootstrap/lib/scaffolding";
+@import "../../../vendor/sass-bootstrap/lib/type";
+
+// Import component styles
+@import "../../../src/sass/shared/_general";
+
+@import "_wordpress";
