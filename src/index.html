@@ -3,6 +3,7 @@
   <head>
     <title ng-bind="pageTitle"></title>
 
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
 
@@ -34,7 +35,7 @@
         <span>Create</span>
         <ul>
           <li ui-route="/add-morsel" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-            <a ng-click="goTo('add-morsel')"><i class="sidenav-add-morsel"></i>My Feed</a>
+            <a ng-click="goTo('add-morsel')"><i class="sidenav-add-morsel"></i>Add Morsel</a>
           </li>
         </ul>
         <span>Other</span>
@@ -65,36 +66,30 @@
 
       <div id="site" ng-class="{site: true, open:menuOpen}">
         <header>
-          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
-          <a ng-click="goTo('home')"><h1 class="text-hide">Morsel</h1></a>
-          <nav role="navigation">
-            <ul>
-              <li ui-route="/about" ng-class="{active:$uiRoute}">
-                <a ng-click="goTo('about')">About</a>
-              </li>
-              <li ng-show="isLoggedIn" ui-route="/add-morsel" ng-class="{active:$uiRoute}">
-                <a ng-click="goTo('add-morsel')">Add Morsel</a>
-              </li>
-              <li ui-route="/myfeed" ng-class="{active:$uiRoute}">
-                <a ng-click="goTo('myfeed')" ng-show="isLoggedIn">My Feed</a>
-              </li>
-              <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-                <a ng-click="goTo('dashboard')">Dashboard</a>
-              </li>
-              <li ui-route="/{{currentUser.username}}" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
-                <a ng-click="goTo(currentUser.username)">Profile</a>
-              </li>
-              <li ng-show="isLoggedIn">
-                <a ng-click="goTo('logout')">Logout</a>
-              </li>
-              <li ng-hide="isLoggedIn">
-                <a ng-click="goTo('login')">Login</a>
-              </li>
-              <li ng-hide="isLoggedIn">
-                <a ng-click="goTo('join')">Join</a>
-              </li>
-            </ul>
-          </nav>
+          <div class="container">
+            <h1 class="morsel-logo">
+              <a ng-click="goTo('home')">Morsel</a>
+            </h1>
+            <nav role="navigation">
+              <ul>
+                <li>
+                  <a ng-click="goTo('join')" class="btn btn-primary">Sign Up</a>
+                </li>
+                <li ng-class="{active:$uiRoute}">
+                  <a ng-click="">Placeholder</a>
+                </li>
+                <li ng-class="{active:$uiRoute}">
+                  <a ng-click="">Placeholder</a>
+                </li>
+                <li ng-class="{active:$uiRoute}">
+                  <a ng-click="">Get the App</a>
+                </li>
+                <li ng-class="{active:$uiRoute}">
+                  <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger">Menu</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </header>
 
         <div ui-view="main" class="main-view"></div>

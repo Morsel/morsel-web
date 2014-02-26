@@ -1,0 +1,104 @@
+a {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+ul {
+  margin: 0 0 0 12px;
+  padding: 0;
+  list-style-image: url('data:image/gif;base64,R0lGODlhBQAKAIABAAAAAP///yH5BAEAAAEALAAAAAAFAAoAAAIIjI+ZwKwPUQEAOw==');
+
+  li {
+    line-height: 22px;
+    font-size: 14px;
+  }
+}
+
+//type
+h1, .h1 {
+  margin: 25px 0;
+  text-transform: uppercase;
+
+  a {
+    color: $headings-color;
+  }
+}
+
+h2, .h2 {
+  margin: 25px 0;
+  text-transform: uppercase;
+
+  a {
+    color: $headings-color;
+  }
+}
+
+h3, .h3 {
+  color: $morsel-dark;
+  text-transform: none;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h4, .h4 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+  text-transform: uppercase;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h5, .h5 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+  font-weight: 400;
+  text-transform: none;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+h6, .h6 {
+  color: $morsel-dark;
+  font-family: $font-family-base;
+  font-weight: 300;
+  text-transform: none;
+
+  a {
+    color: $morsel-dark;
+  }
+}
+
+p {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 300;
+}
+
+label {
+  font-family: $font-family-secondary;
+  font-weight: normal;
+
+  &.required {
+    &:after {
+      content: '*';
+      color: $brand-danger;
+    }
+  }
+}
+
+button[type="submit"] {
+  float: right;
+}
+
+hr {
+  background-image: url(images/bg/dark-line.png);
+  height: 4px;
+  border: 0;
+}
