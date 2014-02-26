@@ -63,11 +63,11 @@ body > .container {
 }
 /* line 68, style.scss */
 .sg-colors li.morsel-primary-light .sg-swatch {
-  background-color: #e86144;
+  background-color: #ee8872;
 }
 /* line 72, style.scss */
 .sg-colors li.morsel-primary-light .sg-label:after {
-  content: "morsel-primary-light: #e86144";
+  content: "morsel-primary-light: #ee8872";
   display: inline-block;
 }
 /* line 68, style.scss */

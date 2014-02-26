@@ -8,13 +8,24 @@
 			"src": "../../images/fpo_16x9.png",
 			"alt": "16x9 Image"
 		},
-		"square": {
-			"src": "../../images/fpo_square.png",
-			"alt": "Square Thumbnail"
+		"logo": {
+			"src": "../../css/images/logos/morsel-text.png",
+			"alt": "Morsel"
 		},
-		"avatar" : {
-			"src" : "../../css/images/utility/avatar.jpg",
+		"icon": {
+			"src": "../../css/images/logos/morsel-m.png",
+			"alt": "Icon Thumbnail"
+		},
+		"avatars" : {
+			"xs" : "../../css/images/utility/avatars/avatar_40x40.jpg",
+			"s" : "../../css/images/utility/avatars/avatar_72x72.jpg",
+			"m" : "../../css/images/utility/avatars/avatar_80x80.jpg",
+			"l" : "../../css/images/utility/avatars/avatar_144x144.jpg",
 			"alt" : "Person Name"
+		},
+		"favicon" : {
+			"16" : "../../css/images/icons/favicon_16x16.png",
+			"32" : "../../css/images/icons/favicon_32x32.png"
 		}
 	},
 	"headline" : {

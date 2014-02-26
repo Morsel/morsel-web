@@ -7,7 +7,7 @@ $morsel-light: #e2ddd7; //light gray
 $morsel-medium: #93a491; //medium gray
 $morsel-dark: #394038; //dark gray
 $morsel-light-off: #f3f1ef;
-$morsel-primary-light: #e86144;
+$morsel-primary-light: lighten($morsel-primary, 10%);
 $morsel-primary-dark: #87392b;
 $morsel-primary-bright: #d62600;
 $morsel-secondary-bright: #31961c;

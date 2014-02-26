@@ -164,6 +164,10 @@ header {
           display: block;
         }
 
+        .btn {
+          text-transform: none;
+        }
+
         &:last-child {
           display: inline-block;
         }

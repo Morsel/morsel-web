@@ -1,7 +1,9 @@
 <div class="morsel-comments">
   <div class="add-comment-morsel">
     <div class="user-info user-info-s">
-      <a href="#" class="profile-pic-link profile-pic-s"><img class="img-circle" src="https://morsel-staging.s3.amazonaws.com/user-photos/38/_72x72_90ea6a33-fbf6-4673-a064-4c08c09566c7.jpg"></a>
+      <a href="#" class="profile-pic-link profile-pic-s">
+        {{> atoms-avatar-s }}
+      </a>
       <div>
         <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
           <div class="form-group">
