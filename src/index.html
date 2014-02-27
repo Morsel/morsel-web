@@ -19,23 +19,38 @@
   <body>
     <div class="page-wrapper">
       <nav class="side-nav" ng-class="{open:menuOpen}" role="navigation">
-        <div class="user-info user-info-xs" ng-show="isLoggedIn">
-          <div user-image username="post.creator.username" user-photos="post.creator.photos" class="profile-pic-xs"></div>
-          <div>
-            <h2 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h2>
-            <a ng-click="goTo(currentUser.username)">View Profile</a>
-          </div>
-        </div>
+        <a ng-click="goTo(currentUser.username)" ng-show="isLoggedIn" class="profile-link">
+          <img ng-src="{{currentUser.photos['_40x40']}}" class="img-circle" />
+          <h5 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h5>
+        </a>
         <span>Feeds</span>
         <ul>
           <li ui-route="/myfeed" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
             <a ng-click="goTo('myfeed')"><i class="sidenav-feed"></i>My Feed</a>
+          </li>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-trending"></i>Trending</a>
           </li>
         </ul>
         <span>Create</span>
         <ul>
           <li ui-route="/add-morsel" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
             <a ng-click="goTo('add-morsel')"><i class="sidenav-add-morsel"></i>Add Morsel</a>
+          </li>
+          <li ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+            <a><i class="sidenav-drafts"></i>Drafts</a>
+          </li>
+        </ul>
+        <span>Following</span>
+        <ul>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-restaurants"></i>Restaurants</a>
+          </li>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-people"></i>People</a>
+          </li>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-tags"></i>Tags</a>
           </li>
         </ul>
         <span>Other</span>
@@ -52,6 +67,12 @@
         </ul>
         <span>Settings</span>
         <ul>
+          <li>
+            <a><i class="sidenav-account-settings"></i>Account Settings</a>
+          </li>
+          <li>
+            <a><i class="sidenav-terms"></i>Terms of Use</a>
+          </li>
           <li ng-show="isLoggedIn">
             <a ng-click="goTo('logout')"><i class="sidenav-logout"></i>Logout</a>
           </li>
@@ -90,6 +111,7 @@
               </ul>
             </nav>
           </div>
+          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger">Menu</a>
         </header>
 
         <div ui-view="main" class="main-view"></div>
