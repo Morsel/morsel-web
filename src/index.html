@@ -23,6 +23,10 @@
           <img ng-src="{{currentUser.photos['_40x40']}}" class="img-circle" />
           <h5 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h5>
         </a>
+        <div class="prompt-btns" ng-hide="isLoggedIn">
+          <a ng-click="goTo('join')">Sign Up</a>
+          <a ng-click="goTo('login')">Login</a>
+        </div>
         <span>Feeds</span>
         <ul>
           <li ui-route="/myfeed" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
@@ -32,12 +36,12 @@
             <a><i class="sidenav-trending"></i>Trending</a>
           </li>
         </ul>
-        <span>Create</span>
-        <ul>
-          <li ui-route="/add-morsel" ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+        <span ng-show="isLoggedIn">Create</span>
+        <ul ng-show="isLoggedIn">
+          <li ui-route="/add-morsel" ng-class="{active:$uiRoute}">
             <a ng-click="goTo('add-morsel')"><i class="sidenav-add-morsel"></i>Add Morsel</a>
           </li>
-          <li ng-class="{active:$uiRoute}" ng-show="isLoggedIn">
+          <li ng-class="{active:$uiRoute}">
             <a><i class="sidenav-drafts"></i>Drafts</a>
           </li>
         </ul>
@@ -80,7 +84,7 @@
             <a ng-click="goTo('login')">Login</a>
           </li>
           <li ng-hide="isLoggedIn">
-            <a ng-click="goTo('join')">Join</a>
+            <a ng-click="goTo('join')">Sign Up</a>
           </li>
         </ul>
       </nav>
@@ -93,7 +97,7 @@
             </h1>
             <nav role="navigation">
               <ul>
-                <li>
+                <li ng-hide="isLoggedIn">
                   <a ng-click="goTo('join')" class="btn btn-primary">Sign Up</a>
                 </li>
                 <li ng-class="{active:$uiRoute}">
@@ -120,7 +124,7 @@
           <div class="container">
             <div class="footer-inner">
               <a ng-click="goTo('home')" class="text-hide morsel-link">Morsel</a>
-              <a ng-click="goTo('join')" class="btn btn-primary">Sign Up</a>
+              <a ng-click="goTo('join')" class="btn btn-primary" ng-hide="isLoggedIn">Sign Up</a>
               <form role="form">
                 <input class="form-control" type="text" placeholder="Search chefs, dishes, ingredients" />
               </form>

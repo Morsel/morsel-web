@@ -26,9 +26,25 @@
     @include opacity(1);
   }
 
+  .prompt-btns {
+    overflow: hidden;
+
+    a {
+      background-color: $btn-primary-bg;
+      width: 50%;
+      float: left;
+      border-right: 2px solid $morsel-primary-light;
+      padding: 20px;
+
+      &:last-child {
+        border: 0;
+      }
+    }
+  }
+
   .profile-link {
     background-color: $btn-primary-bg;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     display: block;
 
     img {
@@ -57,7 +73,7 @@
   a {
     color: $btn-default-color;
     display: block;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     text-transform: none;
 
     &:hover, &:focus {
