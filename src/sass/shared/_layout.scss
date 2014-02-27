@@ -188,6 +188,12 @@ header {
     }
   }
 
+  nav {
+    .site.open & {
+      padding: 12px 0;
+    }
+  }
+
   > .side-nav-trigger {
     position: absolute;
     top: 12px;
@@ -210,10 +216,6 @@ nav {
   display: block;
   float: right;
   padding: 25px 0;
-
-  .site.open & {
-    padding: 12px 0;
-  }
   
   ul {
     list-style: none;
