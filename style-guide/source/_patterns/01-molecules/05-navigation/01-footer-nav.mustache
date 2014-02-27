@@ -1,6 +1,13 @@
-<ul class="nav-footer">
-	<li><a href="#">Home</a></li>
-	<li><a href="#">About</a></li>
-	<li><a href="#">Blog</a></li>
-	<li><a href="#">Contact</a></li>
-</ul>
+<nav role="navigation">
+  <ul class="">
+    <li ui-route="/add-morsel">
+      <a ng-click="goTo('add-morsel')">Add Morsel</a>
+    </li>
+    <li ui-route="/myfeed">
+      <a ng-click="goTo('myfeed')" ng-show="isLoggedIn">My Feed</a>
+    </li>
+    <li>
+      <a ng-click="">Get The App</a>
+    </li>
+  </ul>
+</nav>

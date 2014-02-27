@@ -160,6 +160,24 @@ body > .container {
   content: "morsel-light-off: #f3f1ef";
   display: inline-block;
 }
+/* line 68, style.scss */
+.sg-colors li.morsel-lightest .sg-swatch {
+  background-color: #fbfbfa;
+}
+/* line 72, style.scss */
+.sg-colors li.morsel-lightest .sg-label:after {
+  content: "morsel-lightest: #fbfbfa";
+  display: inline-block;
+}
+/* line 68, style.scss */
+.sg-colors li.morsel-off-white .sg-swatch {
+  background-color: #f9f7f7;
+}
+/* line 72, style.scss */
+.sg-colors li.morsel-off-white .sg-label:after {
+  content: "morsel-off-white: #f9f7f7";
+  display: inline-block;
+}
 /* line 79, style.scss */
 .sg-colors li:before {
   display: none;
