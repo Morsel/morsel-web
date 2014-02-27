@@ -17,7 +17,7 @@
 
   </head>
   <body>
-    <div class="page-wrapper">
+    <div class="page-wrapper" ng-class="{'static-page':pageType.staticPage}">
       <nav class="side-nav" ng-class="{open:menuOpen}" role="navigation">
         <a ng-click="goTo(currentUser.username)" ng-show="isLoggedIn" class="profile-link">
           <img ng-src="{{currentUser.photos['_40x40']}}" class="img-circle" />

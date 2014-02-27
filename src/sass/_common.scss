@@ -214,5 +214,7 @@ form {
   //to be put on .container or equivalent
   .container-shadow {
     @include container-shadow();
+    @include border-bottom-left-radius(5px);
+    @include border-bottom-right-radius(5px);
   }
 }
