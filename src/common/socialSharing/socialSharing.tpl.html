@@ -1,11 +1,11 @@
 <div class="social-sharing">
   <a href="" class="btn btn-social share-facebook"><i class="common-share-facebook"></i>Share on Facebook</a>
   <a href="" class="btn btn-social share-twitter"><i class="common-share-twitter"></i>Share on Twitter</a>
-  <div class="social-sharing-additional expanded">
+  <div class="social-sharing-additional" ng-class="{expanded: socialExpanded}">
     <a href="" class="btn btn-social share-linkedin"><i class="common-share-linkedin"></i></a>
     <a href="" class="btn btn-social share-pinterest"><i class="common-share-pinterest"></i></a>
     <a href="" class="btn btn-social share-stumbleupon"><i class="common-share-stumbleupon"></i></a>
     <a href="" class="btn btn-social share-google-plus"><i class="common-share-google-plus"></i></a>
   </div>
-  <a class="btn btn-social share-expand"><i class="common-share-expand"></i></a>
+  <a ng-click="socialExpanded = !socialExpanded" class="btn btn-social share-expand"><i class="common-share-expand"></i></a>
 </div>

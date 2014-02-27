@@ -16,26 +16,26 @@ img {
 
 .profile-pic-link {
   display: inline-block;
+}
 
-  &.profile-pic-xs {
-    width: $profile-pic-xs;
-    height: $profile-pic-xs;
-  }
+.profile-pic-xs {
+  width: $profile-pic-xs;
+  height: $profile-pic-xs;
+}
 
-  &.profile-pic-s {
-    width: $profile-pic-s;
-    height: $profile-pic-s;
-  }
+.profile-pic-s {
+  width: $profile-pic-s;
+  height: $profile-pic-s;
+}
 
-  &.profile-pic-m {
-    width: $profile-pic-m;
-    height: $profile-pic-m;
-  }
-  
-  &.profile-pic-l {
-    width: $profile-pic-l;
-    height: $profile-pic-l;
-  }
+.profile-pic-m {
+  width: $profile-pic-m;
+  height: $profile-pic-m;
+}
+
+.profile-pic-l {
+  width: $profile-pic-l;
+  height: $profile-pic-l;
 }
 
 .user-info {
@@ -50,7 +50,7 @@ img {
   }
 
   .profile-pic-link {
-    margin: 0 $profile-pic-margin;
+    margin-left: $profile-pic-margin;
     float: left;
 
     & + div {
@@ -72,8 +72,7 @@ img {
     $profile-pic-margin: 10px;
 
     .profile-pic-link {
-      margin: 0 $profile-pic-margin;
-      float: left;
+      margin-left: $profile-pic-margin;
     }
   }
 }
@@ -176,6 +175,10 @@ form {
   .drop-box {
     display: none;
   }
+}
+
+.text-danger, .text-success, .text-warning {
+  font-weight: 400;
 }
 
 @media (min-width: $screen-xs-min) {

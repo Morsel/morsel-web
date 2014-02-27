@@ -10,6 +10,8 @@ angular.module('Morsel.userImage', [])
       userImageSize: '@'
     },
     link: function(scope) {
+      var placeholderAvatarUrl = 'assets/images/utility/avatars/avatar';
+
       scope.returnPhoto = function(){
         var photoSize;
 
@@ -36,7 +38,7 @@ angular.module('Morsel.userImage', [])
           return scope.userPhotos[photoSize];
         } else {
           //placeholder avatar
-          return '';
+          return placeholderAvatarUrl+photoSize+'.jpg';
         }
         
       };

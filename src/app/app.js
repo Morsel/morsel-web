@@ -22,6 +22,7 @@ angular.module( 'Morsel', [
   'Morsel.formNameFix',
   'Morsel.handleErrors',
   'Morsel.morselLike',
+  'Morsel.socialSharing',
   'Morsel.submitBtn',
   'Morsel.userImage',
   'Morsel.validatedInput',

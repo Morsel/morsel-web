@@ -1,0 +1,48 @@
+@each $color in $socialPalette {
+  .share-#{nth($color, 1)} {
+    background-color: nth($color, 2);
+
+    &:hover {
+      background-color: darken(nth($color, 2), 10%);
+    }
+  }
+}
+
+.social-sharing {
+  .social-sharing-additional {
+    display: none;
+
+    .btn-social {
+      i {
+        margin: 0;
+      }
+    }
+
+    &.expanded {
+      display: inline-block;
+      
+      & + .share-expand {
+        i {
+          @extend .common-share-contract;
+        }
+      }
+    }
+  }
+}
+
+.btn-social {
+  color: white;
+  font-weight: 300;
+  margin-right: 10px;
+
+  i {
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+}
+
+.share-expand {
+  i {
+    margin: 0;
+  }
+}
