@@ -173,7 +173,7 @@ $morsel-indicator-size: 10px;
         opacity: 0.4;
         @include filter(blur(15px));
         //extra blur support for fox and ie
-        filter: url(images/blur.svg#blur);
+        filter: url(images/utility/blur.svg#blur);
         filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='15');
       }
     }
