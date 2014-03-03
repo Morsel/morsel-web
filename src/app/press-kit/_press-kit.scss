@@ -1,15 +1,37 @@
+//make grid without padding
+$grid-columns:              12;
+$grid-gutter-width:         0;
+$grid-float-breakpoint:     $screen-md-min;
+
+.row-slim {
+  @include make-row();
+}
+.col-slim-12 {
+  @include make-md-column(12);
+}
+.col-slim-8 {
+  @include make-md-column(8);
+}
+.col-slim-6 {
+  @include make-md-column(6);
+}
+.col-slim-4 {
+  @include make-md-column(4);
+}
+.col-slim-3 {
+  @include make-md-column(3);
+}
+
+
 .press-kit {
   background-color: white;
+  //@import url(http://fonts.googleapis.com/css?family=PT+Serif:400,700);
+  //$presskit-font: 'PT Serif', serif;
 
-  .morsel {
-    .morsel-info {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background-color: rgba(0,0,0,.2);
-      color: white;
-    }
-  }
+  @import url(http://fonts.googleapis.com/css?family=Tinos:400,700);
+  $presskit-font: 'Tinos', serif;
+  
+  font-family: $presskit-font;
 
   .gi {
     min-height: 250px;
@@ -17,6 +39,39 @@
   }
 
   .morsels-wrap {
+    overflow: hidden;
+
+    .morsel-info {
+      $title-height: 54px;
+      $p-height: 36px;
+      
+      padding: 0 20px;
+      position: absolute;
+      bottom: -$p-height;
+      width: 100%;
+      background-color: rgba(0,0,0,.2);
+      color: white;
+      @include transition(bottom .2s ease-out);
+
+      h2 {
+        font-size: 34px;
+        color: white;
+        font-family: $presskit-font;
+        font-weight: 700;
+        margin: 0;
+        line-height: $title-height;
+        text-transform: none;
+      }
+
+      p {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        margin: 0;
+        line-height: $p-height;
+      }
+    }
+
     .morsel-indicator-wrap {
       position: absolute;
       width: 100%;
@@ -34,6 +89,39 @@
       .morsel-indicator-wrap {
         top: 0px;
       }
+
+      .morsel-info {
+        bottom: 0;
+      }
+    }
+  }
+
+  .fact-sheet {
+    
+  }
+
+  .restaurant-main-info {
+    text-align: center;
+    padding: 20px;
+
+    h1 {
+      font-family: $presskit-font;
+      font-size: 42px;
+      color: black;
+    }
+  }
+
+  .restaurant-facts {
+    padding: 20px;
+  }
+
+  h4 {
+    text-transform: none;
+    font-size: 16px;
+    font-family: $presskit-font;
+
+    span {
+      font-weight: 400;
     }
   }
 }
