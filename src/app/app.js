@@ -15,6 +15,7 @@ angular.module( 'Morsel', [
   'Morsel.myfeed',
   'Morsel.post',
   'Morsel.postDetail',
+  'Morsel.pressKit',
   'Morsel.profile',
   //common
   'Morsel.auth',
@@ -88,6 +89,8 @@ angular.module( 'Morsel', [
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
+  resetViewOptions();
+
   //initial fetching of user data for header/footer
   Auth.setInitialUserData().then(function(){
     updateUserData();
@@ -103,6 +106,7 @@ angular.module( 'Morsel', [
       //send them to the login page
       $location.path('/login');
     }
+    resetViewOptions();
   });
 
   //when a user accesses a new route
@@ -119,6 +123,14 @@ angular.module( 'Morsel', [
   //refresh user data
   function updateUserData() {
     $scope.currentUser = Auth.getCurrentUser();
+  }
+
+  //reset our view options
+  function resetViewOptions() {
+    $scope.viewOptions = {
+      hideHeader : false,
+      hideFooter : false
+    };
   }
 
   $scope.goTo = function(path) {
