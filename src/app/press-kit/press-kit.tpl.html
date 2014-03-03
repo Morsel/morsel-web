@@ -1,8 +1,10 @@
 <div class="press-kit">
-  <div morsel-swipe="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}" class="post-detail">
+  <div morsel-swipe="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}">
     <div class="morsels-wrap">
       <morselControls></morselControls>
-      <morselIndicatorBottom></morselIndicatorBottom>
+      <div class="morsel-indicator-wrap">
+        <morselIndicatorTop></morselIndicatorTop>
+      </div>
       <ul morsels class="morsels">
         <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
           <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
@@ -41,7 +43,9 @@
             <div morsel-swipe="{{post2.morsels.length > 1}}" morsel-swipe-index="{{post2MorselNumber}}" class="post-detail">
               <div class="morsels-wrap">
                 <morselControls></morselControls>
-                <morselIndicatorBottom></morselIndicatorBottom>
+                <div class="morsel-indicator-wrap">
+                  <morselIndicatorTop></morselIndicatorTop>
+                </div>
                 <ul morsels class="morsels">
                   <li ng-repeat="morsel in post2.morsels | orderBy:'sort_order'" class="morsel">
                     <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
