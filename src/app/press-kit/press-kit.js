@@ -32,4 +32,22 @@ angular.module( 'Morsel.pressKit', [
 
     $scope.post2 = postData;
   });
+
+  ApiPosts.getPost('265').then(function(postData){
+    $scope.post3MorselNumber = 1;
+
+    $scope.post3 = postData;
+  });
+
+  ApiPosts.getPost('268').then(function(postData){
+    $scope.post4MorselNumber = 1;
+
+    $scope.post4 = postData;
+  });
+
+  ApiPosts.getPost('264').then(function(postData){
+    $scope.post5MorselNumber = 1;
+
+    $scope.post5 = postData;
+  });
 });

@@ -2,6 +2,7 @@
 $grid-columns:              12;
 $grid-gutter-width:         0;
 $grid-float-breakpoint:     $screen-md-min;
+$blackish: #222020;
 
 .row-slim {
   @include make-row();
@@ -45,7 +46,7 @@ $grid-float-breakpoint:     $screen-md-min;
 
   .morsels-wrap {
     overflow: hidden;
-    background: black url(images/icons/loader-white.gif) center center no-repeat;
+    background: $blackish url(images/icons/loader-white.gif) center center no-repeat;
 
     .morsels-container {
       background: none;
@@ -97,13 +98,49 @@ $grid-float-breakpoint:     $screen-md-min;
       }
     }
 
+    .morsel-share-wrap {
+      background-color: rgba(0,0,0,.2);
+      @include transition(right .2s ease-out);
+      @include box-shadow(0px 0px 30px 0px rgba(0, 0, 0, 0.4));
+      z-index: 10;
+      position: absolute;
+      top: 40px;
+      right: -20px;
+
+      ul {
+        li {
+          display: block;
+          text-align: right;
+
+          a {
+            span {
+              display: none;
+            }
+
+            &:hover {
+              text-decoration: none;
+
+              span {
+                display: inline-block;
+                text-decoration: none;
+              }
+            }
+          }
+        }
+      }
+    }
+
     &:hover {
       .morsel-indicator-wrap {
-        top: 0px;
+        top: 0;
       }
 
       .morsel-info {
         bottom: 0;
+      }
+
+      .morsel-share-wrap {
+        right: 5px;
       }
     }
   }
@@ -119,7 +156,7 @@ $grid-float-breakpoint:     $screen-md-min;
     h1 {
       font-size: 42px;
       font-weight: 400;
-      color: black;
+      color: $blackish;
       margin-bottom: 0;
     }
   }
@@ -156,10 +193,32 @@ $grid-float-breakpoint:     $screen-md-min;
   }
 
   .restaurant-staff {
+    h5 {
+      font-size: 36px;
+      text-align: center;
+    }
+
     .user-info {
       > div {
         float: none;
+        margin-top: 12px;
       }
     }
+  }
+
+  .press-block {
+    min-height: 250px;
+  }
+
+  .press-tags {
+    padding: 30px;
+    font-size: 16px;
+  }
+
+  .press-footer {
+    background-color: $blackish;
+    @include box-shadow(0);
+    color: white;
+    margin: 0;
   }
 }

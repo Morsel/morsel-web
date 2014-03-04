@@ -75,15 +75,31 @@
         </div>
         <div class="row-slim">
           <div class="col-slim-6">
-            <div style="background-image:url(https://morsel-staging.s3.amazonaws.com/morsel-photos/405/_640x640_a146c1d4-0ecc-4455-baa7-d97ddf0b21c2.jpg);" class="press-photos">
-              <h3>Press Photos</h3>
+            <div morsel-swipe="{{post3.morsels.length > 1}}" morsel-swipe-index="{{post3MorselNumber}}">
+              <div class="morsels-wrap">
+                <morselControls></morselControls>
+                <div class="morsel-indicator-wrap">
+                  <morselIndicatorTop></morselIndicatorTop>
+                </div>
+                <ul morsels class="morsels">
+                  <li ng-repeat="morsel in post3.morsels | orderBy:'sort_order'" class="morsel">
+                    <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
+                      <div class="morsel-info">
+                        <h2>{{post3.title}}</h2>
+                        <p>{{morsel.description}}</p>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
           <div class="col-slim-6 restaurant-staff">
+            <h5>Staff</h5>
             <div class="user-info user-info-s">
               <div user-image username="post.creator.username" user-photos="post.creator.photos" user-image-size="profile-pic-s"></div>
               <div>
-                <h5 class="user-info-main">{{post.creator.first_name}} {{post.creator.last_name}}</h5>
+                <h3 class="user-info-main">{{post.creator.first_name}} {{post.creator.last_name}}</h3>
                 <p>{{post.creator.title}}</p>
               </div>
             </div>
@@ -91,5 +107,92 @@
         </div>
       </div>
     </div>
+    <div class="row-slim">
+      <div class="col-slim-4">
+        <div morsel-swipe="{{post4.morsels.length > 1}}" morsel-swipe-index="{{post4MorselNumber}}">
+          <div class="morsels-wrap">
+            <morselControls></morselControls>
+            <div class="morsel-indicator-wrap">
+              <morselIndicatorTop></morselIndicatorTop>
+            </div>
+            <div class="morsel-share-wrap">
+              <ul>
+                <li>
+                  <a href="">
+                    <span>Download as .zip</span>
+                    <i class="common-download"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <span>Share</span>
+                    <i class="common-share"></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <span>View Details</span>
+                    <i class="common-view-details"></i>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <ul morsels class="morsels">
+              <li ng-repeat="morsel in post4.morsels | orderBy:'sort_order'" class="morsel">
+                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
+                  <div class="morsel-info">
+                    <h2>{{post4.title}}</h2>
+                    <p>{{morsel.description}}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-slim-4 press-block press-tags">
+        A placeholder for a visual representation of all the tags associated with the restaurant
+      </div>
+      <div class="col-slim-4">
+        <div morsel-swipe="{{post5.morsels.length > 1}}" morsel-swipe-index="{{post5MorselNumber}}">
+          <div class="morsels-wrap">
+            <morselControls></morselControls>
+            <div class="morsel-indicator-wrap">
+              <morselIndicatorTop></morselIndicatorTop>
+            </div>
+            <ul morsels class="morsels">
+              <li ng-repeat="morsel in post5.morsels | orderBy:'sort_order'" class="morsel">
+                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
+                  <div class="morsel-info">
+                    <h2>{{post5.title}}</h2>
+                    <p>{{morsel.description}}</p>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <footer class="press-footer">
+    <div class="container">
+      <nav>
+        <ul>
+          <li>
+            <a href="/">Placeholder</a>
+          </li>
+          <li>
+            <a href="/">Placeholder</a>
+          </li>
+          <li>
+            <a href="/">Placeholder</a>
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <a href="" class="text-hide morsel-link">Morsel</a>
+      </div>
+    </div>
+  </footer>
 </div>
