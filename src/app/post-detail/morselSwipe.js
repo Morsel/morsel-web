@@ -68,12 +68,13 @@ angular.module('Morsel.morselSwipe', [
     scope: true,
     compile: function(tElement, tAttributes) {
       // use the compile phase to customize the DOM
-      var morsels = angular.element(document.querySelector('[morsels]')),
-          morselLi = morsels.children()[0],
+      var morsels = tElement.find('morsels'),
           slidesCount = 0,
           swipeMoved = false,
           isIndexBound = false,
-          repeatCollection = 'post.morsels';
+          // add a wrapper div that will hide the overflow
+          carousel = morsels.wrap('<div class="morsels-container" />'),
+          container = carousel.parent();
 
       return function(scope, iElement, iAttributes, containerCtrl) {
 
@@ -86,60 +87,89 @@ angular.module('Morsel.morselSwipe', [
             destination,
             slidesCount = 0,
             // javascript based animation easing
-            timestamp;
+            timestamp,
+            thisMorselSwipeNum,
+            morselsModel;
 
-        // add a wrapper div that will hide the overflow
-        var carousel = morsels.wrap('<div class="morsels-container"></div>'),
-            container = carousel.parent();
+        //make sure we create a new object to store data for this swipe
+        thisMorselSwipeNum = scope.morselSwipes.length;
+        scope.morselSwipes[thisMorselSwipeNum] = {};
 
-        // if indicator or controls, setup the watch
+        //see if this is even swipeable
+        iAttributes.$observe('morselSwipe', function(newValue, oldValue) {
+          // only bind swipe when it's not switched off
+          if(newValue !== 'false' && newValue !== 'off') {
+            $swipe.bind(carousel, {
+              start: swipeStart,
+              move: swipeMove,
+              end: swipeEnd,
+              cancel: function(event) {
+                swipeEnd({}, event);
+              }
+            });
 
-        updateIndicatorArray();
-        scope.$watch('carouselIndex', function(newValue) {
-          scope.indicatorIndex = newValue;
+            //enable indicators
+            scope.morselSwipes[thisMorselSwipeNum].indicatorsDisabled = false;
+
+            // if indicator or controls, setup the watch
+            updateIndicatorArray();
+            scope.$watch('morselSwipes['+thisMorselSwipeNum+'].carouselIndex', function(newValue) {
+              scope.morselSwipes[thisMorselSwipeNum].indicatorIndex = newValue;
+            });
+            scope.$watch('morselSwipes['+thisMorselSwipeNum+'].indicatorIndex', function(newValue) {
+              goToSlide(newValue, true);
+            });
+
+            // enable two sets of carousel indicators
+            var indicatorTop = $compile('<div index="morselSwipes['+thisMorselSwipeNum+'].indicatorIndex" items="morselSwipes['+thisMorselSwipeNum+'].carouselIndicatorArray" indicators-disabled="morselSwipes['+thisMorselSwipeNum+'].indicatorsDisabled" morsel-indicators></div>')(scope);
+            iElement.find('morselIndicatorTop').replaceWith(indicatorTop);
+
+            var indicatorBottom = $compile('<div index="morselSwipes['+thisMorselSwipeNum+'].indicatorIndex" items="morselSwipes['+thisMorselSwipeNum+'].carouselIndicatorArray" indicators-disabled="morselSwipes['+thisMorselSwipeNum+'].indicatorsDisabled" morsel-indicators></div>')(scope);
+            iElement.find('morselIndicatorBottom').replaceWith(indicatorBottom);
+
+            var controls = $compile('<div index="morselSwipes['+thisMorselSwipeNum+'].indicatorIndex" items="morselSwipes['+thisMorselSwipeNum+'].carouselIndicatorArray" morsel-controls></div>')(scope);
+            iElement.find('morselControls').append(controls);
+          } else {
+            //disable indicators
+            scope.morselSwipes[thisMorselSwipeNum].indicatorsDisabled = true;
+
+            // unbind swipe when it's switched off
+            carousel.unbind();
+          }
         });
-        scope.$watch('indicatorIndex', function(newValue) {
-          goToSlide(newValue, true);
+
+        //set up the corrensponding morsel model
+        iAttributes.$observe('morselSwipeMorsels', function(newValue, oldValue) {
+          morselsModel = newValue;
+
+          // enable created at stamp
+          var createdAt = $compile('<div time-ago="'+morselsModel+'[morselSwipes['+thisMorselSwipeNum+'].indicatorIndex].created_at" morsel-posted-at></div>')(scope);
+          iElement.find('morselPostedAt').replaceWith(createdAt);
+
+          // watch the given collection
+          scope.$watchCollection(morselsModel, function(newValue, oldValue) {
+            slidesCount = 0;
+            if (angular.isArray(newValue)) {
+              slidesCount = newValue.length;
+            } else if (angular.isObject(newValue)) {
+              slidesCount = Object.keys(newValue).length;
+            }
+            updateIndicatorArray();
+            if (!containerWidth) {
+              updateContainerWidth();
+            }
+            goToSlide(scope.morselSwipes[thisMorselSwipeNum].carouselIndex);
+            });
         });
 
-        // enable two sets of carousel indicators
-        var indicatorTop = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" indicators-disabled="indicatorsDisabled" morsel-indicators></div>')(scope);
-        iElement.find('morselIndicatorTop').replaceWith(indicatorTop);
-
-        var indicatorBottom = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" indicators-disabled="indicatorsDisabled" morsel-indicators></div>')(scope);
-        iElement.find('morselIndicatorBottom').replaceWith(indicatorBottom);
-
-        var controls = $compile('<div index="indicatorIndex" items="carouselIndicatorArray" morsel-controls></div>')(scope);
-        iElement.find('morselControls').append(controls);
-
-        // enable created at stamp
-        var createdAt = $compile('<div time-ago="post.morsels[indicatorIndex].created_at" morsel-posted-at></div>')(scope);
-        iElement.find('morselPostedAt').replaceWith(createdAt);
-
-        scope.carouselIndex = 0;
+        scope.morselSwipes[thisMorselSwipeNum].carouselIndex = 0;
 
         // handle index databinding
-        //if (iAttributes.morselSwipeIndex) {
         iAttributes.$observe('morselSwipeIndex', function(newValue, oldValue) {
           if(!isNaN(newValue)) {
             //carousel starts at 0
-            scope.carouselIndex = newValue - 1;
+            scope.morselSwipes[thisMorselSwipeNum].carouselIndex = newValue - 1;
           }
-        });
-
-        // watch the given collection
-        scope.$watchCollection(repeatCollection, function(newValue, oldValue) {
-          slidesCount = 0;
-          if (angular.isArray(newValue)) {
-            slidesCount = newValue.length;
-          } else if (angular.isObject(newValue)) {
-            slidesCount = Object.keys(newValue).length;
-          }
-          updateIndicatorArray();
-          if (!containerWidth) {
-            updateContainerWidth();
-          }
-          goToSlide(scope.carouselIndex);
         });
 
         function updateIndicatorArray() {
@@ -148,7 +178,7 @@ angular.module('Morsel.morselSwipe', [
           for (var i = 0; i < slidesCount; i++) {
             items[i] = i;
           }
-          scope.carouselIndicatorArray = items;
+          scope.morselSwipes[thisMorselSwipeNum].carouselIndicatorArray = items;
         }
 
         function getCarouselWidth() {
@@ -171,14 +201,14 @@ angular.module('Morsel.morselSwipe', [
 
         function scroll(x) {
           // use CSS 3D transform to move the carousel
-          //console.log('scroll', x, 'index', scope.carouselIndex);
+          //console.log('scroll', x, 'index', scope.morselSwipes[thisMorselSwipeNum].carouselIndex);
           if (isNaN(x)) {
-            x = scope.carouselIndex * containerWidth;
+            x = scope.morselSwipes[thisMorselSwipeNum].carouselIndex * containerWidth;
           }
 
           offset = x;
           var move = -Math.round(offset);
-          carousel[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
+          carousel.find('ul')[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
         }
 
         function autoScroll() {
@@ -205,7 +235,7 @@ angular.module('Morsel.morselSwipe', [
 
         function goToSlide(i, animate) {
           if (isNaN(i)) {
-            i = scope.carouselIndex;
+            i = scope.morselSwipes[thisMorselSwipeNum].carouselIndex;
           }
           if (animate) {
             // simulate a swipe so we have the standard animation
@@ -214,7 +244,7 @@ angular.module('Morsel.morselSwipe', [
             swipeEnd(null, null, true);
             return;
           }
-          scope.carouselIndex = capIndex(i);
+          scope.morselSwipes[thisMorselSwipeNum].carouselIndex = capIndex(i);
           // if outside of angular scope, trigger angular digest cycle
           // use local digest only for perfs if no index bound
           if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {
@@ -244,9 +274,9 @@ angular.module('Morsel.morselSwipe', [
         function capPosition(x) {
           // limit position if start or end of slides
           var position = x;
-          if (scope.carouselIndex===0) {
+          if (scope.morselSwipes[thisMorselSwipeNum].carouselIndex===0) {
             position = Math.max(-getAbsMoveTreshold(), position);
-          } else if (scope.carouselIndex===slidesCount-1) {
+          } else if (scope.morselSwipes[thisMorselSwipeNum].carouselIndex===slidesCount-1) {
             position = Math.min(((slidesCount-1)*containerWidth + getAbsMoveTreshold()), position);
           }
           return position;
@@ -292,14 +322,14 @@ angular.module('Morsel.morselSwipe', [
         }
 
         function swipeEnd(coords, event, forceAnimation) {
-          var newMorselId;
+          var newMorselNum;
 
           // Prevent clicks on buttons inside slider to trigger "swipeEnd" event on touchend/mouseup
           if(event && !swipeMoved) {
             return;
           }
 
-          //console.log('swipeEnd', 'scope.carouselIndex', scope.carouselIndex);
+          //console.log('swipeEnd', 'scope.morselSwipes[thisMorselSwipeNum].carouselIndex', scope.morselSwipes[thisMorselSwipeNum].carouselIndex);
           $document.unbind('mouseup', documentMouseUpEvent);
           pressed = false;
           swipeMoved = false;
@@ -307,20 +337,20 @@ angular.module('Morsel.morselSwipe', [
           destination = offset;
 
           var minMove = getAbsMoveTreshold(),
-              currentOffset = (scope.carouselIndex * containerWidth),
+              currentOffset = (scope.morselSwipes[thisMorselSwipeNum].carouselIndex * containerWidth),
               absMove = currentOffset - destination,
               slidesMove = -Math[absMove>=0?'ceil':'floor'](absMove / containerWidth),
               shouldMove = Math.abs(absMove) > minMove;
 
-          if ((slidesMove + scope.carouselIndex) >= slidesCount ) {
-            slidesMove = slidesCount - 1 - scope.carouselIndex;
+          if ((slidesMove + scope.morselSwipes[thisMorselSwipeNum].carouselIndex) >= slidesCount ) {
+            slidesMove = slidesCount - 1 - scope.morselSwipes[thisMorselSwipeNum].carouselIndex;
           }
-          if ((slidesMove + scope.carouselIndex) < 0) {
-            slidesMove = -scope.carouselIndex;
+          if ((slidesMove + scope.morselSwipes[thisMorselSwipeNum].carouselIndex) < 0) {
+            slidesMove = -scope.morselSwipes[thisMorselSwipeNum].carouselIndex;
           }
           var moveOffset = shouldMove?slidesMove:0;
 
-          destination = (moveOffset + scope.carouselIndex) * containerWidth;
+          destination = (moveOffset + scope.morselSwipes[thisMorselSwipeNum].carouselIndex) * containerWidth;
           amplitude = destination - offset;
           timestamp = Date.now();
           if (forceAnimation) {
@@ -330,9 +360,12 @@ angular.module('Morsel.morselSwipe', [
 
           //we swiped to a new morsel, we should do some stuff
           if(shouldMove && moveOffset) {
-            newMorselId = scope.post.morsels[scope.carouselIndex + moveOffset].id;
-            //update our comments
-            scope.getComments(newMorselId);
+            newMorselNum = scope.morselSwipes[thisMorselSwipeNum].carouselIndex + moveOffset;
+
+            //propagate up to parents in case they're looking
+            if(scope.swipeEvents) {
+              scope.swipeEvents.needsComments = newMorselNum;
+            }
           }
 
           if (event) {
@@ -342,33 +375,10 @@ angular.module('Morsel.morselSwipe', [
           return false;
         }
 
-        iAttributes.$observe('morselSwipe', function(newValue, oldValue) {
-          // only bind swipe when it's not switched off
-          if(newValue !== 'false' && newValue !== 'off') {
-            $swipe.bind(carousel, {
-              start: swipeStart,
-              move: swipeMove,
-              end: swipeEnd,
-              cancel: function(event) {
-                swipeEnd({}, event);
-              }
-            });
-
-            //enable indicators
-            scope.indicatorsDisabled = false;
-          } else {
-            //disable indicators
-            scope.indicatorsDisabled = true;
-
-            // unbind swipe when it's switched off
-            carousel.unbind();
-          }
-        });
-
         // initialise first slide only if no binding
         // if so, the binding will trigger the first init
         if (!isIndexBound) {
-          goToSlide(scope.carouselIndex);
+          goToSlide(scope.morselSwipes[thisMorselSwipeNum].carouselIndex);
         }
 
         // detect supported CSS property

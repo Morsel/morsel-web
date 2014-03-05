@@ -1,4 +1,4 @@
-<div morsel-swipe="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}" class="post-detail">
+<div morsel-swipe="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}" morsel-swipe-morsels="post.morsels" class="post-detail">
   <div class="post-header">
     <div class="container">
       <h1>{{post.title}}</h1>
@@ -19,48 +19,50 @@
     <div class="morsels-wrap">
       <morselControls></morselControls>
       <morselIndicatorBottom></morselIndicatorBottom>
-      <ul morsels class="morsels">
-        <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
-          <i morsel-like></i>
-          <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
-          <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
-            <p>{{morsel.description}}</p>
-          </div>
-          <div class="morsel-content morsel-comments">
-            <h4 class="comments-header h2">Comments <span ng-show="morsel.comments.length > 0">({{morsel.comments.length}})</span><i class="common-comments"></i></h4>
-            <hr />
-            <ul ng-show="morsel.comments">
-              <li ng-repeat="comment in morsel.comments | reverse" class="morsel-comment">
-                <div class="user-info user-info-s">
-                  <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
-                  <div>
-                    <span am-time-ago="comment.created_at" class="time-ago"></span>
-                    <h5 class="user-info-main">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
-                    <p class="comment-description">{{comment.description}}</p>
-                  </div>
-                </div>
-              </li>
-            </ul>
-            <div ng-show="!morsel.comments" class="loader"></div>
-            <div ng-show="morsel.comments && morsel.comments.length === 0" class="empty-state">
-              <p>There are no comments</p>
+      <morsels>
+        <ul class="morsels">
+          <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
+            <i morsel-like></i>
+            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
+            <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
+              <p>{{morsel.description}}</p>
             </div>
-            <div class="add-comment-morsel" ng-show="isLoggedIn">
-              <div class="user-info user-info-s">
-                <div user-image username="currentUser.username" user-photos="currentUser.photos" user-image-size="profile-pic-s"></div>
-                <div>
-                  <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
-                    <div class="form-group">
-                      <textarea class="form-control" rows="3" ng-model="addCommentDescription" placeholder="Write your comment" required></textarea>
+            <div class="morsel-content morsel-comments">
+              <h4 class="comments-header h2">Comments <span ng-show="morsel.comments.length > 0">({{morsel.comments.length}})</span><i class="common-comments"></i></h4>
+              <hr />
+              <ul ng-show="morsel.comments">
+                <li ng-repeat="comment in morsel.comments | reverse" class="morsel-comment">
+                  <div class="user-info user-info-s">
+                    <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
+                    <div>
+                      <span am-time-ago="comment.created_at" class="time-ago"></span>
+                      <h5 class="user-info-main">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
+                      <p class="comment-description">{{comment.description}}</p>
                     </div>
-                    <button type="submit" ng-disabled="addCommentForm.$invalid" class="btn btn-primary">Add Comment</button>
-                  </form>
+                  </div>
+                </li>
+              </ul>
+              <div ng-show="!morsel.comments" class="loader"></div>
+              <div ng-show="morsel.comments && morsel.comments.length === 0" class="empty-state">
+                <p>There are no comments</p>
+              </div>
+              <div class="add-comment-morsel" ng-show="isLoggedIn">
+                <div class="user-info user-info-s">
+                  <div user-image username="currentUser.username" user-photos="currentUser.photos" user-image-size="profile-pic-s"></div>
+                  <div>
+                    <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
+                      <div class="form-group">
+                        <textarea class="form-control" rows="3" ng-model="addCommentDescription" placeholder="Write your comment" required></textarea>
+                      </div>
+                      <button type="submit" ng-disabled="addCommentForm.$invalid" class="btn btn-primary">Add Comment</button>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </morsels>
     </div>
   </div>
   <div class="blur-bg">

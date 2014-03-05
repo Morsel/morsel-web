@@ -21,6 +21,9 @@ angular.module( 'Morsel.pressKit', [
   $scope.viewOptions.hideHeader = true;
   $scope.viewOptions.hideFooter = true;
 
+  //create an array of all morsel swiping on the page. will house directive data
+  $scope.morselSwipes = [];
+
   ApiPosts.getPost('5').then(function(postData){
     $scope.postMorselNumber = 1;
 

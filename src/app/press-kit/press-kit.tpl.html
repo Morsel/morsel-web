@@ -1,20 +1,22 @@
 <div class="press-kit">
-  <div morsel-swipe="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}">
+  <div morsel-swipe="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}" morsel-swipe-morsels="post.morsels">
     <div class="morsels-wrap">
       <morselControls></morselControls>
       <div class="morsel-indicator-wrap">
         <morselIndicatorTop></morselIndicatorTop>
       </div>
-      <ul morsels class="morsels">
-        <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
-          <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
-            <div class="morsel-info">
-              <h2>{{post.title}}</h2>
-              <p>{{morsel.description}}</p>
+      <morsels>
+        <ul class="morsels">
+          <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
+            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
+              <div class="morsel-info">
+                <h2>{{post.title}}</h2>
+                <p>{{morsel.description}}</p>
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </morsels>
     </div>
   </div>
   <div class="container-fluid">
@@ -53,44 +55,48 @@
       <div class="col-slim-8">
         <div class="row-slim">
           <div class="col-slim-12">
-            <div morsel-swipe="{{post2.morsels.length > 1}}" morsel-swipe-index="{{post2MorselNumber}}">
+            <div morsel-swipe="{{post2.morsels.length > 1}}" morsel-swipe-index="{{post2MorselNumber}}" morsel-swipe-morsels="post2.morsels">
               <div class="morsels-wrap">
                 <morselControls></morselControls>
                 <div class="morsel-indicator-wrap">
                   <morselIndicatorTop></morselIndicatorTop>
                 </div>
-                <ul morsels class="morsels">
-                  <li ng-repeat="morsel in post2.morsels | orderBy:'sort_order'" class="morsel">
-                    <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
-                      <div class="morsel-info">
-                        <h2>{{post2.title}}</h2>
-                        <p>{{morsel.description}}</p>
+                <morsels>
+                  <ul class="morsels">
+                    <li ng-repeat="morsel in post2.morsels | orderBy:'sort_order'" class="morsel">
+                      <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
+                        <div class="morsel-info">
+                          <h2>{{post2.title}}</h2>
+                          <p>{{morsel.description}}</p>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                </ul>
+                    </li>
+                  </ul>
+                </morsels>
               </div>
             </div>
           </div>
         </div>
         <div class="row-slim">
           <div class="col-slim-6">
-            <div morsel-swipe="{{post3.morsels.length > 1}}" morsel-swipe-index="{{post3MorselNumber}}">
+            <div morsel-swipe="{{post3.morsels.length > 1}}" morsel-swipe-index="{{post3MorselNumber}}" morsel-swipe-morsels="post3.morsels">
               <div class="morsels-wrap">
                 <morselControls></morselControls>
                 <div class="morsel-indicator-wrap">
                   <morselIndicatorTop></morselIndicatorTop>
                 </div>
-                <ul morsels class="morsels">
-                  <li ng-repeat="morsel in post3.morsels | orderBy:'sort_order'" class="morsel">
-                    <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
-                      <div class="morsel-info">
-                        <h2>{{post3.title}}</h2>
-                        <p>{{morsel.description}}</p>
+                <morsels>
+                  <ul class="morsels">
+                    <li ng-repeat="morsel in post3.morsels | orderBy:'sort_order'" class="morsel">
+                      <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
+                        <div class="morsel-info">
+                          <h2>{{post3.title}}</h2>
+                          <p>{{morsel.description}}</p>
+                        </div>
                       </div>
-                    </div>
-                  </li>
-                </ul>
+                    </li>
+                  </ul>
+                </morsels>
               </div>
             </div>
           </div>
@@ -109,7 +115,7 @@
     </div>
     <div class="row-slim">
       <div class="col-slim-4">
-        <div morsel-swipe="{{post4.morsels.length > 1}}" morsel-swipe-index="{{post4MorselNumber}}">
+        <div morsel-swipe="{{post4.morsels.length > 1}}" morsel-swipe-index="{{post4MorselNumber}}" morsel-swipe-morsels="post4.morsels">
           <div class="morsels-wrap">
             <morselControls></morselControls>
             <div class="morsel-indicator-wrap">
@@ -137,16 +143,18 @@
                 </li>
               </ul>
             </div>
-            <ul morsels class="morsels">
-              <li ng-repeat="morsel in post4.morsels | orderBy:'sort_order'" class="morsel">
-                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
-                  <div class="morsel-info">
-                    <h2>{{post4.title}}</h2>
-                    <p>{{morsel.description}}</p>
+            <morsels>
+              <ul class="morsels">
+                <li ng-repeat="morsel in post4.morsels | orderBy:'sort_order'" class="morsel">
+                  <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
+                    <div class="morsel-info">
+                      <h2>{{post4.title}}</h2>
+                      <p>{{morsel.description}}</p>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </morsels>
           </div>
         </div>
       </div>
@@ -154,22 +162,24 @@
         A placeholder for a visual representation of all the tags associated with the restaurant
       </div>
       <div class="col-slim-4">
-        <div morsel-swipe="{{post5.morsels.length > 1}}" morsel-swipe-index="{{post5MorselNumber}}">
+        <div morsel-swipe="{{post5.morsels.length > 1}}" morsel-swipe-index="{{post5MorselNumber}}" morsel-swipe-morsels="post5.morsels">
           <div class="morsels-wrap">
             <morselControls></morselControls>
             <div class="morsel-indicator-wrap">
               <morselIndicatorTop></morselIndicatorTop>
             </div>
-            <ul morsels class="morsels">
-              <li ng-repeat="morsel in post5.morsels | orderBy:'sort_order'" class="morsel">
-                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
-                  <div class="morsel-info">
-                    <h2>{{post5.title}}</h2>
-                    <p>{{morsel.description}}</p>
+            <morsels>
+              <ul class="morsels">
+                <li ng-repeat="morsel in post5.morsels | orderBy:'sort_order'" class="morsel">
+                  <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});">
+                    <div class="morsel-info">
+                      <h2>{{post5.title}}</h2>
+                      <p>{{morsel.description}}</p>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </ul>
+                </li>
+              </ul>
+            </morsels>
           </div>
         </div>
       </div>
