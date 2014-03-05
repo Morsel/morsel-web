@@ -5,6 +5,7 @@
       <div class="morsel-indicator-wrap">
         <morselIndicatorTop></morselIndicatorTop>
       </div>
+      <div morsel-press-share></div>
       <morsels>
         <ul class="morsels">
           <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
@@ -61,6 +62,7 @@
                 <div class="morsel-indicator-wrap">
                   <morselIndicatorTop></morselIndicatorTop>
                 </div>
+                <div morsel-press-share></div>
                 <morsels>
                   <ul class="morsels">
                     <li ng-repeat="morsel in post2.morsels | orderBy:'sort_order'" class="morsel">
@@ -85,6 +87,7 @@
                 <div class="morsel-indicator-wrap">
                   <morselIndicatorTop></morselIndicatorTop>
                 </div>
+                <div morsel-press-share></div>
                 <morsels>
                   <ul class="morsels">
                     <li ng-repeat="morsel in post3.morsels | orderBy:'sort_order'" class="morsel">
@@ -121,28 +124,7 @@
             <div class="morsel-indicator-wrap">
               <morselIndicatorTop></morselIndicatorTop>
             </div>
-            <div class="morsel-share-wrap">
-              <ul>
-                <li>
-                  <a href="">
-                    <span>Download as .zip</span>
-                    <i class="common-download"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <span>Share</span>
-                    <i class="common-share"></i>
-                  </a>
-                </li>
-                <li>
-                  <a href="">
-                    <span>View Details</span>
-                    <i class="common-view-details"></i>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            <div morsel-press-share></div>
             <morsels>
               <ul class="morsels">
                 <li ng-repeat="morsel in post4.morsels | orderBy:'sort_order'" class="morsel">
@@ -168,6 +150,7 @@
             <div class="morsel-indicator-wrap">
               <morselIndicatorTop></morselIndicatorTop>
             </div>
+            <div morsel-press-share></div>
             <morsels>
               <ul class="morsels">
                 <li ng-repeat="morsel in post5.morsels | orderBy:'sort_order'" class="morsel">

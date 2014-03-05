@@ -1,6 +1,4 @@
-angular.module( 'Morsel.pressKit', [
-  'Morsel.morselSwipe'
-])
+angular.module( 'Morsel.pressKit', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'pressKit', {
