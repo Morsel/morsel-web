@@ -1,0 +1,45 @@
+.immersive {
+  header {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    background: none;
+    width: 100%;
+
+    h1 {
+      float: left;
+      margin-left: 50px;
+    }
+
+    nav {
+      float: right;
+      margin-right: 50px;
+    }
+  }
+
+  h2 {
+    margin: 0;
+    position: absolute;
+    top: 100px;
+    right: 50px;
+    width: 200px;
+    color: white;
+    z-index: 2;
+  }
+
+  .morsels {
+    .morsel {
+      display: block;
+
+      .morsel-info {
+        position: absolute;
+        top: 200px;
+        right: 50px;
+        width: 200px;
+        color: white;
+        z-index: 2;
+      }
+    }
+  }
+}
