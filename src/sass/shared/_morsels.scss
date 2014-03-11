@@ -3,10 +3,6 @@ $morsel-indicator-size: 10px;
 
 .morsels-wrap {
   position: relative;
-
-  .morsel-indicators {
-    display: none;
-  }
 }
 
 .morsels {
@@ -63,6 +59,13 @@ $morsel-indicator-size: 10px;
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAICAIAAAC+k6JsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADRJREFUeNpi/PnzJwMMfPv2jQmZw8XFxYTMATKYkDkgPjIHxAdygEIIPhAjC0HNgwsBBBgAZt0a3cE2YmkAAAAASUVORK5CYII=);
 }
 
+.morsel-indicator-wrap {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+  z-index: 1;
+}
+
 .morsel-indicators {
   display: block;
   text-align: center;
@@ -70,10 +73,11 @@ $morsel-indicator-size: 10px;
   span {
     width: $morsel-indicator-size;
     height: $morsel-indicator-size;
-    background-color: white;
+    background-color: transparent;
+    border: 1px solid white;
     border-radius: 50%;
-    margin: 0 2px;
-    display: inline-block;
+    margin: 2px 0;
+    display: block;
     @include transition(background-color .2s ease-out);
 
     &:hover, &:focus {
