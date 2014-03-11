@@ -1,0 +1,22 @@
+<div>
+  <div morsel-swipe-vertical="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}" morsel-swipe-morsels="post.morsels">
+    <div class="morsels-wrap">
+      <morselControls></morselControls>
+      <div class="morsel-indicator-wrap">
+        <morselIndicatorTop></morselIndicatorTop>
+      </div>
+      <morsels>
+        <ul class="morsels vertical">
+          <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
+            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});" ng-style="morselStyle.height">
+              <div class="morsel-info">
+                <h2>{{post.title}}</h2>
+                <p>{{morsel.description}}</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </morsels>
+    </div>
+  </div>
+</div>

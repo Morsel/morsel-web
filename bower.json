@@ -5,6 +5,7 @@
     "angular": "1.2.7",
     "angular-mocks": "1.2.7",
     "angular-bootstrap": "~0.3.0",
+    "angular-swipe":  "git@github.com:marmorkuchen-net/angular-swipe.git",
     "angular-touch": "~1.2.10",
     "angular-ui-router": "~0.0.1",
     "angular-ui-utils": "~0.0.3",

@@ -16,7 +16,8 @@ angular.module( 'Morsel', [
   'Morsel.post',
   'Morsel.postDetail',
   'Morsel.pressKit',
-  'Morsel.profile',
+  'Morsel.restaurant',
+  'Morsel.profile',//:username in route clobbers other routes - this needs to be last until a better solution is found
   //common
   'Morsel.auth',
   'Morsel.bgImage',
@@ -25,6 +26,7 @@ angular.module( 'Morsel', [
   'Morsel.morselLike',
   'Morsel.morselPressShare',
   'Morsel.morselSwipe',
+  'Morsel.morselSwipeVertical',
   'Morsel.socialSharing',
   'Morsel.submitBtn',
   'Morsel.userImage',
@@ -38,6 +40,7 @@ angular.module( 'Morsel', [
   'Morsel.apiUsers',
   //libs
   'angularMoment',
+  'swipe',
   'restangular',
   'ui.bootstrap',
   'ui.state',
