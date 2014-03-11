@@ -41,7 +41,9 @@ angular.module('Morsel.morselSwipeVertical', [
             // javascript based animation easing
             timestamp,
             thisMorselSwipeNum,
-            morselsModel;
+            morselsModel,
+            handleMouseWheel,
+            hamster;
 
         //make sure we create a new object to store data for this swipe
         thisMorselSwipeNum = scope.morselSwipes.length;
@@ -371,6 +373,50 @@ angular.module('Morsel.morselSwipeVertical', [
           $document.unbind('mouseup', documentMouseUpEvent);
           winEl.unbind('orientationchange', onOrientationChange);
           winEl.unbind('resize', onOrientationChange);
+        });
+
+        //deal with mousewheel scrolling
+        /*
+         * Modified from:
+         * angular-mousewheel v1.0.4
+         * (c) 2013 Monospaced http://monospaced.com
+         * License: MIT
+         */
+        handleMouseWheel = function(event, delta, deltaX, deltaY){
+          var moveOffset,
+              slidesMove;
+
+          if(deltaY !== 0) {
+            //if we scroll up and aren't on the first morsel
+            if (deltaY > 0 && scope.morselSwipes[thisMorselSwipeNum].carouselIndex > 0 ) {
+              slidesMove = -1;
+            }
+            //if we scroll down and aren't on the last morsel
+            if (deltaY < 0 && scope.morselSwipes[thisMorselSwipeNum].carouselIndex < slidesCount - 1) {
+              slidesMove = 1;
+            }
+
+            moveOffset = slidesMove?slidesMove:0;
+
+            destination = (moveOffset + scope.morselSwipes[thisMorselSwipeNum].carouselIndex) * containerHeight;
+            amplitude = destination - offset;
+            timestamp = Date.now();
+            requestAnimationFrame(autoScroll);
+          }
+        };
+
+        // don't create multiple Hamster instances per element
+        if (!(hamster = iElement.data('hamster'))) {
+          hamster = new Hamster(iElement[0]);
+          iElement.data('hamster', hamster);
+        }
+
+        // bind Hamster wheel event
+        hamster.wheel(handleMouseWheel);
+
+        // unbind Hamster wheel event
+        scope.$on('$destroy', function(){
+          hamster.unwheel(handleMouseWheel);
         });
       };
     }

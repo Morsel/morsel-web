@@ -10,6 +10,7 @@
     "angular-ui-router": "~0.0.1",
     "angular-ui-utils": "~0.0.3",
     "bower-angular-placeholders": "~0.0.2",
+    "hamsterjs" : "1.0.4",
     "ngInfiniteScroll": "git://github.com/arusanov/ngInfiniteScroll.git#e0b672ead5917431d5105df56c481e5d3cdee487",
     "ngstorage": "~0.3.0",
     "restangular": "",

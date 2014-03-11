@@ -52,4 +52,8 @@ angular.module( 'Morsel.restaurant', [])
 
     $scope.post5 = postData;
   });
+
+  $scope.test1 =  function(event, delta, deltaX, deltaY){
+    console.log('test1');
+  };
 });
