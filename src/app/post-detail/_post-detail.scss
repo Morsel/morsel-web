@@ -1,6 +1,4 @@
 $post-info-height: 70px;
-$morsel-indicator-padding: 10px;
-$morsel-indicator-size: 10px;
 
 .post-detail {
   h1 {
@@ -36,95 +34,6 @@ $morsel-indicator-size: 10px;
 
     h1 {
       display: none;
-    }
-  }
-
-  .morsels-wrap {
-    position: relative;
-
-    .morsel-indicators {
-      display: none;
-    }
-  }
-
-  .morsels {
-    position: relative;
-    @include translate3d(0,0,0);
-    white-space: nowrap;
-    overflow: visible;
-    padding: 0;
-    margin: 0;
-
-    .morsel {
-      position: relative;
-      white-space: normal;
-      vertical-align: top;
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-      @include backface-visibility(hidden);
-
-      .morsel-img {
-        background-position: 50% 50%;
-        background-size: cover;
-        height: 275px;
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-
-      .morsel-content {
-        padding: 30px 40px;
-        background: $morsel-background;
-        font-size: 16px;
-
-        &.text-morsel {
-          text-align: center;
-          font-size: 20px;
-          line-height: 34px;
-          padding: 30px 30px;
-        }
-
-        & + .morsel-content {
-          margin-top: 20px;
-        }
-      }
-    }
-  }
-
-  .morsels-container {
-    overflow: hidden;
-    position: relative;
-    background-position: top left;
-    background-repeat: repeat;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAICAIAAAC+k6JsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAADRJREFUeNpi/PnzJwMMfPv2jQmZw8XFxYTMATKYkDkgPjIHxAdygEIIPhAjC0HNgwsBBBgAZt0a3cE2YmkAAAAASUVORK5CYII=);
-  }
-
-  .morsel-indicators {
-    display: block;
-    text-align: center;
-
-    span {
-      width: $morsel-indicator-size;
-      height: $morsel-indicator-size;
-      background-color: white;
-      border-radius: 50%;
-      margin: 0 2px;
-      display: inline-block;
-      @include transition(background-color .2s ease-out);
-
-      &:hover, &:focus {
-        cursor: pointer;
-      }
-
-      &.active {
-        background-color: $morsel-primary;
-      }
-    }
-
-    &.disabled {
-      visibility: hidden;
     }
   }
 
@@ -186,46 +95,6 @@ $morsel-indicator-size: 10px;
       padding-left: 0;
       padding-right: 0;
     }
-
-    .morsels {
-      .morsel {
-        .morsel-img {
-          height: $morsel-height-s;
-        }
-      }
-    }
-
-    .morsel-control {
-      width: $arrow-height;
-      height: $arrow-height;
-      position: absolute;
-      top: $morsel-height-s/2 - $arrow-height/2;
-      z-index: 1;
-      background-repeat: no-repeat;
-      background-color: $morsel-primary;
-
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAiCAYAAADMDo5aAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlNJREFUeNrsmttqwkAQhj1Qz+LL9BF6KSjSGy8K9Tl62xYRPCCCIioGQRR7W1uKglJbUPoyvaxF0gmdwLYkO+agskl++K80szufcZPdGb8syz4LOgMPwA9oEXWJvgJ/m46igDTpIHgi/+oLnLMQ61TO4dxlzCVoNpYViGP5r5QJZQSCmGEgqhqbhWkW4lDWljKxtAAQ0xoQVQ3NwAwYXAmC4D44r/N5CFwQYF0s4Fy1lMccg4daI5VfqS/z9QgOCXBHhnCuPPWN3Jn7DhwA94iBn8BhgdbIMM6Zpx7mbgtIP7hDDPgMjgj41I7g3HnqIANLIJUAbWKgF3BMQIiqY5gDT20KJgWxSQwwFxwiC3NO5NrkweRBbBCBFw6ByMJcEDk39GDqQawRAZcOg8jCXBK517RgagWrEoFewQkHQlSdwBx5qlIgy0SAN3DSwRBVJzFXnsp6IEvEhe/glAsgqk5hzjyV/oO8Jy7YuAwiC3NDsFHY+ZRF8xZ2ijecXeQH+AL86XOnUuAZ+JzznbuAz5M9wlu4SNy+axf/tdcEm6L3sDnAw0Z1hbhw5aLXnxXBomLHC3ncwRDjdryQq1vEurdF1FV93y2id2hh06EFC7NFBJ456BhtRuTaMnOMZvRgNyowxOihD3ZZmF0Xlxq6dpQajBS/poJUENlK4vSYxS+2HCu5qBwrHaIcy8IcEBOYCAByQuQwMNptYfTQYge+Bo90Pt+CJQGOGCScq5ZGmOPuGN1oek1UWYHWyOypm6i02vq2Arf1be1o6/N7jab2NJr+CDAAfkGbVy1Usc0AAAAASUVORK5CYII=);
-
-
-      &:hover {
-        cursor: pointer;
-        background-color: $morsel-primary-dark;
-      }
-
-      &.disabled {
-        display: none !important;
-      }
-    }
-
-    .morsel-control-prev {
-      background-position: 18px center;
-      left: 0;
-    }
-
-    .morsel-control-next {
-      background-position: -41px center;
-      right: 0;
-    }
   }
 }
 @media (min-width: $screen-md-min) {
@@ -263,14 +132,6 @@ $morsel-indicator-size: 10px;
       }
     }
 
-    .morsel-control-prev {
-      left: -($arrow-height + 10px);
-    }
-
-    .morsel-control-next {
-      right: -($arrow-height + 10px);
-    }
-
     .morsels-wrap {
       .morsel-indicators {
         background-color: rgba(0,0,0,.2);
@@ -284,28 +145,6 @@ $morsel-indicator-size: 10px;
         span {
           float: left;
         }
-      }
-    }
-  }
-}
-
-@media (min-width: $screen-lg-min) {
-  .post-detail {
-    .morsels {
-      .morsel {
-        .morsel-img {
-          height: $morsel-height-l;
-        }
-      }
-    }
-
-    .morsel-control {
-      top: $morsel-height-l/2 - $arrow-height/2;
-    }
-
-    .morsels-wrap {
-      .morsel-nav {
-        top: $morsel-height-l - $morsel-indicator-size - $morsel-indicator-padding*2;
       }
     }
   }

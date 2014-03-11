@@ -1,6 +1,4 @@
-angular.module( 'Morsel.postDetail', [
-  'Morsel.morselSwipe'
-])
+angular.module( 'Morsel.postDetail', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'postDetail', {
@@ -20,7 +18,18 @@ angular.module( 'Morsel.postDetail', [
       postIdSlug = postDetailsArr[0],
       postMorselNumber = parseInt(postDetailsArr[1], 10);
 
-  $scope.post = {};
+  $scope.swipeEvents = {
+    needsComments: false
+  };
+
+  $scope.$watch('swipeEvents.needsComments', function(newMorselNum) {
+    if(newMorselNum && $scope.post) {
+      $scope.getComments($scope.post.morsels[newMorselNum].id);
+    }
+  });
+
+  //create an array of all morsel swiping on the page. will house directive data
+  $scope.morselSwipes = [];
 
   //check and make sure we pulled an idslug from the URL
   if(postIdSlug) {
