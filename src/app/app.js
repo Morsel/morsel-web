@@ -30,6 +30,7 @@ angular.module( 'Morsel', [
   'Morsel.morselSwipe',
   'Morsel.morselSwipeVertical',
   'Morsel.socialSharing',
+  'Morsel.storySwipe',
   'Morsel.submitBtn',
   'Morsel.userImage',
   'Morsel.validatedInput',

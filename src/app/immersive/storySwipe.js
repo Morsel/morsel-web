@@ -1,8 +1,8 @@
-angular.module('Morsel.immersiveSwipe', [
+angular.module('Morsel.storySwipe', [
   'ngTouch'
 ])
 
-.directive('immersiveSwipe', ['swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
+.directive('storySwipe', ['swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -17,73 +17,140 @@ angular.module('Morsel.immersiveSwipe', [
       return function(scope, iElement, iAttributes) {
         var pressed = false,
             startX,
+            startY,
             amplitude,
             timestamp,
             offset = 0,
             currentStoryIndex = 0,
-            immersiveWidth,
-            storiesCount = 1,
+            morselHeight,
+            storiesCount = 3,
             destination,
             transformProperty = 'transform',
-            swipeXMoved = false,
+            swipeMoved = false,
+            swipeDirection = false,
             winEl = angular.element($window);
 
-        updateImmersiveWidth();
+        iAttributes.$observe('storySwipe', function(newValue, oldValue) {
+          // only bind swipe when it's not switched off
+          if(newValue !== 'false' && newValue !== 'off') {
+            updateMorselHeight();
+            scope.immersiveHeight = morselHeight+'px';
+
+            $swipe.bind(iElement, {
+              start: swipeStart,
+              move: swipeMove,
+              end: swipeEnd,
+              cancel: function(event) {
+                swipeEnd({}, event);
+              }
+            });
+          } else {
+            // unbind swipe when it's switched off
+            iElement.unbind();
+          }
+        });
 
         // handle orientation change
         winEl.bind('orientationchange', onOrientationChange);
         winEl.bind('resize', onOrientationChange);
 
         scope.$on('$destroy', function() {
+          $document.unbind('mouseup', documentMouseUpEvent);
           winEl.unbind('orientationchange', onOrientationChange);
           winEl.unbind('resize', onOrientationChange);
         });
 
         //our swiping functions
-        scope.swipeStarted = function(coords) {
+        function swipeStart(coords, event) {
+          $document.bind('mouseup', documentMouseUpEvent);
           pressed = true;
           startX = coords.x;
+          startY = coords.y;
 
           amplitude = 0;
           timestamp = Date.now();
-        };
 
-        scope.swipeMoved = function(coords) {
+          event.preventDefault();
+          event.stopPropagation();
+
+          //call our immersive function
+          scope.swipeStarted(coords);
+
+          return false;
+        }
+
+        function swipeMove(coords, event) {
           var x,
-              xDelta;
+              y,
+              swipeXDelta,
+              swipeYDelta;
 
           if (pressed) {
             x = coords.x;
-            xDelta = startX - x;
+            swipeXDelta = startX - x;
 
-            if (xDelta > 2 || xDelta < -2) {
-              swipeXMoved = true;
-              startX = x;
-              requestAnimationFrame(function() {
-                scroll(capPosition(offset + xDelta));
-              });
+            y = coords.y;
+            swipeYDelta = startY - y;
+
+            //check direction of swipe
+            if(Math.abs(swipeXDelta) > Math.abs(swipeYDelta)) {
+              //swipe was in the x direction
+              //if the swipe just begun, set direction
+              if(!swipeDirection) {
+                swipeDirection = 'x';
+              }
+              
+              //if we're swiping in x
+              if(swipeDirection === 'x') {
+                //call our immersive function
+                scope.swipeMoved(coords);
+              }
+            } else {
+              //swipe was in the y direction
+              //if the swipe just begun, set direction
+              if(!swipeDirection) {
+                swipeDirection = 'y';
+              }
+
+              //if we're swiping in y
+              if(swipeDirection === 'y') {
+                if (swipeYDelta > 2 || swipeYDelta < -2) {
+                  swipeMoved = true;
+                  startY = y;
+                  requestAnimationFrame(function() {
+                    scroll(capPosition(offset + swipeYDelta));
+                  });
+                }
+              }
             }
           }
-        };
+          event.preventDefault();
+          event.stopPropagation();
 
-        scope.swipeEnded = function(coords, forceAnimation) {
+          return false;
+        }
+
+        function swipeEnd(coords, event, forceAnimation) {
           var currentOffset,
               absMove,
               storiesMove,
               shouldMove,
               moveOffset;
 
-          if(!pressed) {
-            pressed = false;
+          // Prevent clicks on buttons inside slider to trigger "swipeEnd" event on touchend/mouseup
+          if(event && !swipeMoved) {
             return;
           }
 
+          $document.unbind('mouseup', documentMouseUpEvent);
+
+          swipeDirection = false;
           pressed = false;
-          swipeXMoved = false;
+          swipeMoved = false;
           destination = offset;
-          currentOffset = (currentStoryIndex * immersiveWidth);
+          currentOffset = (currentStoryIndex * morselHeight);
           absMove = currentOffset - destination;
-          storiesMove = -Math[absMove>=0?'ceil':'floor'](absMove / immersiveWidth);
+          storiesMove = -Math[absMove>=0?'ceil':'floor'](absMove / morselHeight);
           shouldMove = Math.abs(absMove) > getAbsMoveTreshold();
 
           if ((storiesMove + currentStoryIndex) >= storiesCount ) {
@@ -95,14 +162,23 @@ angular.module('Morsel.immersiveSwipe', [
           
           moveOffset = shouldMove ? storiesMove : 0;
 
-          destination = (moveOffset + currentStoryIndex) * immersiveWidth;
+          destination = (moveOffset + currentStoryIndex) * morselHeight;
           amplitude = destination - offset;
           timestamp = Date.now();
           if (forceAnimation) {
             amplitude = offset - currentOffset;
           }
           requestAnimationFrame(autoScroll);
-        };
+
+          if (event) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          //call our immersive function
+          scope.swipeEnded(coords, forceAnimation);
+          return false;
+        }
 
         //helpers
         function capPosition(position) {
@@ -110,7 +186,7 @@ angular.module('Morsel.immersiveSwipe', [
           if (currentStoryIndex===0) {
             position = Math.max(-getAbsMoveTreshold(), position);
           } else if (currentStoryIndex===storiesCount-1) {
-            position = Math.min(((storiesCount-1)*immersiveWidth + getAbsMoveTreshold()), position);
+            position = Math.min(((storiesCount-1)*morselHeight + getAbsMoveTreshold()), position);
           }
           return position;
         }
@@ -122,23 +198,23 @@ angular.module('Morsel.immersiveSwipe', [
 
         function getAbsMoveTreshold() {
           // return min pixels required to move a slide
-          return moveTreshold * immersiveWidth;
+          return moveTreshold * morselHeight;
         }
 
-        function updateImmersiveWidth() {
-          immersiveWidth = window.innerWidth;
+        function updateMorselHeight() {
+          morselHeight = window.innerHeight;
         }
 
         //scrolling
         function scroll(x) {
           // use CSS 3D transform to move the screen
           if (isNaN(x)) {
-            x = currentStoryIndex * immersiveWidth;
+            x = currentStoryIndex * morselHeight;
           }
 
           offset = x;
           var move = -Math.round(offset);
-          iElement.find('ul')[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
+          iElement.find('ul')[0].style[transformProperty] = 'translate3d(0, ' + move + 'px, 0)';
         }
 
         function autoScroll() {
@@ -154,7 +230,7 @@ angular.module('Morsel.immersiveSwipe', [
               scroll(destination - delta);
               requestAnimationFrame(autoScroll);
             } else {
-              goToSlide(destination / immersiveWidth);
+              goToSlide(destination / morselHeight);
             }
           }
         }
@@ -166,7 +242,7 @@ angular.module('Morsel.immersiveSwipe', [
           if (animate) {
             // simulate a swipe so we have the standard animation
             // used when external binding index is updated or touch canceed
-            offset = (i * immersiveWidth);
+            offset = (i * morselHeight);
             swipeEnd(null, null, true);
             return;
           }
@@ -177,6 +253,15 @@ angular.module('Morsel.immersiveSwipe', [
             scope.$digest();
           }
           scroll();
+        }
+
+        function documentMouseUpEvent(event) {
+          // in case we click outside the carousel, trigger a fake swipeEnd
+          swipeMoved = true;
+          swipeEnd({
+            x: event.clientX,
+            y: event.clientY
+          }, event);
         }
 
         // detect supported CSS property
