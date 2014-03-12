@@ -8,6 +8,7 @@ angular.module( 'Morsel', [
   'Morsel.dashboard',
   'Morsel.feed',
   'Morsel.home',
+  'Morsel.immersive',
   'Morsel.join',
   'Morsel.login',
   'Morsel.logout',

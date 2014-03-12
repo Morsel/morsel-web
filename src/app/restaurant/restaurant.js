@@ -13,7 +13,7 @@ angular.module( 'Morsel.restaurant', [])
   });
 })
 
-.controller( 'RestaurantCtrl', function PressKitCtrl( $scope, ApiPosts ) {
+.controller( 'RestaurantCtrl', function RestaurantCtrl( $scope, ApiPosts ) {
   $scope.post = {};
 
   $scope.viewOptions.hideHeader = true;
