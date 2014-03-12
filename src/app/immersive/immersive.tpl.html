@@ -11,5 +11,20 @@
       </ul>
     </nav>
   </header>
-  
+  <div immersive-swipe="{{stories.length > 1}}">
+    <div class="stories-wrap">
+      <ul class="stories">
+        <li ng-repeat="story in stories" class="story">
+          <h2>{{story.name}}</h2>
+          <ul class="morsels">
+            <li ng-repeat="morsel in story.morsels" class="morsel">
+              <div style="background-color: {{morsel.color}}">
+                <p>{{morsel.name}}</p>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>

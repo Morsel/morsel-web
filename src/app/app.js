@@ -24,6 +24,7 @@ angular.module( 'Morsel', [
   'Morsel.bgImage',
   'Morsel.formNameFix',
   'Morsel.handleErrors',
+  'Morsel.immersiveSwipe',
   'Morsel.morselLike',
   'Morsel.morselPressShare',
   'Morsel.morselSwipe',
