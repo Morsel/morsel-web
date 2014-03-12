@@ -8,7 +8,9 @@ angular.module('Morsel.storySwipe', [
       // in container % how much we need to drag to trigger the slide change
       moveTreshold = 0.05,
       // in absolute pixels, at which distance the slide stick to the edge on release
-      rubberTreshold = 3;
+      rubberTreshold = 3,
+      //max time between scrolls
+      scrollThreshold = 500;
 
   return {
     restrict: 'A',
@@ -20,15 +22,18 @@ angular.module('Morsel.storySwipe', [
             startY,
             amplitude,
             timestamp,
+            lastScrollTimestamp,
             offset = 0,
-            currentStoryIndex = 0,
+            currentMorselIndex = 0,
             morselHeight,
-            storiesCount = 3,
+            morselsCount = 3,
             destination,
             transformProperty = 'transform',
             swipeMoved = false,
             swipeDirection = false,
-            winEl = angular.element($window);
+            winEl = angular.element($window),
+            handleMouseWheel,
+            hamster;
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           // only bind swipe when it's not switched off
@@ -133,7 +138,7 @@ angular.module('Morsel.storySwipe', [
         function swipeEnd(coords, event, forceAnimation) {
           var currentOffset,
               absMove,
-              storiesMove,
+              morselsMove,
               shouldMove,
               moveOffset;
 
@@ -148,21 +153,21 @@ angular.module('Morsel.storySwipe', [
           pressed = false;
           swipeMoved = false;
           destination = offset;
-          currentOffset = (currentStoryIndex * morselHeight);
+          currentOffset = (currentMorselIndex * morselHeight);
           absMove = currentOffset - destination;
-          storiesMove = -Math[absMove>=0?'ceil':'floor'](absMove / morselHeight);
+          morselsMove = -Math[absMove>=0?'ceil':'floor'](absMove / morselHeight);
           shouldMove = Math.abs(absMove) > getAbsMoveTreshold();
 
-          if ((storiesMove + currentStoryIndex) >= storiesCount ) {
-            storiesMove = storiesCount - 1 - currentStoryIndex;
+          if ((morselsMove + currentMorselIndex) >= morselsCount ) {
+            morselsMove = morselsCount - 1 - currentMorselIndex;
           }
-          if ((storiesMove + currentStoryIndex) < 0) {
-            storiesMove = -currentStoryIndex;
+          if ((morselsMove + currentMorselIndex) < 0) {
+            morselsMove = -currentMorselIndex;
           }
           
-          moveOffset = shouldMove ? storiesMove : 0;
+          moveOffset = shouldMove ? morselsMove : 0;
 
-          destination = (moveOffset + currentStoryIndex) * morselHeight;
+          destination = (moveOffset + currentMorselIndex) * morselHeight;
           amplitude = destination - offset;
           timestamp = Date.now();
           if (forceAnimation) {
@@ -183,17 +188,17 @@ angular.module('Morsel.storySwipe', [
         //helpers
         function capPosition(position) {
           // limit position if start or end of slides
-          if (currentStoryIndex===0) {
+          if (currentMorselIndex===0) {
             position = Math.max(-getAbsMoveTreshold(), position);
-          } else if (currentStoryIndex===storiesCount-1) {
-            position = Math.min(((storiesCount-1)*morselHeight + getAbsMoveTreshold()), position);
+          } else if (currentMorselIndex===morselsCount-1) {
+            position = Math.min(((morselsCount-1)*morselHeight + getAbsMoveTreshold()), position);
           }
           return position;
         }
 
         function capIndex(idx) {
           // ensure given index it inside bounds
-          return (idx >= storiesCount) ? storiesCount: (idx <= 0) ? 0 : idx;
+          return (idx >= morselsCount) ? morselsCount: (idx <= 0) ? 0 : idx;
         }
 
         function getAbsMoveTreshold() {
@@ -209,7 +214,7 @@ angular.module('Morsel.storySwipe', [
         function scroll(x) {
           // use CSS 3D transform to move the screen
           if (isNaN(x)) {
-            x = currentStoryIndex * morselHeight;
+            x = currentMorselIndex * morselHeight;
           }
 
           offset = x;
@@ -237,7 +242,7 @@ angular.module('Morsel.storySwipe', [
 
         function goToSlide(i, animate) {
           if (isNaN(i)) {
-            i = currentStoryIndex;
+            i = currentMorselIndex;
           }
           if (animate) {
             // simulate a swipe so we have the standard animation
@@ -246,7 +251,7 @@ angular.module('Morsel.storySwipe', [
             swipeEnd(null, null, true);
             return;
           }
-          currentStoryIndex = capIndex(i);
+          currentMorselIndex = capIndex(i);
           // if outside of angular scope, trigger angular digest cycle
           // use local digest only for perfs if no index bound
           if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {
@@ -277,6 +282,42 @@ angular.module('Morsel.storySwipe', [
         function onOrientationChange() {
           goToSlide();
         }
+
+        //deal with mousewheel scrolling
+        /*
+         * Modified from:
+         * angular-mousewheel v1.0.4
+         * (c) 2013 Monospaced http://monospaced.com
+         * License: MIT
+         */
+        handleMouseWheel = function(event, delta, deltaX, deltaY){
+          //make sure user only scrolls one at a time
+          if(Date.now() - (lastScrollTimestamp || 0) > scrollThreshold) {
+            lastScrollTimestamp = Date.now();
+
+            //if we scroll up and aren't on the first morsel
+            if (deltaY > 0 && currentMorselIndex > 0 ) {
+              goToSlide(currentMorselIndex-1, true);
+            } else if (deltaY < 0 && currentMorselIndex < morselsCount - 1) {
+            //if we scroll down and aren't on the last morsel
+              goToSlide(currentMorselIndex+1, true);
+            }
+          }
+        };
+
+        // don't create multiple Hamster instances per element
+        if (!(hamster = iElement.data('hamster'))) {
+          hamster = new Hamster(iElement[0]);
+          iElement.data('hamster', hamster);
+        }
+
+        // bind Hamster wheel event
+        hamster.wheel(handleMouseWheel);
+
+        // unbind Hamster wheel event
+        scope.$on('$destroy', function(){
+          hamster.unwheel(handleMouseWheel);
+        });
       };
     }
   };

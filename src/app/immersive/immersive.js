@@ -34,7 +34,7 @@ angular.module( 'Morsel.immersive', [])
           'color':'green'
         }
       ]
-    }/*,
+    },
     {
       'name':'story 2',
       morsels: [
@@ -68,7 +68,7 @@ angular.module( 'Morsel.immersive', [])
           'color':'black'
         }
       ]
-    }*/
+    }
   ];
 
 });

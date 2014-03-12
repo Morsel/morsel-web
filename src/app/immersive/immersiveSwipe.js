@@ -1,8 +1,12 @@
+/*
+ * Adapted from: http://github.com/revolunet/angular-carousel
+*/
+
 angular.module('Morsel.immersiveSwipe', [
   'ngTouch'
 ])
 
-.directive('immersiveSwipe', ['swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
+.directive('immersiveSwipe', ['$window', function($window) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -22,13 +26,26 @@ angular.module('Morsel.immersiveSwipe', [
             offset = 0,
             currentStoryIndex = 0,
             immersiveWidth,
-            storiesCount = 1,
+            storiesCount = 0,
             destination,
             transformProperty = 'transform',
             swipeXMoved = false,
             winEl = angular.element($window);
 
         updateImmersiveWidth();
+
+        //set up our scope watches
+        //watch our stories
+        scope.$watchCollection('stories', function(newValue, oldValue) {
+          storiesCount = 0;
+          if (angular.isArray(newValue)) {
+            storiesCount = newValue.length;
+          } else if (angular.isObject(newValue)) {
+            storiesCount = Object.keys(newValue).length;
+          }
+          
+          goToSlide(currentStoryIndex);
+        });
 
         // handle orientation change
         winEl.bind('orientationchange', onOrientationChange);
