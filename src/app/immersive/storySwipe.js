@@ -2,6 +2,25 @@ angular.module('Morsel.storySwipe', [
   'ngTouch'
 ])
 
+.directive('storyIndicators', [function() {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      count: '=',
+      index: '='
+    },
+    link: function(scope, element, attrs) {
+      scope.range = function(n) {
+        return new Array(n);
+      };
+    },
+    template: '<div class="story-indicators">' +
+                '<span ng-repeat="c in range(count) track by $index" ng-class="{active: $index==$parent.index}" ng-click="$parent.index=$index"></span>' +
+              '</div>'
+  };
+}])
+
 .directive('storySwipe', ['swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
   var // used to compute the sliding speed
       timeConstant = 75,
@@ -24,9 +43,7 @@ angular.module('Morsel.storySwipe', [
             timestamp,
             lastScrollTimestamp,
             offset = 0,
-            currentMorselIndex = 0,
             morselHeight,
-            morselsCount = 3,
             destination,
             transformProperty = 'transform',
             swipeMoved = false,
@@ -34,6 +51,11 @@ angular.module('Morsel.storySwipe', [
             winEl = angular.element($window),
             handleMouseWheel,
             hamster;
+
+        //our scope vars, accessible by indicators/controls
+        scope.currentMorselIndex = 0; //track which morsel we're on
+        scope.currentIndicatorIndex = 0; //track which indicator is active
+        scope.morselsCount = 3;
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           // only bind swipe when it's not switched off
@@ -48,6 +70,16 @@ angular.module('Morsel.storySwipe', [
               cancel: function(event) {
                 swipeEnd({}, event);
               }
+            });
+
+            //watch for changes in the indicators
+            scope.$watch('currentIndicatorIndex', function(newValue) {
+              goToSlide(newValue, true);
+            });
+
+            //make sure our indicator index is updated when we change morsels
+            scope.$watch('currentMorselIndex', function(newValue) {
+              scope.currentIndicatorIndex = newValue;
             });
           } else {
             // unbind swipe when it's switched off
@@ -153,21 +185,21 @@ angular.module('Morsel.storySwipe', [
           pressed = false;
           swipeMoved = false;
           destination = offset;
-          currentOffset = (currentMorselIndex * morselHeight);
+          currentOffset = (scope.currentMorselIndex * morselHeight);
           absMove = currentOffset - destination;
           morselsMove = -Math[absMove>=0?'ceil':'floor'](absMove / morselHeight);
           shouldMove = Math.abs(absMove) > getAbsMoveTreshold();
 
-          if ((morselsMove + currentMorselIndex) >= morselsCount ) {
-            morselsMove = morselsCount - 1 - currentMorselIndex;
+          if ((morselsMove + scope.currentMorselIndex) >= scope.morselsCount ) {
+            morselsMove = scope.morselsCount - 1 - scope.currentMorselIndex;
           }
-          if ((morselsMove + currentMorselIndex) < 0) {
-            morselsMove = -currentMorselIndex;
+          if ((morselsMove + scope.currentMorselIndex) < 0) {
+            morselsMove = -scope.currentMorselIndex;
           }
           
           moveOffset = shouldMove ? morselsMove : 0;
 
-          destination = (moveOffset + currentMorselIndex) * morselHeight;
+          destination = (moveOffset + scope.currentMorselIndex) * morselHeight;
           amplitude = destination - offset;
           timestamp = Date.now();
           if (forceAnimation) {
@@ -188,17 +220,17 @@ angular.module('Morsel.storySwipe', [
         //helpers
         function capPosition(position) {
           // limit position if start or end of slides
-          if (currentMorselIndex===0) {
+          if (scope.currentMorselIndex===0) {
             position = Math.max(-getAbsMoveTreshold(), position);
-          } else if (currentMorselIndex===morselsCount-1) {
-            position = Math.min(((morselsCount-1)*morselHeight + getAbsMoveTreshold()), position);
+          } else if (scope.currentMorselIndex===scope.morselsCount-1) {
+            position = Math.min(((scope.morselsCount-1)*morselHeight + getAbsMoveTreshold()), position);
           }
           return position;
         }
 
         function capIndex(idx) {
           // ensure given index it inside bounds
-          return (idx >= morselsCount) ? morselsCount: (idx <= 0) ? 0 : idx;
+          return (idx >= scope.morselsCount) ? scope.morselsCount: (idx <= 0) ? 0 : idx;
         }
 
         function getAbsMoveTreshold() {
@@ -214,7 +246,7 @@ angular.module('Morsel.storySwipe', [
         function scroll(x) {
           // use CSS 3D transform to move the screen
           if (isNaN(x)) {
-            x = currentMorselIndex * morselHeight;
+            x = scope.currentMorselIndex * morselHeight;
           }
 
           offset = x;
@@ -242,7 +274,7 @@ angular.module('Morsel.storySwipe', [
 
         function goToSlide(i, animate) {
           if (isNaN(i)) {
-            i = currentMorselIndex;
+            i = scope.currentMorselIndex;
           }
           if (animate) {
             // simulate a swipe so we have the standard animation
@@ -251,7 +283,7 @@ angular.module('Morsel.storySwipe', [
             swipeEnd(null, null, true);
             return;
           }
-          currentMorselIndex = capIndex(i);
+          scope.currentMorselIndex = capIndex(i);
           // if outside of angular scope, trigger angular digest cycle
           // use local digest only for perfs if no index bound
           if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {
@@ -296,11 +328,11 @@ angular.module('Morsel.storySwipe', [
             lastScrollTimestamp = Date.now();
 
             //if we scroll up and aren't on the first morsel
-            if (deltaY > 0 && currentMorselIndex > 0 ) {
-              goToSlide(currentMorselIndex-1, true);
-            } else if (deltaY < 0 && currentMorselIndex < morselsCount - 1) {
+            if (deltaY > 0 && scope.currentMorselIndex > 0 ) {
+              goToSlide(scope.currentMorselIndex-1, true);
+            } else if (deltaY < 0 && scope.currentMorselIndex < scope.morselsCount - 1) {
             //if we scroll down and aren't on the last morsel
-              goToSlide(currentMorselIndex+1, true);
+              goToSlide(scope.currentMorselIndex+1, true);
             }
           }
         };

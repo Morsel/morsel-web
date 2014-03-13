@@ -1,6 +1,9 @@
+$story-indicator-padding: 10px;
+$story-indicator-size: 10px;
+
 .immersive {
   background: black;
-  
+
   header {
     display: none;
     position: fixed;
@@ -33,6 +36,32 @@
 
   .stories-wrap {
     width: 100%;
+  }
+
+  .story-indicators {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+    z-index: 1;
+  
+    span {
+      width: $story-indicator-size;
+      height: $story-indicator-size;
+      background-color: transparent;
+      border: 1px solid white;
+      border-radius: 50%;
+      margin: 2px 0;
+      display: block;
+      @include transition(background-color .2s ease-out);
+
+      &:hover, &:focus {
+        cursor: pointer;
+      }
+
+      &.active {
+        background-color: $morsel-primary;
+      }
+    }
   }
 
   .stories {

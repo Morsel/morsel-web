@@ -17,6 +17,7 @@
         <li ng-repeat="story in stories" class="story">
           <h2>{{story.name}}</h2>
           <div story-swipe="{{story.morsels.length > 1}}" style="height: {{immersiveHeight}}">
+          <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
             <ul class="morsels">
               <li ng-repeat="morsel in story.morsels" class="morsel">
                 <div style="background-color: {{morsel.color}}; height: {{immersiveHeight}}">
