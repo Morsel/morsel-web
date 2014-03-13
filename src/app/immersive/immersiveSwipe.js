@@ -6,6 +6,29 @@ angular.module('Morsel.immersiveSwipe', [
   'ngTouch'
 ])
 
+.directive('immersiveControls', [function() {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      count: '=',
+      index: '='
+    },
+    link: function(scope, element, attrs) {
+      scope.prev = function() {
+        scope.index--;
+      };
+      scope.next = function() {
+        scope.index++;
+      };
+    },
+    template: '<div>' +
+                '<span class="immersive-control immersive-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
+                '<span class="immersive-control immersive-control-next" ng-click="next()" ng-if="index < count - 1"></span>' +
+              '</div>'
+  };
+}])
+
 .directive('immersiveSwipe', ['$window', function($window) {
   var // used to compute the sliding speed
       timeConstant = 75,
@@ -24,9 +47,7 @@ angular.module('Morsel.immersiveSwipe', [
             amplitude,
             timestamp,
             offset = 0,
-            currentStoryIndex = 0,
             immersiveWidth,
-            storiesCount = 0,
             destination,
             transformProperty = 'transform',
             swipeXMoved = false,
@@ -34,17 +55,32 @@ angular.module('Morsel.immersiveSwipe', [
 
         updateImmersiveWidth();
 
+        //our scope vars, accessible by indicators
+        scope.currentStoryIndex = 0; //track which morsel we're on
+        scope.currentControlIndex = 0; //track which indicator is active
+        scope.storiesCount = 3;
+
         //set up our scope watches
         //watch our stories
         scope.$watchCollection('stories', function(newValue, oldValue) {
-          storiesCount = 0;
+          scope.storiesCount = 0;
           if (angular.isArray(newValue)) {
-            storiesCount = newValue.length;
+            scope.storiesCount = newValue.length;
           } else if (angular.isObject(newValue)) {
-            storiesCount = Object.keys(newValue).length;
+            scope.storiesCount = Object.keys(newValue).length;
           }
           
-          goToSlide(currentStoryIndex);
+          goToSlide(scope.currentStoryIndex);
+        });
+
+        //watch for changes from the controls
+        scope.$watch('currentControlIndex', function(newValue) {
+          goToSlide(newValue, true);
+        });
+
+        //make sure our control index is updated when we change stories
+        scope.$watch('currentStoryIndex', function(newValue) {
+          scope.currentControlIndex = newValue;
         });
 
         // handle orientation change
@@ -90,29 +126,29 @@ angular.module('Morsel.immersiveSwipe', [
               shouldMove,
               moveOffset;
 
-          if(!pressed) {
+          /*if(!pressed) {
             pressed = false;
             return;
-          }
+          }*/
 
           pressed = false;
           swipeXMoved = false;
           destination = offset;
-          currentOffset = (currentStoryIndex * immersiveWidth);
+          currentOffset = (scope.currentStoryIndex * immersiveWidth);
           absMove = currentOffset - destination;
           storiesMove = -Math[absMove>=0?'ceil':'floor'](absMove / immersiveWidth);
           shouldMove = Math.abs(absMove) > getAbsMoveTreshold();
 
-          if ((storiesMove + currentStoryIndex) >= storiesCount ) {
-            storiesMove = storiesCount - 1 - currentStoryIndex;
+          if ((storiesMove + scope.currentStoryIndex) >= scope.storiesCount ) {
+            storiesMove = scope.storiesCount - 1 - scope.currentStoryIndex;
           }
-          if ((storiesMove + currentStoryIndex) < 0) {
-            storiesMove = -currentStoryIndex;
+          if ((storiesMove + scope.currentStoryIndex) < 0) {
+            storiesMove = -scope.currentStoryIndex;
           }
           
           moveOffset = shouldMove ? storiesMove : 0;
 
-          destination = (moveOffset + currentStoryIndex) * immersiveWidth;
+          destination = (moveOffset + scope.currentStoryIndex) * immersiveWidth;
           amplitude = destination - offset;
           timestamp = Date.now();
           if (forceAnimation) {
@@ -124,17 +160,17 @@ angular.module('Morsel.immersiveSwipe', [
         //helpers
         function capPosition(position) {
           // limit position if start or end of slides
-          if (currentStoryIndex===0) {
+          if (scope.currentStoryIndex===0) {
             position = Math.max(-getAbsMoveTreshold(), position);
-          } else if (currentStoryIndex===storiesCount-1) {
-            position = Math.min(((storiesCount-1)*immersiveWidth + getAbsMoveTreshold()), position);
+          } else if (scope.currentStoryIndex===scope.storiesCount-1) {
+            position = Math.min(((scope.storiesCount-1)*immersiveWidth + getAbsMoveTreshold()), position);
           }
           return position;
         }
 
         function capIndex(idx) {
           // ensure given index it inside bounds
-          return (idx >= storiesCount) ? storiesCount: (idx <= 0) ? 0 : idx;
+          return (idx >= scope.storiesCount) ? scope.storiesCount: (idx <= 0) ? 0 : idx;
         }
 
         function getAbsMoveTreshold() {
@@ -150,7 +186,7 @@ angular.module('Morsel.immersiveSwipe', [
         function scroll(x) {
           // use CSS 3D transform to move the screen
           if (isNaN(x)) {
-            x = currentStoryIndex * immersiveWidth;
+            x = scope.currentStoryIndex * immersiveWidth;
           }
 
           offset = x;
@@ -178,16 +214,16 @@ angular.module('Morsel.immersiveSwipe', [
 
         function goToSlide(i, animate) {
           if (isNaN(i)) {
-            i = currentStoryIndex;
+            i = scope.currentStoryIndex;
           }
           if (animate) {
             // simulate a swipe so we have the standard animation
             // used when external binding index is updated or touch canceed
             offset = (i * immersiveWidth);
-            swipeEnd(null, null, true);
+            scope.swipeEnded(null, true);
             return;
           }
-          currentStoryIndex = capIndex(i);
+          scope.currentStoryIndex = capIndex(i);
           // if outside of angular scope, trigger angular digest cycle
           // use local digest only for perfs if no index bound
           if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {

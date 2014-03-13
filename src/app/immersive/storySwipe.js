@@ -52,7 +52,7 @@ angular.module('Morsel.storySwipe', [
             handleMouseWheel,
             hamster;
 
-        //our scope vars, accessible by indicators/controls
+        //our scope vars, accessible by indicators
         scope.currentMorselIndex = 0; //track which morsel we're on
         scope.currentIndicatorIndex = 0; //track which indicator is active
         scope.morselsCount = 3;
@@ -99,21 +99,27 @@ angular.module('Morsel.storySwipe', [
 
         //our swiping functions
         function swipeStart(coords, event) {
-          $document.bind('mouseup', documentMouseUpEvent);
-          pressed = true;
-          startX = coords.x;
-          startY = coords.y;
+          var tagCheck = event.target.tagName.toUpperCase();
 
-          amplitude = 0;
-          timestamp = Date.now();
+          if(tagCheck === 'SPAN' || tagCheck === 'TEXTAREA') {
+            return false;
+          } else {
+            $document.bind('mouseup', documentMouseUpEvent);
+            pressed = true;
+            startX = coords.x;
+            startY = coords.y;
 
-          event.preventDefault();
-          event.stopPropagation();
+            amplitude = 0;
+            timestamp = Date.now();
 
-          //call our immersive function
-          scope.swipeStarted(coords);
+            event.preventDefault();
+            event.stopPropagation();
 
-          return false;
+            //call our immersive function
+            scope.swipeStarted(coords);
+
+            return false;
+          }
         }
 
         function swipeMove(coords, event) {

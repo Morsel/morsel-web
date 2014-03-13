@@ -12,6 +12,7 @@
     </nav>
   </header>
   <div immersive-swipe immersive-swipe-count="{{stories.length}}">
+    <div immersive-controls index="currentControlIndex" count="storiesCount"></div>
     <div class="stories-wrap">
       <ul class="stories">
         <li ng-repeat="story in stories" class="story">
