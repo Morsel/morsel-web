@@ -1,7 +1,7 @@
 <div class="immersive">
   <header>
     <h1>
-      <img ng-src="" />
+      <img ng-src="{{owner.photos._72x72}}" />{{owner.first_name + ' ' + owner.last_name}}
     </h1>
     <nav role="navigation">
       <ul>
@@ -16,13 +16,13 @@
     <div class="stories-wrap">
       <ul class="stories">
         <li ng-repeat="story in stories" class="story">
-          <h2>{{story.name}}</h2>
+          <h2>{{story.title}}</h2>
           <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
           <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
             <ul class="morsels">
               <li ng-repeat="morsel in story.morsels" class="morsel">
-                <div style="background-color: {{morsel.color}}; height: {{immersiveHeight}}">
-                  <p>{{morsel.name}}</p>
+                <p class="morsel-description">{{morsel.description}}</p>
+                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}">
                 </div>
               </li>
             </ul>

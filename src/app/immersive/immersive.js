@@ -13,11 +13,11 @@ angular.module( 'Morsel.immersive', [])
   });
 })
 
-.controller( 'ImmersiveCtrl', function ImmersiveCtrl( $scope, ApiPosts, $timeout ) {
+.controller( 'ImmersiveCtrl', function ImmersiveCtrl( $scope, ApiUsers, $timeout ) {
   $scope.viewOptions.hideHeader = true;
   $scope.viewOptions.hideFooter = true;
 
-  $scope.stories = [
+  /*$scope.stories = [
     {
       'name':'story 1',
       morsels: [
@@ -69,5 +69,13 @@ angular.module( 'Morsel.immersive', [])
         }
       ]
     }
-  ];
+  ];*/
+
+  ApiUsers.getPosts('jasonvincent').then(function(postData){
+    $scope.stories = postData;
+  });
+
+  ApiUsers.getUser('jasonvincent').then(function(userData){
+    $scope.owner = userData;
+  });
 });
