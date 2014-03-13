@@ -1,3 +1,7 @@
+/*
+ * Based off: http://github.com/revolunet/angular-carousel
+*/
+
 angular.module('Morsel.storySwipe', [
   'ngTouch'
 ])
@@ -59,8 +63,7 @@ angular.module('Morsel.storySwipe', [
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           // only bind swipe when it's not switched off
-          if(newValue) {
-            scope.morselsCount = newValue;
+          if(newValue !== 'false') {
             updateMorselHeight();
             scope.immersiveHeight = morselHeight+'px';
 
@@ -72,20 +75,27 @@ angular.module('Morsel.storySwipe', [
                 swipeEnd({}, event);
               }
             });
-
-            //watch for changes in the indicators
-            scope.$watch('currentIndicatorIndex', function(newValue) {
-              goToSlide(newValue, true);
-            });
-
-            //make sure our indicator index is updated when we change morsels
-            scope.$watch('currentMorselIndex', function(newValue) {
-              scope.currentIndicatorIndex = newValue;
-            });
           } else {
             // unbind swipe when it's switched off
             iElement.unbind();
           }
+        });
+
+        //watch for update in morsel number
+        iAttributes.$observe('storySwipeCount', function(newValue) {
+          if(newValue) {
+            scope.morselsCount = parseInt(newValue, 10);
+          }
+        });
+
+        //watch for changes in the indicators
+        scope.$watch('currentIndicatorIndex', function(newValue) {
+          goToSlide(newValue, true);
+        });
+
+        //make sure our indicator index is updated when we change morsels
+        scope.$watch('currentMorselIndex', function(newValue) {
+          scope.currentIndicatorIndex = newValue;
         });
 
         // handle orientation change

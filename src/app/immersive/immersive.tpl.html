@@ -11,13 +11,13 @@
       </ul>
     </nav>
   </header>
-  <div immersive-swipe immersive-swipe-count="{{stories.length}}">
+  <div immersive-swipe>
     <div immersive-controls index="currentControlIndex" count="storiesCount"></div>
     <div class="stories-wrap">
       <ul class="stories">
         <li ng-repeat="story in stories" class="story">
           <h2>{{story.name}}</h2>
-          <div story-swipe="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
+          <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
           <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
             <ul class="morsels">
               <li ng-repeat="morsel in story.morsels" class="morsel">
