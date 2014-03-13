@@ -58,7 +58,7 @@ angular.module('Morsel.immersiveSwipe', [
         //our scope vars, accessible by indicators
         scope.currentStoryIndex = 0; //track which morsel we're on
         scope.currentControlIndex = 0; //track which indicator is active
-        scope.storiesCount = 3;
+        scope.storiesCount = 0;
 
         //set up our scope watches
         //watch our stories

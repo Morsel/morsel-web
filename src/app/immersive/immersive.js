@@ -13,7 +13,7 @@ angular.module( 'Morsel.immersive', [])
   });
 })
 
-.controller( 'ImmersiveCtrl', function ImmersiveCtrl( $scope, ApiPosts ) {
+.controller( 'ImmersiveCtrl', function ImmersiveCtrl( $scope, ApiPosts, $timeout ) {
   $scope.viewOptions.hideHeader = true;
   $scope.viewOptions.hideFooter = true;
 
@@ -70,5 +70,4 @@ angular.module( 'Morsel.immersive', [])
       ]
     }
   ];
-
 });

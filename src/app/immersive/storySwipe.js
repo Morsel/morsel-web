@@ -55,11 +55,12 @@ angular.module('Morsel.storySwipe', [
         //our scope vars, accessible by indicators
         scope.currentMorselIndex = 0; //track which morsel we're on
         scope.currentIndicatorIndex = 0; //track which indicator is active
-        scope.morselsCount = 3;
+        scope.morselsCount = 0;
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           // only bind swipe when it's not switched off
-          if(newValue !== 'false' && newValue !== 'off') {
+          if(newValue) {
+            scope.morselsCount = newValue;
             updateMorselHeight();
             scope.immersiveHeight = morselHeight+'px';
 
