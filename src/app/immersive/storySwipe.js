@@ -31,9 +31,7 @@ angular.module('Morsel.storySwipe', [
       // in container % how much we need to drag to trigger the slide change
       moveTreshold = 0.05,
       // in absolute pixels, at which distance the slide stick to the edge on release
-      rubberTreshold = 3,
-      //max time between scrolls
-      scrollThreshold = 500;
+      rubberTreshold = 3;
 
   return {
     restrict: 'A',
@@ -341,15 +339,27 @@ angular.module('Morsel.storySwipe', [
          */
         handleMouseWheel = function(event, delta, deltaX, deltaY){
           //make sure user only scrolls one at a time
-          if(Date.now() - (lastScrollTimestamp || 0) > scrollThreshold) {
-            lastScrollTimestamp = Date.now();
-
-            //if we scroll up and aren't on the first morsel
-            if (deltaY > 0 && scope.currentMorselIndex > 0 ) {
-              goToSlide(scope.currentMorselIndex-1, true);
-            } else if (deltaY < 0 && scope.currentMorselIndex < scope.morselsCount - 1) {
-            //if we scroll down and aren't on the last morsel
-              goToSlide(scope.currentMorselIndex+1, true);
+          if(scope.checkLastScroll()) {
+            //if we scroll up
+            if (deltaY > 0) {
+              //if we're on the first morsel
+              if (scope.currentMorselIndex === 0) {
+                //go to the previous story
+                scope.goToPrevStory();
+              } else {
+                //else go to the previous morsel
+                goToSlide(scope.currentMorselIndex-1, true);
+              }
+            } else if (deltaY < 0) {
+              //if we scroll down
+              //if we're on the last morsel
+              if(scope.currentMorselIndex === scope.morselsCount - 1) {
+                //go to the next story
+                scope.goToNextStory();
+              } else {
+                //and aren't on the last morsel
+                goToSlide(scope.currentMorselIndex+1, true);
+              }
             }
           }
         };

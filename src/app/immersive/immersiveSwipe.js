@@ -1,5 +1,5 @@
 /*
- * Adapted from: http://github.com/revolunet/angular-carousel
+ * Based off: http://github.com/revolunet/angular-carousel
 */
 
 angular.module('Morsel.immersiveSwipe', [
@@ -35,7 +35,9 @@ angular.module('Morsel.immersiveSwipe', [
       // in container % how much we need to drag to trigger the slide change
       moveTreshold = 0.05,
       // in absolute pixels, at which distance the slide stick to the edge on release
-      rubberTreshold = 3;
+      rubberTreshold = 3,
+      //max time between scrolls
+      scrollThreshold = 500;
 
   return {
     restrict: 'A',
@@ -51,7 +53,8 @@ angular.module('Morsel.immersiveSwipe', [
             destination,
             transformProperty = 'transform',
             swipeXMoved = false,
-            winEl = angular.element($window);
+            winEl = angular.element($window),
+            lastScrollTimestamp;
 
         updateImmersiveWidth();
 
@@ -182,6 +185,19 @@ angular.module('Morsel.immersiveSwipe', [
           immersiveWidth = window.innerWidth;
         }
 
+        //keep this here so you don't fire a scroll event in each story as you switch
+        scope.checkLastScroll = function() {
+          //make sure this scroll should have an effect
+          var scrollValid = false;
+
+          if(Date.now() - (lastScrollTimestamp || 0) > scrollThreshold) {
+            scrollValid = true;
+            lastScrollTimestamp = Date.now();
+          }
+
+          return scrollValid;
+        };
+
         //scrolling
         function scroll(x) {
           // use CSS 3D transform to move the screen
@@ -231,6 +247,21 @@ angular.module('Morsel.immersiveSwipe', [
           }
           scroll();
         }
+
+        //for moving elsewhere in scope
+        scope.goToPrevStory = function() {
+          //move to the previous story if we're not on the first
+          if(scope.currentStoryIndex !== 0) {
+            goToSlide(scope.currentStoryIndex-1, true);
+          }
+        };
+
+        scope.goToNextStory = function() {
+          //move to the next story if we're not on the last
+          if(scope.currentStoryIndex !== scope.storiesCount-1) {
+            goToSlide(scope.currentStoryIndex+1, true);
+          }
+        };
 
         // detect supported CSS property
         ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
