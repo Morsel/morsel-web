@@ -1,5 +1,7 @@
 $story-indicator-padding: 10px;
 $story-indicator-size: 10px;
+$header-height: 60px;
+$header-padding: 10px;
 
 .immersive {
   background: black;
@@ -11,7 +13,7 @@ $story-indicator-size: 10px;
     top: 0;
     left: 0;
     width: 100%;
-    padding: 10px;
+    padding: $header-padding;
 
     h1 {
       font-size: 16px;
@@ -29,8 +31,8 @@ $story-indicator-size: 10px;
     }
 
     h1, h5 {
-      @include opacity(1);
-      @include transition(opacity .2s ease-out);
+      @include translate3d(0,0,0);
+      @include transition(all .2s ease-out);
     }
 
     > a {
@@ -38,7 +40,7 @@ $story-indicator-size: 10px;
       vertical-align: top;
     }
 
-    > div {
+    .owner-info {
       margin-left: 10px;
       display: inline-block;
     }
@@ -47,12 +49,22 @@ $story-indicator-size: 10px;
       float: right;
       margin-right: 50px;
     }
+
+    .story-title {
+
+    }
   }
 
   .in-story {
     header {
       h1, h5 {
-        @include opacity(0);
+        @include translate3d(0,-$header-height,0);
+      }
+    }
+
+    .current-story {
+      .story-title {
+        @include translate3d(0,0,0);
       }
     }
   }
@@ -116,8 +128,26 @@ $story-indicator-size: 10px;
     }
   }
 
+  .story-title {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    text-align: center;
+    padding: $header-padding;
+    @include transition(all .2s ease-out);
+    @include translate3d(0,-$header-height,0);
+    width: 100%;
+
+    h2 {
+      width: 50%;
+      font-size: 14px;
+      margin: 0 auto;
+      color: white;
+    }
+  }
+
   .cover-page {
-    padding-top: 60px;
+    padding-top: $header-height;
     background-color: white;
 
     .cover-title {
@@ -206,7 +236,7 @@ $story-indicator-size: 10px;
       display: block;
 
       .morsel-img {
-        background-size: contain;
+        background-size: cover;
         background-position: center top;
         background-repeat: no-repeat;
       }

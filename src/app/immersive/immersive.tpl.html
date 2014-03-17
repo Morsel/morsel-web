@@ -4,7 +4,7 @@
       <a ng-click="goTo(owner.username)">
         <img ng-src="{{owner.photos._40x40}}" />
       </a>
-      <div>
+      <div class="owner-info">
         <h1>
           <a ng-click="goTo(owner.username)">{{owner.first_name + ' ' + owner.last_name}}</a>
         </h1>
@@ -14,9 +14,12 @@
     <div immersive-controls index="currentControlIndex" count="storiesCount"></div>
     <div class="stories-wrap">
       <ul class="stories">
-        <li ng-repeat="story in stories" class="story">
+        <li ng-repeat="story in stories" class="story" ng-class="{'current-story': $index===currentControlIndex}">
           <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
-          <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
+            <div class="story-title">
+              <h2>{{story.title}}</h2>
+            </div>
+            <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
             <ul class="morsels">
               <li class="cover-page" style="height: {{immersiveHeight}}">
                 <div class="cover-title">
