@@ -28,11 +28,7 @@
                 <div class="cover-photo-wrap">
                   <img ng-src="{{story.morsels[0].photos._640x640}}" />
                 </div>
-                <ul class="thumbnails-wrap">
-                  <li ng-repeat="morsel in story.morsels">
-                    <img ng-src="{{morsel.photos._320x320}}" />
-                  </li>
-                </ul>
+                <div story-thumbnails index="currentIndicatorIndex" morsels="story.morsels"></div>
                 <div class="cover-actions">
                   <span><i class="glyphicon glyphicon-heart"></i></span>
                   <span><i class="glyphicon glyphicon-comment"></i></span>

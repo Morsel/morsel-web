@@ -6,6 +6,24 @@ angular.module('Morsel.storySwipe', [
   'ngTouch'
 ])
 
+.directive('storyThumbnails', [function() {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      index: '=',
+      morsels: '='
+    },
+    template: '<div class="thumbnails-wrap">' +
+                  '<ul>' +
+                    '<li ng-repeat="morsel in morsels" ng-click="$parent.index=$index+1">' +
+                      '<img ng-src="{{morsel.photos._320x320}}" />' +
+                    '</li>' +
+                  '</ul>' +
+                '</div>'
+  };
+}])
+
 .directive('storyIndicators', [function() {
   return {
     restrict: 'A',

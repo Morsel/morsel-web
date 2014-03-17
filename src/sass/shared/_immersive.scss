@@ -176,6 +176,11 @@ $header-padding: 10px;
 
     .thumbnails-wrap {
       margin: 10px 0;
+      padding: 0 10px;
+
+      ul {
+        margin: 0;
+      }
 
       li {
         display: inline-block;
@@ -243,9 +248,10 @@ $header-padding: 10px;
       
       .morsel-description {
         position: absolute;
-        top: 200px;
-        right: 50px;
-        width: 30%;
+        bottom: 60px;
+        left: 0;
+        width: 100%;
+        padding: 0 35px 0 15px;
         color: white;
         z-index: 2;
       }
