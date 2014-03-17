@@ -14,13 +14,12 @@ angular.module('Morsel.storySwipe', [
       index: '=',
       morsels: '='
     },
-    template: '<div class="thumbnails-wrap">' +
-                  '<ul>' +
-                    '<li ng-repeat="morsel in morsels" ng-click="$parent.index=$index+1">' +
-                      '<img ng-src="{{morsel.photos._320x320}}" />' +
-                    '</li>' +
-                  '</ul>' +
-                '</div>'
+    link: function(scope, element, attrs) {
+      scope.range = function(n) {
+        return new Array(n);
+      };
+    },
+    templateUrl: 'immersive/storyThumbnails.tpl.html'
   };
 }])
 
@@ -75,7 +74,7 @@ angular.module('Morsel.storySwipe', [
         //our scope vars, accessible by indicators
         scope.currentMorselIndex = 0; //track which morsel we're on
         scope.currentIndicatorIndex = 0; //track which indicator is active
-        scope.morselsCount = 0;
+        scope.morselsCount = 1; //account for cover page
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           updateMorselHeight();
@@ -100,7 +99,7 @@ angular.module('Morsel.storySwipe', [
         //watch for update in morsel number
         iAttributes.$observe('storySwipeCount', function(newValue) {
           if(newValue) {
-            scope.morselsCount = parseInt(newValue, 10);
+            scope.morselsCount = parseInt(newValue, 10) + 1; //+1 for cover page
           }
         });
 

@@ -186,6 +186,7 @@ $header-padding: 10px;
         display: inline-block;
         width: 22%;
         margin-right: 4%;
+        position: relative;
 
         img {
           width: 100%;
@@ -194,6 +195,21 @@ $header-padding: 10px;
         &:last-child {
           margin: 0;
         }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .additional-thumbs {
+        position: absolute;
+        width: 100%;
+        left: 25%;
+        top: 25%;
+        display: block;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
       }
     }
 
