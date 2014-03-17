@@ -1,25 +1,53 @@
 <div class="immersive">
-  <header>
-    <h1>
-      <img ng-src="{{owner.photos._72x72}}" />{{owner.first_name + ' ' + owner.last_name}}
-    </h1>
-    <nav role="navigation">
-      <ul>
-        <li>
-          <a>Info</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <div immersive-swipe>
+  <div immersive-swipe ng-class="{'in-story': immersiveState.inStory}">
+    <header>
+      <a ng-click="goTo(owner.username)">
+        <img ng-src="{{owner.photos._40x40}}" />
+      </a>
+      <div>
+        <h1>
+          <a ng-click="goTo(owner.username)">{{owner.first_name + ' ' + owner.last_name}}</a>
+        </h1>
+        <h5>{{owner.title}}</h5>
+      </div>
+    </header>
     <div immersive-controls index="currentControlIndex" count="storiesCount"></div>
     <div class="stories-wrap">
       <ul class="stories">
         <li ng-repeat="story in stories" class="story">
-          <h2>{{story.title}}</h2>
           <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
           <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
             <ul class="morsels">
+              <li class="cover-page" style="height: {{immersiveHeight}}">
+                <div class="cover-title">
+                  <h2>{{story.title}}</h2>
+                </div>
+                <div class="cover-photo-wrap">
+                  <img ng-src="{{story.morsels[0].photos._640x640}}" />
+                </div>
+                <ul class="thumbnails-wrap">
+                  <li ng-repeat="morsel in story.morsels">
+                    <img ng-src="{{morsel.photos._320x320}}" />
+                  </li>
+                </ul>
+                <div class="cover-actions">
+                  <span><i class="glyphicon glyphicon-heart"></i></span>
+                  <span><i class="glyphicon glyphicon-comment"></i></span>
+                  <span><i class="glyphicon glyphicon-share"></i></span>
+                </div>
+                <div class="cover-tags">
+                  <span><i class="glyphicon glyphicon-tag"></i></span>
+                  <a>Tag 1</a>
+                  <a>Tag 2</a>
+                  <a>Tag 3</a>
+                </div>
+                <div class="cover-browse">
+                  <p>
+                    <span>Browse</span>
+                    <i class="glyphicon glyphicon-circle-arrow-down"></i>
+                  </p>
+                </div>
+              </li>
               <li ng-repeat="morsel in story.morsels" class="morsel">
                 <p class="morsel-description">{{morsel.description}}</p>
                 <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}">

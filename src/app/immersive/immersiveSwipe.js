@@ -63,6 +63,16 @@ angular.module('Morsel.immersiveSwipe', [
         scope.currentControlIndex = 0; //track which indicator is active
         scope.storiesCount = 0;
 
+        //scope vars for individual stories
+        scope.immersiveState = {
+          inStory : false
+        };
+
+        scope.updateImmersiveState = function(obj) {
+          _.extend(scope.immersiveState, obj);
+          scope.$digest();
+        };
+
         //set up our scope watches
         //watch our stories
         scope.$watchCollection('stories', function(newValue, oldValue) {

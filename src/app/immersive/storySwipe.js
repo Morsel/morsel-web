@@ -259,13 +259,16 @@ angular.module('Morsel.storySwipe', [
 
         //scrolling
         function scroll(x) {
+          var move;
+
           // use CSS 3D transform to move the screen
           if (isNaN(x)) {
             x = scope.currentMorselIndex * morselHeight;
           }
 
           offset = x;
-          var move = -Math.round(offset);
+          move = -Math.round(offset);
+
           iElement.find('ul')[0].style[transformProperty] = 'translate3d(0, ' + move + 'px, 0)';
         }
 
@@ -299,6 +302,11 @@ angular.module('Morsel.storySwipe', [
             return;
           }
           scope.currentMorselIndex = capIndex(i);
+
+          scope.updateImmersiveState({
+            inStory: scope.currentMorselIndex !== 0
+          });
+
           // if outside of angular scope, trigger angular digest cycle
           // use local digest only for perfs if no index bound
           if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {

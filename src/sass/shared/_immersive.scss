@@ -10,12 +10,37 @@ $story-indicator-size: 10px;
     z-index: 10;
     top: 0;
     left: 0;
-    background: none;
     width: 100%;
+    padding: 10px;
 
     h1 {
-      float: left;
-      margin-left: 50px;
+      font-size: 16px;
+      margin: 0;
+
+      a {
+        color: $morsel-dark;
+      }
+    }
+
+    h5 {
+      font-size: 14px;
+      color: $morsel-dark;
+      margin: 5px 0 0;
+    }
+
+    h1, h5 {
+      @include opacity(1);
+      @include transition(opacity .2s ease-out);
+    }
+
+    > a {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    > div {
+      margin-left: 10px;
+      display: inline-block;
     }
 
     nav {
@@ -24,7 +49,17 @@ $story-indicator-size: 10px;
     }
   }
 
+  .in-story {
+    header {
+      h1, h5 {
+        @include opacity(0);
+      }
+    }
+  }
+
   .immersive-control {
+    display: none; //for now
+
     width: $arrow-height;
     height: $arrow-height;
     position: absolute;
@@ -64,7 +99,7 @@ $story-indicator-size: 10px;
     span {
       width: $story-indicator-size;
       height: $story-indicator-size;
-      background-color: transparent;
+      background-color: black;
       border: 1px solid white;
       border-radius: 50%;
       margin: 2px 0;
@@ -77,6 +112,68 @@ $story-indicator-size: 10px;
 
       &.active {
         background-color: $morsel-primary;
+      }
+    }
+  }
+
+  .cover-page {
+    padding-top: 60px;
+    background-color: white;
+
+    .cover-title {
+      $cover-title-height: 70px;
+      $cover-title-padding: 8px;
+
+      height: $cover-title-height + $cover-title-padding*2;
+      padding: $cover-title-padding 0;
+      
+      h2 {
+        text-align: center;
+        line-height: $cover-title-height/2;
+        margin: 0;
+        white-space: normal;
+        color: $morsel-dark;
+      }
+    }
+
+    .cover-photo-wrap {
+      text-align: center;
+
+      img {
+        max-height: 66%; //1/1.5
+      }
+    }
+
+    .thumbnails-wrap {
+      margin: 10px 0;
+
+      li {
+        display: inline-block;
+        width: 22%;
+        margin-right: 4%;
+
+        img {
+          width: 100%;
+        }
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+
+    .cover-browse {
+      text-align: center;
+
+      span {
+        text-transform: uppercase;
+        font-size: 12px;
+        display: block;
+        font-weight: bold;
+
+        i {
+          display: inline-block
+        }
       }
     }
   }
@@ -99,16 +196,6 @@ $story-indicator-size: 10px;
     width: 100%;
     height: 100%;
     @include backface-visibility(hidden);
-
-    h2 {
-      margin: 0;
-      position: absolute;
-      top: 100px;
-      right: 50px;
-      width: 200px;
-      color: white;
-      z-index: 2;
-    }
   }
 
   .morsels {
