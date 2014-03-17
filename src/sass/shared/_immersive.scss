@@ -151,27 +151,24 @@ $header-padding: 10px;
     background-color: white;
 
     .cover-title {
-      $cover-title-height: 70px;
-      $cover-title-padding: 8px;
-
-      height: $cover-title-height + $cover-title-padding*2;
-      padding: $cover-title-padding 0;
-      
-      h2 {
-        text-align: center;
-        line-height: $cover-title-height/2;
-        margin: 0;
-        white-space: normal;
-        color: $morsel-dark;
-      }
+      padding: 0 15px;
+      text-align: center;
+      margin: 0;
+      white-space: normal;
+      color: white;
+      display: table-cell;
+      vertical-align: middle;
+      @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
     }
 
     .cover-photo-wrap {
+      display: table;
       text-align: center;
-
-      img {
-        max-height: 66%; //1/1.5
-      }
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 40%;
+      width: 100%;
     }
 
     .thumbnails-wrap {
