@@ -256,19 +256,20 @@ $header-padding: 10px;
 
       .morsel-img {
         background-size: cover;
-        background-position: center top;
+        background-position: center center;
         background-repeat: no-repeat;
       }
       
       .morsel-description {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
         z-index: 2;
         background-color: rgba(0,0,0,0);
         @include transition(background-color .2s ease-out);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        @include transition(opacity .2s ease-out);
+        @include opacity(1);
 
         p {
           position: absolute;
@@ -283,7 +284,18 @@ $header-padding: 10px;
         }
 
         &.expanded {
+          height: 100%;
           background-color: rgba(0,0,0,.8);
+        }
+      }
+
+      &.full-photo {
+        .morsel-img {
+          background-size: contain;
+        }
+
+        .morsel-description {
+          @include opacity(0);
         }
       }
     }

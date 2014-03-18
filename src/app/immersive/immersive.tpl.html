@@ -38,9 +38,9 @@
                   </p>
                 </div>
               </li>
-              <li ng-repeat="morsel in story.morsels" class="morsel">
+              <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto}">
                 <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
-                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}">
+                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto">
                 </div>
               </li>
             </ul>
