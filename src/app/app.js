@@ -32,6 +32,7 @@ angular.module( 'Morsel', [
   'Morsel.socialSharing',
   'Morsel.storySwipe',
   'Morsel.submitBtn',
+  'Morsel.textLimit',
   'Morsel.userImage',
   'Morsel.validatedInput',
   //filters
