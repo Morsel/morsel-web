@@ -1,15 +1,11 @@
 <div class="immersive">
   <div immersive-swipe ng-class="{'in-story': immersiveState.inStory}">
-    <header>
-      <a ng-click="goTo(owner.username)">
-        <img ng-src="{{owner.photos._40x40}}" />
-      </a>
-      <div class="owner-info">
-        <h1>
-          <a ng-click="goTo(owner.username)">{{owner.first_name + ' ' + owner.last_name}}</a>
-        </h1>
-        <h5>{{owner.title}}</h5>
-      </div>
+    <header class="immersive-header user-info">
+      <div user-image username="owner.username" user-photos="owner.photos" user-image-size="profile-pic-xs"></div>
+      <h1 class="overflow-ellipsis">
+        <a ng-click="goTo(owner.username)">{{owner.first_name + ' ' + owner.last_name}}</a>
+      </h1>
+      <h5 class="overflow-ellipsis">{{owner.title}}</h5>
     </header>
     <div immersive-controls index="currentControlIndex" count="storiesCount"></div>
     <div class="stories-wrap">
@@ -38,10 +34,15 @@
                   </p>
                 </div>
               </li>
-              <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto}">
+              <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto, 'comments-showing': showComments}" story-swipeable>
                 <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
-                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto">
+                <div class="morsel-actions">
+                  <span><i class="glyphicon glyphicon-heart"></i></span>
+                  <span ng-click="showComments=!showComments"><i class="glyphicon glyphicon-comment"></i></span>
+                  <span><i class="glyphicon glyphicon-share"></i></span>
                 </div>
+                <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
+                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto" story-swipeable></div>
               </li>
             </ul>
           </div>

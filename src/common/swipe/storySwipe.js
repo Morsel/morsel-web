@@ -19,7 +19,7 @@ angular.module('Morsel.storySwipe', [
         return new Array(n);
       };
     },
-    templateUrl: 'immersive/storyThumbnails.tpl.html'
+    templateUrl: 'swipe/storyThumbnails.tpl.html'
   };
 }])
 
@@ -125,11 +125,10 @@ angular.module('Morsel.storySwipe', [
 
         //our swiping functions
         function swipeStart(coords, event) {
-          var tagCheck = event.target.tagName.toUpperCase();
+          var elementScope = angular.element(event.target).scope(),
+              nonSwipeable = elementScope.nonSwipeable;
 
-          if(tagCheck === 'SPAN' || tagCheck === 'TEXTAREA') {
-            return false;
-          } else {
+          if(!nonSwipeable) {
             $document.bind('mouseup', documentMouseUpEvent);
             pressed = true;
             startX = coords.x;

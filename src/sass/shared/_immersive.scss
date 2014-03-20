@@ -1,19 +1,18 @@
 $story-indicator-padding: 10px;
 $story-indicator-size: 10px;
-$header-height: 60px;
-$header-padding: 10px;
+$immersive-header-padding: 10px;
 
 .immersive {
   background: black;
 
-  header {
+  .immersive-header {
     display: block;
     position: fixed;
     z-index: 10;
     top: 0;
     left: 0;
     width: 100%;
-    padding: $header-padding;
+    padding: $immersive-header-padding;
 
     h1 {
       font-size: 16px;
@@ -34,31 +33,12 @@ $header-padding: 10px;
       @include translate3d(0,0,0);
       @include transition(all .2s ease-out);
     }
-
-    > a {
-      display: inline-block;
-      vertical-align: top;
-    }
-
-    .owner-info {
-      margin-left: 10px;
-      display: inline-block;
-    }
-
-    nav {
-      float: right;
-      margin-right: 50px;
-    }
-
-    .story-title {
-
-    }
   }
 
   .in-story {
-    header {
+    .immersive-header {
       h1, h5 {
-        @include translate3d(0,-$header-height,0);
+        @include translate3d(0,-$immersive-header-height,0);
       }
     }
 
@@ -133,9 +113,9 @@ $header-padding: 10px;
     top: 0;
     z-index: 2;
     text-align: center;
-    padding: $header-padding;
+    padding: $immersive-header-padding;
     @include transition(all .2s ease-out);
-    @include translate3d(0,-$header-height,0);
+    @include translate3d(0,-$immersive-header-height,0);
     width: 100%;
 
     h2 {
@@ -148,7 +128,7 @@ $header-padding: 10px;
   }
 
   .cover-page {
-    padding-top: $header-height;
+    padding-top: $immersive-header-height;
     background-color: white;
 
     .cover-title {
@@ -289,10 +269,30 @@ $header-padding: 10px;
         }
       }
 
+      .morsel-actions {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px 25px 10px 10px;
+        z-index: 10;
+      }
+
+      .comments-showing {
+
+      }
+
       &.full-photo {
         .morsel-img {
           background-size: contain;
         }
+
+        .morsel-description {
+          @include opacity(0);
+        }
+      }
+
+      &.comments-showing {
 
         .morsel-description {
           @include opacity(0);
