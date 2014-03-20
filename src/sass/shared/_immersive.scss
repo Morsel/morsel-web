@@ -130,6 +130,7 @@ $immersive-header-padding: 10px;
   .cover-page {
     padding-top: $immersive-header-height;
     background-color: white;
+    position: relative;
 
     .cover-title {
       padding: 0 15px;
@@ -193,6 +194,10 @@ $immersive-header-padding: 10px;
 
     .cover-browse {
       text-align: center;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
 
       span {
         text-transform: uppercase;
@@ -273,13 +278,8 @@ $immersive-header-padding: 10px;
         position: absolute;
         bottom: 0;
         left: 0;
-        width: 100%;
-        padding: 10px 25px 10px 10px;
+        padding: 10px;
         z-index: 10;
-      }
-
-      .comments-showing {
-
       }
 
       &.full-photo {
