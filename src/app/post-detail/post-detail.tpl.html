@@ -20,9 +20,9 @@
             </div>
             <div story-thumbnails index="currentIndicatorIndex" morsels="story.morsels"></div>
             <div class="cover-actions">
-              <span><i class="glyphicon glyphicon-heart"></i></span>
-              <span><i class="glyphicon glyphicon-comment"></i></span>
-              <span><i class="glyphicon glyphicon-share"></i></span>
+              <span><i class="common-like"></i></span>
+              <span><i class="common-chat"></i></span>
+              <span><i class="common-share"></i></span>
             </div>
             <div class="cover-browse">
               <span>Scroll</span>
@@ -32,9 +32,9 @@
           <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto, 'comments-showing': showComments}" story-swipeable>
             <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
             <div class="morsel-actions">
-              <span><i class="glyphicon glyphicon-heart"></i></span>
-              <span ng-click="showComments=!showComments"><i class="glyphicon glyphicon-comment"></i></span>
-              <span><i class="glyphicon glyphicon-share"></i></span>
+              <span><i class="common-like"></i></span>
+              <span ng-click="showComments=!showComments"><i class="common-chat"></i></span>
+              <span><i class="common-share"></i></span>
             </div>
             <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
             <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto" story-swipeable></div>
