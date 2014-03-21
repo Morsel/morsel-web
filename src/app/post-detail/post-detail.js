@@ -22,6 +22,16 @@ angular.module( 'Morsel.postDetail', [])
   $scope.viewOptions.hideHeader = true;
   $scope.viewOptions.hideFooter = true;
 
+  //scope vars for individual story
+  $scope.immersiveState = {
+    inStory : false
+  };
+
+  $scope.updateImmersiveState = function(obj) {
+    _.extend($scope.immersiveState, obj);
+    $scope.$digest();
+  };
+
   //check and make sure we pulled an idslug from the URL
   if(postIdSlug && username) {
     ApiPosts.getPost(postIdSlug).then(function(postData){
@@ -31,7 +41,7 @@ angular.module( 'Morsel.postDetail', [])
         $scope.postMorselNumber = postMorselNumber;
       }
 
-      $scope.stories = [postData];
+      $scope.story = postData;
     }, function() {
       //if there's an error retrieving post data (bad id?), go to profile page for now
       $location.path('/'+$stateParams.username);

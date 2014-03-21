@@ -7,45 +7,40 @@
       </h1>
       <h5 class="overflow-ellipsis">{{owner.title}}</h5>
     </header>
-    <div immersive-controls index="currentControlIndex" count="storiesCount"></div>
-    <div class="stories-wrap">
-      <ul class="stories">
-        <li ng-repeat="story in stories" class="story" ng-class="{'current-story': $index===currentControlIndex}">
-          <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
-            <div class="story-title">
-              <h2>{{story.title}}</h2>
+    <div class="story current-story">
+      <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
+        <div class="story-title">
+          <h2>{{story.title}}</h2>
+        </div>
+        <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
+        <ul class="morsels">
+          <li class="cover-page" style="height: {{immersiveHeight}}">
+            <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})">
+              <h2 class="cover-title">{{story.title}}</h2>
             </div>
-            <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
-            <ul class="morsels">
-              <li class="cover-page" style="height: {{immersiveHeight}}">
-                <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})">
-                  <h2 class="cover-title">{{story.title}}</h2>
-                </div>
-                <div story-thumbnails index="currentIndicatorIndex" morsels="story.morsels"></div>
-                <div class="cover-actions">
-                  <span><i class="glyphicon glyphicon-heart"></i></span>
-                  <span><i class="glyphicon glyphicon-comment"></i></span>
-                  <span><i class="glyphicon glyphicon-share"></i></span>
-                </div>
-                <div class="cover-browse">
-                  <span>Browse</span>
-                  <i class="glyphicon glyphicon-circle-arrow-down"></i>
-                </div>
-              </li>
-              <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto, 'comments-showing': showComments}" story-swipeable>
-                <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
-                <div class="morsel-actions">
-                  <span><i class="glyphicon glyphicon-heart"></i></span>
-                  <span ng-click="showComments=!showComments"><i class="glyphicon glyphicon-comment"></i></span>
-                  <span><i class="glyphicon glyphicon-share"></i></span>
-                </div>
-                <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
-                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto" story-swipeable></div>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
+            <div story-thumbnails index="currentIndicatorIndex" morsels="story.morsels"></div>
+            <div class="cover-actions">
+              <span><i class="glyphicon glyphicon-heart"></i></span>
+              <span><i class="glyphicon glyphicon-comment"></i></span>
+              <span><i class="glyphicon glyphicon-share"></i></span>
+            </div>
+            <div class="cover-browse">
+              <span>Scroll</span>
+              <i class="glyphicon glyphicon-circle-arrow-down"></i>
+            </div>
+          </li>
+          <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto, 'comments-showing': showComments}" story-swipeable>
+            <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
+            <div class="morsel-actions">
+              <span><i class="glyphicon glyphicon-heart"></i></span>
+              <span ng-click="showComments=!showComments"><i class="glyphicon glyphicon-comment"></i></span>
+              <span><i class="glyphicon glyphicon-share"></i></span>
+            </div>
+            <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
+            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto" story-swipeable></div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
