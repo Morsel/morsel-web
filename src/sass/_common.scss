@@ -52,17 +52,6 @@ img {
   font-style: italic;
 }
 
-//commonly used items
-.like-morsel {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .morsel-icon {
   background-image: url(images/icons/morsel-icon.png);
   background-size: cover;

@@ -18,6 +18,6 @@ angular.module( 'Morsel.morselLike', [] )
         }
       };
     },
-    template: '<i ng-click="toggleMorselLike()" class="like-morsel glyphicon {{morsel.liked ? \'glyphicon-heart\' : \'glyphicon-heart-empty\'}}"></i>'
+    template: '<i ng-click="toggleMorselLike()" class="{{morsel.liked ? \'common-like\' : \'common-like-empty\'}}"></i>'
   };
 });

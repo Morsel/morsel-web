@@ -284,6 +284,16 @@ $immersive-header-padding: 10px;
         left: 0;
         padding: 10px;
         z-index: 10;
+        margin: 0;
+
+        li {
+          display: inline-block;
+          margin-right: 3px;
+        }
+
+        i:hover {
+          cursor: pointer;
+        }
       }
 
       &.full-photo {
