@@ -48,7 +48,9 @@ angular.module('Morsel.storySwipe', [
       // in container % how much we need to drag to trigger the slide change
       moveTreshold = 0.05,
       // in absolute pixels, at which distance the slide stick to the edge on release
-      rubberTreshold = 3;
+      rubberTreshold = 3,
+      //max time between scrolls
+      scrollThreshold = 500;
 
   return {
     restrict: 'A',
@@ -141,7 +143,9 @@ angular.module('Morsel.storySwipe', [
             event.stopPropagation();
 
             //call our immersive function
-            scope.swipeStarted(coords);
+            if(scope.swipeStarted) {
+              scope.swipeStarted(coords);
+            }
 
             return false;
           }
@@ -171,7 +175,9 @@ angular.module('Morsel.storySwipe', [
               //if we're swiping in x
               if(swipeDirection === 'x') {
                 //call our immersive function
-                scope.swipeMoved(coords);
+                if(scope.swipeMoved) {
+                  scope.swipeMoved(coords);
+                }
               }
             } else {
               //swipe was in the y direction
@@ -244,7 +250,9 @@ angular.module('Morsel.storySwipe', [
           }
 
           //call our immersive function
-          scope.swipeEnded(coords, forceAnimation);
+          if(scope.swipeEnded) {
+            scope.swipeEnded(coords, forceAnimation);
+          }
           return false;
         }
 
@@ -319,9 +327,11 @@ angular.module('Morsel.storySwipe', [
           }
           scope.currentMorselIndex = capIndex(i);
 
-          scope.updateImmersiveState({
-            inStory: scope.currentMorselIndex !== 0
-          });
+          if(scope.updateImmersiveState) {
+            scope.updateImmersiveState({
+              inStory: scope.currentMorselIndex !== 0
+            });
+          }
 
           // if outside of angular scope, trigger angular digest cycle
           // use local digest only for perfs if no index bound
@@ -363,16 +373,20 @@ angular.module('Morsel.storySwipe', [
          */
         handleMouseWheel = function(event, delta, deltaX, deltaY){
           var elementScope = angular.element(event.target).scope(),
-              nonSwipeable = elementScope.nonSwipeable;
+              nonSwipeable = elementScope.nonSwipeable,
+              //use immersive checklastscroll if we can, fall back to story version
+              hasScrolled = scope.checkLastScroll ? scope.checkLastScroll() : checkLastScroll();
 
           //make sure we can scroll on this element and user only scrolls one at a time
-          if(!nonSwipeable && scope.checkLastScroll()) {
+          if(!nonSwipeable && hasScrolled) {
             //if we scroll up
             if (deltaY > 0) {
               //if we're on the first morsel
               if (scope.currentMorselIndex === 0) {
                 //go to the previous story
-                scope.goToPrevStory();
+                if(scope.goToPrevStory) {
+                  scope.goToPrevStory();
+                }
               } else {
                 //else go to the previous morsel
                 goToSlide(scope.currentMorselIndex-1, true);
@@ -382,7 +396,9 @@ angular.module('Morsel.storySwipe', [
               //if we're on the last morsel
               if(scope.currentMorselIndex === scope.morselsCount - 1) {
                 //go to the next story
-                scope.goToNextStory();
+                if(scope.goToNextStory) {
+                  scope.goToNextStory();
+                }
               } else {
                 //and aren't on the last morsel
                 goToSlide(scope.currentMorselIndex+1, true);
@@ -404,6 +420,20 @@ angular.module('Morsel.storySwipe', [
         scope.$on('$destroy', function(){
           hamster.unwheel(handleMouseWheel);
         });
+
+        //scrolling story fallback
+        //keep this here so you don't fire a scroll event in this story (if it's not part of a feed)
+        function checkLastScroll() {
+          //make sure this scroll should have an effect
+          var scrollValid = false;
+
+          if(Date.now() - (lastScrollTimestamp || 0) > scrollThreshold) {
+            scrollValid = true;
+            lastScrollTimestamp = Date.now();
+          }
+
+          return scrollValid;
+        }
       };
     }
   };
