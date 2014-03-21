@@ -14,7 +14,8 @@ angular.module( 'Morsel.postDetail', [])
 })
 
 .controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiUsers, $location ) {
-  var postDetailsArr = $stateParams.postDetails.split('/'),
+  var username = $stateParams.username,
+      postDetailsArr = $stateParams.postDetails.split('/'),
       postIdSlug = postDetailsArr[0],
       postMorselNumber = parseInt(postDetailsArr[1], 10);
 
@@ -22,8 +23,8 @@ angular.module( 'Morsel.postDetail', [])
   $scope.viewOptions.hideFooter = true;
 
   //check and make sure we pulled an idslug from the URL
-  if(postIdSlug) {
-    ApiPosts.getPost(5).then(function(postData){
+  if(postIdSlug && username) {
+    ApiPosts.getPost(postIdSlug).then(function(postData){
       if(isNaN(postMorselNumber) || postMorselNumber > postData.morsels.length) {
         $scope.postMorselNumber = 1;
       } else {
@@ -31,13 +32,19 @@ angular.module( 'Morsel.postDetail', [])
       }
 
       $scope.stories = [postData];
+    }, function() {
+      //if there's an error retrieving post data (bad id?), go to profile page for now
+      $location.path('/'+$stateParams.username);
     });
 
-    ApiUsers.getUser('jasonvincent').then(function(userData){
+    ApiUsers.getUser(username).then(function(userData){
       $scope.owner = userData;
+    }, function() {
+      //if there's an error retrieving post data (bad username?), go to home page for now
+      $location.path('/');
     });
   } else {
     //if not, send to profile page
-    $location.path('/'+$scope.params.username);
+    $location.path('/'+$stateParams.username);
   }
 });
