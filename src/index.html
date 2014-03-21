@@ -90,8 +90,8 @@
       </nav>
 
       <div id="site" ng-class="{site: true, open:menuOpen}">
-        <header ng-class="{hide: viewOptions.hideHeader}">
-          <div class="container">
+        <header>
+          <div class="container" ng-class="{hide: viewOptions.hideHeader}">
             <h1 class="morsel-logo">
               <a ng-click="goTo('home')">Morsel</a>
             </h1>
@@ -115,7 +115,7 @@
               </ul>
             </nav>
           </div>
-          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger">Menu</a>
+          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
         </header>
 
         <div ui-view="main" class="main-view" ng-click="menuOpen = false"></div>
