@@ -40,9 +40,6 @@
               <li>
                 <i class="common-chat" ng-click="showComments=!showComments"></i>
               </li>
-              <li>
-                <i class="common-share"></i>
-              </li>
             </ul>
             <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
             <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto" story-swipeable></div>
