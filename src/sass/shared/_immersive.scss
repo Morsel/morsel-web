@@ -137,6 +137,7 @@ $immersive-header-lg-line-height: 40px;
     padding-top: $immersive-header-height;
     background-color: white;
     position: relative;
+    overflow: hidden;
 
     .cover-photo-wrap {
       display: block;

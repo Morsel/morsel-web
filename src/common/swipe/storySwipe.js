@@ -80,7 +80,6 @@ angular.module('Morsel.storySwipe', [
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           updateMorselHeight();
-          scope.immersiveHeight = morselHeight+'px';
 
           // only bind swipe when it's not switched off
           if(newValue !== 'false') {
@@ -279,6 +278,7 @@ angular.module('Morsel.storySwipe', [
 
         function updateMorselHeight() {
           morselHeight = window.innerHeight;
+          scope.immersiveHeight = morselHeight+'px';
         }
 
         //scrolling
@@ -361,6 +361,7 @@ angular.module('Morsel.storySwipe', [
         });
 
         function onOrientationChange() {
+          updateMorselHeight();
           goToSlide();
         }
 
