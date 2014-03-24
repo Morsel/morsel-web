@@ -137,7 +137,7 @@
   &.open {
     @include translate3d(-$sidenav-width, 0, 0);
 
-    header {
+    .main-header {
       li {
         @include opacity(0);
       }
@@ -159,7 +159,7 @@
   }
 }
 
-header {
+.main-header {
   z-index: 11;
 
   .container {
@@ -274,7 +274,7 @@ footer {
 @media (min-width: $screen-xs-min) {
   .site {
     &.open {
-      header {
+      .main-header {
         .morsel-logo {
           @include translate3d($sidenav-width, 0, 0);
         }
@@ -284,7 +284,7 @@ footer {
 }
 
 @media (min-width: $screen-md-min) {
-  header {
+  .main-header {
     background-image: url(images/bg/light-line.png);
 
     .morsel-logo {

@@ -5,7 +5,6 @@
       <h1 class="overflow-ellipsis">
         <a ng-click="goTo(owner.username)">{{owner.first_name + ' ' + owner.last_name}}</a>
       </h1>
-      <h5 class="overflow-ellipsis">{{owner.title}}</h5>
     </header>
     <div class="story current-story">
       <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
@@ -44,12 +43,9 @@
               <li>
                 <i class="common-share"></i>
               </li>
-              <li>
-                <a ng-click="contain=!contain">change photo size</a>
-              </li>
             </ul>
             <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
-            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto" story-swipeable ng-class="{contain: contain}"></div>
+            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto" story-swipeable></div>
           </li>
         </ul>
       </div>
