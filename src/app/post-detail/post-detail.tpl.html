@@ -15,7 +15,8 @@
         <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
         <ul class="morsels">
           <li class="cover-page" style="height: {{immersiveHeight}}">
-            <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})">
+            <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})"></div>
+            <div class="cover-title-wrap">
               <h2 class="cover-title">{{story.title}}</h2>
             </div>
             <div story-thumbnails index="currentIndicatorIndex" morsels="story.morsels"></div>
