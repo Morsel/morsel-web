@@ -73,5 +73,9 @@ angular.module( 'Morsel.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.getPosts = function(username) {
+    return Restangular.one('users', username).one('posts').get();
+  };
+
   return Users;
 });

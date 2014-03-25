@@ -13,88 +13,44 @@ angular.module( 'Morsel.postDetail', [])
   });
 })
 
-.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiMorsels, $location ) {
-  var postDetailsArr = $stateParams.postDetails.split('/'),
+.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiUsers, $location, PageData ) {
+  var username = $stateParams.username,
+      postDetailsArr = $stateParams.postDetails.split('/'),
       postIdSlug = postDetailsArr[0],
       postMorselNumber = parseInt(postDetailsArr[1], 10);
 
-  $scope.swipeEvents = {
-    needsComments: false
+  $scope.viewOptions.hideHeader = true;
+  $scope.viewOptions.hideFooter = true;
+
+  //scope vars for individual story
+  $scope.immersiveState = {
+    inStory : false
   };
 
-  $scope.$watch('swipeEvents.needsComments', function(newMorselNum) {
-    if(newMorselNum && $scope.post) {
-      $scope.getComments($scope.post.morsels[newMorselNum].id);
-    }
-  });
-
-  //create an array of all morsel swiping on the page. will house directive data
-  $scope.morselSwipes = [];
+  $scope.updateImmersiveState = function(obj) {
+    _.extend($scope.immersiveState, obj);
+    $scope.$digest();
+  };
 
   //check and make sure we pulled an idslug from the URL
-  if(postIdSlug) {
+  if(postIdSlug && username) {
     ApiPosts.getPost(postIdSlug).then(function(postData){
-      if(isNaN(postMorselNumber) || postMorselNumber > postData.morsels.length) {
-        $scope.postMorselNumber = 1;
-      } else {
-        $scope.postMorselNumber = postMorselNumber;
-      }
+      $scope.story = postData;
 
-      $scope.post = postData;
-
-      //get comments for initial morsel
-      $scope.getComments(postData.morsels[$scope.postMorselNumber - 1].id);
+      PageData.setTitle($scope.story.title);
     }, function() {
+      //if there's an error retrieving post data (bad id?), go to profile page for now
+      $location.path('/'+$stateParams.username);
+    });
 
+    ApiUsers.getUser(username).then(function(userData){
+      $scope.owner = userData;
+    }, function() {
+      //if there's an error retrieving post data (bad username?), go to home page for now
+      $location.path('/');
     });
   } else {
     //if not, send to profile page
-    $location.path('/'+$scope.params.username);
-  }
-
-  //fetch comments for the current morsel
-  $scope.getComments = function(morselId) {
-    var morsel;
-
-    //make sure we have our post data
-    if($scope.post) {
-      morsel = filterMorselsById(morselId);
-
-      //make sure we have a valid morsel
-      if(morsel) {
-        //if we don't have our comments cached already
-        if(!morsel.comments) {
-          ApiMorsels.getComments(morselId).then(function(commentData){
-            morsel.comments = commentData;
-          }, function() {
-            console.log('error');
-          });
-        }
-      }
-    }
-  };
-
-  $scope.addComment = function() {
-    var commentScope = this;
-
-    ApiMorsels.postComment(commentScope.morsel.id, commentScope.addCommentDescription).then(function(commentData){
-      var morsel = filterMorselsById(commentData.morsel_id);
-
-      if(morsel.comments) {
-        morsel.comments.unshift(commentData);
-      } else {
-        morsel.comments = commentData;
-      }
-      //clear comment textarea
-      commentScope.addCommentDescription = '';
-    }, function() {
-      console.log('error');
-    });
-  };
-
-  function filterMorselsById(morselId) {
-    return $scope.post.morsels.filter(function(m) {
-      return m.id === morselId;
-    })[0];
+    $location.path('/'+$stateParams.username);
   }
 });

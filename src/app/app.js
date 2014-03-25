@@ -6,27 +6,29 @@ angular.module( 'Morsel', [
   'Morsel.about',
   'Morsel.addMorsel',
   'Morsel.dashboard',
-  'Morsel.feed',
   'Morsel.home',
+  'Morsel.immersive',
   'Morsel.join',
   'Morsel.login',
   'Morsel.logout',
-  'Morsel.morsel',
   'Morsel.myfeed',
-  'Morsel.post',
   'Morsel.postDetail',
   'Morsel.pressKit',
-  'Morsel.profile',
+  'Morsel.profile',//:username in route clobbers other routes - this needs to be last until a better solution is found
   //common
   'Morsel.auth',
   'Morsel.bgImage',
+  'Morsel.comments',
   'Morsel.formNameFix',
   'Morsel.handleErrors',
+  'Morsel.immersiveSwipe',
   'Morsel.morselLike',
   'Morsel.morselPressShare',
-  'Morsel.morselSwipe',
+  'Morsel.pageData',
   'Morsel.socialSharing',
+  'Morsel.storySwipe',
   'Morsel.submitBtn',
+  'Morsel.textLimit',
   'Morsel.userImage',
   'Morsel.validatedInput',
   //filters
@@ -38,6 +40,7 @@ angular.module( 'Morsel', [
   'Morsel.apiUsers',
   //libs
   'angularMoment',
+  'swipe',
   'restangular',
   'ui.bootstrap',
   'ui.state',
@@ -87,11 +90,13 @@ angular.module( 'Morsel', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, PageData ) {
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
   resetViewOptions();
+
+  $scope.pageData = PageData;
 
   //initial fetching of user data for header/footer
   Auth.setInitialUserData().then(function(){
@@ -115,7 +120,7 @@ angular.module( 'Morsel', [
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       //update the page title
-      $scope.pageTitle = toState.data.pageTitle + ' | Morsel' ;
+      PageData.setTitle(toState.data.pageTitle + ' | Morsel');
     }
     //refresh our user data
     $scope.isLoggedIn = Auth.isLoggedIn();

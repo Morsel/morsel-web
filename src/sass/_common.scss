@@ -39,58 +39,17 @@ img {
 }
 
 .user-info {
-  padding: 15px;
   overflow: hidden;
 
-  //default size is $profile-pic-s
-  $profile-pic-margin: 20px;
-
-  > div {
-    float: left;
-  }
-
   .profile-pic-link {
-    margin-left: $profile-pic-margin;
+    margin: 0 15px;
     float: left;
-
-    & + div {
-      margin-left: $profile-pic-s + 2*$profile-pic-margin;
-    }
-  }
-
-  .user-info-main {
-    margin: 2px 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-  }
-
-  &.user-info-xs {
-    padding: 15px;
-
-    $profile-pic-margin: 10px;
-
-    .profile-pic-link {
-      margin-left: $profile-pic-margin;
-    }
   }
 }
 
 .caption {
   color: $morsel-medium;
   font-style: italic;
-}
-
-//commonly used items
-.like-morsel {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-
-  &:hover {
-    cursor: pointer;
-  }
 }
 
 .morsel-icon {
@@ -102,7 +61,6 @@ img {
 }
 
 .time-ago {
-  color: $morsel-medium;
   font-size: 12px;
   margin: 0;
 }
@@ -116,6 +74,10 @@ img {
   width: 100%;
   background: url(images/icons/loader.gif) center center no-repeat;
   height: 100px;
+
+  &.loader-white {
+    background-image: url(images/icons/loader-white.gif);
+  }
 }
 
 form {
@@ -179,6 +141,13 @@ form {
 
 .text-danger, .text-success, .text-warning {
   font-weight: 400;
+}
+
+.overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
 @media (min-width: $screen-xs-min) {

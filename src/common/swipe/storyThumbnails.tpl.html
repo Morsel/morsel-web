@@ -1,0 +1,16 @@
+<div class="thumbnails-wrap">
+  <ul ng-show="morsels.length <= 4">
+    <li ng-repeat="morsel in morsels" >
+      <img ng-src="{{morsel.photos._320x320}}" ng-click="$parent.index=$index+1" />
+    </li>
+  </ul>
+  <ul ng-show="morsels.length > 4">
+    <li ng-repeat="morsel in morsels.slice(0,3)" ng-click="$parent.index=$index+1">
+      <img ng-src="{{morsel.photos._320x320}}" />
+    </li>
+    <li ng-click="index=3" class="additional-thumbs" style="background-image: url({{morsels[3].photos._320x320}})">
+      <span>+{{morsels.slice(3).length}}</span>
+      <img ng-src="{{morsels[3].photos._320x320}}" />
+    </li>
+  </ul>
+</div>

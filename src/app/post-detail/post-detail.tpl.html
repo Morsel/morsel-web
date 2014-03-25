@@ -1,71 +1,44 @@
-<div morsel-swipe="{{post.morsels.length > 1}}" morsel-swipe-index="{{postMorselNumber}}" morsel-swipe-morsels="post.morsels" class="post-detail">
-  <div class="post-header">
-    <div class="container">
-      <h1>{{post.title}}</h1>
-      <morselIndicatorTop></morselIndicatorTop>
-    </div>
-  </div>
-  <div class="container container-shadow">
-    <div class="post-info morsel-bg">
-      <h1>{{post.title}}</h1>
-      <div class="user-info user-info-xs">
-        <div user-image username="post.creator.username" user-photos="post.creator.photos" user-image-size="profile-pic-xs"></div>
-        <div>
-          <h2 class="user-info-main h3">{{post.creator.first_name}} {{post.creator.last_name}}</h2>
-          <morselPostedAt></morselPostedAt>
+<div class="immersive">
+  <div ng-class="{'in-story': immersiveState.inStory}">
+    <header class="immersive-header user-info">
+      <div user-image username="owner.username" user-photos="owner.photos" user-image-size="profile-pic-xs"></div>
+      <h1 class="overflow-ellipsis">
+        <a ng-click="goTo(owner.username)">{{owner.first_name + ' ' + owner.last_name}}</a>
+      </h1>
+    </header>
+    <div class="story current-story">
+      <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
+        <div class="story-title">
+          <h2>{{story.title}}</h2>
         </div>
-      </div>
-    </div>
-    <div class="morsels-wrap">
-      <morselControls></morselControls>
-      <morselIndicatorBottom></morselIndicatorBottom>
-      <morsels>
+        <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
         <ul class="morsels">
-          <li ng-repeat="morsel in post.morsels | orderBy:'sort_order'" class="morsel">
-            <i morsel-like></i>
-            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}});"></div>
-            <div ng-if="morsel.description" ng-class="{'morsel-content': true, 'text-morsel': !morsel.photos }">
-              <p>{{morsel.description}}</p>
-            </div>
-            <div class="morsel-content morsel-comments">
-              <h4 class="comments-header h2">Comments <span ng-show="morsel.comments.length > 0">({{morsel.comments.length}})</span><i class="common-comments"></i></h4>
-              <hr />
-              <ul ng-show="morsel.comments">
-                <li ng-repeat="comment in morsel.comments | reverse" class="morsel-comment">
-                  <div class="user-info user-info-s">
-                    <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-s"></div>
-                    <div>
-                      <span am-time-ago="comment.created_at" class="time-ago"></span>
-                      <h5 class="user-info-main">{{comment.creator.first_name}} {{comment.creator.last_name}}</h5>
-                      <p class="comment-description">{{comment.description}}</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-              <div ng-show="!morsel.comments" class="loader"></div>
-              <div ng-show="morsel.comments && morsel.comments.length === 0" class="empty-state">
-                <p>There are no comments</p>
+          <li class="cover-page" style="height: {{immersiveHeight}}">
+            <div class="cover-container">
+              <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})"></div>
+              <div class="cover-title-wrap">
+                <h2 class="cover-title">{{story.title}}</h2>
               </div>
-              <div class="add-comment-morsel" ng-show="isLoggedIn">
-                <div class="user-info user-info-s">
-                  <div user-image username="currentUser.username" user-photos="currentUser.photos" user-image-size="profile-pic-s"></div>
-                  <div>
-                    <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
-                      <div class="form-group">
-                        <textarea class="form-control" rows="3" ng-model="addCommentDescription" placeholder="Write your comment" required></textarea>
-                      </div>
-                      <button type="submit" ng-disabled="addCommentForm.$invalid" class="btn btn-primary">Add Comment</button>
-                    </form>
-                  </div>
-                </div>
+              <div story-thumbnails index="currentIndicatorIndex" morsels="story.morsels"></div>
+              <div class="cover-actions">
+                <span><i class="common-like"></i></span>
+                <span><i class="common-chat"></i></span>
+                <span><i class="common-share"></i></span>
+              </div>
+              <div class="cover-browse">
+                <span>Scroll</span>
+                <i class="glyphicon glyphicon-circle-arrow-down"></i>
               </div>
             </div>
           </li>
+          <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto, 'comments-showing': showComments}">
+            <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
+            <div morsel-actions comments-trigger="showComments" actionable-morsel="morsel"></div>
+            <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
+            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
+          </li>
         </ul>
-      </morsels>
+      </div>
     </div>
-  </div>
-  <div class="blur-bg">
-    <div style="background-image: url(https://morsel-staging.s3.amazonaws.com/morsel-photos/17/_640x640_3f39252d-656a-4670-8e19-ae1f8409c285.jpg);"></div>
   </div>
 </div>

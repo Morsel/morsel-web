@@ -21,8 +21,10 @@
   padding: 0;
   @include opacity(0);
   @include transition(all .2s ease-out);
+  display: none;
 
   &.open {
+    display: block;
     @include opacity(1);
   }
 
@@ -135,13 +137,9 @@
   &.open {
     @include translate3d(-$sidenav-width, 0, 0);
 
-    header {
+    .main-header {
       li {
         @include opacity(0);
-      }
-
-      > .side-nav-trigger {
-        @include opacity(1);
       }
     }
 
@@ -161,7 +159,7 @@
   }
 }
 
-header {
+.main-header {
   z-index: 11;
 
   .container {
@@ -198,13 +196,13 @@ header {
     position: absolute;
     top: 12px;
     right: 20px;
-    @include opacity(0);
     @include transition(opacity .2s ease-out);
     padding: $padding-base-vertical 5px;
     color: $morsel-dark;
     text-transform: uppercase;
     font-size: 16px;
     display: block;
+    z-index: 12;
 
     &:hover {
       color: $link-hover-color;
@@ -252,10 +250,10 @@ footer {
 
 .side-nav-trigger {
   &:after {
-    width: 16px;
-    height: 12px;
+    width: 18px;
+    height: 14px;
     background-repeat: no-repeat;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAMAAABcOc2zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRFOUA4////68BBvwAAAAJ0Uk5T/wDltzBKAAAAFklEQVR42mJgIAgY0QARAgNjKECAAQAnDABhhodsmAAAAABJRU5ErkJggg==);
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAMAAAAVBLyFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRFOUA4////////Q/v6MgAAAAN0Uk5T//8A18oNQQAAAB1JREFUeNpiYMQADIwMaAC7EKZGJgzAMHSMBwgwAGTKAMGbmQmrAAAAAElFTkSuQmCC);
     content: ' ';
     display: inline-block;
     margin-left: 3px;
@@ -264,7 +262,7 @@ footer {
 
   &:hover {
     &:after {
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAMCAMAAABcOc2zAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF6WFE////JLZEAAAAAAJ0Uk5T/wDltzBKAAAAFklEQVR42mJgIAgY0QARAgNjKECAAQAnDABhhodsmAAAAABJRU5ErkJggg==);
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAMAAAAVBLyFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRF6WFE////////SehjnAAAAAN0Uk5T//8A18oNQQAAAB1JREFUeNpiYMQADIwMaAC7EKZGJgzAMHSMBwgwAGTKAMGbmQmrAAAAAElFTkSuQmCC);
     }
   }
 }
@@ -276,7 +274,7 @@ footer {
 @media (min-width: $screen-xs-min) {
   .site {
     &.open {
-      header {
+      .main-header {
         .morsel-logo {
           @include translate3d($sidenav-width, 0, 0);
         }
@@ -286,7 +284,7 @@ footer {
 }
 
 @media (min-width: $screen-md-min) {
-  header {
+  .main-header {
     background-image: url(images/bg/light-line.png);
 
     .morsel-logo {
