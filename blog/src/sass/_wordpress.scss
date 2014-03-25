@@ -850,10 +850,13 @@ Site Header
   margin: 0 0 0.8rem;
 }
 .site-title a {
-  @include replace-text(url(images/morsel-header.png));
-  width: 200px;
+  background: url(images/morsel-header.png) left top no-repeat;
   height: 136px;
+  line-height: 136px;
   display: block;
+  color: $morsel-dark;
+  font-size: 40px;
+  text-align: center;
 }
 
 .site-title a,
@@ -863,6 +866,8 @@ Site Header
 
 .site-description {
   color: $morsel-dark;
+
+  @extend .h4;
 }
 
 /* Full width header, no widgets */
@@ -879,11 +884,6 @@ Site Header
 }
 
 /* Logo, hide text */
-
-.header-image .site-header .wrap {
-  background: url(images/janelogo.png) no-repeat left;
-  padding: 0;
-}
 
 .header-image .site-title a {
   float: left;
@@ -1370,6 +1370,8 @@ Sidebars
   margin-bottom: 4rem;
   padding: 40px;
   padding: 4rem;
+  background-color: $morsel-off-white;
+  @include box-shadow(0px 4px 7px 0px rgba(0, 0, 0, 0.5));
 
   ul {
     list-style: none;
@@ -1631,11 +1633,6 @@ Media Queries
   only screen and (-o-min-device-pixel-ratio: 3/2),
   only screen and (min-device-pixel-ratio: 1.5) {
 
-  .header-image .site-header .wrap {
-    background: url(images/janelogox2.png) no-repeat left;
-    background-size: 320px 164px;
-  }
-
 }
 
 @media only screen and (max-width: 1139px) {
@@ -1723,6 +1720,13 @@ Media Queries
   .site-header .search-form,
   .site-title {
     text-align: center;
+  }
+
+  .site-title a {
+    background-position: center top;
+    padding-top: 150px;
+    height: auto;
+    line-height: 80px;
   }
 
   .genesis-nav-menu a,

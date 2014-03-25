@@ -90,7 +90,7 @@
       </nav>
 
       <div id="site" ng-class="{site: true, open:menuOpen}">
-        <header>
+        <header ng-class="{hide: viewOptions.hideHeader}">
           <div class="container">
             <h1 class="morsel-logo">
               <a ng-click="goTo('home')">Morsel</a>
@@ -120,7 +120,7 @@
 
         <div ui-view="main" class="main-view" ng-click="menuOpen = false"></div>
 
-        <footer class="footer">
+        <footer class="footer" ng-class="{hide: viewOptions.hideFooter}">
           <div class="container">
             <div class="footer-inner">
               <a ng-click="goTo('home')" class="text-hide morsel-link">Morsel</a>
