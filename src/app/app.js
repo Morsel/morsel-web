@@ -6,18 +6,14 @@ angular.module( 'Morsel', [
   'Morsel.about',
   'Morsel.addMorsel',
   'Morsel.dashboard',
-  'Morsel.feed',
   'Morsel.home',
   'Morsel.immersive',
   'Morsel.join',
   'Morsel.login',
   'Morsel.logout',
-  'Morsel.morsel',
   'Morsel.myfeed',
-  'Morsel.post',
   'Morsel.postDetail',
   'Morsel.pressKit',
-  'Morsel.restaurant',
   'Morsel.profile',//:username in route clobbers other routes - this needs to be last until a better solution is found
   //common
   'Morsel.auth',
