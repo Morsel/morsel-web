@@ -35,12 +35,6 @@ angular.module( 'Morsel.postDetail', [])
   //check and make sure we pulled an idslug from the URL
   if(postIdSlug && username) {
     ApiPosts.getPost(postIdSlug).then(function(postData){
-      if(isNaN(postMorselNumber) || postMorselNumber > postData.morsels.length) {
-        $scope.postMorselNumber = 1;
-      } else {
-        $scope.postMorselNumber = postMorselNumber;
-      }
-
       $scope.story = postData;
     }, function() {
       //if there's an error retrieving post data (bad id?), go to profile page for now
