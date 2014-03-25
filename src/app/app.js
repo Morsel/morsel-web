@@ -28,8 +28,6 @@ angular.module( 'Morsel', [
   'Morsel.immersiveSwipe',
   'Morsel.morselLike',
   'Morsel.morselPressShare',
-  'Morsel.morselSwipe',
-  'Morsel.morselSwipeVertical',
   'Morsel.socialSharing',
   'Morsel.storySwipe',
   'Morsel.submitBtn',

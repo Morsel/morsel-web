@@ -79,6 +79,7 @@ module.exports = {
       'vendor/angular-moment/angular-moment.min.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
       'vendor/angular-touch/angular-touch.min.js',
+      'vendor/angular-touch/angular-touch.min.js.map',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/bower-angular-placeholders/angular-placeholders.js',
