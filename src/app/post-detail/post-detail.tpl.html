@@ -33,14 +33,7 @@
           </li>
           <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto, 'comments-showing': showComments}" story-swipeable>
             <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
-            <ul class="morsel-actions">
-              <li>
-                <i morsel-like></i>
-              </li>
-              <li>
-                <i class="common-chat" ng-click="showComments=!showComments"></i>
-              </li>
-            </ul>
+            <div morsel-actions comments-trigger="showComments" actionable-morsel="morsel"></div>
             <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
             <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto" story-swipeable></div>
           </li>

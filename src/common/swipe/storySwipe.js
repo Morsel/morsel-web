@@ -15,6 +15,7 @@ angular.module('Morsel.storySwipe', [
       morsels: '='
     },
     link: function(scope, element, attrs) {
+      scope.nonSwipeable = true;
       scope.range = function(n) {
         return new Array(n);
       };
@@ -39,6 +40,21 @@ angular.module('Morsel.storySwipe', [
     template: '<div class="story-indicators">' +
                 '<span ng-repeat="c in range(count) track by $index" ng-class="{active: $index==$parent.index}" ng-click="$parent.index=$index"></span>' +
               '</div>'
+  };
+}])
+
+.directive('morselActions', [function() {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      commentsTrigger: '=',
+      morsel: '=actionableMorsel'
+    },
+    link: function(scope, element, attrs) {
+      scope.nonSwipeable = true;
+    },
+    templateUrl: 'swipe/morselActions.tpl.html'
   };
 }])
 
@@ -120,6 +136,7 @@ angular.module('Morsel.storySwipe', [
 
         scope.$on('$destroy', function() {
           $document.unbind('mouseup', documentMouseUpEvent);
+          $document.unbind('touchend', documentMouseUpEvent);
           winEl.unbind('orientationchange', onOrientationChange);
           winEl.unbind('resize', onOrientationChange);
         });
@@ -131,6 +148,7 @@ angular.module('Morsel.storySwipe', [
 
           if(!nonSwipeable) {
             $document.bind('mouseup', documentMouseUpEvent);
+            $document.bind('touchend', documentMouseUpEvent);
             pressed = true;
             startX = coords.x;
             startY = coords.y;
@@ -216,6 +234,7 @@ angular.module('Morsel.storySwipe', [
           }
 
           $document.unbind('mouseup', documentMouseUpEvent);
+          $document.unbind('touchend', documentMouseUpEvent);
 
           swipeDirection = false;
           pressed = false;

@@ -16,7 +16,7 @@ $immersive-header-lg-line-height: 40px;
     padding: $immersive-header-padding;
 
     h1 {
-      font-size: 24px;
+      font-size: 20px;
       line-height: $immersive-header-lg-line-height;
       margin: 0;
 
@@ -348,6 +348,12 @@ $immersive-header-lg-line-height: 40px;
 
 @media (min-width: $screen-md-min) {
   .immersive {
+    .immersive-header {
+      h1 {
+        font-size: 24px;
+      }
+    }
+    
     .cover-page {
       padding-top: $immersive-header-height + 30px;
 

@@ -27,6 +27,7 @@ angular.module( 'Morsel.textLimit', [] )
 
       scope.textContent = limitedContent;
       scope.expanded = false;
+      scope.nonSwipeable = true;
 
       scope.expand = function() {
         scope.textContent = scope.fullContent;
