@@ -24,6 +24,20 @@ angular.module( 'Morsel.myfeed', [
 })
 
 .controller( 'MyFeedCtrl', function MyFeedCtrl( $scope, ApiPosts, Auth) {
-  $scope.feed = ApiPosts.getFeed().$object;
-  $scope.welcomeUserName = Auth.getCurrentUser().first_name;
+  $scope.viewOptions.hideHeader = true;
+  $scope.viewOptions.hideFooter = true;
+
+  //scope vars for individual story
+  $scope.immersiveState = {
+    inStory : false
+  };
+
+  $scope.updateImmersiveState = function(obj) {
+    _.extend($scope.immersiveState, obj);
+    $scope.$digest();
+  };
+
+  ApiPosts.getFeed().then(function(feedData){
+    $scope.stories = feedData;
+  });
 });
