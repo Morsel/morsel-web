@@ -28,6 +28,7 @@ angular.module( 'Morsel', [
   'Morsel.immersiveSwipe',
   'Morsel.morselLike',
   'Morsel.morselPressShare',
+  'Morsel.pageData',
   'Morsel.socialSharing',
   'Morsel.storySwipe',
   'Morsel.submitBtn',
@@ -93,11 +94,13 @@ angular.module( 'Morsel', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, PageData ) {
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
   resetViewOptions();
+
+  $scope.pageData = PageData;
 
   //initial fetching of user data for header/footer
   Auth.setInitialUserData().then(function(){
@@ -121,7 +124,7 @@ angular.module( 'Morsel', [
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       //update the page title
-      $scope.pageTitle = toState.data.pageTitle + ' | Morsel' ;
+      PageData.setTitle(toState.data.pageTitle + ' | Morsel');
     }
     //refresh our user data
     $scope.isLoggedIn = Auth.isLoggedIn();
