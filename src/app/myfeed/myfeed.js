@@ -23,7 +23,7 @@ angular.module( 'Morsel.myfeed', [
   });
 })
 
-.controller( 'MyFeedCtrl', function MyFeedCtrl( $scope, ApiPosts, Auth) {
+.controller( 'MyFeedCtrl', function MyFeedCtrl( $scope, ApiFeed, Auth) {
   $scope.viewOptions.hideHeader = true;
   $scope.viewOptions.hideFooter = true;
 
@@ -37,7 +37,7 @@ angular.module( 'Morsel.myfeed', [
     $scope.$digest();
   };
 
-  ApiPosts.getFeed().then(function(feedData){
+  ApiFeed.getFeed().then(function(feedData){
     $scope.stories = feedData;
   });
 });

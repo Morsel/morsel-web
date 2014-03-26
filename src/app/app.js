@@ -34,6 +34,7 @@ angular.module( 'Morsel', [
   //filters
   'Morsel.reverse',
   //API
+  'Morsel.apiFeed',
   'Morsel.apiMorsels',
   'Morsel.apiPosts',
   'Morsel.apiUploads',
