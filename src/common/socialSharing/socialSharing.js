@@ -7,6 +7,7 @@ angular.module( 'Morsel.socialSharing', [] )
     scope: false,
     replace: true,
     link: function(scope, element, attrs) {
+      scope.socialExpanded = true;
     },
     templateUrl: 'socialSharing/socialSharing.tpl.html'
   };
