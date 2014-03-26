@@ -13,7 +13,7 @@
         </div>
         <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
         <ul class="morsels">
-          <li class="cover-page" style="height: {{immersiveHeight}}">
+          <li class="cover-page extra-page" style="height: {{immersiveHeight}}">
             <div class="cover-container">
               <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})"></div>
               <div class="cover-title-wrap">
@@ -36,6 +36,24 @@
             <div morsel-actions comments-trigger="showComments" actionable-morsel="morsel"></div>
             <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
             <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
+          </li>
+          <li class="share-page extra-page" style="height: {{immersiveHeight}}">
+            <div class="cover-container">
+              <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})"></div>
+              <div class="cover-title-wrap">
+                <h2 class="cover-title">{{story.title}}</h2>
+              </div>
+              <div social-sharing></div>
+              <hr />
+              <div class="user-info">
+                <div user-image username="owner.username" user-photos="owner.photos" user-image-size="profile-pic-m"></div>
+                <h4 class="h3">
+                  <a ng-click="goTo(owner.username)">{{owner.first_name + ' ' + owner.last_name}}</a>
+                </h4>
+                <h5>{{owner.title}}</h5>
+                <p>{{owner.bio}}</p>
+              </header>
+            </div>
           </li>
         </ul>
       </div>

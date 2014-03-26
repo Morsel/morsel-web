@@ -66,7 +66,9 @@ angular.module('Morsel.storySwipe', [
       // in absolute pixels, at which distance the slide stick to the edge on release
       rubberTreshold = 3,
       //max time between scrolls
-      scrollThreshold = 500;
+      scrollThreshold = 500,
+      //number of additional "pages". 1. cover page 2. share page
+      extraPages = 2;
 
   return {
     restrict: 'A',
@@ -92,7 +94,7 @@ angular.module('Morsel.storySwipe', [
         //our scope vars, accessible by indicators
         scope.currentMorselIndex = 0; //track which morsel we're on
         scope.currentIndicatorIndex = 0; //track which indicator is active
-        scope.morselsCount = 1; //account for cover page
+        scope.morselsCount = extraPages; //account for cover page + share page
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           updateMorselHeight();
@@ -116,7 +118,7 @@ angular.module('Morsel.storySwipe', [
         //watch for update in morsel number
         iAttributes.$observe('storySwipeCount', function(newValue) {
           if(newValue) {
-            scope.morselsCount = parseInt(newValue, 10) + 1; //+1 for cover page
+            scope.morselsCount = parseInt(newValue, 10) + extraPages; //+2 for cover page + share page
           }
         });
 
@@ -348,7 +350,7 @@ angular.module('Morsel.storySwipe', [
 
           if(scope.updateImmersiveState) {
             scope.updateImmersiveState({
-              inStory: scope.currentMorselIndex !== 0
+              inStory: scope.currentMorselIndex > 0 && scope.currentMorselIndex < scope.morselsCount - 1
             });
           }
 
