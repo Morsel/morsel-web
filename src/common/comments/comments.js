@@ -14,6 +14,7 @@ angular.module( 'Morsel.comments', [] )
           addComment;
 
       scope.nonSwipeable = true;
+      scope.nonScrollable = true;
       
       scope.$watch('commentsTrigger', function(newValue) {
         if(newValue) {

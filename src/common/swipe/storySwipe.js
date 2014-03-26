@@ -395,12 +395,12 @@ angular.module('Morsel.storySwipe', [
          */
         handleMouseWheel = function(event, delta, deltaX, deltaY){
           var elementScope = angular.element(event.target).scope(),
-              nonSwipeable = elementScope.nonSwipeable,
+              nonScrollable = elementScope.nonScrollable,
               //use immersive checklastscroll if we can, fall back to story version
               hasScrolled = scope.checkLastScroll ? scope.checkLastScroll() : checkLastScroll();
 
           //make sure we can scroll on this element and user only scrolls one at a time
-          if(!nonSwipeable && hasScrolled) {
+          if(!nonScrollable && hasScrolled) {
             //if we scroll up
             if (deltaY > 0) {
               //if we're on the first morsel
