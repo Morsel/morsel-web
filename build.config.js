@@ -24,6 +24,8 @@ module.exports = {
   staging_repo: 'git@heroku.com:eatmorsel-staging.git',
   prod_repo: 'git@heroku.com:eatmorsel.git',
 
+  dev_server_port: '5000',
+
   /**
    * This is a collection of file patterns that refer to our app code (the
    * stuff in `src/`). These file paths are used in the configuration of
