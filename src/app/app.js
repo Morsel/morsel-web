@@ -119,6 +119,8 @@ angular.module( 'Morsel', [
 
   //when a user accesses a new route
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+    PageData.reset();
+    
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       //update the page title
       PageData.setTitle(toState.data.pageTitle + ' | Morsel');
