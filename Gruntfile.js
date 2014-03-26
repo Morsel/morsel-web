@@ -16,6 +16,8 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-concurrent');
 
   /**
    * Load in our build configuration file.
@@ -629,6 +631,26 @@ module.exports = function ( grunt ) {
           }
         }
       }
+    },
+
+    concurrent: {
+      dev: {
+        tasks: ['nodemon:dev', 'delta'],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
+    },
+    nodemon: {
+      dev: {
+        script: 'server.js',
+        options: {
+          env: {
+            PORT: '<%= dev_server_port %>'
+          },
+          cwd: '<%= build_dir %>'
+        }
+      }
     }
   };
 
@@ -640,9 +662,11 @@ module.exports = function ( grunt ) {
    * the `watch` task to `delta` (that's why the configuration var above is
    * `delta`) and then add a new task called `watch` that does a clean build
    * before watching for changes.
+   * 
+   * The `watch` task is what should be run while you develop/test
    */
   grunt.renameTask( 'watch', 'delta' );
-  grunt.registerTask( 'watch', [ 'build-no-style', 'karma:unit', 'delta' ] );
+  grunt.registerTask( 'watch', [ 'build-no-style', 'karma:unit', 'concurrent:dev' ] );
 
   /**
    * The default task is to build and compile.
@@ -653,6 +677,12 @@ module.exports = function ( grunt ) {
    * The `build` task gets your app ready to run for development and testing.
    */
   grunt.registerTask( 'build', [ 'build-no-style', 'style']);
+
+  /**
+   * The `dev-server` task runs the local server
+   */
+  grunt.registerTask( 'dev-server', [ 'nodemon:dev']);
+
 
   /**
    * The `style` task builds the style guide locally
@@ -666,7 +696,7 @@ module.exports = function ( grunt ) {
     'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
     'concat:build_css', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
-    'karma:continuous'
+    'karma:continuous', 'appserver:build'
   ]);
 
   /**
