@@ -724,7 +724,7 @@ module.exports = function ( grunt ) {
   /**
    * The `push-dev` task pushes the site to heroku (dev.eatmorsel.com)
    */
-  grunt.registerTask( 'push-dev', [ 'shell:build_deploy_init', 'copy:build_deploy', 'shell:build_deploy_push' ]);
+  grunt.registerTask( 'push-dev', [ 'shell:build_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:build_deploy_push' ]);
 
   /**
    * The `push-blog` task pushes the blog to insights.eatmorsel.com over ssh
