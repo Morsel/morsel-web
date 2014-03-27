@@ -11,6 +11,9 @@ angular.module( 'Morsel.afterLogin', [])
     callbacks: function() {
       return info.callbacks;
     },
+    hasCallbacks: function() {
+      return info.callbacks.length > 0;
+    },
     addCallbacks: function() {
       for (var i = 0; i < arguments.length; i++) {
         //add callback to the beginning of the array, so we can work backwards and pop off completed tasks

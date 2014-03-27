@@ -86,7 +86,7 @@ angular.module( 'Morsel.join', [])
 
   function onSuccess(resp) {
     //if successfully joined check if we have anything in the to-do queue
-    if(AfterLogin.callbacks()) {
+    if(AfterLogin.hasCallbacks()) {
       AfterLogin.executeCallbacks();
     } else {
       //or else send to their feed

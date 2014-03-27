@@ -17,7 +17,7 @@
     <div ng-show="morsel.comments && morsel.comments.length === 0" class="empty-state">
       <p>There are no comments</p>
     </div>
-    <div class="add-comment" ng-show="isLoggedIn">
+    <div class="add-comment">
       <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
         <div class="form-group">
           <textarea class="form-control" rows="3" ng-model="addCommentDescription" placeholder="Write your comment" required></textarea>
