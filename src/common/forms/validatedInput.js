@@ -13,7 +13,8 @@ angular.module('Morsel.validatedInput', [])
       placeholder: '@valPlaceholder',
       formModel: '=valFormModel',
       customVal: '=valCustom',
-      tagType: '@valTagType'
+      tagType: '@valTagType',
+      radioVals: '=valRadioVals'
     },
     link: function(scope, element, attrs) {
       var customValType;
@@ -66,6 +67,19 @@ angular.module('Morsel.validatedInput', [])
         }
       }
     },
-    templateUrl: 'forms/validatedInput.tpl.html'
+    templateUrl: function(tElement, tAttrs) {
+      var templateRoot = 'forms/validated',
+          templateMid = 'Input', //assume input if not specified
+          templateEnd = '.tpl.html';
+
+      //figure out which template to load and use
+      if(tAttrs.valTagType === 'textarea') {
+        templateMid = 'Textarea';
+      } else if(tAttrs.valTagType === 'radio') {
+        templateMid = 'Radio';
+      }
+      
+      return templateRoot + templateMid + templateEnd;
+    }
   };
 });

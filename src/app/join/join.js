@@ -15,6 +15,20 @@ angular.module( 'Morsel.join', [])
 
 .controller( 'JoinCtrl', function JoinCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors, AfterLogin ) {
 
+  //a cleaner way of building radio buttons
+  $scope.industryValues = [{
+    'name':'Restaurant Staff',
+    'value':'chef'
+  },
+  {
+    'name':'Press / Media',
+    'value':'media'
+  },
+  {
+    'name':'Diner',
+    'value':'diner'
+  }];
+
   //model to store our join data
   $scope.joinModel = {};
 
