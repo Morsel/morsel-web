@@ -31,7 +31,7 @@ angular.module( 'Morsel', [
   'Morsel.submitBtn',
   'Morsel.textLimit',
   'Morsel.userImage',
-  'Morsel.validatedInput',
+  'Morsel.validatedElement',
   //filters
   'Morsel.reverse',
   //API
