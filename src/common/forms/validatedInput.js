@@ -12,7 +12,8 @@ angular.module('Morsel.validatedInput', [])
       required: '@valRequired',
       placeholder: '@valPlaceholder',
       formModel: '=valFormModel',
-      customVal: '=valCustom'
+      customVal: '=valCustom',
+      tagType: '@valTagType'
     },
     link: function(scope, element, attrs) {
       var customValType;

@@ -73,6 +73,7 @@ angular.module( 'Morsel.join', [])
             'last_name': $scope.joinModel.last_name,
             'title': $scope.joinModel.title,
             'bio': $scope.joinModel.bio,
+            'industry': $scope.joinModel.industry,
             'photo': this.selectedFile || null
           }
         };
