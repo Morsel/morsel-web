@@ -13,7 +13,7 @@ angular.module( 'Morsel.login', [])
   });
 })
 
-.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $location, HandleErrors ) {
+.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $location, HandleErrors, AfterLogin ) {
   //model to store our join data
   $scope.loginModel = {};
 
@@ -32,8 +32,13 @@ angular.module( 'Morsel.login', [])
     }
     
     function onSuccess(resp) {
-      //if successfully joined, send to their feed
-      $location.path('/myfeed');
+      //if successfully jogged in check if we have anything in the to-do queue
+      if(AfterLogin.callbacks()) {
+        AfterLogin.executeCallbacks();
+      } else {
+        //or else send to their feed
+        $location.path('/myfeed');
+      }
     }
 
     function onError(resp) {

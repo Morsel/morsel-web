@@ -115,5 +115,5 @@ angular.module( 'Morsel.pageData', [])
         pageData.og.url = newUrl;
       }
     }
-   };
+  };
 });

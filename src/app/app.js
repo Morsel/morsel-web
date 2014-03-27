@@ -16,6 +16,7 @@ angular.module( 'Morsel', [
   'Morsel.pressKit',
   'Morsel.profile',//:username in route clobbers other routes - this needs to be last until a better solution is found
   //common
+  'Morsel.afterLogin',
   'Morsel.auth',
   'Morsel.bgImage',
   'Morsel.comments',
