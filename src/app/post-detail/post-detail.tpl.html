@@ -14,7 +14,7 @@
         <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
         <ul class="morsels">
           <li class="cover-page extra-page" style="height: {{immersiveHeight}}">
-            <div class="cover-container">
+            <div class="story-container">
               <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title">{{story.title}}</h2>
@@ -32,13 +32,15 @@
             </div>
           </li>
           <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto, 'comments-showing': showComments}">
-            <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
-            <div morsel-actions comments-trigger="showComments" actionable-morsel="morsel"></div>
-            <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
-            <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
+            <div class="story-container">
+              <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
+              <div morsel-actions comments-trigger="showComments" actionable-morsel="morsel"></div>
+              <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
+              <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
+            </div>
           </li>
           <li class="share-page extra-page" style="height: {{immersiveHeight}}">
-            <div class="cover-container">
+            <div class="story-container">
               <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title">{{story.title}}</h2>
