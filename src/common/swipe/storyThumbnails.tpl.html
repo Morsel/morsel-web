@@ -8,8 +8,10 @@
     <li ng-repeat="morsel in morsels.slice(0,3)" ng-click="$parent.index=$index+1">
       <img ng-src="{{morsel.photos._320x320}}" />
     </li>
-    <li ng-click="index=3" class="additional-thumbs" ng-style="{'background-image': 'url('+morsels[3].photos._320x320+')'}">
-      <span>+{{morsels.slice(3).length}}</span>
+    <li ng-click="index=3" class="additional-thumbs">
+      <div>
+        <span>+{{morsels.slice(3).length}}</span>
+      </div>
       <img ng-src="{{morsels[3].photos._320x320}}" />
     </li>
   </ul>

@@ -144,11 +144,12 @@ $immersive-header-lg-line-height: 40px;
 
       ul {
         margin: 0;
+        text-align: center;
       }
 
       li {
         display: inline-block;
-        width: 22%;
+        width: 21%;
         margin-right: 4%;
         position: relative;
 
@@ -166,15 +167,21 @@ $immersive-header-lg-line-height: 40px;
       }
 
       .additional-thumbs {
-        font-size: 0;
-        text-align: center;
-        background-size: cover;
-
-        &:before {
-          content: '';
-          display: inline-block;
+        div {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
           height: 100%;
-          vertical-align: middle;
+          font-size: 0;
+          text-align: center;
+
+          &:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+          }
         }
 
         span {
@@ -185,10 +192,6 @@ $immersive-header-lg-line-height: 40px;
           font-weight: bold;
           color: white;
           @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-        }
-
-        img {
-          visibility: hidden;
         }
       }
     }
