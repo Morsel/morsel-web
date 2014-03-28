@@ -343,6 +343,11 @@ $immersive-header-lg-line-height: 40px;
         &.expanded {
           height: 100%;
           background-color: rgba(0,0,0,.8);
+
+          p {
+            max-height: 80%;
+            overflow-y: scroll;
+          }
         }
       }
 

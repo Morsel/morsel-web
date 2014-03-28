@@ -32,10 +32,12 @@ angular.module( 'Morsel.textLimit', [] )
       scope.expand = function() {
         scope.textContent = scope.fullContent;
         scope.expanded = true;
+        scope.nonScrollable = true;
       };
       scope.collapse = function() {
         scope.textContent = limitedContent;
         scope.expanded = false;
+        scope.nonScrollable = false;
       };
     },
     templateUrl: 'text/textLimit.tpl.html'
