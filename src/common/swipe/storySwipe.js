@@ -101,7 +101,11 @@ angular.module('Morsel.storySwipe', [
             return m.id === primaryId;
           });
 
-          return 'url('+coverMorsel.photos._640x640+')';
+          if(coverMorsel && coverMorsel.photos) {
+            return 'url('+coverMorsel.photos._640x640+')';
+          } else {
+            return 'none';
+          }
         };
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
