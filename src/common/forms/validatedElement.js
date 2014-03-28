@@ -2,7 +2,7 @@ angular.module('Morsel.validatedElement', [])
 
 .directive('validatedElement', function() {
   return {
-    restrict: 'EA',
+    restrict: 'A',
     replace: true,
     scope: {
       inForm: '=valForm',

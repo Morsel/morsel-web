@@ -10,14 +10,14 @@
     <div class="stories-wrap">
       <ul class="stories">
         <li ng-repeat="story in stories" class="story" ng-class="{'current-story': $index===currentControlIndex}">
-          <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" style="height: {{immersiveHeight}}">
+          <div story-swipe="{{story.morsels.length > 1}}" story-swipe-count="{{story.morsels.length}}" ng-style="{'height': immersiveHeight}">
             <div class="story-title">
               <h2>{{story.title}}</h2>
             </div>
             <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
             <ul class="morsels">
-              <li class="cover-page" style="height: {{immersiveHeight}}">
-                <div class="cover-photo-wrap" style="background-image:url({{story.morsels[0].photos._640x640}})">
+              <li class="cover-page" ng-style="{'height': immersiveHeight}">
+                <div class="cover-photo-wrap" ng-style="{'background-image':'url('+story.morsels[0].photos._640x640+')'}">
                 </div>
                 <div class="cover-title-wrap">
                   <h2 class="cover-title">{{story.title}}</h2>
@@ -37,7 +37,7 @@
                 <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
                 <div morsel-actions comments-trigger="showComments" actionable-morsel="morsel"></div>
                 <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
-                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" style="background-image: url({{morsel.photos._640x640}}); height: {{immersiveHeight}}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
+                <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" ng-style="{'background-image': 'url('+morsel.photos._640x640+')', 'height': immersiveHeight}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
               </li>
             </ul>
           </div>

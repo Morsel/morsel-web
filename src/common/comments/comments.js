@@ -2,7 +2,7 @@ angular.module( 'Morsel.comments', [] )
 
 .directive('morselComments', function(ApiMorsels, AfterLogin, Auth, $location, $q){
   return {
-    restrict: 'EA',
+    restrict: 'A',
     scope: {
       morsel: '=commentsMorsel',
       commentsTrigger: '='

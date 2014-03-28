@@ -2,7 +2,7 @@ angular.module('Morsel.submitBtn', [])
 
 .directive('submitBtn', [function() {
   return {
-    restrict: 'EA',
+    restrict: 'A',
     replace: true,
     scope: {
       form: '=submitBtnForm',

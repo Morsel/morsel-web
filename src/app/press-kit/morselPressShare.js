@@ -2,7 +2,7 @@ angular.module('Morsel.morselPressShare', [])
 
 .directive('morselPressShare', [function() {
   return {
-    restrict: 'EA',
+    restrict: 'A',
     replace: true,
     scope: true,
     link : function() {
