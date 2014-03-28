@@ -96,6 +96,14 @@ angular.module('Morsel.storySwipe', [
         scope.currentIndicatorIndex = 0; //track which indicator is active
         scope.morselsCount = extraPages; //account for cover page + share page
 
+        scope.findCoverPhoto = function(morsels, primaryId) {
+          var coverMorsel = _.find(morsels, function(m) {
+            return m.id === primaryId;
+          });
+
+          return 'url('+coverMorsel.photos._640x640+')';
+        };
+
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           updateMorselHeight();
 

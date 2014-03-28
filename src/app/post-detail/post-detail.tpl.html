@@ -15,7 +15,7 @@
         <ul class="morsels">
           <li class="cover-page extra-page" ng-style="{'height': immersiveHeight}">
             <div class="story-container">
-              <div class="cover-photo-wrap" ng-style="{'background-image':'url('+story.morsels[0].photos._640x640+')'}"></div>
+              <div class="cover-photo-wrap" ng-style="{'background-image': findCoverPhoto(story.morsels, story.primary_morsel_id)}"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title">{{story.title}}</h2>
               </div>
