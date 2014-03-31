@@ -28,7 +28,8 @@ angular.module( 'Morsel.auth', [
       'photo_url': null,
       'title': null,
       'auth_token': '',
-      'username': null
+      'username': null,
+      'industry': null
     };
   };
 
@@ -124,6 +125,33 @@ angular.module( 'Morsel.auth', [
   //check if a user is logged in
   Auth.isLoggedIn = function() {
     return Auth._getSavedUserId() && Auth._getSavedUserAuthToken();
+  };
+
+  //check user industry type
+  Auth.isChef = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'chef');
+  };
+
+  Auth.isMedia = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'media');
+  };
+
+  Auth.isDiner = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'diner');
+  };
+
+  //isNot____ accounts for being logged in. So a non-logged-in user won't count as being "not that type". Should
+  //really be "is logged in and isn't ____"
+  Auth.isNotChef = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry !== 'chef');
+  };
+
+  Auth.isNotMedia = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry !== 'media');
+  };
+
+  Auth.isNotDiner = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry !== 'diner');
   };
 
   //intercept our API calls
