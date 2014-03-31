@@ -16,6 +16,7 @@ angular.module( 'Morsel', [
   'Morsel.pressKit',
   'Morsel.profile',//:username in route clobbers other routes - this needs to be last until a better solution is found
   //common
+  'Morsel.afterLogin',
   'Morsel.auth',
   'Morsel.bgImage',
   'Morsel.comments',
@@ -25,12 +26,13 @@ angular.module( 'Morsel', [
   'Morsel.morselLike',
   'Morsel.morselPressShare',
   'Morsel.pageData',
+  'Morsel.responsiveImages',
   'Morsel.socialSharing',
   'Morsel.storySwipe',
   'Morsel.submitBtn',
   'Morsel.textLimit',
   'Morsel.userImage',
-  'Morsel.validatedInput',
+  'Morsel.validatedElement',
   //filters
   'Morsel.reverse',
   //API
@@ -62,6 +64,15 @@ angular.module( 'Morsel', [
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
+
+// Default queries
+.value('presetMediaQueries', {
+  'default':   'only screen and (min-width: 1px)',
+  'screen-xs': 'only screen and (min-width: 480px)',
+  'screen-sm': 'only screen and (min-width: 768px)',
+  'screen-md': 'only screen and (min-width: 992px)',
+  'screen-lg': 'only screen and (min-width: 1200px)'
+})
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};
@@ -119,6 +130,8 @@ angular.module( 'Morsel', [
 
   //when a user accesses a new route
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+    PageData.reset();
+    
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       //update the page title
       PageData.setTitle(toState.data.pageTitle + ' | Morsel');

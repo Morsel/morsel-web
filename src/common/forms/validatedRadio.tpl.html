@@ -1,7 +1,12 @@
 <div class="form-group" ng-class="{'has-error': (inForm[inputName].$dirty && hasClientError()) || inForm[inputName].$error.server}">
   <label class="control-label" ng-class="{'required':required === 'true'}" for="{{inputName}}">{{enName}}</label>
-  
-  <input class="form-control" ng-model="formModel[inputName]" id="{{inputName}}" placeholder="{{placeholder}}" name="{{inputName}}" ng-change="removeServerError()" ng-attr="customValAttrs" ng-required="{{required}}" type="{{type}}"/>
+
+  <div ng-repeat="radioVal in radioVals" class="radio">
+    <label>
+      <input type="radio" ng-change="removeServerError()" name="{{inputName}}" ng-attr="customValAttrs" ng-model="formModel[inputName]" value="{{radioVal.value}}" ng-required="{{required}}">
+      {{radioVal.name}}
+    </label>
+  </div>
 
   <p class="help-block">{{helpText}}</p>
 

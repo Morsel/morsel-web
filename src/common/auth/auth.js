@@ -28,7 +28,8 @@ angular.module( 'Morsel.auth', [
       'photo_url': null,
       'title': null,
       'auth_token': '',
-      'username': null
+      'username': null,
+      'industry': null
     };
   };
 
@@ -124,6 +125,19 @@ angular.module( 'Morsel.auth', [
   //check if a user is logged in
   Auth.isLoggedIn = function() {
     return Auth._getSavedUserId() && Auth._getSavedUserAuthToken();
+  };
+
+  //check user industry type
+  Auth.isChef = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'chef');
+  };
+
+  Auth.isMedia = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'media');
+  };
+
+  Auth.isDiner = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'diner');
   };
 
   //intercept our API calls

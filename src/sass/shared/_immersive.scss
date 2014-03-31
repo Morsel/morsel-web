@@ -128,7 +128,7 @@ $immersive-header-lg-line-height: 40px;
       @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
     }
   }
-  .cover-container {
+  .story-container {
     height: 100%;
     position: relative;
   }
@@ -144,11 +144,12 @@ $immersive-header-lg-line-height: 40px;
 
       ul {
         margin: 0;
+        text-align: center;
       }
 
       li {
         display: inline-block;
-        width: 22%;
+        width: 21%;
         margin-right: 4%;
         position: relative;
 
@@ -166,15 +167,21 @@ $immersive-header-lg-line-height: 40px;
       }
 
       .additional-thumbs {
-        font-size: 0;
-        text-align: center;
-        background-size: cover;
-
-        &:before {
-          content: '';
-          display: inline-block;
+        div {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
           height: 100%;
-          vertical-align: middle;
+          font-size: 0;
+          text-align: center;
+
+          &:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+          }
         }
 
         span {
@@ -185,10 +192,6 @@ $immersive-header-lg-line-height: 40px;
           font-weight: bold;
           color: white;
           @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-        }
-
-        img {
-          visibility: hidden;
         }
       }
     }
@@ -273,7 +276,13 @@ $immersive-header-lg-line-height: 40px;
 
     .share-this-story {
       text-align: center;
-      margin-bottom: 0;
+      margin: 10px auto 0;
+      font-size: 20px;
+    }
+
+    hr {
+      margin-top: 15px;
+      margin-bottom: 15px;
     }
   }
 
@@ -303,6 +312,7 @@ $immersive-header-lg-line-height: 40px;
 
     .morsel {
       display: block;
+      position: relative;
 
       .morsel-img {
         background-size: contain;
@@ -336,6 +346,11 @@ $immersive-header-lg-line-height: 40px;
         &.expanded {
           height: 100%;
           background-color: rgba(0,0,0,.8);
+
+          p {
+            max-height: 80%;
+            overflow-y: scroll;
+          }
         }
       }
 
@@ -379,10 +394,16 @@ $immersive-header-lg-line-height: 40px;
         font-size: 24px;
       }
     }
+
+    .story-container {
+      width: $screen-md-min;
+      margin: 0 auto;
+    }
     
     .cover-page {
       .cover-photo-wrap, .cover-title-wrap {
         height: 98%;
+        width: 55%;
       }
 
       .thumbnails-wrap, .cover-actions {
@@ -414,27 +435,58 @@ $immersive-header-lg-line-height: 40px;
           }
         }
       }
+
+      .cover-photo-wrap {
+        float: left;
+      }
     }
 
     .extra-page {
       padding-top: $immersive-header-height + 30px;
 
-      .cover-container {
-        width: $screen-md-min;
-        margin: 0 auto;
+      .story-container {
         padding-bottom: 3%;
       }
 
-      .cover-photo-wrap {
-        width: 55%;
-        float: left;
-      }
-
       .cover-title-wrap {
-        width: 55%;
-
         h2 {
           font-size: 40px;
+        }
+      }
+    }
+
+    .share-page {
+      .cover-photo-wrap, .cover-title-wrap {
+        height: 40%;
+      }
+
+      .cover-photo-wrap {
+        margin-bottom: 15px;
+      }
+
+      .share-this-story {
+        display: inline-block;
+        font-size: 26px;
+        margin: 0 20px 0 0;
+        vertical-align: middle;
+      }
+
+      .social-sharing {
+        display: inline-block;
+      }
+
+      .user-info {
+        h4 {
+          display: inline-block;
+          margin-right: 10px;
+        }
+
+        h5 {
+          display: inline-block;
+        }
+
+        p {
+          clear: none;
         }
       }
     }
@@ -455,7 +507,7 @@ $immersive-header-lg-line-height: 40px;
 @media (min-width: $screen-lg-min) {
   .immersive {
     .extra-page {
-      .cover-container {
+      .story-container {
         width: $screen-lg-min;
       }
     }

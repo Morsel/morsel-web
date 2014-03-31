@@ -13,7 +13,21 @@ angular.module( 'Morsel.join', [])
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors ) {
+.controller( 'JoinCtrl', function JoinCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors, AfterLogin ) {
+
+  //a cleaner way of building radio buttons
+  $scope.industryValues = [{
+    'name':'Restaurant Staff',
+    'value':'chef'
+  },
+  {
+    'name':'Press / Media',
+    'value':'media'
+  },
+  {
+    'name':'Diner',
+    'value':'diner'
+  }];
 
   //model to store our join data
   $scope.joinModel = {};
@@ -73,6 +87,7 @@ angular.module( 'Morsel.join', [])
             'last_name': $scope.joinModel.last_name,
             'title': $scope.joinModel.title,
             'bio': $scope.joinModel.bio,
+            'industry': $scope.joinModel.industry,
             'photo': this.selectedFile || null
           }
         };
@@ -85,8 +100,13 @@ angular.module( 'Morsel.join', [])
   };
 
   function onSuccess(resp) {
-    //if successfully joined, send to their feed
-    $location.path('/myfeed');
+    //if successfully joined check if we have anything in the to-do queue
+    if(AfterLogin.hasCallbacks()) {
+      AfterLogin.executeCallbacks();
+    } else {
+      //or else send to their feed
+      $location.path('/myfeed');
+    }
   }
 
   function onError(resp) {

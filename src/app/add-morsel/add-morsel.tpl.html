@@ -20,7 +20,7 @@
     <div class="sel-file" >
       <img ng-show="dataUrl" ng-src="{{dataUrl}}">
       <span class="progress" ng-show="progress >= 0">           
-        <div style="width:{{progress}}%">{{progress}}%</div>
+        <div ng-style="{'width':progress+'%'}">{{progress}}%</div>
       </span>
     </div>
   </div>

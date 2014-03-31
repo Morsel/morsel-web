@@ -1,8 +1,8 @@
-angular.module('Morsel.validatedInput', [])
+angular.module('Morsel.validatedElement', [])
 
-.directive('validatedInput', function() {
+.directive('validatedElement', function() {
   return {
-    restrict: 'EA',
+    restrict: 'A',
     replace: true,
     scope: {
       inForm: '=valForm',
@@ -12,7 +12,10 @@ angular.module('Morsel.validatedInput', [])
       required: '@valRequired',
       placeholder: '@valPlaceholder',
       formModel: '=valFormModel',
-      customVal: '=valCustom'
+      customVal: '=valCustom',
+      tagType: '@valTagType',
+      radioVals: '=valRadioVals',
+      helpText: '@valHelpText'
     },
     link: function(scope, element, attrs) {
       var customValType;
@@ -65,6 +68,19 @@ angular.module('Morsel.validatedInput', [])
         }
       }
     },
-    templateUrl: 'forms/validatedInput.tpl.html'
+    templateUrl: function(tElement, tAttrs) {
+      var templateRoot = 'forms/validated',
+          templateMid = 'Input', //assume input if not specified
+          templateEnd = '.tpl.html';
+
+      //figure out which template to load and use
+      if(tAttrs.valTagType === 'textarea') {
+        templateMid = 'Textarea';
+      } else if(tAttrs.valTagType === 'radio') {
+        templateMid = 'Radio';
+      }
+      
+      return templateRoot + templateMid + templateEnd;
+    }
   };
 });

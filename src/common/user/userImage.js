@@ -2,7 +2,7 @@ angular.module('Morsel.userImage', [])
 
 .directive('userImage', [function() {
   return {
-    restrict: 'EA',
+    restrict: 'A',
     replace: true,
     scope: {
       username: '=',

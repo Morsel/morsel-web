@@ -96,6 +96,18 @@ angular.module('Morsel.storySwipe', [
         scope.currentIndicatorIndex = 0; //track which indicator is active
         scope.morselsCount = extraPages; //account for cover page + share page
 
+        scope.findCoverPhotos = function(morsels, primaryId) {
+          var coverMorsel = _.find(morsels, function(m) {
+            return m.id === primaryId;
+          });
+
+          if(coverMorsel && coverMorsel.photos) {
+            return coverMorsel.photos;
+          } else {
+            return [];
+          }
+        };
+
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           updateMorselHeight();
 
@@ -395,12 +407,12 @@ angular.module('Morsel.storySwipe', [
          */
         handleMouseWheel = function(event, delta, deltaX, deltaY){
           var elementScope = angular.element(event.target).scope(),
-              nonSwipeable = elementScope.nonSwipeable,
+              nonScrollable = elementScope.nonScrollable,
               //use immersive checklastscroll if we can, fall back to story version
               hasScrolled = scope.checkLastScroll ? scope.checkLastScroll() : checkLastScroll();
 
           //make sure we can scroll on this element and user only scrolls one at a time
-          if(!nonSwipeable && hasScrolled) {
+          if(!nonScrollable && hasScrolled) {
             //if we scroll up
             if (deltaY > 0) {
               //if we're on the first morsel
