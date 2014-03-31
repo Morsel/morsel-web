@@ -14,6 +14,9 @@ angular.module( 'Morsel.comments', [] )
 
       scope.nonSwipeable = true;
       scope.nonScrollable = true;
+
+      scope.isChef = Auth.isChef();
+      scope.isLoggedIn = Auth.isLoggedIn();
       
       scope.$watch('commentsTrigger', function(newValue) {
         if(newValue) {

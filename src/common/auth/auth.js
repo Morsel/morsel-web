@@ -140,20 +140,6 @@ angular.module( 'Morsel.auth', [
     return Auth.isLoggedIn() && (Auth._currentUser.industry === 'diner');
   };
 
-  //isNot____ accounts for being logged in. So a non-logged-in user won't count as being "not that type". Should
-  //really be "is logged in and isn't ____"
-  Auth.isNotChef = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry !== 'chef');
-  };
-
-  Auth.isNotMedia = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry !== 'media');
-  };
-
-  Auth.isNotDiner = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry !== 'diner');
-  };
-
   //intercept our API calls
   Auth.setupInterceptor = function() {
     Restangular.setErrorInterceptor(function(response) {
