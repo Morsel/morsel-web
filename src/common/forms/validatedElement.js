@@ -14,7 +14,8 @@ angular.module('Morsel.validatedElement', [])
       formModel: '=valFormModel',
       customVal: '=valCustom',
       tagType: '@valTagType',
-      radioVals: '=valRadioVals'
+      radioVals: '=valRadioVals',
+      helpText: '@valHelpText'
     },
     link: function(scope, element, attrs) {
       var customValType;

@@ -8,6 +8,8 @@
     </label>
   </div>
 
+  <p class="help-block">{{helpText}}</p>
+
   <span ng-repeat="(errorType, message) in builtInErrorMessages">
     <span ng-show="inForm[inputName].$dirty && inForm[inputName].$error[errorType]" class="help-block">{{message}}</span>
   </span>
