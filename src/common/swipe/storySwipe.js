@@ -96,15 +96,15 @@ angular.module('Morsel.storySwipe', [
         scope.currentIndicatorIndex = 0; //track which indicator is active
         scope.morselsCount = extraPages; //account for cover page + share page
 
-        scope.findCoverPhoto = function(morsels, primaryId) {
+        scope.findCoverPhotos = function(morsels, primaryId) {
           var coverMorsel = _.find(morsels, function(m) {
             return m.id === primaryId;
           });
 
           if(coverMorsel && coverMorsel.photos) {
-            return 'url('+coverMorsel.photos._640x640+')';
+            return coverMorsel.photos;
           } else {
-            return 'none';
+            return [];
           }
         };
 

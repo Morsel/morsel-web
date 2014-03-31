@@ -26,6 +26,7 @@ angular.module( 'Morsel', [
   'Morsel.morselLike',
   'Morsel.morselPressShare',
   'Morsel.pageData',
+  'Morsel.responsiveImages',
   'Morsel.socialSharing',
   'Morsel.storySwipe',
   'Morsel.submitBtn',
@@ -63,6 +64,15 @@ angular.module( 'Morsel', [
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
+
+// Default queries
+.value('presetMediaQueries', {
+  'default':   'only screen and (min-width: 1px)',
+  'screen-xs': 'only screen and (min-width: 480px)',
+  'screen-sm': 'only screen and (min-width: 768px)',
+  'screen-md': 'only screen and (min-width: 992px)',
+  'screen-lg': 'only screen and (min-width: 1200px)'
+})
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};

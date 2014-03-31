@@ -15,7 +15,7 @@
         <ul class="morsels">
           <li class="cover-page extra-page" ng-style="{'height': immersiveHeight}">
             <div class="story-container">
-              <div class="cover-photo-wrap" ng-style="{'background-image': findCoverPhoto(story.morsels, story.primary_morsel_id)}"></div>
+              <div class="cover-photo-wrap" responsive-images="[['default', {{findCoverPhotos(story.morsels, story.primary_morsel_id)}}['_320x320']], ['(min-width: 321px)', {{findCoverPhotos(story.morsels, story.primary_morsel_id)}}['_480x480']], ['(min-width: 481px)', {{findCoverPhotos(story.morsels, story.primary_morsel_id)}}['_640x640']], ['(min-width: 992px)', {{findCoverPhotos(story.morsels, story.primary_morsel_id)}}['_992x992']]]" ri-image-type="background"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title">{{story.title}}</h2>
               </div>
@@ -36,12 +36,12 @@
               <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
               <div morsel-actions comments-trigger="showComments" actionable-morsel="morsel"></div>
               <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
-              <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" ng-style="{'background-image': 'url('+morsel.photos._640x640+')', 'height': immersiveHeight}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
+              <div ng-if="morsel.photos" class="morsel-img" responsive-images="[['default', '{{morsel.photos._320x320}}'], ['(min-width: 321px)', '{{morsel.photos._480x480}}'], ['(min-width: 481px)', '{{morsel.photos._640x640}}'], ['(min-width: 992px)', '{{morsel.photos._992x992}}']]" ri-image-type="background" ng-style="{'height': immersiveHeight}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
             </div>
           </li>
           <li class="share-page extra-page" ng-style="{'height': immersiveHeight}">
             <div class="story-container">
-              <div class="cover-photo-wrap" ng-style="{'background-image':'url('+story.morsels[0].photos._640x640+')'}"></div>
+              <div class="cover-photo-wrap" responsive-images="[['default', {{findCoverPhotos(story.morsels, story.primary_morsel_id)}}['_320x320']], ['(min-width: 321px)', {{findCoverPhotos(story.morsels, story.primary_morsel_id)}}['_480x480']], ['(min-width: 481px)', {{findCoverPhotos(story.morsels, story.primary_morsel_id)}}['_640x640']], ['(min-width: 992px)', {{findCoverPhotos(story.morsels, story.primary_morsel_id)}}['_992x992']]]" ri-image-type="background"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title">{{story.title}}</h2>
               </div>
