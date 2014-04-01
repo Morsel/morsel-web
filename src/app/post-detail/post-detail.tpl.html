@@ -22,7 +22,7 @@
               <div story-thumbnails index="currentIndicatorIndex" morsels="story.morsels"></div>
               <div class="cover-actions">
                 <span am-time-ago="story.created_at" class="time-ago"></span>
-                <span><i class="common-share"></i></span>
+                <a ng-click="currentIndicatorIndex = story.morsels.length+1"><i class="common-share"></i></a>
               </div>
               <div class="cover-browse">
                 <span>Scroll</span>

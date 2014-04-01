@@ -43,6 +43,6 @@ angular.module( 'Morsel.morselLike', [] )
         return deferred.promise;
       }
     },
-    template: '<i ng-click="toggleMorselLike()" class="{{morsel.liked ? \'common-like\' : \'common-like-empty\'}}"></i>'
+    template: '<a><i ng-click="toggleMorselLike()" class="{{morsel.liked ? \'common-like\' : \'common-like-empty\'}}"></i>{{morsel.like_count}} like{{morsel.like_count===1?\'\':\'s\'}}</a>'
   };
 });

@@ -219,7 +219,7 @@ $immersive-header-lg-line-height: 40px;
       padding: 10px 20px;
       overflow:hidden;
 
-      span {
+      a {
         float: right;
         display: inline-block;
         vertical-align: middle;
@@ -376,7 +376,18 @@ $immersive-header-lg-line-height: 40px;
 
         li {
           display: inline-block;
-          margin-right: 3px;
+          margin-right: 12px;
+
+          a {
+            display: inline-block;
+            color: white;
+            font-weight: 300;
+
+            i {
+              vertical-align: middle;
+              margin-right: 8px;
+            }
+          }
         }
 
         i:hover {
