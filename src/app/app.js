@@ -43,8 +43,9 @@ angular.module( 'Morsel', [
   'Morsel.apiUsers',
   //libs
   'angularMoment',
-  'swipe',
   'restangular',
+  'seo',
+  'swipe',
   'ui.bootstrap',
   'ui.state',
   'ui.route'
