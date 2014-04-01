@@ -74,8 +74,10 @@ angular.module( 'Morsel', [
   'screen-lg': 'only screen and (min-width: 1200px)'
 })
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider, RestangularProvider, APIURL ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};
+
+  $locationProvider.html5Mode(true);
 
   //if we don't recognize the URL, send it to the homepage for now
   $urlRouterProvider.otherwise( '/home' );
