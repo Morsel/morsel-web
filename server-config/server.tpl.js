@@ -2,6 +2,7 @@ var express = require("express"),
     mustacheExpress = require('mustache-express'),
     _ = require('underscore'),
     routes = require('./data/routes.json'),
+    metadata = require('./data/metadata.json'),
     app = express();
 
 app.engine('mustache', mustacheExpress());
@@ -35,7 +36,7 @@ app.get('/:username/:postidslug', function(req, res){
   //we have to test to see if it's a username
 
   //in the meantime, just send them to angular
-  renderAngular(req, res);
+  renderAngular(req, res, metadata.fakeuser);
 });
 
 //anything with a single route param
@@ -59,8 +60,12 @@ app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
-function renderAngular(req, res) {
-  res.render('index');
+function renderAngular(req, res, mdata) {
+  var fullMetadata = _.extend(mdata || {}, metadata.default);
+
+  res.render('index', {
+    metadata: mdata
+  });
 }
 
 function isRoutePrivateAndActive(route) {

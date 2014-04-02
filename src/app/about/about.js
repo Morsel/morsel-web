@@ -17,8 +17,6 @@ angular.module( 'Morsel.about', [
   });
 })
 
-.controller( 'AboutCtrl', function AboutCtrl( $scope, PageData ) {
-  PageData.setTitle('About');
-  PageData.setDescription('This is the description for the about page');
+.controller( 'AboutCtrl', function AboutCtrl( $scope ) {
   $scope.htmlReady();
 });

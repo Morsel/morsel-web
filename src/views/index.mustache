@@ -4,22 +4,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title ng-bind="pageData.title()"></title>
-    <meta name="description" content="{{pageData.description()}}">
-    <meta name="keywords" content="{{pageData.keywords()}}" />
+    <title>{{{metadata.title}}}</title>
+    <meta name="description" content="{{{metadata.description}}}">
+    <meta name="keywords" content="{{{metadata.keywords}}}" />
 
     <!-- social media tags -->
-    <meta name="twitter:card" content="{{pageData.twitter.card()}}">
-    <meta name="twitter:site" content="@eatmorsel">
-    <meta name="twitter:title" content="{{pageData.twitter.title()}}">
-    <meta name="twitter:description" content="{{pageData.twitter.description()}}">
-    <meta name="twitter:creator" content="{{pageData.twitter.creator()}}">
-    <meta name="twitter:image:src" content="{{pageData.twitter.image()}}">
-    <meta property="og:title" content="{{pageData.og.title()}}" />
-    <meta property="og:type" content="{{pageData.og.type()}}" />
-    <meta property="og:url" content="{{pageData.og.url()}}" />
-    <meta property="og:image" content="{{pageData.og.image()}}" />
-    <meta property="og:description" content="{{pageData.og.description()}}">
+    <meta name="twitter:card" content="{{{metadata.twitter.card}}}">
+    <meta name="twitter:site" content="{{{metadata.twitter.site}}}">
+    <meta name="twitter:title" content="{{{metadata.title}}}">
+    <meta name="twitter:description" content="{{{metadata.description}}}">
+    <meta name="twitter:creator" content="{{{metadata.twitter.creator}}}">
+    <meta name="twitter:image:src" content="{{{metadata.image}}}">
+    <meta property="og:title" content="{{{metadata.title}}}" />
+    <meta property="og:type" content="{{{metadata.og.type}}}" />
+    <meta property="og:url" content="{{{metadata.og.url}}}" />
+    <meta property="og:image" content="{{{metadata.image}}}" />
+    <meta property="og:description" content="{{{metadata.description}}}">
 
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <base href="/">
