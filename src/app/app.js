@@ -132,7 +132,7 @@ angular.module( 'Morsel', [
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       //update the page title
-      PageData.setTitle(toState.data.pageTitle + ' | Morsel');
+      $scope.pageTitle = toState.data.pageTitle + ' | Morsel');
     }
     //refresh our user data
     $scope.isLoggedIn = Auth.isLoggedIn();
