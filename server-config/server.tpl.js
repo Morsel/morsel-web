@@ -1,7 +1,13 @@
-var express = require("express");
-var app = express();
+var express = require("express"),
+    mustacheExpress = require('mustache-express'),
+    app = express();
+
+app.engine('mustache', mustacheExpress());
 
 app.configure(function(){
+  app.set('view engine', 'mustache');
+  app.set('views', __dirname + '/views');
+
   app.use('/assets', express.static(__dirname + '/assets'));
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
@@ -9,13 +15,12 @@ app.configure(function(){
   app.use(app.router);
 });
 
+function renderAngular(req, res) {
+  res.render('index');
+}
 app.get('/', function(req, res) {
-  res.sendfile('index.html');
+  renderAngular(req, res)
 });
-
-// app.get('*', function(req, res){
-//   res.sendfile('index.html');
-// });
 
 app.get('/templates-common.js', function(req, res){
   res.sendfile('templates-common.js');
@@ -27,7 +32,7 @@ app.get('/templates-app.js', function(req, res){
 
 //direct anything else back to the index
 app.get('*', function(req, res){
-  res.sendfile('index.html');
+  renderAngular(req, res)
 });
 
 var port = Number(process.env.PORT || 5000);

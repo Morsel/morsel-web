@@ -755,7 +755,7 @@ module.exports = function ( grunt ) {
    * the list into variables for the template to use and then runs the
    * compilation.
    */
-  grunt.registerMultiTask( 'index', 'Process index.html template', function () {
+  grunt.registerMultiTask( 'index', 'Process index.mustache template', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
       return file.replace( dirRE, '' );
@@ -764,7 +764,7 @@ module.exports = function ( grunt ) {
       return file.replace( dirRE, '' );
     });
 
-    grunt.file.copy('src/index.html', this.data.dir + '/index.html', { 
+    grunt.file.copy('src/views/index.mustache', this.data.dir + '/views/index.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
