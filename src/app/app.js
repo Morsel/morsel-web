@@ -43,7 +43,6 @@ angular.module( 'Morsel', [
   //libs
   'angularMoment',
   'restangular',
-  'seo',
   'swipe',
   'ui.bootstrap',
   'ui.state',

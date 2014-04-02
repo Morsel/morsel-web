@@ -18,5 +18,4 @@ angular.module( 'Morsel.about', [
 })
 
 .controller( 'AboutCtrl', function AboutCtrl( $scope ) {
-  $scope.htmlReady();
 });

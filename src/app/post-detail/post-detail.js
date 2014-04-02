@@ -36,8 +36,6 @@ angular.module( 'Morsel.postDetail', [])
   if(postIdSlug && username) {
     ApiPosts.getPost(postIdSlug).then(function(postData){
       $scope.story = postData;
-
-      $scope.htmlReady();
     }, function() {
       //if there's an error retrieving post data (bad id?), go to profile page for now
       $location.path('/'+$stateParams.username);
