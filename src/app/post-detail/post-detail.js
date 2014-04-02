@@ -39,6 +39,7 @@ angular.module( 'Morsel.postDetail', [])
 
       PageData.setTitle($scope.story.title);
       PageData.setDescription('testing a description');
+      $scope.htmlReady();
     }, function() {
       //if there's an error retrieving post data (bad id?), go to profile page for now
       $location.path('/'+$stateParams.username);

@@ -26,6 +26,9 @@ module.exports = {
 
   dev_server_port: '5000',
 
+  /* for storing all the favicons and touch icons and nonsense */
+  favicon_dir: '/assets/images/icons/morsel',
+
   /**
    * This is a collection of file patterns that refer to our app code (the
    * stuff in `src/`). These file paths are used in the configuration of
@@ -79,6 +82,7 @@ module.exports = {
       'vendor/angular-bootstrap/ui-bootstrap.min.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/angular-moment/angular-moment.min.js',
+      'vendor/angular-seo/angular-seo.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
       'vendor/angular-touch/angular-touch.min.js',
       'vendor/angular-touch/angular-touch.min.js.map',
