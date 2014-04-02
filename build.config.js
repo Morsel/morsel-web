@@ -29,6 +29,9 @@ module.exports = {
   /* for storing all the favicons and touch icons and nonsense */
   favicon_dir: '/assets/images/icons/morsel',
 
+  //for any data the server might need
+  server_data_dir: 'data',
+
   /**
    * This is a collection of file patterns that refer to our app code (the
    * stuff in `src/`). These file paths are used in the configuration of

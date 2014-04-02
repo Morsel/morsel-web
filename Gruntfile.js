@@ -192,6 +192,16 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+      server_data: {
+        files: [
+          {
+            src: [ '<%= server_data_dir %>/*' ],
+            dest: '<%= build_dir %>',
+            cwd: '.',
+            expand: true
+          }
+        ]
       }
     },
 
@@ -696,7 +706,7 @@ module.exports = function ( grunt ) {
     'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
     'concat:build_css', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
-    'karma:continuous', 'appserver:build'
+    'karma:continuous', 'copy:server_data', 'appserver:build'
   ]);
 
   /**
