@@ -78,7 +78,7 @@ angular.module( 'Morsel', [
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};
 
-  $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(true).hashPrefix('!');
 
   //if we don't recognize the URL, send it to the homepage for now
   $urlRouterProvider.otherwise( '/home' );

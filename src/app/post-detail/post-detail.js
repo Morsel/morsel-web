@@ -42,20 +42,17 @@ angular.module( 'Morsel.postDetail', [])
       $scope.htmlReady();
     }, function() {
       //if there's an error retrieving post data (bad id?), go to profile page for now
-      //$location.path('/'+$stateParams.username);
-      PageData.setTitle('error getting posts');
+      $location.path('/'+$stateParams.username);
     });
 
     ApiUsers.getUser(username).then(function(userData){
       $scope.owner = userData;
     }, function() {
       //if there's an error retrieving post data (bad username?), go to home page for now
-      //$location.path('/');
-      PageData.setTitle('error getting user');
+      $location.path('/');
     });
   } else {
     //if not, send to profile page
-    //$location.path('/'+$stateParams.username);
-    PageData.setTitle(JSON.stringify($stateParams));
+    $location.path('/'+$stateParams.username);
   }
 });
