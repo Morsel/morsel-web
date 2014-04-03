@@ -21,15 +21,12 @@ app.configure(function(){
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
 
-  if(currEnv === 'production' && prerenderToken) {
-    prerender = require('prerender-node').set('prerenderToken', prerenderToken);
+  prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
+  /*if(currEnv === 'production' && prerenderToken) {
+    prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
   } else {
-    prerender = require('prerender-node').set('prerenderServiceUrl', 'http://morsel-seo.herokuapp.com/').set('beforeRender', function(req, done) {
-      //we need to make sure everything renders properly even when it's hosted on s3 or wherever
-      metabase = siteURL+'/';
-      done();
-    });
-  }
+    prerender = require('prerender-node').set('prerenderServiceUrl', 'http://morsel-seo.herokuapp.com/').set('beforeRender', updateMetabase);
+  }*/
   app.use(prerender);
 
   app.use(app.router);
@@ -146,4 +143,10 @@ function render404(res) {
   res.render('404', {
     metadata: findMetadata('404')
   });
+}
+
+function updateMetabase(req, done) {
+  //we need to make sure everything renders properly even when it's hosted on s3 or wherever
+  metabase = siteURL+'/';
+  done();
 }
