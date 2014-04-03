@@ -1,0 +1,29 @@
+{
+  "default": {
+    "title": "Metadata is working!",
+    "description": "We're building something awesome for the artists who use food and drink as their medium: chefs, sommeliers, mixologists and more.",
+    "keywords": "chef,foodie,sommelier,mixologist,restaurant",
+    "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+    "twitter": {
+      "card": "summary",
+      "creator": "@eatmorsel",
+      "site": "@eatmorsel"
+    },
+    "og": {
+      "type": "website",
+      "url": "http://www.eatmorsel.com"
+    }
+  },
+  "about": {
+    "title": "This page is about morsel",
+    "description": "This is the about page for morsel"
+  },
+  "": {
+    "title": "The Morsel homepage",
+    "description": "This is the morsel homepage"
+  },
+  "404": {
+    "title": "You're on a 404!",
+    "description": "This page doesn't exist"
+  }
+}

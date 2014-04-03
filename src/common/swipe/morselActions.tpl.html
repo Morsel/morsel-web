@@ -3,6 +3,8 @@
     <i morsel-like="morsel"></i>
   </li>
   <li>
-    <i class="common-chat" ng-click="commentsTrigger=!commentsTrigger"></i>
+    <a ng-click="commentsTrigger=!commentsTrigger">
+      <i class="common-chat"></i>{{morsel.comment_count}} comment{{morsel.comment_count===1?'':'s'}}
+    </a>
   </li>
 </ul>

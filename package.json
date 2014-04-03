@@ -11,7 +11,9 @@
     "type": "",
     "url": ""
   },
-  "dependencies": {},
+  "dependencies": {
+    "prerender-node": "~1.0.0"
+  },
   "devDependencies": {
     "bower": "*",
     "grunt": "~0.4.1",
@@ -29,6 +31,10 @@
     "grunt-shell": "0.6.1",
     "grunt-contrib-compass": "~0.7.1",
     "grunt-nodemon": "~0.2.1",
-    "grunt-concurrent": "~0.5.0"
+    "grunt-concurrent": "~0.5.0",
+    "mustache-express": "~1.0.1",
+    "express": "~3.5.1",
+    "underscore": "~1.6.0",
+    "request": "~2.34.0"
   }
 }

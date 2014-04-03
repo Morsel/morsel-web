@@ -216,7 +216,19 @@ $immersive-header-lg-line-height: 40px;
     }
 
     .cover-actions {
-      padding: 10px;
+      padding: 10px 20px;
+      overflow:hidden;
+
+      a {
+        float: right;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .time-ago {
+        float: left;
+        font-size: 14px;
+      }
     }
   }
 
@@ -364,7 +376,18 @@ $immersive-header-lg-line-height: 40px;
 
         li {
           display: inline-block;
-          margin-right: 3px;
+          margin-right: 12px;
+
+          a {
+            display: inline-block;
+            color: white;
+            font-weight: 300;
+
+            i {
+              vertical-align: middle;
+              margin-right: 8px;
+            }
+          }
         }
 
         i:hover {

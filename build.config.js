@@ -29,13 +29,16 @@ module.exports = {
   /* for storing all the favicons and touch icons and nonsense */
   favicon_dir: '/assets/images/icons/morsel',
 
+  //for any data the server might need
+  server_data_dir: 'data',
+
   /**
    * This is a collection of file patterns that refer to our app code (the
    * stuff in `src/`). These file paths are used in the configuration of
    * build tasks. `js` is all project javascript, less tests. `ctpl` contains
    * our reusable components' (`src/common`) template HTML files, while
    * `atpl` contains the same, but for our app's code. `html` is just our
-   * main HTML file, `sass` is our main stylesheet, and `unit` contains our
+   * main HTML template, `sass` is our main stylesheet, and `unit` contains our
    * app's unit tests.
    */
   app_files: {
@@ -45,7 +48,7 @@ module.exports = {
     atpl: [ 'src/app/**/*.tpl.html' ],
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
-    html: [ 'src/index.html' ],
+    html: [ 'src/views/*.mustache' ],
     sass: 'src/sass/main.scss'
   },
 

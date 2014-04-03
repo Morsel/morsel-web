@@ -192,6 +192,16 @@ module.exports = function ( grunt ) {
             expand: true
           }
         ]
+      },
+      server_data: {
+        files: [
+          {
+            src: [ '<%= server_data_dir %>/*' ],
+            dest: '<%= build_dir %>',
+            cwd: '.',
+            expand: true
+          }
+        ]
       }
     },
 
@@ -696,7 +706,7 @@ module.exports = function ( grunt ) {
     'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
     'concat:build_css', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
-    'karma:continuous', 'appserver:build'
+    'karma:continuous', 'copy:server_data', 'appserver:build'
   ]);
 
   /**
@@ -755,7 +765,7 @@ module.exports = function ( grunt ) {
    * the list into variables for the template to use and then runs the
    * compilation.
    */
-  grunt.registerMultiTask( 'index', 'Process index.html template', function () {
+  grunt.registerMultiTask( 'index', 'Process index.mustache template', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
       return file.replace( dirRE, '' );
@@ -764,7 +774,20 @@ module.exports = function ( grunt ) {
       return file.replace( dirRE, '' );
     });
 
-    grunt.file.copy('src/index.html', this.data.dir + '/index.html', { 
+    grunt.file.copy('src/views/index.mustache', this.data.dir + '/views/index.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/404.mustache', this.data.dir + '/views/404.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
