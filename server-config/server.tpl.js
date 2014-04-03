@@ -38,7 +38,7 @@ app.configure(function(){
 
   app.use(app.router);
 });
-
+/*
 app.get('/', function(req, res) {
   renderAngular(res, findMetadata(''));
 });
@@ -85,7 +85,7 @@ app.get('/:route', function(req, res){
 app.get('*', function(req, res) {
   render404(res);
 });
-
+*/
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
   console.log("Listening on " + port);
