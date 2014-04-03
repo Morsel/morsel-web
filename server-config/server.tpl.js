@@ -22,7 +22,8 @@ app.configure(function(){
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
 
-  prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase);
+  prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
+  console.log('using prerender server');
   /*if(currEnv === 'production' && prerenderToken) {
     prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
   } else {
