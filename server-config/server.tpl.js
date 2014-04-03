@@ -5,8 +5,10 @@ var express = require("express"),
     request = require('request'),
     metadata = require('./data/metadata.json'),
     currEnv = process.env.CURRENV || 'development',
+    siteURL = process.env.SITEURL || 'localhost:5000',
     prerender,
     prerenderToken = process.env.PRERENDER_TOKEN || '',
+    metabase = '/',
     app = express();
 
 app.engine('mustache', mustacheExpress());
@@ -19,13 +21,15 @@ app.configure(function(){
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
 
-  prerender = require('prerender-node').set('prerenderToken', prerenderToken);
-
-  /*if(currEnv === 'production' && prerenderToken) {
-
+  if(currEnv === 'production' && prerenderToken) {
+    prerender = require('prerender-node').set('prerenderToken', prerenderToken);
   } else {
-    prerender = require('prerender-node').set('prerenderServiceUrl', 'http://morsel-seo.herokuapp.com/');
-  }*/
+    prerender = require('prerender-node').set('prerenderServiceUrl', 'http://morsel-seo.herokuapp.com/').set('beforeRender', function(req, done) {
+      //we need to make sure everything renders properly even when it's hosted on s3 or wherever
+      metabase = siteURL+'/';
+      done();
+    });
+  }
   app.use(prerender);
 
   app.use(app.router);
@@ -87,7 +91,8 @@ function renderAngular(res, mData) {
   var fullMetadata = mData || findMetadata('default');
 
   res.render('index', {
-    metadata: fullMetadata
+    metadata: fullMetadata,
+    metabase: metabase
   });
 }
 
