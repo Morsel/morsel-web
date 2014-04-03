@@ -4,7 +4,7 @@ var express = require("express"),
     routes = require('./data/routes.json'),
     request = require('request'),
     metadata = require('./data/metadata.json'),
-    //prerender = require('prerender-node').set('prerenderServiceUrl', 'http://agile-meadow-5196.herokuapp.com/'),
+    prerender = require('prerender-node').set('prerenderServiceUrl', 'http://agile-meadow-5196.herokuapp.com/'),
     app = express();
 
 app.engine('mustache', mustacheExpress());
@@ -17,7 +17,7 @@ app.configure(function(){
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
 
-  //app.use(prerender);
+  app.use(prerender);
 
   app.use(app.router);
 });
