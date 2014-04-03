@@ -11,7 +11,9 @@
     "type": "",
     "url": ""
   },
-  "dependencies": {},
+  "dependencies": {
+    "prerender-node": "~1.0.0"
+  },
   "devDependencies": {
     "bower": "*",
     "grunt": "~0.4.1",
