@@ -40,6 +40,7 @@ app.configure(function(){
 });
 
 app.get('/', function(req, res) {
+  console.log('params are: ',req.params);
   renderAngular(res, findMetadata(''));
 });
 
@@ -54,14 +55,14 @@ app.get('/templates-app.js', function(req, res){
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
   console.log('got user '+ req.params.username+' with postid '+req.params.postidslug);
-  
+  console.log('params are: ',req.params);
   getMorselMetadata(res);
 });
 
 //anything with a single route param
 app.get('/:route', function(req, res){
   var route = req.params.route;
-
+  console.log('params are: ',req.params);
   //check against our known routes
   if(isValidStaticRoute(route)) {
     //check if it's a public route - public routes could have unique metadata
@@ -83,6 +84,7 @@ app.get('/:route', function(req, res){
 
 //anything else must be a 404 at this point - this will obviously change
 app.get('*', function(req, res) {
+  console.log('params are: ',req.params);
   render404(res);
 });
 
