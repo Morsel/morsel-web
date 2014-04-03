@@ -4,7 +4,9 @@ var express = require("express"),
     routes = require('./data/routes.json'),
     request = require('request'),
     metadata = require('./data/metadata.json'),
-    prerender = require('prerender-node').set('prerenderServiceUrl', 'http://agile-meadow-5196.herokuapp.com/'),
+    currEnv = process.env.CURRENV || 'development',
+    prerender,
+    prerenderToken = process.env.PRERENDER_TOKEN || '',
     app = express();
 
 app.engine('mustache', mustacheExpress());
@@ -17,6 +19,13 @@ app.configure(function(){
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
 
+  prerender = require('prerender-node').set('prerenderToken', prerenderToken);
+
+  /*if(currEnv === 'production' && prerenderToken) {
+
+  } else {
+    prerender = require('prerender-node').set('prerenderServiceUrl', 'http://morsel-seo.herokuapp.com/');
+  }*/
   app.use(prerender);
 
   app.use(app.router);
