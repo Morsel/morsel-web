@@ -27,8 +27,9 @@ app.configure(function(){
     console.log(req);
     console.log('prerender_res is:');
     console.log(prerender_res);
+    console.log('using prerender server');
 });
-  console.log('using prerender server');
+  
   /*if(currEnv === 'production' && prerenderToken) {
     prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
   } else {
