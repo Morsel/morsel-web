@@ -147,6 +147,6 @@ function render404(res) {
 
 function updateMetabase(req, done) {
   //we need to make sure everything renders properly even when it's hosted on s3 or wherever
-  metabase = siteURL+'/';
+  metabase = siteURL;
   done();
 }
