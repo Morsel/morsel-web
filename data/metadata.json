@@ -18,19 +18,12 @@
     "title": "This page is about morsel",
     "description": "This is the about page for morsel"
   },
-  "fakeuser": {
-    "title": "Fake User",
-    "description": "This is the Metadata for a fake user",
-    "keywords": "chef,foodie,sommelier,mixologist,restaurant",
-    "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
-    "twitter": {
-      "card": "summary",
-      "creator": "@fakeuser",
-      "site": "@eatmorsel"
-    },
-    "og": {
-      "type": "website",
-      "url": "http://www.eatmorsel.com/fakeuser"
-    }
+  "": {
+    "title": "The Morsel homepage",
+    "description": "This is the morsel homepage"
+  },
+  "404": {
+    "title": "You're on a 404!",
+    "description": "This page doesn't exist"
   }
 }

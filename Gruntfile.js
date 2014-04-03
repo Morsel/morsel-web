@@ -786,6 +786,19 @@ module.exports = function ( grunt ) {
         });
       }
     });
+
+    grunt.file.copy('src/views/404.mustache', this.data.dir + '/views/404.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
   });
 
   /**

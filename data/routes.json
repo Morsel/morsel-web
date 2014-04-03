@@ -1,447 +1,358 @@
-[
-  {
-    "name":"",
+{
+  "": {
     "public": true,
     "active": true
   },
-  {
-    "name":"about",
-    "public": true,
-    "active": false
-  },
-  {
-    "name":"account",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"accounts",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"activity",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"add-morsel",
-    "public": false,
-    "active": true
-  },
-  {
-    "name":"admin",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"all",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"announcements",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"anywhere",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"apps",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"auth",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"badges",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"bar",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"blog",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"business",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"buttons",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"chef",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"city",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"contact",
+  "about": {
     "public": true,
     "active": true
   },
-  {
-    "name":"contacts",
+  "account": {
     "public": false,
     "active": false
   },
-  {
-    "name":"devices",
+  "accounts": {
     "public": false,
     "active": false
   },
-  {
-    "name":"direct_messages",
+  "activity": {
     "public": false,
     "active": false
   },
-  {
-    "name":"download",
+  "add-morsel": {
+    "public": false,
+    "active": true
+  },
+  "admin": {
     "public": false,
     "active": false
   },
-  {
-    "name":"downloads",
+  "all": {
     "public": false,
     "active": false
   },
-  {
-    "name":"eatmorsel",
+  "announcements": {
     "public": false,
     "active": false
   },
-  {
-    "name":"faq",
+  "anywhere": {
     "public": false,
     "active": false
   },
-  {
-    "name":"favorites",
+  "apps": {
     "public": false,
     "active": false
   },
-  {
-    "name":"feed",
+  "auth": {
     "public": false,
     "active": false
   },
-  {
-    "name":"find_users",
+  "badges": {
     "public": false,
     "active": false
   },
-  {
-    "name":"followers",
+  "bar": {
     "public": false,
     "active": false
   },
-  {
-    "name":"following",
+  "blog": {
     "public": false,
     "active": false
   },
-  {
-    "name":"friend_request",
+  "business": {
     "public": false,
     "active": false
   },
-  {
-    "name":"friendrequest",
+  "buttons": {
     "public": false,
     "active": false
   },
-  {
-    "name":"friends",
+  "chef": {
     "public": false,
     "active": false
   },
-  {
-    "name":"goodies",
+  "city": {
     "public": false,
     "active": false
   },
-  {
-    "name":"help",
-    "public": false,
-    "active": false
-  },
-  {
-    "name":"home",
+  "contact": {
     "public": true,
     "active": true
   },
-  {
-    "name":"how-it-works",
+  "contacts": {
     "public": false,
     "active": false
   },
-  {
-    "name":"im_account",
+  "devices": {
     "public": false,
     "active": false
   },
-  {
-    "name":"inbox",
+  "direct_messages": {
     "public": false,
     "active": false
   },
-  {
-    "name":"invitations",
+  "download": {
     "public": false,
     "active": false
   },
-  {
-    "name":"invite",
+  "downloads": {
     "public": false,
     "active": false
   },
-  {
-    "name":"jobs",
+  "eatmorsel": {
     "public": false,
     "active": false
   },
-  {
-    "name":"join",
+  "faq": {
     "public": false,
     "active": false
   },
-  {
-    "name":"kitchen",
+  "favorites": {
     "public": false,
     "active": false
   },
-  {
-    "name":"list",
+  "feed": {
     "public": false,
     "active": false
   },
-  {
-    "name":"login",
+  "find_users": {
+    "public": false,
+    "active": false
+  },
+  "followers": {
+    "public": false,
+    "active": false
+  },
+  "following": {
+    "public": false,
+    "active": false
+  },
+  "friend_request": {
+    "public": false,
+    "active": false
+  },
+  "friendrequest": {
+    "public": false,
+    "active": false
+  },
+  "friends": {
+    "public": false,
+    "active": false
+  },
+  "goodies": {
+    "public": false,
+    "active": false
+  },
+  "help": {
+    "public": false,
+    "active": false
+  },
+  "home": {
     "public": true,
     "active": true
   },
-  {
-    "name":"logo",
+  "how-it-works": {
     "public": false,
     "active": false
   },
-  {
-    "name":"logout",
+  "im_account": {
     "public": false,
     "active": false
   },
-  {
-    "name":"me",
+  "inbox": {
     "public": false,
     "active": false
   },
-  {
-    "name":"media",
+  "invitations": {
     "public": false,
     "active": false
   },
-  {
-    "name":"media_signup",
+  "invite": {
     "public": false,
     "active": false
   },
-  {
-    "name":"mentions",
+  "jobs": {
     "public": false,
     "active": false
   },
-  {
-    "name":"messages",
+  "join": {
     "public": false,
     "active": false
   },
-  {
-    "name":"morsel",
+  "kitchen": {
     "public": false,
     "active": false
   },
-  {
-    "name":"notifications",
+  "list": {
     "public": false,
     "active": false
   },
-  {
-    "name":"oauth",
+  "login": {
+    "public": true,
+    "active": true
+  },
+  "logo": {
     "public": false,
     "active": false
   },
-  {
-    "name":"password",
+  "logout": {
     "public": false,
     "active": false
   },
-  {
-    "name":"positions",
+  "me": {
     "public": false,
     "active": false
   },
-  {
-    "name":"post",
+  "media": {
     "public": false,
     "active": false
   },
-  {
-    "name":"press",
+  "media_signup": {
     "public": false,
     "active": false
   },
-  {
-    "name":"privacy",
+  "mentions": {
     "public": false,
     "active": false
   },
-  {
-    "name":"products",
+  "messages": {
     "public": false,
     "active": false
   },
-  {
-    "name":"public_timeline",
+  "morsel": {
     "public": false,
     "active": false
   },
-  {
-    "name":"replies",
+  "notifications": {
     "public": false,
     "active": false
   },
-  {
-    "name":"restaurant",
+  "oauth": {
     "public": false,
     "active": false
   },
-  {
-    "name":"rules",
+  "password": {
     "public": false,
     "active": false
   },
-  {
-    "name":"saved_searches",
+  "positions": {
     "public": false,
     "active": false
   },
-  {
-    "name":"search",
+  "post": {
     "public": false,
     "active": false
   },
-  {
-    "name":"sent",
+  "press": {
     "public": false,
     "active": false
   },
-  {
-    "name":"settings",
+  "privacy": {
     "public": false,
     "active": false
   },
-  {
-    "name":"share",
+  "products": {
     "public": false,
     "active": false
   },
-  {
-    "name":"signin",
+  "public_timeline": {
     "public": false,
     "active": false
   },
-  {
-    "name":"signup",
+  "replies": {
     "public": false,
     "active": false
   },
-  {
-    "name":"similar_to",
+  "restaurant": {
     "public": false,
     "active": false
   },
-  {
-    "name":"sitemap",
+  "rules": {
     "public": false,
     "active": false
   },
-  {
-    "name":"statistics",
+  "saved_searches": {
     "public": false,
     "active": false
   },
-  {
-    "name":"tag",
+  "search": {
     "public": false,
     "active": false
   },
-  {
-    "name":"team",
+  "sent": {
     "public": false,
     "active": false
   },
-  {
-    "name":"terms",
+  "settings": {
     "public": false,
     "active": false
   },
-  {
-    "name":"tos",
+  "share": {
     "public": false,
     "active": false
   },
-  {
-    "name":"translate",
+  "signin": {
     "public": false,
     "active": false
   },
-  {
-    "name":"trends",
+  "signup": {
     "public": false,
     "active": false
   },
-  {
-    "name":"user",
+  "similar_to": {
     "public": false,
     "active": false
   },
-  {
-    "name":"users",
+  "sitemap": {
     "public": false,
     "active": false
   },
-  {
-    "name":"welcome",
+  "statistics": {
     "public": false,
     "active": false
   },
-  {
-    "name":"who_to_follow",
+  "tag": {
     "public": false,
     "active": false
   },
-  {
-    "name":"widgets",
+  "team": {
+    "public": false,
+    "active": false
+  },
+  "terms": {
+    "public": false,
+    "active": false
+  },
+  "tos": {
+    "public": false,
+    "active": false
+  },
+  "translate": {
+    "public": false,
+    "active": false
+  },
+  "trends": {
+    "public": false,
+    "active": false
+  },
+  "user": {
+    "public": false,
+    "active": false
+  },
+  "users": {
+    "public": false,
+    "active": false
+  },
+  "welcome": {
+    "public": false,
+    "active": false
+  },
+  "who_to_follow": {
+    "public": false,
+    "active": false
+  },
+  "widgets": {
     "public": false,
     "active": false
   }
-]
+}
