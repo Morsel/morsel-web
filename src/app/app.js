@@ -18,6 +18,7 @@ angular.module( 'Morsel', [
   //common
   'Morsel.afterLogin',
   'Morsel.auth',
+  'Morsel.baseErrors',
   'Morsel.bgImage',
   'Morsel.comments',
   'Morsel.formNameFix',
