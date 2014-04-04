@@ -12,22 +12,44 @@ angular.module( 'Morsel.handleErrors', [] )
     if(resp.data.errors) {
       //go through each type of error
       for (fieldName in resp.data.errors) {
-        //we need an english phrase for the field name
-        fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
-        //get the errors for this field
-        serverErrors = resp.data.errors[fieldName];
-
-        //make good english
-        for(i=0; i<serverErrors.length; i++) {
-          serverErrors[i] = fnEnglish+' '+serverErrors[i];
-        }
-
-        //make sure there's a field associated with it
         if(form[fieldName]) {
+          //must be associated with a specific input
+
+          //we need an english phrase for the field name
+          fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
+          //get the errors for this field
+          serverErrors = resp.data.errors[fieldName];
+
+          //make good english
+          for(i=0; i<serverErrors.length; i++) {
+            serverErrors[i] = fnEnglish+' '+serverErrors[i];
+          }
+
           //set field as invalid
           form[fieldName].$setValidity('server', false, form);
           //put errors in model
           form[fieldName].$error.serverErrors = serverErrors;
+        } else {
+          //this is either a generic form error or catching mismatched input
+          //get the errors for this field
+          serverErrors = resp.data.errors[fieldName];
+
+          //capitalize first letter
+          for(i=0; i<serverErrors.length; i++) {
+            //generic error
+            if(fieldName === 'base') {
+              serverErrors[i] = serverErrors[i].charAt(0).toUpperCase() + serverErrors[i].slice(1);
+            } else {
+              //misplaced input - make good english
+              for(i=0; i<serverErrors.length; i++) {
+                serverErrors[i] = fnEnglish+' '+serverErrors[i];
+              }
+            }
+          }
+
+          //put errors in model
+          form.$error.serverErrors = serverErrors;
+          //don't set our form as invalid on a server error - user could have perfectly valid inputs
         }
       }
     }
