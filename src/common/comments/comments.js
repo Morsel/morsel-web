@@ -1,73 +1,81 @@
 angular.module( 'Morsel.comments', [] )
 
-.directive('morselComments', function(ApiMorsels, AfterLogin, Auth, $location, $q){
+.directive('morselComments', function(ApiMorsels, AfterLogin, Auth, $location, $q, $modal){
   return {
     restrict: 'A',
     scope: {
-      morsel: '=commentsMorsel',
-      commentsTrigger: '='
+      morsel: '=morselComments'
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var getComments,
-          addComment;
-
-      scope.nonSwipeable = true;
-      scope.nonScrollable = true;
-
-      scope.isChef = Auth.isChef();
-      scope.isLoggedIn = Auth.isLoggedIn();
-      
-      scope.$watch('commentsTrigger', function(newValue) {
-        if(newValue) {
-          //if we don't have our comments already
-          if(!scope.morsel.comments) {
-            getComments();
+      scope.openComments = function () {
+        console.log(scope.morsel);
+        var modalInstance = $modal.open({
+          templateUrl: 'comments/comments.tpl.html',
+          controller: ModalInstanceCtrl,
+          resolve: {
+            morsel: function () {
+              return scope.morsel;
+            }
           }
-        }
-      });
-
-      //fetch comments for the morsel in scope
-      getComments = function(morselId) {
-        ApiMorsels.getComments(scope.morsel.id).then(function(commentData){
-          scope.morsel.comments = commentData;
         });
       };
 
-      scope.addComment = function() {
-        if(Auth.isLoggedIn()) {
-          postComment();
-        } else {
-          var currentUrl = $location.url();
+      var ModalInstanceCtrl = function ($scope, $modalInstance, morsel) {
 
-          //if not, set our callback for after we're logged in
-          AfterLogin.addCallbacks(function() {
-            postComment().then(function(){
-              $location.path(currentUrl);
-            });
-          });
-          $location.path('/join');
-        }
-      };
+        $scope.morsel = morsel;
+        $scope.isChef = Auth.isChef();
+        $scope.isLoggedIn = Auth.isLoggedIn();
+        $scope.comment = {
+          description: ''
+        };
 
-      function postComment() {
-        var deferred = $q.defer();
-
-        ApiMorsels.postComment(scope.morsel.id, scope.addCommentDescription).then(function(commentData){
-
-          if(scope.morsel.comments) {
-            scope.morsel.comments.unshift(commentData);
+        $scope.addComment = function() {
+          if(Auth.isLoggedIn()) {
+            postComment();
           } else {
-            scope.morsel.comments = commentData;
-          }
-          //clear comment textarea
-          scope.addCommentDescription = '';
-          deferred.resolve();
-        });
+            var currentUrl = $location.url();
 
-        return deferred.promise;
-      }
+            //if not, set our callback for after we're logged in
+            AfterLogin.addCallbacks(function() {
+              postComment().then(function(){
+                $location.path(currentUrl);
+              });
+            });
+            $location.path('/join');
+          }
+        };
+
+        if(!$scope.morsel.comments) {
+          getComments();
+        }
+
+        //fetch comments for the morsel
+        function getComments() {
+          ApiMorsels.getComments($scope.morsel.id).then(function(commentData){
+            $scope.morsel.comments = commentData;
+          });
+        }
+
+        function postComment() {
+          var deferred = $q.defer();
+
+          ApiMorsels.postComment($scope.morsel.id, $scope.comment.description).then(function(commentData){
+
+            if($scope.morsel.comments) {
+              $scope.morsel.comments.unshift(commentData);
+            } else {
+              $scope.morsel.comments = commentData;
+            }
+            //clear comment textarea
+            $scope.comment.description = '';
+            deferred.resolve();
+          });
+
+          return deferred.promise;
+        }
+      };
     },
-    templateUrl: 'comments/comments.tpl.html'
+    template: '<a ng-click="openComments()"><i class="common-chat"></i>{{morsel.comment_count}} comment{{morsel.comment_count===1?\'\':\'s\'}}</a>'
   };
 });

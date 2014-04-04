@@ -13,7 +13,7 @@ angular.module( 'Morsel.postDetail', [])
   });
 })
 
-.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiUsers, $location ) {
+.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiUsers, $location, $modal ) {
   var username = $stateParams.username,
       postDetailsArr = $stateParams.postDetails.split('/'),
       postIdSlug = postDetailsArr[0],
