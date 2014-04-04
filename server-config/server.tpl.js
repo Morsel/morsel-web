@@ -22,7 +22,7 @@ app.configure(function(){
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
 
-  prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
+  prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
     console.log('req is:');
     console.log(req);
     console.log('prerender_res is:');
