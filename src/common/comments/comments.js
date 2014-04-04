@@ -37,16 +37,6 @@ angular.module( 'Morsel.comments', [] )
         $scope.addComment = function() {
           if(Auth.isLoggedIn()) {
             postComment();
-          } else {
-            var currentUrl = $location.url();
-
-            //if not, set our callback for after we're logged in
-            AfterLogin.addCallbacks(function() {
-              postComment().then(function(){
-                $location.path(currentUrl);
-              });
-            });
-            $location.path('/join');
           }
         };
 
