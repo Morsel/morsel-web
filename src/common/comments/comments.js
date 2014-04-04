@@ -30,6 +30,10 @@ angular.module( 'Morsel.comments', [] )
           description: ''
         };
 
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+
         $scope.addComment = function() {
           if(Auth.isLoggedIn()) {
             postComment();

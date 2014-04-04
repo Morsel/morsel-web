@@ -50,3 +50,9 @@
     border: 0;
   }
 }
+
+@media (max-width: $screen-sm-max) {
+  .comments-header {
+    font-size: 22px;
+  }
+}
