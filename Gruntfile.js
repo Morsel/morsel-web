@@ -205,10 +205,10 @@ module.exports = function ( grunt ) {
       },
       static_launch: {
         files: [
-          {
-            src: [ '<%= static_launch_dir %>/*' ],
-            dest: '<%= build_dir %>',
-            cwd: '.',
+          { 
+            src: [ '**' ],
+            dest: '<%= build_dir %>/launch/',
+            cwd: '<%= static_launch_dir %>',
             expand: true
           }
         ]

@@ -45,11 +45,6 @@ app.get('/templates-app.js', function(req, res){
   res.sendfile('templates-app.js');
 });
 
-//morsel detail with post id/slug
-app.get('/:username/:postidslug', function(req, res){
-  renderMorselPage(res, req.params.username, req.params.postidslug);
-});
-
 //unsubscribe
 app.get('/unsubscribe', function(req, res){
   res.render('unsubscribe', {
@@ -60,29 +55,14 @@ app.get('/unsubscribe', function(req, res){
   });
 });
 
-//anything with a single route param
-app.get('/:route', function(req, res){
-  var route = req.params.route;
-
-  //check against our known routes
-  if(isValidStaticRoute(route)) {
-    //check if it's a public route - public routes could have unique metadata
-    if(isRoutePublic(route)) {
-      //need to check for metadata
-      renderAngular(res, findMetadata(route));
-    } else {
-      //if it's not public, we don't care about getting metadata/content customized - send req to angular
-      renderAngular(res);
-    }
-  } else {
-    //either a user's profile page or a bad route
-    renderUserPage(res, route);
-  }
+//morsel detail with post id/slug
+app.get('/:username/:postidslug', function(req, res){
+  renderMorselPage(res, req.params.username, req.params.postidslug);
 });
 
 //anything else must be a 404 at this point - this will obviously change
 app.get('*', function(req, res) {
-  render404(res);
+  res.redirect('/');
 });
 
 var port = Number(process.env.PORT || 5000);
@@ -116,39 +96,6 @@ function findMetadata(route) {
   });
 
   return _.defaults(mdata || {}, metadata.default);
-}
-
-function renderUserPage(res, username) {
-  
-  request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
-    var user,
-        userImage,
-        userMetadata;
-
-    if (!error && response.statusCode == 200) {
-      user = JSON.parse(body).data;
-      userImage = user.photos && user.photos._144x144;
-
-      userMetadata = {
-        "title": _.escape(user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel'),
-        "description": _.escape(user.first_name + ' ' + user.last_name + ' - ' + user.bio),
-        "image": userImage || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
-        "twitter": {
-          "creator": user.twitter_username || "@eatmorsel"
-        },
-        "og": {
-          "url": siteURL + '/' + user.username
-        }
-      };
-
-      userMetadata = _.defaults(userMetadata || {}, metadata.default);
-
-      renderAngular(res, userMetadata);
-    } else {
-      //not a valid user - must be a bad route
-      render404(res);
-    }
-  });
 }
 
 function renderMorselPage(res, username, postIdSlug) {
