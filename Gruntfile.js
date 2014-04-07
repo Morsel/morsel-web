@@ -739,7 +739,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', /*'uglify', */'index:compile', 'appserver:compile'
+    'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'appserver:compile'
   ]);
 
   /*
