@@ -45,6 +45,18 @@ app.get('/templates-app.js', function(req, res){
   res.sendfile('templates-app.js');
 });
 
+app.get('/BingSiteAuth.xml', function(req, res){
+  res.sendfile('seo/BingSiteAuth.xml');
+});
+
+app.get('/bOeAHuseytu27v9K8MznKwOWZFk.html', function(req, res){
+  res.sendfile('seo/bOeAHuseytu27v9K8MznKwOWZFk.html');
+});
+
+app.get('/google1739f11000682532.html', function(req, res){
+  res.sendfile('seo/google1739f11000682532.html');
+});
+
 //unsubscribe
 app.get('/unsubscribe', function(req, res){
   res.render('unsubscribe', {
