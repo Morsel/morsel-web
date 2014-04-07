@@ -9,9 +9,9 @@
       "site": "@eatmorsel"
     },
     "og": {
-      "type": "website",
-      "url": "http://www.eatmorsel.com"
-    }
+      "type": "website"
+    },
+    "url": "http://www.eatmorsel.com"
   },
   "about": {
     "title": "This page is about morsel",

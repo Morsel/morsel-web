@@ -133,9 +133,7 @@ function renderMorselPage(res, username, postIdSlug) {
               "card" : "summary_large_image",
               "creator": user.twitter_username || "@eatmorsel"
             },
-            "og": {
-              "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
-            }
+            "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
           };
 
           console.log('before',postMetadata);
