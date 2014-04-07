@@ -8,9 +8,6 @@ var express = require("express"),
     siteURL = process.env.SITEURL || 'localhost:5000',
     apiURL = process.env.APIURL || 'http://api-staging.eatmorsel.com',
     apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
-    prerender,
-    prerenderDevUrl = 'http://morsel-seo.herokuapp.com/',
-    prerenderToken = process.env.PRERENDER_TOKEN || '',
     metabase = '/',
     app = express();
 
@@ -23,16 +20,6 @@ app.configure(function(){
   app.use('/assets', express.static(__dirname + '/assets'));
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
-
-  prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
-});
-  
-  /*if(currEnv === 'production' && prerenderToken) {
-    prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
-  } else {
-    prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase);
-  }*/
-  app.use(prerender);
 
   app.use(app.router);
 });
