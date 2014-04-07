@@ -86,7 +86,8 @@ function renderAngular(res, mData) {
 
   res.render('index', {
     metadata: fullMetadata,
-    metabase: metabase
+    metabase: metabase,
+    apiUrl: apiURL
   });
 }
 
