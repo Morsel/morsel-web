@@ -14,7 +14,6 @@ var express = require("express"),
     metabase = '/',
     app = express();
 
-console.log(apiQuerystring);
 app.engine('mustache', mustacheExpress());
 
 app.configure(function(){
@@ -26,11 +25,6 @@ app.configure(function(){
   app.use('/vendor', express.static(__dirname + '/vendor'));
 
   prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
-    console.log('req is:');
-    console.log(req);
-    console.log('prerender_res is:');
-    console.log(prerender_res);
-    console.log('using prerender server');
 });
   
   /*if(currEnv === 'production' && prerenderToken) {
@@ -44,7 +38,6 @@ app.configure(function(){
 });
 
 app.get('/', function(req, res) {
-  console.log('params are: ',req.params);
   renderAngular(res, findMetadata(''));
 });
 
@@ -58,25 +51,20 @@ app.get('/templates-app.js', function(req, res){
 
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
-  console.log('got user '+ req.params.username+' with postid '+req.params.postidslug);
-  console.log('params are: ',req.params);
   renderMorselPage(res, req.params.username, req.params.postidslug);
 });
 
 //anything with a single route param
 app.get('/:route', function(req, res){
   var route = req.params.route;
-  console.log('params are: ',req.params);
+
   //check against our known routes
   if(isValidStaticRoute(route)) {
     //check if it's a public route - public routes could have unique metadata
     if(isRoutePublic(route)) {
-      console.log(route+ ' is public');
       //need to check for metadata
-      console.log('found:',findMetadata(route));
       renderAngular(res, findMetadata(route));
     } else {
-      console.log(route+' is private');
       //if it's not public, we don't care about getting metadata/content customized - send req to angular
       renderAngular(res);
     }
@@ -88,13 +76,11 @@ app.get('/:route', function(req, res){
 
 //anything else must be a 404 at this point - this will obviously change
 app.get('*', function(req, res) {
-  console.log('params are: ',req.params);
   render404(res);
 });
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
-  console.log("Listening on " + port);
 });
 
 function renderAngular(res, mData) {
@@ -127,7 +113,6 @@ function findMetadata(route) {
 }
 
 function renderUserPage(res, username) {
-  console.log('getting user metadata...');
   
   request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
     var user,
@@ -161,15 +146,12 @@ function renderUserPage(res, username) {
 }
 
 function renderMorselPage(res, username, postIdSlug) {
-  console.log('getting user metadata for post '+postIdSlug+'...');
 
   request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
     var user;
 
     if (!error && response.statusCode == 200) {
       user = JSON.parse(body).data;
-
-      console.log('getting post metadata for post '+postIdSlug+'...');
 
       request(apiURL+'/posts/'+postIdSlug+apiQuerystring, function (error, response, body) {
         var post,
@@ -195,13 +177,11 @@ function renderMorselPage(res, username, postIdSlug) {
 
           renderAngular(res, postMetadata);
         } else {
-          console.log('not a valid post');
           //not a valid morsel id - must be a bad route
           render404(res);
         }
       });
     } else {
-      console.log('not a valid user');
       //not a valid user - must be a bad route
       render404(res);
     }
