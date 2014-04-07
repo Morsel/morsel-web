@@ -768,10 +768,10 @@ module.exports = function ( grunt ) {
   grunt.registerMultiTask( 'index', 'Process index.mustache template', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
-      return file.replace( dirRE, '' );
+      return '/'+file.replace( dirRE, '' );
     });
     var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
-      return file.replace( dirRE, '' );
+      return '/'+file.replace( dirRE, '' );
     });
 
     grunt.file.copy('src/views/index.mustache', this.data.dir + '/views/index.mustache', { 
@@ -845,6 +845,7 @@ module.exports = function ( grunt ) {
         return grunt.template.process( contents, {
           //don't need to pass anything at the moment
           data: {
+            version: grunt.config( 'pkg.version' )
           }
         });
       }

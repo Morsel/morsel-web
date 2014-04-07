@@ -2,6 +2,8 @@
   <form name="loginForm" method="post" ng-submit="login()" class="padded-form" novalidate>
     <div class="row">
       <div class="col-md-12">
+        <div base-errors val-form="loginForm"></div>
+
         <input validated-element val-form="loginForm" val-en-name="Email" val-type="email" val-name="email" val-form-model="loginModel" val-placeholder="johnsmith@example.com" val-required="true" />
 
         <input validated-element val-form="loginForm" val-en-name="Password" val-type="password" val-name="password" val-form-model="loginModel" val-required="true" />

@@ -4,9 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title ng-bind="pageTitle">{{{metadata.title}}}</title>
+    <title>{{{metadata.title}}}</title>
     <meta name="description" content="{{{metadata.description}}}">
-    <meta name="keywords" content="{{{metadata.keywords}}}" />
 
     <!-- social media tags -->
     <meta name="twitter:card" content="{{{metadata.twitter.card}}}">
@@ -22,7 +21,7 @@
     <meta property="og:description" content="{{{metadata.description}}}">
 
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <base href="/">
+    <base href="{{{metabase}}}">
     <meta name="fragment" content="!" />
 
     <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon" />

@@ -48,7 +48,6 @@ angular.module('Morsel.storySwipe', [
     restrict: 'A',
     replace: true,
     scope: {
-      commentsTrigger: '=',
       morsel: '=actionableMorsel'
     },
     link: function(scope, element, attrs) {

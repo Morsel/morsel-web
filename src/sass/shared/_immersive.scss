@@ -400,12 +400,6 @@ $immersive-header-lg-line-height: 40px;
           @include opacity(0);
         }
       }
-
-      &.comments-showing {
-        .morsel-description {
-          @include opacity(0);
-        }
-      }
     }
   }
 }
