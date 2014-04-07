@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Unsubscribe | Morsel</title>
+    <meta name="description" content="We're building something awesome for the artists who use food and drink as their medium: chefs, sommeliers, mixologists and more.">
+
+    <meta name="keywords" content="chef,foodie,sommelier,mixologist,restaurant" /> 
+    <meta property="og:title" content="Morsel"/> 
+    <meta property="og:type" content="company"/> 
+    <meta property="og:site_name" content="Morsel"/> 
+    <meta property="og:description" content="Morsel is building something awesome for the artists who use food and drink as their medium: chefs, sommeliers, mixologists and more." />
+    <meta property="og:url" content="{{{siteUrl}}}" />
+    <meta property="og:image" content="{{{siteUrl}}}/images/morsel-m.png"/>
+    <link rel="image_src" href="{{{siteUrl}}}/images/morsel-m.png" />
+
+    <link rel="stylesheet" href="/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.png">
+  </head>
+  <body class="unsubscribe">
+    <div class="welcome">
+      <h1><a href="{{{siteUrl}}}">Morsel</a></h1>
+      <div class="welcome-step current-step">
+        <img class="loader" src="/images/loader.gif" />
+        <h2 id="unsubscribe-text"></h2>
+      </div>
+    </div>
+    {{> partials/ga}}
+    <script type="text/javascript">
+      var Morsel = {
+        apiURL : '{{{apiURL}}}'
+      };
+    </script>
+    <script type="text/javascript" src="js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="js/libs/purl.js"></script>
+    <script type="text/javascript" src="js/unsubscribe.js"></script>
+  </body>
+</html>

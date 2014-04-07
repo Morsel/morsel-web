@@ -5,6 +5,7 @@ var express = require("express"),
     request = require('request'),
     metadata = require('./data/metadata.json'),
     currEnv = process.env.CURRENV || 'development',
+    isProd = currEnv === 'production',
     siteURL = process.env.SITEURL || 'localhost:5000',
     apiURL = process.env.APIURL || 'http://api-staging.eatmorsel.com',
     apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
@@ -41,6 +42,16 @@ app.get('/templates-app.js', function(req, res){
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
   renderMorselPage(res, req.params.username, req.params.postidslug);
+});
+
+//unsubscribe
+app.get('/unsubscribe', function(req, res){
+  res.render('unsubscribe', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
 });
 
 //anything with a single route param
