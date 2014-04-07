@@ -23,12 +23,18 @@ app.configure(function(){
   app.use('/assets', express.static(__dirname + '/assets'));
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
+  app.use('/launch', express.static(__dirname + '/launch'));
 
   app.use(app.router);
 });
 
 app.get('/', function(req, res) {
-  renderAngular(res, findMetadata(''));
+  res.render('claim', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
 });
 
 app.get('/templates-common.js', function(req, res){

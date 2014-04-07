@@ -1472,7 +1472,7 @@ html {
   height: 100%; }
 
 body {
-  background: white url(/images/landing-tile.jpg) center center repeat;
+  background: white url(/launch/images/landing-tile.jpg) center center repeat;
   margin: 0px;
   color: #394038; }
 
@@ -1486,12 +1486,12 @@ body {
   margin: 0 auto;
   text-align: center;
   padding: 200px 30px 40px;
-  background: url(/images/octopus.png) center top no-repeat; }
+  background: url(/launch/images/octopus.png) center top no-repeat; }
   .welcome h1 a {
     width: 130px;
     height: 80px;
     margin: 10px auto 20px;
-    background: url(/images/morsel.png) center top no-repeat;
+    background: url(/launch/images/morsel.png) center top no-repeat;
     background-size: 130px 59px;
     display: block;
     text-indent: -9999px;
@@ -1576,14 +1576,14 @@ body {
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .welcome h1 a {
-    background-image: url(/images/morsel@2x.png); } }
+    background-image: url(/launch/images/morsel@2x.png); } }
 
 @media only screen and (max-width: 480px) {
   .welcome .welcome-step input, .welcome .welcome-step label {
     width: 100%; } }
 
 .home .welcome .farm-to-table {
-  background: url(/images/farm-to-table.png) center center no-repeat;
+  background: url(/launch/images/farm-to-table.png) center center no-repeat;
   width: 113px;
   height: 21px;
   margin: 25px auto 55px;
@@ -1618,13 +1618,13 @@ body {
     .home .welcome .social-share li .facebook {
       background-color: #2a5e9d; }
       .home .welcome .social-share li .facebook i {
-        background: url(/images/share-facebook.png) center center no-repeat; }
+        background: url(/launch/images/share-facebook.png) center center no-repeat; }
       .home .welcome .social-share li .facebook:hover {
         background-color: #1f4675; }
     .home .welcome .social-share li .twitter {
       background-color: #00c2f6; }
       .home .welcome .social-share li .twitter i {
-        background: url(/images/share-twitter.png) center center no-repeat; }
+        background: url(/launch/images/share-twitter.png) center center no-repeat; }
       .home .welcome .social-share li .twitter:hover {
         background-color: #009ac3; }
   .home .welcome .social-share + a {

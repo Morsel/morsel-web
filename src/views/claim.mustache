@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Morsel</title>
+    <meta name="description" content="We're building something awesome for the artists who use food and drink as their medium: chefs, sommeliers, mixologists and more.">
+
+    <meta property="og:title" content="Morsel"/> 
+    <meta property="og:type" content="company"/> 
+    <meta property="og:site_name" content="Morsel"/> 
+    <meta property="og:description" content="I just claimed my username on Morsel. Chefs, Mixologists, Sommeliers - claim yours at http://eatmorsel.com now!" />
+    <meta property="og:url" content="{{{siteUrl}}}" />
+    <meta property="og:image" content="{{{siteUrl}}}/launch/images/morsel-m.png"/>
+    <link rel="image_src" href="{{{siteUrl}}}/launch/images/morsel-m.png" />
+
+    <link rel="stylesheet" href="/launch/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/launch/images/favicon.png">
+    {{> partials/mixpanel}}
+  </head>
+  <body class="home">
+    <div id="home-welcome" class="welcome">
+      <h1><a href="{{{siteUrl}}}">Morsel</a></h1>
+      <div id="welcome-step-1" class="welcome-step current-step">
+        <h2>A beautiful storytelling app for chefs, mixologists and sommeliers</h2>
+        <span class="farm-to-table"></span>
+        <div>
+          <h4>Claim your username now!</h4>
+          <form novalidate>
+            <input type="text" id="username" name="username" placeholder="johnsmith" />
+            <p class="help-text">Must be alphanumeric and not include spaces</p>
+            <input type="submit" value="Check Availability" />
+          </form>
+        </div>
+      </div>
+      <div id="welcome-step-2" class="welcome-step">
+        <h3><span class="your-username"></span> is available!</h3>
+        <div>
+          <h4>Reserve it with your email:</h4>
+          <form novalidate>
+            <input type="email" id="email" name="email" placeholder="john@example.com" />
+            <input type="submit" value="Reserve Username" />
+
+            <input type="hidden" name="username" id="your-username-input" />
+          </form>
+        </div>
+      </div>
+      <div id="welcome-step-3" class="welcome-step">
+        <div>
+          <h4>What role best describes you?</h4>
+          <form novalidate>
+            <label class="needs-load">
+              <input type="radio" name="industry" value="chef" />Restaurant Staff
+            </label>
+            <label class="needs-load">
+              <input type="radio" name="industry" value="media" />Press &#47; Media
+            </label>
+            <label class="needs-load">
+              <input type="radio" name="industry" value="diner" />Diner
+            </label>
+          </form>
+        </div>
+      </div>
+      <div id="welcome-step-4" class="welcome-step">
+        <h3><span class="your-username"></span>, you're in!</h3>
+        <div>
+          <h4>Now that you've claimed your name, pay it forward and let your friends know to claim theirs!</h4>
+          <ul class="social-share">
+            <li>
+              <a id="facebook-share" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Featmorsel.com" target="_blank" class="facebook"><i></i>Share on Facebook</a>
+            </li>
+            <li>
+              <a id="twitter-share" href="https://twitter.com/share?text=I%20just%20claimed%20my%20username%20on%20%40EatMorsel.%20Chefs%2C%20Mixologists%2C%20Sommeliers%20-%20claim%20yours%20now!%20%23claimmorsel" class="twitter" target="_blank"><i></i>Share on Twitter</a>
+            </li>
+
+          </ul>
+          <a href="mailto:press@eatmorsel.com">Press Inquiries</a>
+          <a href="http://insights.eatmorsel.com">Morsel Insights Blog</a>
+        </div>
+      </div>
+    </div>
+    {{> partials/ga}}
+    <script type="text/javascript">
+      var Morsel = {
+        apiURL : '{{{apiURL}}}'
+      };
+    </script>
+    <script type="text/javascript" src="/launch/js/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="/launch/js/reserve-username.js"></script>
+  </body>
+</html>

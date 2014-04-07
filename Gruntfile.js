@@ -809,6 +809,58 @@ module.exports = function ( grunt ) {
         });
       }
     });
+
+    grunt.file.copy('src/views/claim.mustache', this.data.dir + '/views/claim.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/unsubscribe.mustache', this.data.dir + '/views/unsubscribe.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/partials/ga.mustache', this.data.dir + '/views/partials/ga.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/partials/mixpanel.mustache', this.data.dir + '/views/partials/mixpanel.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
   });
 
   /**
