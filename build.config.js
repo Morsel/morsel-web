@@ -32,6 +32,9 @@ module.exports = {
   //for any data the server might need
   server_data_dir: 'data',
 
+  //for temp stuff for the initial launch
+  static_launch_dir: 'launch',
+
   /**
    * This is a collection of file patterns that refer to our app code (the
    * stuff in `src/`). These file paths are used in the configuration of
