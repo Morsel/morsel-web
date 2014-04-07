@@ -137,12 +137,10 @@ function renderMorselPage(res, username, postIdSlug) {
             "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
           };
 
-          console.log('before',postMetadata);
           postMetadata.twitter = _.defaults(postMetadata.twitter || {}, metadata.default.twitter);
           postMetadata.og = _.defaults(postMetadata.og || {}, metadata.default.og);
           postMetadata = _.defaults(postMetadata || {}, metadata.default);
-          console.log('after',postMetadata);
-          console.log('default',metadata.default);
+         
           renderAngular(res, postMetadata);
         } else {
           //not a valid morsel id - must be a bad route
