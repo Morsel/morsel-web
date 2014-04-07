@@ -85,7 +85,7 @@ angular.module( 'Morsel', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window ) {
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
@@ -118,6 +118,11 @@ angular.module( 'Morsel', [
     //refresh our user data
     $scope.isLoggedIn = Auth.isLoggedIn();
     updateUserData();
+
+    //manually push a GA pageview
+    if($window._gaq) {
+      $window._gaq.push(['_trackPageview', $location.path()]);
+    }
   });
 
   //refresh user data
