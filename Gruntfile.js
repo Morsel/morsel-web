@@ -845,6 +845,7 @@ module.exports = function ( grunt ) {
         return grunt.template.process( contents, {
           //don't need to pass anything at the moment
           data: {
+            version: grunt.config( 'pkg.version' )
           }
         });
       }

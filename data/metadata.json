@@ -2,7 +2,6 @@
   "default": {
     "title": "Metadata is working!",
     "description": "We're building something awesome for the artists who use food and drink as their medium: chefs, sommeliers, mixologists and more.",
-    "keywords": "chef,foodie,sommelier,mixologist,restaurant",
     "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
     "twitter": {
       "card": "summary",

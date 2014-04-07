@@ -6,12 +6,15 @@ var express = require("express"),
     metadata = require('./data/metadata.json'),
     currEnv = process.env.CURRENV || 'development',
     siteURL = process.env.SITEURL || 'localhost:5000',
+    apiURL = process.env.APIURL || 'http://api-staging.eatmorsel.com',
+    apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
     prerender,
     prerenderDevUrl = 'http://morsel-seo.herokuapp.com/',
     prerenderToken = process.env.PRERENDER_TOKEN || '',
     metabase = '/',
     app = express();
 
+console.log(apiQuerystring);
 app.engine('mustache', mustacheExpress());
 
 app.configure(function(){
@@ -57,7 +60,7 @@ app.get('/templates-app.js', function(req, res){
 app.get('/:username/:postidslug', function(req, res){
   console.log('got user '+ req.params.username+' with postid '+req.params.postidslug);
   console.log('params are: ',req.params);
-  getMorselMetadata(res);
+  renderMorselPage(res, req.params.username, req.params.postidslug);
 });
 
 //anything with a single route param
@@ -79,7 +82,7 @@ app.get('/:route', function(req, res){
     }
   } else {
     //either a user's profile page or a bad route
-    getUserMetadata(res);
+    renderUserPage(res, route);
   }
 });
 
@@ -123,36 +126,112 @@ function findMetadata(route) {
   return _.defaults(mdata || {}, metadata.default);
 }
 
-function getUserMetadata(res) {
-  renderAngular(res);
+function renderUserPage(res, username) {
+  console.log('getting user metadata...');
+  
+  request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
+    var user,
+        userImage,
+        userMetadata;
 
-  /*request('./data/fakeuser.json?api_key=1&device=web', function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      renderAngular(res, JSON.parse(body).data);
+      user = JSON.parse(body).data;
+      userImage = user.photos && user.photos._144x144;
+
+      userMetadata = {
+        "title": _.escape(user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel'),
+        "description": _.escape(user.first_name + ' ' + user.last_name + ' - ' + user.bio),
+        "image": userImage || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "twitter": {
+          "creator": user.twitter_username || "@eatmorsel"
+        },
+        "og": {
+          "url": siteURL + '/' + user.username
+        }
+      };
+
+      userMetadata = _.defaults(userMetadata || {}, metadata.default);
+
+      renderAngular(res, userMetadata);
     } else {
       //not a valid user - must be a bad route
       render404(res);
     }
-  });*/
+  });
 }
 
-function getMorselMetadata(res) {
-  renderAngular(res);
+function renderMorselPage(res, username, postIdSlug) {
+  console.log('getting user metadata for post '+postIdSlug+'...');
 
-  /*request('./data/fakeuser.json?api_key=1&device=web', function (error, response, body) {
+  request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
+    var user;
+
     if (!error && response.statusCode == 200) {
-      renderAngular(res, JSON.parse(body).data);
+      user = JSON.parse(body).data;
+
+      console.log('getting post metadata for post '+postIdSlug+'...');
+
+      request(apiURL+'/posts/'+postIdSlug+apiQuerystring, function (error, response, body) {
+        var post,
+            postMetadata;
+
+        if (!error && response.statusCode == 200) {
+          post = JSON.parse(body).data;
+
+          postMetadata = {
+            "title": _.escape(post.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
+            "description": _.escape(truncateAt(getFirstDescription(post.morsels), 155)),
+            "image": getCoverPhoto(post.morsels, post.primary_morsel_id) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+            "twitter": {
+              "card" : "summary_large_image",
+              "creator": user.twitter_username || "@eatmorsel"
+            },
+            "og": {
+              "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
+            }
+          };
+
+          postMetadata = _.defaults(postMetadata || {}, metadata.default);
+
+          renderAngular(res, postMetadata);
+        } else {
+          console.log('not a valid post');
+          //not a valid morsel id - must be a bad route
+          render404(res);
+        }
+      });
     } else {
+      console.log('not a valid user');
       //not a valid user - must be a bad route
       render404(res);
     }
-  });*/
+  });
+}
+
+function getFirstDescription(morsels) {
+  return _.find(morsels, function(m) {
+    return m.description && m.description.length > 0;
+  })['description'];
+}
+
+function truncateAt(text, limit) {
+  return text.substring(0, limit);
 }
 
 function render404(res) {
   res.render('404', {
     metadata: findMetadata('404')
   });
+}
+
+function getCoverPhoto(morsels, mId) {
+  var primaryMorsel;
+
+  primaryMorsel = _.find(morsels, function(m) {
+    return m.id === mId;
+  });
+
+  return primaryMorsel.photos._992x992;
 }
 
 function updateMetabase(req, done) {
