@@ -8,6 +8,8 @@ var express = require("express"),
     siteURL = process.env.SITEURL || 'localhost:5000',
     apiURL = process.env.APIURL || 'http://api-staging.eatmorsel.com',
     apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
+    devMixpanelToken = 'fc91c2a6f8d8388f077f6b9618e90499',
+    mixpanelToken = process.env.MIXPANELTOKEN || devMixpanelToken,
     metabase = '/',
     app = express();
 
