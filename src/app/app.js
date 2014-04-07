@@ -4,17 +4,14 @@ angular.module( 'Morsel', [
   'templates-common',
   //app
   'Morsel.home',
-  'Morsel.join',
   'Morsel.postDetail',
   //common
   'Morsel.afterLogin',
   'Morsel.auth',
   'Morsel.baseErrors',
-  'Morsel.comments',
   'Morsel.formNameFix',
   'Morsel.handleErrors',
   'Morsel.immersiveSwipe',
-  'Morsel.morselLike',
   'Morsel.responsiveImages',
   'Morsel.socialSharing',
   'Morsel.storySwipe',
@@ -25,7 +22,6 @@ angular.module( 'Morsel', [
   //filters
   'Morsel.reverse',
   //API
-  'Morsel.apiFeed',
   'Morsel.apiMorsels',
   'Morsel.apiPosts',
   'Morsel.apiUploads',

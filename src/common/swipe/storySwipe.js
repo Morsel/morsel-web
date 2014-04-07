@@ -43,20 +43,6 @@ angular.module('Morsel.storySwipe', [
   };
 }])
 
-.directive('morselActions', [function() {
-  return {
-    restrict: 'A',
-    replace: true,
-    scope: {
-      morsel: '=actionableMorsel'
-    },
-    link: function(scope, element, attrs) {
-      scope.nonSwipeable = true;
-    },
-    templateUrl: 'swipe/morselActions.tpl.html'
-  };
-}])
-
 .directive('storySwipe', ['swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
   var // used to compute the sliding speed
       timeConstant = 75,

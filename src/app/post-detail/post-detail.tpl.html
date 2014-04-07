@@ -33,7 +33,6 @@
           <li ng-repeat="morsel in story.morsels" class="morsel" ng-class="{'full-photo': fullPhoto}">
             <div class="story-container">
               <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
-              <div morsel-actions actionable-morsel="morsel"></div>
               <div ng-if="morsel.photos" class="morsel-img" responsive-images="[['default', '{{morsel.photos._320x320}}'], ['(min-width: 321px)', '{{morsel.photos._480x480}}'], ['(min-width: 481px)', '{{morsel.photos._640x640}}'], ['(min-width: 992px)', '{{morsel.photos._992x992}}']]" ri-image-type="background" ng-style="{'height': immersiveHeight}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
             </div>
           </li>
