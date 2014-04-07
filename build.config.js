@@ -35,6 +35,9 @@ module.exports = {
   //for temp stuff for the initial launch
   static_launch_dir: 'launch',
 
+  //seo files that need to render at root
+  seo_dir: 'seo',
+
   /**
    * This is a collection of file patterns that refer to our app code (the
    * stuff in `src/`). These file paths are used in the configuration of
