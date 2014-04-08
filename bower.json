@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "angular-moment": "~0.6.0",
-    "angular-bootstrap": "~0.10.0"
+    "angular-bootstrap": "~0.10.0",
+    "animationFrame": "~0.1.6"
   }
 }
