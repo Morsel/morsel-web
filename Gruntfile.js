@@ -193,7 +193,7 @@ module.exports = function ( grunt ) {
           }
         ]
       },
-      server_data: {
+      build_server_data: {
         files: [
           {
             src: [ '<%= server_data_dir %>/*' ],
@@ -203,7 +203,7 @@ module.exports = function ( grunt ) {
           }
         ]
       },
-      seo: {
+      build_seo: {
         files: [
           {
             src: [ '<%= seo_dir %>/*' ],
@@ -213,11 +213,41 @@ module.exports = function ( grunt ) {
           }
         ]
       },
-      static_launch: {
+      build_static_launch: {
         files: [
           { 
             src: [ '**' ],
             dest: '<%= build_dir %>/launch/',
+            cwd: '<%= static_launch_dir %>',
+            expand: true
+          }
+        ]
+      },
+      compile_server_data: {
+        files: [
+          {
+            src: [ '<%= server_data_dir %>/*' ],
+            dest: '<%= compile_dir %>',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      compile_seo: {
+        files: [
+          {
+            src: [ '<%= seo_dir %>/*' ],
+            dest: '<%= compile_dir %>',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      compile_static_launch: {
+        files: [
+          { 
+            src: [ '**' ],
+            dest: '<%= compile_dir %>/launch/',
             cwd: '<%= static_launch_dir %>',
             expand: true
           }
@@ -680,6 +710,15 @@ module.exports = function ( grunt ) {
           },
           cwd: '<%= build_dir %>'
         }
+      },
+      prod: {
+        script: 'server.js',
+        options: {
+          env: {
+            PORT: '<%= dev_server_port %>'
+          },
+          cwd: '<%= compile_dir %>'
+        }
       }
     }
   };
@@ -709,10 +748,14 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [ 'build-no-style', 'style']);
 
   /**
-   * The `dev-server` task runs the local server
+   * The `dev-server` task runs development code on local server
    */
   grunt.registerTask( 'dev-server', [ 'nodemon:dev']);
 
+  /**
+   * The `prod-server` task runs production-ready code on the local server
+   */
+  grunt.registerTask( 'prod-server', [ 'nodemon:prod']);
 
   /**
    * The `style` task builds the style guide locally
@@ -726,7 +769,7 @@ module.exports = function ( grunt ) {
     'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
     'concat:build_css', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
-    'karma:continuous', 'copy:server_data', 'copy:seo', 'copy:static_launch', 'appserver:build'
+    'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
   ]);
 
   /**
@@ -739,7 +782,7 @@ module.exports = function ( grunt ) {
    * minifying your code.
    */
   grunt.registerTask( 'compile', [
-    'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'appserver:compile'
+    'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile'
   ]);
 
   /*
