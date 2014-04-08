@@ -74,7 +74,8 @@ angular.module('Morsel.storySwipe', [
             swipeDirection = false,
             winEl = angular.element($window),
             handleMouseWheel,
-            hamster;
+            hamster,
+            animationFrame = new AnimationFrame();
 
         //our scope vars, accessible by indicators
         scope.currentMorselIndex = 0; //track which morsel we're on
@@ -209,7 +210,7 @@ angular.module('Morsel.storySwipe', [
                 if (swipeYDelta > 2 || swipeYDelta < -2) {
                   swipeMoved = true;
                   startY = y;
-                  requestAnimationFrame(function() {
+                  animationFrame.request(function() {
                     scroll(capPosition(offset + swipeYDelta));
                   });
                 }
@@ -265,7 +266,7 @@ angular.module('Morsel.storySwipe', [
             amplitude = offset - currentOffset;
             console.log('266 amplitude: ',amplitude);
           }
-          requestAnimationFrame(autoScroll);
+          animationFrame.request(autoScroll);
 
           if (event) {
             event.preventDefault();
@@ -322,7 +323,7 @@ angular.module('Morsel.storySwipe', [
 
         function autoScroll() {
           // scroll smoothly to "destination" until we reach it
-          // using requestAnimationFrame
+          // using animationFrame API
           var elapsed,
               delta;
 
@@ -331,7 +332,7 @@ angular.module('Morsel.storySwipe', [
             delta = amplitude * Math.exp(-elapsed / timeConstant);
             if (delta > rubberTreshold || delta < -rubberTreshold) {
               scroll(destination - delta);
-              requestAnimationFrame(autoScroll);
+              animationFrame.request(autoScroll);
             } else {
               console.log('332 - before gotoslide - destination: '+destination);
               console.log('333 - before gotoslide - morselHeight: '+morselHeight);
