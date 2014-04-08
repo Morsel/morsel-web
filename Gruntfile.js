@@ -183,6 +183,16 @@ module.exports = function ( grunt ) {
           }
         ]
       },
+      compile_deploy: {
+        files: [
+          {
+            src: [ '**' ],
+            dest: '<%= compile_deploy_dir %>',
+            cwd: '<%= compile_dir %>',
+            expand: true
+          }
+        ]
+      },
       blog: {
         files: [
           {
@@ -624,13 +634,13 @@ module.exports = function ( grunt ) {
      * Used to execute shell commands
      */
     shell: {
-      build_deploy_init: {
+      dev_deploy_init: {
         command: 'sh <%= serverconfig_dir %>/server_init.sh <%= build_deploy_dir %> <%= dev_repo %> push_dev',
         options: {
           stdout: true
         }
       },
-      build_deploy_push: {
+      dev_deploy_push: {
         command: [
           'git add .',
           'git commit -a -m "automatically pushed to dev"',
@@ -688,6 +698,25 @@ module.exports = function ( grunt ) {
           stdout: true,
           execOptions: {
             cwd: '<%= blog_deploy_dir %>'
+          }
+        }
+      },
+      staging_deploy_init: {
+        command: 'sh <%= serverconfig_dir %>/server_init.sh <%= compile_deploy_dir %> <%= staging_repo %> push_staging',
+        options: {
+          stdout: true
+        }
+      },
+      staging_deploy_push: {
+        command: [
+          'git add .',
+          'git commit -a -m "automatically pushed to staging"',
+          'git push push_staging master -f'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= compile_deploy_dir %>'
           }
         }
       }
@@ -797,7 +826,12 @@ module.exports = function ( grunt ) {
   /**
    * The `push-dev` task pushes the site to heroku (dev.eatmorsel.com)
    */
-  grunt.registerTask( 'push-dev', [ 'shell:build_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:build_deploy_push' ]);
+  grunt.registerTask( 'push-dev', [ 'shell:dev_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:dev_deploy_push' ]);
+
+  /**
+   * The `push-staging` task pushes the site to heroku (staging.eatmorsel.com)
+   */
+  grunt.registerTask( 'push-staging', [ 'shell:compile_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:compile_deploy_push' ]);
 
   /**
    * The `push-blog` task pushes the blog to insights.eatmorsel.com over ssh
