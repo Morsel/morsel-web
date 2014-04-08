@@ -121,11 +121,13 @@ angular.module('Morsel.storySwipe', [
 
         //watch for changes in the indicators
         scope.$watch('currentIndicatorIndex', function(newValue) {
+          console.log('124 - currentIndicatorIndex watch: '+newValue);
           goToSlide(newValue, true);
         });
 
         //make sure our indicator index is updated when we change morsels
         scope.$watch('currentMorselIndex', function(newValue) {
+          console.log('130 - currentMorselIndex watch: '+newValue);
           scope.currentIndicatorIndex = newValue;
         });
 
@@ -333,9 +335,11 @@ angular.module('Morsel.storySwipe', [
         }
 
         function goToSlide(i, animate) {
+          console.log('338 - gotoslide start: '+i);
           if (isNaN(i)) {
             i = scope.currentMorselIndex;
           }
+          console.log('342 - animate?: '+animate);
           if (animate) {
             // simulate a swipe so we have the standard animation
             // used when external binding index is updated or touch canceed
@@ -343,6 +347,7 @@ angular.module('Morsel.storySwipe', [
             swipeEnd(null, null, true);
             return;
           }
+          console.log('350 - currentMorselindex set with: '+i);
           scope.currentMorselIndex = capIndex(i);
 
           if(scope.updateImmersiveState) {
