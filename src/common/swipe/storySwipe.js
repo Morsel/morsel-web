@@ -254,12 +254,16 @@ angular.module('Morsel.storySwipe', [
           }
           
           moveOffset = shouldMove ? morselsMove : 0;
-
+          console.log('257 - moveOffset:',moveOffset,' scope.currentMorselIndex:',scope.currentMorselIndex,' morselHeight:',morselHeight);
           destination = (moveOffset + scope.currentMorselIndex) * morselHeight;
+          console.log('259 destination: ',destination);
+          console.log('260 offset: ',offset);
           amplitude = destination - offset;
+          console.log('262 amplitude: ',amplitude);
           timestamp = Date.now();
           if (forceAnimation) {
             amplitude = offset - currentOffset;
+            console.log('266 amplitude: ',amplitude);
           }
           requestAnimationFrame(autoScroll);
 
@@ -329,6 +333,8 @@ angular.module('Morsel.storySwipe', [
               scroll(destination - delta);
               requestAnimationFrame(autoScroll);
             } else {
+              console.log('332 - before gotoslide - destination: '+destination);
+              console.log('333 - before gotoslide - morselHeight: '+morselHeight);
               goToSlide(destination / morselHeight);
             }
           }
