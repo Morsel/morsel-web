@@ -178,7 +178,11 @@ function getCoverPhoto(morsels, mId) {
     return m.id === mId;
   });
 
-  return primaryMorsel.photos._992x992;
+  if(primaryMorsel) {
+    return primaryMorsel.photos._992x992;
+  } else {
+    return morsels[0].photos._992x992;
+  }
 }
 
 function updateMetabase(req, done) {

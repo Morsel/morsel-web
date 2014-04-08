@@ -831,7 +831,7 @@ module.exports = function ( grunt ) {
   /**
    * The `push-staging` task pushes the site to heroku (staging.eatmorsel.com)
    */
-  grunt.registerTask( 'push-staging', [ 'shell:compile_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:compile_deploy_push' ]);
+  grunt.registerTask( 'push-staging', [ 'shell:staging_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:staging_deploy_push' ]);
 
   /**
    * The `push-blog` task pushes the blog to insights.eatmorsel.com over ssh
