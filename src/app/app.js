@@ -31,7 +31,6 @@ angular.module( 'Morsel', [
   'Morsel.userImage',
   'Morsel.validatedElement',
   //app
-  'Morsel.home',
   'Morsel.postDetail'
 ])
 
@@ -59,9 +58,6 @@ angular.module( 'Morsel', [
   var defaultRequestParams = {};
 
   $locationProvider.html5Mode(true).hashPrefix('!');
-
-  //if we don't recognize the URL, send it to the homepage for now
-  $urlRouterProvider.otherwise( '/home' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
