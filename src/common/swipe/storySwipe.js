@@ -6,18 +6,33 @@ angular.module('Morsel.storySwipe', [
   'ngTouch'
 ])
 
-.directive('storyThumbnails', function() {
+.directive('storyThumbnails', function(Mixpanel) {
   return {
     restrict: 'A',
     replace: true,
     scope: {
       index: '=',
-      morsels: '='
+      story: '='
     },
     link: function(scope, element, attrs) {
+      var storyId;
+
       scope.nonSwipeable = true;
       scope.range = function(n) {
         return new Array(n);
+      };
+
+      scope.$watch('story', function(newValue, oldValue) {
+        if(newValue) {
+          storyId = newValue.id;
+        }
+      });
+
+      scope.sendMixpanel = function(morselItemId) {
+        Mixpanel.send('Tapped Morsel Item Thumbnail', {
+          morsel_id : storyId,
+          morsel_item_id : morselItemId
+        });
       };
     },
     templateUrl: 'swipe/storyThumbnails.tpl.html'

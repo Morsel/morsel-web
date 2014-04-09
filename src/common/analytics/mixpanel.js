@@ -22,8 +22,8 @@ angular.module( 'Morsel.mixpanel', [])
         });
       }
       
-      if(mixpanel) {
-        mixpanel.track(e, props); 
+      if(window.mixpanel) {
+        window.mixpanel.track(e, props); 
       } else {
         console.log('Mixpanel Event: ', e, props);
       }

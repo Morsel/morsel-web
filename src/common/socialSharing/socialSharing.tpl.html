@@ -1,18 +1,18 @@
 <div class="social-sharing">
-  <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}" class="btn btn-social share-facebook" target="_blank">
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{currentUrl}}" class="btn btn-social share-facebook" target="_blank" ng-click="shareMixpanel('facebook')">
     <i class="common-share-facebook"></i>Share on Facebook
   </a>
-  <a href="https://twitter.com/home?status={{currentUrl}}" class="btn btn-social share-twitter" target="_blank">
+  <a href="https://twitter.com/home?status={{currentUrl}}" class="btn btn-social share-twitter" target="_blank" ng-click="shareMixpanel('twitter')">
     <i class="common-share-twitter"></i>Share on Twitter
   </a>
   <div class="social-sharing-additional" ng-class="{expanded: socialExpanded}">
-    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{currentUrl}}&title=&summary=&source=" class="btn btn-social share-linkedin" target="_blank">
+    <a href="https://www.linkedin.com/shareArticle?mini=true&url={{currentUrl}}&title=&summary=&source=" class="btn btn-social share-linkedin" target="_blank" ng-click="shareMixpanel('linkedin')">
       <i class="common-share-linkedin"></i>
     </a>
-    <a href="https://pinterest.com/pin/create/button/?url=&media={{currentUrl}}&description=" class="btn btn-social share-pinterest" target="_blank">
+    <a href="https://pinterest.com/pin/create/button/?url=&media={{currentUrl}}&description=" class="btn btn-social share-pinterest" target="_blank" ng-click="shareMixpanel('pinterest')">
       <i class="common-share-pinterest"></i>
     </a>
-    <a href="https://plus.google.com/share?url={{currentUrl}}" class="btn btn-social share-google-plus" target="_blank">
+    <a href="https://plus.google.com/share?url={{currentUrl}}" class="btn btn-social share-google-plus" target="_blank" ng-click="shareMixpanel('google_plus')">
       <i class="common-share-google-plus"></i>
     </a>
   </div>

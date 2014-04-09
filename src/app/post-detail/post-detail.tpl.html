@@ -18,7 +18,7 @@
               <div class="cover-title-wrap">
                 <h2 class="cover-title">{{story.title}}</h2>
               </div>
-              <div story-thumbnails index="currentIndicatorIndex" morsels="story.morsels"></div>
+              <div story-thumbnails index="currentIndicatorIndex" story="story"></div>
               <div class="cover-actions">
                 <span am-time-ago="story.created_at" class="time-ago"></span>
                 <a ng-click="currentIndicatorIndex = story.morsels.length+1"><i class="common-share"></i></a>
@@ -44,7 +44,7 @@
                 <h2 class="cover-title">{{story.title}}</h2>
               </div>
               <h5 class="share-this-story h2">Share this Story:</h5>
-              <div social-sharing></div>
+              <div social-sharing="story"></div>
               <hr />
               <div class="user-info">
                 <div user-image username="owner.username" user-photos="owner.photos" user-image-size="profile-pic-m"></div>
