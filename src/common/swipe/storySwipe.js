@@ -59,7 +59,7 @@ angular.module('Morsel.storySwipe', [
   };
 })
 
-.directive('storySwipe', function($swipe, $window, $document, $parse, $compile) {
+.directive('storySwipe', function($swipe, $window, $document, $parse, $compile, Mixpanel) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -325,15 +325,15 @@ angular.module('Morsel.storySwipe', [
         }
 
         //scrolling
-        function scroll(x) {
+        function scroll(y) {
           var move;
 
           // use CSS 3D transform to move the screen
-          if (isNaN(x)) {
-            x = scope.currentMorselIndex * morselHeight;
+          if (isNaN(y)) {
+            y = scope.currentMorselIndex * morselHeight;
           }
 
-          offset = x;
+          offset = y;
           move = -Math.round(offset);
 
           iElement.find('ul')[0].style[transformProperty] = 'translate3d(0, ' + move + 'px, 0)';
