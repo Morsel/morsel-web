@@ -13,7 +13,10 @@ angular.module( 'Morsel.apiPosts', [] )
     var deferred = $q.defer();
 
     RestangularPosts.get(postId).then(function(resp){
-      deferred.resolve(Restangular.stripRestangular(resp));
+      var postData = Restangular.stripRestangular(resp);
+      //correctly sort morsel items by sort order before we even deal with them
+      postData.morsels = _.sortBy(postData.morsels, 'sort_order');
+      deferred.resolve(postData);
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));
     });
