@@ -24,7 +24,8 @@ angular.module( 'Morsel.postDetail', [])
 
   //scope vars for individual story
   $scope.immersiveState = {
-    inStory : false
+    inStory : false,
+    onShare : false,
   };
 
   $scope.updateImmersiveState = function(obj) {

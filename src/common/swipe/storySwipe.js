@@ -375,7 +375,8 @@ angular.module('Morsel.storySwipe', [
 
           if(scope.updateImmersiveState) {
             scope.updateImmersiveState({
-              inStory: scope.currentMorselIndex > 0 && scope.currentMorselIndex < scope.morselsCount - 1
+              inStory: scope.currentMorselIndex > 0 && scope.currentMorselIndex < scope.morselsCount - 1,
+              onShare: scope.currentMorselIndex === scope.morselsCount - 1
             });
           }
 

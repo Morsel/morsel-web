@@ -157,6 +157,8 @@ $immersive-header-lg-line-height: 40px;
   }
 
   .cover-page {
+    padding-top: $immersive-header-height;
+
     .cover-photo-wrap, .cover-title-wrap {
       height: 40%;
     }
@@ -256,7 +258,6 @@ $immersive-header-lg-line-height: 40px;
   }
 
   .extra-page {
-    padding-top: $immersive-header-height;
     background-color: white;
     position: relative;
     overflow: hidden;
@@ -433,6 +434,18 @@ $immersive-header-lg-line-height: 40px;
       .morsel {
         .morsel-placeholder-img {
           background-size: initial;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-md) {
+  .immersive {
+    .on-share {
+      .immersive-header {
+        h1, .profile-pic-link {
+          @include translate3d(0,-$immersive-header-height,0);
         }
       }
     }
