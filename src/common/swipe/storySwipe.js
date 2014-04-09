@@ -67,7 +67,9 @@ angular.module('Morsel.storySwipe', [
       // in absolute pixels, at which distance the slide stick to the edge on release
       rubberTreshold = 3,
       //max time between scrolls
-      scrollThreshold = 500,
+      scrollTimeThreshold = 500,
+      //min intensity for scrolls
+      scrollMinIntensity = 1,
       //number of additional "pages". 1. cover page 2. share page
       extraPages = 2;
 
@@ -428,7 +430,7 @@ angular.module('Morsel.storySwipe', [
           //make sure we can scroll on this element and user only scrolls one at a time
           if(!nonScrollable && hasScrolled) {
             //if we scroll up
-            if (deltaY > 0) {
+            if (deltaY > 0 && (Math.abs(deltaY) >= scrollMinIntensity) ) {
               //if we're on the first morsel
               if (scope.currentMorselIndex === 0) {
                 //go to the previous story
@@ -438,11 +440,8 @@ angular.module('Morsel.storySwipe', [
               } else {
                 //else go to the previous morsel
                 goToSlide(scope.currentMorselIndex-1, true);
-                Mixpanel.send('Scrolled to previous morsel', {
-                  morsel_num: scope.currentMorselIndex
-                })
               }
-            } else if (deltaY < 0) {
+            } else if (deltaY < 0 && (Math.abs(deltaY) >= scrollMinIntensity) ) {
               //if we scroll down
               //if we're on the last morsel
               if(scope.currentMorselIndex === scope.morselsCount - 1) {
@@ -478,7 +477,7 @@ angular.module('Morsel.storySwipe', [
           //make sure this scroll should have an effect
           var scrollValid = false;
 
-          if(Date.now() - (lastScrollTimestamp || 0) > scrollThreshold) {
+          if(Date.now() - (lastScrollTimestamp || 0) > scrollTimeThreshold) {
             scrollValid = true;
             lastScrollTimestamp = Date.now();
           }
