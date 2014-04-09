@@ -138,13 +138,13 @@ $(function(){
 
   $('#facebook-share').on('click', function() {
     sendMixpanel('Tapped Share Username on Social', {
-      site: 'Facebook'
+      social_type: 'Facebook'
     });
   });
 
   $('#twitter-share').on('click', function() {
     sendMixpanel('Tapped Share Username on Social', {
-      site: 'Twitter'
+      social_type: 'Twitter'
     });
   });
 
