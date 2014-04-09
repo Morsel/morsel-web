@@ -221,7 +221,8 @@ $(function(){
       client_device: 'web',
       client_version: '0.0',
       $screen_width: window.innerWidth,
-      $screen_height: window.innerHeight
+      $screen_height: window.innerHeight,
+      view: 'claim_username'
     };
 
     if(mixpanel) {
