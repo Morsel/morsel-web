@@ -91,7 +91,6 @@ module.exports = {
       'vendor/angular-bootstrap/ui-bootstrap.min.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/angular-moment/angular-moment.min.js',
-      'vendor/angular-seo/angular-seo.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
       'vendor/angular-touch/angular-touch.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
@@ -103,7 +102,6 @@ module.exports = {
       'vendor/lodash/dist/lodash.js',
       'vendor/ng-file-upload/angular-file-upload.js',
       'vendor/ng-file-upload/angular-file-upload-shim.js',
-      'vendor/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'vendor/ngstorage/ngStorage.js',
       'vendor/restangular/dist/restangular.js'
     ],

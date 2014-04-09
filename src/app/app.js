@@ -1,10 +1,21 @@
 angular.module( 'Morsel', [
+  //libs
+  'angularMoment',
+  'restangular',
+  'swipe',
+  'ui.bootstrap',
+  'ui.state',
+  'ui.route',
+  //filters
+  'Morsel.reverse',
+  //API
+  'Morsel.apiMorsels',
+  'Morsel.apiPosts',
+  'Morsel.apiUploads',
+  'Morsel.apiUsers',
   //templates
   'templates-app',
   'templates-common',
-  //app
-  'Morsel.home',
-  'Morsel.postDetail',
   //common
   'Morsel.afterLogin',
   'Morsel.auth',
@@ -19,20 +30,9 @@ angular.module( 'Morsel', [
   'Morsel.textLimit',
   'Morsel.userImage',
   'Morsel.validatedElement',
-  //filters
-  'Morsel.reverse',
-  //API
-  'Morsel.apiMorsels',
-  'Morsel.apiPosts',
-  'Morsel.apiUploads',
-  'Morsel.apiUsers',
-  //libs
-  'angularMoment',
-  'restangular',
-  'swipe',
-  'ui.bootstrap',
-  'ui.state',
-  'ui.route'
+  //app
+  'Morsel.home',
+  'Morsel.postDetail'
 ])
 
 //define some constants for the app
