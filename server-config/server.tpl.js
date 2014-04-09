@@ -122,14 +122,14 @@ function renderMorselPage(res, username, postIdSlug) {
 
       request(apiURL+'/posts/'+postIdSlug+apiQuerystring, function (error, response, body) {
         var post,
-            postMetadata;
+            postMetadata,
+            description;
 
         if (!error && response.statusCode == 200) {
           post = JSON.parse(body).data;
 
           postMetadata = {
             "title": _.escape(post.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "description": _.escape(truncateAt(getFirstDescription(post.morsels), 155)),
             "image": getCoverPhoto(post.morsels, post.primary_morsel_id) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
             "twitter": {
               "card" : "summary_large_image",
@@ -137,6 +137,12 @@ function renderMorselPage(res, username, postIdSlug) {
             },
             "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
           };
+
+          description = _.escape(truncateAt(getFirstDescription(post.morsels), 155));
+          //there's a change none of the morsels have a description
+          if(description) {
+            postMetadata.description = description;
+          }
 
           postMetadata.twitter = _.defaults(postMetadata.twitter || {}, metadata.default.twitter);
           postMetadata.og = _.defaults(postMetadata.og || {}, metadata.default.og);
@@ -156,9 +162,17 @@ function renderMorselPage(res, username, postIdSlug) {
 }
 
 function getFirstDescription(morsels) {
-  return _.find(morsels, function(m) {
+  var firstMorselWithDescription;
+
+  firstMorselWithDescription = _.find(morsels, function(m) {
     return m.description && m.description.length > 0;
-  })['description'];
+  });
+
+  if(firstMorselWithDescription) {
+    return firstMorselWithDescription.description;
+  } else {
+    return '';
+  }
 }
 
 function truncateAt(text, limit) {
