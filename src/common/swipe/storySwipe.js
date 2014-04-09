@@ -138,13 +138,13 @@ angular.module('Morsel.storySwipe', [
 
         //watch for changes in the indicators
         scope.$watch('currentIndicatorIndex', function(newValue) {
-          console.log('124 - currentIndicatorIndex watch: '+newValue);
+          //console.log('124 - currentIndicatorIndex watch: '+newValue);
           goToSlide(newValue, true);
         });
 
         //make sure our indicator index is updated when we change morsels
         scope.$watch('currentMorselIndex', function(newValue) {
-          console.log('130 - currentMorselIndex watch: '+newValue);
+          //console.log('130 - currentMorselIndex watch: '+newValue);
           scope.currentIndicatorIndex = newValue;
         });
 
@@ -271,16 +271,16 @@ angular.module('Morsel.storySwipe', [
           }
           
           moveOffset = shouldMove ? morselsMove : 0;
-          console.log('257 - moveOffset:',moveOffset,' scope.currentMorselIndex:',scope.currentMorselIndex,' morselHeight:',morselHeight);
+          //console.log('257 - moveOffset:',moveOffset,' scope.currentMorselIndex:',scope.currentMorselIndex,' morselHeight:',morselHeight);
           destination = (moveOffset + scope.currentMorselIndex) * morselHeight;
-          console.log('259 destination: ',destination);
-          console.log('260 offset: ',offset);
+          //console.log('259 destination: ',destination);
+          //console.log('260 offset: ',offset);
           amplitude = destination - offset;
-          console.log('262 amplitude: ',amplitude);
+          //console.log('262 amplitude: ',amplitude);
           timestamp = Date.now();
           if (forceAnimation) {
             amplitude = offset - currentOffset;
-            console.log('266 amplitude: ',amplitude);
+            //console.log('266 amplitude: ',amplitude);
           }
           animationFrame.request(autoScroll);
 
@@ -350,19 +350,19 @@ angular.module('Morsel.storySwipe', [
               scroll(destination - delta);
               animationFrame.request(autoScroll);
             } else {
-              console.log('332 - before gotoslide - destination: '+destination);
-              console.log('333 - before gotoslide - morselHeight: '+morselHeight);
+              //console.log('332 - before gotoslide - destination: '+destination);
+              //console.log('333 - before gotoslide - morselHeight: '+morselHeight);
               goToSlide(destination / morselHeight);
             }
           }
         }
 
         function goToSlide(i, animate) {
-          console.log('338 - gotoslide start: '+i);
+          //console.log('338 - gotoslide start: '+i);
           if (isNaN(i)) {
             i = scope.currentMorselIndex;
           }
-          console.log('342 - animate?: '+animate);
+          //console.log('342 - animate?: '+animate);
           if (animate) {
             // simulate a swipe so we have the standard animation
             // used when external binding index is updated or touch canceed
@@ -370,7 +370,7 @@ angular.module('Morsel.storySwipe', [
             swipeEnd(null, null, true);
             return;
           }
-          console.log('350 - currentMorselindex set with: '+i);
+          //console.log('350 - currentMorselindex set with: '+i);
           scope.currentMorselIndex = capIndex(i);
 
           if(scope.updateImmersiveState) {
