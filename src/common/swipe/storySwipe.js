@@ -6,7 +6,7 @@ angular.module('Morsel.storySwipe', [
   'ngTouch'
 ])
 
-.directive('storyThumbnails', [function() {
+.directive('storyThumbnails', function() {
   return {
     restrict: 'A',
     replace: true,
@@ -22,9 +22,9 @@ angular.module('Morsel.storySwipe', [
     },
     templateUrl: 'swipe/storyThumbnails.tpl.html'
   };
-}])
+})
 
-.directive('storyIndicators', [function() {
+.directive('storyIndicators', function() {
   return {
     restrict: 'A',
     replace: true,
@@ -41,9 +41,9 @@ angular.module('Morsel.storySwipe', [
                 '<span ng-repeat="c in range(count) track by $index" ng-class="{active: $index==$parent.index}" ng-click="$parent.index=$index"></span>' +
               '</div>'
   };
-}])
+})
 
-.directive('morselActions', [function() {
+.directive('morselActions', function() {
   return {
     restrict: 'A',
     replace: true,
@@ -57,9 +57,9 @@ angular.module('Morsel.storySwipe', [
     },
     templateUrl: 'swipe/morselActions.tpl.html'
   };
-}])
+})
 
-.directive('storySwipe', ['swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
+.directive('storySwipe', function($swipe, $window, $document, $parse, $compile) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -438,6 +438,9 @@ angular.module('Morsel.storySwipe', [
               } else {
                 //else go to the previous morsel
                 goToSlide(scope.currentMorselIndex-1, true);
+                Mixpanel.send('Scrolled to previous morsel', {
+                  morsel_num: scope.currentMorselIndex
+                })
               }
             } else if (deltaY < 0) {
               //if we scroll down
@@ -485,4 +488,4 @@ angular.module('Morsel.storySwipe', [
       };
     }
   };
-}]);
+});

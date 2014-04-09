@@ -23,6 +23,7 @@ angular.module( 'Morsel', [
   'Morsel.formNameFix',
   'Morsel.handleErrors',
   'Morsel.immersiveSwipe',
+  'Morsel.mixpanel',
   'Morsel.responsiveImages',
   'Morsel.socialSharing',
   'Morsel.storySwipe',
