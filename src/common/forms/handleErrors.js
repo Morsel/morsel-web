@@ -1,6 +1,6 @@
 angular.module( 'Morsel.handleErrors', [] )
 
-.factory('HandleErrors', function() {
+.factory('HandleErrors', function(Mixpanel) {
   var HandleErrors = {};
 
   HandleErrors.onError = function(resp, form) {
@@ -30,7 +30,7 @@ angular.module( 'Morsel.handleErrors', [] )
           //put errors in model
           form[fieldName].$error.serverErrors = serverErrors;
         } else {
-          //this is either a generic form error or catching mismatched input
+          //this is either a generic form error, an API error, or catching mismatched input
           //get the errors for this field
           serverErrors = resp.data.errors[fieldName];
 
@@ -39,6 +39,11 @@ angular.module( 'Morsel.handleErrors', [] )
             //generic error
             if(fieldName === 'base') {
               serverErrors[i] = serverErrors[i].charAt(0).toUpperCase() + serverErrors[i].slice(1);
+            } else if(fieldName === 'api') { 
+              //something's wrong on the API side, possibly not related to client input
+              Mixpanel.send('Error - API', {
+                error_message : serverErrors[i]
+              });
             } else {
               //misplaced input - make good english
               for(i=0; i<serverErrors.length; i++) {
