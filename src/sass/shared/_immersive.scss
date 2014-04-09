@@ -427,6 +427,18 @@ $immersive-header-lg-line-height: 40px;
   }
 }
 
+@media (min-width: $screen-xs-min) {
+  .immersive {
+    .morsels {
+      .morsel {
+        .morsel-placeholder-img {
+          background-size: initial;
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: $screen-md-min) {
   .immersive {
     .immersive-header {
