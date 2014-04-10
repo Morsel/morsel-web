@@ -719,6 +719,25 @@ module.exports = function ( grunt ) {
             cwd: '<%= compile_deploy_dir %>'
           }
         }
+      },
+      production_deploy_init: {
+        command: 'sh <%= serverconfig_dir %>/server_init.sh <%= compile_deploy_dir %> <%= prod_repo %> push_prod',
+        options: {
+          stdout: true
+        }
+      },
+      production_deploy_push: {
+        command: [
+          'git add .',
+          'git commit -a -m "automatically pushed to production"',
+          'git push push_prod master -f'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= compile_deploy_dir %>'
+          }
+        }
       }
     },
 
@@ -832,6 +851,11 @@ module.exports = function ( grunt ) {
    * The `push-staging` task pushes the site to heroku (staging.eatmorsel.com)
    */
   grunt.registerTask( 'push-staging', [ 'shell:staging_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:staging_deploy_push' ]);
+
+  /**
+   * The `push-production` task pushes the site to heroku (staging.eatmorsel.com)
+   */
+  grunt.registerTask( 'push-production', [ 'shell:production_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:production_deploy_push' ]);
 
   /**
    * The `push-blog` task pushes the blog to insights.eatmorsel.com over ssh
