@@ -1,7 +1,7 @@
 <div class="immersive">
   <div ng-class="{'in-story': immersiveState.inStory, 'on-share': immersiveState.onShare}">
     <header class="immersive-header user-info">
-      <a href="/" target="_self" class="morsel-logo"><span>Claim Your Username</span><i>Morsel</i></a>
+      <a ng-click="goHome()" class="morsel-logo"><span>Claim Your Username</span><i>Morsel</i></a>
       <div user-image username="owner.username" user-photos="owner.photos" user-image-size="profile-pic-xs"></div>
       <h1 class="overflow-ellipsis">{{owner.first_name + ' ' + owner.last_name}}</h1>
     </header>

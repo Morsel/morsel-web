@@ -13,7 +13,7 @@ angular.module( 'Morsel.postDetail', [])
   });
 })
 
-.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiUsers, $location, $modal ) {
+.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiUsers, $location, $modal, $window ) {
   var username = $stateParams.username,
       postDetailsArr = $stateParams.postDetails.split('/'),
       postIdSlug = postDetailsArr[0],
@@ -21,6 +21,10 @@ angular.module( 'Morsel.postDetail', [])
 
   $scope.viewOptions.hideHeader = true;
   $scope.viewOptions.hideFooter = true;
+
+  $scope.goHome = function() {
+    $window.open($location.protocol() + '://'+ $location.host(), '_self');
+  };
 
   //scope vars for individual story
   $scope.immersiveState = {
