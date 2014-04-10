@@ -48,10 +48,10 @@
         <div>
           <h4>Reserve it with your email:</h4>
           <form novalidate>
-            <input type="email" id="email" name="email" placeholder="john@example.com" />
+            <input type="email" id="email" name="user[email]" placeholder="john@example.com" />
             <input type="submit" value="Reserve Username" />
 
-            <input type="hidden" name="username" id="your-username-input" />
+            <input type="hidden" name="user[username]" id="your-username-input" />
           </form>
         </div>
       </div>
@@ -60,13 +60,13 @@
           <h4>What role best describes you?</h4>
           <form novalidate>
             <label class="needs-load">
-              <input type="radio" name="industry" value="chef" />Restaurant Staff
+              <input type="radio" name="user[industry]" value="chef" />Restaurant Staff
             </label>
             <label class="needs-load">
-              <input type="radio" name="industry" value="media" />Press &#47; Media
+              <input type="radio" name="user[industry]" value="media" />Press &#47; Media
             </label>
             <label class="needs-load">
-              <input type="radio" name="industry" value="diner" />Diner
+              <input type="radio" name="user[industry]" value="diner" />Diner
             </label>
           </form>
         </div>

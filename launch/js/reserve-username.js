@@ -23,7 +23,7 @@ $(function(){
         url: Morsel.apiURL+'/users/checkusername.json',
         data: serializePlusUtmz($form)
       }).then(function(resp){
-        if(resp.data === 'true') {
+        if(resp.data) {
           //returned true - username already exists
           hideErrors($form, $formInputs);
           showErrors($username, 'Username already exists. Please choose another');
