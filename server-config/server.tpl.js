@@ -132,7 +132,7 @@ function renderMorselPage(res, username, postIdSlug) {
     if (!error && response.statusCode == 200) {
       user = JSON.parse(body).data;
 
-      request(apiURL+'/posts/'+postIdSlug+apiQuerystring, function (error, response, body) {
+      request(apiURL+'/morsels/'+postIdSlug+apiQuerystring, function (error, response, body) {
         var post,
             postMetadata,
             description;
@@ -180,13 +180,11 @@ function getFirstDescription(morsels) {
     return m.description && m.description.length > 0;
   });
 
-  //i'm a bug!
-  return firstMorselWithDescription['description'];
-  /*if(firstMorselWithDescription) {
+  if(firstMorselWithDescription) {
     return firstMorselWithDescription.description;
   } else {
     return '';
-  }*/
+  }
 }
 
 function truncateAt(text, limit) {

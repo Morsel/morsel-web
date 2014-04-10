@@ -3,7 +3,7 @@ angular.module( 'Morsel.apiPosts', [] )
 // ApiPosts is the middleman for dealing with /posts requests
 .factory('ApiPosts', function($http, Restangular, $q) {
   var Posts = {},
-      RestangularPosts = Restangular.all('posts');
+      RestangularPosts = Restangular.all('morsels');
 
   Posts.getFeed = function() {
     return Restangular.one('feed').get();
