@@ -142,7 +142,7 @@ function renderMorselPage(res, username, postIdSlug) {
 
           postMetadata = {
             "title": _.escape(post.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "image": getCoverPhoto(post.items, post.primary_item_id) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+            "image": getMetadataImage(post) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
             "twitter": {
               "card" : "summary_large_image",
               "creator": user.twitter_username || "@eatmorsel"
@@ -197,17 +197,23 @@ function render404(res) {
   });
 }
 
-function getCoverPhoto(morsels, mId) {
-  var primaryMorsel;
+function getMetadataImage(morsel) {
+  var primaryItem;
 
-  primaryMorsel = _.find(morsels, function(m) {
-    return m.id === mId;
-  });
-
-  if(primaryMorsel) {
-    return primaryMorsel.photos._992x992;
+  //if they have a collage, use it
+  if(morsel.photos) {
+    return morsel.photos._400x300;
   } else {
-    return morsels[0].photos._992x992;
+    //use their cover photo as backup
+    primaryItem = _.find(morsel.items, function(i) {
+      return i.id === morsel.primary_item_id;
+    });
+
+    if(primaryItem && primaryItem.photos) {
+      return primaryItem.photos._992x992;
+    } else {
+      return morsels[0].photos._992x992;
+    }
   }
 }
 
