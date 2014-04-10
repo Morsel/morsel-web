@@ -142,7 +142,7 @@ function renderMorselPage(res, username, postIdSlug) {
 
           postMetadata = {
             "title": _.escape(post.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "image": getCoverPhoto(post.items, post.primary_morsel_id) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+            "image": getCoverPhoto(post.items, post.primary_item_id) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
             "twitter": {
               "card" : "summary_large_image",
               "creator": user.twitter_username || "@eatmorsel"

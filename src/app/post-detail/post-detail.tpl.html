@@ -14,7 +14,7 @@
         <ul class="morsels">
           <li class="cover-page extra-page" ng-style="{'height': immersiveHeight}">
             <div class="story-container">
-              <div class="cover-photo-wrap" responsive-images="[['default', {{findCoverPhotos(story.items, story.primary_morsel_id)}}['_320x320']], ['(min-width: 321px)', {{findCoverPhotos(story.items, story.primary_morsel_id)}}['_480x480']], ['(min-width: 481px)', {{findCoverPhotos(story.items, story.primary_morsel_id)}}['_640x640']], ['(min-width: 992px)', {{findCoverPhotos(story.items, story.primary_morsel_id)}}['_992x992']]]" ri-image-type="background"></div>
+              <div class="cover-photo-wrap" responsive-images="[['default', {{findCoverPhotos(story.items, story.primary_item_id)}}['_320x320']], ['(min-width: 321px)', {{findCoverPhotos(story.items, story.primary_item_id)}}['_480x480']], ['(min-width: 481px)', {{findCoverPhotos(story.items, story.primary_item_id)}}['_640x640']], ['(min-width: 992px)', {{findCoverPhotos(story.items, story.primary_item_id)}}['_992x992']]]" ri-image-type="background"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title">{{story.title}}</h2>
               </div>
@@ -39,7 +39,7 @@
           </li>
           <li class="share-page extra-page" ng-style="{'height': immersiveHeight}">
             <div class="story-container">
-              <div class="cover-photo-wrap" responsive-images="[['default', {{findCoverPhotos(story.items, story.primary_morsel_id)}}['_320x320']], ['(min-width: 321px)', {{findCoverPhotos(story.items, story.primary_morsel_id)}}['_480x480']], ['(min-width: 481px)', {{findCoverPhotos(story.items, story.primary_morsel_id)}}['_640x640']], ['(min-width: 992px)', {{findCoverPhotos(story.items, story.primary_morsel_id)}}['_992x992']]]" ri-image-type="background"></div>
+              <div class="cover-photo-wrap" responsive-images="[['default', {{findCoverPhotos(story.items, story.primary_item_id)}}['_320x320']], ['(min-width: 321px)', {{findCoverPhotos(story.items, story.primary_item_id)}}['_480x480']], ['(min-width: 481px)', {{findCoverPhotos(story.items, story.primary_item_id)}}['_640x640']], ['(min-width: 992px)', {{findCoverPhotos(story.items, story.primary_item_id)}}['_992x992']]]" ri-image-type="background"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title">{{story.title}}</h2>
               </div>
