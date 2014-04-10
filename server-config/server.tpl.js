@@ -7,7 +7,7 @@ var express = require("express"),
     nodeEnv = process.env.NODE_ENV || 'development',
     isProd = nodeEnv === 'production',
     siteURL = process.env.SITEURL || 'localhost:5000',
-    apiURL = process.env.APIURL || 'http://api-staging.eatmorsel.com',
+    apiURL = process.env.APIURL || 'http://api.eatmorsel.com',// 'http://api-staging.eatmorsel.com',
     apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
     devMixpanelToken = 'fc91c2a6f8d8388f077f6b9618e90499',
     mixpanelToken = process.env.MIXPANELTOKEN || devMixpanelToken,
@@ -142,7 +142,7 @@ function renderMorselPage(res, username, postIdSlug) {
 
           postMetadata = {
             "title": _.escape(post.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "image": getCoverPhoto(post.morsels, post.primary_morsel_id) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+            "image": getCoverPhoto(post.items, post.primary_morsel_id) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
             "twitter": {
               "card" : "summary_large_image",
               "creator": user.twitter_username || "@eatmorsel"
@@ -150,7 +150,7 @@ function renderMorselPage(res, username, postIdSlug) {
             "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
           };
 
-          description = _.escape(truncateAt(getFirstDescription(post.morsels), 155));
+          description = _.escape(truncateAt(getFirstDescription(post.items), 155));
           //there's a change none of the morsels have a description
           if(description) {
             postMetadata.description = description;
