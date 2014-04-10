@@ -168,11 +168,13 @@ function getFirstDescription(morsels) {
     return m.description && m.description.length > 0;
   });
 
-  if(firstMorselWithDescription) {
+  //i'm a bug!
+  return firstMorselWithDescription['description'];
+  /*if(firstMorselWithDescription) {
     return firstMorselWithDescription.description;
   } else {
     return '';
-  }
+  }*/
 }
 
 function truncateAt(text, limit) {
