@@ -142,10 +142,10 @@ function renderMorselPage(res, username, postIdSlug) {
 
           postMetadata = {
             "title": _.escape(post.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "image": getMetadataImage(post) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+            "image": getMetadataImage(post) || 'http://www.eatmorsel.com/assets/images/logos/morsel-large.png',
             "twitter": {
-              "card" : "summary_large_image",
-              "creator": user.twitter_username || "@eatmorsel"
+              "card" : 'summary_large_image',
+              "creator": user.twitter_username || '@eatmorsel'
             },
             "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
           };

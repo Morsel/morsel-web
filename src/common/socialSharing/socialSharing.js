@@ -11,7 +11,7 @@ angular.module( 'Morsel.socialSharing', [] )
     link: function(scope, element, attrs) {
       var storyId,
           creatorId,
-          currentUrl = encodeURIComponent($location.absUrl());
+          cURL = encodeURIComponent($location.absUrl());
 
       scope.socialExpanded = true;
       scope.nonSwipeable = true;
@@ -32,20 +32,25 @@ angular.module( 'Morsel.socialSharing', [] )
       }
 
       scope.shareSocial = function(socialType) {
-        var url;
+        var url,
+            shareText,
+            s = scope.story,
+            twitterUsername = s.creator.twitter_username;
 
         shareMixpanel(socialType);
 
         if(socialType === 'facebook') {
-          url = 'https://www.facebook.com/sharer/sharer.php?u='+currentUrl;
+          url = 'https://www.facebook.com/sharer/sharer.php?u='+cURL;
         } else if(socialType === 'twitter') {
-          url = 'https://twitter.com/home?status='+currentUrl;
+          shareText = encodeURIComponent('"'+s.title+'" from '+(twitterUsername || (s.creator.first_name+' '+s.creator.last_name))+' on @eatmorsel ');
+          url = 'https://twitter.com/home?status='+shareText+cURL;
         } else if(socialType === 'linkedin') {
-          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+currentUrl+'&title=&summary=&source=';
+          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+cURL+'&title=&summary=&source=';
         } else if(socialType === 'pinterest') {
-          url = 'https://pinterest.com/pin/create/button/?url='+currentUrl+'&media='+currentUrl+'&description=';
+          shareText = encodeURIComponent('"'+s.title+'" from '+s.creator.first_name+' '+s.creator.last_name+' on Morsel');
+          url = 'https://pinterest.com/pin/create/button/?url='+cURL+'&media='+cURL+'&description='+shareText;
         } else if(socialType === 'google_plus') {
-          url = 'https://plus.google.com/share?url='+currentUrl;
+          url = 'https://plus.google.com/share?url='+cURL;
         }
 
         $window.open(url);
