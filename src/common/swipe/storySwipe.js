@@ -74,7 +74,7 @@ angular.module('Morsel.storySwipe', [
   };
 })
 
-.directive('storySwipe', function($swipe, $window, $document, $parse, $compile, Mixpanel) {
+.directive('storySwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -132,7 +132,7 @@ angular.module('Morsel.storySwipe', [
 
           // only bind swipe when it's not switched off
           if(newValue !== 'false') {
-            $swipe.bind(iElement, {
+            swipe.bind(iElement, {
               start: swipeStart,
               move: swipeMove,
               end: swipeEnd,
