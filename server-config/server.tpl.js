@@ -14,6 +14,18 @@ var express = require("express"),
     metabase = '/',
     app = express();
 
+//if something goes wrong, exit so heroku can try to restart
+process.on('uncaughtException', function (err) {
+  console.error('uncaughtException:', err.message);
+  console.error(err.stack);
+  process.exit(1);
+});
+
+//log any errors
+app.on('error', function (err) {
+  console.error(err);
+});
+
 app.engine('mustache', mustacheExpress());
 
 app.configure(function(){
