@@ -38,7 +38,7 @@ angular.module( 'Morsel', [
 //define some constants for the app
 
 //the URL to use for our API
-.constant('APIURL', window.MorselConfig.apiUrl || 'http://api-staging.eatmorsel.com')
+.constant('APIURL', 'http://api.eatmorsel.com')//window.MorselConfig.apiUrl || 'http://api-staging.eatmorsel.com')
 
 //for any API requests
 .constant('DEVICEKEY', 'client[device]')
