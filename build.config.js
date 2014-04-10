@@ -55,7 +55,7 @@ module.exports = {
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
     html: [ 'src/views/*.mustache' ],
-    sass: 'src/sass/main.scss'
+    sass: ['src/sass/main.scss', 'src/sass/error-page.scss']
   },
 
   /**

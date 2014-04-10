@@ -22,7 +22,7 @@
     "description": "This is the morsel homepage"
   },
   "404": {
-    "title": "You're on a 404!",
-    "description": "This page doesn't exist"
+    "title": "404 | Morsel",
+    "description": "Oops, this page doesn't exist"
   }
 }
