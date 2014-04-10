@@ -62,7 +62,7 @@ module.exports = function ( grunt ) {
           "<% build_dir %>/package.json",
           "<% compile_dir %>/package.json"
         ],
-        commit: true,
+        commit: false,
         commitMessage: 'chore(release): v%VERSION%',
         commitFiles: [
           "package.json", 
@@ -832,6 +832,15 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'compile', [
     'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile'
   ]);
+
+  /**
+   * The `bump` task is temporary for bumping version
+   */
+  /*grunt.registerTask( 'bump', [
+    'bump'
+  ]);*/
+
+
 
   /*
    * PUSHING TO SERVERS

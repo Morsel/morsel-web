@@ -1,6 +1,6 @@
 {
   "name": "Morsel",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "devDependencies": {
     "angular": "1.2.7",
     "angular-mocks": "1.2.7",
