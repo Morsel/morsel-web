@@ -31,6 +31,27 @@ angular.module( 'Morsel.socialSharing', [] )
         });
       }
 
+      function getMediaImage() {
+        var primaryItem,
+            m = scope.story;
+
+        //if they have a collage, use it
+        if(m.photos) {
+          return m.photos._400x300;
+        } else {
+          //use their cover photo as backup
+          primaryItem = _.find(m.items, function(i) {
+            return i.id === m.primary_item_id;
+          });
+
+          if(primaryItem && primaryItem.photos) {
+            return primaryItem.photos._992x992;
+          } else {
+            return m[0].photos._992x992;
+          }
+        }
+      }
+
       scope.shareSocial = function(socialType) {
         var url,
             shareText,
@@ -45,10 +66,10 @@ angular.module( 'Morsel.socialSharing', [] )
           shareText = encodeURIComponent('"'+s.title+'" from '+(twitterUsername || (s.creator.first_name+' '+s.creator.last_name))+' on @eatmorsel ');
           url = 'https://twitter.com/home?status='+shareText+cURL;
         } else if(socialType === 'linkedin') {
-          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+cURL+'&title=&summary=&source=';
+          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+cURL;
         } else if(socialType === 'pinterest') {
           shareText = encodeURIComponent('"'+s.title+'" from '+s.creator.first_name+' '+s.creator.last_name+' on Morsel');
-          url = 'https://pinterest.com/pin/create/button/?url='+cURL+'&media='+cURL+'&description='+shareText;
+          url = 'https://pinterest.com/pin/create/button/?url='+cURL+'&media='+encodeURIComponent(getMediaImage())+'&description='+shareText;
         } else if(socialType === 'google_plus') {
           url = 'https://plus.google.com/share?url='+cURL;
         }
