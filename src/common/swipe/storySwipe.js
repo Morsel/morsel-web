@@ -34,6 +34,17 @@ angular.module('Morsel.storySwipe', [
           morsel_item_id : morselItemId
         });
       };
+
+      scope.getItemThumbnailArray = function(morsel) {
+        if(morsel.photos) {
+          return [
+            ['default', morsel.photos._100x100],
+            ['(min-width: 481px)', morsel.photos._240x240]
+          ];
+        } else {
+          return [];
+        }
+      };
     },
     templateUrl: 'swipe/storyThumbnails.tpl.html'
   };
@@ -115,7 +126,35 @@ angular.module('Morsel.storySwipe', [
         scope.currentIndicatorIndex = 0; //track which indicator is active
         scope.morselsCount = extraPages; //account for cover page + share page
 
-        scope.findCoverPhotos = function(morsels, primaryId) {
+        scope.getCoverPhotoArray = function(morsels, primaryId) {
+          var primaryItemPhotos = findPrimaryItemPhotos(morsels, primaryId);
+
+          if(primaryItemPhotos) {
+            return [
+              ['default', primaryItemPhotos._320x320],
+              ['(min-width: 321px)', primaryItemPhotos._480x480],
+              ['(min-width: 481px)', primaryItemPhotos._640x640],
+              ['(min-width: 992px)', primaryItemPhotos._992x992]
+            ];
+          } else {
+            return [];
+          }
+        };
+
+        scope.getItemPhotoArray = function(morsel) {
+          if(morsel.photos) {
+            return [
+              ['default', morsel.photos._320x320],
+              ['(min-width: 321px)', morsel.photos._480x480],
+              ['(min-width: 481px)', morsel.photos._640x640],
+              ['(min-width: 992px)', morsel.photos._992x992]
+            ];
+          } else {
+            return [];
+          }
+        };
+
+        function findPrimaryItemPhotos(morsels, primaryId) {
           var coverMorsel = _.find(morsels, function(m) {
             return m.id === primaryId;
           });
@@ -123,9 +162,9 @@ angular.module('Morsel.storySwipe', [
           if(coverMorsel && coverMorsel.photos) {
             return coverMorsel.photos;
           } else {
-            return [];
+            return null;
           }
-        };
+        }
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           updateMorselHeight();
