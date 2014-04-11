@@ -20,15 +20,11 @@ $(function(){
       sendMixpanel('Tapped Check Username Availability');
 
       $.ajax({
-        url: Morsel.apiURL+'/users/checkusername.json',
+        url: Morsel.apiURL+'/users/validateusername.json',
         data: serializePlusUtmz($form)
       }).then(function(resp){
         if(resp.data) {
-          //returned true - username already exists
-          hideErrors($form, $formInputs);
-          showErrors($username, 'Username already exists. Please choose another');
-        } else {
-          //returned false - username available
+          //returned true - username available
           //show name on page and put in hidden inputs
           $yourUsername.text($username.val());
           $welcome.find('#your-username-input').val($username.val());
