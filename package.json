@@ -1,7 +1,7 @@
 {
   "author": "Morsel",
   "name": "Morsel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "homepage": "http://www.eatmorsel.com",
   "licenses": {
     "type": "",
@@ -34,6 +34,7 @@
     "grunt-shell": "0.6.1",
     "grunt-contrib-compass": "~0.7.1",
     "grunt-nodemon": "~0.2.1",
-    "grunt-concurrent": "~0.5.0"
+    "grunt-concurrent": "~0.5.0",
+    "grunt-prompt": "~1.1.0"
   }
 }
