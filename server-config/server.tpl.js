@@ -29,6 +29,9 @@ app.on('error', function (err) {
 app.engine('mustache', mustacheExpress());
 
 app.configure(function(){
+  //enable gzip
+  app.use(express.compress());
+  
   app.set('view engine', 'mustache');
   app.set('views', __dirname + '/views');
 
