@@ -131,6 +131,17 @@ module.exports = function ( grunt ) {
           }
         ]
       },
+      //copy our package.json for deployment
+      build_package_json: {
+        files: [
+          {
+            src: [ 'package.json' ],
+            dest: '<%= build_dir %>/',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
       //copy the site's built css file into the style guide folder
       build_style_guide_css: {
         files: [
@@ -816,7 +827,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build-no-style', [
     'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
     'concat:build_css', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'index:build', 'karmaconfig',
     'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
   ]);
 
@@ -1038,16 +1049,6 @@ module.exports = function ( grunt ) {
         return grunt.template.process( contents, {
           //don't need to pass anything at the moment
           data: {
-          }
-        });
-      }
-    });
-
-    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/package.tpl.json', this.data.dir + '/package.json', { 
-      process: function ( contents, path ) {
-        return grunt.template.process( contents, {
-          data: {
-            release_name: grunt.config(dirRE+'_name')
           }
         });
       }
