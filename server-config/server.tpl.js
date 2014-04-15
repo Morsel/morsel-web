@@ -4,42 +4,60 @@ var express = require("express"),
     routes = require('./data/routes.json'),
     request = require('request'),
     metadata = require('./data/metadata.json'),
-    currEnv = process.env.CURRENV || 'development',
+    nodeEnv = process.env.NODE_ENV || 'development',
+    isProd = nodeEnv === 'production',
     siteURL = process.env.SITEURL || 'localhost:5000',
     apiURL = process.env.APIURL || 'http://api-staging.eatmorsel.com',
     apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
+    devMixpanelToken = 'fc91c2a6f8d8388f077f6b9618e90499',
+    mixpanelToken = process.env.MIXPANELTOKEN || devMixpanelToken,
     prerender,
     prerenderDevUrl = 'http://morsel-seo.herokuapp.com/',
     prerenderToken = process.env.PRERENDER_TOKEN || '',
     metabase = '/',
     app = express();
 
-console.log(apiQuerystring);
+//if something goes wrong, exit so heroku can try to restart
+process.on('uncaughtException', function (err) {
+  console.error('uncaughtException:', err.message);
+  console.error(err.stack);
+  process.exit(1);
+});
+
+//log any errors
+app.on('error', function (err) {
+  console.error(err);
+});
+
 app.engine('mustache', mustacheExpress());
 
 app.configure(function(){
+  //enable gzip
+  app.use(express.compress());
+
   app.set('view engine', 'mustache');
   app.set('views', __dirname + '/views');
 
   app.use('/assets', express.static(__dirname + '/assets'));
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
+  app.use('/launch', express.static(__dirname + '/launch'));
 
-  prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
+  /*prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
     console.log('req is:');
     console.log(req);
     console.log('prerender_res is:');
     console.log(prerender_res);
     console.log('using prerender server');
-});
+  });
   
-  /*if(currEnv === 'production' && prerenderToken) {
+  if(currEnv === 'production' && prerenderToken) {
     prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
   } else {
     prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase);
-  }*/
+  }
   app.use(prerender);
-
+  */
   app.use(app.router);
 });
 
@@ -48,12 +66,46 @@ app.get('/', function(req, res) {
   renderAngular(res, findMetadata(''));
 });
 
+/* from dev-launch
+app.get('/', function(req, res) {
+  res.render('claim', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
+});
+*/
+
 app.get('/templates-common.js', function(req, res){
   res.sendfile('templates-common.js');
 });
 
 app.get('/templates-app.js', function(req, res){
   res.sendfile('templates-app.js');
+});
+
+
+app.get('/BingSiteAuth.xml', function(req, res){
+  res.sendfile('seo/BingSiteAuth.xml');
+});
+
+app.get('/bOeAHuseytu27v9K8MznKwOWZFk.html', function(req, res){
+  res.sendfile('seo/bOeAHuseytu27v9K8MznKwOWZFk.html');
+});
+
+app.get('/google1739f11000682532.html', function(req, res){
+  res.sendfile('seo/google1739f11000682532.html');
+});
+
+//unsubscribe
+app.get('/unsubscribe', function(req, res){
+  res.render('unsubscribe', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
 });
 
 //morsel detail with post id/slug
@@ -102,7 +154,10 @@ function renderAngular(res, mData) {
 
   res.render('index', {
     metadata: fullMetadata,
-    metabase: metabase
+    metabase: metabase,
+    apiUrl: apiURL,
+    isProd : isProd,
+    mixpanelToken : mixpanelToken
   });
 }
 
@@ -126,9 +181,7 @@ function findMetadata(route) {
   return _.defaults(mdata || {}, metadata.default);
 }
 
-function renderUserPage(res, username) {
-  console.log('getting user metadata...');
-  
+function renderUserPage(res, username) {  
   request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
     var user,
         userImage,
@@ -140,16 +193,16 @@ function renderUserPage(res, username) {
 
       userMetadata = {
         "title": _.escape(user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel'),
-        "description": _.escape(user.first_name + ' ' + user.last_name + ' - ' + user.bio),
+        "description": _.escape(user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : '')),
         "image": userImage || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "twitter": {
           "creator": user.twitter_username || "@eatmorsel"
         },
-        "og": {
-          "url": siteURL + '/' + user.username
-        }
+        "url": siteURL + '/' + user.username
       };
 
+      userMetadata.twitter = _.defaults(userMetadata.twitter || {}, metadata.default.twitter);
+      userMetadata.og = _.defaults(userMetadata.og || {}, metadata.default.og);
       userMetadata = _.defaults(userMetadata || {}, metadata.default);
 
       renderAngular(res, userMetadata);
@@ -171,34 +224,38 @@ function renderMorselPage(res, username, postIdSlug) {
 
       console.log('getting post metadata for post '+postIdSlug+'...');
 
-      request(apiURL+'/posts/'+postIdSlug+apiQuerystring, function (error, response, body) {
+      request(apiURL+'/morsels/'+postIdSlug+apiQuerystring, function (error, response, body) {
         var post,
-            postMetadata;
+            postMetadata,
+            description;
 
         if (!error && response.statusCode == 200) {
           post = JSON.parse(body).data;
 
           postMetadata = {
             "title": _.escape(post.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "description": _.escape(truncateAt(getFirstDescription(post.morsels), 155)),
-            "image": getCoverPhoto(post.morsels, post.primary_morsel_id) || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+            "image": getMetadataImage(post) || 'http://www.eatmorsel.com/assets/images/logos/morsel-large.png',
             "twitter": {
-              "card" : "summary_large_image",
-              "creator": user.twitter_username || "@eatmorsel"
+              "card" : 'summary_large_image',
+              "creator": user.twitter_username || '@eatmorsel'
             },
-            "og": {
-              "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
-            }
+            "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
           };
 
-          postMetadata = _.defaults(postMetadata || {}, metadata.default);
+          description = _.escape(truncateAt(getFirstDescription(post.items), 155));
+          //there's a change none of the morsels have a description
+          if(description) {
+            postMetadata.description = description;
+          }
 
+          postMetadata.twitter = _.defaults(postMetadata.twitter || {}, metadata.default.twitter);
+          postMetadata.og = _.defaults(postMetadata.og || {}, metadata.default.og);
+          postMetadata = _.defaults(postMetadata || {}, metadata.default);
+         
           renderAngular(res, postMetadata);
         } else {
-          console.log('not a valid post');
           //not a valid morsel id - must be a bad route
           render404(res);
-        }
       });
     } else {
       console.log('not a valid user');
@@ -209,9 +266,17 @@ function renderMorselPage(res, username, postIdSlug) {
 }
 
 function getFirstDescription(morsels) {
-  return _.find(morsels, function(m) {
+  var firstMorselWithDescription;
+
+  firstMorselWithDescription = _.find(morsels, function(m) {
     return m.description && m.description.length > 0;
-  })['description'];
+  });
+
+  if(firstMorselWithDescription) {
+    return firstMorselWithDescription.description;
+  } else {
+    return '';
+  }
 }
 
 function truncateAt(text, limit) {
@@ -224,14 +289,24 @@ function render404(res) {
   });
 }
 
-function getCoverPhoto(morsels, mId) {
-  var primaryMorsel;
+function getMetadataImage(morsel) {
+  var primaryItem;
 
-  primaryMorsel = _.find(morsels, function(m) {
-    return m.id === mId;
-  });
+  //if they have a collage, use it
+  if(morsel.photos) {
+    return morsel.photos._400x300;
+  } else {
+    //use their cover photo as backup
+    primaryItem = _.find(morsel.items, function(i) {
+      return i.id === morsel.primary_item_id;
+    });
 
-  return primaryMorsel.photos._992x992;
+    if(primaryItem && primaryItem.photos) {
+      return primaryItem.photos._992x992;
+    } else {
+      return morsels[0].photos._992x992;
+    }
+  }
 }
 
 function updateMetabase(req, done) {
