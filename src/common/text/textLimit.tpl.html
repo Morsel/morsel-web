@@ -1,3 +1,3 @@
 <div ng-class="{expanded: expanded}">
-  <p>{{textContent}}<span ng-if="textLimited && !expanded">...</span> <a ng-if="textLimited && !expanded" ng-click="expand()">View More</a><a ng-if="textLimited && expanded" ng-click="collapse()">View Less</a></p>
+  <p>{{textContent}}<span ng-if="textLimited">...</span> <a text-limit-btn ng-if="textLimited" ng-click="expand()">View More</a></p>
 </div>
