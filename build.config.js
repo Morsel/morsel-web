@@ -32,6 +32,12 @@ module.exports = {
   //for any data the server might need
   server_data_dir: 'data',
 
+  //for temp stuff for the initial launch
+  static_launch_dir: 'launch',
+
+  //seo files that need to render at root
+  seo_dir: 'seo',
+
   /**
    * This is a collection of file patterns that refer to our app code (the
    * stuff in `src/`). These file paths are used in the configuration of
@@ -49,7 +55,7 @@ module.exports = {
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
     html: [ 'src/views/*.mustache' ],
-    sass: 'src/sass/main.scss'
+    sass: ['src/sass/main.scss', 'src/sass/error-page.scss']
   },
 
   /**
@@ -85,19 +91,17 @@ module.exports = {
       'vendor/angular-bootstrap/ui-bootstrap.min.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/angular-moment/angular-moment.min.js',
-      'vendor/angular-seo/angular-seo.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
-      'vendor/angular-touch/angular-touch.min.js',
-      'vendor/angular-touch/angular-touch.min.js.map',
+      'vendor/angular-touch/angular-touch.js',
       'vendor/angular-ui-router/release/angular-ui-router.js',
       'vendor/angular-ui-utils/modules/route/route.js',
+      'vendor/animationFrame/AnimationFrame.js',
       'vendor/bower-angular-placeholders/angular-placeholders.js',
       'vendor/hamsterjs/hamster.js',
       'vendor/moment/moment.js',
       'vendor/lodash/dist/lodash.js',
       'vendor/ng-file-upload/angular-file-upload.js',
       'vendor/ng-file-upload/angular-file-upload-shim.js',
-      'vendor/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'vendor/ngstorage/ngStorage.js',
       'vendor/restangular/dist/restangular.js'
     ],
