@@ -29,6 +29,11 @@ angular.module('Morsel.responsiveImages', [])
       // Query that gets run on link, whenever the directive attr changes, and whenever 
       var waiting = false;
       function updateFromQuery(querySets) {
+        //don't run if haven't been given any queries
+        if(querySets.length === 0) {
+          return;
+        }
+
         // Throttle calling this function so that multiple media query change handlers don't try to run concurrently
         if (!waiting) {
           $timeout(function() { 
