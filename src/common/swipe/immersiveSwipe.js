@@ -65,7 +65,8 @@ angular.module('Morsel.immersiveSwipe', [
 
         //scope vars for individual stories
         scope.immersiveState = {
-          inStory : false
+          inStory : false,
+          onShare : false
         };
 
         scope.updateImmersiveState = function(obj) {
