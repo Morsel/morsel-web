@@ -53,7 +53,7 @@ describe( 'ApiPosts factory', function() {
   describe('function getPost', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/posts/1.json').respond('{"data":{}}');
+      httpBackend.expectGET(APIURL+'/morsels/1.json').respond('{"data":{}}');
     }));
 
     afterEach(function () {
