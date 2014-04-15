@@ -14,9 +14,10 @@
     <meta name="twitter:description" content="{{{metadata.description}}}">
     <meta name="twitter:creator" content="{{{metadata.twitter.creator}}}">
     <meta name="twitter:image:src" content="{{{metadata.image}}}">
+    <meta name="twitter:url" content="{{{metadata.url}}}">
     <meta property="og:title" content="{{{metadata.title}}}" />
     <meta property="og:type" content="{{{metadata.og.type}}}" />
-    <meta property="og:url" content="{{{metadata.og.url}}}" />
+    <meta property="og:url" content="{{{metadata.url}}}" />
     <meta property="og:image" content="{{{metadata.image}}}" />
     <meta property="og:description" content="{{{metadata.description}}}">
 
@@ -24,20 +25,26 @@
     <base href="{{{metabase}}}">
     <meta name="fragment" content="!" />
 
+    <link rel="canonical" href="{{{metadata.url}}}">
     <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="<%= favicon_dir %>/apple-touch-icon.png" />
 
-    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
-    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+    <!-- compiled CSS -->
+    <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" />
+    <% }); %>
 
     <script type="text/javascript">
       var MorselConfig = {
-        version: '<%= version %>'
+        version: '<%= version %>',
+        apiUrl: '{{{apiUrl}}}'
       };
     </script>
-    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
-    <script type="text/javascript" src="<%= file %>"></script><% }); %>
-
+    <!-- compiled JavaScript -->
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+    {{> partials/mixpanel}}
   </head>
   <body>
     <div class="page-wrapper">
@@ -169,5 +176,6 @@
         </footer>
       </div>
     </div>
+    {{> partials/ga}}
   </body>
 </html>
