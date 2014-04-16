@@ -1,6 +1,5 @@
 angular.module( 'Morsel.home', [
-  'ui.state',
-  'infinite-scroll'
+  'ui.state'
 ])
 
 .config(function config( $stateProvider ) {

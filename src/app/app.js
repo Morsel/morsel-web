@@ -5,7 +5,7 @@ angular.module( 'Morsel', [
   'swipe',
   'ui.bootstrap',
   'ui.state',
-  'ui.route'
+  'ui.route',
   //filters
   'Morsel.reverse',
   //API

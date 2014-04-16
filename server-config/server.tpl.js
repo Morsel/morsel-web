@@ -256,6 +256,7 @@ function renderMorselPage(res, username, postIdSlug) {
         } else {
           //not a valid morsel id - must be a bad route
           render404(res);
+        }
       });
     } else {
       console.log('not a valid user');
