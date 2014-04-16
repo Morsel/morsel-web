@@ -239,6 +239,13 @@ function renderMorselPage(res, username, postIdSlug) {
               "card" : 'summary_large_image',
               "creator": user.twitter_username || '@eatmorsel'
             },
+            "og": {
+              "type":"article",
+              "article_publisher": "https://www.facebook.com/eatmorsel",
+              "article_published_at":post.published_at,
+              "article_modified_at":post.updated_at,
+              "is_article": true
+            },
             "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
           };
 
@@ -246,6 +253,11 @@ function renderMorselPage(res, username, postIdSlug) {
           //there's a change none of the morsels have a description
           if(description) {
             postMetadata.description = description;
+          }
+
+          //only include fb id if we have one
+          if(user.facebook_uid) {
+            postMetadata.og.author = user.facebook_uid;
           }
 
           postMetadata.twitter = _.defaults(postMetadata.twitter || {}, metadata.default.twitter);

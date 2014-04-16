@@ -3,13 +3,16 @@
     "title": "Morsel",
     "description": "We're building something awesome for the artists who use food and drink as their medium: chefs, sommeliers, mixologists and more.",
     "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+    "fb_app_id": "1402286360015732",
     "twitter": {
       "card": "summary",
       "creator": "@eatmorsel",
       "site": "@eatmorsel"
     },
     "og": {
-      "type": "website"
+      "type": "website",
+      "locale": "en_US",
+      "site_name": "Morsel"
     },
     "url": "http://www.eatmorsel.com"
   },
