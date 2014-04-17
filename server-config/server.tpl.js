@@ -307,7 +307,11 @@ function getMetadataImage(morsel) {
 
   //if they have a collage, use it
   if(morsel.photos) {
-    return morsel.photos._400x300;
+    if(morsel.photos._800x600) {
+      return morsel.photos._800x600;
+    } else {
+      return morsel.photos._400x300;
+    }
   } else {
     //use their cover photo as backup
     primaryItem = _.find(morsel.items, function(i) {

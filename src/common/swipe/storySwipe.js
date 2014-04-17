@@ -36,15 +36,22 @@ angular.module('Morsel.storySwipe', [
       };
 
       scope.getItemThumbnailArray = function(morsel) {
-        if(morsel.photos) {
-          return [
-            ['default', morsel.photos._100x100],
-            ['(min-width: 481px)', morsel.photos._240x240]
-          ];
+        //if there's no morsel yet, don't show anything
+        if(morsel) {
+          if(morsel.photos) {
+            return [
+              ['default', morsel.photos._100x100],
+              ['screen-xs', morsel.photos._240x240]
+            ];
+          } else {
+            //no photos, return default placeholder
+            return [
+              ['default', '/assets/images/logos/morsel-placeholder.jpg']
+            ];
+          }
         } else {
-          return [
-            ['default', '/assets/images/logos/morsel-placeholder.jpg']
-          ];
+          //return blank
+          return [];
         }
       };
     },
@@ -131,36 +138,46 @@ angular.module('Morsel.storySwipe', [
         scope.morselsCount = extraPages; //account for cover page + share page
 
         scope.getCoverPhotoArray = function(morsels, primaryId) {
-          var primaryItemPhotos = findPrimaryItemPhotos(morsels, primaryId);
+          var primaryItemPhotos;
 
-          if(primaryItemPhotos) {
-            return [
-              ['default', primaryItemPhotos._320x320],
-              ['(min-width: 321px)', primaryItemPhotos._480x480],
-              ['(min-width: 481px)', primaryItemPhotos._640x640],
-              ['(min-width: 640px)', primaryItemPhotos._992x992]
-            ];
+          if(morsels) {
+            primaryItemPhotos = findPrimaryItemPhotos(morsels, primaryId);
+
+            if(primaryItemPhotos) {
+              return [
+                ['default', primaryItemPhotos._320x320],
+                ['(min-width: 321px)', primaryItemPhotos._480x480],
+                ['screen-xs', primaryItemPhotos._640x640],
+                ['(min-width: 640px)', primaryItemPhotos._992x992]
+              ];
+            } else {
+              return [
+                ['default', '/assets/images/logos/morsel-placeholder.jpg']
+              ];
+            }
           } else {
-            //return placeholder
-            return [
-              ['default', '/assets/images/logos/morsel-placeholder.jpg']
-            ];
+            //return blank
+            return [];
           }
         };
 
         scope.getItemPhotoArray = function(morsel) {
-          if(morsel.photos) {
-            return [
-              ['default', morsel.photos._320x320],
-              ['(min-width: 321px)', morsel.photos._480x480],
-              ['(min-width: 481px)', morsel.photos._640x640],
-              ['(min-width: 992px)', morsel.photos._992x992]
-            ];
+          if(morsel) {
+            if(morsel.photos) {
+              return [
+                ['default', morsel.photos._320x320],
+                ['(min-width: 321px)', morsel.photos._480x480],
+                ['screen-xs', morsel.photos._640x640],
+                ['screen-md', morsel.photos._992x992]
+              ];
+            } else {
+              return [
+                ['default', '/assets/images/logos/morsel-placeholder.jpg']
+              ];
+            }
           } else {
-            //return placeholder
-            return [
-              ['default', '/assets/images/logos/morsel-placeholder.jpg']
-            ];
+            //return blank
+            return [];
           }
         };
 
