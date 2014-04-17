@@ -1,29 +1,29 @@
 angular.module( 'Morsel.comments', [] )
 
-.directive('morselComments', function(ApiItems, AfterLogin, Auth, $location, $q, $modal){
+.directive('itemComments', function(ApiItems, AfterLogin, Auth, $location, $q, $modal){
   return {
     restrict: 'A',
     scope: {
-      morsel: '=morselComments'
+      item: '=itemComments'
     },
     replace: true,
     link: function(scope, element, attrs) {
       scope.openComments = function () {
-        console.log(scope.morsel);
+        console.log(scope.item);
         var modalInstance = $modal.open({
           templateUrl: 'comments/comments.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
-            morsel: function () {
-              return scope.morsel;
+            item: function () {
+              return scope.item;
             }
           }
         });
       };
 
-      var ModalInstanceCtrl = function ($scope, $modalInstance, morsel) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, item) {
 
-        $scope.morsel = morsel;
+        $scope.item = item;
         $scope.isChef = Auth.isChef();
         $scope.isLoggedIn = Auth.isLoggedIn();
         $scope.comment = {
@@ -40,26 +40,26 @@ angular.module( 'Morsel.comments', [] )
           }
         };
 
-        if(!$scope.morsel.comments) {
+        if(!$scope.item.comments) {
           getComments();
         }
 
-        //fetch comments for the morsel
+        //fetch comments for the item
         function getComments() {
-          ApiItems.getComments($scope.morsel.id).then(function(commentData){
-            $scope.morsel.comments = commentData;
+          ApiItems.getComments($scope.item.id).then(function(commentData){
+            $scope.item.comments = commentData;
           });
         }
 
         function postComment() {
           var deferred = $q.defer();
 
-          ApiItems.postComment($scope.morsel.id, $scope.comment.description).then(function(commentData){
+          ApiItems.postComment($scope.item.id, $scope.comment.description).then(function(commentData){
 
-            if($scope.morsel.comments) {
-              $scope.morsel.comments.unshift(commentData);
+            if($scope.item.comments) {
+              $scope.item.comments.unshift(commentData);
             } else {
-              $scope.morsel.comments = commentData;
+              $scope.item.comments = commentData;
             }
             //clear comment textarea
             $scope.comment.description = '';
@@ -70,6 +70,6 @@ angular.module( 'Morsel.comments', [] )
         }
       };
     },
-    template: '<a ng-click="openComments()"><i class="common-chat"></i>{{morsel.comment_count}} comment{{morsel.comment_count===1?\'\':\'s\'}}</a>'
+    template: '<a ng-click="openComments()"><i class="common-chat"></i>{{item.comment_count}} comment{{item.comment_count===1?\'\':\'s\'}}</a>'
   };
 });

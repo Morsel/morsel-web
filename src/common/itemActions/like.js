@@ -1,14 +1,14 @@
-angular.module( 'Morsel.morselLike', [] )
+angular.module( 'Morsel.itemLike', [] )
 
-//like/unlike a morsel
-.directive('morselLike', function(ApiItems, AfterLogin, $location, Auth, $q){
+//like/unlike an item
+.directive('itemLike', function(ApiItems, AfterLogin, $location, Auth, $q){
   return {
     scope: {
-      morsel: '=morselLike'
+      item: '=itemLike'
     },
     replace: true,
     link: function(scope, element, attrs) {
-      scope.toggleMorselLike = function() {
+      scope.toggleItemLike = function() {
         //check if we're logged in
         if(Auth.isLoggedIn()) {
           toggleLike();
@@ -28,14 +28,14 @@ angular.module( 'Morsel.morselLike', [] )
       function toggleLike() {
         var deferred = $q.defer();
 
-        if(scope.morsel.liked) {
-          ApiItems.unlikeItem(scope.morsel.id).then(function(data) {
-            scope.morsel.liked = data;
+        if(scope.item.liked) {
+          ApiItems.unlikeItem(scope.item.id).then(function(data) {
+            scope.item.liked = data;
             deferred.resolve();
           });
         } else {
-          ApiItems.likeItem(scope.morsel.id).then(function(data) {
-            scope.morsel.liked = data;
+          ApiItems.likeItem(scope.item.id).then(function(data) {
+            scope.item.liked = data;
             deferred.resolve();
           });
         }
@@ -43,6 +43,6 @@ angular.module( 'Morsel.morselLike', [] )
         return deferred.promise;
       }
     },
-    template: '<a><i ng-click="toggleMorselLike()" class="{{morsel.liked ? \'common-like\' : \'common-like-empty\'}}"></i>{{morsel.like_count}} like{{morsel.like_count===1?\'\':\'s\'}}</a>'
+    template: '<a><i ng-click="toggleItemLike()" class="{{item.liked ? \'common-like\' : \'common-like-empty\'}}"></i>{{item.like_count}} like{{item.like_count===1?\'\':\'s\'}}</a>'
   };
 });

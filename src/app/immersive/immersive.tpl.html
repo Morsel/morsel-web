@@ -39,7 +39,7 @@
                   <span ng-click="showComments=!showComments"><i class="glyphicon glyphicon-comment"></i></span>
                   <span><i class="glyphicon glyphicon-share"></i></span>
                 </div>
-                <div morsel-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
+                <div item-comments comments-morsel="morsel" comments-trigger="showComments" is-logged-in="isLoggedIn"></div>
                 <div ng-if="morsel.photos" class="morsel-img" href="{{morsel.photos._640x640}}" ng-style="{'background-image': 'url('+morsel.photos._640x640+')', 'height': immersiveHeight}" ng-dblclick="$parent.fullPhoto=!$parent.fullPhoto"></div>
               </li>
             </ul>
