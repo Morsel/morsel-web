@@ -1,7 +1,7 @@
 angular.module( 'Morsel.apiItems', [] )
 
 // ApiItems is the middleman for dealing with /items requests
-.factory('apiItems', function($http, Restangular, $q, ApiUploads) {
+.factory('ApiItems', function($http, Restangular, $q, ApiUploads) {
   var Items = {},
       RestangularItems = Restangular.all('items');
 

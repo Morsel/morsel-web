@@ -1,6 +1,6 @@
 angular.module( 'Morsel.comments', [] )
 
-.directive('morselComments', function(ApiMorsels, AfterLogin, Auth, $location, $q, $modal){
+.directive('morselComments', function(ApiItems, AfterLogin, Auth, $location, $q, $modal){
   return {
     restrict: 'A',
     scope: {
@@ -46,7 +46,7 @@ angular.module( 'Morsel.comments', [] )
 
         //fetch comments for the morsel
         function getComments() {
-          ApiMorsels.getComments($scope.morsel.id).then(function(commentData){
+          ApiItems.getComments($scope.morsel.id).then(function(commentData){
             $scope.morsel.comments = commentData;
           });
         }
@@ -54,7 +54,7 @@ angular.module( 'Morsel.comments', [] )
         function postComment() {
           var deferred = $q.defer();
 
-          ApiMorsels.postComment($scope.morsel.id, $scope.comment.description).then(function(commentData){
+          ApiItems.postComment($scope.morsel.id, $scope.comment.description).then(function(commentData){
 
             if($scope.morsel.comments) {
               $scope.morsel.comments.unshift(commentData);

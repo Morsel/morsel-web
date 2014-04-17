@@ -1,7 +1,7 @@
 angular.module( 'Morsel.morselLike', [] )
 
 //like/unlike a morsel
-.directive('morselLike', function(ApiMorsels, AfterLogin, $location, Auth, $q){
+.directive('morselLike', function(ApiItems, AfterLogin, $location, Auth, $q){
   return {
     scope: {
       morsel: '=morselLike'
@@ -29,12 +29,12 @@ angular.module( 'Morsel.morselLike', [] )
         var deferred = $q.defer();
 
         if(scope.morsel.liked) {
-          ApiMorsels.unlikeItem(scope.morsel.id).then(function(data) {
+          ApiItems.unlikeItem(scope.morsel.id).then(function(data) {
             scope.morsel.liked = data;
             deferred.resolve();
           });
         } else {
-          ApiMorsels.likeItem(scope.morsel.id).then(function(data) {
+          ApiItems.likeItem(scope.morsel.id).then(function(data) {
             scope.morsel.liked = data;
             deferred.resolve();
           });

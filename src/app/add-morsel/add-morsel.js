@@ -64,7 +64,7 @@ angular.module( 'Morsel.addMorsel', [])
         };
 
     //call our join to take care of the heavy lifting
-    ApiMorsels.addMorsel(uploadData).then(onSuccess, onError);
+    //ApiMorsels.addMorsel(uploadData).then(onSuccess, onError);
   };
 
   function onSuccess(resp) {
