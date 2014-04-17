@@ -213,8 +213,8 @@ function renderUserPage(res, username) {
   });
 }
 
-function renderMorselPage(res, username, postIdSlug) {
-  console.log('getting user metadata for post '+postIdSlug+'...');
+function renderMorselPage(res, username, morselIdSlug) {
+  console.log('getting user metadata for morsel '+morselIdSlug+'...');
 
   request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
     var user;
@@ -222,19 +222,19 @@ function renderMorselPage(res, username, postIdSlug) {
     if (!error && response.statusCode == 200) {
       user = JSON.parse(body).data;
 
-      console.log('getting post metadata for post '+postIdSlug+'...');
+      console.log('getting morsel metadata for morsel '+morselIdSlug+'...');
 
-      request(apiURL+'/morsels/'+postIdSlug+apiQuerystring, function (error, response, body) {
-        var post,
-            postMetadata,
+      request(apiURL+'/morsels/'+morselIdSlug+apiQuerystring, function (error, response, body) {
+        var morsel,
+            morselMetadata,
             description;
 
         if (!error && response.statusCode == 200) {
-          post = JSON.parse(body).data;
+          morsel = JSON.parse(body).data;
 
-          postMetadata = {
-            "title": _.escape(post.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "image": getMetadataImage(post) || 'http://www.eatmorsel.com/assets/images/logos/morsel-large.png',
+          morselMetadata = {
+            "title": _.escape(morsel.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
+            "image": getMetadataImage(morsel) || 'http://www.eatmorsel.com/assets/images/logos/morsel-large.png',
             "twitter": {
               "card" : 'summary_large_image',
               "creator": user.twitter_username || '@eatmorsel'
@@ -242,29 +242,29 @@ function renderMorselPage(res, username, postIdSlug) {
             "og": {
               "type":"article",
               "article_publisher": "https://www.facebook.com/eatmorsel",
-              "article_published_at":post.published_at,
-              "article_modified_at":post.updated_at,
+              "article_published_at":morsel.published_at,
+              "article_modified_at":morsel.updated_at,
               "is_article": true
             },
-            "url": siteURL + '/' + user.username + '/' + post.id + '-' + post.slug
+            "url": siteURL + '/' + user.username + '/' + morsel.id + '-' + morsel.slug
           };
 
-          description = _.escape(truncateAt(getFirstDescription(post.items), 155));
+          description = _.escape(truncateAt(getFirstDescription(morsel.items), 155)) + '...';
           //there's a change none of the morsels have a description
           if(description) {
-            postMetadata.description = description;
+            morselMetadata.description = description;
           }
 
           //only include fb id if we have one
-          if(user.facebook_uid) {
-            postMetadata.og.author = user.facebook_uid;
+          if(morsel.facebook_uid) {
+            morselMetadata.og.author = morsel.facebook_uid;
           }
 
-          postMetadata.twitter = _.defaults(postMetadata.twitter || {}, metadata.default.twitter);
-          postMetadata.og = _.defaults(postMetadata.og || {}, metadata.default.og);
-          postMetadata = _.defaults(postMetadata || {}, metadata.default);
+          morselMetadata.twitter = _.defaults(morselMetadata.twitter || {}, metadata.default.twitter);
+          morselMetadata.og = _.defaults(morselMetadata.og || {}, metadata.default.og);
+          morselMetadata = _.defaults(morselMetadata || {}, metadata.default);
          
-          renderAngular(res, postMetadata);
+          renderAngular(res, morselMetadata);
         } else {
           //not a valid morsel id - must be a bad route
           render404(res);
@@ -278,15 +278,15 @@ function renderMorselPage(res, username, postIdSlug) {
   });
 }
 
-function getFirstDescription(morsels) {
-  var firstMorselWithDescription;
+function getFirstDescription(items) {
+  var firstItemWithDescription;
 
-  firstMorselWithDescription = _.find(morsels, function(m) {
+  firstItemWithDescription = _.find(items, function(m) {
     return m.description && m.description.length > 0;
   });
 
-  if(firstMorselWithDescription) {
-    return firstMorselWithDescription.description;
+  if(firstItemWithDescription) {
+    return firstItemWithDescription.description;
   } else {
     return '';
   }
