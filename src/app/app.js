@@ -1,4 +1,19 @@
 angular.module( 'Morsel', [
+  //libs
+  'angularMoment',
+  'restangular',
+  'swipe',
+  'ui.bootstrap',
+  'ui.state',
+  'ui.route',
+  //filters
+  'Morsel.reverse',
+  //API
+  'Morsel.apiFeed',
+  'Morsel.apiMorsels',
+  'Morsel.apiPosts',
+  'Morsel.apiUploads',
+  'Morsel.apiUsers',
   //templates
   'templates-app',
   'templates-common',
@@ -24,6 +39,7 @@ angular.module( 'Morsel', [
   'Morsel.formNameFix',
   'Morsel.handleErrors',
   'Morsel.immersiveSwipe',
+  'Morsel.mixpanel',
   'Morsel.morselLike',
   'Morsel.morselPressShare',
   'Morsel.responsiveImages',
@@ -32,32 +48,13 @@ angular.module( 'Morsel', [
   'Morsel.submitBtn',
   'Morsel.textLimit',
   'Morsel.userImage',
-  'Morsel.validatedElement',
-  //filters
-  'Morsel.reverse',
-  //API
-  'Morsel.apiFeed',
-  'Morsel.apiMorsels',
-  'Morsel.apiPosts',
-  'Morsel.apiUploads',
-  'Morsel.apiUsers',
-  //libs
-  'angularMoment',
-  'restangular',
-  'swipe',
-  'ui.bootstrap',
-  'ui.state',
-  'ui.route'
+  'Morsel.validatedElement'
 ])
 
 //define some constants for the app
 
 //the URL to use for our API
-.constant('APIURL', 'http://api-staging.eatmorsel.com')
-//dev
-//.constant('APIURL', 'http://barf')
-//marty
-//.constant('APIURL', 'http://192.168.48.102:3000/')
+.constant('APIURL', window.MorselConfig.apiUrl || 'http://api-staging.eatmorsel.com')
 
 //for any API requests
 .constant('DEVICEKEY', 'client[device]')
@@ -104,7 +101,7 @@ angular.module( 'Morsel', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window ) {
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
@@ -137,6 +134,11 @@ angular.module( 'Morsel', [
     //refresh our user data
     $scope.isLoggedIn = Auth.isLoggedIn();
     updateUserData();
+
+    //manually push a GA pageview
+    if($window._gaq) {
+      $window._gaq.push(['_trackPageview', $location.path()]);
+    }
   });
 
   //refresh user data

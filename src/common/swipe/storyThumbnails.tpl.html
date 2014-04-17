@@ -1,18 +1,18 @@
 <div class="thumbnails-wrap">
-  <ul ng-if="morsels.length <= 4">
-    <li ng-repeat="morsel in morsels" ng-click="$parent.$parent.index=$index+1">
-      <img responsive-images="[ [ 'default', '{{morsel.photos._100x100}}' ], [ 'screen-xs', '{{morsel.photos._240x240}}' ] ]" />
+  <ul ng-if="story.items.length <= 4">
+    <li ng-repeat="morsel in story.items" ng-click="$parent.$parent.index=$index+1; sendMixpanel(morsel.id)">
+      <img responsive-images="{{getItemThumbnailArray(morsel)}}" />
     </li>
   </ul>
-  <ul ng-if="morsels.length > 4">
-    <li ng-repeat="morsel in morsels.slice(0,3)" ng-click="$parent.$parent.index=$index+1">
-      <img responsive-images="[ [ 'default', '{{morsel.photos._100x100}}' ], [ 'screen-xs', '{{morsel.photos._240x240}}' ] ]" />
+  <ul ng-if="story.items.length > 4">
+    <li ng-repeat="morsel in story.items.slice(0,3)" ng-click="$parent.$parent.index=$index+1; sendMixpanel(morsel.id)">
+      <img responsive-images="{{getItemThumbnailArray(morsel)}}" />
     </li>
-    <li ng-click="$parent.index=4" class="additional-thumbs">
+    <li ng-click="$parent.index=4; sendMixpanel(story.items[3].id)" class="additional-thumbs">
       <div>
-        <span>+{{morsels.slice(3).length}}</span>
+        <span>+{{story.items.slice(3).length}}</span>
       </div>
-      <img responsive-images="[ [ 'default', '{{morsels[3].photos._100x100}}' ], [ 'screen-xs', '{{morsels[3].photos._240x240}}' ] ]" />
+      <img responsive-images="{{getItemThumbnailArray(story.items[3])}}" />
     </li>
   </ul>
 </div>

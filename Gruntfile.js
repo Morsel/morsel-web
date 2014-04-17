@@ -18,6 +18,11 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-prompt');
+
+  //for our prompt
+  var semver = require('semver');
+  var currentVersion = require('./package.json').version;
 
   /**
    * Load in our build configuration file.
@@ -58,23 +63,13 @@ module.exports = function ( grunt ) {
       options: {
         files: [
           "package.json", 
-          "bower.json",
-          "<% build_dir %>/package.json",
-          "<% compile_dir %>/package.json"
-        ],
-        commit: true,
-        commitMessage: 'chore(release): v%VERSION%',
-        commitFiles: [
-          "package.json", 
           "bower.json"
         ],
+        commit: false,
         createTag: false,
-        tagName: 'v%VERSION%',
-        tagMessage: 'Version %VERSION%',
-        push: false,
-        pushTo: 'origin'
+        push: false
       }
-    },    
+    },
 
     /**
      * The directories to delete when `grunt clean` is executed.
@@ -125,6 +120,17 @@ module.exports = function ( grunt ) {
         files: [
           {
             src: [ '<%= vendor_files.js %>' ],
+            dest: '<%= build_dir %>/',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      //copy our package.json for deployment
+      build_package_json: {
+        files: [
+          {
+            src: [ 'package.json' ],
             dest: '<%= build_dir %>/',
             cwd: '.',
             expand: true
@@ -183,6 +189,27 @@ module.exports = function ( grunt ) {
           }
         ]
       },
+      compile_deploy: {
+        files: [
+          {
+            src: [ '**' ],
+            dest: '<%= compile_deploy_dir %>',
+            cwd: '<%= compile_dir %>',
+            expand: true
+          }
+        ]
+      },
+      //copy our package.json for deployment
+      compile_package_json: {
+        files: [
+          {
+            src: [ 'package.json' ],
+            dest: '<%= compile_dir %>/',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
       blog: {
         files: [
           {
@@ -193,12 +220,62 @@ module.exports = function ( grunt ) {
           }
         ]
       },
-      server_data: {
+      build_server_data: {
         files: [
           {
             src: [ '<%= server_data_dir %>/*' ],
             dest: '<%= build_dir %>',
             cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      build_seo: {
+        files: [
+          {
+            src: [ '<%= seo_dir %>/*' ],
+            dest: '<%= build_dir %>',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      build_static_launch: {
+        files: [
+          { 
+            src: [ '**' ],
+            dest: '<%= build_dir %>/launch/',
+            cwd: '<%= static_launch_dir %>',
+            expand: true
+          }
+        ]
+      },
+      compile_server_data: {
+        files: [
+          {
+            src: [ '<%= server_data_dir %>/*' ],
+            dest: '<%= compile_dir %>',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      compile_seo: {
+        files: [
+          {
+            src: [ '<%= seo_dir %>/*' ],
+            dest: '<%= compile_dir %>',
+            cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      compile_static_launch: {
+        files: [
+          { 
+            src: [ '**' ],
+            dest: '<%= compile_dir %>/launch/',
+            cwd: '<%= static_launch_dir %>',
             expand: true
           }
         ]
@@ -574,13 +651,13 @@ module.exports = function ( grunt ) {
      * Used to execute shell commands
      */
     shell: {
-      build_deploy_init: {
+      dev_deploy_init: {
         command: 'sh <%= serverconfig_dir %>/server_init.sh <%= build_deploy_dir %> <%= dev_repo %> push_dev',
         options: {
           stdout: true
         }
       },
-      build_deploy_push: {
+      dev_deploy_push: {
         command: [
           'git add .',
           'git commit -a -m "automatically pushed to dev"',
@@ -640,6 +717,51 @@ module.exports = function ( grunt ) {
             cwd: '<%= blog_deploy_dir %>'
           }
         }
+      },
+      staging_deploy_init: {
+        command: 'sh <%= serverconfig_dir %>/server_init.sh <%= compile_deploy_dir %> <%= staging_repo %> push_staging',
+        options: {
+          stdout: true
+        }
+      },
+      staging_deploy_push: {
+        command: [
+          'git add .',
+          'git commit -a -m "automatically pushed to staging"',
+          'git push push_staging master -f'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= compile_deploy_dir %>'
+          }
+        }
+      },
+      production_deploy_init: {
+        command: 'sh <%= serverconfig_dir %>/server_init.sh <%= compile_deploy_dir %> <%= prod_repo %> push_prod',
+        options: {
+          stdout: true
+        }
+      },
+      production_deploy_push: {
+        command: [
+          'git add .',
+          'git commit -a -m "automatically pushed to production"',
+          'git push push_prod master -f'
+        ].join('&&'),
+        options: {
+          stdout: true,
+          execOptions: {
+            cwd: '<%= compile_deploy_dir %>'
+          }
+        }
+      },
+      //silly that this has to be done like this
+      bump_to_version: {
+        command: 'grunt bump --setversion=<%= bump.version %>',
+        options: {
+          stdout: true
+        }
       }
     },
 
@@ -659,6 +781,69 @@ module.exports = function ( grunt ) {
             PORT: '<%= dev_server_port %>'
           },
           cwd: '<%= build_dir %>'
+        }
+      },
+      prod: {
+        script: 'server.js',
+        options: {
+          env: {
+            PORT: '<%= dev_server_port %>'
+          },
+          cwd: '<%= compile_dir %>'
+        }
+      }
+    },
+
+    prompt: {
+      bump: {
+        options: {
+          questions: [
+            {
+              config:  'bump.type',
+              type:    'list',
+              message: 'Bump version from ' + '<%= pkg.version %>'.cyan + ' to:',
+              choices: [
+                {
+                  value: 'build',
+                  name:  'Build:  '.yellow + ('<%= pkg.version %>' + '-?').yellow +
+                    ' Unstable, betas, and release candidates.'
+                },
+                {
+                  value: 'patch',
+                  name:  'Patch:  '.yellow + semver.inc(currentVersion, 'patch').yellow +
+                    '   Backwards-compatible bug fixes.'
+                },
+                {
+                  value: 'minor',
+                  name:  'Minor:  '.yellow + semver.inc(currentVersion, 'minor').yellow +
+                    '   Add functionality in a backwards-compatible manner.'
+                },
+                {
+                  value: 'major',
+                  name:  'Major:  '.yellow + semver.inc(currentVersion, 'major').yellow +
+                    '   Incompatible API changes.'
+                },
+                {
+                  value: 'custom',
+                  name:  'Custom: ?.?.?'.yellow +
+                    '   Specify version...'
+                }
+              ]
+            },
+            {
+              config:   'bump.version',
+              type:     'input',
+              message:  'What specific version would you like',
+              when:     function (answers) {
+                return answers['bump.type'] === 'custom';
+              },
+              validate: function (value) {
+                var valid = semver.valid(value) && true;
+                return valid || 'Must be a valid semver, such as 1.2.3-rc1. See ' +
+                  'http://semver.org/'.blue.underline + ' for more details.';
+              }
+            }
+          ]
         }
       }
     }
@@ -689,10 +874,14 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build', [ 'build-no-style', 'style']);
 
   /**
-   * The `dev-server` task runs the local server
+   * The `dev-server` task runs development code on local server
    */
   grunt.registerTask( 'dev-server', [ 'nodemon:dev']);
 
+  /**
+   * The `prod-server` task runs production-ready code on the local server
+   */
+  grunt.registerTask( 'prod-server', [ 'nodemon:prod']);
 
   /**
    * The `style` task builds the style guide locally
@@ -705,8 +894,8 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build-no-style', [
     'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
     'concat:build_css', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'index:build', 'karmaconfig',
-    'karma:continuous', 'copy:server_data', 'appserver:build'
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'index:build', 'karmaconfig',
+    'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
   ]);
 
   /**
@@ -718,8 +907,15 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [
-    'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', /*'uglify', */'index:compile', 'appserver:compile'
+  grunt.registerTask( 'compile', [ 'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile'
+  ]);
+
+  /**
+   * The `prompt-bump` task asks you if you want to bump versions before pushing
+   */
+  grunt.registerTask( 'prompt-bump', [
+    'prompt:bump',
+    'bump_prompt_react'
   ]);
 
   /*
@@ -734,7 +930,17 @@ module.exports = function ( grunt ) {
   /**
    * The `push-dev` task pushes the site to heroku (dev.eatmorsel.com)
    */
-  grunt.registerTask( 'push-dev', [ 'shell:build_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:build_deploy_push' ]);
+  grunt.registerTask( 'push-dev', [ 'shell:dev_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:dev_deploy_push' ]);
+
+  /**
+   * The `push-staging` task pushes the site to heroku (staging.eatmorsel.com)
+   */
+  grunt.registerTask( 'push-staging', [ 'shell:staging_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:staging_deploy_push' ]);
+
+  /**
+   * The `push-production` task pushes the site to heroku (staging.eatmorsel.com)
+   */
+  grunt.registerTask( 'push-production', [ 'shell:production_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:production_deploy_push' ]);
 
   /**
    * The `push-blog` task pushes the blog to insights.eatmorsel.com over ssh
@@ -788,6 +994,58 @@ module.exports = function ( grunt ) {
     });
 
     grunt.file.copy('src/views/404.mustache', this.data.dir + '/views/404.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/claim.mustache', this.data.dir + '/views/claim.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/unsubscribe.mustache', this.data.dir + '/views/unsubscribe.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/partials/ga.mustache', this.data.dir + '/views/partials/ga.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/partials/mixpanel.mustache', this.data.dir + '/views/partials/mixpanel.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -860,16 +1118,17 @@ module.exports = function ( grunt ) {
         });
       }
     });
+  });
 
-    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/package.tpl.json', this.data.dir + '/package.json', { 
-      process: function ( contents, path ) {
-        return grunt.template.process( contents, {
-          data: {
-            release_name: grunt.config(dirRE+'_name')
-          }
-        });
-      }
-    });
+  /*
+   * 'bump_prompt_react' decides what kind of bump needs to happen
+   */
+  grunt.registerTask( 'bump_prompt_react', function () {
+    if(grunt.config('bump.type') === 'custom') {
+      grunt.task.run(['shell:bump_to_version']);
+    } else {
+      grunt.task.run(['bump:'+grunt.config('bump.type')]);
+    }
   });
 
 };

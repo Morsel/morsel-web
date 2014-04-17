@@ -633,13 +633,16 @@ img.alignright,
 .author-box {
   padding: 40px;
   padding: 4rem;
+
+  background-color: $morsel-off-white;
+  margin-bottom: 40px;
+  margin-bottom: 4rem;
+
+  @include box-shadow(0px 4px 7px 0px rgba(0, 0, 0, 0.5));
 }
 
 .author-box-title {
-  color: #333;
-  font-family: 'Vidaloka', serif;
-  font-size: 20px;
-  font-size: 2rem;
+  color: $morsel-dark;
   margin-bottom: 4px;
   margin-bottom: 0.4rem;
 }

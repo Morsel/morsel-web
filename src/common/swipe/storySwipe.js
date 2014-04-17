@@ -6,25 +6,60 @@ angular.module('Morsel.storySwipe', [
   'ngTouch'
 ])
 
-.directive('storyThumbnails', [function() {
+.directive('storyThumbnails', function(Mixpanel) {
   return {
     restrict: 'A',
     replace: true,
     scope: {
       index: '=',
-      morsels: '='
+      story: '='
     },
     link: function(scope, element, attrs) {
+      var storyId;
+
       scope.nonSwipeable = true;
       scope.range = function(n) {
         return new Array(n);
       };
+
+      scope.$watch('story', function(newValue, oldValue) {
+        if(newValue) {
+          storyId = newValue.id;
+        }
+      });
+
+      scope.sendMixpanel = function(morselItemId) {
+        Mixpanel.send('Tapped Morsel Item Thumbnail', {
+          morsel_id : storyId,
+          morsel_item_id : morselItemId
+        });
+      };
+
+      scope.getItemThumbnailArray = function(morsel) {
+        //if there's no morsel yet, don't show anything
+        if(morsel) {
+          if(morsel.photos) {
+            return [
+              ['default', morsel.photos._100x100],
+              ['screen-xs', morsel.photos._240x240]
+            ];
+          } else {
+            //no photos, return default placeholder
+            return [
+              ['default', '/assets/images/logos/morsel-placeholder.jpg']
+            ];
+          }
+        } else {
+          //return blank
+          return [];
+        }
+      };
     },
     templateUrl: 'swipe/storyThumbnails.tpl.html'
   };
-}])
+})
 
-.directive('storyIndicators', [function() {
+.directive('storyIndicators', function() {
   return {
     restrict: 'A',
     replace: true,
@@ -41,23 +76,25 @@ angular.module('Morsel.storySwipe', [
                 '<span ng-repeat="c in range(count) track by $index" ng-class="{active: $index==$parent.index}" ng-click="$parent.index=$index"></span>' +
               '</div>'
   };
-}])
+})
 
-.directive('morselActions', [function() {
+.directive('morselActions', function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      morsel: '=actionableMorsel'
+      morsel: '=actionableMorsel',
+      morsels: '=',
+      index: '='
     },
     link: function(scope, element, attrs) {
       scope.nonSwipeable = true;
     },
     templateUrl: 'swipe/morselActions.tpl.html'
   };
-}])
+})
 
-.directive('storySwipe', ['swipe', '$window', '$document', '$parse', '$compile', function($swipe, $window, $document, $parse, $compile) {
+.directive('storySwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -65,7 +102,11 @@ angular.module('Morsel.storySwipe', [
       // in absolute pixels, at which distance the slide stick to the edge on release
       rubberTreshold = 3,
       //max time between scrolls
-      scrollThreshold = 500,
+      scrollTimeThreshold = 500,
+      //use a debounce function so mousewheel functions don't fire multiple times
+      scrollDebounceTime = 40,
+      //min intensity for scrolls
+      scrollMinIntensity = 1,
       //number of additional "pages". 1. cover page 2. share page
       extraPages = 2;
 
@@ -88,14 +129,59 @@ angular.module('Morsel.storySwipe', [
             swipeDirection = false,
             winEl = angular.element($window),
             handleMouseWheel,
-            hamster;
+            hamster,
+            animationFrame = new AnimationFrame();
 
         //our scope vars, accessible by indicators
         scope.currentMorselIndex = 0; //track which morsel we're on
         scope.currentIndicatorIndex = 0; //track which indicator is active
         scope.morselsCount = extraPages; //account for cover page + share page
 
-        scope.findCoverPhotos = function(morsels, primaryId) {
+        scope.getCoverPhotoArray = function(morsels, primaryId) {
+          var primaryItemPhotos;
+
+          if(morsels) {
+            primaryItemPhotos = findPrimaryItemPhotos(morsels, primaryId);
+
+            if(primaryItemPhotos) {
+              return [
+                ['default', primaryItemPhotos._320x320],
+                ['(min-width: 321px)', primaryItemPhotos._480x480],
+                ['screen-xs', primaryItemPhotos._640x640],
+                ['(min-width: 640px)', primaryItemPhotos._992x992]
+              ];
+            } else {
+              return [
+                ['default', '/assets/images/logos/morsel-placeholder.jpg']
+              ];
+            }
+          } else {
+            //return blank
+            return [];
+          }
+        };
+
+        scope.getItemPhotoArray = function(morsel) {
+          if(morsel) {
+            if(morsel.photos) {
+              return [
+                ['default', morsel.photos._320x320],
+                ['(min-width: 321px)', morsel.photos._480x480],
+                ['screen-xs', morsel.photos._640x640],
+                ['screen-md', morsel.photos._992x992]
+              ];
+            } else {
+              return [
+                ['default', '/assets/images/logos/morsel-placeholder.jpg']
+              ];
+            }
+          } else {
+            //return blank
+            return [];
+          }
+        };
+
+        function findPrimaryItemPhotos(morsels, primaryId) {
           var coverMorsel = _.find(morsels, function(m) {
             return m.id === primaryId;
           });
@@ -103,16 +189,16 @@ angular.module('Morsel.storySwipe', [
           if(coverMorsel && coverMorsel.photos) {
             return coverMorsel.photos;
           } else {
-            return [];
+            return null;
           }
-        };
+        }
 
         iAttributes.$observe('storySwipe', function(newValue, oldValue) {
           updateMorselHeight();
 
           // only bind swipe when it's not switched off
           if(newValue !== 'false') {
-            $swipe.bind(iElement, {
+            swipe.bind(iElement, {
               start: swipeStart,
               move: swipeMove,
               end: swipeEnd,
@@ -135,11 +221,13 @@ angular.module('Morsel.storySwipe', [
 
         //watch for changes in the indicators
         scope.$watch('currentIndicatorIndex', function(newValue) {
+          //console.log('124 - currentIndicatorIndex watch: '+newValue);
           goToSlide(newValue, true);
         });
 
         //make sure our indicator index is updated when we change morsels
         scope.$watch('currentMorselIndex', function(newValue) {
+          //console.log('130 - currentMorselIndex watch: '+newValue);
           scope.currentIndicatorIndex = newValue;
         });
 
@@ -221,7 +309,7 @@ angular.module('Morsel.storySwipe', [
                 if (swipeYDelta > 2 || swipeYDelta < -2) {
                   swipeMoved = true;
                   startY = y;
-                  requestAnimationFrame(function() {
+                  animationFrame.request(function() {
                     scroll(capPosition(offset + swipeYDelta));
                   });
                 }
@@ -266,14 +354,18 @@ angular.module('Morsel.storySwipe', [
           }
           
           moveOffset = shouldMove ? morselsMove : 0;
-
+          //console.log('257 - moveOffset:',moveOffset,' scope.currentMorselIndex:',scope.currentMorselIndex,' morselHeight:',morselHeight);
           destination = (moveOffset + scope.currentMorselIndex) * morselHeight;
+          //console.log('259 destination: ',destination);
+          //console.log('260 offset: ',offset);
           amplitude = destination - offset;
+          //console.log('262 amplitude: ',amplitude);
           timestamp = Date.now();
           if (forceAnimation) {
             amplitude = offset - currentOffset;
+            //console.log('266 amplitude: ',amplitude);
           }
-          requestAnimationFrame(autoScroll);
+          animationFrame.request(autoScroll);
 
           if (event) {
             event.preventDefault();
@@ -314,15 +406,15 @@ angular.module('Morsel.storySwipe', [
         }
 
         //scrolling
-        function scroll(x) {
+        function scroll(y) {
           var move;
 
           // use CSS 3D transform to move the screen
-          if (isNaN(x)) {
-            x = scope.currentMorselIndex * morselHeight;
+          if (isNaN(y)) {
+            y = scope.currentMorselIndex * morselHeight;
           }
 
-          offset = x;
+          offset = y;
           move = -Math.round(offset);
 
           iElement.find('ul')[0].style[transformProperty] = 'translate3d(0, ' + move + 'px, 0)';
@@ -330,7 +422,7 @@ angular.module('Morsel.storySwipe', [
 
         function autoScroll() {
           // scroll smoothly to "destination" until we reach it
-          // using requestAnimationFrame
+          // using animationFrame API
           var elapsed,
               delta;
 
@@ -339,17 +431,21 @@ angular.module('Morsel.storySwipe', [
             delta = amplitude * Math.exp(-elapsed / timeConstant);
             if (delta > rubberTreshold || delta < -rubberTreshold) {
               scroll(destination - delta);
-              requestAnimationFrame(autoScroll);
+              animationFrame.request(autoScroll);
             } else {
+              //console.log('332 - before gotoslide - destination: '+destination);
+              //console.log('333 - before gotoslide - morselHeight: '+morselHeight);
               goToSlide(destination / morselHeight);
             }
           }
         }
 
         function goToSlide(i, animate) {
+          //console.log('338 - gotoslide start: '+i);
           if (isNaN(i)) {
             i = scope.currentMorselIndex;
           }
+          //console.log('342 - animate?: '+animate);
           if (animate) {
             // simulate a swipe so we have the standard animation
             // used when external binding index is updated or touch canceed
@@ -357,11 +453,13 @@ angular.module('Morsel.storySwipe', [
             swipeEnd(null, null, true);
             return;
           }
+          //console.log('350 - currentMorselindex set with: '+i);
           scope.currentMorselIndex = capIndex(i);
 
           if(scope.updateImmersiveState) {
             scope.updateImmersiveState({
-              inStory: scope.currentMorselIndex > 0 && scope.currentMorselIndex < scope.morselsCount - 1
+              inStory: scope.currentMorselIndex > 0 && scope.currentMorselIndex < scope.morselsCount - 1,
+              onShare: scope.currentMorselIndex === scope.morselsCount - 1
             });
           }
 
@@ -413,7 +511,7 @@ angular.module('Morsel.storySwipe', [
           //make sure we can scroll on this element and user only scrolls one at a time
           if(!nonScrollable && hasScrolled) {
             //if we scroll up
-            if (deltaY > 0) {
+            if (deltaY > 0 && (Math.abs(deltaY) >= scrollMinIntensity) ) {
               //if we're on the first morsel
               if (scope.currentMorselIndex === 0) {
                 //go to the previous story
@@ -424,7 +522,7 @@ angular.module('Morsel.storySwipe', [
                 //else go to the previous morsel
                 goToSlide(scope.currentMorselIndex-1, true);
               }
-            } else if (deltaY < 0) {
+            } else if (deltaY < 0 && (Math.abs(deltaY) >= scrollMinIntensity) ) {
               //if we scroll down
               //if we're on the last morsel
               if(scope.currentMorselIndex === scope.morselsCount - 1) {
@@ -447,7 +545,7 @@ angular.module('Morsel.storySwipe', [
         }
 
         // bind Hamster wheel event
-        hamster.wheel(handleMouseWheel);
+        hamster.wheel(_.debounce(handleMouseWheel, scrollDebounceTime, true));
 
         // unbind Hamster wheel event
         scope.$on('$destroy', function(){
@@ -460,7 +558,7 @@ angular.module('Morsel.storySwipe', [
           //make sure this scroll should have an effect
           var scrollValid = false;
 
-          if(Date.now() - (lastScrollTimestamp || 0) > scrollThreshold) {
+          if(Date.now() - (lastScrollTimestamp || 0) > scrollTimeThreshold) {
             scrollValid = true;
             lastScrollTimestamp = Date.now();
           }
@@ -470,4 +568,4 @@ angular.module('Morsel.storySwipe', [
       };
     }
   };
-}]);
+});
