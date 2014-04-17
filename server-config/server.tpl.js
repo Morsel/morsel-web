@@ -196,7 +196,7 @@ function renderUserPage(res, username) {
         "description": _.escape(user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : '')),
         "image": userImage || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "twitter": {
-          "creator": user.twitter_username || "@eatmorsel"
+          "creator": '@'+(user.twitter_username || 'eatmorsel')
         },
         "url": siteURL + '/' + user.username
       };
@@ -237,7 +237,7 @@ function renderMorselPage(res, username, morselIdSlug) {
             "image": getMetadataImage(morsel) || 'http://www.eatmorsel.com/assets/images/logos/morsel-large.png',
             "twitter": {
               "card" : 'summary_large_image',
-              "creator": user.twitter_username || '@eatmorsel'
+              "creator": '@'+(user.twitter_username || 'eatmorsel')
             },
             "og": {
               "type":"article",

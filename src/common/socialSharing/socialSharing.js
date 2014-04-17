@@ -57,7 +57,7 @@ angular.module( 'Morsel.socialSharing', [] )
         var url,
             shareText,
             s = scope.story,
-            twitterUsername = s.creator.twitter_username;
+            twitterUsername = '@'+s.creator.twitter_username;
 
         shareMixpanel(socialType);
 
