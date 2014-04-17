@@ -40,7 +40,7 @@ angular.module( 'Morsel', [
   'Morsel.handleErrors',
   'Morsel.immersiveSwipe',
   'Morsel.mixpanel',
-  'Morsel.morselLike',
+  'Morsel.itemLike',
   'Morsel.morselPressShare',
   'Morsel.responsiveImages',
   'Morsel.socialSharing',
