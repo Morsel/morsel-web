@@ -1,6 +1,6 @@
 angular.module( 'Morsel.apiMorsels', [] )
 
-// ApiMorsels is the middleman for dealing with /posts requests
+// ApiMorsels is the middleman for dealing with /morsels requests
 .factory('ApiMorsels', function($http, Restangular, $q) {
   var Morsels = {},
       RestangularMorsels = Restangular.all('morsels');
@@ -59,5 +59,5 @@ angular.module( 'Morsel.apiMorsels', [] )
     return deferred.promise;
   };*/
 
-  return Posts;
+  return Morsels;
 });
