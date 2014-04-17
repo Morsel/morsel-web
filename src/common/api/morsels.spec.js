@@ -1,4 +1,4 @@
-describe( 'ApiPosts factory', function() {
+describe( 'ApiMorsels factory', function() {
   var httpBackend;
 
   // Utils
@@ -17,16 +17,16 @@ describe( 'ApiPosts factory', function() {
 
   beforeEach( module( 'Morsel' ) );
 
-  it( 'should contain an ApiPosts factory', inject(function(ApiPosts) {
-    expect(ApiPosts).not.toEqual(null);
+  it( 'should contain an ApiMorsels factory', inject(function(ApiMorsels) {
+    expect(ApiMorsels).not.toEqual(null);
   }));
 
-  it( 'should contain a getFeed function', inject(function(ApiPosts) {
-    expect(ApiPosts.getFeed).toBeDefined();
+  it( 'should contain a getFeed function', inject(function(ApiMorsels) {
+    expect(ApiMorsels.getFeed).toBeDefined();
   }));
 
-  it( 'should contain a getPost function', inject(function(ApiPosts) {
-    expect(ApiPosts.getPost).toBeDefined();
+  it( 'should contain a getMorsel function', inject(function(ApiMorsels) {
+    expect(ApiMorsels.getMorsel).toBeDefined();
   }));
 
   describe('function getFeed', function() {
@@ -40,9 +40,9 @@ describe( 'ApiPosts factory', function() {
       httpBackend.verifyNoOutstandingRequest();
     });
 
-    it( 'should return an object', inject(function(ApiPosts) {
+    it( 'should return an object', inject(function(ApiMorsels) {
       var resolvedValue;
-      ApiPosts.getFeed().then(function (data) {
+      ApiMorsels.getFeed().then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();
@@ -50,7 +50,7 @@ describe( 'ApiPosts factory', function() {
     }));
   });
 
-  describe('function getPost', function() {
+  describe('function getMorsel', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
       httpBackend.expectGET(APIURL+'/morsels/1.json').respond('{"data":{}}');
@@ -61,9 +61,9 @@ describe( 'ApiPosts factory', function() {
       httpBackend.verifyNoOutstandingRequest();
     });
 
-    it( 'should return an object', inject(function(ApiPosts) {
+    it( 'should return an object', inject(function(ApiMorsels) {
       var resolvedValue;
-      ApiPosts.getPost(1).then(function (data) {
+      ApiMorsels.getMorsel(1).then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();

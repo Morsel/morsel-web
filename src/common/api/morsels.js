@@ -1,22 +1,22 @@
-angular.module( 'Morsel.apiPosts', [] )
+angular.module( 'Morsel.apiMorsels', [] )
 
-// ApiPosts is the middleman for dealing with /posts requests
-.factory('ApiPosts', function($http, Restangular, $q) {
-  var Posts = {},
-      RestangularPosts = Restangular.all('morsels');
+// ApiMorsels is the middleman for dealing with /posts requests
+.factory('ApiMorsels', function($http, Restangular, $q) {
+  var Morsels = {},
+      RestangularMorsels = Restangular.all('morsels');
 
-  Posts.getFeed = function() {
+  Morsels.getFeed = function() {
     return Restangular.one('feed').get();
   };
 
-  Posts.getPost = function(postId) {
+  Morsels.getMorsel = function(morselId) {
     var deferred = $q.defer();
 
-    RestangularPosts.get(postId).then(function(resp){
-      var postData = Restangular.stripRestangular(resp);
+    RestangularMorsels.get(morselId).then(function(resp){
+      var morselData = Restangular.stripRestangular(resp);
       //correctly sort morsel items by sort order before we even deal with them
-      postData.items = _.sortBy(postData.items, 'sort_order');
-      deferred.resolve(postData);
+      morselData.items = _.sortBy(morselData.items, 'sort_order');
+      deferred.resolve(morselData);
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));
     });

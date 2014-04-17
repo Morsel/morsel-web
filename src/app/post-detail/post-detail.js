@@ -13,7 +13,7 @@ angular.module( 'Morsel.postDetail', [])
   });
 })
 
-.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiPosts, ApiUsers, $location, $modal, $window ) {
+.controller( 'PostDetailCtrl', function PostDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $modal, $window ) {
   var username = $stateParams.username,
       postDetailsArr = $stateParams.postDetails.split('/'),
       postIdSlug = postDetailsArr[0],
@@ -39,7 +39,7 @@ angular.module( 'Morsel.postDetail', [])
 
   //check and make sure we pulled an idslug from the URL
   if(postIdSlug && username) {
-    ApiPosts.getPost(postIdSlug).then(function(postData){
+    ApiMorsels.getMorsel(postIdSlug).then(function(postData){
       $scope.story = postData;
     }, function() {
       //if there's an error retrieving post data (bad id?), go to profile page for now
