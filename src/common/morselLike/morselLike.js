@@ -29,12 +29,12 @@ angular.module( 'Morsel.morselLike', [] )
         var deferred = $q.defer();
 
         if(scope.morsel.liked) {
-          ApiMorsels.unlikeMorsel(scope.morsel.id).then(function(data) {
+          ApiMorsels.unlikeItem(scope.morsel.id).then(function(data) {
             scope.morsel.liked = data;
             deferred.resolve();
           });
         } else {
-          ApiMorsels.likeMorsel(scope.morsel.id).then(function(data) {
+          ApiMorsels.likeItem(scope.morsel.id).then(function(data) {
             scope.morsel.liked = data;
             deferred.resolve();
           });

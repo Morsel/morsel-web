@@ -71,8 +71,8 @@ angular.module( 'Morsel.immersive', [])
     }
   ];*/
 
-  ApiUsers.getPosts('jasonvincent').then(function(postData){
-    $scope.stories = postData;
+  ApiUsers.getMorsels('jasonvincent').then(function(morselsData){
+    $scope.stories = morselsData;
   });
 
   ApiUsers.getUser('jasonvincent').then(function(userData){

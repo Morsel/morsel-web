@@ -1,4 +1,4 @@
-describe( 'ApiMorsels factory', function() {
+describe( 'ApiItems factory', function() {
   var httpBackend;
 
   // Utils
@@ -17,22 +17,22 @@ describe( 'ApiMorsels factory', function() {
 
   beforeEach( module( 'Morsel' ) );
 
-  it( 'should contain an ApiMorsels factory', inject(function(ApiMorsels) {
-    expect(ApiMorsels).not.toEqual(null);
+  it( 'should contain an ApiItems factory', inject(function(ApiItems) {
+    expect(ApiItems).not.toEqual(null);
   }));
 
-  it( 'should contain a likeMorsel function', inject(function(ApiMorsels) {
-    expect(ApiMorsels.likeMorsel).toBeDefined();
+  it( 'should contain a likeItem function', inject(function(ApiItems) {
+    expect(ApiItems.likeItem).toBeDefined();
   }));
 
-  it( 'should contain an unlikeMorsel function', inject(function(ApiMorsels) {
-    expect(ApiMorsels.unlikeMorsel).toBeDefined();
+  it( 'should contain an unlikeItem function', inject(function(ApiItems) {
+    expect(ApiItems.unlikeItem).toBeDefined();
   }));
 
-  describe('function likeMorsel', function() {
+  describe('function likeItem', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectPOST(APIURL+'/morsels/1/like.json').respond('OK');
+      httpBackend.expectPOST(APIURL+'/items/1/like.json').respond('OK');
     }));
 
     afterEach(function () {
@@ -40,9 +40,9 @@ describe( 'ApiMorsels factory', function() {
       httpBackend.verifyNoOutstandingRequest();
     });
 
-    it( 'should return a blank object', inject(function(ApiMorsels) {
+    it( 'should return a blank object', inject(function(ApiItems) {
       var resolvedValue;
-      ApiMorsels.likeMorsel(1).then(function (data) {
+      ApiItems.likeItem(1).then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();
@@ -50,10 +50,10 @@ describe( 'ApiMorsels factory', function() {
     }));
   });
 
-  describe('function unlikeMorsel', function() {
+  describe('function unlikeItem', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectDELETE(APIURL+'/morsels/1/like.json').respond('OK');
+      httpBackend.expectDELETE(APIURL+'/items/1/like.json').respond('OK');
     }));
 
     afterEach(function () {
@@ -61,9 +61,9 @@ describe( 'ApiMorsels factory', function() {
       httpBackend.verifyNoOutstandingRequest();
     });
 
-    it( 'should return a blank object', inject(function(ApiMorsels) {
+    it( 'should return a blank object', inject(function(ApiItems) {
       var resolvedValue;
-      ApiMorsels.unlikeMorsel(1).then(function (data) {
+      ApiItems.unlikeItem(1).then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();

@@ -10,7 +10,7 @@ angular.module( 'Morsel', [
   'Morsel.reverse',
   //API
   'Morsel.apiFeed',
-  'Morsel.apiMorsels',
+  'Morsel.apiItems',
   'Morsel.apiPosts',
   'Morsel.apiUploads',
   'Morsel.apiUsers',
