@@ -10,8 +10,14 @@ Setup
 2. Clone repo
 3. $ npm install
 4. $ bower install
-5. a. To build (for dev) including style guide: grunt build
-   b. To build (for dev) without style guide: grunt build-no-style
-   c. To push style guide to heroku: grunt pushstyle
-   d. For continuous dev: grunt watch
-   e. To build (for production): grunt compile
+5. See Gruntfile for tasks
+
+Environment Vars
+==========
+APIURL:               http://api-staging.eatmorsel.com
+ERROR_PAGE_URL:       https://morsel-dev.s3.amazonaws.com/error-pages/error.html
+MAINTENANCE_PAGE_URL: https://morsel-dev.s3.amazonaws.com/error-pages/maintenance.html
+MIXPANELTOKEN:        
+NODE_ENV:             development
+PRERENDER_TOKEN:      
+SITEURL:              http://dev.eatmorsel.com
