@@ -9,11 +9,15 @@
 			"alt": "16x9 Image"
 		},
 		"logo": {
-			"src": "../../css/images/logos/morsel-text.png",
+			"src": "../../css/images/logos/morsel-large.png",
+			"alt": "Morsel"
+		},
+		"placeholder": {
+			"src": "../../css/images/logos/morsel-placeholder.jpg",
 			"alt": "Morsel"
 		},
 		"icon": {
-			"src": "../../css/images/logos/morsel-m.png",
+			"src": "../../css/images/logos/morsel-m_500.png",
 			"alt": "Icon Thumbnail"
 		},
 		"avatars" : {

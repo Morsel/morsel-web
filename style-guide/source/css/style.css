@@ -197,3 +197,8 @@ body > .container {
 header {
   margin-bottom: 50px;
 }
+
+/* line 100, style.scss */
+.morsel-comments {
+  position: relative !important;
+}
