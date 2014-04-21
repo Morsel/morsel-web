@@ -1,10 +1,10 @@
 angular.module( 'Morsel.comments', [] )
 
-.directive('itemComments', function(ApiItems, AfterLogin, Auth, $location, $q, $modal){
+.directive('mrslItemComments', function(ApiItems, AfterLogin, Auth, $location, $q, $modal){
   return {
     restrict: 'A',
     scope: {
-      item: '=itemComments'
+      item: '=mrslItemComments'
     },
     replace: true,
     link: function(scope, element, attrs) {

@@ -1,18 +1,18 @@
 <div class="thumbnails-wrap">
   <ul ng-if="morsel.items.length <= 4">
     <li ng-repeat="item in morsel.items" ng-click="$parent.$parent.index=$index+1; sendMixpanel(morsel.id)">
-      <img responsive-images="{{getItemThumbnailArray(item)}}" />
+      <img mrsl-responsive-images="{{getItemThumbnailArray(item)}}" />
     </li>
   </ul>
   <ul ng-if="morsel.items.length > 4">
     <li ng-repeat="item in morsel.items.slice(0,3)" ng-click="$parent.$parent.index=$index+1; sendMixpanel(morsel.id)">
-      <img responsive-images="{{getItemThumbnailArray(item)}}" />
+      <img mrsl-responsive-images="{{getItemThumbnailArray(item)}}" />
     </li>
     <li ng-click="$parent.index=4; sendMixpanel(morsel.items[3].id)" class="additional-thumbs">
       <div>
         <span>+{{morsel.items.slice(3).length}}</span>
       </div>
-      <img responsive-images="{{getItemThumbnailArray(morsel.items[3])}}" />
+      <img mrsl-responsive-images="{{getItemThumbnailArray(morsel.items[3])}}" />
     </li>
   </ul>
 </div>

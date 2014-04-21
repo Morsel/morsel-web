@@ -1,12 +1,12 @@
 angular.module('Morsel.submitBtn', [])
 
-.directive('submitBtn', [function() {
+.directive('mrslSubmitBtn', [function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      form: '=submitBtnForm',
-      copy: '@submitBtnCopy'
+      form: '=mrslSubmitBtnForm',
+      copy: '@mrslSubmitBtnCopy'
     },
     link: function(scope) {
     },

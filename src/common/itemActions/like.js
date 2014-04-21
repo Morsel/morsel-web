@@ -1,10 +1,10 @@
 angular.module( 'Morsel.itemLike', [] )
 
 //like/unlike an item
-.directive('itemLike', function(ApiItems, AfterLogin, $location, Auth, $q){
+.directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q){
   return {
     scope: {
-      item: '=itemLike'
+      item: '=mrslItemLike'
     },
     replace: true,
     link: function(scope, element, attrs) {

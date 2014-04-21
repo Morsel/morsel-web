@@ -1,21 +1,21 @@
 angular.module('Morsel.validatedElement', [])
 
-.directive('validatedElement', function() {
+.directive('mrslValidatedElement', function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      inForm: '=valForm',
-      type: '@valType',
-      enName: '@valEnName',
-      inputName: '@valName',
-      required: '@valRequired',
-      placeholder: '@valPlaceholder',
-      formModel: '=valFormModel',
-      customVal: '=valCustom',
-      tagType: '@valTagType',
-      radioVals: '=valRadioVals',
-      helpText: '@valHelpText'
+      inForm: '=mrslValForm',
+      type: '@mrslValType',
+      enName: '@mrslValEnName',
+      inputName: '@mrslValName',
+      required: '@mrslValRequired',
+      placeholder: '@mrslValPlaceholder',
+      formModel: '=mrslValFormModel',
+      customVal: '=mrslValCustom',
+      tagType: '@mrslValTagType',
+      radioVals: '=mrslValRadioVals',
+      helpText: '@mrslValHelpText'
     },
     link: function(scope, element, attrs) {
       var customValType;

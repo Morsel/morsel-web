@@ -1,14 +1,14 @@
 angular.module( 'Morsel.itemActionBar', [] )
 
 //a holder for actions performed on an item
-.directive('itemActionBar', function() {
+.directive('mrslItemActionBar', function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      item: '=actionableItem',
-      items: '=',
-      index: '='
+      item: '=mrslActionableItem',
+      items: '=mrslItems',
+      index: '=mrsItems'
     },
     link: function(scope, element, attrs) {
       scope.nonSwipeable = true;

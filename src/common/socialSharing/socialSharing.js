@@ -1,12 +1,12 @@
 angular.module( 'Morsel.socialSharing', [] )
 
 //like/unlike a morsel
-.directive('socialSharing', function($location, Mixpanel, $window){
+.directive('mrslSocialSharing', function($location, Mixpanel, $window){
   return {
     restrict: 'A',
     scope: {
-      morsel : '=socialSharing',
-      fullBtns : '=socialFull'
+      morsel : '=mrslSocialSharing',
+      fullBtns : '=mrslSocialFull'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -17,7 +17,7 @@ angular.module( 'Morsel.socialSharing', [] )
       scope.socialExpanded = true;
       scope.nonSwipeable = true;
 
-      scope.$watch('morsel', function(newValue, oldValue) {
+      scope.$watch('mrslMorsel', function(newValue, oldValue) {
         if(newValue) {
           morselId = newValue.id;
           creatorId = newValue.creator.id;

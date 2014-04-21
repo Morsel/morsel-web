@@ -11,8 +11,8 @@ angular.module('Morsel.morselSwipe', [
     restrict: 'A',
     replace: true,
     scope: {
-      index: '=',
-      morsel: '='
+      index: '=mrslIndex',
+      morsel: '=mrslMorsel'
     },
     link: function(scope, element, attrs) {
       var morselId;
@@ -22,7 +22,7 @@ angular.module('Morsel.morselSwipe', [
         return new Array(n);
       };
 
-      scope.$watch('morsel', function(newValue, oldValue) {
+      scope.$watch('mrslMorsel', function(newValue, oldValue) {
         if(newValue) {
           morselId = newValue.id;
         }
@@ -59,13 +59,13 @@ angular.module('Morsel.morselSwipe', [
   };
 })
 
-.directive('itemIndicators', function() {
+.directive('mrslItemIndicators', function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      count: '=',
-      index: '='
+      count: '=mrslCount',
+      index: '=mrslIndex'
     },
     link: function(scope, element, attrs) {
       scope.range = function(n) {
@@ -78,7 +78,7 @@ angular.module('Morsel.morselSwipe', [
   };
 })
 
-.directive('morselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel) {
+.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -177,7 +177,7 @@ angular.module('Morsel.morselSwipe', [
           }
         }
 
-        iAttributes.$observe('morselSwipe', function(newValue, oldValue) {
+        iAttributes.$observe('mrslMorselSwipe', function(newValue, oldValue) {
           updateItemHeight();
 
           // only bind swipe when it's not switched off
@@ -197,7 +197,7 @@ angular.module('Morsel.morselSwipe', [
         });
 
         //watch for update in item number
-        iAttributes.$observe('morselSwipeCount', function(newValue) {
+        iAttributes.$observe('mrslMorselSwipeCount', function(newValue) {
           if(newValue) {
             scope.itemCount = parseInt(newValue, 10) + extraPages; //+2 for cover page + share page
           }

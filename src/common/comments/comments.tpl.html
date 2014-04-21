@@ -7,7 +7,7 @@
     <ul ng-show="item.comments">
       <li ng-repeat="comment in item.comments | reverse" class="item-comment">
         <div class="user-info">
-          <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-xs"></div>
+          <div mrsl-user-image mrsl-username="comment.creator.username" mrsl-user-photos="comment.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
           <div class="user-body">
             <h5 class="user-info-main">
               <a href="/{{comment.creator.username}}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a>

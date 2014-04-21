@@ -1,12 +1,12 @@
 angular.module( 'Morsel.textLimit', [] )
 
 //show/hide an amount of text
-.directive('textLimit', function($modal, $window){
+.directive('mrslTextLimit', function($modal, $window){
   return {
     restrict: 'A',
     scope: {
-      fullContent: '=textContent',
-      charLimit: '='
+      fullContent: '=mrslTextContent',
+      charLimit: '=mrslCharLimit'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -63,7 +63,7 @@ angular.module( 'Morsel.textLimit', [] )
   };
 })
 
-.directive('textLimitBtn', function(){
+.directive('mrslTextLimitBtn', function(){
   return {
     restrict: 'A',
     scope: true,

@@ -1,13 +1,13 @@
 angular.module('Morsel.userImage', [])
 
-.directive('userImage', [function() {
+.directive('mrslUserImage', [function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      username: '=',
-      userPhotos: '=',
-      userImageSize: '@'
+      username: '=mrslUsername',
+      userPhotos: '=mrslUserPhotos',
+      userImageSize: '@mrslUserImageSize'
     },
     link: function(scope) {
       var placeholderAvatarUrl = 'assets/images/utility/avatars/avatar';

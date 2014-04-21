@@ -4,7 +4,7 @@
 */
 angular.module('Morsel.responsiveImages', [])
 
-.directive('responsiveImages', function(presetMediaQueries, $timeout) {
+.directive('mrslResponsiveImages', function(presetMediaQueries, $timeout) {
   return {
     restrict: 'A',
     priority: 100,
@@ -102,7 +102,7 @@ angular.module('Morsel.responsiveImages', [])
       }
 
       var updaterDereg;
-      attrs.$observe('responsiveImages', function(value) {
+      attrs.$observe('mrslResponsiveImages', function(value) {
         var querySets = scope.$eval(value);
         
         if (querySets instanceof Array === false) {
