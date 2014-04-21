@@ -1,34 +1,34 @@
 <div class="immersive">
-  <div ng-class="{'in-story': immersiveState.inStory, 'on-share': immersiveState.onShare}">
+  <div ng-class="{'in-morsel': immersiveState.inMorsel, 'on-share': immersiveState.onShare}">
     <header class="immersive-header user-info">
-      <div class="story-container">
+      <div class="morsel-container">
         <a ng-click="goHome()" class="morsel-logo"><i>Morsel</i><span>Claim Your Username</span></a>
       </div>
     </header>
-    <div class="story current-story">
-      <div story-swipe="{{story.items.length > 0}}" story-swipe-count="{{story.items.length}}" ng-style="{'height': immersiveHeight}">
-        <div class="story-title">
-          <div class="story-container">
-            <h1>{{story.title}}</h1>
+    <div class="morsel current-morsel">
+      <div morsel-swipe="{{morsel.items.length > 0}}" morsel-swipe-count="{{morsel.items.length}}" ng-style="{'height': immersiveHeight}">
+        <div class="morsel-title">
+          <div class="morsel-container">
+            <h1>{{morsel.title}}</h1>
           </div>
         </div>
-        <div story-indicators index="currentIndicatorIndex" count="morselsCount"></div>
-        <ul class="morsels">
+        <div item-indicators index="currentIndicatorIndex" count="itemCount"></div>
+        <ul class="items">
           <li class="cover-page extra-page" ng-style="{'height': immersiveHeight}">
-            <div class="story-container">
-              <div ng-if="story.items" class="cover-photo-wrap" responsive-images="{{getCoverPhotoArray(story.items, story.primary_item_id)}}" ri-image-type="background"></div>
+            <div class="morsel-container">
+              <div ng-if="morsel.items" class="cover-photo-wrap" responsive-images="{{getCoverPhotoArray(morsel)}}" ri-image-type="background"></div>
               <div class="cover-title-wrap">
-                <h2 class="cover-title">{{story.title}}</h2>
+                <h2 class="cover-title">{{morsel.title}}</h2>
               </div>
               <div class="cover-info">
                 <div class="user-info">
                   <div user-image username="owner.username" user-photos="owner.photos" user-image-size="profile-pic-xs"></div>
                   <h5 class="h2 overflow-ellipsis">{{owner.first_name + ' ' + owner.last_name}}</h5>
                 </div>
-                <div story-thumbnails index="currentIndicatorIndex" story="story"></div>
+                <div item-thumbnails index="currentIndicatorIndex" morsel="morsel"></div>
                 <div class="cover-actions">
-                  <span am-time-ago="story.created_at" class="time-ago"></span>
-                  <a ng-click="currentIndicatorIndex = story.items.length+1"><i class="common-share"></i></a>
+                  <span am-time-ago="morsel.created_at" class="time-ago"></span>
+                  <a ng-click="currentIndicatorIndex = morsel.items.length+1"><i class="common-share"></i></a>
                 </div>
               </div>
               <div class="cover-browse">
@@ -37,30 +37,30 @@
               </div>
             </div>
           </li>
-          <li ng-repeat="morsel in story.items" class="morsel" ng-class="{'full-photo': fullPhoto}" ng-style="{'height': immersiveHeight}">
-            <div class="story-container">
+          <li ng-repeat="item in morsel.items" class="item" ng-class="{'full-photo': fullPhoto}" ng-style="{'height': immersiveHeight}">
+            <div class="morsel-container">
               <div class="item-photo-wrap">
-                <img class="morsel-img" responsive-images="{{getItemPhotoArray(morsel)}}" />
+                <img class="item-img" responsive-images="{{getItemPhotoArray(item)}}" />
               </div>
               <div class="item-info">
                 <div class="user-info">
                   <div user-image username="owner.username" user-photos="owner.photos" user-image-size="profile-pic-xs"></div>
                   <h5 class="h2 overflow-ellipsis">{{owner.first_name + ' ' + owner.last_name}}</h5>
                 </div>
-                <div morsel-actions actionable-morsel="morsel" index="$parent.currentIndicatorIndex" morsels="story.items"></div>
-                <p text-limit class="morsel-description" char-limit="200" text-content="morsel.description"></p>
-                <div social-sharing="story"></div>
+                <div item-action-bar actionable-item="item" index="$parent.currentIndicatorIndex" items="morsel.items"></div>
+                <p text-limit class="item-description" char-limit="200" text-content="item.description"></p>
+                <div social-sharing="morsel"></div>
               </div>
             </div>
           </li>
           <li class="share-page extra-page" ng-style="{'height': immersiveHeight}">
-            <div class="story-container">
-              <div ng-if="story.items" class="cover-photo-wrap" responsive-images="{{getCoverPhotoArray(story.items, story.primary_item_id)}}" ri-image-type="background"></div>
+            <div class="morsel-container">
+              <div ng-if="morsel.items" class="cover-photo-wrap" responsive-images="{{getCoverPhotoArray(morsel)}}" ri-image-type="background"></div>
               <div class="cover-title-wrap">
-                <h2 class="cover-title">{{story.title}}</h2>
+                <h2 class="cover-title">{{morsel.title}}</h2>
               </div>
-              <h5 class="share-this-story h2">Share this morsel:</h5>
-              <div social-sharing="story" social-full="true"></div>
+              <h5 class="share-this-morsel h2">Share this morsel:</h5>
+              <div social-sharing="morsel" social-full="true"></div>
               <hr />
               <div class="user-info">
                 <div user-image username="owner.username" user-photos="owner.photos" user-image-size="profile-pic-m"></div>

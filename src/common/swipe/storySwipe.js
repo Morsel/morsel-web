@@ -121,11 +121,11 @@ angular.module('Morsel.morselSwipe', [
         scope.currentIndicatorIndex = 0; //track which indicator is active
         scope.itemCount = extraPages; //account for cover page + share page
 
-        scope.getCoverPhotoArray = function(items, primaryId) {
+        scope.getCoverPhotoArray = function(morsel) {
           var primaryItemPhotos;
 
-          if(items) {
-            primaryItemPhotos = findPrimaryItemPhotos(items, primaryId);
+          if(morsel.items) {
+            primaryItemPhotos = findPrimaryItemPhotos(morsel);
 
             if(primaryItemPhotos) {
               return [
@@ -165,9 +165,9 @@ angular.module('Morsel.morselSwipe', [
           }
         };
 
-        function findPrimaryItemPhotos(items, primaryId) {
-          var primaryItem = _.find(items, function(i) {
-            return i.id === primaryId;
+        function findPrimaryItemPhotos(morsel) {
+          var primaryItem = _.find(morsel.items, function(i) {
+            return i.id === morsel.primary_item_id;
           });
 
           if(primaryItem && primaryItem.photos) {

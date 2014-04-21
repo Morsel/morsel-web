@@ -5,21 +5,21 @@ angular.module( 'Morsel.socialSharing', [] )
   return {
     restrict: 'A',
     scope: {
-      story : '=socialSharing',
+      morsel : '=socialSharing',
       fullBtns : '=socialFull'
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var storyId,
+      var morselId,
           creatorId,
           cURL = encodeURIComponent($location.absUrl());
 
       scope.socialExpanded = true;
       scope.nonSwipeable = true;
 
-      scope.$watch('story', function(newValue, oldValue) {
+      scope.$watch('morsel', function(newValue, oldValue) {
         if(newValue) {
-          storyId = newValue.id;
+          morselId = newValue.id;
           creatorId = newValue.creator.id;
         }
       });
@@ -27,14 +27,14 @@ angular.module( 'Morsel.socialSharing', [] )
       function shareMixpanel(socialType) {
         Mixpanel.send('Tapped Share Morsel', {
           social_type : socialType,
-          morsel_id : storyId,
+          morsel_id : morselId,
           creator_id : creatorId
         });
       }
 
       function getMediaImage() {
         var primaryItem,
-            m = scope.story;
+            m = scope.morsel;
 
         //if they have a collage, use it
         if(m.photos) {
@@ -56,7 +56,7 @@ angular.module( 'Morsel.socialSharing', [] )
       scope.shareSocial = function(socialType) {
         var url,
             shareText,
-            s = scope.story,
+            s = scope.morsel,
             twitterUsername = '@'+s.creator.twitter_username;
 
         shareMixpanel(socialType);
