@@ -2,25 +2,24 @@
   "name": "Morsel",
   "version": "1.1.2",
   "devDependencies": {
-    "angular": "1.2.7",
-    "angular-mocks": "1.2.7",
-    "angular-swipe": "git@github.com:marmorkuchen-net/angular-swipe.git",
-    "angular-touch": "~1.2.10",
-    "angular-ui-router": "~0.0.1",
-    "angular-ui-utils": "~0.0.3",
-    "bower-angular-placeholders": "~0.0.2",
-    "hamsterjs": "1.0.4",
-    "ngstorage": "~0.3.0",
-    "restangular": "",
-    "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0"
+    "angular-mocks": "1.2.7"
   },
   "resolutions": {
     "angular": "1.2.7"
   },
   "dependencies": {
-    "angular-moment": "~0.6.0",
+    "angular": "1.2.7",
     "angular-bootstrap": "~0.10.0",
+    "angular-moment": "~0.6.0",
+    "angular-swipe": "git@github.com:marmorkuchen-net/angular-swipe.git",
+    "angular-touch": "~1.2.10",
+    "angular-ui-router": "~0.0.1",
+    "angular-ui-utils": "~0.0.3",
     "animationFrame": "~0.1.6",
-    "ng-file-upload":"~1.2.7"
+    "hamsterjs": "1.0.4",
+    "ngstorage": "~0.3.0",
+    "ng-file-upload":"~1.2.7",
+    "restangular": "",
+    "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0"
   }
 }

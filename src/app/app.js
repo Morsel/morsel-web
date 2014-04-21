@@ -17,16 +17,6 @@ angular.module( 'Morsel', [
   //templates
   'templates-app',
   'templates-common',
-  //app
-  'Morsel.about',
-  'Morsel.addMorsel',
-  'Morsel.home',
-  'Morsel.join',
-  'Morsel.login',
-  'Morsel.logout',
-  'Morsel.morselDetail',
-  'Morsel.myfeed',
-  'Morsel.profile',//:username in route clobbers other routes - this needs to be last until a better solution is found
   //common
   'Morsel.afterLogin',
   'Morsel.auth',
@@ -44,7 +34,17 @@ angular.module( 'Morsel', [
   'Morsel.submitBtn',
   'Morsel.textLimit',
   'Morsel.userImage',
-  'Morsel.validatedElement'
+  'Morsel.validatedElement',
+  //app
+  'Morsel.about',
+  'Morsel.addMorsel',
+  'Morsel.home',
+  'Morsel.join',
+  'Morsel.login',
+  'Morsel.logout',
+  'Morsel.morselDetail',
+  'Morsel.myfeed',
+  'Morsel.profile'//:username in route clobbers other routes - this needs to be last until a better solution is found
 ])
 
 //define some constants for the app

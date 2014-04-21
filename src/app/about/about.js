@@ -1,8 +1,4 @@
-angular.module( 'Morsel.about', [
-  'ui.state',
-  'placeholders',
-  'ui.bootstrap'
-])
+angular.module( 'Morsel.about', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'about', {
