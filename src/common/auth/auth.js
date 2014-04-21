@@ -29,7 +29,8 @@ angular.module( 'Morsel.auth', [
       'title': null,
       'auth_token': '',
       'username': null,
-      'industry': null
+      'industry': null,
+      'staff': false
     };
   };
 
@@ -138,6 +139,10 @@ angular.module( 'Morsel.auth', [
 
   Auth.isDiner = function() {
     return Auth.isLoggedIn() && (Auth._currentUser.industry === 'diner');
+  };
+
+  Auth.isStaff = function() {
+    return Auth.isLoggedIn() && Auth._currentUser.staff;
   };
 
   //intercept our API calls

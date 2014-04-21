@@ -6,7 +6,8 @@ angular.module( 'Morsel.mixpanel', [])
       client_device: 'web',
       client_version: MorselConfig.version,
       $screen_width: window.innerWidth,
-      $screen_height: window.innerHeight
+      $screen_height: window.innerHeight,
+      is_staff: Auth.isStaff()
     };
   
   return {
@@ -21,6 +22,10 @@ angular.module( 'Morsel.mixpanel', [])
           user_id : userId
         });
       }
+
+      _.extend(props, {
+        is_staff : Auth.isStaff()
+      });
       
       if(window.mixpanel) {
         window.mixpanel.track(e, props); 
