@@ -442,7 +442,7 @@ angular.module('Morsel.morselSwipe', [
 
           if(scope.updateImmersiveState) {
             scope.updateImmersiveState({
-              inStory: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
+              inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
               onShare: scope.currentItemIndex === scope.itemCount - 1
             });
           }
@@ -489,7 +489,7 @@ angular.module('Morsel.morselSwipe', [
         handleMouseWheel = function(event, delta, deltaX, deltaY){
           var elementScope = angular.element(event.target).scope(),
               nonScrollable = elementScope.nonScrollable,
-              //use immersive checklastscroll if we can, fall back to story version
+              //use immersive checklastscroll if we can, fall back to morsel version
               hasScrolled = scope.checkLastScroll ? scope.checkLastScroll() : checkLastScroll();
 
           //make sure we can scroll on this element and user only scrolls one at a time
@@ -498,9 +498,9 @@ angular.module('Morsel.morselSwipe', [
             if (deltaY > 0 && (Math.abs(deltaY) >= scrollMinIntensity) ) {
               //if we're on the first morsel
               if (scope.currentItemIndex === 0) {
-                //go to the previous story
-                if(scope.goToPrevStory) {
-                  scope.goToPrevStory();
+                //go to the previous morsel
+                if(scope.goToPrevMorsel) {
+                  scope.goToPrevMorsel();
                 }
               } else {
                 //else go to the previous morsel
@@ -510,9 +510,9 @@ angular.module('Morsel.morselSwipe', [
               //if we scroll down
               //if we're on the last morsel
               if(scope.currentItemIndex === scope.itemCount - 1) {
-                //go to the next story
-                if(scope.goToNextStory) {
-                  scope.goToNextStory();
+                //go to the next morsel
+                if(scope.goToNextMorsel) {
+                  scope.goToNextMorsel();
                 }
               } else {
                 //and aren't on the last morsel
@@ -536,8 +536,8 @@ angular.module('Morsel.morselSwipe', [
           hamster.unwheel(handleMouseWheel);
         });
 
-        //scrolling story fallback
-        //keep this here so you don't fire a scroll event in this story (if it's not part of a feed)
+        //scrolling morsel fallback
+        //keep this here so you don't fire a scroll event in this morsel (if it's not part of a feed)
         function checkLastScroll() {
           //make sure this scroll should have an effect
           var scrollValid = false;
