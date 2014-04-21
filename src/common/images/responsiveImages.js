@@ -9,7 +9,7 @@ angular.module('Morsel.responsiveImages', [])
     restrict: 'A',
     priority: 100,
     scope: {
-      imageType: '@riImageType'
+      imageType: '@mrslRiImageType'
     },
     link: function(scope, elm, attrs) {
       // Double-check that the matchMedia function matchMedia exists
