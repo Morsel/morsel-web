@@ -66,6 +66,8 @@ angular.module( 'Morsel.comments', [] )
             }
             //clear comment textarea
             $scope.comment.description = '';
+            //update comment number
+            $scope.item.comment_count = $scope.item.comments.length;
             deferred.resolve();
           });
 

@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body">
   <div class="comments-body">
-    <ul ng-show="item.comments">
+    <ul ng-show="item.comments.length > 0">
       <li ng-repeat="comment in item.comments | reverse" class="item-comment">
         <div class="user-info">
           <div mrsl-user-image mrsl-username="comment.creator.username" mrsl-user-photos="comment.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
