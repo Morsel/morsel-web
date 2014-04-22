@@ -97,7 +97,7 @@ angular.module( 'Morsel', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
@@ -106,6 +106,16 @@ angular.module( 'Morsel', [
   //initial fetching of user data for header/footer
   Auth.setInitialUserData().then(function(){
     updateUserData();
+
+    //get and send some super properties to mixpanel
+    if(Auth.hasCurrentUser()) {
+      //identify our users by their ID, also don't overwrite their id if they log out
+      Mixpanel.identify(Auth.getCurrentUser()['id']);
+    }
+
+    Mixpanel.register({
+      is_staff : Auth.isStaff()
+    });
   }, function() {
     console.log('Trouble initiating user...');
   });

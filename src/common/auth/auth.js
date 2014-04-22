@@ -3,7 +3,7 @@ angular.module( 'Morsel.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE){
+.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel){
   var Auth = {},
       defaultRequestParams = {},
       hasLoadedUser = $q.defer();
@@ -148,10 +148,16 @@ angular.module( 'Morsel.auth', [
   //intercept our API calls
   Auth.setupInterceptor = function() {
     Restangular.setErrorInterceptor(function(response) {
-      //if an API call is ever blocked by restricted access, we log the user out for security
+      var errors;
+
       if (response.status === 401) {
+        //if an API call is ever blocked by restricted access, we log the user out for security
         Auth._clearUser();
         $location.path('/login');
+      } else if(response.data && response.data.errors && response.data.errors.api) {
+        //response returned an api issue
+        //report and error back to user
+        Auth.showApiError(response.status,errors);
       }
     });
   };
@@ -198,6 +204,30 @@ angular.module( 'Morsel.auth', [
 
   Auth.hasCurrentUser = function() {
     return hasLoadedUser.promise;
+  };
+
+  Auth.showApiError = function(status, errors) {
+    var modalInstance,
+        ModalInstanceCtrl,
+        errorList = errors || 'No error message';
+
+    //send error report to mixpanel
+    Mixpanel.send('Error - API', {
+      http_status: status,
+      error_message : JSON.stringify(errorList)
+    });
+
+    modalInstance = $modal.open({
+      templateUrl: 'auth/apiError.tpl.html',
+      controller: ModalInstanceCtrl,
+      resolve: {}
+    });
+
+    ModalInstanceCtrl = function ($scope, $modalInstance) {
+      $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+      };
+    };
   };
 
   //to start, reset our user

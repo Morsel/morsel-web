@@ -12,7 +12,7 @@ angular.module( 'Morsel.apiMorsels', [] )
   Morsels.getMorsel = function(morselId) {
     var deferred = $q.defer();
 
-    RestangularMorsels.get(morselId).then(function(resp){
+    RestangularMorsels.get('0').then(function(resp){
       var morselData = Restangular.stripRestangular(resp);
       //correctly sort morsel items by sort order before we even deal with them
       morselData.items = _.sortBy(morselData.items, 'sort_order');
