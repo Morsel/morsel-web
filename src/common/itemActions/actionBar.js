@@ -6,9 +6,9 @@ angular.module( 'Morsel.itemActionBar', [] )
     restrict: 'A',
     replace: true,
     scope: {
-      item: '=mrslActionableItem',
+      item: '=mrslItem',
       items: '=mrslItems',
-      index: '=mrsItems'
+      index: '=mrslIndex'
     },
     link: function(scope, element, attrs) {
       scope.nonSwipeable = true;

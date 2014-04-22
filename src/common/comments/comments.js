@@ -1,6 +1,6 @@
 angular.module( 'Morsel.comments', [] )
 
-.directive('mrslItemComments', function(ApiItems, AfterLogin, Auth, $location, $q, $modal){
+.directive('mrslItemComments', function(ApiItems, AfterLogin, Auth, $location, $q, $modal, $rootScope){
   return {
     restrict: 'A',
     scope: {
@@ -9,7 +9,6 @@ angular.module( 'Morsel.comments', [] )
     replace: true,
     link: function(scope, element, attrs) {
       scope.openComments = function () {
-        console.log(scope.item);
         var modalInstance = $modal.open({
           templateUrl: 'comments/comments.tpl.html',
           controller: ModalInstanceCtrl,
@@ -39,6 +38,10 @@ angular.module( 'Morsel.comments', [] )
             postComment();
           }
         };
+
+        $rootScope.$on('$locationChangeSuccess', function () {
+          $modalInstance.dismiss('cancel');
+        });
 
         if(!$scope.item.comments) {
           getComments();

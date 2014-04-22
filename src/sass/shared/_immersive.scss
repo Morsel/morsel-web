@@ -393,19 +393,19 @@ $immersive-bg: #030000;
         li {
           display: inline-block;
 
-          a {
-            display: inline-block;
-            color: white;
-            font-weight: 300;
-
-            i {
-              vertical-align: middle;
-              margin-right: 8px;
-            }
-          }
-
           & + li {
             margin-left: 12px;
+          }
+        }
+
+        a {
+          display: inline-block;
+          color: white;
+          font-weight: 300;
+
+          i {
+            vertical-align: middle;
+            margin-right: 8px;
           }
         }
 
@@ -472,6 +472,12 @@ $immersive-bg: #030000;
         @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
       }
     }
+
+    .item-actions {
+      a {
+        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+      }
+    }
   }
 }
 
@@ -508,6 +514,7 @@ $immersive-bg: #030000;
 
       .user-info {
         margin-bottom: 10px;
+
         h5 {
           font-size: 20px;
           line-height: $immersive-header-lg-line-height;
@@ -532,6 +539,12 @@ $immersive-bg: #030000;
           background-color: $morsel-light-off;
           height: auto;
           @include border-radius(3px);
+
+          .user-info {
+            span {
+              margin-left: 0;
+            }
+          }
         }
 
         .item-description {
@@ -565,7 +578,11 @@ $immersive-bg: #030000;
         }
 
         .item-actions {
-          display: none;
+          float: none;
+
+          a {
+            color: $morsel-dark;
+          }
         }
 
         .social-sharing {
