@@ -62,7 +62,6 @@ app.configure(function(){
 });
 
 app.get('/', function(req, res) {
-  console.log('params are: ',req.params);
   renderAngular(res, findMetadata(''));
 });
 
@@ -110,25 +109,20 @@ app.get('/unsubscribe', function(req, res){
 
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
-  console.log('got user '+ req.params.username+' with postid '+req.params.postidslug);
-  console.log('params are: ',req.params);
   renderMorselPage(res, req.params.username, req.params.postidslug);
 });
 
 //anything with a single route param
 app.get('/:route', function(req, res){
   var route = req.params.route;
-  console.log('params are: ',req.params);
+  
   //check against our known routes
   if(isValidStaticRoute(route)) {
     //check if it's a public route - public routes could have unique metadata
     if(isRoutePublic(route)) {
-      console.log(route+ ' is public');
       //need to check for metadata
-      console.log('found:',findMetadata(route));
       renderAngular(res, findMetadata(route));
     } else {
-      console.log(route+' is private');
       //if it's not public, we don't care about getting metadata/content customized - send req to angular
       renderAngular(res);
     }
@@ -140,7 +134,6 @@ app.get('/:route', function(req, res){
 
 //anything else must be a 404 at this point - this will obviously change
 app.get('*', function(req, res) {
-  console.log('params are: ',req.params);
   render404(res);
 });
 
@@ -214,15 +207,11 @@ function renderUserPage(res, username) {
 }
 
 function renderMorselPage(res, username, morselIdSlug) {
-  console.log('getting user metadata for morsel '+morselIdSlug+'...');
-
   request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
     var user;
 
     if (!error && response.statusCode == 200) {
       user = JSON.parse(body).data;
-
-      console.log('getting morsel metadata for morsel '+morselIdSlug+'...');
 
       request(apiURL+'/morsels/'+morselIdSlug+apiQuerystring, function (error, response, body) {
         var morsel,
@@ -271,7 +260,6 @@ function renderMorselPage(res, username, morselIdSlug) {
         }
       });
     } else {
-      console.log('not a valid user');
       //not a valid user - must be a bad route
       render404(res);
     }
