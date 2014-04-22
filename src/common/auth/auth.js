@@ -228,6 +228,8 @@ angular.module( 'Morsel.auth', [
         $modalInstance.dismiss('cancel');
       };
     };
+    //we need to implicitly inject dependencies here, otherwise minification will botch them
+    ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance'];
   };
 
   //to start, reset our user

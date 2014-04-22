@@ -74,6 +74,8 @@ angular.module( 'Morsel.comments', [] )
           return deferred.promise;
         }
       };
+      //we need to implicitly inject dependencies here, otherwise minification will botch them
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item'];
     },
     template: '<a ng-click="openComments()"><i class="common-chat"></i>{{item.comment_count}} comment{{item.comment_count===1?\'\':\'s\'}}</a>'
   };
