@@ -68,12 +68,13 @@
 
 
 //import shared styles
-@import "shared/_comments";
 @import "shared/_general";
 @import "shared/_immersive";
 @import "shared/_layout";
+@import "shared/_modal";
 @import "shared/_social";
 @import "shared/_static";
+@import "shared/_user-list";
 
 
 @import "../app/home/_home";

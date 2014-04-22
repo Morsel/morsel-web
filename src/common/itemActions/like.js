@@ -1,7 +1,7 @@
 angular.module( 'Morsel.itemLike', [] )
 
 //like/unlike an item
-.directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q){
+.directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q, $modal, $rootScope){
   return {
     scope: {
       item: '=mrslItemLike'
@@ -31,18 +31,71 @@ angular.module( 'Morsel.itemLike', [] )
         if(scope.item.liked) {
           ApiItems.unlikeItem(scope.item.id).then(function(data) {
             scope.item.liked = data;
+
+            //remove user from liker list
+            if(scope.item.likers) {
+              scope.item.likers = _.reject(scope.item.likers, function(liker) {
+                return liker.id === Auth.getCurrentUser()['id'];
+              });
+            }
+            
+            //increment count for display
+            scope.item.like_count--;
+
             deferred.resolve();
           });
         } else {
           ApiItems.likeItem(scope.item.id).then(function(data) {
             scope.item.liked = data;
+
+            //add user to liker list
+            if(scope.item.likers) {
+              scope.item.likers.unshift(Auth.getCurrentUser());
+            } else {
+              scope.item.likers = [Auth.getCurrentUser()];
+            }
+
+            //decrement count for display
+            scope.item.like_count++;
+
             deferred.resolve();
           });
         }
 
         return deferred.promise;
       }
+
+      scope.openLikes = function () {
+        var modalInstance = $modal.open({
+          templateUrl: 'itemActions/likes.tpl.html',
+          controller: ModalInstanceCtrl,
+          resolve: {
+            item: function () {
+              return scope.item;
+            }
+          }
+        });
+      };
+
+      var ModalInstanceCtrl = function ($scope, $modalInstance, item) {
+
+        $scope.item = item;
+        
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+
+        $rootScope.$on('$locationChangeSuccess', function () {
+          $modalInstance.dismiss('cancel');
+        });
+
+        if(!$scope.item.likers) {
+          ApiItems.getLikers($scope.item.id).then(function(likerData){
+            $scope.item.likers = likerData;
+          });
+        }
+      };
     },
-    template: '<a><i ng-click="toggleItemLike()" class="{{item.liked ? \'common-like\' : \'common-like-empty\'}}"></i>{{item.like_count}} like{{item.like_count===1?\'\':\'s\'}}</a>'
+    template: '<a><i ng-click="toggleItemLike()" class="{{item.liked ? \'common-like\' : \'common-like-empty\'}}"></i><span ng-click="openLikes()">{{item.like_count}} like{{item.like_count===1?\'\':\'s\'}}</span></a>'
   };
 });

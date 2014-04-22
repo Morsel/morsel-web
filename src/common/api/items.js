@@ -57,5 +57,17 @@ angular.module( 'Morsel.apiItems', [] )
     return deferred.promise;
   };
 
+  Items.getLikers = function(itemId) {
+    var deferred = $q.defer();
+
+    Restangular.one('items', itemId).getList('likers').then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Items;
 });

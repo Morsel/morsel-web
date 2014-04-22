@@ -1,0 +1,53 @@
+.user-list {
+  ul {
+    margin: 0;
+
+    li {
+      list-style: none;
+      border-bottom: 1px solid $morsel-light;
+      margin-bottom: 15px;
+
+      .user-info-main {
+        margin: 0 8px 0 0;
+        display: inline-block;
+      }
+
+      .time-ago {
+        font-style: italic;
+        display: inline-block;
+      }
+
+      .user-list-text {
+        margin-top: 10px;
+      }
+
+      &:last-child {
+        margin: 0;
+        border: 0;
+      }
+    }
+  }
+
+  .empty-state {
+    padding-bottom: 10px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .add-comment {
+    padding-top: 15px;
+    border-top: 1px solid white;
+    overflow: hidden;
+    margin-top: 10px;
+    border-top: 1px solid $morsel-light;
+  }
+
+  & > p {
+    text-align: center;
+    margin-top: 10px;
+    border-top: 1px solid $morsel-light;
+    padding-top: 10px;
+  }
+}
