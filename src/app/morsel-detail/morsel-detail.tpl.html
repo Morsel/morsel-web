@@ -23,7 +23,9 @@
               <div class="cover-info">
                 <div class="user-info">
                   <div mrsl-user-image mrsl-username="owner.username" mrsl-user-photos="owner.photos" mrsl-user-image-size="profile-pic-xs"></div>
-                  <h5 class="h2 overflow-ellipsis">{{owner.first_name + ' ' + owner.last_name}}</h5>
+                  <h5 class="h2 overflow-ellipsis">
+                    <a href="/{{owner.username}}">{{owner.first_name + ' ' + owner.last_name}}</a>
+                  </h5>
                 </div>
                 <div mrsl-item-thumbnails mrsl-index="currentIndicatorIndex" mrsl-morsel="morsel"></div>
                 <div class="cover-actions">
@@ -45,7 +47,9 @@
               <div class="item-info">
                 <div class="user-info">
                   <div mrsl-user-image mrsl-username="owner.username" mrsl-user-photos="owner.photos" mrsl-user-image-size="profile-pic-xs"></div>
-                  <h5 class="h2 overflow-ellipsis">{{owner.first_name + ' ' + owner.last_name}}</h5>
+                  <h5 class="h2 overflow-ellipsis">
+                    <a href="/{{owner.username}}">{{owner.first_name + ' ' + owner.last_name}}</a>
+                  </h5>
                 </div>
                 <div mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
                 <p mrsl-text-limit class="item-description" mrsl-char-limit="200" mrsl-text-content="item.description"></p>
@@ -64,10 +68,12 @@
               <hr />
               <div class="user-info">
                 <div mrsl-user-image mrsl-username="owner.username" mrsl-user-photos="owner.photos" mrsl-user-image-size="profile-pic-m"></div>
-                <h4 class="h3">{{owner.first_name + ' ' + owner.last_name}}</h4>
+                <h4 class="h3">
+                  <a href="/{{owner.username}}">{{owner.first_name + ' ' + owner.last_name}}</a>
+                </h4>
                 <h5>{{owner.title}}</h5>
                 <p>{{owner.bio}}</p>
-              </header>
+              </div>
             </div>
           </li>
         </ul>
@@ -75,7 +81,9 @@
     </div>
     <footer class="immersive-footer user-info">
       <div mrsl-user-image mrsl-username="owner.username" mrsl-user-photos="owner.photos" mrsl-user-image-size="profile-pic-xs"></div>
-      <h2 class="overflow-ellipsis">{{owner.first_name + ' ' + owner.last_name}}</h2>
+      <h2 class="overflow-ellipsis">
+        <a href="/{{owner.username}}">{{owner.first_name + ' ' + owner.last_name}}</a>
+      </h2>
     </footer>
   </div>
 </div>
