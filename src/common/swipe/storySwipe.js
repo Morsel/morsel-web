@@ -6,7 +6,7 @@ angular.module('Morsel.morselSwipe', [
   'ngTouch'
 ])
 
-.directive('itemThumbnails', function(Mixpanel) {
+.directive('mrslItemThumbnails', function(Mixpanel) {
   return {
     restrict: 'A',
     replace: true,
