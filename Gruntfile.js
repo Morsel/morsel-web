@@ -74,10 +74,11 @@ module.exports = function ( grunt ) {
     /**
      * The directories to delete when `grunt clean` is executed.
      */
-    clean: [ 
-      '<%= build_dir %>', 
-      '<%= compile_dir %>'
-    ],
+    clean: {
+      preDev: ['<%= build_dir %>'],
+      preCompile: ['<%= compile_dir %>'],
+      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/main.css']
+    },
 
     /**
      * The `copy` task just copies files from A to B. We use it here to copy
@@ -892,7 +893,7 @@ module.exports = function ( grunt ) {
    * The `build-no-style` task builds without the style guide
    */
   grunt.registerTask( 'build-no-style', [
-    'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
+    'clean:preDev', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
     'concat:build_css', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'index:build', 'karmaconfig',
     'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
@@ -907,7 +908,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**
