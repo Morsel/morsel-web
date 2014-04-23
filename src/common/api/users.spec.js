@@ -21,10 +21,6 @@ describe( 'ApiUsers factory', function() {
     expect(ApiUsers).not.toEqual(null);
   }));
 
-  it( 'should contain a getMorsels function', inject(function(ApiUsers) {
-    expect(ApiUsers.getMorsels).toBeDefined();
-  }));
-
   it( 'should contain a getUser function', inject(function(ApiUsers) {
     expect(ApiUsers.getUser).toBeDefined();
   }));
@@ -32,27 +28,6 @@ describe( 'ApiUsers factory', function() {
   it( 'should contain a newUser function', inject(function(ApiUsers) {
     expect(ApiUsers.newUser).toBeDefined();
   }));
-
-  describe('function getMorsels', function() {
-    beforeEach(inject(function (_$httpBackend_, APIURL) {
-      httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/users/1/morsels.json').respond('{"data":{}}');
-    }));
-
-    afterEach(function () {
-      httpBackend.verifyNoOutstandingExpectation();
-      httpBackend.verifyNoOutstandingRequest();
-    });
-
-    it( 'should return an object', inject(function(ApiUsers) {
-      var resolvedValue;
-      ApiUsers.getMorsels(1).then(function (data) {
-        resolvedValue = data;
-      });
-      httpBackend.flush();
-      expect(sanitizeRestangularAll(resolvedValue)).toEqual(jasmine.any(Object));
-    }));
-  });
 
   describe('function getUser', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {

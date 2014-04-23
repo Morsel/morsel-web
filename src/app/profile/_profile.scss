@@ -1,9 +1,11 @@
 .profile {
   padding-top: $mini-header-height;
-  
+  background-color: white;
+
   .user-container {
-    height: 150px;
-    background-color: $morsel-light;
+    li {
+      padding: 15px;
+    }
   }
 
   .user-stats {
@@ -15,8 +17,14 @@
       text-align: center;
       padding: 0 15px;
 
+      p {
+        color: $morsel-primary;
+        margin: 0;
+      }
+
       span {
         display: block;
+        color: $morsel-dark;
       }
 
       & + li {
@@ -33,12 +41,13 @@
       position: relative;
       float: left;
       display: inline-block;
-      width: 33%;
+      width: percentage(1/3);
       margin: 0;
       list-style: none;
 
       a {
         display: block;
+        padding: 1px;
 
         &:hover {
           div {

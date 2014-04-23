@@ -70,7 +70,18 @@ angular.module( 'Morsel.apiUsers', [] )
   };
 
   Users.getMorsels = function(username) {
-    return Restangular.one('users', username).one('morsels').get();
+    var deferred = $q.defer();
+
+    Restangular.one('users', username).one('morsels').get().then(function(resp) {
+      var morselsData = Restangular.stripRestangular(resp);
+      //correctly sort morsels by published_at before we even deal with them
+      morselsData = _.sortBy(morselsData, 'published_at');
+      deferred.resolve(morselsData);
+    }, function(resp) {
+      deferred.reject(resp);
+    });
+
+    return deferred.promise;
   };
 
   return Users;
