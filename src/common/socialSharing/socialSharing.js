@@ -11,8 +11,8 @@ angular.module( 'Morsel.socialSharing', [] )
     replace: true,
     link: function(scope, element, attrs) {
       var morselId,
-          creatorId,
-          cURL = encodeURIComponent($location.absUrl());
+          creatorId;
+          //cURL = encodeURIComponent($location.absUrl());//for testing
 
       scope.socialExpanded = true;
       scope.nonSwipeable = true;
@@ -57,22 +57,23 @@ angular.module( 'Morsel.socialSharing', [] )
         var url,
             shareText,
             s = scope.morsel,
-            twitterUsername = '@'+s.creator.twitter_username;
+            //use their handle if they have one - otherwise use their name
+            twitterUsername = s.creator.twitter_username ? '@'+s.creator.twitter_username : s.creator.first_name+' '+s.creator.last_name;
 
         shareMixpanel(socialType);
 
         if(socialType === 'facebook') {
-          url = 'https://www.facebook.com/sharer/sharer.php?u='+cURL;
+          url = 'https://www.facebook.com/sharer/sharer.php?u='+s.url;
         } else if(socialType === 'twitter') {
           shareText = encodeURIComponent('"'+s.title+'" from '+(twitterUsername || (s.creator.first_name+' '+s.creator.last_name))+' on @eatmorsel ');
-          url = 'https://twitter.com/home?status='+shareText+cURL;
+          url = 'https://twitter.com/home?status='+shareText+s.url;
         } else if(socialType === 'linkedin') {
-          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+cURL;
+          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+s.url;
         } else if(socialType === 'pinterest') {
           shareText = encodeURIComponent('"'+s.title+'" from '+s.creator.first_name+' '+s.creator.last_name+' on Morsel');
-          url = 'https://pinterest.com/pin/create/button/?url='+cURL+'&media='+encodeURIComponent(getMediaImage())+'&description='+shareText;
+          url = 'https://pinterest.com/pin/create/button/?url='+s.url+'&media='+encodeURIComponent(getMediaImage())+'&description='+shareText;
         } else if(socialType === 'google_plus') {
-          url = 'https://plus.google.com/share?url='+cURL;
+          url = 'https://plus.google.com/share?url='+s.url;
         }
 
         $window.open(url);
