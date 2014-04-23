@@ -14,8 +14,9 @@ angular.module( 'Morsel.profile', [])
 })
 
 .controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER ) {
+  $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
-  
+
   ApiUsers.getUser($stateParams.username).then(function(userData) {
     $scope.user = userData;
   }, function() {

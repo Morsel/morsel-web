@@ -131,8 +131,8 @@
       </nav>
 
       <div id="site" ng-class="{site: true, open:menuOpen}">
-        <header class="main-header">
-          <div class="container" ng-class="{hide: viewOptions.hideHeader}">
+        <header class="main-header" ng-class="{'mini-header': viewOptions.miniHeader, 'full-header': !viewOptions.miniHeader}">
+          <div class="container">
             <h1 class="morsel-logo">
               <a ng-click="goTo('home')">Morsel</a>
             </h1>
@@ -149,9 +149,6 @@
                 </li>
                 <li ng-class="{active:$uiRoute}">
                   <a ng-click="">Get the App</a>
-                </li>
-                <li ng-class="{active:$uiRoute}">
-                  <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger">Menu</a>
                 </li>
               </ul>
             </nav>

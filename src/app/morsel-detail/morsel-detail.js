@@ -19,7 +19,7 @@ angular.module( 'Morsel.morselDetail', [])
       morselIdSlug = morselDetailsArr[0],
       itemNumber = parseInt(morselDetailsArr[1], 10);
 
-  $scope.viewOptions.hideHeader = true;
+  $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
   $scope.goHome = function() {

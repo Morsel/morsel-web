@@ -159,7 +159,7 @@ angular.module( 'Morsel', [
   //reset our view options
   function resetViewOptions() {
     $scope.viewOptions = {
-      hideHeader : false,
+      miniHeader : false,
       hideFooter : false
     };
   }
