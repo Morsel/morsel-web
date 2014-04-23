@@ -1,6 +1,7 @@
 angular.module( 'Morsel', [
   //libs
   'angularMoment',
+  'angular-carousel',
   'restangular',
   'swipe',
   'ui.bootstrap',
@@ -29,6 +30,7 @@ angular.module( 'Morsel', [
   'Morsel.mixpanel',
   'Morsel.morselSwipe',
   'Morsel.itemLike',
+  'Morsel.photoHelpers',
   'Morsel.responsiveImages',
   'Morsel.socialSharing',
   'Morsel.submitBtn',
@@ -66,6 +68,8 @@ angular.module( 'Morsel', [
   'screen-md': 'only screen and (min-width: 992px)',
   'screen-lg': 'only screen and (min-width: 1200px)'
 })
+
+.constant('MORSELPLACEHOLDER', '/assets/images/logos/morsel-placeholder.jpg')
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};

@@ -204,35 +204,6 @@ $immersive-bg: #030000;
           cursor: pointer;
         }
       }
-
-      .additional-thumbs {
-        div {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          font-size: 0;
-          text-align: center;
-
-          &:before {
-            content: '';
-            display: inline-block;
-            height: 100%;
-            vertical-align: middle;
-          }
-        }
-
-        span {
-          display: inline-block;
-          vertical-align: middle;
-          width: 100%;
-          font-size: 30px;
-          font-weight: bold;
-          color: white;
-          @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-        }
-      }
     }
 
     .cover-browse {
@@ -620,12 +591,6 @@ $immersive-bg: #030000;
 
           &:nth-child(even) {
             margin-right: 0;
-          }
-        }
-
-        .additional-thumbs {
-          span {
-            font-size: 40px;
           }
         }
       }

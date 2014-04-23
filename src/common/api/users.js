@@ -9,10 +9,6 @@ angular.module( 'Morsel.apiUsers', [] )
     return RestangularUsers.get(username);
   };
 
-  Users.getFeed = function(userId) {
-    return Restangular.one('users', userId).one('feed').get();
-  };
-
   Users.newUser = function(userData) {
     var deferred = $q.defer(),
         fd,

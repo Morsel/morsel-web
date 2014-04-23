@@ -6,7 +6,7 @@ angular.module('Morsel.morselSwipe', [
   'ngTouch'
 ])
 
-.directive('mrslItemThumbnails', function(Mixpanel) {
+.directive('mrslItemThumbnails', function(Mixpanel, MORSELPLACEHOLDER) {
   return {
     restrict: 'A',
     replace: true,
@@ -46,7 +46,7 @@ angular.module('Morsel.morselSwipe', [
           } else {
             //no photos, return default placeholder
             return [
-              ['default', '/assets/images/logos/morsel-placeholder.jpg']
+              ['default', MORSELPLACEHOLDER]
             ];
           }
         } else {
@@ -78,7 +78,7 @@ angular.module('Morsel.morselSwipe', [
   };
 })
 
-.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel) {
+.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -125,7 +125,7 @@ angular.module('Morsel.morselSwipe', [
           var primaryItemPhotos;
 
           if(morsel.items) {
-            primaryItemPhotos = findPrimaryItemPhotos(morsel);
+            primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
 
             if(primaryItemPhotos) {
               return [
@@ -136,7 +136,7 @@ angular.module('Morsel.morselSwipe', [
               ];
             } else {
               return [
-                ['default', '/assets/images/logos/morsel-placeholder.jpg']
+                ['default', MORSELPLACEHOLDER]
               ];
             }
           } else {
@@ -156,7 +156,7 @@ angular.module('Morsel.morselSwipe', [
               ];
             } else {
               return [
-                ['default', '/assets/images/logos/morsel-placeholder.jpg']
+                ['default', MORSELPLACEHOLDER]
               ];
             }
           } else {
@@ -164,18 +164,6 @@ angular.module('Morsel.morselSwipe', [
             return [];
           }
         };
-
-        function findPrimaryItemPhotos(morsel) {
-          var primaryItem = _.find(morsel.items, function(i) {
-            return i.id === morsel.primary_item_id;
-          });
-
-          if(primaryItem && primaryItem.photos) {
-            return primaryItem.photos;
-          } else {
-            return null;
-          }
-        }
 
         iAttributes.$observe('mrslMorselSwipe', function(newValue, oldValue) {
           updateItemHeight();

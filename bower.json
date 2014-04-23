@@ -9,7 +9,6 @@
   },
   "dependencies": {
     "angular": "1.2.7",
-    "angular-bootstrap": "~0.10.1",
     "angular-moment": "~0.6.0",
     "angular-swipe": "git@github.com:marmorkuchen-net/angular-swipe.git",
     "angular-touch": "~1.2.10",
@@ -18,8 +17,10 @@
     "animationFrame": "~0.1.6",
     "hamsterjs": "1.0.4",
     "ngstorage": "~0.3.0",
-    "ng-file-upload":"~1.2.7",
+    "ng-file-upload": "~1.2.7",
     "restangular": "",
-    "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0"
+    "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0",
+    "angular-bootstrap": "~0.10.0",
+    "angular-carousel": "~0.2.2"
   }
 }

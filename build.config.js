@@ -89,6 +89,7 @@ module.exports = {
     js: [
       'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+      'vendor/angular-carousel/dist/angular-carousel.min.js',
       'vendor/angular-moment/angular-moment.min.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
       'vendor/angular-touch/angular-touch.js',
@@ -104,6 +105,7 @@ module.exports = {
       'vendor/restangular/dist/restangular.js'
     ],
     css: [
+      'vendor/angular-carousel/dist/angular-carousel.min.css',
     ],
     assets: [
       'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',

@@ -1,12 +1,37 @@
 <div class="profile">
-  <div class="user-info">
-    <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" class="profile-pic-m"></div>
-    <div>
-      <h1>{{user.first_name}} {{user.last_name}}</h1>
-      <span><i class="glyphicon glyphicon-heart"></i>{{user.like_count}}</span>
-      <span><i class="morsel-icon"></i>{{user.morsel_count}}</span>
+  <ul rn-carousel rn-carousel-indicator class="user-container">
+    <li>
+      <div class="user-info">
+        <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" class="profile-pic-m"></div>
+        <h1 class="h3">{{user.first_name}} {{user.last_name}}</h1>
+      </div>
       <p>{{user.bio}}</p>
-    </div>
+      <ul class="user-stats">
+        <li>
+          <p>{{user.like_count}}<span>like{{user.like_count === 1 ? '':'s'}}</span></p>
+        </li>
+        <li>
+          <p>{{user.item_count}}<span>item{{user.item_count === 1 ? '':'s'}}</span></p>
+        </li>
+      </ul>
+    </li>
+    <li>
+      something else
+    </li>
+  </ul>
+  <p>Morsels</p>
+  <ul class="user-morsels clearfix">
+    <li ng-repeat="morsel in morsels">
+      <a href="/{{user.username}}/{{morsel.id}}-{{morsel.slug}}" class="centered-white">
+        <div>
+          <span class="user-morsel-title">{{morsel.title}}</span>
+        </div>
+        <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
+      </a>
+    </li>
+  </ul>
+  <div ng-show="!morsels" class="loader"></div>
+  <div ng-show="morsels && morsels.length === 0" class="empty-state">
+    <p>This user hasn't made any morsels yet</p>
   </div>
-  <ul mrsl-feed mrsl-posts="feed" class="feed"></ul>
 </div>

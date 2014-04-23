@@ -1,26 +1,61 @@
 .profile {
-  padding-top: $mobile-header-height;
+  .user-container {
+    height: 150px;
+    background-color: $morsel-light;
+  }
 
-  .user-info {
-    background-color: rgba($morsel-medium, .5);
+  .user-stats {
+    text-align: center;
 
-    > div {
-
-      h1 {
-        color: $morsel-light;
-      }
+    li {
+      list-style: none;
+      display: inline-block;
+      text-align: center;
+      padding: 0 15px;
 
       span {
-        display: inline-block;
-        margin-right: 15px;
-        font-size: 16px;
-        color: $morsel-light;
+        display: block;
       }
 
-      p {
-        clear: both;
-        color: $morsel-light;
+      & + li {
+        border-left: 1px solid $morsel-medium;
       }
+    }
+  }
+
+  .user-morsels {
+    width: 100%;
+    margin: 0;
+
+    li {
+      position: relative;
+      float: left;
+      display: inline-block;
+      width: 33%;
+      margin: 0;
+      list-style: none;
+
+      a {
+        display: block;
+
+        &:hover {
+          div {
+            background-color: rgba(0,0,0,.2);
+          }
+        }
+      }
+    }
+
+    .centered-white {
+      div {
+        background-color: rgba(0,0,0,0);
+        @include transition(background-color .1s ease-out);
+      }
+    }
+
+    .user-morsel-title {
+      text-transform: uppercase;
+      font-size: 14px;
     }
   }
 }
