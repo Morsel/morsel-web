@@ -49,10 +49,8 @@ angular.module( 'Morsel.profile', [])
 
       if(primaryItemPhotos) {
         return [
-          ['default', primaryItemPhotos._320x320],
-          ['(min-width: 321px)', primaryItemPhotos._480x480],
-          ['screen-xs', primaryItemPhotos._640x640],
-          ['(min-width: 640px)', primaryItemPhotos._992x992]
+          ['default', primaryItemPhotos._100x100],
+          ['(min-width: 321px)', primaryItemPhotos._240x240]
         ];
       } else {
         return [

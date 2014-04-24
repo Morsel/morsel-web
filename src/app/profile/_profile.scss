@@ -1,6 +1,6 @@
 .profile {
   padding-top: $mini-header-height;
-  background-color: white;
+  background-color: $morsel-light-off;
 
   .user-container {
     li {
@@ -83,6 +83,10 @@
     margin: 0;
   }
 
+  .loader {
+    height: 250px;
+  }
+
   .user-morsels {
     width: 100%;
     margin: 0;
@@ -98,6 +102,8 @@
       a {
         display: block;
         padding: 1px;
+        text-align: center;
+        min-height: 60px;//so it doesn't look so nasty when they load
 
         &:hover {
           div {
@@ -125,6 +131,51 @@
   .profile {
     .container {
       padding: 0;
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .profile {
+    background-color: $morsel-background-dark;
+    background-image: url(images/bg/morsel-detail-noise.png);
+    padding-bottom: 10px;
+
+    .container {
+      padding: 0;
+      @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
+      background-color: $morsel-light-off;
+      @include border-radius(3px);
+    }
+
+    .user-morsels {
+      .user-morsel-title {
+        font-size: 22px;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .profile {
+    .user-morsels {
+      li {
+        width: percentage(1/4);
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .profile {
+    .user-morsels {
+      li {
+        width: percentage(1/5);
+      }
+
+      .user-morsel-title {
+        font-size: 24px;
+      }
     }
   }
 }

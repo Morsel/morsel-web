@@ -3,12 +3,11 @@ $immersive-footer-vert-padding: 5px;
 $immersive-footer-hor-padding: 10px;
 $immersive-header-lg-line-height: 40px;
 $immersive-footer-height: $immersive-footer-vert-padding*2 + $immersive-header-lg-line-height;
-$left-col-width: 55%;
-$right-col-width: 42%;
-$immersive-bg: #030000;
+$detail-left-col-width: 55%;
+$detail-right-col-width: 42%;
 
 .immersive {
-  background: $immersive-bg;
+  background: $morsel-background-dark;
 
   .immersive-footer {
     display: block;
@@ -471,14 +470,14 @@ $immersive-bg: #030000;
         }
 
         .item-photo-wrap {
-          width: $left-col-width;
+          width: $detail-left-col-width;
           float: left;
           padding: 0;
           text-align: left;
         }
 
         .item-info {
-          width: $right-col-width;
+          width: $detail-right-col-width;
           float: right;
           position: relative;
           padding-top: 20px;
@@ -509,11 +508,11 @@ $immersive-bg: #030000;
     .cover-page {
       .cover-photo-wrap, .cover-title-wrap {
         height: 98%;
-        width: $left-col-width;
+        width: $detail-left-col-width;
       }
 
       .cover-info {
-        width: $right-col-width;
+        width: $detail-right-col-width;
         float: right;
       }
 
