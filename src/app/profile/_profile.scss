@@ -9,6 +9,8 @@
   }
 
   .user-info {
+    margin-bottom: 15px;
+
     .h3 {
       margin: 2px 0 8px;
     }
@@ -32,6 +34,12 @@
       font-size: 15px;
       font-family: inherit;
     }
+  }
+
+  .edit-profile {
+    position: absolute;
+    top: 15px;
+    right: 15px;
   }
 
   .user-stats {
@@ -68,6 +76,10 @@
         list-style: none;
       }
     }
+  }
+
+  hr {
+    margin: 0;
   }
 
   .user-morsels {

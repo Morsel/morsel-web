@@ -20,7 +20,7 @@
           <p class="h3">{{user.item_count}}<span class="h6">item{{user.item_count === 1 ? '':'s'}}</span></p>
         </li>
       </ul>
-      <a href="/{{user.username}}/edit" ng-show="canEdit">Edit</a>
+      <a href="/{{user.username}}/edit" ng-show="canEdit" class="edit-profile">Edit</a>
     </li>
     <li>
       <div class="user-tags user-cuisines" ng-show="cuisines">
