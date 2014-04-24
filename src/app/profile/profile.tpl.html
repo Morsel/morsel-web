@@ -4,8 +4,7 @@
       <div class="user-info row">
         <div class="col-xs-4">
           <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos"  mrsl-no-link="true" class="profile-pic-m"></div>
-          <button class="btn btn-info" ng-show="!following" ng-click="following=!following">Follow</button>
-          <button class="btn btn-default" ng-show="following"  ng-click="following=!following">Following</button>
+          <button mrsl-follow mrsl-id-to-follow="user.id"></button>
         </div>
         <div class="user-body col-xs-8">
           <h3 class="user-username" ng-bind="user.username"></h3>

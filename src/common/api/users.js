@@ -97,5 +97,31 @@ angular.module( 'Morsel.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.followUser = function(userId) {
+    var deferred = $q.defer();
+
+    //guessing at what this follow call is going to be...
+    Restangular.one('users', userId).one('follow').post().then(function(resp){
+      deferred.resolve(true);
+    }, function(resp) {
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  };
+
+  Users.unfollowUser = function(userId) {
+    var deferred = $q.defer();
+
+    //guessing at what this unfollow call is going to be...
+    Restangular.one('users', userId).one('follow').remove().then(function(resp){
+      deferred.resolve(true);
+    }, function(resp) {
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  };
+
   return Users;
 });

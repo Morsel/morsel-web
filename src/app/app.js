@@ -23,6 +23,7 @@ angular.module( 'Morsel', [
   'Morsel.auth',
   'Morsel.baseErrors',
   'Morsel.comments',
+  'Morsel.follow',
   'Morsel.formNameFix',
   'Morsel.handleErrors',
   'Morsel.itemActionBar',
