@@ -59,6 +59,17 @@
     }
   }
 
+  .user-tags {
+    ul {
+      display: inline;
+
+      li {
+        display: inline-block;
+        list-style: none;
+      }
+    }
+  }
+
   .user-morsels {
     width: 100%;
     margin: 0;

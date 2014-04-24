@@ -23,7 +23,14 @@
       <a href="/{{user.username}}/edit" ng-show="canEdit">Edit</a>
     </li>
     <li>
-      something else
+      <div class="user-tags user-cuisines" ng-show="cuisines">
+        <span>Cuisines:</span>
+        <ul>
+          <li ng-repeat="cuisine in cuisines">
+            <a href="">{{cuisine}}</a>
+          </li>
+        </ul>
+      </div>
     </li>
   </ul>
   <hr />

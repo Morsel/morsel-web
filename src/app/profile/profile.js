@@ -33,6 +33,14 @@ angular.module( 'Morsel.profile', [])
     $location.path('/');
   });
 
+  $scope.cuisines = ['French', 'Italian', 'Farm-to-table', 'American (new)'];
+  /*ApiUsers.getCuisines($stateParams.username).then(function(cuisineData) {
+    $scope.cuisines = cuisineData;
+  }, function() {
+    //if there's an error retrieving user data (bad username?), go to home page for now
+    $location.path('/');
+  });*/
+
   $scope.getCoverPhotoArray = function(morsel) {
     var primaryItemPhotos;
 
