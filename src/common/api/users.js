@@ -85,10 +85,9 @@ angular.module( 'Morsel.apiUsers', [] )
   };
 
   Users.updateUser = function(userId, userData) {
-    var deferred = $q.defer(),
-        user = Auth.getCurrentUser();
+    var deferred = $q.defer();
 
-    Restangular.one('users', user.id).put(userData).then(function(resp) {
+    Restangular.one('users', userId).put(userData).then(function(resp) {
       deferred.resolve(resp);
     }, function(resp) {
       deferred.reject(resp);
