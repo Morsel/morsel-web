@@ -40,6 +40,7 @@ angular.module( 'Morsel', [
   //app
   'Morsel.about',
   'Morsel.addMorsel',
+  'Morsel.editProfile',
   'Morsel.home',
   'Morsel.join',
   'Morsel.login',

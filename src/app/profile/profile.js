@@ -13,20 +13,24 @@ angular.module( 'Morsel.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth ) {
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
   ApiUsers.getUser($stateParams.username).then(function(userData) {
     $scope.user = userData;
+
+    $scope.canEdit = userData.id === Auth.getCurrentUser()['id'];
   }, function() {
-    console.log('error retrieving user data');
+    //if there's an error retrieving user data (bad username?), go to home page for now
+    $location.path('/');
   });
 
   ApiUsers.getMorsels($stateParams.username).then(function(morselsData) {
     $scope.morsels = morselsData;
   }, function() {
-    console.log('error retrieving morsels');
+    //if there's an error retrieving user data (bad username?), go to home page for now
+    $location.path('/');
   });
 
   $scope.getCoverPhotoArray = function(morsel) {

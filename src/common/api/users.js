@@ -57,7 +57,7 @@ angular.module( 'Morsel.apiUsers', [] )
   };
 
   //called on initial app load if we have user info in storage
-  Users.getMyData = function(userId) {
+  Users.getMyData = function() {
     var deferred = $q.defer();
 
     RestangularUsers.get('me').then(function(resp){
@@ -77,6 +77,19 @@ angular.module( 'Morsel.apiUsers', [] )
       //correctly sort morsels by published_at before we even deal with them
       morselsData = _.sortBy(morselsData, 'published_at');
       deferred.resolve(morselsData);
+    }, function(resp) {
+      deferred.reject(resp);
+    });
+
+    return deferred.promise;
+  };
+
+  Users.updateUser = function(userId, userData) {
+    var deferred = $q.defer(),
+        user = Auth.getCurrentUser();
+
+    Restangular.one('users', user.id).put(userData).then(function(resp) {
+      deferred.resolve(resp);
     }, function(resp) {
       deferred.reject(resp);
     });
