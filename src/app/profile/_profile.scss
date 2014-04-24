@@ -8,6 +8,32 @@
     }
   }
 
+  .user-info {
+    .h3 {
+      margin: 2px 0 8px;
+    }
+
+    .col-xs-4 {
+      text-align: center;
+    }
+
+    .profile-pic-link {
+      margin: 0;
+      float: none;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+
+    .user-username {
+      margin: 5px 0;
+      color: $morsel-medium;
+      font-size: 15px;
+      font-family: inherit;
+    }
+  }
+
   .user-stats {
     text-align: center;
 

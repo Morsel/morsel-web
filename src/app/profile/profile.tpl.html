@@ -1,11 +1,18 @@
 <div class="profile">
   <ul rn-carousel rn-carousel-indicator class="user-container">
     <li>
-      <div class="user-info">
-        <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" class="profile-pic-m"></div>
-        <h1 class="h3">{{user.first_name}} {{user.last_name}}</h1>
+      <div class="user-info row">
+        <div class="col-xs-4">
+          <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos"  mrsl-no-link="true" class="profile-pic-m"></div>
+          <button class="btn btn-info" ng-show="!following" ng-click="following=!following">Follow</button>
+          <button class="btn btn-default" ng-show="following"  ng-click="following=!following">Following</button>
+        </div>
+        <div class="user-body col-xs-8">
+          <h3 class="user-username" ng-bind="user.username"></h3>
+          <h1 class="h3" ng-bind="user.first_name+' '+user.last_name"></h1>
+          <p ng-bind="user.bio"></p>
+        </div>
       </div>
-      <p>{{user.bio}}</p>
       <ul class="user-stats">
         <li>
           <p class="h3">{{user.like_count}}<span class="h6">like{{user.like_count === 1 ? '':'s'}}</span></p>

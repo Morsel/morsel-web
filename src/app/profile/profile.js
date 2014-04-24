@@ -17,6 +17,9 @@ angular.module( 'Morsel.profile', [])
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
+  //placeholder for following
+  $scope.following = false;
+
   ApiUsers.getUser($stateParams.username).then(function(userData) {
     $scope.user = userData;
 
