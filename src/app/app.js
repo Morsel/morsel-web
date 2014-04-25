@@ -24,6 +24,7 @@ angular.module( 'Morsel', [
   'Morsel.baseErrors',
   'Morsel.comments',
   'Morsel.follow',
+  'Morsel.followedUsers',
   'Morsel.followers',
   'Morsel.formNameFix',
   'Morsel.handleErrors',
