@@ -156,5 +156,17 @@ angular.module( 'Morsel.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.getSpecialties = function(userId) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', userId).one('specialties').get().then(function(resp) {
+      deferred.resolve(resp);
+    }, function(resp) {
+      deferred.reject(resp);
+    });
+
+    return deferred.promise;
+  };
+
   return Users;
 });

@@ -23,6 +23,15 @@ angular.module( 'Morsel.profile', [])
     $scope.user = userData;
 
     $scope.canEdit = userData.id === Auth.getCurrentUser()['id'];
+    $scope.isChef = userData.industry === 'chef';
+
+    ApiUsers.getCuisines(userData.id).then(function(cuisineData) {
+      $scope.cuisines = cuisineData;
+    });
+
+    ApiUsers.getSpecialties(userData.id).then(function(specialityData) {
+      $scope.specialties = specialityData;
+    });
   }, function() {
     //if there's an error retrieving user data (bad username?), go to home page for now
     $location.path('/');
@@ -34,16 +43,6 @@ angular.module( 'Morsel.profile', [])
     //if there's an error retrieving user data (bad username?), go to home page for now
     $location.path('/');
   });
-
-  $scope.cuisines = ['French', 'Italian', 'Farm-to-table', 'American (new)'];
-
-  $scope.specialities = ['whole animal', 'raw bar', 'vegan', 'beer cocktails'];
-  /*ApiUsers.getCuisines($stateParams.username).then(function(cuisineData) {
-    $scope.cuisines = cuisineData;
-  }, function() {
-    //if there's an error retrieving user data (bad username?), go to home page for now
-    $location.path('/');
-  });*/
 
   $scope.getCoverPhotoArray = function(morsel) {
     var primaryItemPhotos;

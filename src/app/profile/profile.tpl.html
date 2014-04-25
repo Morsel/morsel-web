@@ -2,7 +2,7 @@
   <div class="container">
     <a href="/{{user.username}}/edit" ng-show="canEdit" class="edit-profile">Edit</a>
     <ul rn-carousel rn-carousel-indicator rn-carousel-off="{{largeBreakpoint}}" class="user-container">
-      <li class="">
+      <li>
         <div class="user-info row col-sm-6">
           <div class="col-xs-4 row">
             <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos"  mrsl-no-link="true" class="profile-pic-m col-12"></div>
@@ -31,20 +31,28 @@
           </li>
         </ul>
       </li>
-      <li class="">
-        <div class="user-tags col-sm-6" ng-show="cuisines">
-          <span>Cuisines:</span>
+      <li ng-show="isChef">
+        <div class="user-tags col-sm-6">
+          <span class="h5">Cuisines:</span>
           <ul>
+            <li ng-show="cuisines.length === 0">
+              <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
+              <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</span>
+            </li>
             <li ng-repeat="cuisine in cuisines">
               <a href="">{{cuisine}}</a>
             </li>
           </ul>
         </div>
-        <div class="user-tags col-sm-6" ng-show="specialities">
-          <span>Specialities:</span>
+        <div class="user-tags col-sm-6">
+          <span class="h5">Specialties:</span>
           <ul>
-            <li ng-repeat="speciality in specialities">
-              <a href="">{{speciality}}</a>
+            <li ng-show="specialties.length === 0">
+              <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
+              <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</span>
+            </li>
+            <li ng-repeat="specialty in specialties">
+              <a href="">{{specialties}}</a>
             </li>
           </ul>
         </div>

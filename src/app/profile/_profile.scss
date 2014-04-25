@@ -7,10 +7,13 @@
   }
 
   .user-container {
-    li {
-      padding: 15px;
+    margin: 0;
+
+    > li {
       list-style: none;
       clear: both;
+      overflow: hidden;
+      padding: 15px 15px 5px;
     }
   }
 
@@ -81,6 +84,10 @@
   }
 
   .user-tags {
+    > span {
+      padding: 10px 5px;
+    }
+
     ul {
       margin: 0;
       display: inline;
@@ -88,7 +95,12 @@
       li {
         display: inline-block;
         list-style: none;
+        padding: 10px 5px;
       }
+    }
+
+    .user-tags-empty {
+      color: $morsel-medium;
     }
   }
 
@@ -99,6 +111,10 @@
 
   .loader {
     height: 250px;
+  }
+
+  .empty-state {
+    padding: 100px 0;
   }
 
   .user-morsels {
