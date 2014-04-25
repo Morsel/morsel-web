@@ -13,9 +13,11 @@ angular.module( 'Morsel.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth, $window ) {
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
+
+  $scope.largeBreakpoint = $window.innerWidth > 768; //total hack
 
   ApiUsers.getUser($stateParams.username).then(function(userData) {
     $scope.user = userData;
@@ -34,6 +36,8 @@ angular.module( 'Morsel.profile', [])
   });
 
   $scope.cuisines = ['French', 'Italian', 'Farm-to-table', 'American (new)'];
+
+  $scope.specialities = ['whole animal', 'raw bar', 'vegan', 'beer cocktails'];
   /*ApiUsers.getCuisines($stateParams.username).then(function(cuisineData) {
     $scope.cuisines = cuisineData;
   }, function() {

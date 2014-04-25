@@ -89,7 +89,7 @@ module.exports = {
     js: [
       'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      'vendor/angular-carousel/dist/angular-carousel.min.js',
+      /*'vendor/angular-carousel/dist/angular-carousel.min.js',*///until I figure out how to turn off conditionally
       'vendor/angular-moment/angular-moment.min.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
       'vendor/angular-touch/angular-touch.js',

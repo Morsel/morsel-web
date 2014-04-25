@@ -2,9 +2,15 @@
   padding-top: $mini-header-height;
   background-color: $morsel-light-off;
 
+  .container {
+    position: relative;
+  }
+
   .user-container {
     li {
       padding: 15px;
+      list-style: none;
+      clear: both;
     }
   }
 
@@ -70,6 +76,7 @@
 
   .user-tags {
     ul {
+      margin: 0;
       display: inline;
 
       li {
@@ -81,6 +88,7 @@
 
   hr {
     margin: 0;
+    clear: both;
   }
 
   .loader {
@@ -148,6 +156,10 @@
       @include border-radius(3px);
     }
 
+    .user-stats {
+      margin-top: 20px;
+    }
+    
     .user-morsels {
       .user-morsel-title {
         font-size: 22px;
