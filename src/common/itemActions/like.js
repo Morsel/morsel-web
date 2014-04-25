@@ -67,7 +67,7 @@ angular.module( 'Morsel.itemLike', [] )
 
       scope.openLikes = function () {
         var modalInstance = $modal.open({
-          templateUrl: 'itemActions/likes.tpl.html',
+          templateUrl: 'user/userList.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             item: function () {
@@ -78,9 +78,9 @@ angular.module( 'Morsel.itemLike', [] )
       };
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, item) {
+        $scope.users = item.likers;
+        $scope.heading = 'Likers';
 
-        $scope.item = item;
-        
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
         };
@@ -89,9 +89,9 @@ angular.module( 'Morsel.itemLike', [] )
           $modalInstance.dismiss('cancel');
         });
 
-        if(!$scope.item.likers) {
-          ApiItems.getLikers($scope.item.id).then(function(likerData){
-            $scope.item.likers = likerData;
+        if(!$scope.users) {
+          ApiItems.getLikers(item.id).then(function(likerData){
+            $scope.users = likerData;
           });
         }
       };
