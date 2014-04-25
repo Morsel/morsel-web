@@ -1,19 +1,16 @@
 angular.module( 'Morsel.follow', [] )
 
 //follow/unfollow something
-.directive('mrslFollow', function(ApiItems, AfterLogin, $location, Auth, $q){
+.directive('mrslFollow', function(ApiUsers, AfterLogin, $location, Auth, $q){
   return {
     scope: {
-      idToFollow: '=mrslIdToFollow'
+      idToFollow: '=mrslIdToFollow',
+      isFollowing: '=mrslIsFollowing'
     },
     replace: true,
     link: function(scope, element, attrs) {
-      //temporary - not sure where this will come from yet
-      scope.following = true;
-
       scope.toggleFollow = function() {
-        scope.following = !scope.following;
-        /*//check if we're logged in
+        //check if we're logged in
         if(Auth.isLoggedIn()) {
           performToggleFollow();
         } else {
@@ -26,19 +23,53 @@ angular.module( 'Morsel.follow', [] )
             });
           });
           $location.path('/join');
-        }*/
+        }
       };
 
       function performToggleFollow() {
         var deferred = $q.defer();
 
-        //do some stuff
+        if(scope.isFollowing) {
+          ApiUsers.unfollowUser(scope.idToFollow).then(function(data) {
+            scope.isFollowing = data;
+
+            //don't worry about this for now
+            /*//remove user from liker list
+            if(scope.item.likers) {
+              scope.item.likers = _.reject(scope.item.likers, function(liker) {
+                return liker.id === Auth.getCurrentUser()['id'];
+              });
+            }
+            
+            //increment count for display
+            scope.item.like_count--;*/
+
+            deferred.resolve();
+          });
+        } else {
+          ApiUsers.followUser(scope.idToFollow).then(function(data) {
+            scope.isFollowing = data;
+
+            //don't worry about this for now
+            /*//add user to liker list
+            if(scope.item.likers) {
+              scope.item.likers.unshift(Auth.getCurrentUser());
+            } else {
+              scope.item.likers = [Auth.getCurrentUser()];
+            }
+
+            //decrement count for display
+            scope.item.like_count++;*/
+
+            deferred.resolve();
+          });
+        }
 
         return deferred.promise;
       }
     },
-    template: '<button ng-click="toggleFollow()" class="btn {{following ? \'btn-default\' : \'btn-info\'}}">'+
-              '{{following ? \'Unfollow\' : \'Follow\'}}'+
+    template: '<button ng-click="toggleFollow()" class="btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
+              '{{isFollowing ? \'Unfollow\' : \'Follow\'}}'+
               '</button>'
   };
 });

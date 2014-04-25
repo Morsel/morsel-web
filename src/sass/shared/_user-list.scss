@@ -6,9 +6,15 @@
       list-style: none;
       border-bottom: 1px solid $morsel-light;
       margin-bottom: 15px;
+      padding-bottom: 15px;
+
+      .user-extra-info {
+        .user-info-main {
+          margin: 0 8px 0 0;
+        }
+      }
 
       .user-info-main {
-        margin: 0 8px 0 0;
         display: inline-block;
       }
 
@@ -18,7 +24,7 @@
       }
 
       .user-list-text {
-        margin-top: 10px;
+        margin: 5px 0 0;
       }
 
       &:last-child {

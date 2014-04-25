@@ -80,6 +80,7 @@ angular.module( 'Morsel.itemLike', [] )
       var ModalInstanceCtrl = function ($scope, $modalInstance, item) {
         $scope.users = item.likers;
         $scope.heading = 'Likers';
+        $scope.emptyText = 'No one has liked this yet';
 
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
