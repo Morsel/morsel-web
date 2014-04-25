@@ -13,7 +13,7 @@ angular.module( 'Morsel.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth, $window ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth, $window, $location, $anchorScroll ) {
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
@@ -65,5 +65,10 @@ angular.module( 'Morsel.profile', [])
       //return blank
       return [];
     }
+  };
+
+  $scope.scrollToMorsels = function() {
+    $location.hash('user-morsels');
+    $anchorScroll();
   };
 });

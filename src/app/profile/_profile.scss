@@ -58,9 +58,15 @@
       text-align: center;
       padding: 0 15px;
 
-      p {
+      a {
         color: $morsel-primary;
         margin: 0;
+
+        &:hover {
+          span {
+            color: $morsel-primary;
+          }
+        }
       }
 
       span {
@@ -159,7 +165,7 @@
     .user-stats {
       margin-top: 20px;
     }
-    
+
     .user-morsels {
       .user-morsel-title {
         font-size: 22px;
