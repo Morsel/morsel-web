@@ -44,7 +44,7 @@
               <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</span>
             </li>
             <li ng-repeat="cuisine in cuisines">
-              <a href="">{{cuisine.name}}</a>
+              <a mrsl-cuisine-users mrsl-cuisine="cuisine">{{cuisine.keyword.name}}</a>{{$last ? '':','}}
             </li>
           </ul>
         </div>
@@ -56,7 +56,7 @@
               <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</span>
             </li>
             <li ng-repeat="specialty in specialties">
-              <a href="">{{specialties.name}}</a>
+              <a mrsl-specialty-users mrsl-specialty="specialty">{{specialty.keyword.name}}</a>{{$last ? '':','}}
             </li>
           </ul>
         </div>

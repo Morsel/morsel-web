@@ -28,9 +28,9 @@ angular.module( 'Morsel.apiUsers', [] )
 
       //use our restangular multi-part post
       ApiUploads.upload('users', fd).then(function(resp){
-        deferred.resolve(resp);
+        deferred.resolve(Restangular.stripRestangular(resp));
       }, function(resp){
-        deferred.reject(resp);
+        deferred.resolve(Restangular.stripRestangular(resp));
       });
     } else {
       //no photo - use normal restangular post
@@ -61,9 +61,9 @@ angular.module( 'Morsel.apiUsers', [] )
     var deferred = $q.defer();
 
     RestangularUsers.get('me').then(function(resp){
-      deferred.resolve(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){
-      deferred.reject(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -78,7 +78,7 @@ angular.module( 'Morsel.apiUsers', [] )
       morselsData = _.sortBy(morselsData, 'published_at');
       deferred.resolve(morselsData);
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -88,9 +88,9 @@ angular.module( 'Morsel.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', userId).put(userData).then(function(resp) {
-      deferred.resolve(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -124,9 +124,9 @@ angular.module( 'Morsel.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', userId).one('followers').get().then(function(resp) {
-      deferred.resolve(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -136,9 +136,9 @@ angular.module( 'Morsel.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', userId).one('followed_users').get().then(function(resp) {
-      deferred.resolve(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -148,9 +148,9 @@ angular.module( 'Morsel.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', userId).one('cuisines').get().then(function(resp) {
-      deferred.resolve(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -160,9 +160,9 @@ angular.module( 'Morsel.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', userId).one('specialties').get().then(function(resp) {
-      deferred.resolve(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -172,9 +172,9 @@ angular.module( 'Morsel.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', userId).one('liked_items').get().then(function(resp) {
-      deferred.resolve(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;

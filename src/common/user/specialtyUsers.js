@@ -1,0 +1,48 @@
+angular.module( 'Morsel.specialtyUsers', [] )
+
+//show which users are tagged with a certain specialty
+.directive('mrslSpecialtyUsers', function(ApiKeywords, $modal, $rootScope){
+  return {
+    scope: {
+      specialty: '=mrslSpecialty'
+    },
+    replace: false,
+    link: function(scope, element, attrs) {
+      //bind whatever our element is to opening the overlay - this way we don't have to replace the existing element
+      element.bind('click', showSpecialtyUsers);
+
+      function showSpecialtyUsers() {
+        var modalInstance = $modal.open({
+          templateUrl: 'user/userList.tpl.html',
+          controller: ModalInstanceCtrl,
+          resolve: {
+            specialty: function () {
+              return scope.specialty;
+            }
+          }
+        });
+      }
+
+      var ModalInstanceCtrl = function ($scope, $modalInstance, specialty) {
+        $scope.heading = specialty.keyword.name;
+        $scope.emptyText = 'No one is tagged with this specialty';
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+
+        $rootScope.$on('$locationChangeSuccess', function () {
+          $modalInstance.dismiss('cancel');
+        });
+
+        if(!$scope.users) {
+          ApiKeywords.getSpecialtyUsers(specialty.keyword.id).then(function(userData){
+            $scope.users = userData;
+          });
+        }
+      };
+      //we need to implicitly inject dependencies here, otherwise minification will botch them
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'specialty'];
+    }
+  };
+});
