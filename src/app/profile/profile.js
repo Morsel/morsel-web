@@ -106,7 +106,7 @@ angular.module( 'Morsel.profile', [])
           likeable.itemMessage = likeable.itemMessage.substr(0, 80);
 
           //pick proper photo to display
-          likeable.display_photo = likeable.photos ? likeable.photos._50x50 : MORSELPLACEHOLDER;
+          likeable.display_photo = likeable.photos ? likeable.photos._80x80 : MORSELPLACEHOLDER;
         });
 
         $scope.likeFeed = likeFeedData;

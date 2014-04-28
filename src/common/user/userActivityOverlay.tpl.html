@@ -6,7 +6,7 @@
   <ul ng-show="likeFeed.length > 0">
     <li ng-repeat="likeable in likeFeed | reverse">
       <div class="user-info">
-        <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-xs"></div>
+        <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s"></div>
         <div class="user-body">
           <img ng-src="{{likeable.display_photo}}" />
           <p>{{user.first_name}} liked <a href="/{{likeable.user.username}}">{{likeable.user.first_name+' '+likeable.user.last_name}}</a>'s {{likeable.message}}</p>

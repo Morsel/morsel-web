@@ -212,9 +212,17 @@ form {
 }
 
 .activity-feed {
-  $activity-feed-padding-right: 60px;
-  
+  $activity-feed-padding-right: 90px;
+
+  ul {
+    margin: 0;
+  }
+
   li {
+    .user-profile-link {
+      margin-left: 0;
+    }
+    
     .user-body {
       img {
         float: right;
