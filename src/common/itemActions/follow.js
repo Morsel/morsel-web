@@ -9,6 +9,17 @@ angular.module( 'Morsel.follow', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
+      //wait until we have the data on who to follow, then decide if we need to show the follow button or not
+      scope.$watch('idToFollow', function(newValue, oldValue) {
+        if(newValue) {
+          var currentUser = Auth.getCurrentUser();
+
+          if(currentUser && currentUser.id === scope.idToFollow) {
+            scope.isSelf = true;
+          }
+        }
+      });
+
       scope.toggleFollow = function() {
         //check if we're logged in
         if(Auth.isLoggedIn()) {
@@ -68,7 +79,7 @@ angular.module( 'Morsel.follow', [] )
         return deferred.promise;
       }
     },
-    template: '<button ng-click="toggleFollow()" class="btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
+    template: '<button ng-hide="isSelf" ng-click="toggleFollow()" class="btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
               '{{isFollowing ? \'Unfollow\' : \'Follow\'}}'+
               '</button>'
   };
