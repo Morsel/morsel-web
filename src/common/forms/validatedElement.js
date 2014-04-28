@@ -14,7 +14,7 @@ angular.module('Morsel.validatedElement', [])
       formModel: '=mrslValFormModel',
       customVal: '=mrslValCustom',
       tagType: '@mrslValTagType',
-      radioVals: '=mrslValRadioVals',
+      multipleVals: '=mrslValMultipleVals',
       helpText: '@mrslValHelpText'
     },
     link: function(scope, element, attrs) {
@@ -78,6 +78,8 @@ angular.module('Morsel.validatedElement', [])
         templateMid = 'Textarea';
       } else if(tAttrs.valTagType === 'radio') {
         templateMid = 'Radio';
+      } else if(tAttrs.valTagType === 'checkbox') {
+        templateMid = 'Checkbox';
       }
       
       return templateRoot + templateMid + templateEnd;

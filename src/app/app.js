@@ -12,6 +12,7 @@ angular.module( 'Morsel', [
   //API
   'Morsel.apiFeed',
   'Morsel.apiItems',
+  'Morsel.apiKeywords',
   'Morsel.apiMorsels',
   'Morsel.apiUploads',
   'Morsel.apiUsers',

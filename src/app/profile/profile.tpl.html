@@ -44,7 +44,7 @@
               <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</span>
             </li>
             <li ng-repeat="cuisine in cuisines">
-              <a href="">{{cuisine}}</a>
+              <a href="">{{cuisine.name}}</a>
             </li>
           </ul>
         </div>
@@ -56,7 +56,7 @@
               <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</span>
             </li>
             <li ng-repeat="specialty in specialties">
-              <a href="">{{specialties}}</a>
+              <a href="">{{specialties.name}}</a>
             </li>
           </ul>
         </div>
