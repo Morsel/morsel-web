@@ -13,7 +13,7 @@ angular.module( 'Morsel.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth, $window, $location, $anchorScroll ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth, $window, $location, $anchorScroll, $modal, $rootScope ) {
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
@@ -70,4 +70,49 @@ angular.module( 'Morsel.profile', [])
     $location.hash('user-morsels');
     $anchorScroll();
   };
+
+  $scope.openLikeFeed = function () {
+    if($scope.user) {
+      var modalInstance = $modal.open({
+        templateUrl: 'user/userActivityOverlay.tpl.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+          user: function () {
+            return $scope.user;
+          }
+        }
+      });
+    }
+  };
+
+  var ModalInstanceCtrl = function ($scope, $modalInstance, user) {
+    $scope.user = user;
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
+    $rootScope.$on('$locationChangeSuccess', function () {
+      $modalInstance.dismiss('cancel');
+    });
+
+    if(!$scope.likeFeed) {
+      ApiUsers.getUserLikeFeed(user.id).then(function(likeFeedData){
+        _.each(likeFeedData, function(likeable) {
+          //construct message to display
+          likeable.itemMessage = likeable.title+': '+likeable.description;
+
+          //truncate message
+          likeable.itemMessage = likeable.itemMessage.substr(0, 80);
+
+          //pick proper photo to display
+          likeable.display_photo = likeable.photos ? likeable.photos._50x50 : MORSELPLACEHOLDER;
+        });
+
+        $scope.likeFeed = likeFeedData;
+      });
+    }
+  };
+  //we need to implicitly inject dependencies here, otherwise minification will botch them
+  ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'user'];
 });

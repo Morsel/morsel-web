@@ -211,6 +211,29 @@ form {
   }
 }
 
+.activity-feed {
+  $activity-feed-padding-right: 60px;
+  
+  li {
+    .user-body {
+      img {
+        float: right;
+      }
+
+      p {
+        padding-right: $activity-feed-padding-right;
+        margin-bottom: 0;
+      }
+
+      .time-ago {
+        display: block;
+        text-align: right;
+        padding-right: $activity-feed-padding-right;
+      }
+    }
+  }
+}
+
 @media (min-width: $screen-xs-min) {
   form {
     .avatar-add {

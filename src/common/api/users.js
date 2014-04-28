@@ -168,5 +168,17 @@ angular.module( 'Morsel.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.getUserLikeFeed = function(userId) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', userId).one('liked_items').get().then(function(resp) {
+      deferred.resolve(resp);
+    }, function(resp) {
+      deferred.reject(resp);
+    });
+
+    return deferred.promise;
+  };
+
   return Users;
 });
