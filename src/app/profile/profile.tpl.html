@@ -3,31 +3,35 @@
     <a href="/{{user.username}}/edit" ng-show="canEdit" class="edit-profile">Edit</a>
     <ul rn-carousel rn-carousel-indicator rn-carousel-off="{{largeBreakpoint}}" class="user-container">
       <li>
-        <div class="user-info row col-sm-6">
-          <div class="col-xs-4 row">
-            <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos"  mrsl-no-link="true" class="profile-pic-m col-12"></div>
-            <div class="col-12">
-              <button mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>
+        <div class="user-info col-sm-6">
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="row">
+                <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos"  mrsl-no-link="true" class="profile-pic-m col-12"></div>
+                <div class="col-12">
+                  <button mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="user-body col-xs-8">
-            <h3 class="user-username" ng-bind="user.username"></h3>
-            <h1 class="h3" ng-bind="user.first_name+' '+user.last_name"></h1>
-            <p ng-bind="user.bio"></p>
+            <div class="user-body col-xs-8">
+              <h3 class="user-username" ng-bind="user.username"></h3>
+              <h1 class="h3" ng-bind="user.first_name+' '+user.last_name"></h1>
+              <p ng-bind="user.bio"></p>
+            </div>
           </div>
         </div>
         <ul class="user-stats col-sm-6">
           <li>
-            <a class="h3">{{user.like_count}}<span class="h6">like{{user.like_count === 1 ? '':'s'}}</span></a>
+            <a class="h3">{{user.liked_items_count}}<span class="h6">like{{user.liked_items_count === 1 ? '':'s'}}</span></a>
           </li>
           <li>
             <a class="h3" ng-click="scrollToMorsels()">{{user.morsel_count}}<span class="h6">morsel{{user.morsel_count === 1 ? '':'s'}}</span></a>
           </li>
           <li>
-            <a class="h3" mrsl-followers mrsl-follow-id="user.id">1,000<span class="h6">Followers</span></a>
+            <a class="h3" mrsl-followers mrsl-follow-id="user.id">{{user.follower_count}}<span class="h6">Followers</span></a>
           </li>
           <li>
-            <a class="h3" mrsl-followed-users mrsl-follower-id="user.id">2,000<span class="h6">Following</span></a>
+            <a class="h3" mrsl-followed-users mrsl-follower-id="user.id">{{user.followed_users_count}}<span class="h6">Following</span></a>
           </li>
         </ul>
       </li>

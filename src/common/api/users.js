@@ -135,7 +135,7 @@ angular.module( 'Morsel.apiUsers', [] )
   Users.getFollowedUsers = function(userId) {
     var deferred = $q.defer();
 
-    Restangular.one('users', userId).one('following').get().then(function(resp) {
+    Restangular.one('users', userId).one('followed_users').get().then(function(resp) {
       deferred.resolve(resp);
     }, function(resp) {
       deferred.reject(resp);

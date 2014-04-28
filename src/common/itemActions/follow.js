@@ -31,7 +31,7 @@ angular.module( 'Morsel.follow', [] )
 
         if(scope.isFollowing) {
           ApiUsers.unfollowUser(scope.idToFollow).then(function(data) {
-            scope.isFollowing = data;
+            scope.isFollowing = false;
 
             //don't worry about this for now
             /*//remove user from liker list
@@ -48,7 +48,7 @@ angular.module( 'Morsel.follow', [] )
           });
         } else {
           ApiUsers.followUser(scope.idToFollow).then(function(data) {
-            scope.isFollowing = data;
+            scope.isFollowing = true;
 
             //don't worry about this for now
             /*//add user to liker list
