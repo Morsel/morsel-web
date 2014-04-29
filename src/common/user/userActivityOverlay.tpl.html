@@ -8,8 +8,10 @@
       <div class="user-info">
         <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s"></div>
         <div class="user-body">
-          <img ng-src="{{likeable.display_photo}}" />
-          <p>{{user.first_name}} liked <a href="/{{likeable.user.username}}">{{likeable.user.first_name+' '+likeable.user.last_name}}</a>'s {{likeable.message}}</p>
+          <a href="/{{likeable.creator.username}}/{{likeable.morsel.id}}-{{likeable.morsel.slug}}">
+            <img ng-src="{{likeable.display_photo}}" />
+          </a>
+          <p>{{user.first_name}} liked <a href="/{{likeable.creator.username}}">{{likeable.creator.first_name+' '+likeable.creator.last_name}}</a>'s {{likeable.itemMessage}}</p>
           <span am-time-ago="likeable.liked_at" class="time-ago"></span>
         </div>
       </div>

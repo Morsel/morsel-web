@@ -97,19 +97,19 @@ angular.module( 'Morsel.profile', [])
     });
 
     if(!$scope.likeFeed) {
-      ApiUsers.getUserLikeFeed(user.id).then(function(likeFeedData){
-        _.each(likeFeedData, function(likeable) {
+      ApiUsers.getLikeables(user.id, 'Item').then(function(likeableData){
+        _.each(likeableData, function(likeable) {
           //construct message to display
-          likeable.itemMessage = likeable.title+': '+likeable.description;
+          likeable.itemMessage = likeable.morsel.title+(likeable.description ? ': '+likeable.description : '');
 
           //truncate message
-          likeable.itemMessage = likeable.itemMessage.substr(0, 80);
+          likeable.itemMessage = likeable.itemMessage.length > 80 ? likeable.itemMessage.substr(0, 80) + '...' : likeable.itemMessage;
 
           //pick proper photo to display
           likeable.display_photo = likeable.photos ? likeable.photos._80x80 : MORSELPLACEHOLDER;
         });
 
-        $scope.likeFeed = likeFeedData;
+        $scope.likeFeed = likeableData;
       });
     }
   };

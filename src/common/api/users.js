@@ -168,10 +168,10 @@ angular.module( 'Morsel.apiUsers', [] )
     return deferred.promise;
   };
 
-  Users.getUserLikeFeed = function(userId) {
+  Users.getLikeables = function(userId, type) {
     var deferred = $q.defer();
 
-    Restangular.one('users', userId).one('liked_items').get().then(function(resp) {
+    Restangular.one('users', userId).one('likeables').get({type: type}).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
