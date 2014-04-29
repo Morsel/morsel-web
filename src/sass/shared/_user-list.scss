@@ -23,11 +23,14 @@
 
       .user-info-main {
         display: inline-block;
+        margin: 0;
+        line-height: 72px;
       }
 
       .time-ago {
         font-style: italic;
         display: inline-block;
+        color: $morsel-medium;
       }
 
       .user-list-text {
@@ -37,6 +40,7 @@
       &:last-child {
         margin: 0;
         border: 0;
+        padding: 0;
       }
     }
   }
@@ -62,5 +66,13 @@
     margin-top: 10px;
     border-top: 1px solid $morsel-light;
     padding-top: 10px;
+  }
+
+  &.comment-list {
+    li {
+      .user-info-main {
+        line-height: inherit;
+      }
+    }
   }
 }

@@ -2,7 +2,7 @@
   <button type="button" class="close" ng-click="cancel()">&times;</button>
   <h4 class="h2">Chef's Comments <span ng-show="item.comments.length > 0">({{item.comments.length}})</span><i class="common-comments"></i></h4>
 </div>
-<div class="modal-body user-list">
+<div class="modal-body user-list comment-list">
   <ul ng-show="item.comments.length > 0">
     <li ng-repeat="comment in item.comments | reverse">
       <div class="user-info">
