@@ -145,12 +145,6 @@
         padding: 1px;
         text-align: center;
         min-height: 60px;//so it doesn't look so nasty when they load
-
-        &:hover {
-          div {
-            background-color: rgba(0,0,0,.2);
-          }
-        }
       }
     }
 
@@ -195,7 +189,7 @@
       @include border-radius(3px);
     }
 
-    .user-contianer {
+    .user-container {
       .user-info {
         margin-bottom: 0;
       }
@@ -208,6 +202,16 @@
     .user-morsels {
       .user-morsel-title {
         font-size: 22px;
+      }
+
+      li {
+        a {
+          &:hover {
+            div {
+              background-color: rgba(0,0,0,.2);
+            }
+          }
+        }
       }
     }
   }

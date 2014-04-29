@@ -44,15 +44,12 @@ angular.module( 'Morsel', [
   'Morsel.userImage',
   'Morsel.validatedElement',
   //app
-  'Morsel.about',
-  'Morsel.addMorsel',
   'Morsel.editProfile',
   'Morsel.home',
   'Morsel.join',
   'Morsel.login',
   'Morsel.logout',
   'Morsel.morselDetail',
-  'Morsel.myfeed',
   'Morsel.profile'//:username in route clobbers other routes - this needs to be last until a better solution is found
 ])
 
