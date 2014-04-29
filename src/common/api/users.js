@@ -132,10 +132,10 @@ angular.module( 'Morsel.apiUsers', [] )
     return deferred.promise;
   };
 
-  Users.getFollowedUsers = function(userId) {
+  Users.getFollowables = function(userId, type) {
     var deferred = $q.defer();
 
-    Restangular.one('users', userId).one('followed_users').get().then(function(resp) {
+    Restangular.one('users', userId).one('followables').get({type: type}).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));

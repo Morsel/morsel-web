@@ -36,7 +36,7 @@ angular.module( 'Morsel.followedUsers', [] )
         });
 
         if(!$scope.users) {
-          ApiUsers.getFollowedUsers(followerId).then(function(followedData){
+          ApiUsers.getFollowables(followerId, 'User').then(function(followedData){
             $scope.users = followedData;
           });
         }
