@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body user-list">
   <ul ng-show="users.length > 0">
-    <li ng-repeat="user in users | reverse">
+    <li ng-repeat="user in users">
       <div class="user-info">
         <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s"></div>
         <div class="user-body">

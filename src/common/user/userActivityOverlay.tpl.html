@@ -4,7 +4,7 @@
 </div>
 <div class="modal-body activity-feed">
   <ul ng-show="likeFeed.length > 0">
-    <li ng-repeat="likeable in likeFeed | reverse">
+    <li ng-repeat="likeable in likeFeed">
       <div class="user-info">
         <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s"></div>
         <div class="user-body">
