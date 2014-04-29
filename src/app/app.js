@@ -109,10 +109,19 @@ angular.module( 'Morsel', [
 })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
+  var viewOptions = {
+    miniHeader : false,
+    hideFooter : false
+  };
+
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
   resetViewOptions();
+
+  setMinimumMainHeight();
+  //also bind on resize
+  angular.element($window).bind('resize', _.debounce(onBrowserResize, 300));
 
   //initial fetching of user data for header/footer
   Auth.setInitialUserData().then(function(){
@@ -165,10 +174,23 @@ angular.module( 'Morsel', [
 
   //reset our view options
   function resetViewOptions() {
-    $scope.viewOptions = {
-      miniHeader : false,
-      hideFooter : false
+    if(!$scope.viewOptions) {
+      $scope.viewOptions = {};
+    }
+
+    _.extend($scope.viewOptions, viewOptions);
+  }
+
+  function setMinimumMainHeight() {
+    //set the height of our main site to be at least as tall as the window
+    $scope.viewOptions.minimumMainHeight = function(){
+      return {'min-height': $window.innerHeight+'px'};
     };
+  }
+
+  function onBrowserResize() {
+    setMinimumMainHeight();
+    $scope.$apply('viewOptions');
   }
 
   $scope.goTo = function(path) {

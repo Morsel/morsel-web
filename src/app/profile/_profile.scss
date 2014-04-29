@@ -90,8 +90,10 @@
   }
 
   .user-tags {
+    margin-bottom: 10px;
+
     > span {
-      padding: 10px 5px;
+      padding: 2px 5px;
     }
 
     ul {
@@ -101,7 +103,7 @@
       li {
         display: inline-block;
         list-style: none;
-        padding: 10px 5px;
+        padding: 2px 5px;
         color: $morsel-medium;
       }
     }
