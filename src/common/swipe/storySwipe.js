@@ -135,6 +135,28 @@ angular.module('Morsel.morselSwipe', [
                 ['(min-width: 640px)', primaryItemPhotos._992x992]
               ];
             } else {
+              var lastItemWithPhotos;
+
+              //loop through items, take the last one with photos
+              _.each(morsel.items, function(item) {
+                if(item.photos) {
+                  lastItemWithPhotos = item;
+                }
+              });
+
+              if(lastItemWithPhotos) {
+                return [
+                  ['default', lastItemWithPhotos.photos._320x320],
+                  ['(min-width: 321px)', lastItemWithPhotos.photos._480x480],
+                  ['screen-xs', lastItemWithPhotos.photos._640x640],
+                  ['(min-width: 640px)', lastItemWithPhotos.photos._992x992]
+                ];
+              } else {
+                //no items have photos
+                return [
+                  ['default', '/assets/images/logos/morsel-placeholder.jpg']
+                ];
+              }
               return [
                 ['default', MORSELPLACEHOLDER]
               ];
