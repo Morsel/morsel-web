@@ -32,6 +32,14 @@ angular.module( 'Morsel.profile', [])
     ApiUsers.getSpecialties(userData.id).then(function(specialityData) {
       $scope.specialties = specialityData;
     });
+
+    $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
+      if(dir === 'increase') {
+        $scope.user.follower_count++;
+      } else if (dir === 'decrease') {
+        $scope.user.follower_count--;
+      }
+    });
   }, function() {
     //if there's an error retrieving user data (bad username?), go to home page for now
     $location.path('/');

@@ -44,33 +44,17 @@ angular.module( 'Morsel.follow', [] )
           ApiUsers.unfollowUser(scope.idToFollow).then(function(data) {
             scope.isFollowing = false;
 
-            //don't worry about this for now
-            /*//remove user from liker list
-            if(scope.item.likers) {
-              scope.item.likers = _.reject(scope.item.likers, function(liker) {
-                return liker.id === Auth.getCurrentUser()['id'];
-              });
-            }
-            
-            //increment count for display
-            scope.item.like_count--;*/
+            //emit this so if we're on a profile page, it can update the count
+            scope.$emit('users.'+scope.idToFollow+'.followerCount', 'decrease');
 
             deferred.resolve();
           });
         } else {
           ApiUsers.followUser(scope.idToFollow).then(function(data) {
             scope.isFollowing = true;
-
-            //don't worry about this for now
-            /*//add user to liker list
-            if(scope.item.likers) {
-              scope.item.likers.unshift(Auth.getCurrentUser());
-            } else {
-              scope.item.likers = [Auth.getCurrentUser()];
-            }
-
-            //decrement count for display
-            scope.item.like_count++;*/
+            
+            //emit this so if we're on a profile page, it can update the count
+            scope.$emit('users.'+scope.idToFollow+'.followerCount', 'increase');
 
             deferred.resolve();
           });
