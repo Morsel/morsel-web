@@ -6,7 +6,15 @@ angular.module( 'Morsel.apiUsers', [] )
       RestangularUsers = Restangular.all('users');
 
   Users.getUser = function(username) {
-    return RestangularUsers.get(username);
+    var deferred = $q.defer();
+
+    RestangularUsers.get(username).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
   };
 
   Users.newUser = function(userData) {

@@ -15,38 +15,38 @@
       overflow: hidden;
       padding: 15px 15px 5px;
     }
-  }
 
-  .user-info {
-    margin-bottom: 15px;
+    .user-info {
+      margin-bottom: 15px;
 
-    .h3 {
-      margin: 2px 0 8px;
-    }
+      .h3 {
+        margin: 2px 0 8px;
+      }
 
-    .col-xs-4 {
-      text-align: center;
-    }
+      .col-xs-4 {
+        text-align: center;
+      }
 
-    .profile-pic-link {
-      margin: 0;
-      float: none;
-    }
+      .profile-pic-link {
+        margin: 0;
+        float: none;
+      }
 
-    button {
-      margin-top: 10px;
-    }
+      button {
+        margin-top: 10px;
+      }
 
-    .user-username {
-      margin: 5px 0;
-      color: $morsel-medium;
-      font-size: 15px;
-      font-family: inherit;
-    }
+      .user-username {
+        margin: 5px 0;
+        color: $morsel-medium;
+        font-size: 15px;
+        font-family: inherit;
+      }
 
-    .user-body {
-      p {
-        margin-bottom: 0;
+      .user-body {
+        p {
+          margin-bottom: 0;
+        }
       }
     }
   }
@@ -127,8 +127,10 @@
   }
 
   .user-morsels {
-    width: 100%;
-    margin: 0;
+    ul {
+      width: 100%;
+      margin: 0;
+    }
 
     li {
       position: relative;
@@ -164,6 +166,12 @@
       font-size: 14px;
     }
   }
+
+  .user-likes {
+    max-width: $screen-sm;
+    margin: 0 auto;
+    padding: 15px;
+  }
 }
 
 @media (max-width: $screen-md) {
@@ -187,8 +195,10 @@
       @include border-radius(3px);
     }
 
-    .user-info {
-      margin-bottom: 0;
+    .user-contianer {
+      .user-info {
+        margin-bottom: 0;
+      }
     }
 
     .user-stats {

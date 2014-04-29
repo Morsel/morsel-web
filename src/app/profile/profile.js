@@ -40,6 +40,11 @@ angular.module( 'Morsel.profile', [])
         $scope.user.follower_count--;
       }
     });
+
+    //if user isn't a chef, we want to show their like feed in the main section of the profile page
+    if(!$scope.isChef) {
+      getLikeFeed($scope, $scope.user);
+    }
   }, function() {
     //if there's an error retrieving user data (bad username?), go to home page for now
     $location.path('/');
@@ -79,6 +84,11 @@ angular.module( 'Morsel.profile', [])
     $anchorScroll();
   };
 
+  $scope.scrollToLikes = function() {
+    $location.hash('user-likes');
+    $anchorScroll();
+  };
+
   $scope.openLikeFeed = function () {
     if($scope.user) {
       var modalInstance = $modal.open({
@@ -104,7 +114,13 @@ angular.module( 'Morsel.profile', [])
       $modalInstance.dismiss('cancel');
     });
 
-    if(!$scope.likeFeed) {
+    getLikeFeed($scope, user);
+  };
+  //we need to implicitly inject dependencies here, otherwise minification will botch them
+  ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'user'];
+
+  function getLikeFeed(scope, user) {
+    if(!scope.likeFeed) {
       ApiUsers.getLikeables(user.id, 'Item').then(function(likeableData){
         _.each(likeableData, function(likeable) {
           //construct message to display
@@ -117,10 +133,8 @@ angular.module( 'Morsel.profile', [])
           likeable.display_photo = likeable.photos ? likeable.photos._80x80 : MORSELPLACEHOLDER;
         });
 
-        $scope.likeFeed = likeableData;
+        scope.likeFeed = likeableData;
       });
     }
-  };
-  //we need to implicitly inject dependencies here, otherwise minification will botch them
-  ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'user'];
+  }
 });
