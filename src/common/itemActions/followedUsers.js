@@ -4,14 +4,12 @@ angular.module( 'Morsel.followedUsers', [] )
 .directive('mrslFollowedUsers', function(ApiUsers, $modal, $rootScope){
   return {
     scope: {
-      followerId: '=mrslFollowerId'
+      followerId: '=mrslFollowerId',
+      followingCount: '=mrslFollowingCount'
     },
     replace: false,
     link: function(scope, element, attrs) {
-      //bind whatever our element is to opening the overlay - this way we don't have to replace the existing element
-      element.bind('click', showFollowed);
-
-      function showFollowed() {
+      scope.showFollowed = function() {
         var modalInstance = $modal.open({
           templateUrl: 'user/userList.tpl.html',
           controller: ModalInstanceCtrl,
@@ -21,7 +19,7 @@ angular.module( 'Morsel.followedUsers', [] )
             }
           }
         });
-      }
+      };
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, followerId) {
         $scope.heading = 'Following';
@@ -43,6 +41,7 @@ angular.module( 'Morsel.followedUsers', [] )
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'followerId'];
-    }
+    },
+    template: '<a class="h3" ng-click="showFollowed()">{{followingCount}}<span class="h6">Following</span></a>'
   };
 });

@@ -232,6 +232,8 @@ form {
 
     .profile-pic-link {
       margin-left: 0;
+      width: $profile-pic-xs;
+      height: $profile-pic-xs;
     }
     
     .user-body {
@@ -254,6 +256,17 @@ form {
         display: block;
         text-align: right;
         color: $morsel-medium;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm) {
+  .activity-feed {
+    li {
+      .profile-pic-link {
+        width: $profile-pic-s;
+        height: $profile-pic-s;
       }
     }
   }

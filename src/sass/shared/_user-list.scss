@@ -17,14 +17,19 @@
       .user-body {
         button {
           float: right;
-          margin-top: 18px;
+          margin-top: 5px;
         }
       }
 
       .user-info-main {
         display: inline-block;
         margin: 0;
-        line-height: 72px;
+        line-height: $profile-pic-xs;
+      }
+
+      .profile-pic-link {
+        width: $profile-pic-xs;
+        height: $profile-pic-xs;
       }
 
       .time-ago {
@@ -72,6 +77,29 @@
     li {
       .user-info-main {
         line-height: inherit;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm) {
+  .user-list {
+    ul {
+      li {
+        .user-body {
+          button {
+            margin-top: 18px;
+          }
+        }
+
+        .user-info-main {
+          line-height: $profile-pic-s;
+        }
+
+        .profile-pic-link {
+          width: $profile-pic-s;
+          height: $profile-pic-s;
+        }
       }
     }
   }

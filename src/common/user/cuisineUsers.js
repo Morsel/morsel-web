@@ -6,12 +6,10 @@ angular.module( 'Morsel.cuisineUsers', [] )
     scope: {
       cuisine: '=mrslCuisine'
     },
-    replace: false,
+    replace: true,
     link: function(scope, element, attrs) {
-      //bind whatever our element is to opening the overlay - this way we don't have to replace the existing element
-      element.bind('click', showCuisineUsers);
 
-      function showCuisineUsers() {
+      scope.showCuisineUsers = function() {
         var modalInstance = $modal.open({
           templateUrl: 'user/userList.tpl.html',
           controller: ModalInstanceCtrl,
@@ -21,7 +19,7 @@ angular.module( 'Morsel.cuisineUsers', [] )
             }
           }
         });
-      }
+      };
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, cuisine) {
         $scope.heading = cuisine.keyword.name;
@@ -43,6 +41,7 @@ angular.module( 'Morsel.cuisineUsers', [] )
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'cuisine'];
-    }
+    },
+    template: '<a ng-click="showCuisineUsers()">{{cuisine.keyword.name}}</a>'
   };
 });
