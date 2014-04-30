@@ -6,7 +6,7 @@ angular.module( 'Morsel.morselDetail', [])
     views: {
       "main": {
         controller: 'MorselDetailCtrl',
-        templateUrl: 'morsel-detail/morsel-detail.tpl.html'
+        templateUrl: 'public/morsel-detail/morsel-detail.tpl.html'
       }
     },
     data:{ pageTitle: 'Morsel Detail' }
