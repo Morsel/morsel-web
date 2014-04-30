@@ -9,46 +9,51 @@ angular.module( 'Morsel.profile', [])
         templateUrl: 'profile/profile.tpl.html'
       }
     },
-    data:{ /*pageTitle: 'Profile'*/ }
+    data:{ /*pageTitle: 'Profile'*/ },
+    resolve: {
+      //get our user data before we try to render the page
+      userData: function(ApiUsers, $stateParams) {
+        return ApiUsers.getUser($stateParams.username).then(function(userData) {
+          return userData;
+        }, function() {
+          //if there's an error retrieving user data (bad username?), go to home page for now
+          $location.path('/');
+        });
+      }
+    }
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth, $window, $location, $anchorScroll, $modal, $rootScope ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth, $window, $location, $anchorScroll, $modal, $rootScope, userData ) {
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
   $scope.largeBreakpoint = $window.innerWidth > 768; //total hack
 
-  ApiUsers.getUser($stateParams.username).then(function(userData) {
-    $scope.user = userData;
+  $scope.user = userData;
+  $scope.canEdit = userData.id === Auth.getCurrentUser()['id'];
+  $scope.isChef = userData.industry === 'chef';
 
-    $scope.canEdit = userData.id === Auth.getCurrentUser()['id'];
-    $scope.isChef = userData.industry === 'chef';
-
-    ApiUsers.getCuisines(userData.id).then(function(cuisineData) {
-      $scope.cuisines = cuisineData;
-    });
-
-    ApiUsers.getSpecialties(userData.id).then(function(specialityData) {
-      $scope.specialties = specialityData;
-    });
-
-    $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
-      if(dir === 'increase') {
-        $scope.user.follower_count++;
-      } else if (dir === 'decrease') {
-        $scope.user.follower_count--;
-      }
-    });
-
-    //if user isn't a chef, we want to show their like feed in the main section of the profile page
-    if(!$scope.isChef) {
-      getLikeFeed($scope, $scope.user);
-    }
-  }, function() {
-    //if there's an error retrieving user data (bad username?), go to home page for now
-    $location.path('/');
+  ApiUsers.getCuisines(userData.id).then(function(cuisineData) {
+    $scope.cuisines = cuisineData;
   });
+
+  ApiUsers.getSpecialties(userData.id).then(function(specialityData) {
+    $scope.specialties = specialityData;
+  });
+
+  $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
+    if(dir === 'increase') {
+      $scope.user.follower_count++;
+    } else if (dir === 'decrease') {
+      $scope.user.follower_count--;
+    }
+  });
+
+  //if user isn't a chef, we want to show their like feed in the main section of the profile page
+  if(!$scope.isChef) {
+    getLikeFeed($scope, $scope.user);
+  }
 
   ApiUsers.getMorsels($stateParams.username).then(function(morselsData) {
     $scope.morsels = morselsData;

@@ -1,7 +1,7 @@
 <div class="profile" ng-style="viewOptions.minimumMainHeight()">
   <div class="container">
     <a href="/{{user.username}}/edit" ng-show="canEdit" class="edit-profile"><i class="common-settings"></i></a>
-    <ul rn-carousel rn-carousel-indicator rn-carousel-off="{{largeBreakpoint}}" class="user-container">
+    <ul rn-carousel rn-carousel-indicator rn-carousel-off="{{largeBreakpoint || !isChef}}" class="user-container">
       <li>
         <div class="user-info col-sm-6">
           <div class="row">
