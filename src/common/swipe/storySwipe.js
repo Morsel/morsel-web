@@ -543,7 +543,8 @@ angular.module('Morsel.morselSwipe', [
 
         // unbind Hamster wheel event
         scope.$on('$destroy', function(){
-          hamster.unwheel(handleMouseWheel);
+          //rather than trying to reference the debounced function, just remove the last one bound
+          hamster.unwheel();
         });
 
         //scrolling morsel fallback
