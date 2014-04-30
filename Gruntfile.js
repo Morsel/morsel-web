@@ -1021,6 +1021,15 @@ module.exports = function ( grunt ) {
       }
     });
 
+    grunt.file.copy('src/views/login.mustache', this.data.dir + '/views/login.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+          }
+        });
+      }
+    });
+
     grunt.file.copy('src/views/unsubscribe.mustache', this.data.dir + '/views/unsubscribe.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {

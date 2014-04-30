@@ -107,6 +107,11 @@ app.get('/unsubscribe', function(req, res){
   });
 });
 
+//login
+app.get('/login', function(req, res){
+  res.render('login');
+});
+
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
   renderMorselPage(res, req.params.username, req.params.postidslug);
