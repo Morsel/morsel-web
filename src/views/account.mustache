@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="Morsel.account" ng-controller="AccountCtrl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{{metadata.title}}}</title>
+    <meta name="description" content="{{{metadata.description}}}">
+
+    <!-- social media tags -->
+    <meta name="twitter:card" content="{{{metadata.twitter.card}}}">
+    <meta name="twitter:site" content="{{{metadata.twitter.site}}}">
+    <meta name="twitter:title" content="{{{metadata.title}}}">
+    <meta name="twitter:description" content="{{{metadata.description}}}">
+    <meta name="twitter:creator" content="{{{metadata.twitter.creator}}}">
+    <meta name="twitter:image:src" content="{{{metadata.image}}}">
+    <meta name="twitter:url" content="{{{metadata.url}}}">
+    <meta property="og:locale" content="{{metadata.og.locale}}"/>
+    <meta property="og:title" content="{{{metadata.title}}}" />
+    <meta property="og:type" content="{{{metadata.og.type}}}" />
+    <meta property="og:url" content="{{{metadata.url}}}" />
+    <meta property="og:image" content="{{{metadata.image}}}" />
+    <meta property="og:description" content="{{{metadata.description}}}">
+    <meta property="og:site_name" content="{{{metadata.og.site_name}}}"/>
+    <meta property="fb:app_id" content="{{{metadata.fb_app_id}}}"/>
+    {{#metadata.og.is_article}}
+    {{#metadata.og.author}}
+    <meta property="article:author" content="{{{metadata.og.author}}}"/>
+    {{/metadata.og.author}}
+    <meta property="article:publisher" content="{{{metadata.og.article_publisher}}}"/>
+    <meta property="article:published_time" content="{{{metadata.og.article_published_at}}}"/>
+    <meta property="article:modified_time" content="{{{metadata.og.article_modified_at}}}"/>
+    {{/metadata.og.is_article}}
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <base href="{{{metabase}}}">
+    <meta name="fragment" content="!" />
+
+    <link rel="canonical" href="{{{metadata.url}}}">
+    <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="<%= favicon_dir %>/apple-touch-icon.png" />
+
+    <!-- compiled CSS -->
+    <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" />
+    <% }); %>
+
+    <script type="text/javascript">
+      var MorselConfig = {
+        version: '<%= version %>',
+        apiUrl: '{{{apiUrl}}}'
+      };
+    </script>
+    <!-- compiled JavaScript -->
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+    {{> partials/mixpanel}}
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <nav class="side-nav" ng-class="{open:menuOpen}" role="navigation">
+        <a ng-click="goTo(currentUser.username)" ng-if="isLoggedIn" class="profile-link">
+          <img ng-src="{{currentUser.photos['_40x40']}}" class="img-circle" />
+          <h5 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h5>
+        </a>
+        <div class="prompt-btns" ng-if="!isLoggedIn">
+          <a ng-click="goTo('join')">Sign Up</a>
+          <a ng-click="goTo('login')">Login</a>
+        </div>
+        <span>Feeds</span>
+        <ul>
+          <li ui-route="/myfeed" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+            <a ng-click="goTo('myfeed')"><i class="sidenav-feed"></i>My Feed</a>
+          </li>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-trending"></i>Trending</a>
+          </li>
+        </ul>
+        <span ng-if="isLoggedIn">Create</span>
+        <ul ng-if="isLoggedIn">
+          <li ui-route="/add-morsel" ng-class="{active:$uiRoute}">
+            <a ng-click="goTo('add-morsel')"><i class="sidenav-add-morsel"></i>Add Morsel</a>
+          </li>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-drafts"></i>Drafts</a>
+          </li>
+        </ul>
+        <span>Following</span>
+        <ul>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-restaurants"></i>Restaurants</a>
+          </li>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-people"></i>People</a>
+          </li>
+          <li ng-class="{active:$uiRoute}">
+            <a><i class="sidenav-tags"></i>Tags</a>
+          </li>
+        </ul>
+        <span>Other</span>
+        <ul>
+          <li ui-route="/home" ng-class="{active:$uiRoute}">
+            <a ng-click="goTo('home')">Home</a>
+          </li>
+          <li ui-route="/about" ng-class="{active:$uiRoute}">
+            <a ng-click="goTo('about')">About</a>
+          </li>
+          <li ui-route="/dashboard" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+            <a ng-click="goTo('dashboard')">Dashboard</a>
+          </li>
+        </ul>
+        <span>Settings</span>
+        <ul>
+          <li>
+            <a><i class="sidenav-account-settings"></i>Account Settings</a>
+          </li>
+          <li>
+            <a><i class="sidenav-terms"></i>Terms of Use</a>
+          </li>
+          <li ng-if="isLoggedIn">
+            <a ng-click="goTo('logout')"><i class="sidenav-logout"></i>Logout</a>
+          </li>
+          <li ng-if="!isLoggedIn">
+            <a ng-click="goTo('login')">Login</a>
+          </li>
+          <li ng-if="!isLoggedIn">
+            <a ng-click="goTo('join')">Sign Up</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div id="site" ng-class="{site: true, open:menuOpen}">
+        <header class="main-header" ng-class="{'mini-header': viewOptions.miniHeader, 'full-header': !viewOptions.miniHeader}">
+          <div class="container">
+            <h1 class="morsel-logo">
+              <a ng-click="goTo('home')">Morsel</a>
+            </h1>
+            <nav role="navigation">
+              <ul>
+                <li ng-if="!isLoggedIn">
+                  <a ng-click="goTo('join')" class="btn btn-primary">Sign Up</a>
+                </li>
+                <li ng-class="{active:$uiRoute}">
+                  <a ng-click="">Placeholder</a>
+                </li>
+                <li ng-class="{active:$uiRoute}">
+                  <a ng-click="">Placeholder</a>
+                </li>
+                <li ng-class="{active:$uiRoute}">
+                  <a ng-click="">Get the App</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
+        </header>
+
+        <div ui-view="main" class="main-view" ng-click="menuOpen = false"></div>
+
+        <footer class="footer" ng-class="{hide: viewOptions.hideFooter}">
+          <div class="container">
+            <div class="footer-inner">
+              <a ng-click="goTo('home')" class="text-hide morsel-link">Morsel</a>
+              <a ng-click="goTo('join')" class="btn btn-primary" ng-if="!isLoggedIn">Sign Up</a>
+              <form role="form">
+                <input class="form-control" type="text" placeholder="Search chefs, dishes, ingredients" />
+              </form>
+              <nav role="navigation">
+                <ul class="">
+                  <li ui-route="/add-morsel">
+                    <a ng-click="goTo('add-morsel')">Add Morsel</a>
+                  </li>
+                  <li ui-route="/myfeed">
+                    <a ng-click="goTo('myfeed')" ng-if="isLoggedIn">My Feed</a>
+                  </li>
+                  <li>
+                    <a ng-click="">Get The App</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    {{> partials/ga}}
+  </body>
+</html>

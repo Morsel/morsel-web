@@ -112,6 +112,16 @@ app.get('/login', function(req, res){
   res.render('login');
 });
 
+//account pages
+app.get('/account*', function(req, res){
+  res.render('account', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
+});
+
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
   renderMorselPage(res, req.params.username, req.params.postidslug);
