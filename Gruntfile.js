@@ -467,15 +467,15 @@ module.exports = function ( grunt ) {
     },
 
     /**
-     * The `index` task compiles the `index.html` file as a Grunt template. CSS
+     * The `app_public` task compiles the `public.html` file as a Grunt template. CSS
      * and JS files co-exist here but they get split apart later.
      */
-    index: {
+    app_public: {
 
       /**
        * During development, we don't want to have wait for compilation,
        * concatenation, minification, etc. So to avoid these steps, we simply
-       * add all script files directly to the `<head>` of `index.html`. The
+       * add all script files directly to the `<head>` of `public.html`. The
        * `src` property contains the list of included files.
        */
       build: {
@@ -598,11 +598,11 @@ module.exports = function ( grunt ) {
       },
 
       /**
-       * When index.html changes, we need to compile it.
+       * When template files change, we need to compile them.
        */
       html: {
         files: [ '<%= app_files.html %>' ],
-        tasks: [ 'index:build' ]
+        tasks: [ 'app_public:build' ]
       },
 
       /**
@@ -896,7 +896,7 @@ module.exports = function ( grunt ) {
   grunt.registerTask( 'build-no-style', [
     'clean:preDev', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
     'concat:build_css', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'index:build', 'karmaconfig',
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'app_public:build', 'karmaconfig',
     'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
   ]);
 
@@ -909,7 +909,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'app_public:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**
@@ -968,12 +968,12 @@ module.exports = function ( grunt ) {
   }
 
   /** 
-   * The index.html template includes the stylesheet and javascript sources
+   * The public.html template includes the stylesheet and javascript sources
    * based on dynamic names calculated in this Gruntfile. This task assembles
    * the list into variables for the template to use and then runs the
    * compilation.
    */
-  grunt.registerMultiTask( 'index', 'Process index.mustache template', function () {
+  grunt.registerMultiTask( 'app_public', 'Process public.mustache template', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
       return '/'+file.replace( dirRE, '' );
@@ -982,7 +982,7 @@ module.exports = function ( grunt ) {
       return '/'+file.replace( dirRE, '' );
     });
 
-    grunt.file.copy('src/views/index.mustache', this.data.dir + '/views/index.mustache', { 
+    grunt.file.copy('src/views/public.mustache', this.data.dir + '/views/public.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
