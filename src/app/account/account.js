@@ -1,9 +1,7 @@
 angular.module( 'Morsel.account', [
   //libs
   'angularMoment',
-  'angular-carousel',
   'restangular',
-  'swipe',
   'ui.bootstrap',
   'ui.state',
   'ui.route',

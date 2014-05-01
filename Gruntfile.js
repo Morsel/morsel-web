@@ -314,7 +314,7 @@ module.exports = function ( grunt ) {
           banner: '<%= meta.banner %>'
         },
         src: [ 
-          '<%= vendor_files.js %>', 
+          '<%= public_files.vendor_files.js %>', 
           'module.prefix', 
           '<%= build_dir %>/src/app/public/**/*.js',
           '<%= build_dir %>/src/common/**/*.js',
@@ -329,7 +329,7 @@ module.exports = function ( grunt ) {
           banner: '<%= meta.banner %>'
         },
         src: [ 
-          '<%= vendor_files.js %>', 
+          '<%= account_files.vendor_files.js %>', 
           'module.prefix', 
           '<%= build_dir %>/src/app/account/**/*.js',
           '<%= build_dir %>/src/common/**/*.js',
@@ -515,7 +515,7 @@ module.exports = function ( grunt ) {
       build: {
         dir: '<%= build_dir %>',
         src: [
-          '<%= vendor_files.js %>',
+          '<%= public_files.vendor_files.js %>',
           '<%= build_dir %>/src/app/public/**/*.js',
           '<%= build_dir %>/src/common/**/*.js',
           '<%= html2js.common.dest %>',
@@ -546,7 +546,7 @@ module.exports = function ( grunt ) {
       build: {
         dir: '<%= build_dir %>',
         src: [
-          '<%= vendor_files.js %>',
+          '<%= account_files.vendor_files.js %>',
           '<%= build_dir %>/src/app/account/**/*.js',
           '<%= build_dir %>/src/common/**/*.js',
           '<%= html2js.common.dest %>',

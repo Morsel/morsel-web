@@ -25,7 +25,7 @@ SITEURL:              http://dev.eatmorsel.com
 When adding new angular app
 ==========
 1. add new folder in src/app/<app_name>
-2. add <app_name>_files to build.config.js with template files
+2. add <app_name>_files to build.config.js with template files, vendor files
 
 All following happen in Gruntfile.js:
 3. add new subtask to html2js grunt task to parse templates from #2
