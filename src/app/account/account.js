@@ -17,7 +17,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
   //templates
- // 'templates-app',
+  'templates-account',
   'templates-common',
   //common
   'Morsel.common.afterLogin',
@@ -45,7 +45,6 @@ angular.module( 'Morsel.account', [
   'Morsel.common.validatedElement',
   //app
   'Morsel.account.editProfile'
-  //:username in route clobbers other routes - this needs to be last until a better solution is found
 ])
 
 //define some constants for the app

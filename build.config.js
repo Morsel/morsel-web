@@ -63,6 +63,11 @@ module.exports = {
     atpl: [ 'src/app/public/**/*.tpl.html' ]
   },
 
+  /* files just related to our account app */
+  account_files: {
+    atpl: [ 'src/app/account/**/*.tpl.html' ]
+  },
+
   /**
    * This is a collection of files used during testing only.
    */
