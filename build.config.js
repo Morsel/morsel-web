@@ -39,7 +39,7 @@ module.exports = {
   seo_dir: 'seo',
 
   /**
-   * This is a collection of file patterns that refer to our app code (the
+   * This is a collection of file patterns that refer to all of our apps' code (the
    * stuff in `src/`). These file paths are used in the configuration of
    * build tasks. `js` is all project javascript, less tests. `ctpl` contains
    * our reusable components' (`src/common`) template HTML files, while
@@ -56,6 +56,11 @@ module.exports = {
 
     html: [ 'src/views/*.mustache' ],
     sass: ['src/sass/main.scss', 'src/sass/error-page.scss']
+  },
+
+  /* files just related to our public app */
+  public_files: {
+    atpl: [ 'src/app/public/**/*.tpl.html' ]
   },
 
   /**

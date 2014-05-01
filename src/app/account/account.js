@@ -17,7 +17,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
   //templates
-  'templates-app',
+ // 'templates-app',
   'templates-common',
   //common
   'Morsel.common.afterLogin',

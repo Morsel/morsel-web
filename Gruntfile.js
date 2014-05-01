@@ -427,14 +427,14 @@ module.exports = function ( grunt ) {
      */
     html2js: {
       /**
-       * These are the templates from `src/app`.
+       * These are the templates from `src/app/public`.
        */
-      app: {
+      public: {
         options: {
-          base: 'src/app'
+          base: 'src/app/public'
         },
-        src: [ '<%= app_files.atpl %>' ],
-        dest: '<%= build_dir %>/templates-app.js'
+        src: [ '<%= public_files.atpl %>' ],
+        dest: '<%= build_dir %>/templates-public.js'
       },
 
       /**
@@ -475,16 +475,17 @@ module.exports = function ( grunt ) {
       /**
        * During development, we don't want to have wait for compilation,
        * concatenation, minification, etc. So to avoid these steps, we simply
-       * add all script files directly to the `<head>` of `public.html`. The
+       * add all relevant script files directly to the `<head>` of our html template. The
        * `src` property contains the list of included files.
        */
       build: {
         dir: '<%= build_dir %>',
         src: [
           '<%= vendor_files.js %>',
-          '<%= build_dir %>/src/**/*.js',
+          '<%= build_dir %>/src/app/public/**/*.js',
+          '<%= build_dir %>/src/common/**/*.js',
           '<%= html2js.common.dest %>',
-          '<%= html2js.app.dest %>',
+          '<%= html2js.public.dest %>',
           '<%= vendor_files.css %>',
           '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
@@ -535,7 +536,7 @@ module.exports = function ( grunt ) {
         dir: '<%= build_dir %>',
         src: [ 
           '<%= vendor_files.js %>',
-          '<%= html2js.app.dest %>',
+          '<%= html2js.public.dest %>',
           '<%= html2js.common.dest %>',
           '<%= test_files.js %>'
         ]
@@ -1043,7 +1044,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/account.mustache', this.data.dir + '/views/account.mustache', { 
+    /*grunt.file.copy('src/views/account.mustache', this.data.dir + '/views/account.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1054,7 +1055,7 @@ module.exports = function ( grunt ) {
           }
         });
       }
-    });
+    });*/
 
     grunt.file.copy('src/views/partials/ga.mustache', this.data.dir + '/views/partials/ga.mustache', { 
       process: function ( contents, path ) {

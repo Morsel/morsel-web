@@ -80,8 +80,8 @@ app.get('/templates-common.js', function(req, res){
   res.sendfile('templates-common.js');
 });
 
-app.get('/templates-app.js', function(req, res){
-  res.sendfile('templates-app.js');
+app.get('/templates-public.js', function(req, res){
+  res.sendfile('templates-public.js');
 });
 
 

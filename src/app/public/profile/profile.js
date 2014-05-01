@@ -6,7 +6,7 @@ angular.module( 'Morsel.public.profile', [])
     views: {
       "main": {
         controller: 'ProfileCtrl',
-        templateUrl: 'public/profile/profile.tpl.html'
+        templateUrl: 'profile/profile.tpl.html'
       }
     },
     data:{ /*pageTitle: 'Profile'*/ },

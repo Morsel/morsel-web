@@ -8,7 +8,7 @@ angular.module( 'Morsel.public.home', [
     views: {
       "main": {
         controller: 'HomeCtrl',
-        templateUrl: 'public/home/home.tpl.html'
+        templateUrl: 'home/home.tpl.html'
       }
     },
     data:{ pageTitle: 'Home' },

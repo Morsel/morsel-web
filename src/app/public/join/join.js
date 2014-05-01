@@ -6,7 +6,7 @@ angular.module( 'Morsel.public.join', [])
     views: {
       'main': {
         controller: 'JoinCtrl',
-        templateUrl: 'public/join/join.tpl.html'
+        templateUrl: 'join/join.tpl.html'
       }
     },
     data:{ pageTitle: 'Join' }

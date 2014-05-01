@@ -17,7 +17,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
   //templates
-  'templates-app',
+  'templates-public',
   'templates-common',
   //common
   'Morsel.common.afterLogin',
