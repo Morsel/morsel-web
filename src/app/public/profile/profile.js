@@ -97,7 +97,7 @@ angular.module( 'Morsel.profile', [])
   $scope.openLikeFeed = function () {
     if($scope.user) {
       var modalInstance = $modal.open({
-        templateUrl: 'public/user/userActivityOverlay.tpl.html',
+        templateUrl: 'user/userActivityOverlay.tpl.html',
         controller: ModalInstanceCtrl,
         resolve: {
           user: function () {
