@@ -1,4 +1,4 @@
-angular.module('Morsel.userImage', [])
+angular.module('Morsel.common.userImage', [])
 
 .directive('mrslUserImage', [function() {
   return {

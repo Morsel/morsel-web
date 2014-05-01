@@ -1,4 +1,4 @@
-angular.module( 'Morsel.specialtyUsers', [] )
+angular.module( 'Morsel.common.specialtyUsers', [] )
 
 //show which users are tagged with a certain specialty
 .directive('mrslSpecialtyUsers', function(ApiKeywords, $modal, $rootScope){

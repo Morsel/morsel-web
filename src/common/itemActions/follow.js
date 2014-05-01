@@ -1,4 +1,4 @@
-angular.module( 'Morsel.follow', [] )
+angular.module( 'Morsel.common.follow', [] )
 
 //follow/unfollow something
 .directive('mrslFollow', function(ApiUsers, AfterLogin, $location, Auth, $q){

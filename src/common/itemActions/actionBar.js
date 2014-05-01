@@ -1,4 +1,4 @@
-angular.module( 'Morsel.itemActionBar', [] )
+angular.module( 'Morsel.common.itemActionBar', [] )
 
 //a holder for actions performed on an item
 .directive('mrslItemActionBar', function() {

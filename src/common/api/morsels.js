@@ -1,4 +1,4 @@
-angular.module( 'Morsel.apiMorsels', [] )
+angular.module( 'Morsel.common.apiMorsels', [] )
 
 // ApiMorsels is the middleman for dealing with /morsels requests
 .factory('ApiMorsels', function($http, Restangular, $q) {

@@ -1,4 +1,4 @@
-angular.module('Morsel.baseErrors', [])
+angular.module('Morsel.common.baseErrors', [])
 
 .directive('mrslBaseErrors', function() {
   return {

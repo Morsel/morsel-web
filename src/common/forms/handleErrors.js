@@ -1,4 +1,4 @@
-angular.module( 'Morsel.handleErrors', [] )
+angular.module( 'Morsel.common.handleErrors', [] )
 
 .factory('HandleErrors', function(Mixpanel, Auth) {
   var HandleErrors = {};

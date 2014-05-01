@@ -1,4 +1,4 @@
-angular.module( 'Morsel.apiUploads', [] )
+angular.module( 'Morsel.common.apiUploads', [] )
 
 // ApiUploads is the middleman for dealing with requests involving uploading images
 .factory('ApiUploads', function($http, Restangular, $q) {

@@ -1,4 +1,4 @@
-angular.module( 'Morsel.afterLogin', [])
+angular.module( 'Morsel.common.afterLogin', [])
 
 //things to be completed after a successful login/registration
 .factory('AfterLogin', function($location) {

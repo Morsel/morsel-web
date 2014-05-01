@@ -1,4 +1,4 @@
-angular.module( 'Morsel.join', [])
+angular.module( 'Morsel.public.join', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'join', {

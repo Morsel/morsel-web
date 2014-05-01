@@ -1,4 +1,4 @@
-angular.module( 'Morsel.profile', [])
+angular.module( 'Morsel.public.profile', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'profile', {

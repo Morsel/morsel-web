@@ -1,4 +1,4 @@
-angular.module( 'Morsel.apiFeed', [] )
+angular.module( 'Morsel.common.apiFeed', [] )
 
 // ApiFeed is the middleman for dealing with /feed requests
 .factory('ApiFeed', function($http, Restangular, $q) {

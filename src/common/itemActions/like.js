@@ -1,4 +1,4 @@
-angular.module( 'Morsel.itemLike', [] )
+angular.module( 'Morsel.common.itemLike', [] )
 
 //like/unlike an item
 .directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q, $modal, $rootScope){

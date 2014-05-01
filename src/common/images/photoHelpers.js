@@ -1,4 +1,4 @@
-angular.module( 'Morsel.photoHelpers', [])
+angular.module( 'Morsel.common.photoHelpers', [])
 
 //helper methods dealing with morsel photos
 .factory('PhotoHelpers', function() {

@@ -1,4 +1,4 @@
-angular.module( 'Morsel.morselDetail', [])
+angular.module( 'Morsel.public.morselDetail', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'morselDetail', {

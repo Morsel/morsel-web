@@ -1,4 +1,4 @@
-angular.module( 'Morsel.editProfile', [])
+angular.module( 'Morsel.public.editProfile', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'edit-profile', {

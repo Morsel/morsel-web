@@ -1,4 +1,4 @@
-angular.module('Morsel.submitBtn', [])
+angular.module('Morsel.common.submitBtn', [])
 
 .directive('mrslSubmitBtn', [function() {
   return {

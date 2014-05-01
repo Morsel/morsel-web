@@ -1,4 +1,4 @@
-angular.module( 'Morsel.auth', [
+angular.module( 'Morsel.common.auth', [
   'ngStorage'
 ] )
 

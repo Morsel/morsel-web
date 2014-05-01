@@ -1,6 +1,6 @@
 describe( 'Join controller', function() {
 
-  beforeEach( module( 'Morsel' ) );
+  beforeEach( module( 'Morsel.public' ) );
   beforeEach(inject(function($rootScope, $controller) {
     $scope = $rootScope.$new();
     $controller('JoinCtrl', {$scope: $scope});

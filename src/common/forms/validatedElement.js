@@ -1,4 +1,4 @@
-angular.module('Morsel.validatedElement', [])
+angular.module('Morsel.common.validatedElement', [])
 
 .directive('mrslValidatedElement', function() {
   return {

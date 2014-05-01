@@ -1,4 +1,4 @@
-angular.module( 'Morsel.mixpanel', [])
+angular.module( 'Morsel.common.mixpanel', [])
 
 //handle sending mixpanel events
 .factory('Mixpanel', function() {

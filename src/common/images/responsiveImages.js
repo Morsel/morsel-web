@@ -2,7 +2,7 @@
  * Adapted from https://github.com/c0bra/angular-responsive-images
  *
 */
-angular.module('Morsel.responsiveImages', [])
+angular.module('Morsel.common.responsiveImages', [])
 
 .directive('mrslResponsiveImages', function(presetMediaQueries, $timeout) {
   return {

@@ -1,4 +1,4 @@
-angular.module( 'Morsel.apiKeywords', [] )
+angular.module( 'Morsel.common.apiKeywords', [] )
 
 // ApiWorss is the middleman for dealing with /cuisine and /specialties requests
 .factory('ApiKeywords', function($http, Restangular, $q) {

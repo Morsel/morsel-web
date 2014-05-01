@@ -1,4 +1,4 @@
-angular.module( 'Morsel.login', [])
+angular.module( 'Morsel.public.login', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'login', {

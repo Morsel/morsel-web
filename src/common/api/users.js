@@ -1,4 +1,4 @@
-angular.module( 'Morsel.apiUsers', [] )
+angular.module( 'Morsel.common.apiUsers', [] )
 
 // ApiUsers is the middleman for dealing with /users requests
 .factory('ApiUsers', function($http, Restangular, $q, ApiUploads) {

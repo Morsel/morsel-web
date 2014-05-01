@@ -1,4 +1,4 @@
-angular.module( 'Morsel.socialSharing', [] )
+angular.module( 'Morsel.common.socialSharing', [] )
 
 //like/unlike a morsel
 .directive('mrslSocialSharing', function($location, Mixpanel, $window){

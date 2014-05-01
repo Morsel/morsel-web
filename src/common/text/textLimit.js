@@ -1,4 +1,4 @@
-angular.module( 'Morsel.textLimit', [] )
+angular.module( 'Morsel.common.textLimit', [] )
 
 //show/hide an amount of text
 .directive('mrslTextLimit', function($modal, $window){

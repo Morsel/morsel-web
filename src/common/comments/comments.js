@@ -1,4 +1,4 @@
-angular.module( 'Morsel.comments', [] )
+angular.module( 'Morsel.common.comments', [] )
 
 .directive('mrslItemComments', function(ApiItems, AfterLogin, Auth, $location, $q, $modal, $rootScope){
   return {

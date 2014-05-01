@@ -1,4 +1,4 @@
-angular.module( 'Morsel.cuisineUsers', [] )
+angular.module( 'Morsel.common.cuisineUsers', [] )
 
 //show which users are tagged with a certain cuisine
 .directive('mrslCuisineUsers', function(ApiKeywords, $modal, $rootScope){

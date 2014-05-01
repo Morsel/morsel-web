@@ -2,7 +2,7 @@
  * Based off: http://github.com/revolunet/angular-carousel
 */
 
-angular.module('Morsel.morselSwipe', [
+angular.module('Morsel.common.morselSwipe', [
   'ngTouch'
 ])
 

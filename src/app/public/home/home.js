@@ -1,4 +1,4 @@
-angular.module( 'Morsel.home', [
+angular.module( 'Morsel.public.home', [
   'ui.state'
 ])
 

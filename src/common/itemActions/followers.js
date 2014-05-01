@@ -1,4 +1,4 @@
-angular.module( 'Morsel.followers', [] )
+angular.module( 'Morsel.common.followers', [] )
 
 //show users who follow something
 .directive('mrslFollowers', function(ApiUsers, $modal, $rootScope){

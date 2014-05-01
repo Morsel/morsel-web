@@ -1,4 +1,4 @@
-angular.module('Morsel.checklist', [])
+angular.module('Morsel.common.checklist', [])
 
 .directive('checklist', [function() {
   return {
