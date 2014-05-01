@@ -316,12 +316,13 @@ module.exports = function ( grunt ) {
         src: [ 
           '<%= vendor_files.js %>', 
           'module.prefix', 
-          '<%= build_dir %>/src/**/*.js', 
-          '<%= html2js.app.dest %>', 
+          '<%= build_dir %>/src/app/public/**/*.js',
+          '<%= build_dir %>/src/common/**/*.js',
+          '<%= html2js.public.dest %>', 
           '<%= html2js.common.dest %>', 
           'module.suffix' 
         ],
-        dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.js'
       }
     },
 
@@ -333,7 +334,7 @@ module.exports = function ( grunt ) {
       compile: {
         files: [
           {
-            src: [ 'assets/<%= pkg.name %>-<%= pkg.version %>.js' ],
+            src: [ 'assets/<%= pkg.name %>_public-<%= pkg.version %>.js' ],
             cwd: '<%= compile_dir %>',
             dest: '<%= compile_dir %>',
             expand: true
