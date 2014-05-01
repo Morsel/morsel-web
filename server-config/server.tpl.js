@@ -160,7 +160,7 @@ app.listen(port, function() {
 function renderAngular(res, mData) {
   var fullMetadata = mData || findMetadata('default');
 
-  res.render('index', {
+  res.render('public', {
     metadata: fullMetadata,
     metabase: metabase,
     apiUrl: apiURL,
