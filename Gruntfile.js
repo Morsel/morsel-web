@@ -317,7 +317,7 @@ module.exports = function ( grunt ) {
           '<%= public_files.vendor_files.js %>', 
           'module.prefix', 
           '<%= build_dir %>/src/app/public/**/*.js',
-          '<%= build_dir %>/src/common/**/*.js',
+          '<%= public_files.common.js %>',
           '<%= html2js.public.dest %>', 
           'module.suffix' 
         ],
@@ -331,10 +331,11 @@ module.exports = function ( grunt ) {
           '<%= account_files.vendor_files.js %>', 
           'module.prefix', 
           '<%= build_dir %>/src/app/account/**/*.js',
-          '<%= build_dir %>/src/common/**/*.js',
+          '<%= account_files.common.js %>',
           '<%= html2js.account.dest %>', 
           'module.suffix' 
         ],
+
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.js'
       }
     },
