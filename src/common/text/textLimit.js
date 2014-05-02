@@ -39,7 +39,7 @@ angular.module( 'Morsel.common.textLimit', [] )
 
       scope.expand = function () {
         var modalInstance = $modal.open({
-          templateUrl: 'text/textOverlay.tpl.html',
+          templateUrl: 'common/text/textOverlay.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             textContent: function () {
@@ -61,7 +61,7 @@ angular.module( 'Morsel.common.textLimit', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'textContent'];
     },
-    templateUrl: 'text/textLimit.tpl.html'
+    templateUrl: 'common/text/textLimit.tpl.html'
   };
 })
 

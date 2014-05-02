@@ -79,6 +79,6 @@ angular.module( 'Morsel.common.socialSharing', [] )
         $window.open(url);
       };
     },
-    templateUrl: 'socialSharing/socialSharing.tpl.html'
+    templateUrl: 'common/socialSharing/socialSharing.tpl.html'
   };
 });

@@ -11,7 +11,7 @@ angular.module( 'Morsel.common.followedUsers', [] )
     link: function(scope, element, attrs) {
       scope.showFollowed = function() {
         var modalInstance = $modal.open({
-          templateUrl: 'user/userList.tpl.html',
+          templateUrl: 'common/user/userList.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             followerId: function () {

@@ -8,6 +8,6 @@ angular.module('Morsel.common.checklist', [])
     },
     link: function(scope) {
     },
-    templateUrl: 'forms/checklist.tpl.html'
+    templateUrl: 'common/forms/checklist.tpl.html'
   };
 }]);

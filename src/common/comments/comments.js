@@ -10,7 +10,7 @@ angular.module( 'Morsel.common.comments', [] )
     link: function(scope, element, attrs) {
       scope.openComments = function () {
         var modalInstance = $modal.open({
-          templateUrl: 'comments/comments.tpl.html',
+          templateUrl: 'common/comments/comments.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             item: function () {

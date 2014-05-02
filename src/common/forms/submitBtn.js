@@ -10,6 +10,6 @@ angular.module('Morsel.common.submitBtn', [])
     },
     link: function(scope) {
     },
-    templateUrl: 'forms/submitBtn.tpl.html'
+    templateUrl: 'common/forms/submitBtn.tpl.html'
   };
 }]);

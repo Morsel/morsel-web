@@ -11,7 +11,7 @@ angular.module( 'Morsel.common.cuisineUsers', [] )
 
       scope.showCuisineUsers = function() {
         var modalInstance = $modal.open({
-          templateUrl: 'user/userList.tpl.html',
+          templateUrl: 'common/user/userList.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             cuisine: function () {

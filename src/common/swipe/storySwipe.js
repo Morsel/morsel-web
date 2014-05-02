@@ -55,7 +55,7 @@ angular.module('Morsel.common.morselSwipe', [
         }
       };
     },
-    templateUrl: 'swipe/itemThumbnails.tpl.html'
+    templateUrl: 'common/swipe/itemThumbnails.tpl.html'
   };
 })
 

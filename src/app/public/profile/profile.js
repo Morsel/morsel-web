@@ -6,7 +6,7 @@ angular.module( 'Morsel.public.profile', [])
     views: {
       "main": {
         controller: 'ProfileCtrl',
-        templateUrl: 'profile/profile.tpl.html'
+        templateUrl: 'app/public/profile/profile.tpl.html'
       }
     },
     data:{ /*pageTitle: 'Profile'*/ },
@@ -97,7 +97,7 @@ angular.module( 'Morsel.public.profile', [])
   $scope.openLikeFeed = function () {
     if($scope.user) {
       var modalInstance = $modal.open({
-        templateUrl: 'user/userActivityOverlay.tpl.html',
+        templateUrl: 'common/user/userActivityOverlay.tpl.html',
         controller: ModalInstanceCtrl,
         resolve: {
           user: function () {

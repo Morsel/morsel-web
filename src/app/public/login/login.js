@@ -6,7 +6,7 @@ angular.module( 'Morsel.public.login', [])
     views: {
       "main": {
         controller: 'LoginCtrl',
-        templateUrl: 'login/login.tpl.html'
+        templateUrl: 'app/public/login/login.tpl.html'
       }
     },
     data:{ pageTitle: 'Login' }

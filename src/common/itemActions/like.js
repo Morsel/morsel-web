@@ -67,7 +67,7 @@ angular.module( 'Morsel.common.itemLike', [] )
 
       scope.openLikes = function () {
         var modalInstance = $modal.open({
-          templateUrl: 'user/userList.tpl.html',
+          templateUrl: 'common/user/userList.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             item: function () {

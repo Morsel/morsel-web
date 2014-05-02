@@ -319,7 +319,6 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/src/app/public/**/*.js',
           '<%= build_dir %>/src/common/**/*.js',
           '<%= html2js.public.dest %>', 
-          '<%= html2js.common.dest %>', 
           'module.suffix' 
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.js'
@@ -334,7 +333,6 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/src/app/account/**/*.js',
           '<%= build_dir %>/src/common/**/*.js',
           '<%= html2js.account.dest %>', 
-          '<%= html2js.common.dest %>', 
           'module.suffix' 
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.js'
@@ -447,6 +445,8 @@ module.exports = function ( grunt ) {
      * places them into JavaScript files as strings that are added to
      * AngularJS's template cache. This means that the templates too become
      * part of the initial payload as one JavaScript file. Neat!
+     *
+     * Notice nothing for common templates - these are parsed with individual app templates as needed
      */
     html2js: {
       /**
@@ -454,9 +454,12 @@ module.exports = function ( grunt ) {
        */
       public: {
         options: {
-          base: 'src/app/public'
+          base: 'src'
         },
-        src: [ '<%= public_files.atpl %>' ],
+        src: [
+          '<%= public_files.atpl %>',
+          '<%= public_files.common.tpl %>'
+        ],
         dest: '<%= build_dir %>/templates-public.js'
       },
 
@@ -465,21 +468,13 @@ module.exports = function ( grunt ) {
        */
       account: {
         options: {
-          base: 'src/app/account'
+          base: 'src'
         },
-        src: [ '<%= account_files.atpl %>' ],
+        src: [
+          '<%= account_files.atpl %>',
+          '<%= account_files.common.tpl %>'
+        ],
         dest: '<%= build_dir %>/templates-account.js'
-      },
-
-      /**
-       * These are the templates from `src/common`.
-       */
-      common: {
-        options: {
-          base: 'src/common'
-        },
-        src: [ '<%= app_files.ctpl %>' ],
-        dest: '<%= build_dir %>/templates-common.js'
       }
     },
 
@@ -517,10 +512,9 @@ module.exports = function ( grunt ) {
         src: [
           '<%= public_files.vendor_files.js %>',
           '<%= build_dir %>/src/app/public/**/*.js',
-          '<%= build_dir %>/src/common/**/*.js',
-          '<%= html2js.common.dest %>',
+          '<%= public_files.common.js %>',
           '<%= html2js.public.dest %>',
-          '<%= vendor_files.css %>',
+          '<%= build_dir %>/<%= vendor_files.css %>',
           '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
       },
@@ -548,10 +542,9 @@ module.exports = function ( grunt ) {
         src: [
           '<%= account_files.vendor_files.js %>',
           '<%= build_dir %>/src/app/account/**/*.js',
-          '<%= build_dir %>/src/common/**/*.js',
-          '<%= html2js.common.dest %>',
+          '<%= account_files.common.js %>',
           '<%= html2js.account.dest %>',
-          '<%= vendor_files.css %>',
+          '<%= build_dir %>/<%= vendor_files.css %>',
           '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
         ]
       },
@@ -597,7 +590,7 @@ module.exports = function ( grunt ) {
           '<%= vendor_files.js %>',
           '<%= html2js.public.dest %>',
           '<%= html2js.account.dest %>',
-          '<%= html2js.common.dest %>',
+          '<%= app_files.ctpl %>',
           '<%= test_files.js %>'
         ]
       }

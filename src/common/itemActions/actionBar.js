@@ -13,6 +13,6 @@ angular.module( 'Morsel.common.itemActionBar', [] )
     link: function(scope, element, attrs) {
       scope.nonSwipeable = true;
     },
-    templateUrl: 'itemActions/itemActionBar.tpl.html'
+    templateUrl: 'common/itemActions/itemActionBar.tpl.html'
   };
 });

@@ -218,7 +218,7 @@ angular.module( 'Morsel.common.auth', [
     });
 
     modalInstance = $modal.open({
-      templateUrl: 'auth/apiError.tpl.html',
+      templateUrl: 'common/auth/apiError.tpl.html',
       controller: ModalInstanceCtrl,
       resolve: {}
     });
