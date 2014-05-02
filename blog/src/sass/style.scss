@@ -32,11 +32,11 @@
 @import "../../../vendor/sass-bootstrap/lib/mixins";
 
 // Import our variables
-@import "../../../src/sass/_variables.scss";
+@import "../../../src/sass/_common/_variables.scss";
 @import "../../../vendor/sass-bootstrap/lib/scaffolding";
 @import "../../../vendor/sass-bootstrap/lib/type";
 
 // Import component styles
-@import "../../../src/sass/shared/_general";
+@import "../../../src/sass/_common/_general";
 
 @import "_wordpress";

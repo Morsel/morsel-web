@@ -77,7 +77,7 @@ module.exports = function ( grunt ) {
     clean: {
       preDev: ['<%= build_dir %>'],
       preCompile: ['<%= compile_dir %>'],
-      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/main.css']
+      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css']
     },
 
     /**
@@ -288,22 +288,36 @@ module.exports = function ( grunt ) {
      */
     concat: {
       /**
-       * The `build_css` target concatenates compiled CSS and vendor CSS
+       * The `build_<app_name>_css` target concatenates compiled CSS and vendor CSS
        * together.
        */
-      build_css: {
+      build_public_css: {
         src: [
-          '<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/main.css'
+          '<%= public_files.vendor_files.css %>',
+          '<%= build_dir %>/assets/public.css'
         ],
-        dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.css'
       },
-      compile_css: {
+      build_account_css: {
         src: [
-          '<%= vendor_files.css %>',
-          '<%= compile_dir %>/assets/main.css'
+          '<%= account_files.vendor_files.css %>',
+          '<%= build_dir %>/assets/account.css'
         ],
-        dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.css'
+      },
+      compile_public_css: {
+        src: [
+          '<%= public_files.vendor_files.css %>',
+          '<%= compile_dir %>/assets/public.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.css'
+      },
+      compile_account_css: {
+        src: [
+          '<%= account_files.vendor_files.css %>',
+          '<%= compile_dir %>/assets/account.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.css'
       },
       /**
        * The `compile_<app_name>js` target is the concatenation of our application source
@@ -381,8 +395,6 @@ module.exports = function ( grunt ) {
 
     /**
      * `compass` handles our SCSS compilation and uglification automatically.
-     * Only our `main.scss` file is included in compilation; all other files
-     * must be imported from this file.
      */
     compass: {
       build: {
@@ -515,8 +527,7 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/src/app/public/**/*.js',
           '<%= public_files.common.js %>',
           '<%= html2js.public.dest %>',
-          '<%= build_dir %>/<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= build_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.css'
         ]
       },
 
@@ -529,7 +540,7 @@ module.exports = function ( grunt ) {
         dir: '<%= compile_dir %>',
         src: [
           '<%= concat.compile_public_js.dest %>',
-          '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= compile_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.css'
         ]
       }
     },
@@ -545,15 +556,14 @@ module.exports = function ( grunt ) {
           '<%= build_dir %>/src/app/account/**/*.js',
           '<%= account_files.common.js %>',
           '<%= html2js.account.dest %>',
-          '<%= build_dir %>/<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= build_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.css'
         ]
       },
       compile: {
         dir: '<%= compile_dir %>',
         src: [
           '<%= concat.compile_account_js.dest %>',
-          '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= compile_dir %>/assets/<%= pkg.name %>_account--<%= pkg.version %>.css'
         ]
       }
     },
@@ -676,7 +686,12 @@ module.exports = function ( grunt ) {
        */
       compass: {
         files: [ 'src/**/*.scss' ],
-        tasks: [ 'compass:build', 'concat:build_css', 'style' ]
+        tasks: [ 
+          'compass:build',
+          'concat:build_public_css',
+          'concat:build_account_css',
+          'style'
+          ]
       },
 
       /**
@@ -950,7 +965,7 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'build-no-style', [
     'clean:preDev', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
-    'concat:build_css', 'copy:build_vendor_assets',
+    'concat:build_public_css', 'concat:build_account_css', 'copy:build_vendor_assets',
     'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'app_public:build', 'app_account:build', 'karmaconfig',
     'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
   ]);
@@ -964,7 +979,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_public_js', 'concat:compile_account_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_public_js', 'concat:compile_account_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**

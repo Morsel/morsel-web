@@ -3,7 +3,7 @@
 @import "compass";
 
 // Import our variables
-@import "_variables.scss";
+@import "_common/_variables.scss";
 
 @import "../../vendor/sass-bootstrap/lib/mixins";
 
@@ -57,25 +57,16 @@
 //our stuff
 
 //mixins
-@import "_mixins";
+@import "_common/_mixins";
 
 // Import sprites
 @import "spritesheets/_sidenav";
 @import "spritesheets/_common";
 
-// Import component styles
-@import "_common";
-
-
-//import shared styles
-@import "shared/_general";
-@import "shared/_immersive";
-@import "shared/_layout";
-@import "shared/_modal";
-@import "shared/_social";
-@import "shared/_static";
-@import "shared/_user-list";
-
-
-@import "../app/public/home/_home";
-@import "../app/public/profile/_profile";
+// Import common styles
+@import "_common/_common";
+@import "_common/_general";
+@import "_common/_layout";
+@import "_common/_modal";
+@import "_common/_static";
+@import "_common/_user-list";

@@ -40,3 +40,5 @@ All following happen in Gruntfile.js:
 12. add js from #11 to array in ngmin:compile task
 13. add js from #12 to array in uglify:compile task
 14. add 'concat:compile_<app_name>_js' to compile task
+15. add new tasks in concat:build_css and update references to these
+16. add <app_name>.css to clean:postCompile array

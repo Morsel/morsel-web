@@ -1,0 +1,12 @@
+//css file for our public app. includes all common styles plus public app specific files
+
+// Import our common config file
+@import "_config";
+
+//our general public css
+@import "_public/_immersive";
+@import "_public/_social";
+
+//our page-specific public css
+@import "../app/public/home/_home";
+@import "../app/public/profile/_profile";
