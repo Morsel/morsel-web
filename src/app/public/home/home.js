@@ -1,5 +1,5 @@
 angular.module( 'Morsel.public.home', [
-  'ui.state'
+  'ui.router'
 ])
 
 .config(function config( $stateProvider ) {

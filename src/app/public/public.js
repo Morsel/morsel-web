@@ -5,7 +5,7 @@ angular.module( 'Morsel.public', [
   'restangular',
   'swipe',
   'ui.bootstrap',
-  'ui.state',
+  'ui.router',
   'ui.route',
   //filters
   'Morsel.common.reverse',

@@ -188,5 +188,20 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.checkAuthentication = function(provider, userProviderId) {
+    var deferred = $q.defer();
+
+    Restangular.one('users').one('checkauthentication').get({authentication: {
+      provider: provider,
+      uid: userProviderId
+    }}).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Users;
 });

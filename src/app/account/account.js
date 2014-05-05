@@ -3,7 +3,7 @@ angular.module( 'Morsel.account', [
   'angularMoment',
   'restangular',
   'ui.bootstrap',
-  'ui.state',
+  'ui.router',
   'ui.route',
   //filters
   //API
@@ -23,7 +23,8 @@ angular.module( 'Morsel.account', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
-  'Morsel.account.editProfile'
+  'Morsel.account.editProfile',
+  'Morsel.account.join'
 ])
 
 //define some constants for the app
@@ -54,7 +55,7 @@ angular.module( 'Morsel.account', [
   $locationProvider.html5Mode(true).hashPrefix('!');
 
   //if we don't recognize the URL, send it to the homepage for now
-  $urlRouterProvider.otherwise( '/home' );
+  $urlRouterProvider.otherwise( '/account/login' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);

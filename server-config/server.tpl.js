@@ -114,7 +114,12 @@ app.get('/unsubscribe', function(req, res){
 
 //login
 app.get('/login', function(req, res){
-  res.render('login');
+  res.redirect('account/login');
+});
+
+//join
+app.get('/join', function(req, res){
+  res.redirect('account/join');
 });
 
 //account pages

@@ -12,7 +12,6 @@
     "angular-moment": "~0.6.0",
     "angular-swipe": "git@github.com:marmorkuchen-net/angular-swipe.git",
     "angular-touch": "~1.2.10",
-    "angular-ui-router": "~0.0.1",
     "angular-ui-utils": "~0.0.3",
     "animationFrame": "~0.1.6",
     "hamsterjs": "1.0.4",
@@ -21,6 +20,7 @@
     "restangular": "",
     "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0",
     "angular-bootstrap": "~0.10.0",
-    "angular-carousel": "~0.2.2"
+    "angular-carousel": "~0.2.2",
+    "angular-ui-router": "~0.2.10"
   }
 }
