@@ -32,6 +32,10 @@ angular.module( 'Morsel.account.join', [])
 })
 
 .controller( 'JoinCtrl', function JoinCtrl( $scope, $state ) {
+  $scope.userInfo = {
+    fromSocial : {}
+  };
+
   //immediately send them
   $state.go('join.landing');
 })
@@ -65,12 +69,25 @@ angular.module( 'Morsel.account.join', [])
         // user is logged into your app and Facebook.
         if(response.authResponse && response.authResponse.userID) {
           ApiUsers.checkAuthentication('facebook', response.authResponse.userID).then(function(resp){
-            //if we already have them on file, just sign them in
-            console.log(resp);
-            //come back to this!
+            //if we already have them on file
+            if(resp && resp.data) {
+              //just sign them in
+              console.log(resp);
+              alert('signing in...');
+              //come back to this!
+            } else {
+              //otherwise get some basic info from fb
+              FB.api('/me', function(response) {
+                console.log(response);
+                $scope.prePopulatedUserInfo = response;
+                console.log('Good to see you, ' + response.name + '.');
+                document.getElementById('status').innerHTML = 'Good to see you, ' + response.name;
+                $scope.userInfo.fromSocial = response;
+                $state.go('join.basicInfo');
+              });
+            }
           }, function(resp) {
-            //otherwise send them to get some basic info
-            $state.go('join.basicInfo');
+            //something went wrong...
           });
         }
       }
@@ -84,8 +101,7 @@ angular.module( 'Morsel.account.join', [])
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors, AfterLogin ) {
-
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors, AfterLogin, $stateParams ) {
   //a cleaner way of building radio buttons
   $scope.industryValues = [{
     'name':'Restaurant Staff',
@@ -101,7 +117,11 @@ angular.module( 'Morsel.account.join', [])
   }];
 
   //model to store our join data
-  $scope.joinModel = {};
+  $scope.joinModel = {
+    'first_name': $scope.userInfo.fromSocial.first_name || '',
+    'last_name': $scope.userInfo.fromSocial.last_name || '',
+    'email': $scope.userInfo.fromSocial.email || ''
+  };
 
   //custom validation configs for password verification
   $scope.customMatchVer = {

@@ -189,12 +189,15 @@ angular.module( 'Morsel.common.apiUsers', [] )
   };
 
   Users.checkAuthentication = function(provider, userProviderId) {
-    var deferred = $q.defer();
+    var deferred = $q.defer(),
+        params  = {
+          authentication: {
+            'provider': provider,
+            'uid': userProviderId
+          }
+        };
 
-    Restangular.one('users').one('checkauthentication').get({authentication: {
-      provider: provider,
-      uid: userProviderId
-    }}).then(function(resp) {
+    RestangularUsers.get('check_authentication', params).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
