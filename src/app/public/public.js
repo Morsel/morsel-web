@@ -88,8 +88,8 @@ angular.module( 'Morsel.public', [
     // This is a get for a list
     var newResponse;
     if (operation === "get") {
-      // Here we're returning an Array which has one special property metadata with our extra information
-      newResponse = response.data;
+      // Here we're returning our data object, with one special metadata property with extra information
+      newResponse = response.data || {};
       newResponse.metadata = response.meta;
     } else {
       // This is an element
