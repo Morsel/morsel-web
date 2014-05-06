@@ -158,10 +158,13 @@ angular.module( 'Morsel.account.join', [])
             'last_name': $scope.joinModel.last_name,
             'title': $scope.joinModel.title,
             'bio': $scope.joinModel.bio,
-            'industry': $scope.joinModel.industry,
-            'photo': this.selectedFile || null
+            'industry': $scope.joinModel.industry
           }
         };
+
+    if(this.selectedFile) {
+      uploadData.user.photo = this.selectedFile;
+    }
 
     //check if everything is valid
     if($scope.joinForm.$valid) {
