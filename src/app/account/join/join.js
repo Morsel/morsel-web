@@ -178,8 +178,9 @@ angular.module( 'Morsel.account.join', [])
     if(AfterLogin.hasCallbacks()) {
       AfterLogin.executeCallbacks();
     } else {
+      alert('signup success!');
       //or else send to their feed
-      $location.path('/myfeed');
+      //$location.path('/myfeed');
     }
   }
 

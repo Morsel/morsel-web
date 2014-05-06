@@ -69,16 +69,16 @@ angular.module('Morsel.common.validatedElement', [])
       }
     },
     templateUrl: function(tElement, tAttrs) {
-      var templateRoot = 'forms/validated',
+      var templateRoot = 'common/forms/validated',
           templateMid = 'Input', //assume input if not specified
           templateEnd = '.tpl.html';
 
       //figure out which template to load and use
-      if(tAttrs.valTagType === 'textarea') {
+      if(tAttrs.mrslValTagType === 'textarea') {
         templateMid = 'Textarea';
-      } else if(tAttrs.valTagType === 'radio') {
+      } else if(tAttrs.mrslValTagType === 'radio') {
         templateMid = 'Radio';
-      } else if(tAttrs.valTagType === 'checkbox') {
+      } else if(tAttrs.mrslValTagType === 'checkbox') {
         templateMid = 'Checkbox';
       }
       

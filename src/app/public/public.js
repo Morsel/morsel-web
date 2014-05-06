@@ -45,7 +45,6 @@ angular.module( 'Morsel.public', [
   //app
   'Morsel.public.editProfile',
   'Morsel.public.home',
-  'Morsel.public.join',
   'Morsel.public.login',
   'Morsel.public.logout',
   'Morsel.public.morselDetail',
