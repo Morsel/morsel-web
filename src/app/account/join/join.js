@@ -41,7 +41,9 @@ angular.module( 'Morsel.account.join', [])
   $state.go('join.landing');
 })
 
-.controller( 'LandingCtrl', function LandingCtrl( $scope, ApiUsers, $state ) {
+.controller( 'LandingCtrl', function LandingCtrl( $scope, ApiUsers, $state, $q ) {
+  var fb;
+
   //our authentication code
 
   //facebook
@@ -66,6 +68,9 @@ angular.module( 'Morsel.account.join', [])
 
   $scope.signupFacebook = function() {
     FB.login(function(response) {
+      var fbUserPromise,
+          fbPicturePromise;
+
       if (response.status === 'connected') {
         // user is logged into your app and Facebook.
         if(response.authResponse && response.authResponse.userID) {
@@ -78,13 +83,17 @@ angular.module( 'Morsel.account.join', [])
               //come back to this!
             } else {
               //otherwise get some basic info from fb
-              FB.api('/me', function(meInfo) {
-                //store our basic user info so we can prepopulate form
-                $scope.socialData.user = meInfo;
+              fbUserPromise = fb.getUserInfo();
+              //and get user's picture
+              fbPicturePromise = fb.getUserPicture();
+
+              //once all promises are resolved with data from fb, send to main form
+              $q.all([fbUserPromise, fbPicturePromise]).then(function(){
                 //where we pulled the data
                 $scope.socialData.type = 'facebook';
                 //social token
                 $scope.socialData.token = response.authResponse.accessToken;
+                
                 //send to main form
                 $state.go('join.basicInfo');
               });
@@ -101,6 +110,34 @@ angular.module( 'Morsel.account.join', [])
 
   $scope.joinEmail = function() {
     $state.go('join.basicInfo');
+  };
+
+  fb = {
+    getUserInfo: function() {
+      var deferred = $q.defer();
+
+      FB.api('/me', function(myInfo) {
+        //store our basic user info so we can prepopulate form
+        $scope.socialData.user = myInfo;
+        deferred.resolve();
+      });
+
+      return deferred.promise;
+    },
+    getUserPicture: function() {
+      var deferred = $q.defer();
+
+      FB.api('/me/picture', {
+        'width': '144',
+        'height': '144'
+      }, function(myPicture) {
+        //store our picture info so we can prepopulate form
+        $scope.socialData.picture = myPicture;
+        deferred.resolve();
+      });
+
+      return deferred.promise;
+    }
   };
 })
 
