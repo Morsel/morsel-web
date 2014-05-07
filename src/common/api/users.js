@@ -34,6 +34,15 @@ angular.module( 'Morsel.common.apiUsers', [] )
         }
       }
 
+      if(userData.authentication) {
+        //loop through our data and append to fd
+        for(k in userData.authentication) {
+          if(userData.authentication[k]) {
+            fd.append('authentication['+k+']', userData.authentication[k]);
+          }
+        }
+      }
+
       //use our restangular multi-part post
       ApiUploads.upload('users', fd).then(function(resp){
         deferred.resolve(Restangular.stripRestangular(resp));

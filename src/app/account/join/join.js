@@ -32,8 +32,9 @@ angular.module( 'Morsel.account.join', [])
 })
 
 .controller( 'JoinCtrl', function JoinCtrl( $scope, $state ) {
-  $scope.userInfo = {
-    fromSocial : {}
+  //for storing data to pass between views
+  $scope.socialData = {
+    user: {}
   };
 
   //immediately send them
@@ -77,12 +78,14 @@ angular.module( 'Morsel.account.join', [])
               //come back to this!
             } else {
               //otherwise get some basic info from fb
-              FB.api('/me', function(response) {
-                console.log(response);
-                $scope.prePopulatedUserInfo = response;
-                console.log('Good to see you, ' + response.name + '.');
-                document.getElementById('status').innerHTML = 'Good to see you, ' + response.name;
-                $scope.userInfo.fromSocial = response;
+              FB.api('/me', function(meInfo) {
+                //store our basic user info so we can prepopulate form
+                $scope.socialData.user = meInfo;
+                //where we pulled the data
+                $scope.socialData.type = 'facebook';
+                //social token
+                $scope.socialData.token = response.authResponse.accessToken;
+                //send to main form
                 $state.go('join.basicInfo');
               });
             }
@@ -103,7 +106,7 @@ angular.module( 'Morsel.account.join', [])
 
 .controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors, AfterLogin, $stateParams ) {
   //used to differentiate between login types for UI
-  $scope.usingEmail = _.isEmpty($scope.userInfo.fromSocial); 
+  $scope.usingEmail = _.isEmpty($scope.socialData.user); 
 
   //a cleaner way of building radio buttons
   $scope.industryValues = [{
@@ -121,9 +124,9 @@ angular.module( 'Morsel.account.join', [])
 
   //model to store our join data
   $scope.joinModel = {
-    'first_name': $scope.userInfo.fromSocial.first_name || '',
-    'last_name': $scope.userInfo.fromSocial.last_name || '',
-    'email': $scope.userInfo.fromSocial.email || ''
+    'first_name': $scope.socialData.user.first_name || '',
+    'last_name': $scope.socialData.user.last_name || '',
+    'email': $scope.socialData.user.email || ''
   };
 
   //custom validation configs for password verification
@@ -183,10 +186,27 @@ angular.module( 'Morsel.account.join', [])
             'bio': $scope.joinModel.bio,
             'industry': $scope.joinModel.industry
           }
-        };
+        },
+        socialData;
 
     if(this.selectedFile) {
       uploadData.user.photo = this.selectedFile;
+    }
+
+    if(!$scope.usingEmail) {
+      socialData = {
+        authentication: {
+          'provider': $scope.socialData.type,
+          'token': $scope.socialData.token
+        }
+      };
+
+      if($scope.socialData.secret) {
+        socialData.authentication.secret = $scope.socialData.secret;
+      }
+
+      //combine our data to be passed along
+      _.extend(uploadData, socialData);
     }
 
     //check if everything is valid
