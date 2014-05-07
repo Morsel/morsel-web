@@ -50,7 +50,7 @@ angular.module( 'Morsel.account.join', [])
   $state.go('join.landing');
 })
 
-.controller( 'LandingCtrl', function LandingCtrl( $scope, ApiUsers, $state, $q ) {
+.controller( 'LandingCtrl', function LandingCtrl( $scope, ApiUsers, $state, $q, HandleErrors, $modal, $rootScope ) {
   var fb;
 
   //our authentication code
@@ -128,7 +128,20 @@ angular.module( 'Morsel.account.join', [])
       FB.api('/me', function(myInfo) {
         //store our basic user info so we can prepopulate form
         $scope.userData.social = myInfo;
-        deferred.resolve();
+
+        //check to see if this user's email is already in use on morsel
+        ApiUsers.validateEmail(myInfo.email).then(function(resp){
+          deferred.resolve();
+        }, function(resp) {
+          //if this email already exists...
+          if(resp.data && resp.data.errors && resp.data.errors.email && (_.indexOf(resp.data.errors.email, 'has already been taken')>=0)) {
+            //pop an overlay prompting user to associated fb data to existing morsel account
+            fb.existingAccountModal($scope, deferred);
+          } else {
+            //deal with API error...
+            //HandleErrors.onError(resp, FORM);
+          }
+        });
       });
 
       return deferred.promise;
@@ -146,6 +159,43 @@ angular.module( 'Morsel.account.join', [])
       });
 
       return deferred.promise;
+    },
+    existingAccountModal: function(scopeWithData, deferred) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, scopeWithData, deferred) {
+        $scope.email = scopeWithData.userData.social.email;
+
+        //if user cancels, allow fb info to go through, but strip out email
+        $scope.cancel = function () {
+          scopeWithData.userData.social.email = '';
+          $modalInstance.dismiss('cancel');
+          deferred.resolve();
+        };
+
+        $scope.combineAccounts = function() {
+          alert('combine accounts');
+          //send to login, then combine once you're there
+          //COME BACK TO THIS
+        };
+
+        $rootScope.$on('$locationChangeSuccess', function () {
+          $modalInstance.dismiss('cancel');
+        });
+      };
+      //we need to implicitly inject dependencies here, otherwise minification will botch them
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'scopeWithData', 'deferred'];
+
+      var modalInstance = $modal.open({
+        templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+          scopeWithData: function () {
+            return scopeWithData;
+          },
+          deferred: function () {
+            return deferred;
+          }
+        }
+      });
     }
   };
 })

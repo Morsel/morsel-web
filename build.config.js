@@ -170,7 +170,8 @@ module.exports = {
         'src/common/forms/validatedCheckbox.tpl.html',
         'src/common/forms/validatedInput.tpl.html',
         'src/common/forms/validatedRadio.tpl.html',
-        'src/common/forms/validatedTextarea.tpl.html'
+        'src/common/forms/validatedTextarea.tpl.html',
+        'src/common/user/duplicateEmailOverlay.tpl.html'
       ]
     },
     vendor_files: {

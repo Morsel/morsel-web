@@ -10,7 +10,7 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     Restangular.one('cuisines').get().then(function(resp){
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.resolve(Restangular.stripRestangular(resp));
+      deferred.reject(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -22,7 +22,7 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     Restangular.one('cuisines', cuisineId).one('users').get().then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.resolve(Restangular.stripRestangular(resp));
+      deferred.reject(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -34,7 +34,7 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     Restangular.one('specialties', specialtyId).one('users').get().then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.resolve(Restangular.stripRestangular(resp));
+      deferred.reject(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
