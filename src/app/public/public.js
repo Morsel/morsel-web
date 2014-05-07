@@ -45,8 +45,6 @@ angular.module( 'Morsel.public', [
   //app
   'Morsel.public.editProfile',
   'Morsel.public.home',
-  'Morsel.public.login',
-  'Morsel.public.logout',
   'Morsel.public.morselDetail',
   'Morsel.public.profile'//:username in route clobbers other routes - this needs to be last until a better solution is found
 ])

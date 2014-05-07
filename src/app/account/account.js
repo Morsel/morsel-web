@@ -24,7 +24,9 @@ angular.module( 'Morsel.account', [
   'Morsel.common.validatedElement',
   //app
   'Morsel.account.editProfile',
-  'Morsel.account.join'
+  'Morsel.account.join',
+  'Morsel.account.login',
+  'Morsel.account.logout'
 ])
 
 //define some constants for the app

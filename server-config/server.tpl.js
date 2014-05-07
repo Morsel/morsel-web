@@ -117,6 +117,11 @@ app.get('/login', function(req, res){
   res.redirect('account/login');
 });
 
+//logout
+app.get('/logout', function(req, res){
+  res.redirect('account/logout');
+});
+
 //join
 app.get('/join', function(req, res){
   res.redirect('account/join');

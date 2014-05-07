@@ -1,4 +1,4 @@
-angular.module( 'Morsel.public.logout', [])
+angular.module( 'Morsel.account.logout', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'logout', {
