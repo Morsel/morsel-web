@@ -28,13 +28,22 @@ angular.module( 'Morsel.account.join', [])
         templateUrl: 'app/account/join/basicInfo.tpl.html'
       }
     }
+  })
+  .state( 'join.additionalInfo', {
+    views: {
+      "additionalInfo": {
+        controller: 'AdditionalInfoCtrl',
+        templateUrl: 'app/account/join/additionalInfo.tpl.html'
+      }
+    }
   });
 })
 
 .controller( 'JoinCtrl', function JoinCtrl( $scope, $state ) {
   //for storing data to pass between views
-  $scope.socialData = {
-    user: {}
+  $scope.userData = {
+    social: {},
+    registered: {}
   };
 
   //immediately send them
@@ -90,10 +99,10 @@ angular.module( 'Morsel.account.join', [])
               //once all promises are resolved with data from fb, send to main form
               $q.all([fbUserPromise, fbPicturePromise]).then(function(){
                 //where we pulled the data
-                $scope.socialData.type = 'facebook';
+                $scope.userData.social.type = 'facebook';
                 //social token
-                $scope.socialData.token = response.authResponse.accessToken;
-                
+                $scope.userData.social.token = response.authResponse.accessToken;
+
                 //send to main form
                 $state.go('join.basicInfo');
               });
@@ -118,7 +127,7 @@ angular.module( 'Morsel.account.join', [])
 
       FB.api('/me', function(myInfo) {
         //store our basic user info so we can prepopulate form
-        $scope.socialData.user = myInfo;
+        $scope.userData.social = myInfo;
         deferred.resolve();
       });
 
@@ -132,7 +141,7 @@ angular.module( 'Morsel.account.join', [])
         'height': '144'
       }, function(myPicture) {
         //store our picture info so we can prepopulate form
-        $scope.socialData.picture = myPicture;
+        $scope.userData.social.picture = myPicture;
         deferred.resolve();
       });
 
@@ -141,29 +150,15 @@ angular.module( 'Morsel.account.join', [])
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors, AfterLogin, $stateParams ) {
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $timeout, HandleErrors, $state ) {
   //used to differentiate between login types for UI
-  $scope.usingEmail = _.isEmpty($scope.socialData.user); 
+  $scope.usingEmail = _.isEmpty($scope.userData.social); 
 
-  //a cleaner way of building radio buttons
-  $scope.industryValues = [{
-    'name':'Restaurant Staff',
-    'value':'chef'
-  },
-  {
-    'name':'Press / Media',
-    'value':'media'
-  },
-  {
-    'name':'Diner',
-    'value':'diner'
-  }];
-
-  //model to store our join data
-  $scope.joinModel = {
-    'first_name': $scope.socialData.user.first_name || '',
-    'last_name': $scope.socialData.user.last_name || '',
-    'email': $scope.socialData.user.email || ''
+  //model to store our basic info data
+  $scope.basicInfoModel = {
+    'first_name': $scope.userData.social.first_name || '',
+    'last_name': $scope.userData.social.last_name || '',
+    'email': $scope.userData.social.email || ''
   };
 
   //custom validation configs for password verification
@@ -211,17 +206,14 @@ angular.module( 'Morsel.account.join', [])
   };
 
   //submit our form
-  $scope.join = function() {
+  $scope.basicInfoSubmit = function() {
     var uploadData = {
           user: {
-            'email': $scope.joinModel.email,
-            'username': $scope.joinModel.username,
-            'password': $scope.joinModel.password,
-            'first_name': $scope.joinModel.first_name,
-            'last_name': $scope.joinModel.last_name,
-            'title': $scope.joinModel.title,
-            'bio': $scope.joinModel.bio,
-            'industry': $scope.joinModel.industry
+            'email': $scope.basicInfoModel.email,
+            'username': $scope.basicInfoModel.username,
+            'password': $scope.basicInfoModel.password,
+            'first_name': $scope.basicInfoModel.first_name,
+            'last_name': $scope.basicInfoModel.last_name
           }
         },
         socialData;
@@ -233,13 +225,13 @@ angular.module( 'Morsel.account.join', [])
     if(!$scope.usingEmail) {
       socialData = {
         authentication: {
-          'provider': $scope.socialData.type,
-          'token': $scope.socialData.token
+          'provider': $scope.userData.social.type,
+          'token': $scope.userData.social.token
         }
       };
 
-      if($scope.socialData.secret) {
-        socialData.authentication.secret = $scope.socialData.secret;
+      if($scope.userData.social.secret) {
+        socialData.authentication.secret = $scope.userData.social.secret;
       }
 
       //combine our data to be passed along
@@ -247,9 +239,57 @@ angular.module( 'Morsel.account.join', [])
     }
 
     //check if everything is valid
-    if($scope.joinForm.$valid) {
+    if($scope.basicInfoForm.$valid) {
       //call our join to take care of the heavy lifting
       Auth.join(uploadData, onSuccess, onError);
+    }
+  };
+
+  function onSuccess(resp) {
+    //store our user data for the next step if we need it
+    $scope.userData.registered = resp;
+
+    //if successfully joined send to the next step
+    $state.go('join.additionalInfo');
+  }
+
+  function onError(resp) {
+    HandleErrors.onError(resp, $scope.basicInfoForm);
+  }
+})
+
+.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors) {
+  //a cleaner way of building radio buttons
+  $scope.industryValues = [{
+    'name':'Restaurant Staff',
+    'value':'chef'
+  },
+  {
+    'name':'Press / Media',
+    'value':'media'
+  },
+  {
+    'name':'Diner',
+    'value':'diner'
+  }];
+
+  //model to store our additional data
+  $scope.additionalInfoModel = {};
+
+  //submit our form
+  $scope.submitAdditionalInfo = function() {
+    var industryPromise,
+        userInfoPromise;
+
+    //check if everything is valid
+    if($scope.additionalInfoForm.$valid) {
+      industryPromise = ApiUsers.updateIndustry($scope.userData.registered.id, $scope.additionalInfoModel.industry);
+      userInfoPromise = ApiUsers.updateUser($scope.userData.registered.id, {
+        bio: $scope.additionalInfoModel.bio
+      });
+
+      //once all promises are resolved, send them on their way
+      $q.all([industryPromise, userInfoPromise]).then(onSuccess, onError);
     }
   };
 
@@ -265,6 +305,6 @@ angular.module( 'Morsel.account.join', [])
   }
 
   function onError(resp) {
-    HandleErrors.onError(resp, $scope.joinForm);
+    HandleErrors.onError(resp, $scope.additionalInfoForm);
   }
 });

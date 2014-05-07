@@ -104,7 +104,19 @@ angular.module( 'Morsel.common.apiUsers', [] )
   Users.updateUser = function(userId, userData) {
     var deferred = $q.defer();
 
-    Restangular.one('users', userId).put(userData).then(function(resp) {
+    Restangular.one('users', userId).customPUT(userData).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.updateIndustry = function(userId, industry) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', userId).one('updateindustry', 0, true).customPUT({user:{industry:industry}}).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));

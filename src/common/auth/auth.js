@@ -99,7 +99,7 @@ angular.module( 'Morsel.common.auth', [
   Auth.join = function(uploadUserData, onSuccess, onError) {
     ApiUsers.newUser(uploadUserData).then(function(loggedInUser) {
       Auth._updateUser(loggedInUser);
-      onSuccess();
+      onSuccess(loggedInUser);
     }, function(resp){
       Auth._clearUser();
       onError(resp);

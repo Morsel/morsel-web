@@ -1,0 +1,16 @@
+<div class="container morsel-bg container-shadow container-max-xs">
+  <form name="additionalInfoForm" method="post" ng-submit="submitAdditionalInfo()" class="padded-form" novalidate>
+    <div class="row">
+      <div class="col-md-5">
+      </div>
+      <div class="col-md-7">
+        <input mrsl-validated-element mrsl-val-form="additionalInfoForm" mrsl-val-en-name="What role best describes you?" mrsl-val-name="industry" mrsl-val-form-model="additionalInfoModel" mrsl-val-required="true" mrsl-val-tag-type="radio" mrsl-val-multiple-vals="industryValues" />
+
+        <textarea mrsl-validated-element mrsl-val-form="additionalInfoForm" mrsl-val-en-name="Bio" mrsl-val-name="bio" mrsl-val-form-model="additionalInfoModel" mrsl-val-placeholder="Tell us a little about yourself" mrsl-val-required="true" mrsl-val-tag-type="textarea"></textarea>
+
+        <button mrsl-submit-btn mrsl-submit-btn-form="additionalInfoForm" mrsl-submit-btn-copy="Sign Up"></button>
+      </div>
+    </div>
+  </form>
+</div>
+
