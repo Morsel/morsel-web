@@ -102,6 +102,9 @@ angular.module( 'Morsel.account.join', [])
 })
 
 .controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $location, $timeout, $parse, HandleErrors, AfterLogin, $stateParams ) {
+  //used to differentiate between login types for UI
+  $scope.usingEmail = _.isEmpty($scope.userInfo.fromSocial); 
+
   //a cleaner way of building radio buttons
   $scope.industryValues = [{
     'name':'Restaurant Staff',

@@ -24,9 +24,9 @@
 
         <input mrsl-validated-element mrsl-val-form="joinForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="joinModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="true" />
 
-        <input mrsl-validated-element mrsl-val-form="joinForm" mrsl-val-en-name="Password" mrsl-val-type="password" mrsl-val-name="password" mrsl-val-form-model="joinModel" mrsl-val-required="true" />
+        <input ng-if="usingEmail" mrsl-validated-element mrsl-val-form="joinForm" mrsl-val-en-name="Password" mrsl-val-type="password" mrsl-val-name="password" mrsl-val-form-model="joinModel" mrsl-val-required="true" />
 
-        <input mrsl-validated-element mrsl-val-form="joinForm" mrsl-val-en-name="Repeat Password" mrsl-val-type="password" mrsl-val-name="verification" mrsl-val-form-model="joinModel" mrsl-val-custom="customMatchVer" mrsl-val-required="true" />
+        <input ng-if="usingEmail" mrsl-validated-element mrsl-val-form="joinForm" mrsl-val-en-name="Repeat Password" mrsl-val-type="password" mrsl-val-name="verification" mrsl-val-form-model="joinModel" mrsl-val-custom="customMatchVer" mrsl-val-required="true" />
 
         <!--<input mrsl-validated-element mrsl-val-form="joinForm" mrsl-val-en-name="What role best describes you?" mrsl-val-name="industry" mrsl-val-form-model="joinModel" mrsl-val-required="true" mrsl-val-tag-type="radio" mrsl-val-multiple-vals="industryValues" />-->
 
