@@ -15,6 +15,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.afterLogin',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
+  'Morsel.common.connectFacebook',
   'Morsel.common.formNameFix',
   'Morsel.common.handleErrors',
   'Morsel.common.mixpanel',

@@ -162,6 +162,7 @@ module.exports = {
         'src/common/forms/submitBtn.js',
         'src/common/forms/validatedElement.js',
         'src/common/images/photoHelpers.js',
+        'src/common/social/connectFacebook.js',
         'src/common/user/userImage.js'
       ],
       tpl: [
