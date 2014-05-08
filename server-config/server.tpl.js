@@ -133,6 +133,15 @@ app.get('/logout', function(req, res){
 });
 
 //join
+app.get('/join/:step', function(req, res){
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
+});
+
 app.get('/join', function(req, res){
   res.render('login', {
     siteUrl : siteURL,

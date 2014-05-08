@@ -14,6 +14,7 @@ angular.module( 'Morsel.login.join', [])
     }
   })
   .state( 'join.landing', {
+    url: '/1',
     views: {
       "landing": {
         controller: 'LandingCtrl',
@@ -22,6 +23,7 @@ angular.module( 'Morsel.login.join', [])
     }
   })
   .state( 'join.basicInfo', {
+    url: '/2',
     views: {
       "basicInfo": {
         controller: 'BasicInfoCtrl',
@@ -30,6 +32,7 @@ angular.module( 'Morsel.login.join', [])
     }
   })
   .state( 'join.additionalInfo', {
+    url: '/3',
     views: {
       "additionalInfo": {
         controller: 'AdditionalInfoCtrl',
