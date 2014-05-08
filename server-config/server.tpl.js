@@ -77,16 +77,16 @@ app.get('/', function(req, res) {
 */
 
 //templates
-app.get('/templates-common.js', function(req, res){
-  res.sendfile('templates-common.js');
-});
-
 app.get('/templates-public.js', function(req, res){
   res.sendfile('templates-public.js');
 });
 
 app.get('/templates-account.js', function(req, res){
   res.sendfile('templates-account.js');
+});
+
+app.get('/templates-login.js', function(req, res){
+  res.sendfile('templates-login.js');
 });
 
 //SEO
@@ -114,17 +114,32 @@ app.get('/unsubscribe', function(req, res){
 
 //login
 app.get('/login', function(req, res){
-  res.redirect('account/login');
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
 });
 
 //logout
 app.get('/logout', function(req, res){
-  res.redirect('account/logout');
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
 });
 
 //join
 app.get('/join', function(req, res){
-  res.redirect('account/join');
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
 });
 
 //account pages

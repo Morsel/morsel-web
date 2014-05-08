@@ -1,12 +1,12 @@
-angular.module( 'Morsel.account.join', [])
+angular.module( 'Morsel.login.join', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'join', {
-    url: '/account/join',
+    url: '/join',
     views: {
       "main": {
         controller: 'JoinCtrl',
-        templateUrl: 'app/account/join/join.tpl.html'
+        templateUrl: 'app/login/join/join.tpl.html'
       }
     },
     data:{
@@ -17,7 +17,7 @@ angular.module( 'Morsel.account.join', [])
     views: {
       "landing": {
         controller: 'LandingCtrl',
-        templateUrl: 'app/account/join/landing.tpl.html'
+        templateUrl: 'app/login/join/landing.tpl.html'
       }
     }
   })
@@ -25,7 +25,7 @@ angular.module( 'Morsel.account.join', [])
     views: {
       "basicInfo": {
         controller: 'BasicInfoCtrl',
-        templateUrl: 'app/account/join/basicInfo.tpl.html'
+        templateUrl: 'app/login/join/basicInfo.tpl.html'
       }
     }
   })
@@ -33,7 +33,7 @@ angular.module( 'Morsel.account.join', [])
     views: {
       "additionalInfo": {
         controller: 'AdditionalInfoCtrl',
-        templateUrl: 'app/account/join/additionalInfo.tpl.html'
+        templateUrl: 'app/login/join/additionalInfo.tpl.html'
       }
     }
   });

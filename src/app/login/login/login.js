@@ -1,12 +1,12 @@
-angular.module( 'Morsel.account.login', [])
+angular.module( 'Morsel.login.login', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'login', {
-    url: '/account/login',
+    url: '/login',
     views: {
       "main": {
         controller: 'LoginCtrl',
-        templateUrl: 'app/account/login/login.tpl.html'
+        templateUrl: 'app/login/login/login.tpl.html'
       }
     },
     data:{ pageTitle: 'Login' }

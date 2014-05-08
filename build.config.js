@@ -201,6 +201,61 @@ module.exports = {
     }
   },
 
+  /* files just related to our login app */
+  login_files: {
+    atpl: [ 'src/app/login/**/*.tpl.html' ],
+    common: {
+      js: [
+        'src/common/analytics/mixpanel.js',
+        'src/common/api/uploads.js',
+        'src/common/api/users.js',
+        'src/common/auth/afterLogin.js',
+        'src/common/auth/auth.js',
+        'src/common/forms/baseErrors.js',
+        'src/common/forms/formNameFix.js',
+        'src/common/forms/handleErrors.js',
+        'src/common/forms/submitBtn.js',
+        'src/common/forms/validatedElement.js',
+        'src/common/images/photoHelpers.js',
+        'src/common/social/connectFacebook.js',
+        'src/common/user/userImage.js'
+      ],
+      tpl: [
+        'src/common/auth/apiError.tpl.html',
+        'src/common/forms/submitBtn.tpl.html',
+        'src/common/forms/validatedCheckbox.tpl.html',
+        'src/common/forms/validatedInput.tpl.html',
+        'src/common/forms/validatedRadio.tpl.html',
+        'src/common/forms/validatedTextarea.tpl.html',
+        'src/common/user/duplicateEmailOverlay.tpl.html'
+      ]
+    },
+    vendor_files: {
+      js: [
+        'vendor/angular/angular.js',
+        'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-moment/angular-moment.min.js',
+        'vendor/angular-touch/angular-touch.js',
+        'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/angular-ui-utils/modules/route/route.js',
+        'vendor/moment/moment.js',
+        'vendor/lodash/dist/lodash.js',
+        'vendor/ng-file-upload/angular-file-upload.js',
+        'vendor/ng-file-upload/angular-file-upload-shim.js',
+        'vendor/ngstorage/ngStorage.js',
+        'vendor/restangular/dist/restangular.js'
+      ],
+      css: [
+      ],
+      assets: [
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+      ]
+    }
+  },
+
   /**
    * This is a collection of files used during testing only.
    */
