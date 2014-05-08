@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectFacebook', [] )
 
 //connect (sign up/login) with facebook SDK
-.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope){
+.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin){
   return {
     restrict: 'A',
     scope: false,
@@ -16,7 +16,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             appId      : '1402286360015732',
             cookie     : true,  // enable cookies to allow the server to access 
                                 // the session
-            xfbml      : true,  // parse social plugins on this page
+            xfbml      : false,  // parse social plugins on this page
             version    : 'v2.0' // use version 2.0
           });
         };
@@ -47,6 +47,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             }
           }
         }, {
+          //grab this stuff from fb
           scope: 'public_profile,email,user_friends'
         });
       };
@@ -57,15 +58,11 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           //if we already have them on file
           if(resp && resp.data) {
             //just sign them in
-            console.log(resp);
-            alert('signing in...');
-            //come back to this!
+            login();
           } else {
             //otherwise get some stuff from FB to start sign up process
             gatherSignUpData();
           }
-        }, function(resp) {
-          //something went wrong...
         });
       }
 
@@ -104,8 +101,9 @@ angular.module( 'Morsel.common.connectFacebook', [] )
               //pop an overlay prompting user to associated fb data to existing morsel account
               existingAccountModal();
             } else {
-              //deal with API error...
-              //HandleErrors.onError(resp, FORM);
+              //the email wasn't valid - just scrap it, move to sign up
+              scope.userData.social.email = '';
+              userInfoDeferred.resolve();
             }
           });
         });
@@ -140,9 +138,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           };
 
           $scope.combineAccounts = function() {
-            alert('combine accounts');
-            //send to login, then combine once you're there
-            //COME BACK TO THIS
+            AfterLogin.addCallbacks(function() {
+              gatherSignUpData();
+            });
+            $location.path('/account/login');
           };
 
           $rootScope.$on('$locationChangeSuccess', function () {
@@ -165,6 +164,33 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             }
           }
         });
+      }
+
+      function login() {
+       var authenticationData = {
+            'authentication': {
+              'provider': 'facebook',
+              'token': loginResponse.authResponse.accessToken
+            }
+          };
+
+        Auth.login(userData, onLoginSuccess, onLoginError);
+      }
+
+      function onLoginSuccess(resp) {
+        //if successfully logged in check if we have anything in the to-do queue
+        if(AfterLogin.hasCallbacks()) {
+          AfterLogin.executeCallbacks();
+        } else {
+          //or else send them somewhere
+          alert('logged in!');
+        }
+      }
+
+      function onLoginError(resp) {
+        alert('error!');
+        //how to handle errors?
+        //HandleErrors.onError(resp, $scope.loginForm);
       }
     },
     template: '<a ng-click="connectFacebook()">Connect with Facebook</a>'
