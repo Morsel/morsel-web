@@ -140,7 +140,14 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
           $scope.combineAccounts = function() {
             AfterLogin.addCallbacks(function() {
-              //COME BACK HERE TO MERGE ACCOUNTS
+              ApiUsers.updateUser(scopeWithData.userData.registered.id, {
+                'authentication': {
+                  'provider': 'facebook',
+                  'token': loginResponse.authResponse.accessToken
+                }
+              }).then(function() {
+                //send them somewhere?
+              });
             });
             $location.path('/account/login');
           };
