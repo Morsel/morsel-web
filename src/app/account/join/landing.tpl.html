@@ -1,12 +1,15 @@
-<div class="row">
-  <div class="col-md-6">
-    <a mrsl-connect-facebook>Connect with Facebook</a>
-    <a href="">Connect Twitter</a>
-    <a ng-click="joinEmail()">Use my email address</a>
-    <div id="status"></div>
+<div class="join-landing">
+  <div class="row">
+    <div class="col-md-6">
+      <a ng-click="goTo('home')" class="morsel-text">Morsel</a>
+      <a mrsl-connect-facebook>Connect with Facebook</a>
+      <a class="btn btn-social btn-twitter"><i class="common-share-twitter"></i>Connect with Twitter</a>
+      <a ng-click="joinEmail()" class="btn btn-social btn-email"><i class="common-share-email"></i>Sign up with Email</a>
+      <div id="status"></div>
+    </div>
+    <div class="col-md-6">
+    </div>
   </div>
-  <div class="col-md-6">
-  </div>
+  <p class="have-an-account">Already have an account? <a href="/account/login">Login here.</a></p>
 </div>
-<p class="have-an-account">Already have an account? <a href="/account/login">Login here.</a></p>
 

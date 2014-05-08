@@ -201,6 +201,6 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         //HandleErrors.onError(resp, $scope.loginForm);
       }
     },
-    template: '<a ng-click="connectFacebook()">Connect with Facebook</a>'
+    template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook"><i class="common-share-facebook"></i>Connect with Facebook</a>'
   };
 });

@@ -1,6 +1,5 @@
 //forms
 .padded-form {
-  padding-top: 25px;
   padding-bottom: 25px;
 }
 
@@ -258,6 +257,22 @@ form {
         color: $morsel-medium;
       }
     }
+  }
+}
+
+.morsel-text {
+  background: url(images/logos/morsel-text.png) center top no-repeat;
+  background-size: 130px 59px;
+  width: 130px;
+  height: 59px;
+  display: inline-block;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+  .morsel-text {
+    background-image: url(images/logos/morsel-text@2x.png);
   }
 }
 
