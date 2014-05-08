@@ -3,12 +3,13 @@
     <div class="row">
       <div class="col-md-5">
         <div class="form-group">
-          <div class="avatar-add img-circle" tooltip-placement="bottom" tooltip="Click to select or drag and drop a photo here" tooltip-trigger="{{{true:'mouseenter', false:'never'}[dropSupported]}}">
+          <div class="avatar-add img-circle" tooltip-placement="bottom" tooltip="Click to select or drag and drop a photo from your computer" tooltip-trigger="{{{true:'mouseenter', false:'never'}[dropSupported]}}">
             <div ng-show="dropSupported" class="drop-box " ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true"></div>
             <span class="h1 plus-sign">+</span>
             <input type="file" id="photo" ng-file-select="onFileSelect($files)">
-            <div ng-show="selectedFile != null" class="avatar-preview" >
-              <img class="img-circle" ng-show="dataUrl" ng-src="{{dataUrl}}">
+            <div ng-show="(selectedFile != null) || remotePhotoUrl" class="avatar-preview" >
+              <img class="img-circle" ng-show="photoDataUrl" ng-src="{{photoDataUrl}}">
+              <img class="img-circle" ng-show="remotePhotoUrl" ng-src="{{remotePhotoUrl}}">
             </div>
           </div>
           <label class="control-label center-block text-center" for="photo">Profile Photo</label>

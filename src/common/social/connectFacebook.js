@@ -89,7 +89,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
         FB.api('/me', function(myInfo) {
           //store our basic user info so we can prepopulate form
-          scope.userData.social = myInfo;
+          //use extend so we don't overwrite the picture
+          _.extend(scope.userData.social, myInfo);
 
           //check to see if this user's email is already in use on morsel
           ApiUsers.validateEmail(myInfo.email).then(function(resp){
@@ -139,7 +140,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
           $scope.combineAccounts = function() {
             AfterLogin.addCallbacks(function() {
-              gatherSignUpData();
+              //COME BACK HERE TO MERGE ACCOUNTS
             });
             $location.path('/account/login');
           };

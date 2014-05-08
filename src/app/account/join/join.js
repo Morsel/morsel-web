@@ -50,7 +50,7 @@ angular.module( 'Morsel.account.join', [])
   $state.go('join.landing');
 })
 
-.controller( 'LandingCtrl', function LandingCtrl( $scope ) {
+.controller( 'LandingCtrl', function LandingCtrl( $scope, $state ) {
   $scope.joinEmail = function() {
     $state.go('join.basicInfo');
   };
@@ -66,6 +66,10 @@ angular.module( 'Morsel.account.join', [])
     'last_name': $scope.userData.social.last_name || '',
     'email': $scope.userData.social.email || ''
   };
+
+  if($scope.userData.social.picture) {
+    setRemotePhotoUrl($scope.userData.social.picture.data.url);
+  }
 
   //custom validation configs for password verification
   $scope.customMatchVer = {
@@ -86,7 +90,7 @@ angular.module( 'Morsel.account.join', [])
   function setPreview(fileReader) {
     fileReader.onload = function(e) {
       $timeout(function() {
-        $scope.dataUrl = e.target.result;
+        $scope.photoDataUrl = e.target.result;
       });
     };
   }
@@ -100,12 +104,12 @@ angular.module( 'Morsel.account.join', [])
     }
     $scope.upload = null;
     $scope.uploadResult = null;
-    $scope.dataUrl = '';
+    $scope.photoDataUrl = '';
 
     //if Filereader API is available, use it to preview
     if (window.FileReader && $scope.selectedFile.type.indexOf('image') > -1) {
       var fileReader = new FileReader();
-      fileReader.readAsDataURL($scope.selectedFile);
+      fileReader.readAsphotoDataUrl($scope.selectedFile);
       
       setPreview(fileReader);
     }
@@ -126,6 +130,10 @@ angular.module( 'Morsel.account.join', [])
 
     if(this.selectedFile) {
       uploadData.user.photo = this.selectedFile;
+    }
+
+    if($scope.remotePhotoUrl) {
+      uploadData.user.remote_photo_url = $scope.remotePhotoUrl;
     }
 
     if(!$scope.usingEmail) {
@@ -161,6 +169,10 @@ angular.module( 'Morsel.account.join', [])
 
   function onError(resp) {
     HandleErrors.onError(resp, $scope.basicInfoForm);
+  }
+
+  function setRemotePhotoUrl(url) {
+    $scope.remotePhotoUrl = url;
   }
 })
 
