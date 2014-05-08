@@ -8,6 +8,37 @@
   display: inline-block;
 }
 
+.label-btns {
+  .control-label {
+    display: block;
+  }
+
+  .radio {
+    display: inline-block;
+    padding: 0;
+
+    label {
+      /*@extend .btn;
+      @extend .btn-default;*/
+      display: block;
+      white-space: normal;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      display: none;
+
+      &:checked + label {
+        background-color: darken($btn-default-bg, 8%);
+        border-color: darken($btn-default-border, 12%);
+      }
+    }
+
+    & + .radio {
+      margin-top: 10px;
+    }
+  }
+}
+
 //general image styles
 img {
   max-width: 100%;

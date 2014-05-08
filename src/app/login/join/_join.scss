@@ -1,10 +1,6 @@
 .join-landing {
   text-align: center;
 
-  .morsel-text {
-    margin: 15px 0 40px;
-  }
-
   .btn {
     display: block;
     margin-bottom: 10px;
@@ -14,4 +10,11 @@
 
 .have-an-account {
   margin-top: 10px;
+}
+
+.industry-btns {
+  .radio {
+    width: 33%;
+    padding: 0 5px;
+  }
 }

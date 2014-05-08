@@ -179,11 +179,11 @@ angular.module( 'Morsel.login.join', [])
 .controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors) {
   //a cleaner way of building radio buttons
   $scope.industryValues = [{
-    'name':'Restaurant Staff',
+    'name':'Chef',
     'value':'chef'
   },
   {
-    'name':'Press / Media',
+    'name':'Media',
     'value':'media'
   },
   {

@@ -1,5 +1,11 @@
-<div class="container morsel-bg container-shadow container-max-xs">
-  <div ui-view="landing"></div>
-  <div ui-view="basicInfo"></div>
-  <div ui-view="additionalInfo"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      <div ui-view="landing" class="join-landing"></div>
+      <div ui-view="basicInfo"></div>
+      <div ui-view="additionalInfo"></div>
+    </div>
+    <div class="col-sm-6">
+    </div>
+  </div>
 </div>

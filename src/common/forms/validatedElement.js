@@ -15,7 +15,8 @@ angular.module('Morsel.common.validatedElement', [])
       customVal: '=mrslValCustom',
       tagType: '@mrslValTagType',
       multipleVals: '=mrslValMultipleVals',
-      helpText: '@mrslValHelpText'
+      helpText: '@mrslValHelpText',
+      labelBtns: '@mrslValLabelBtns'//display checkboxes, radios as buttons
     },
     link: function(scope, element, attrs) {
       var customValType;
