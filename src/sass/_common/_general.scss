@@ -5,13 +5,14 @@ a {
 }
 
 ul {
-  margin: 0 0 0 12px;
+  margin: 0 0 10px 12px;
   padding: 0;
   list-style-image: url('data:image/gif;base64,R0lGODlhBQAKAIABAAAAAP///yH5BAEAAAEALAAAAAAFAAoAAAIIjI+ZwKwPUQEAOw==');
 
   li {
     line-height: 22px;
     font-size: 14px;
+    font-weight: 300;
   }
 }
 
