@@ -77,7 +77,7 @@ module.exports = function ( grunt ) {
     clean: {
       preDev: ['<%= build_dir %>'],
       preCompile: ['<%= compile_dir %>'],
-      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css', '<%= compile_dir %>/assets/login.css']
+      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css', '<%= compile_dir %>/assets/login.css', '<%= compile_dir %>/assets/static.css']
     },
 
     /**
@@ -134,6 +134,17 @@ module.exports = function ( grunt ) {
             src: [ 'package.json' ],
             dest: '<%= build_dir %>/',
             cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      //copy our static templates
+      build_static_templates: {
+        files: [
+          {
+            src: ['views/partials/static/*.mustache'],
+            dest: '<%= build_dir %>/',
+            cwd: 'src/',
             expand: true
           }
         ]
@@ -312,6 +323,12 @@ module.exports = function ( grunt ) {
         ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>_login-<%= pkg.version %>.css'
       },
+      build_static_css: {
+        src: [
+          '<%= build_dir %>/assets/static.css'
+        ],
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
+      },
       compile_public_css: {
         src: [
           '<%= public_files.vendor_files.css %>',
@@ -332,6 +349,12 @@ module.exports = function ( grunt ) {
           '<%= compile_dir %>/assets/login.css'
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>_login-<%= pkg.version %>.css'
+      },
+      compile_static_css: {
+        src: [
+          '<%= compile_dir %>/assets/static.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
       },
       /**
        * The `compile_<app_name>js` target is the concatenation of our application source
@@ -639,6 +662,24 @@ module.exports = function ( grunt ) {
     },
 
     /**
+     * The `static_pages` is analogous copy of app_public
+     */
+    static_pages: {
+      build: {
+        dir: '<%= build_dir %>',
+        src: [
+          '<%= build_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
+        ]
+      },
+      compile: {
+        dir: '<%= compile_dir %>',
+        src: [
+          '<%= compile_dir %>/assets/<%= pkg.name %>_static--<%= pkg.version %>.css'
+        ]
+      }
+    },
+
+    /**
      * The `appserver` task compiles the `server.js` file as a Grunt template.
      */
     appserver: {
@@ -738,7 +779,7 @@ module.exports = function ( grunt ) {
        */
       html: {
         files: [ '<%= app_files.html %>' ],
-        tasks: [ 'app_public:build', 'app_account:build', 'app_login:build' ]
+        tasks: [ 'app_public:build', 'app_account:build', 'app_login:build', 'static_pages:build' ]
       },
 
       /**
@@ -762,6 +803,7 @@ module.exports = function ( grunt ) {
           'concat:build_public_css',
           'concat:build_account_css',
           'concat:build_login_css',
+          'concat:build_static_css',
           'style'
           ]
       },
@@ -1037,8 +1079,8 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'build-no-style', [
     'clean:preDev', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
-    'concat:build_public_css', 'concat:build_account_css', 'concat:build_login_css', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'app_public:build', 'app_account:build', 'app_login:build', 'karmaconfig',
+    'concat:build_public_css', 'concat:build_account_css', 'concat:build_login_css', 'concat:build_static_css', 'copy:build_vendor_assets',
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'copy:build_static_templates', 'app_public:build', 'app_account:build', 'app_login:build', 'static_pages:build', 'karmaconfig',
     'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
   ]);
 
@@ -1051,7 +1093,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**
@@ -1238,6 +1280,30 @@ module.exports = function ( grunt ) {
     });
 
     grunt.file.copy('src/views/login.mustache', this.data.dir + '/views/login.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+  });
+
+  /* analogous to app_public */
+  grunt.registerMultiTask( 'static_pages', 'Process static.mustache template', function () {
+    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
+    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+
+    grunt.file.copy('src/views/static.mustache', this.data.dir + '/views/static.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {

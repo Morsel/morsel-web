@@ -1,7 +1,7 @@
 var express = require("express"),
     mustacheExpress = require('mustache-express'),
     _ = require('underscore'),
-    routes = require('./data/routes.json'),
+    staticRoutes = require('./data/static-routes.json'),
     request = require('request'),
     metadata = require('./data/metadata.json'),
     nodeEnv = process.env.NODE_ENV || 'development',
@@ -169,20 +169,31 @@ app.get('/:username/:postidslug', function(req, res){
 //anything with a single route param
 app.get('/:route', function(req, res){
   var route = req.params.route;
-  
+
   //check against our known routes
-  if(isValidStaticRoute(route)) {
-    //check if it's a public route - public routes could have unique metadata
-    if(isRoutePublic(route)) {
-      //need to check for metadata
-      renderAngular(res, findMetadata(route));
-    } else {
-      //if it's not public, we don't care about getting metadata/content customized - send req to angular
-      renderAngular(res);
-    }
+  if(isStaticRoute(route)) {
+    renderStatic(res, route);
   } else {
-    //either a user's profile page or a bad route
-    renderUserPage(res, route);
+    //check and see if it's a reserved route
+    request(apiURL+'/configuration'+apiQuerystring, function (error, response, body) {
+      var configData,
+          nonUsernamePaths;
+
+      if (!error && response.statusCode == 200) {
+        configData = JSON.parse(body).data;
+        nonUsernamePaths = configData.non_username_paths;
+
+        if(_.find(nonUsernamePaths, function(path) {
+          return path === route;
+        })) {
+          //this is a reserved path that isn't in use - send them to a 404
+          render404(res);
+        } else {
+          //this could be a user
+          renderUserPage(res, route);
+        }
+      }
+    });
   }
 });
 
@@ -208,15 +219,25 @@ function renderAngular(res, mData) {
   });
 }
 
-function isValidStaticRoute(route) {
-  return _.find(routes, function(r, ind) {
-    return (ind === route) && r.active;
-  });
+function renderStatic(res, route) {
+  var fullMetadata = findMetadata(route) || findMetadata('default'),
+      templateVars = {
+        metadata: fullMetadata,
+        apiUrl: apiURL,
+        isProd : isProd,
+        mixpanelToken : mixpanelToken,
+        staticPartial: {}
+      };
+
+  //set a var here to let our static template render off it
+  templateVars.staticPartial[route] = true;
+
+  res.render('static', templateVars);
 }
 
-function isRoutePublic(route) {
-  return _.find(routes, function(r, ind) {
-    return (ind === route) && r.public;
+function isStaticRoute(route) {
+  return _.find(staticRoutes, function(staticRoute) {
+    return staticRoute === route;
   });
 }
 
