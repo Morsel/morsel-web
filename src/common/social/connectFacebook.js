@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectFacebook', [] )
 
 //connect (sign up/login) with facebook SDK
-.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin){
+.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth){
   return {
     restrict: 'A',
     scope: false,
@@ -56,7 +56,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       function checkAuthentication() {
         ApiUsers.checkAuthentication('facebook', loginResponse.authResponse.userID).then(function(resp){
           //if we already have them on file
-          if(resp && resp.data) {
+          if(resp) {
             //just sign them in
             login();
           } else {
@@ -128,7 +128,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function existingAccountModal() {
-        var ModalInstanceCtrl = function ($scope, $modalInstance, scopeWithData, userInfoDeferred) {
+        var ModalInstanceCtrl = function ($scope, $modalInstance, $location, scopeWithData, userInfoDeferred) {
           $scope.email = scopeWithData.userData.social.email;
 
           //if user cancels, allow fb info to go through, but strip out email
@@ -157,7 +157,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           });
         };
         //we need to implicitly inject dependencies here, otherwise minification will botch them
-        ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'scopeWithData', 'userInfoDeferred'];
+        ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', 'scopeWithData', 'userInfoDeferred'];
 
         var modalInstance = $modal.open({
           templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',
@@ -182,7 +182,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             }
           };
 
-        Auth.login(userData, onLoginSuccess, onLoginError);
+        Auth.login(authenticationData, onLoginSuccess, onLoginError);
       }
 
       function onLoginSuccess(resp) {

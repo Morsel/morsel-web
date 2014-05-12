@@ -217,9 +217,9 @@ angular.module( 'Morsel.common.apiUsers', [] )
         };
 
     Restangular.one('authentications', 0, true).customGET('check', params).then(function(resp) {
-      deferred.resolve(Restangular.stripRestangular(resp));
+      deferred.resolve(resp);
     }, function(resp) {
-      deferred.reject(Restangular.stripRestangular(resp));
+      deferred.reject(resp);
     });
 
     return deferred.promise;
