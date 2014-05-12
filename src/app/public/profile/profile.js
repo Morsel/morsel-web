@@ -2,7 +2,7 @@ angular.module( 'Morsel.public.profile', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'profile', {
-    url: '/:username',
+    url: '/{username:[a-zA-Z][A-Za-z0-9_]{0,14}}',
     views: {
       "main": {
         controller: 'ProfileCtrl',
@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.profile', [])
     data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get our user data before we try to render the page
-      userData: function(ApiUsers, $stateParams) {
+      userData: function(ApiUsers, $stateParams, $location) {
         return ApiUsers.getUser($stateParams.username).then(function(userData) {
           return userData;
         }, function() {
