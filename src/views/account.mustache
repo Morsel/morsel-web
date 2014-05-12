@@ -65,8 +65,8 @@
           <h5 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h5>
         </a>
         <div class="prompt-btns" ng-if="!isLoggedIn">
-          <a ng-click="goTo('join')">Sign Up</a>
-          <a ng-click="goTo('login')">Login</a>
+          <a href="/join" target="_self">Sign Up</a>
+          <a href="/login"  target="_self">Login</a>
         </div>
         <span>Feeds</span>
         <ul>
