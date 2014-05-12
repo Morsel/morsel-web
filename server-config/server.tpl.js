@@ -167,7 +167,7 @@ app.get('/:username/:postidslug', function(req, res){
 });
 
 //anything with a single route param
-app.get('/:route', function(req, res){
+app.get('/:route', function(req, res, next){
   var route = req.params.route;
 
   //check against our known routes
@@ -177,7 +177,9 @@ app.get('/:route', function(req, res){
     //check and see if it's a reserved route
     request(apiURL+'/configuration'+apiQuerystring, function (error, response, body) {
       var configData,
-          nonUsernamePaths;
+          nonUsernamePaths,
+          //Maximum 15 characters (alphanumeric or _), must start with a letter
+          usernameRegex = /^[a-zA-Z]\w{0,14}$/;
 
       if (!error && response.statusCode == 200) {
         configData = JSON.parse(body).data;
@@ -189,8 +191,14 @@ app.get('/:route', function(req, res){
           //this is a reserved path that isn't in use - send them to a 404
           render404(res);
         } else {
-          //this could be a user
-          renderUserPage(res, route);
+          //check and see if the route could be a valid username
+          if(usernameRegex.test(route)) {
+            //this could be a user
+            renderUserPage(res, route);
+          } else {
+            //not sure what this could be, send it to next route
+            next();
+          }
         }
       }
     });
