@@ -15,7 +15,9 @@ angular.module( 'Morsel.login.login', [])
 
 .controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $location, HandleErrors, AfterLogin ) {
   //model to store our join data
-  $scope.loginModel = {};
+  $scope.loginModel = {
+    'test':'value'
+  };
 
   //called on submit of login form
   $scope.login = function() {
