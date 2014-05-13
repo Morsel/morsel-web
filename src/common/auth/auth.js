@@ -150,11 +150,17 @@ angular.module( 'Morsel.common.auth', [
     Restangular.setErrorInterceptor(function(response) {
       var errors;
 
+      //if an API call is blocked
       if (response.status === 401) {
-        //if an API call is ever blocked by restricted access, we log the user out for security
-        Auth._clearUser();
-        $window.location.href = '/login';
-      } else if(response.data && response.data.errors && response.data.errors.api) {
+        //check if it's unauthorized (vs a login error)
+        if(response.data && response.data.errors && response.data.errors.api && response.data.errors.api === 'unauthorized') {
+          //log user out
+          Auth._clearUser();
+          $window.location.href = '/login';
+        }
+      }
+
+      if(response.data && response.data.errors && response.data.errors.api) {
         //response returned an api issue
         //report and error back to user
         Auth.showApiError(response.status,errors);
