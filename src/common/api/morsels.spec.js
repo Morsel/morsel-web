@@ -15,24 +15,24 @@ describe( 'ApiMorsels factory', function() {
     return _.omit(item, "route", "parentResource", "getList", "get", "post", "put", "remove", "head", "trace", "options", "patch", "$get", "$save", "$query", "$remove", "$delete", "$put", "$post", "$head", "$trace", "$options", "$patch", "$then", "$resolved", "restangularCollection", "customOperation", "customGET", "customPOST", "customPUT", "customDELETE", "customGETLIST", "$getList", "$resolved", "restangularCollection", "one", "all", "doGET", "doPOST", "doPUT", "doDELETE", "doGETLIST", "addRestangularMethod", "getRestangularUrl");
   }
 
-  beforeEach( module( 'Morsel' ) );
+  beforeEach( module( 'Morsel.public' ) );
 
   it( 'should contain an ApiMorsels factory', inject(function(ApiMorsels) {
     expect(ApiMorsels).not.toEqual(null);
   }));
 
-  it( 'should contain a likeMorsel function', inject(function(ApiMorsels) {
-    expect(ApiMorsels.likeMorsel).toBeDefined();
+  it( 'should contain a getFeed function', inject(function(ApiMorsels) {
+    expect(ApiMorsels.getFeed).toBeDefined();
   }));
 
-  it( 'should contain an unlikeMorsel function', inject(function(ApiMorsels) {
-    expect(ApiMorsels.unlikeMorsel).toBeDefined();
+  it( 'should contain a getMorsel function', inject(function(ApiMorsels) {
+    expect(ApiMorsels.getMorsel).toBeDefined();
   }));
 
-  describe('function likeMorsel', function() {
+  describe('function getFeed', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectPOST(APIURL+'/morsels/1/like.json').respond('OK');
+      httpBackend.expectGET(APIURL+'/feed.json').respond('{"data":[]}');
     }));
 
     afterEach(function () {
@@ -40,20 +40,20 @@ describe( 'ApiMorsels factory', function() {
       httpBackend.verifyNoOutstandingRequest();
     });
 
-    it( 'should return a blank object', inject(function(ApiMorsels) {
+    it( 'should return an object', inject(function(ApiMorsels) {
       var resolvedValue;
-      ApiMorsels.likeMorsel(1).then(function (data) {
+      ApiMorsels.getFeed().then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();
-      expect(sanitizeRestangularAll(resolvedValue)).toEqual({});
+      expect(sanitizeRestangularAll(resolvedValue)).toEqual(jasmine.any(Object));
     }));
   });
 
-  describe('function unlikeMorsel', function() {
+  describe('function getMorsel', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
       httpBackend = _$httpBackend_;
-      httpBackend.expectDELETE(APIURL+'/morsels/1/like.json').respond('OK');
+      httpBackend.expectGET(APIURL+'/morsels/1.json').respond('{"data":{}}');
     }));
 
     afterEach(function () {
@@ -61,13 +61,13 @@ describe( 'ApiMorsels factory', function() {
       httpBackend.verifyNoOutstandingRequest();
     });
 
-    it( 'should return a blank object', inject(function(ApiMorsels) {
+    it( 'should return an object', inject(function(ApiMorsels) {
       var resolvedValue;
-      ApiMorsels.unlikeMorsel(1).then(function (data) {
+      ApiMorsels.getMorsel(1).then(function (data) {
         resolvedValue = data;
       });
       httpBackend.flush();
-      expect(sanitizeRestangularAll(resolvedValue)).toEqual({});
+      expect(sanitizeRestangularAll(resolvedValue)).toEqual(jasmine.any(Object));
     }));
   });
 });

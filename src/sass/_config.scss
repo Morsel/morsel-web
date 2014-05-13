@@ -1,0 +1,72 @@
+//This file is essentially a copy of '../../vendor/sass-bootstrap/lib/bootstrap.scss' except we only want to include the components that we're using for now.
+
+@import "compass";
+
+// Import our variables
+@import "_common/_variables.scss";
+
+@import "../../vendor/sass-bootstrap/lib/mixins";
+
+// Reset
+@import "../../vendor/sass-bootstrap/lib/normalize";
+//@import "../../vendor/sass-bootstrap/lib/print";
+
+// Core CSS
+@import "../../vendor/sass-bootstrap/lib/scaffolding";
+@import "../../vendor/sass-bootstrap/lib/type";
+//@import "../../vendor/sass-bootstrap/lib/code";
+@import "../../vendor/sass-bootstrap/lib/grid";
+@import "../../vendor/sass-bootstrap/lib/tables";
+@import "../../vendor/sass-bootstrap/lib/forms";
+@import "../../vendor/sass-bootstrap/lib/buttons";
+
+// Components
+//@import "../../vendor/sass-bootstrap/lib/component-animations";
+@import "../../vendor/sass-bootstrap/lib/glyphicons";
+@import "../../vendor/sass-bootstrap/lib/dropdowns";
+@import "../../vendor/sass-bootstrap/lib/button-groups";
+//@import "../../vendor/sass-bootstrap/lib/input-groups";
+//@import "../../vendor/sass-bootstrap/lib/navs";
+//@import "../../vendor/sass-bootstrap/lib/navbar";
+//@import "../../vendor/sass-bootstrap/lib/breadcrumbs";
+//@import "../../vendor/sass-bootstrap/lib/pagination";
+//@import "../../vendor/sass-bootstrap/lib/pager";
+//@import "../../vendor/sass-bootstrap/lib/labels";
+//@import "../../vendor/sass-bootstrap/lib/badges";
+//@import "../../vendor/sass-bootstrap/lib/jumbotron";
+//@import "../../vendor/sass-bootstrap/lib/thumbnails";
+@import "../../vendor/sass-bootstrap/lib/alerts";
+//@import "../../vendor/sass-bootstrap/lib/progress-bars";
+//@import "../../vendor/sass-bootstrap/lib/media";
+//@import "../../vendor/sass-bootstrap/lib/list-group";
+//@import "../../vendor/sass-bootstrap/lib/panels";
+//@import "../../vendor/sass-bootstrap/lib/wells";
+@import "../../vendor/sass-bootstrap/lib/close";
+
+// Components w/ JavaScript
+@import "../../vendor/sass-bootstrap/lib/modals";
+@import "../../vendor/sass-bootstrap/lib/tooltip";
+@import "../../vendor/sass-bootstrap/lib/popovers";
+//@import "../../vendor/sass-bootstrap/lib/carousel";
+
+// Utility classes
+@import "../../vendor/sass-bootstrap/lib/utilities";
+@import "../../vendor/sass-bootstrap/lib/responsive-utilities";
+
+
+//our stuff
+
+//mixins
+@import "_common/_mixins";
+
+// Import sprites
+@import "spritesheets/_sidenav";
+@import "spritesheets/_common";
+
+// Import common styles
+@import "_common/_common";
+@import "_common/_general";
+@import "_common/_layout";
+@import "_common/_modal";
+@import "_common/_social";
+@import "_common/_user-list";

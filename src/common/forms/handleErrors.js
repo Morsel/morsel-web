@@ -1,6 +1,6 @@
-angular.module( 'Morsel.handleErrors', [] )
+angular.module( 'Morsel.common.handleErrors', [] )
 
-.factory('HandleErrors', function(Mixpanel) {
+.factory('HandleErrors', function(Mixpanel, Auth) {
   var HandleErrors = {};
 
   HandleErrors.onError = function(resp, form) {
@@ -39,12 +39,11 @@ angular.module( 'Morsel.handleErrors', [] )
             //generic error
             if(fieldName === 'base') {
               serverErrors[i] = serverErrors[i].charAt(0).toUpperCase() + serverErrors[i].slice(1);
-            } else if(fieldName === 'api') { 
+            } else if(fieldName === 'api') {
               //something's wrong on the API side, possibly not related to client input
-              Mixpanel.send('Error - API', {
-                error_message : serverErrors[i]
-              });
+              Auth.showApiError(resp.status, serverErrors[i]);
             } else {
+              fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
               //misplaced input - make good english
               for(i=0; i<serverErrors.length; i++) {
                 serverErrors[i] = fnEnglish+' '+serverErrors[i];

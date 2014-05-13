@@ -1,0 +1,637 @@
+$immersive-header-padding: 10px;
+$immersive-footer-vert-padding: 5px;
+$immersive-footer-hor-padding: 10px;
+$immersive-header-lg-line-height: 40px;
+$immersive-footer-height: $immersive-footer-vert-padding*2 + $immersive-header-lg-line-height;
+$detail-left-col-width: 55%;
+$detail-right-col-width: 42%;
+
+.immersive {
+  background: $morsel-background-dark;
+
+  .immersive-footer {
+    display: block;
+    position: fixed;
+    z-index: 7;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: $immersive-footer-vert-padding $immersive-footer-hor-padding;
+    @include translate3d(0,0,0);
+    @include transition(all .2s ease-out);
+
+    h2 {
+      margin: 0;
+
+      a {
+        font-size: 20px;
+        color: $morsel-dark;
+        line-height: $immersive-header-lg-line-height;
+      }
+    }
+
+    h5 {
+      font-size: 14px;
+      color: $morsel-dark;
+      margin: 5px 0 0;
+    }
+  }
+
+  .in-morsel {
+    .current-morsel {
+      .morsel-title {
+        @include translate3d(0,0,0);
+      }
+    }
+
+    .immersive-footer {
+      h2 {
+        a {
+          color: white;
+          @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+        }
+      }
+    }
+  }
+
+  .immersive-control {
+    display: none; //for now
+
+    width: $arrow-height;
+    height: $arrow-height;
+    position: absolute;
+    top: $morsel-height-s/2 - $arrow-height/2;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-color: $morsel-primary;
+
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFIAAAAiCAYAAADMDo5aAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlNJREFUeNrsmttqwkAQhj1Qz+LL9BF6KSjSGy8K9Tl62xYRPCCCIioGQRR7W1uKglJbUPoyvaxF0gmdwLYkO+agskl++K80szufcZPdGb8syz4LOgMPwA9oEXWJvgJ/m46igDTpIHgi/+oLnLMQ61TO4dxlzCVoNpYViGP5r5QJZQSCmGEgqhqbhWkW4lDWljKxtAAQ0xoQVQ3NwAwYXAmC4D44r/N5CFwQYF0s4Fy1lMccg4daI5VfqS/z9QgOCXBHhnCuPPWN3Jn7DhwA94iBn8BhgdbIMM6Zpx7mbgtIP7hDDPgMjgj41I7g3HnqIANLIJUAbWKgF3BMQIiqY5gDT20KJgWxSQwwFxwiC3NO5NrkweRBbBCBFw6ByMJcEDk39GDqQawRAZcOg8jCXBK517RgagWrEoFewQkHQlSdwBx5qlIgy0SAN3DSwRBVJzFXnsp6IEvEhe/glAsgqk5hzjyV/oO8Jy7YuAwiC3NDsFHY+ZRF8xZ2ijecXeQH+AL86XOnUuAZ+JzznbuAz5M9wlu4SNy+axf/tdcEm6L3sDnAw0Z1hbhw5aLXnxXBomLHC3ncwRDjdryQq1vEurdF1FV93y2id2hh06EFC7NFBJ456BhtRuTaMnOMZvRgNyowxOihD3ZZmF0Xlxq6dpQajBS/poJUENlK4vSYxS+2HCu5qBwrHaIcy8IcEBOYCAByQuQwMNptYfTQYge+Bo90Pt+CJQGOGCScq5ZGmOPuGN1oek1UWYHWyOypm6i02vq2Arf1be1o6/N7jab2NJr+CDAAfkGbVy1Usc0AAAAASUVORK5CYII=);
+
+    &:hover {
+      cursor: pointer;
+      background-color: $morsel-primary-dark;
+    }
+  }
+
+  .immersive-control-prev {
+    background-position: 18px center;
+    left: 0;
+  }
+
+  .immersive-control-next {
+    background-position: -41px center;
+    right: 0;
+  }
+
+  .morsels-wrap {
+    width: 100%;
+  }
+
+  .item-indicators {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+    z-index: 8;
+  
+    span {
+      width: $indicator-size;
+      height: $indicator-size;
+      background-color: $morsel-dark;
+      border: 1px solid $morsel-light;
+      border-radius: 50%;
+      margin: 2px 0;
+      display: block;
+      @include transition(background-color .2s ease-out);
+
+      &:hover, &:focus {
+        cursor: pointer;
+      }
+
+      &.active {
+        background-color: $morsel-primary;
+      }
+    }
+  }
+
+  .morsel-title {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    text-align: center;
+    padding: $immersive-header-padding;
+    @include transition(all .2s ease-out);
+    @include translate3d(0,-$mini-header-height,0);
+    width: 100%;
+
+    h1 {
+      width: 50%;
+      font-size: 14px;
+      margin: 0 auto;
+      color: white;
+      @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+    }
+  }
+  .morsel-container {
+    height: 100%;
+    position: relative;
+    margin: 0 auto;
+  }
+
+  .cover-page {
+    .cover-photo-wrap, .cover-title-wrap {
+      height: 40%;
+    }
+
+    .thumbnails-wrap {
+      margin: 10px 0;
+      padding: 0 10px;
+
+      ul {
+        margin: 0;
+        text-align: center;
+      }
+
+      li {
+        display: inline-block;
+        width: 21%;
+        margin-right: 4%;
+        position: relative;
+
+        img {
+          width: 100%;
+        }
+
+        &:last-child {
+          margin: 0;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .cover-browse {
+      display: none;
+    }
+
+    .cover-actions {
+      padding: 10px 20px;
+      overflow:hidden;
+
+      a {
+        float: right;
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .time-ago {
+        float: left;
+        font-size: 14px;
+      }
+    }
+  }
+
+  .extra-page {
+    background-color: $morsel-light-off;
+    position: relative;
+    overflow: hidden;
+    padding-top: $mini-header-height;
+
+    .cover-photo-wrap {
+      display: block;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      width: 100%;
+      position: relative;
+    }
+
+    .cover-title-wrap {
+      display: table;
+      text-align: center;
+      width: 100%;
+      z-index: 3;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2; 
+
+      .cover-title {
+        padding: 0 15px;
+        text-align: center;
+        margin: 0;
+        white-space: normal;
+        color: white;
+        display: table-cell;
+        vertical-align: middle;
+        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+      }
+    }
+  }
+
+  .share-page {
+    .cover-photo-wrap, .cover-title-wrap {
+      height: 20%;
+    }
+
+    .user-info {
+      p {
+        padding: 15px;
+        clear: both;
+      }
+    }
+
+    .social-sharing {
+      padding-bottom: 0;
+    }
+
+    .share-this-morsel {
+      text-align: center;
+      margin: 10px auto 0;
+      font-size: 20px;
+    }
+
+    hr {
+      margin-top: 15px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .morsels {
+    list-style: none;
+    position: relative;
+    @include translate3d(0,0,0);
+    white-space: nowrap;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+  }
+
+  .morsel {
+    position: relative;
+    white-space: normal;
+    vertical-align: top;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    @include backface-visibility(hidden);
+  }
+
+  .items {
+    list-style: none;
+    margin: 0;
+
+    .item {
+      display: block;
+      position: relative;
+
+      .item-photo-wrap {
+        padding-top: $mini-header-height;
+        text-align: center;
+        height: 100%;
+      }
+
+      .item-img {
+        max-height: 100%;
+      }
+
+      .item-info {
+        position: absolute;
+        bottom: 0;
+        padding: 0 30px ($immersive-footer-height + 10px) 15px;
+        width: 100%;
+      }
+      
+      .item-description {
+        z-index: 2;
+        background-color: rgba(0,0,0,0);
+        @include transition(background-color .2s ease-out);
+        width: 100%;
+        @include transition(opacity .2s ease-out);
+        @include opacity(1);
+        clear: both;
+
+        p {
+          width: 100%;
+          color: white;
+          z-index: 3;
+          margin: 0;
+        }
+      }
+
+      .item-actions {
+        padding: 10px 0;
+        z-index: 10;
+        margin: 0;
+        float: right;
+
+        li {
+          display: inline-block;
+
+          & + li {
+            margin-left: 12px;
+          }
+        }
+
+        a {
+          display: inline-block;
+          color: white;
+          font-weight: 300;
+
+          i {
+            vertical-align: middle;
+            margin-right: 8px;
+          }
+        }
+
+        i:hover {
+          cursor: pointer;
+        }
+      }
+
+      .social-sharing {
+        display: none;
+      }
+
+      &.full-photo {
+        .item-description, .item-actions {
+          @include opacity(0);
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .immersive {
+    .extra-page {
+      .cover-title-wrap {
+        h2 {
+          font-size: 30px;
+        }
+      }
+    }
+
+    .share-page {
+      .cover-title-wrap, .cover-photo-wrap {
+        height: 30%;
+      }
+    }
+  }
+}
+
+@media (max-width: $screen-md) {
+  .immersive {
+    .on-share {
+      .immersive-footer {
+        @include translate3d(0,$mini-header-height,0);
+      }
+    }
+
+    .cover-page, .item {
+      .morsel-container {
+        .user-info {
+          display: none;
+        }
+      }
+    }
+
+    .item-description {
+      p {
+        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+      }
+    }
+
+    .item-actions {
+      a {
+        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .immersive {
+    .morsel-title {
+      h1 {
+        font-size: 22px;
+      }
+    }
+
+    .morsel-container {
+      width: $screen-md-min;
+
+      .user-info {
+        margin-bottom: 10px;
+
+        h5 {
+          font-size: 20px;
+          line-height: $immersive-header-lg-line-height;
+          margin: 0;
+          color: $morsel-dark;
+
+          a {
+            color: $morsel-dark;
+          }
+        }
+      }
+    }
+
+    .items {
+      .item {
+        background-image: url(images/bg/morsel-detail-noise.png);
+        padding: $mini-header-height 0 10px;
+
+        .morsel-container {
+          overflow: hidden;
+          @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
+          background-color: $morsel-light-off;
+          height: auto;
+          @include border-radius(3px);
+
+          .user-info {
+            span {
+              margin-left: 0;
+            }
+          }
+        }
+
+        .item-description {
+          margin-bottom: 25px;
+
+          p {
+            color: $morsel-dark;
+          }
+        }
+
+        .item-img {
+          background-position: left top;
+        }
+
+        .item-photo-wrap {
+          width: $detail-left-col-width;
+          float: left;
+          padding: 0;
+          text-align: left;
+        }
+
+        .item-info {
+          width: $detail-right-col-width;
+          float: right;
+          position: relative;
+          padding-top: 20px;
+
+          .scrollable-info {
+            overflow-y: auto;
+          }
+        }
+
+        .item-actions {
+          float: none;
+
+          a {
+            color: $morsel-dark;
+          }
+        }
+
+        .social-sharing {
+          display: block;
+        }
+      }
+    }
+
+    .immersive-footer {
+      display: none;
+    }
+    
+    .cover-page {
+      .cover-photo-wrap, .cover-title-wrap {
+        height: 98%;
+        width: $detail-left-col-width;
+      }
+
+      .cover-info {
+        width: $detail-right-col-width;
+        float: right;
+      }
+
+      .thumbnails-wrap {
+        margin: 0;
+
+        li {
+          width: 48%;
+          float: left;
+          margin-bottom: 3%;
+
+          &:nth-child(odd) {
+            margin-right: 4%;
+          }
+
+          &:nth-child(even) {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .cover-browse {
+        display: none;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+
+        span {
+          text-transform: uppercase;
+          font-size: 12px;
+          display: block;
+          font-weight: bold;
+
+          i {
+            display: inline-block
+          }
+        }
+      }
+
+      .cover-photo-wrap {
+        float: left;
+      }
+
+      .cover-actions {
+        width: 100%;
+      }
+    }
+
+    .extra-page {
+      background-image: url(images/bg/morsel-detail-noise.png);
+
+      .morsel-container {
+        padding-bottom: 3%;
+      }
+
+      .cover-title-wrap {
+        h2 {
+          font-size: 40px;
+        }
+      }
+    }
+
+    .share-page {
+      .cover-photo-wrap, .cover-title-wrap {
+        height: 40%;
+      }
+
+      .cover-photo-wrap {
+        margin-bottom: 15px;
+      }
+
+      .share-this-morsel {
+        display: inline-block;
+        font-size: 26px;
+        margin: 0 20px 0 0;
+        vertical-align: middle;
+      }
+
+      .social-sharing {
+        display: inline-block;
+      }
+
+      .user-info {
+        h4 {
+          display: inline-block;
+          margin-right: 10px;
+        }
+
+        h5 {
+          display: inline-block;
+        }
+
+        p {
+          clear: none;
+        }
+      }
+    }
+
+    .in-morsel {
+      .current-morsel {
+        .morsel-title {
+          h2 {
+            font-size: 24px;
+            line-height: $immersive-header-lg-line-height;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .immersive {
+    .item {
+      .morsel-container {
+        width: $screen-lg-min;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<div class="activity-feed">
+  <ul ng-show="likeFeed.length > 0">
+    <li ng-repeat="likeable in likeFeed">
+      <div class="user-info">
+        <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s"></div>
+        <div class="user-body">
+          <a href="/{{likeable.creator.username}}/{{likeable.morsel.id}}-{{likeable.morsel.slug}}">
+            <img ng-src="{{likeable.display_photo}}" />
+          </a>
+          <p>{{user.first_name}} liked <a href="/{{likeable.creator.username}}">{{likeable.creator.first_name+' '+likeable.creator.last_name}}</a>'s {{likeable.itemMessage}}</p>
+          <span am-time-ago="likeable.liked_at" class="time-ago"></span>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div ng-show="!likeFeed" class="loader"></div>
+  <div ng-show="likeFeed && likeFeed.length === 0" class="empty-state">
+    <p>{{user.first_name+' '+user.last_name}} hasn't liked anything yet</p>
+  </div>
+</div>

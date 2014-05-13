@@ -1,0 +1,27 @@
+.join-page {
+  background-image: url(images/bg/join.jpg);
+  background-size: contain;
+  background-position: right center;
+  background-repeat: no-repeat;
+}
+
+.join-landing {
+  text-align: center;
+
+  .btn {
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+}
+
+.have-an-account {
+  margin-top: 10px;
+}
+
+.industry-btns {
+  .radio {
+    width: 33%;
+    padding: 0 5px;
+  }
+}

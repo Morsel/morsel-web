@@ -2,7 +2,7 @@
 These are styles related to the styleguide implementation of Morsel. any actual styles should be updated in /src/sass
 */
 
-@import "../../../src/sass/_variables.scss";
+@import "../../../src/sass/_common/_variables.scss";
 
 //make our body color different so we can differentiate the style guide
 body {
@@ -95,4 +95,8 @@ body {
 header {
   //so our overflowing logo still shows
   margin-bottom: 50px;
+}
+
+.morsel-comments {
+  position: relative !important;
 }

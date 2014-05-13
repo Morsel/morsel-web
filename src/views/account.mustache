@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="Morsel.account" ng-controller="AccountCtrl">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{{{metadata.title}}}</title>
+    <meta name="description" content="{{{metadata.description}}}">
+
+    <!-- social media tags -->
+    <meta name="twitter:card" content="{{{metadata.twitter.card}}}">
+    <meta name="twitter:site" content="{{{metadata.twitter.site}}}">
+    <meta name="twitter:title" content="{{{metadata.title}}}">
+    <meta name="twitter:description" content="{{{metadata.description}}}">
+    <meta name="twitter:creator" content="{{{metadata.twitter.creator}}}">
+    <meta name="twitter:image:src" content="{{{metadata.image}}}">
+    <meta name="twitter:url" content="{{{metadata.url}}}">
+    <meta property="og:locale" content="{{metadata.og.locale}}"/>
+    <meta property="og:title" content="{{{metadata.title}}}" />
+    <meta property="og:type" content="{{{metadata.og.type}}}" />
+    <meta property="og:url" content="{{{metadata.url}}}" />
+    <meta property="og:image" content="{{{metadata.image}}}" />
+    <meta property="og:description" content="{{{metadata.description}}}">
+    <meta property="og:site_name" content="{{{metadata.og.site_name}}}"/>
+    <meta property="fb:app_id" content="{{{metadata.fb_app_id}}}"/>
+    
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <base href="{{{metabase}}}">
+    <meta name="fragment" content="!" />
+
+    <link rel="canonical" href="{{{metadata.url}}}">
+    <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="<%= favicon_dir %>/apple-touch-icon.png" />
+
+    <!-- compiled CSS -->
+    <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" />
+    <% }); %>
+
+    <script type="text/javascript">
+      var MorselConfig = {
+        version: '<%= version %>',
+        apiUrl: '{{{apiUrl}}}'
+      };
+    </script>
+    <!-- compiled JavaScript -->
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+    {{> partials/mixpanel}}
+  </head>
+  <body class="account">
+    <header class="account-header">
+      <div class="container">
+        <h1>
+          <a href="/" target="_self" class="morsel-text">Morsel</a>
+        </h1>
+        <div class="account-dropdown btn-group" dropdown>
+          <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+            <img ng-src="{{currentUser.photos['_40x40']}}" class="img-circle" />
+            <span ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></span>
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu pull-right" role="menu">
+            <li>
+              <a ng-click="viewProfile()">View Profile</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="/logout" target="_self">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </header>
+
+    <div class="container container-shadow">
+      <div class="row">
+        <div class="col-sm-3 account-menu">
+          <h2>Your Account</h2>
+          <ul>
+            <li ui-route="/account/edit-profile" ng-class="{active:$uiRoute}">
+              <a href="/account/edit-profile">Edit Profile</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-9 account-main">
+          <div ui-view="main" class="main-view"></div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="account-footer">
+      <div class="container">
+        <div class="footer-inner">
+          <nav role="navigation">
+            <ul>
+              <li>
+                <a>A Placeholder link</a>
+              </li>
+              <li>
+                <a>A placeholder</a>
+              </li>
+              <li>
+                <a>Get The App</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </footer>
+    {{> partials/ga}}
+  </body>
+</html>

@@ -1,0 +1,82 @@
+.account {
+  .container-shadow {
+    background-color: $morsel-light-off;
+  }
+
+  .account-header {
+    background: url(images/bg/light-line.png) right top repeat;
+    border-bottom: 1px solid $morsel-light;
+
+    h1 {
+      float: left;
+      margin: 5px 0;
+    }
+
+    .account-dropdown {
+      float: right;
+      margin-top: 25px;
+    }
+  }
+
+  .account-footer {
+    background: url(images/bg/light-line.png) right top repeat;
+    border-top: 1px solid $morsel-light;
+    margin-top: 20px;
+    padding: 10px 0;
+
+    nav {
+      display: block;
+    }
+  }
+
+  .account-menu {
+    padding: 0;
+
+    h2 {
+      text-align: center;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: block;
+        float: none;
+        margin: 0;
+        border-top: 1px solid $morsel-medium;
+
+        &:last-child {
+          border-bottom: 1px solid $morsel-medium;
+        }
+
+        a {
+          font-size: 16px;
+          padding: 8px 10px 8px 15px;
+          display: block;
+          font-weight: 400;
+          background-color: $morsel-light;
+        }
+
+        &.active {
+          a {
+            background-color: $morsel-off-white;
+            color: $morsel-dark;
+          }
+        }
+
+        &:hover {
+          a {
+            background-color: $morsel-off-white;
+          }
+        }
+      }
+    }
+  }
+
+  .account-main {
+    background-color: $morsel-background;
+    border-left: 1px solid $morsel-medium;
+  }
+}

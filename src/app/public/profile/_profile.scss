@@ -1,0 +1,260 @@
+.profile {
+  padding-top: $mini-header-height;
+  background-color: $morsel-light-off;
+
+  .container {
+    position: relative;
+  }
+
+  .user-container {
+    margin: 0;
+    min-width: 100%;
+
+    > li {
+      list-style: none;
+      clear: both;
+      overflow: hidden;
+      padding: 15px 15px 5px;
+    }
+
+    .user-info {
+      margin-bottom: 15px;
+
+      .h3 {
+        margin: 2px 0 8px;
+      }
+
+      .col-xs-4 {
+        text-align: center;
+      }
+
+      .profile-pic-link {
+        margin: 0;
+        float: none;
+      }
+
+      button {
+        margin-top: 10px;
+      }
+
+      .user-username {
+        margin: 5px 0;
+        color: $morsel-medium;
+        font-size: 15px;
+        font-family: inherit;
+      }
+
+      .user-body {
+        p {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .edit-profile-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+  }
+
+  .user-stats {
+    text-align: center;
+    margin: 0;
+
+    li {
+      list-style: none;
+      display: inline-block;
+      text-align: center;
+      padding: 0 10px;
+
+      a {
+        color: $morsel-primary;
+        margin: 0;
+
+        &:hover {
+          span {
+            color: $morsel-primary;
+          }
+        }
+      }
+
+      span {
+        display: block;
+        color: $morsel-dark;
+      }
+
+      & + li {
+        border-left: 1px solid $morsel-medium;
+      }
+
+      &:first-child {
+        padding-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 0;
+      }
+    }
+  }
+
+  .user-tags {
+    margin-bottom: 10px;
+
+    > span {
+      padding: 2px 5px;
+    }
+
+    ul {
+      margin: 0;
+      display: inline;
+
+      li {
+        display: inline-block;
+        list-style: none;
+        padding: 2px 5px;
+        color: $morsel-medium;
+      }
+    }
+
+    .user-tags-empty {
+      color: $morsel-medium;
+    }
+  }
+
+  hr {
+    margin: 0;
+    clear: both;
+  }
+
+  .loader {
+    height: 250px;
+  }
+
+  .empty-state {
+    padding: 100px 0;
+  }
+
+  .user-morsels {
+    ul {
+      width: 100%;
+      margin: 0;
+    }
+
+    li {
+      position: relative;
+      float: left;
+      display: inline-block;
+      width: percentage(1/3);
+      margin: 0;
+      list-style: none;
+
+      a {
+        display: block;
+        padding: 1px;
+        text-align: center;
+        min-height: 60px;//so it doesn't look so nasty when they load
+      }
+    }
+
+    .centered-white {
+      div {
+        background-color: rgba(0,0,0,0);
+        @include transition(background-color .1s ease-out);
+      }
+    }
+
+    .user-morsel-title {
+      text-transform: uppercase;
+      font-size: 14px;
+    }
+  }
+
+  .user-likes {
+    max-width: $screen-sm;
+    margin: 0 auto;
+    padding: 15px;
+  }
+}
+
+@media (max-width: $screen-md) {
+  .profile {
+    .container {
+      padding: 0;
+    }
+
+    .user-stats {
+      padding: 0;
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .profile {
+    background-color: $morsel-background-dark;
+    background-image: url(images/bg/morsel-detail-noise.png);
+    padding-bottom: 10px;
+
+    .container {
+      padding: 0;
+      @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
+      background-color: $morsel-light-off;
+      @include border-radius(3px);
+    }
+
+    .user-container {
+      .user-info {
+        margin-bottom: 0;
+      }
+    }
+
+    .user-stats {
+      margin-top: 20px;
+
+      li {
+        padding: 0 15px;
+      }
+    }
+
+    .user-morsels {
+      .user-morsel-title {
+        font-size: 22px;
+      }
+
+      li {
+        a {
+          &:hover {
+            div {
+              background-color: rgba(0,0,0,.2);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .profile {
+    .user-morsels {
+      li {
+        width: percentage(1/4);
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .profile {
+    .user-morsels {
+      li {
+        width: percentage(1/5);
+      }
+
+      .user-morsel-title {
+        font-size: 24px;
+      }
+    }
+  }
+}

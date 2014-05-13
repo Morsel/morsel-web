@@ -1,35 +1,30 @@
-angular.module( 'Morsel.apiMorsels', [] )
+angular.module( 'Morsel.common.apiMorsels', [] )
 
 // ApiMorsels is the middleman for dealing with /morsels requests
-.factory('ApiMorsels', function($http, Restangular, $q, ApiUploads) {
+.factory('ApiMorsels', function($http, Restangular, $q) {
   var Morsels = {},
       RestangularMorsels = Restangular.all('morsels');
 
-  Morsels.likeMorsel = function(morselId) {
+  Morsels.getFeed = function() {
+    return Restangular.one('feed').get();
+  };
+
+  Morsels.getMorsel = function(morselId) {
     var deferred = $q.defer();
-    
-    Restangular.one('morsels', morselId).one('like').post().then(function(resp){
-      deferred.resolve(true);
-    }, function(resp) {
-      deferred.reject();
+
+    RestangularMorsels.get(morselId).then(function(resp){
+      var morselData = Restangular.stripRestangular(resp);
+      //correctly sort morsel items by sort order before we even deal with them
+      morselData.items = _.sortBy(morselData.items, 'sort_order');
+      deferred.resolve(morselData);
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
   };
 
-  Morsels.unlikeMorsel = function(morselId) {
-    var deferred = $q.defer();
-
-    Restangular.one('morsels', morselId).one('like').remove().then(function(resp){
-      deferred.resolve(false);
-    }, function(resp) {
-      deferred.reject();
-    });
-
-    return deferred.promise;
-  };
-
-  Morsels.addMorsel = function(morselData) {
+  /*Items.addMorsel = function(morselData) {
     var deferred = $q.defer(),
         fd,
         k;
@@ -54,7 +49,7 @@ angular.module( 'Morsel.apiMorsels', [] )
       });
     } else {
       //no photo - use normal restangular post
-      RestangularMorsels.post(angular.toJson(morselData)).then(function(resp){
+      RestangularItems.post(angular.toJson(morselData)).then(function(resp){
         deferred.resolve(Restangular.stripRestangular(resp));
       }, function(resp){
         deferred.reject(Restangular.stripRestangular(resp));
@@ -62,35 +57,7 @@ angular.module( 'Morsel.apiMorsels', [] )
     }
 
     return deferred.promise;
-  };
-
-  Morsels.getComments = function(morselId) {
-    var deferred = $q.defer();
-
-    Restangular.one('morsels', morselId).getList('comments').then(function(resp){
-      deferred.resolve(Restangular.stripRestangular(resp));
-    }, function(resp){
-      deferred.reject(Restangular.stripRestangular(resp));
-    });
-
-    return deferred.promise;
-  };
-
-  Morsels.postComment = function(morselId, comment) {
-    var deferred = $q.defer();
-
-    Restangular.one('morsels', morselId).post('comments', {
-      comment: {
-        description: comment
-      }
-    }).then(function(resp){
-      deferred.resolve(Restangular.stripRestangular(resp));
-    }, function(resp){
-      deferred.reject(Restangular.stripRestangular(resp));
-    });
-
-    return deferred.promise;
-  };
+  };*/
 
   return Morsels;
 });

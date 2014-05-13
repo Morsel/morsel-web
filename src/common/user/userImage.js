@@ -1,13 +1,13 @@
-angular.module('Morsel.userImage', [])
+angular.module('Morsel.common.userImage', [])
 
-.directive('userImage', [function() {
+.directive('mrslUserImage', [function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      username: '=',
-      userPhotos: '=',
-      userImageSize: '@'
+      username: '=mrslUsername',
+      userPhotos: '=mrslUserPhotos',
+      userImageSize: '@mrslUserImageSize'
     },
     link: function(scope) {
       var placeholderAvatarUrl = 'assets/images/utility/avatars/avatar';
@@ -43,8 +43,16 @@ angular.module('Morsel.userImage', [])
         
       };
     },
-    template: '<span class="profile-pic-link {{userImageSize}}">' +
+    template: function(tElement, tAttrs) {
+      if(tAttrs.mrslNoLink) {
+        return '<span href="/{{username}}" class="profile-pic-link {{userImageSize}}">' +
                 '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
-              '</span>'
+              '</span>';
+      } else {
+        return '<a href="/{{username}}" class="profile-pic-link {{userImageSize}}">' +
+                '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
+              '</a>';
+      }
+    }
   };
 }]);

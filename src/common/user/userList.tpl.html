@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()">&times;</button>
+  <h4 class="h2">{{heading || 'Users'}} <span ng-show="users.length > 0">({{users.length}})</span></h4>
+</div>
+<div class="modal-body user-list">
+  <ul ng-show="users.length > 0">
+    <li ng-repeat="user in users">
+      <div class="user-info">
+        <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s"></div>
+        <div class="user-body">
+          <button mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>
+          <h5 class="user-info-main">
+            <a href="/{{user.username}}">{{user.first_name}} {{user.last_name}}</a>
+          </h5>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div ng-show="!users" class="loader"></div>
+  <div ng-show="users && users.length === 0" class="empty-state">
+    <p>{{emptyText || 'No users'}}</p>
+  </div>
+</div>

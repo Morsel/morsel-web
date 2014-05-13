@@ -74,10 +74,11 @@ module.exports = function ( grunt ) {
     /**
      * The directories to delete when `grunt clean` is executed.
      */
-    clean: [ 
-      '<%= build_dir %>', 
-      '<%= compile_dir %>'
-    ],
+    clean: {
+      preDev: ['<%= build_dir %>'],
+      preCompile: ['<%= compile_dir %>'],
+      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css', '<%= compile_dir %>/assets/login.css', '<%= compile_dir %>/assets/static.css']
+    },
 
     /**
      * The `copy` task just copies files from A to B. We use it here to copy
@@ -133,6 +134,17 @@ module.exports = function ( grunt ) {
             src: [ 'package.json' ],
             dest: '<%= build_dir %>/',
             cwd: '.',
+            expand: true
+          }
+        ]
+      },
+      //copy our static templates
+      build_static_templates: {
+        files: [
+          {
+            src: ['views/partials/static/*.mustache'],
+            dest: '<%= build_dir %>/',
+            cwd: 'src/',
             expand: true
           }
         ]
@@ -287,40 +299,110 @@ module.exports = function ( grunt ) {
      */
     concat: {
       /**
-       * The `build_css` target concatenates compiled CSS and vendor CSS
+       * The `build_<app_name>_css` target concatenates compiled CSS and vendor CSS
        * together.
        */
-      build_css: {
+      build_public_css: {
         src: [
-          '<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/main.css'
+          '<%= public_files.vendor_files.css %>',
+          '<%= build_dir %>/assets/public.css'
         ],
-        dest: '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.css'
       },
-      compile_css: {
+      build_account_css: {
         src: [
-          '<%= vendor_files.css %>',
-          '<%= compile_dir %>/assets/main.css'
+          '<%= account_files.vendor_files.css %>',
+          '<%= build_dir %>/assets/account.css'
         ],
-        dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.css'
+      },
+      build_login_css: {
+        src: [
+          '<%= login_files.vendor_files.css %>',
+          '<%= build_dir %>/assets/login.css'
+        ],
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_login-<%= pkg.version %>.css'
+      },
+      build_static_css: {
+        src: [
+          '<%= build_dir %>/assets/static.css'
+        ],
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
+      },
+      compile_public_css: {
+        src: [
+          '<%= public_files.vendor_files.css %>',
+          '<%= compile_dir %>/assets/public.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.css'
+      },
+      compile_account_css: {
+        src: [
+          '<%= account_files.vendor_files.css %>',
+          '<%= compile_dir %>/assets/account.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.css'
+      },
+      compile_login_css: {
+        src: [
+          '<%= login_files.vendor_files.css %>',
+          '<%= compile_dir %>/assets/login.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_login-<%= pkg.version %>.css'
+      },
+      compile_static_css: {
+        src: [
+          '<%= compile_dir %>/assets/static.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
       },
       /**
-       * The `compile_js` target is the concatenation of our application source
+       * The `compile_<app_name>js` target is the concatenation of our application source
        * code and all specified vendor source code into a single file.
        */
-      compile_js: {
+      compile_public_js: {
         options: {
           banner: '<%= meta.banner %>'
         },
         src: [ 
-          '<%= vendor_files.js %>', 
+          '<%= public_files.vendor_files.js %>', 
           'module.prefix', 
-          '<%= build_dir %>/src/**/*.js', 
-          '<%= html2js.app.dest %>', 
-          '<%= html2js.common.dest %>', 
+          '<%= build_dir %>/src/app/public/**/*.js',
+          '<%= public_files.common.js %>',
+          '<%= html2js.public.dest %>', 
           'module.suffix' 
         ],
-        dest: '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.js'
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.js'
+      },
+      compile_account_js: {
+        options: {
+          banner: '<%= meta.banner %>'
+        },
+        src: [ 
+          '<%= account_files.vendor_files.js %>', 
+          'module.prefix', 
+          '<%= build_dir %>/src/app/account/**/*.js',
+          '<%= account_files.common.js %>',
+          '<%= html2js.account.dest %>', 
+          'module.suffix' 
+        ],
+
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.js'
+      },
+      compile_login_js: {
+        options: {
+          banner: '<%= meta.banner %>'
+        },
+        src: [ 
+          '<%= login_files.vendor_files.js %>', 
+          'module.prefix', 
+          '<%= build_dir %>/src/app/login/**/*.js',
+          '<%= login_files.common.js %>',
+          '<%= html2js.login.dest %>', 
+          'module.suffix' 
+        ],
+
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_login-<%= pkg.version %>.js'
       }
     },
 
@@ -332,7 +414,11 @@ module.exports = function ( grunt ) {
       compile: {
         files: [
           {
-            src: [ 'assets/<%= pkg.name %>-<%= pkg.version %>.js' ],
+            src: [ 
+              'assets/<%= pkg.name %>_public-<%= pkg.version %>.js',
+              'assets/<%= pkg.name %>_account-<%= pkg.version %>.js',
+              'assets/<%= pkg.name %>_login-<%= pkg.version %>.js'
+            ],
             cwd: '<%= compile_dir %>',
             dest: '<%= compile_dir %>',
             expand: true
@@ -347,18 +433,24 @@ module.exports = function ( grunt ) {
     uglify: {
       compile: {
         options: {
-          banner: '<%= meta.banner %>'
+          banner: '<%= meta.banner %>',
+          mangle: false
         },
-        files: {
-          '<%= concat.compile_js.dest %>': '<%= concat.compile_js.dest %>'
-        }
+        files: [{
+          '<%= concat.compile_public_js.dest %>': '<%= concat.compile_public_js.dest %>'
+          },
+          {
+          '<%= concat.compile_account_js.dest %>': '<%= concat.compile_account_js.dest %>'
+          },
+          {
+          '<%= concat.compile_login_js.dest %>': '<%= concat.compile_login_js.dest %>'
+          }
+        ]
       }
     },
 
     /**
      * `compass` handles our SCSS compilation and uglification automatically.
-     * Only our `main.scss` file is included in compilation; all other files
-     * must be imported from this file.
      */
     compass: {
       build: {
@@ -422,28 +514,50 @@ module.exports = function ( grunt ) {
      * places them into JavaScript files as strings that are added to
      * AngularJS's template cache. This means that the templates too become
      * part of the initial payload as one JavaScript file. Neat!
+     *
+     * Notice nothing for common templates - these are parsed with individual app templates as needed
      */
     html2js: {
       /**
-       * These are the templates from `src/app`.
+       * These are the templates from `src/app/public`.
        */
-      app: {
+      public: {
         options: {
-          base: 'src/app'
+          base: 'src'
         },
-        src: [ '<%= app_files.atpl %>' ],
-        dest: '<%= build_dir %>/templates-app.js'
+        src: [
+          '<%= public_files.atpl %>',
+          '<%= public_files.common.tpl %>'
+        ],
+        dest: '<%= build_dir %>/templates-public.js'
       },
 
       /**
-       * These are the templates from `src/common`.
+       * These are the templates from `src/app/account`.
        */
-      common: {
+      account: {
         options: {
-          base: 'src/common'
+          base: 'src'
         },
-        src: [ '<%= app_files.ctpl %>' ],
-        dest: '<%= build_dir %>/templates-common.js'
+        src: [
+          '<%= account_files.atpl %>',
+          '<%= account_files.common.tpl %>'
+        ],
+        dest: '<%= build_dir %>/templates-account.js'
+      },
+
+      /**
+       * These are the templates from `src/app/login`.
+       */
+      login: {
+        options: {
+          base: 'src'
+        },
+        src: [
+          '<%= login_files.atpl %>',
+          '<%= login_files.common.tpl %>'
+        ],
+        dest: '<%= build_dir %>/templates-login.js'
       }
     },
 
@@ -465,26 +579,25 @@ module.exports = function ( grunt ) {
     },
 
     /**
-     * The `index` task compiles the `index.html` file as a Grunt template. CSS
+     * The `app_public` task compiles the `public.html` file as a Grunt template. CSS
      * and JS files co-exist here but they get split apart later.
      */
-    index: {
+    app_public: {
 
       /**
        * During development, we don't want to have wait for compilation,
        * concatenation, minification, etc. So to avoid these steps, we simply
-       * add all script files directly to the `<head>` of `index.html`. The
+       * add all relevant script files directly to the `<head>` of our html template. The
        * `src` property contains the list of included files.
        */
       build: {
         dir: '<%= build_dir %>',
         src: [
-          '<%= vendor_files.js %>',
-          '<%= build_dir %>/src/**/*.js',
-          '<%= html2js.common.dest %>',
-          '<%= html2js.app.dest %>',
-          '<%= vendor_files.css %>',
-          '<%= build_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= public_files.vendor_files.js %>',
+          '<%= build_dir %>/src/app/public/**/*.js',
+          '<%= public_files.common.js %>',
+          '<%= html2js.public.dest %>',
+          '<%= build_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.css'
         ]
       },
 
@@ -496,8 +609,72 @@ module.exports = function ( grunt ) {
       compile: {
         dir: '<%= compile_dir %>',
         src: [
-          '<%= concat.compile_js.dest %>',
-          '<%= compile_dir %>/assets/<%= pkg.name %>-<%= pkg.version %>.css'
+          '<%= concat.compile_public_js.dest %>',
+          '<%= compile_dir %>/assets/<%= pkg.name %>_public-<%= pkg.version %>.css'
+        ]
+      }
+    },
+
+    /**
+     * The `app_account` is analogous copy of app_public
+     */
+    app_account: {
+      build: {
+        dir: '<%= build_dir %>',
+        src: [
+          '<%= account_files.vendor_files.js %>',
+          '<%= build_dir %>/src/app/account/**/*.js',
+          '<%= account_files.common.js %>',
+          '<%= html2js.account.dest %>',
+          '<%= build_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.css'
+        ]
+      },
+      compile: {
+        dir: '<%= compile_dir %>',
+        src: [
+          '<%= concat.compile_account_js.dest %>',
+          '<%= compile_dir %>/assets/<%= pkg.name %>_account--<%= pkg.version %>.css'
+        ]
+      }
+    },
+
+    /**
+     * The `app_login` is analogous copy of app_public
+     */
+    app_login: {
+      build: {
+        dir: '<%= build_dir %>',
+        src: [
+          '<%= login_files.vendor_files.js %>',
+          '<%= build_dir %>/src/app/login/**/*.js',
+          '<%= login_files.common.js %>',
+          '<%= html2js.login.dest %>',
+          '<%= build_dir %>/assets/<%= pkg.name %>_login-<%= pkg.version %>.css'
+        ]
+      },
+      compile: {
+        dir: '<%= compile_dir %>',
+        src: [
+          '<%= concat.compile_login_js.dest %>',
+          '<%= compile_dir %>/assets/<%= pkg.name %>_login--<%= pkg.version %>.css'
+        ]
+      }
+    },
+
+    /**
+     * The `static_pages` is analogous copy of app_public
+     */
+    static_pages: {
+      build: {
+        dir: '<%= build_dir %>',
+        src: [
+          '<%= build_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
+        ]
+      },
+      compile: {
+        dir: '<%= compile_dir %>',
+        src: [
+          '<%= compile_dir %>/assets/<%= pkg.name %>_static--<%= pkg.version %>.css'
         ]
       }
     },
@@ -533,8 +710,10 @@ module.exports = function ( grunt ) {
         dir: '<%= build_dir %>',
         src: [ 
           '<%= vendor_files.js %>',
-          '<%= html2js.app.dest %>',
-          '<%= html2js.common.dest %>',
+          '<%= html2js.public.dest %>',
+          '<%= html2js.account.dest %>',
+          '<%= html2js.login.dest %>',
+          '<%= app_files.ctpl %>',
           '<%= test_files.js %>'
         ]
       }
@@ -596,11 +775,11 @@ module.exports = function ( grunt ) {
       },
 
       /**
-       * When index.html changes, we need to compile it.
+       * When template files change, we need to compile them.
        */
       html: {
         files: [ '<%= app_files.html %>' ],
-        tasks: [ 'index:build' ]
+        tasks: [ 'app_public:build', 'app_account:build', 'app_login:build', 'static_pages:build' ]
       },
 
       /**
@@ -619,7 +798,14 @@ module.exports = function ( grunt ) {
        */
       compass: {
         files: [ 'src/**/*.scss' ],
-        tasks: [ 'compass:build', 'concat:build_css', 'style' ]
+        tasks: [ 
+          'compass:build',
+          'concat:build_public_css',
+          'concat:build_account_css',
+          'concat:build_login_css',
+          'concat:build_static_css',
+          'style'
+          ]
       },
 
       /**
@@ -892,9 +1078,9 @@ module.exports = function ( grunt ) {
    * The `build-no-style` task builds without the style guide
    */
   grunt.registerTask( 'build-no-style', [
-    'clean', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
-    'concat:build_css', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'index:build', 'karmaconfig',
+    'clean:preDev', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
+    'concat:build_public_css', 'concat:build_account_css', 'concat:build_login_css', 'concat:build_static_css', 'copy:build_vendor_assets',
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'copy:build_static_templates', 'app_public:build', 'app_account:build', 'app_login:build', 'static_pages:build', 'karmaconfig',
     'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
   ]);
 
@@ -907,7 +1093,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'copy:compile_assets', 'compass:compile', 'concat:compile_css', 'concat:compile_js', 'ngmin', 'uglify', 'index:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**
@@ -966,12 +1152,12 @@ module.exports = function ( grunt ) {
   }
 
   /** 
-   * The index.html template includes the stylesheet and javascript sources
+   * The public.html template includes the stylesheet and javascript sources
    * based on dynamic names calculated in this Gruntfile. This task assembles
    * the list into variables for the template to use and then runs the
    * compilation.
    */
-  grunt.registerMultiTask( 'index', 'Process index.mustache template', function () {
+  grunt.registerMultiTask( 'app_public', 'Process public.mustache template', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
       return '/'+file.replace( dirRE, '' );
@@ -980,7 +1166,7 @@ module.exports = function ( grunt ) {
       return '/'+file.replace( dirRE, '' );
     });
 
-    grunt.file.copy('src/views/index.mustache', this.data.dir + '/views/index.mustache', { 
+    grunt.file.copy('src/views/public.mustache', this.data.dir + '/views/public.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1046,6 +1232,78 @@ module.exports = function ( grunt ) {
     });
 
     grunt.file.copy('src/views/partials/mixpanel.mustache', this.data.dir + '/views/partials/mixpanel.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+  });
+
+  /* analogous to app_public */
+  grunt.registerMultiTask( 'app_account', 'Process account.mustache template', function () {
+    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
+    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+
+    grunt.file.copy('src/views/account.mustache', this.data.dir + '/views/account.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+  });
+
+  /* analogous to app_public */
+  grunt.registerMultiTask( 'app_login', 'Process login.mustache template', function () {
+    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
+    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+
+    grunt.file.copy('src/views/login.mustache', this.data.dir + '/views/login.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+  });
+
+  /* analogous to app_public */
+  grunt.registerMultiTask( 'static_pages', 'Process static.mustache template', function () {
+    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
+    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+
+    grunt.file.copy('src/views/static.mustache', this.data.dir + '/views/static.mustache', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {

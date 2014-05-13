@@ -1,21 +1,22 @@
-angular.module('Morsel.validatedElement', [])
+angular.module('Morsel.common.validatedElement', [])
 
-.directive('validatedElement', function() {
+.directive('mrslValidatedElement', function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      inForm: '=valForm',
-      type: '@valType',
-      enName: '@valEnName',
-      inputName: '@valName',
-      required: '@valRequired',
-      placeholder: '@valPlaceholder',
-      formModel: '=valFormModel',
-      customVal: '=valCustom',
-      tagType: '@valTagType',
-      radioVals: '=valRadioVals',
-      helpText: '@valHelpText'
+      inForm: '=mrslValForm',
+      type: '@mrslValType',
+      enName: '@mrslValEnName',
+      inputName: '@mrslValName',
+      required: '@mrslValRequired',
+      placeholder: '@mrslValPlaceholder',
+      formModel: '=mrslValFormModel',
+      customVal: '=mrslValCustom',
+      tagType: '@mrslValTagType',
+      multipleVals: '=mrslValMultipleVals',
+      helpText: '@mrslValHelpText',
+      labelBtns: '@mrslValLabelBtns'//display checkboxes, radios as buttons
     },
     link: function(scope, element, attrs) {
       var customValType;
@@ -69,15 +70,17 @@ angular.module('Morsel.validatedElement', [])
       }
     },
     templateUrl: function(tElement, tAttrs) {
-      var templateRoot = 'forms/validated',
+      var templateRoot = 'common/forms/validated',
           templateMid = 'Input', //assume input if not specified
           templateEnd = '.tpl.html';
 
       //figure out which template to load and use
-      if(tAttrs.valTagType === 'textarea') {
+      if(tAttrs.mrslValTagType === 'textarea') {
         templateMid = 'Textarea';
-      } else if(tAttrs.valTagType === 'radio') {
+      } else if(tAttrs.mrslValTagType === 'radio') {
         templateMid = 'Radio';
+      } else if(tAttrs.mrslValTagType === 'checkbox') {
+        templateMid = 'Checkbox';
       }
       
       return templateRoot + templateMid + templateEnd;

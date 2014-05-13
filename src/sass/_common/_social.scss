@@ -1,0 +1,92 @@
+@each $color in $socialPalette {
+  .btn-#{nth($color, 1)} {
+    background-color: nth($color, 2);
+
+    &:hover {
+      background-color: darken(nth($color, 2), 10%);
+    }
+  }
+}
+
+.btn-social {
+  color: white;
+
+  i {
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+}
+
+.social-sharing {
+  padding: 10px;
+  text-align: center;
+
+  > .btn-social {
+    font-size: 0;
+  }
+
+  .social-sharing-additional {
+    display: none;
+
+    &.expanded {
+      display: inline-block;
+      
+      & + .share-expand {
+        i {
+          @extend .common-share-contract;
+        }
+      }
+    }
+  }
+
+  .btn-social {
+    font-weight: 300;
+    padding-left: 6px;
+    padding-right: 6px;
+    display: inline-block;
+
+    i {
+      vertical-align: middle;
+      margin-right: 0;
+    }
+  }
+
+  .share-expand {
+    display: none;
+
+    i {
+      margin: 0;
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .full-social-btns {
+    padding: 0;
+    text-align: left;
+
+    > .btn-social {
+      font-size: $font-size-base;
+
+      i {
+        margin-right: 8px;
+      }
+    }
+
+    .social-sharing-additional {
+      &.expanded {
+        display: inline-block;
+      }
+    }
+
+    /*.share-expand {
+      display: inline-block;
+    }*/
+
+    .btn-social {
+      margin-right: 10px;
+      padding-left: $padding-base-horizontal;
+      padding-right: $padding-base-horizontal;
+    }
+  }
+}

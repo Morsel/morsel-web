@@ -1,7 +1,7 @@
 var express = require("express"),
     mustacheExpress = require('mustache-express'),
     _ = require('underscore'),
-    routes = require('./data/routes.json'),
+    staticRoutes = require('./data/static-routes.json'),
     request = require('request'),
     metadata = require('./data/metadata.json'),
     nodeEnv = process.env.NODE_ENV || 'development',
@@ -62,7 +62,6 @@ app.configure(function(){
 });
 
 app.get('/', function(req, res) {
-  console.log('params are: ',req.params);
   renderAngular(res, findMetadata(''));
 });
 
@@ -77,15 +76,20 @@ app.get('/', function(req, res) {
 });
 */
 
-app.get('/templates-common.js', function(req, res){
-  res.sendfile('templates-common.js');
+//templates
+app.get('/templates-public.js', function(req, res){
+  res.sendfile('templates-public.js');
 });
 
-app.get('/templates-app.js', function(req, res){
-  res.sendfile('templates-app.js');
+app.get('/templates-account.js', function(req, res){
+  res.sendfile('templates-account.js');
 });
 
+app.get('/templates-login.js', function(req, res){
+  res.sendfile('templates-login.js');
+});
 
+//SEO
 app.get('/BingSiteAuth.xml', function(req, res){
   res.sendfile('seo/BingSiteAuth.xml');
 });
@@ -108,39 +112,101 @@ app.get('/unsubscribe', function(req, res){
   });
 });
 
+//login
+app.get('/login', function(req, res){
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
+});
+
+//logout
+app.get('/logout', function(req, res){
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
+});
+
+//join
+app.get('/join/:step', function(req, res){
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
+});
+
+app.get('/join', function(req, res){
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
+});
+
+//account pages
+app.get('/account*', function(req, res){
+  res.render('account', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiURL : apiURL,
+    mixpanelToken : mixpanelToken
+  });
+});
+
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
-  console.log('got user '+ req.params.username+' with postid '+req.params.postidslug);
-  console.log('params are: ',req.params);
   renderMorselPage(res, req.params.username, req.params.postidslug);
 });
 
 //anything with a single route param
-app.get('/:route', function(req, res){
+app.get('/:route', function(req, res, next){
   var route = req.params.route;
-  console.log('params are: ',req.params);
+
   //check against our known routes
-  if(isValidStaticRoute(route)) {
-    //check if it's a public route - public routes could have unique metadata
-    if(isRoutePublic(route)) {
-      console.log(route+ ' is public');
-      //need to check for metadata
-      console.log('found:',findMetadata(route));
-      renderAngular(res, findMetadata(route));
-    } else {
-      console.log(route+' is private');
-      //if it's not public, we don't care about getting metadata/content customized - send req to angular
-      renderAngular(res);
-    }
+  if(isStaticRoute(route)) {
+    renderStatic(res, route);
   } else {
-    //either a user's profile page or a bad route
-    renderUserPage(res, route);
+    //check and see if it's a reserved route
+    request(apiURL+'/configuration'+apiQuerystring, function (error, response, body) {
+      var configData,
+          nonUsernamePaths,
+          //Maximum 15 characters (alphanumeric or _), must start with a letter
+          usernameRegex = /^[a-zA-Z]\w{0,14}$/;
+
+      if (!error && response.statusCode == 200) {
+        configData = JSON.parse(body).data;
+        nonUsernamePaths = configData.non_username_paths;
+
+        if(_.find(nonUsernamePaths, function(path) {
+          return path === route;
+        })) {
+          //this is a reserved path that isn't in use - send them to a 404
+          render404(res);
+        } else {
+          //check and see if the route could be a valid username
+          if(usernameRegex.test(route)) {
+            //this could be a user
+            renderUserPage(res, route);
+          } else {
+            //not sure what this could be, send it to next route
+            next();
+          }
+        }
+      }
+    });
   }
 });
 
 //anything else must be a 404 at this point - this will obviously change
 app.get('*', function(req, res) {
-  console.log('params are: ',req.params);
   render404(res);
 });
 
@@ -152,7 +218,7 @@ app.listen(port, function() {
 function renderAngular(res, mData) {
   var fullMetadata = mData || findMetadata('default');
 
-  res.render('index', {
+  res.render('public', {
     metadata: fullMetadata,
     metabase: metabase,
     apiUrl: apiURL,
@@ -161,15 +227,25 @@ function renderAngular(res, mData) {
   });
 }
 
-function isValidStaticRoute(route) {
-  return _.find(routes, function(r, ind) {
-    return (ind === route) && r.active;
-  });
+function renderStatic(res, route) {
+  var fullMetadata = findMetadata(route) || findMetadata('default'),
+      templateVars = {
+        metadata: fullMetadata,
+        apiUrl: apiURL,
+        isProd : isProd,
+        mixpanelToken : mixpanelToken,
+        staticPartial: {}
+      };
+
+  //set a var here to let our static template render off it
+  templateVars.staticPartial[route] = true;
+
+  res.render('static', templateVars);
 }
 
-function isRoutePublic(route) {
-  return _.find(routes, function(r, ind) {
-    return (ind === route) && r.public;
+function isStaticRoute(route) {
+  return _.find(staticRoutes, function(staticRoute) {
+    return staticRoute === route;
   });
 }
 
@@ -196,7 +272,7 @@ function renderUserPage(res, username) {
         "description": _.escape(user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : '')),
         "image": userImage || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "twitter": {
-          "creator": user.twitter_username || "@eatmorsel"
+          "creator": '@'+(user.twitter_username || 'eatmorsel')
         },
         "url": siteURL + '/' + user.username
       };
@@ -214,15 +290,11 @@ function renderUserPage(res, username) {
 }
 
 function renderMorselPage(res, username, morselIdSlug) {
-  console.log('getting user metadata for morsel '+morselIdSlug+'...');
-
   request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
     var user;
 
     if (!error && response.statusCode == 200) {
       user = JSON.parse(body).data;
-
-      console.log('getting morsel metadata for morsel '+morselIdSlug+'...');
 
       request(apiURL+'/morsels/'+morselIdSlug+apiQuerystring, function (error, response, body) {
         var morsel,
@@ -237,7 +309,7 @@ function renderMorselPage(res, username, morselIdSlug) {
             "image": getMetadataImage(morsel) || 'http://www.eatmorsel.com/assets/images/logos/morsel-large.png',
             "twitter": {
               "card" : 'summary_large_image',
-              "creator": user.twitter_username || '@eatmorsel'
+              "creator": '@'+(user.twitter_username || 'eatmorsel')
             },
             "og": {
               "type":"article",
@@ -271,7 +343,6 @@ function renderMorselPage(res, username, morselIdSlug) {
         }
       });
     } else {
-      console.log('not a valid user');
       //not a valid user - must be a bad route
       render404(res);
     }

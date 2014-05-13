@@ -1,35 +1,33 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()">&times;</button>
-  <h4 class="h2 comments-header">Chef's Comments <span ng-show="morsel.comments.length > 0">({{morsel.comments.length}})</span><i class="common-comments"></i></h4>
+  <h4 class="h2">Chef's Comments <span ng-show="item.comments.length > 0">({{item.comments.length}})</span><i class="common-comments"></i></h4>
 </div>
-<div class="modal-body">
-  <div class="comments-body">
-    <ul ng-show="morsel.comments">
-      <li ng-repeat="comment in morsel.comments | reverse" class="morsel-comment">
-        <div class="user-info">
-          <div user-image username="comment.creator.username" user-photos="comment.creator.photos" user-image-size="profile-pic-xs"></div>
-          <div class="user-body">
-            <h5 class="user-info-main">
-              <a href="/{{comment.creator.username}}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a>
-            </h5>
-            <span am-time-ago="comment.created_at" class="time-ago"></span>
-            <p class="comment-text">{{comment.description}}</p>
-          </div>
+<div class="modal-body user-list comment-list">
+  <ul ng-show="item.comments.length > 0">
+    <li ng-repeat="comment in item.comments | reverse">
+      <div class="user-info">
+        <div mrsl-user-image mrsl-username="comment.creator.username" mrsl-user-photos="comment.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
+        <div class="user-body user-extra-info">
+          <h5 class="user-info-main">
+            <a href="/{{comment.creator.username}}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a>
+          </h5>
+          <span am-time-ago="comment.created_at" class="time-ago"></span>
+          <p class="user-list-text">{{comment.description}}</p>
         </div>
-      </li>
-    </ul>
-    <div ng-show="!morsel.comments" class="loader"></div>
-    <div ng-show="morsel.comments && morsel.comments.length === 0" class="empty-state">
-      <p>There are no comments</p>
-    </div>
-    <div ng-if="isChef" class="add-comment">
-      <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
-        <div class="form-group">
-          <textarea class="form-control" rows="3" ng-model="comment.description" placeholder="Write your comment" required></textarea>
-        </div>
-        <button type="submit" ng-disabled="addCommentForm.$invalid" class="btn btn-primary">Add Comment</button>
-      </form>
-    </div>
-    <p ng-if="!isLoggedIn">Are you a chef? <a href="/#/login">Sign up here</a></p>
+      </div>
+    </li>
+  </ul>
+  <div ng-show="!item.comments" class="loader"></div>
+  <div ng-show="item.comments && item.comments.length === 0" class="empty-state">
+    <p>There are no comments</p>
   </div>
+  <div ng-if="isChef" class="add-comment">
+    <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
+      <div class="form-group">
+        <textarea class="form-control" rows="3" ng-model="comment.description" placeholder="Write your comment" required></textarea>
+      </div>
+      <button type="submit" ng-disabled="addCommentForm.$invalid" class="btn btn-primary">Add Comment</button>
+    </form>
+  </div>
+  <p ng-if="!isLoggedIn">Are you a chef? <a href="/login">Sign up here</a></p>
 </div>

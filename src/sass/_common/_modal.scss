@@ -1,0 +1,29 @@
+.modal-header {
+  h4 {
+    margin: 5px 0 5px 20px !important;
+
+    i {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+  }
+}
+
+@media (max-width: $screen-xs-max) {
+  .modal-body {
+    padding: 10px;
+  }
+}
+
+@media (max-width: $screen-sm-max) {
+  .modal-dialog {
+    padding: 5px;
+  }
+
+  .modal-header {
+    h4 {
+      font-size: 22px;
+    }
+  }
+}

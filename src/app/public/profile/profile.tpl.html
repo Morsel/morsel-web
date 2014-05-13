@@ -1,0 +1,89 @@
+<div class="profile" ng-style="viewOptions.minimumMainHeight()">
+  <div class="container">
+    <a href="/{{user.username}}/edit" ng-show="canEdit" class="edit-profile-btn"><i class="common-settings"></i></a>
+    <ul rn-carousel rn-carousel-indicator rn-carousel-off="{{largeBreakpoint || !isChef}}" class="user-container">
+      <li>
+        <div class="user-info col-sm-6">
+          <div class="row">
+            <div class="col-xs-4">
+              <div class="row">
+                <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos"  mrsl-no-link="true" class="profile-pic-m col-12"></div>
+                <div class="col-12">
+                  <button mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>
+                </div>
+              </div>
+            </div>
+            <div class="user-body col-xs-8">
+              <h3 class="user-username" ng-bind="user.username"></h3>
+              <h1 class="h3" ng-bind="user.first_name+' '+user.last_name"></h1>
+              <p ng-bind="user.bio"></p>
+            </div>
+          </div>
+        </div>
+        <ul class="user-stats col-sm-6">
+          <li ng-if="isChef">
+            <a class="h3" ng-click="openLikeFeed()">{{user.liked_items_count}}<span class="h6">like{{user.liked_items_count === 1 ? '':'s'}}</span></a>
+          </li>
+          <li ng-if="!isChef">
+            <a class="h3" ng-click="scrollToLikes()">{{user.liked_items_count}}<span class="h6">like{{user.liked_items_count === 1 ? '':'s'}}</span></a>
+          </li>
+          <li ng-if="isChef">
+            <a class="h3" ng-click="scrollToMorsels()">{{user.morsel_count}}<span class="h6">morsel{{user.morsel_count === 1 ? '':'s'}}</span></a>
+          </li>
+          <li>
+            <a mrsl-followers mrsl-follow-id="user.id" mrsl-follower-count="user.follower_count"></a>
+          </li>
+          <li>
+            <a mrsl-followed-users mrsl-follower-id="user.id" mrsl-following-count="user.followed_users_count"></a>
+          </li>
+        </ul>
+      </li>
+      <li ng-show="isChef">
+        <div class="user-tags col-sm-6">
+          <span class="h5">Cuisines:</span>
+          <ul>
+            <li ng-show="cuisines.length === 0">
+              <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
+              <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</a>
+            </li>
+            <li ng-repeat="cuisine in cuisines" >
+              <a mrsl-cuisine-users mrsl-cuisine="cuisine"></a>{{$last ? '':','}}
+            </li>
+          </ul>
+        </div>
+        <div class="user-tags col-sm-6">
+          <span class="h5">Specialties:</span>
+          <ul>
+            <li ng-show="specialties.length === 0">
+              <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
+              <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</a>
+            </li>
+            <li ng-repeat="specialty in specialties">
+              <a mrsl-specialty-users mrsl-specialty="specialty"></a>{{$last ? '':','}}
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    <hr />
+    <div ng-if="isChef" id="user-morsels" class="user-morsels">
+      <ul class="clearfix">
+        <li ng-repeat="morsel in morsels | reverse">
+          <a href="/{{user.username}}/{{morsel.id}}-{{morsel.slug}}" class="centered-white">
+            <div>
+              <span class="user-morsel-title">{{morsel.title}}</span>
+            </div>
+            <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
+          </a>
+        </li>
+      </ul>
+      <div ng-show="!morsels" class="loader"></div>
+      <div ng-show="morsels && morsels.length === 0" class="empty-state">
+        <p>This user hasn't made any morsels yet</p>
+      </div>
+    </div>
+    <div ng-if="!isChef" id="user-likes" class="user-likes">
+      <div ng-include src="'common/user/activityFeed.tpl.html'"></div>
+    </div>
+  </div>
+</div>

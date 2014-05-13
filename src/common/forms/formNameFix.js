@@ -1,5 +1,5 @@
 //need this until https://github.com/angular/angular.js/issues/1404 is fixed in angular
-angular.module('Morsel.formNameFix', [])
+angular.module('Morsel.common.formNameFix', [])
 
 .config(function($provide) {
   $provide.decorator('ngModelDirective', function($delegate) {

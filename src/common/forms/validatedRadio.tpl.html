@@ -1,9 +1,16 @@
-<div class="form-group" ng-class="{'has-error': (inForm[inputName].$dirty && hasClientError()) || inForm[inputName].$error.server}">
+<div class="form-group" ng-class="{'has-error': (inForm[inputName].$dirty && hasClientError()) || inForm[inputName].$error.server, 'label-btns': labelBtns}">
   <label class="control-label" ng-class="{'required':required === 'true'}" for="{{inputName}}">{{enName}}</label>
 
-  <div ng-repeat="radioVal in radioVals" class="radio">
+  <div ng-if="labelBtns" ng-repeat="radioVal in multipleVals" class="radio">
+    <input id="{{inputName}}-{{radioVal.value}}" type="radio" ng-change="removeServerError();toggleChecked(formModel[inputName])" name="{{inputName}}" ng-attr="customValAttrs" ng-model="formModel[inputName]" value="{{radioVal.value}}" ng-required="{{required}}">
+    <label class="btn btn-default" for="{{inputName}}-{{radioVal.value}}">
+      {{radioVal.name}}
+    </label>
+  </div>
+
+  <div ng-if="!labelBtns" ng-repeat="radioVal in multipleVals" class="radio">
     <label>
-      <input type="radio" ng-change="removeServerError()" name="{{inputName}}" ng-attr="customValAttrs" ng-model="formModel[inputName]" value="{{radioVal.value}}" ng-required="{{required}}">
+      <input type="radio" ng-change="removeServerError();toggleChecked(formModel[inputName])" name="{{inputName}}" ng-attr="customValAttrs" ng-model="formModel[inputName]" value="{{radioVal.value}}" ng-required="{{required}}">
       {{radioVal.name}}
     </label>
   </div>

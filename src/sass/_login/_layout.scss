@@ -1,0 +1,32 @@
+.login {
+  .page-wrapper {
+    background: $morsel-background;
+  }
+
+  .main-view {
+    .container {
+      padding-top: 40px;
+    }
+  }
+
+  .login-header {
+    background: url(images/bg/light-line.png) right top repeat;
+    border-bottom: 1px solid $morsel-light;
+
+    h1 {
+      margin: 5px 0;
+      text-align: center;
+    }
+  }
+
+  .login-footer {
+    background: url(images/bg/light-line.png) right top repeat;
+    border-top: 1px solid $morsel-light;
+    margin-top: 20px;
+    padding: 10px 0;
+
+    nav {
+      display: block;
+    }
+  }
+}

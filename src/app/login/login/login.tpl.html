@@ -1,0 +1,16 @@
+<div class="container morsel-bg container-shadow container-max-xs">
+  <form name="loginForm" method="post" ng-submit="login()" class="padded-form" novalidate>
+    <div class="row">
+      <div class="col-md-12">
+        <div mrsl-base-errors mrsl-val-form="loginForm"></div>
+
+        <input mrsl-validated-element mrsl-val-form="loginForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="loginModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="true" />
+
+        <input mrsl-validated-element mrsl-val-form="loginForm" mrsl-val-en-name="Password" mrsl-val-type="password" mrsl-val-name="password" mrsl-val-form-model="loginModel" mrsl-val-required="true" />
+
+        <button mrsl-submit-btn mrsl-submit-btn-form="loginForm" mrsl-submit-btn-copy="Login"></button>
+      </div>
+    </div>
+    <p class="have-an-account">Don't have an account? <a ng-click="goTo('join')">Sign up here.</a></p>
+  </form>
+</div>

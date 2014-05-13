@@ -1,4 +1,4 @@
-angular.module( 'Morsel.reverse', [] )
+angular.module( 'Morsel.common.reverse', [] )
 
 .filter('reverse', function() {
   return function(items) {

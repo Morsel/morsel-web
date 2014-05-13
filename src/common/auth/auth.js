@@ -1,9 +1,9 @@
-angular.module( 'Morsel.auth', [
+angular.module( 'Morsel.common.auth', [
   'ngStorage'
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE){
+.factory('Auth', function($window, ApiUsers, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel){
   var Auth = {},
       defaultRequestParams = {},
       hasLoadedUser = $q.defer();
@@ -26,10 +26,10 @@ angular.module( 'Morsel.auth', [
       'sign_in_count': null,
       'created_at': null,
       'photo_url': null,
-      'title': null,
       'auth_token': '',
       'username': null,
-      'industry': null
+      'industry': null,
+      'staff': false
     };
   };
 
@@ -98,7 +98,7 @@ angular.module( 'Morsel.auth', [
   Auth.join = function(uploadUserData, onSuccess, onError) {
     ApiUsers.newUser(uploadUserData).then(function(loggedInUser) {
       Auth._updateUser(loggedInUser);
-      onSuccess();
+      onSuccess(loggedInUser);
     }, function(resp){
       Auth._clearUser();
       onError(resp);
@@ -119,7 +119,7 @@ angular.module( 'Morsel.auth', [
   //log out a user
   Auth.logout = function(userData) {
     Auth._clearUser();
-    $location.path('/home');
+    $window.location.href = '/';
   };
 
   //check if a user is logged in
@@ -140,13 +140,29 @@ angular.module( 'Morsel.auth', [
     return Auth.isLoggedIn() && (Auth._currentUser.industry === 'diner');
   };
 
+  Auth.isStaff = function() {
+    return Auth.isLoggedIn() && Auth._currentUser.staff;
+  };
+
   //intercept our API calls
   Auth.setupInterceptor = function() {
     Restangular.setErrorInterceptor(function(response) {
-      //if an API call is ever blocked by restricted access, we log the user out for security
+      var errors;
+
+      //if an API call is blocked
       if (response.status === 401) {
-        Auth._clearUser();
-        $location.path('/login');
+        //check if it's unauthorized (vs a login error)
+        if(response.data && response.data.errors && response.data.errors.api && response.data.errors.api === 'unauthorized') {
+          //log user out
+          Auth._clearUser();
+          $window.location.href = '/login';
+        }
+      }
+
+      if(response.data && response.data.errors && response.data.errors.api) {
+        //response returned an api issue
+        //report and error back to user
+        Auth.showApiError(response.status,errors);
       }
     });
   };
@@ -193,6 +209,32 @@ angular.module( 'Morsel.auth', [
 
   Auth.hasCurrentUser = function() {
     return hasLoadedUser.promise;
+  };
+
+  Auth.showApiError = function(status, errors) {
+    var modalInstance,
+        ModalInstanceCtrl,
+        errorList = errors || 'No error message';
+
+    //send error report to mixpanel
+    Mixpanel.send('Error - API', {
+      http_status: status,
+      error_message : JSON.stringify(errorList)
+    });
+
+    modalInstance = $modal.open({
+      templateUrl: 'common/auth/apiError.tpl.html',
+      controller: ModalInstanceCtrl,
+      resolve: {}
+    });
+
+    ModalInstanceCtrl = function ($scope, $modalInstance) {
+      $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+      };
+    };
+    //we need to implicitly inject dependencies here, otherwise minification will botch them
+    ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance'];
   };
 
   //to start, reset our user

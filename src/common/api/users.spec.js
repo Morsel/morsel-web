@@ -15,14 +15,10 @@ describe( 'ApiUsers factory', function() {
     return _.omit(item, "route", "parentResource", "getList", "get", "post", "put", "remove", "head", "trace", "options", "patch", "$get", "$save", "$query", "$remove", "$delete", "$put", "$post", "$head", "$trace", "$options", "$patch", "$then", "$resolved", "restangularCollection", "customOperation", "customGET", "customPOST", "customPUT", "customDELETE", "customGETLIST", "$getList", "$resolved", "restangularCollection", "one", "all", "doGET", "doPOST", "doPUT", "doDELETE", "doGETLIST", "addRestangularMethod", "getRestangularUrl");
   }
 
-  beforeEach( module( 'Morsel' ) );
+  beforeEach( module( 'Morsel.public' ) );
 
   it( 'should contain an ApiUsers factory', inject(function(ApiUsers) {
     expect(ApiUsers).not.toEqual(null);
-  }));
-
-  it( 'should contain a getFeed function', inject(function(ApiUsers) {
-    expect(ApiUsers.getFeed).toBeDefined();
   }));
 
   it( 'should contain a getUser function', inject(function(ApiUsers) {
@@ -32,27 +28,6 @@ describe( 'ApiUsers factory', function() {
   it( 'should contain a newUser function', inject(function(ApiUsers) {
     expect(ApiUsers.newUser).toBeDefined();
   }));
-
-  describe('function getFeed', function() {
-    beforeEach(inject(function (_$httpBackend_, APIURL) {
-      httpBackend = _$httpBackend_;
-      httpBackend.expectGET(APIURL+'/users/1/feed.json').respond('{"data":{}}');
-    }));
-
-    afterEach(function () {
-      httpBackend.verifyNoOutstandingExpectation();
-      httpBackend.verifyNoOutstandingRequest();
-    });
-
-    it( 'should return an object', inject(function(ApiUsers) {
-      var resolvedValue;
-      ApiUsers.getFeed(1).then(function (data) {
-        resolvedValue = data;
-      });
-      httpBackend.flush();
-      expect(sanitizeRestangularAll(resolvedValue)).toEqual(jasmine.any(Object));
-    }));
-  });
 
   describe('function getUser', function() {
     beforeEach(inject(function (_$httpBackend_, APIURL) {
@@ -93,8 +68,7 @@ describe( 'ApiUsers factory', function() {
           'email': 'email@test.com',
           'password': 'testpassword',
           'first_name': 'testfirst',
-          'last_name': 'testlast',
-          'title': 'testtitle'
+          'last_name': 'testlast'
         }
       }, null, function(){}).then(function (data) {
         resolvedValue = data;

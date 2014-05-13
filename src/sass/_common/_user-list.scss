@@ -1,0 +1,106 @@
+.user-list {
+  ul {
+    margin: 0;
+
+    li {
+      list-style: none;
+      border-bottom: 1px solid $morsel-light;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+
+      .user-extra-info {
+        .user-info-main {
+          margin: 0 8px 0 0;
+        }
+      }
+
+      .user-body {
+        button {
+          float: right;
+          margin-top: 5px;
+        }
+      }
+
+      .user-info-main {
+        display: inline-block;
+        margin: 0;
+        line-height: $profile-pic-xs;
+      }
+
+      .profile-pic-link {
+        width: $profile-pic-xs;
+        height: $profile-pic-xs;
+      }
+
+      .time-ago {
+        font-style: italic;
+        display: inline-block;
+        color: $morsel-medium;
+      }
+
+      .user-list-text {
+        margin: 5px 0 0;
+      }
+
+      &:last-child {
+        margin: 0;
+        border: 0;
+        padding: 0;
+      }
+    }
+  }
+
+  .empty-state {
+    padding-bottom: 10px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .add-comment {
+    padding-top: 15px;
+    border-top: 1px solid white;
+    overflow: hidden;
+    margin-top: 10px;
+    border-top: 1px solid $morsel-light;
+  }
+
+  & > p {
+    text-align: center;
+    margin-top: 10px;
+    border-top: 1px solid $morsel-light;
+    padding-top: 10px;
+  }
+
+  &.comment-list {
+    li {
+      .user-info-main {
+        line-height: inherit;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm) {
+  .user-list {
+    ul {
+      li {
+        .user-body {
+          button {
+            margin-top: 18px;
+          }
+        }
+
+        .user-info-main {
+          line-height: $profile-pic-s;
+        }
+
+        .profile-pic-link {
+          width: $profile-pic-s;
+          height: $profile-pic-s;
+        }
+      }
+    }
+  }
+}

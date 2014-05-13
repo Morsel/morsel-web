@@ -1,12 +1,12 @@
-angular.module( 'Morsel.textLimit', [] )
+angular.module( 'Morsel.common.textLimit', [] )
 
 //show/hide an amount of text
-.directive('textLimit', function($modal, $window){
+.directive('mrslTextLimit', function($modal, $window){
   return {
     restrict: 'A',
     scope: {
-      fullContent: '=textContent',
-      charLimit: '='
+      fullContent: '=mrslTextContent',
+      charLimit: '=mrslCharLimit'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -39,7 +39,7 @@ angular.module( 'Morsel.textLimit', [] )
 
       scope.expand = function () {
         var modalInstance = $modal.open({
-          templateUrl: 'text/textOverlay.tpl.html',
+          templateUrl: 'common/text/textOverlay.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             textContent: function () {
@@ -58,12 +58,14 @@ angular.module( 'Morsel.textLimit', [] )
           $modalInstance.dismiss('cancel');
         };
       };
+      //we need to implicitly inject dependencies here, otherwise minification will botch them
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'textContent'];
     },
-    templateUrl: 'text/textLimit.tpl.html'
+    templateUrl: 'common/text/textLimit.tpl.html'
   };
 })
 
-.directive('textLimitBtn', function(){
+.directive('mrslTextLimitBtn', function(){
   return {
     restrict: 'A',
     scope: true,
