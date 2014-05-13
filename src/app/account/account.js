@@ -24,10 +24,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
-  'Morsel.account.editProfile',
-  'Morsel.account.join',
-  'Morsel.account.login',
-  'Morsel.account.logout'
+  'Morsel.account.editProfile'
 ])
 
 //define some constants for the app
@@ -167,9 +164,10 @@ angular.module( 'Morsel.account', [
     $scope.$apply('viewOptions');
   }
 
-  $scope.goTo = function(path) {
-    $location.path(path);
-    $scope.menuOpen = false;
+  $scope.viewProfile = function(path) {
+    if($scope.currentUser) {
+      $window.location.href = '/'+$scope.currentUser.username;
+    }
   };
 });
 

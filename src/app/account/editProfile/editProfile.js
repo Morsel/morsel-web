@@ -13,9 +13,7 @@ angular.module( 'Morsel.account.editProfile', [])
       pageTitle: 'Edit Profile'
     },
     access: {
-      /*restricted : true*/
-    },
-    resolve: {
+      restricted : true
     }
   });
 })
