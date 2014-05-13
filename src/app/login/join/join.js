@@ -143,7 +143,10 @@ angular.module( 'Morsel.login.join', [])
       socialData = {
         authentication: {
           'provider': $scope.userData.social.type,
-          'token': $scope.userData.social.token
+          'token': $scope.userData.social.token,
+          //tokens coming from the JS SDK are short-lived
+          'short_lived': true,
+          'uid': $scope.userData.social.id
         }
       };
 

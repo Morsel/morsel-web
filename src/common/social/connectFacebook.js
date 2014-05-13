@@ -143,7 +143,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
               ApiUsers.updateUser(scopeWithData.userData.registered.id, {
                 'authentication': {
                   'provider': 'facebook',
-                  'token': loginResponse.authResponse.accessToken
+                  'token': loginResponse.authResponse.accessToken,
+                  //tokens coming from the JS SDK are short-lived
+                  'short_lived': true,
+                  'uid': scopeWithData.userData.social.id
                 }
               }).then(function() {
                 //send them home (trigger page refresh to switch apps)
