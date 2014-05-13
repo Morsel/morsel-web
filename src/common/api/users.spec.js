@@ -68,8 +68,7 @@ describe( 'ApiUsers factory', function() {
           'email': 'email@test.com',
           'password': 'testpassword',
           'first_name': 'testfirst',
-          'last_name': 'testlast',
-          'title': 'testtitle'
+          'last_name': 'testlast'
         }
       }, null, function(){}).then(function (data) {
         resolvedValue = data;

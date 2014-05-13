@@ -26,7 +26,6 @@ angular.module( 'Morsel.common.auth', [
       'sign_in_count': null,
       'created_at': null,
       'photo_url': null,
-      'title': null,
       'auth_token': '',
       'username': null,
       'industry': null,
