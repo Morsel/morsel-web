@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectFacebook', [] )
 
 //connect (sign up/login) with facebook SDK
-.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth){
+.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window){
   return {
     restrict: 'A',
     scope: false,
@@ -128,7 +128,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function existingAccountModal() {
-        var ModalInstanceCtrl = function ($scope, $modalInstance, $location, scopeWithData, userInfoDeferred) {
+        var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, scopeWithData, userInfoDeferred) {
           $scope.email = scopeWithData.userData.social.email;
 
           //if user cancels, allow fb info to go through, but strip out email
@@ -146,7 +146,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
                   'token': loginResponse.authResponse.accessToken
                 }
               }).then(function() {
-                //send them somewhere?
+                //send them home (trigger page refresh to switch apps)
+                $window.location.href = '/';
               });
             });
             $location.path('/account/login');
@@ -157,7 +158,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           });
         };
         //we need to implicitly inject dependencies here, otherwise minification will botch them
-        ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', 'scopeWithData', 'userInfoDeferred'];
+        ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'scopeWithData', 'userInfoDeferred'];
 
         var modalInstance = $modal.open({
           templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',
@@ -190,8 +191,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         if(AfterLogin.hasCallbacks()) {
           AfterLogin.executeCallbacks();
         } else {
-          //or else send them somewhere
-          alert('logged in!');
+          //send them home (trigger page refresh to switch apps)
+          $window.location.href = '/';
         }
       }
 

@@ -56,7 +56,7 @@ angular.module( 'Morsel.login', [
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  //if we don't recognize the URL, send it to the homepage for now
+  //if we don't recognize the URL, send them to the login page for now
   $urlRouterProvider.otherwise( '/login' );
 
   //Restangular configuration

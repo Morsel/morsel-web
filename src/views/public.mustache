@@ -119,13 +119,13 @@
             <a><i class="sidenav-terms"></i>Terms of Use</a>
           </li>
           <li ng-if="isLoggedIn">
-            <a ng-click="goTo('logout')"><i class="sidenav-logout"></i>Logout</a>
+            <a href="/logout" target="_self"><i class="sidenav-logout"></i>Logout</a>
           </li>
           <li ng-if="!isLoggedIn">
-            <a ng-click="goTo('login')">Login</a>
+            <a href="/login"  target="_self">Login</a>
           </li>
           <li ng-if="!isLoggedIn">
-            <a ng-click="goTo('join')">Sign Up</a>
+            <a href="/join" target="_self">Sign Up</a>
           </li>
         </ul>
       </nav>

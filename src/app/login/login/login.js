@@ -13,7 +13,7 @@ angular.module( 'Morsel.login.login', [])
   });
 })
 
-.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $location, HandleErrors, AfterLogin ) {
+.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $window, HandleErrors, AfterLogin ) {
   //model to store our join data
   $scope.loginModel = {
     'test':'value'
@@ -38,8 +38,8 @@ angular.module( 'Morsel.login.login', [])
       if(AfterLogin.hasCallbacks()) {
         AfterLogin.executeCallbacks();
       } else {
-        //or else send to their feed
-        $location.path('/myfeed');
+        //send them home (trigger page refresh to switch apps)
+        $window.location.href = '/';
       }
     }
 

@@ -77,7 +77,7 @@ angular.module( 'Morsel.public', [
   $locationProvider.html5Mode(true).hashPrefix('!');
 
   //if we don't recognize the URL, send it to the homepage for now
-  $urlRouterProvider.otherwise( '/home' );
+  $urlRouterProvider.otherwise( '/' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
@@ -139,7 +139,7 @@ angular.module( 'Morsel.public', [
     if(toState.access && toState.access.restricted && !Auth.isLoggedIn()) {
       event.preventDefault();
       //send them to the login page
-      $location.path('/login');
+      $window.location.href = '/login';
     }
     resetViewOptions();
   });

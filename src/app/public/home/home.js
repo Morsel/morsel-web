@@ -4,7 +4,7 @@ angular.module( 'Morsel.public.home', [
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'home', {
-    url: '/home',
+    url: '/',
     views: {
       "main": {
         controller: 'HomeCtrl',

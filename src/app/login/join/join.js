@@ -179,7 +179,7 @@ angular.module( 'Morsel.login.join', [])
   }
 })
 
-.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors) {
+.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors, $window) {
   //a cleaner way of building radio buttons
   $scope.industryValues = [{
     'name':'Chef',
@@ -219,9 +219,8 @@ angular.module( 'Morsel.login.join', [])
     if(AfterLogin.hasCallbacks()) {
       AfterLogin.executeCallbacks();
     } else {
-      alert('signup success!');
-      //or else send to their feed
-      //$location.path('/myfeed');
+      //send them home (trigger page refresh to switch apps)
+      $window.location.href = '/';
     }
   }
 

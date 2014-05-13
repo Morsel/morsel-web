@@ -57,7 +57,7 @@ angular.module( 'Morsel.account', [
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  //if we don't recognize the URL, send it to the homepage for now
+  //if we don't recognize the URL, send them to the login page for now
   $urlRouterProvider.otherwise( '/account/login' );
 
   //Restangular configuration
@@ -120,7 +120,7 @@ angular.module( 'Morsel.account', [
     if(toState.access && toState.access.restricted && !Auth.isLoggedIn()) {
       event.preventDefault();
       //send them to the login page
-      $location.path('/login');
+      $window.location.href ='/login';
     }
     resetViewOptions();
   });

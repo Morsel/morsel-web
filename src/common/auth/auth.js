@@ -3,7 +3,7 @@ angular.module( 'Morsel.common.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, $location, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel){
+.factory('Auth', function($window, ApiUsers, $window, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel){
   var Auth = {},
       defaultRequestParams = {},
       hasLoadedUser = $q.defer();
@@ -120,7 +120,7 @@ angular.module( 'Morsel.common.auth', [
   //log out a user
   Auth.logout = function(userData) {
     Auth._clearUser();
-    $location.path('/home');
+    $window.location.href = '/';
   };
 
   //check if a user is logged in
@@ -153,7 +153,7 @@ angular.module( 'Morsel.common.auth', [
       if (response.status === 401) {
         //if an API call is ever blocked by restricted access, we log the user out for security
         Auth._clearUser();
-        $location.path('/login');
+        $window.location.href = '/login';
       } else if(response.data && response.data.errors && response.data.errors.api) {
         //response returned an api issue
         //report and error back to user
