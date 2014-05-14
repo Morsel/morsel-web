@@ -13,7 +13,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       if(!window.fbAsyncInit) {
         window.fbAsyncInit = function() {
           FB.init({
-            appId      : '1402286360015732',
+            appId      : '1406459019603393',//1402286360015732',
             cookie     : true,  // enable cookies to allow the server to access 
                                 // the session
             xfbml      : false,  // parse social plugins on this page
@@ -182,7 +182,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
        var authenticationData = {
             'authentication': {
               'provider': 'facebook',
-              'token': loginResponse.authResponse.accessToken
+              'token': loginResponse.authResponse.accessToken,
+              //tokens coming from the JS SDK are short-lived
+              'short_lived': true,
+              'uid': loginResponse.authResponse.userID
             }
           };
 
