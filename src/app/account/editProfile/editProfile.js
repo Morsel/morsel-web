@@ -1,8 +1,8 @@
 angular.module( 'Morsel.account.editProfile', [])
 
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'edit-profile', {
-    url: '/account/edit-profile',
+  $stateProvider.state( 'account.edit-profile', {
+    url: '/edit-profile',
     views: {
       "main": {
         controller: 'EditProfileCtrl',
@@ -15,29 +15,31 @@ angular.module( 'Morsel.account.editProfile', [])
     access: {
       restricted : true
     },
-    resolve: {
-      userCanEdit : function($stateParams, Auth) {
-        return $stateParams.username === Auth.getCurrentUser()['username'];
-      }
-    }
+    resolve: {}
   });
 })
 
-.controller( 'EditProfileCtrl', function EditProfileCtrl( $scope, $stateParams, ApiUsers, userCanEdit, ApiKeywords, HandleErrors, $window ) {
+.controller( 'EditProfileCtrl', function EditProfileCtrl( $scope, $stateParams, ApiUsers, ApiKeywords, HandleErrors, $window, accountUser){
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
+  $scope.basicInfoModel = accountUser;
+
   ApiKeywords.getAllCuisines().then(function(cuisineData) {
-    var allCuisines = {};
+    var allCuisines = [];
 
     _.each(cuisineData, function(c) {
-      allCuisines.append({
+      allCuisines.push({
         value: c.value,
         name: c.name
       }); 
     });
 
     $scope.allCuisines = allCuisines;
+  });
+
+  ApiUsers.getCuisines(accountUser.id).then(function(cuisineData) {
+    $scope.userCuisines = cuisineData;
   });
 
   //model to store our profile data
@@ -69,15 +71,4 @@ angular.module( 'Morsel.account.editProfile', [])
   function onBasicInfoError(resp) {
     HandleErrors.onError(resp, $scope.basicInfoForm);
   }
-
-  ApiUsers.getMyData().then(function(userData) {
-    $scope.basicInfoModel = userData;
-
-    ApiUsers.getCuisines(userData.id).then(function(cuisineData) {
-      $scope.userCuisines = cuisineData;
-    });
-  }, function() {
-    //if there's an error retrieving user data, go to login
-    $window.location.href = '/login';
-  });
 });

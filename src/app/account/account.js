@@ -25,6 +25,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.account.body',
   'Morsel.account.editProfile'
 ])
 
@@ -55,8 +56,8 @@ angular.module( 'Morsel.account', [
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  //if we don't recognize the URL, send them to the login page for now
-  $urlRouterProvider.otherwise( '/account/login' );
+  //if we don't recognize the URL, send them to edit their profile for now
+  $urlRouterProvider.otherwise( '/account/edit-profile' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
@@ -171,4 +172,3 @@ angular.module( 'Morsel.account', [
     }
   };
 });
-
