@@ -23,52 +23,61 @@ angular.module( 'Morsel.account.editProfile', [])
   });
 })
 
-.controller( 'EditProfileCtrl', function EditProfileCtrl( $scope, $stateParams, ApiUsers, userCanEdit, ApiKeywords ) {
+.controller( 'EditProfileCtrl', function EditProfileCtrl( $scope, $stateParams, ApiUsers, userCanEdit, ApiKeywords, HandleErrors, $window ) {
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
   ApiKeywords.getAllCuisines().then(function(cuisineData) {
-    $scope.allCuisines = cuisineData;
+    var allCuisines = {};
+
+    _.each(cuisineData, function(c) {
+      allCuisines.append({
+        value: c.value,
+        name: c.name
+      }); 
+    });
+
+    $scope.allCuisines = allCuisines;
   });
 
   //model to store our profile data
-  $scope.editProfileModel = {};
+  $scope.basicInfoModel = {};
 
   //submit our form
-  $scope.updateProfile = function() {
+  $scope.updateBasicInfo = function() {
     var userData = {
       user: {
-        'first_name': $scope.editProfileModel.first_name,
-        'last_name': $scope.editProfileModel.last_name,
-        'email': $scope.editProfileModel.email,
-        'bio': $scope.editProfileModel.bio
+        'first_name': $scope.basicInfoModel.first_name,
+        'last_name': $scope.basicInfoModel.last_name,
+        'email': $scope.basicInfoModel.email,
+        'bio': $scope.basicInfoModel.bio
       }
     };
 
     //check if everything is valid
-    if($scope.editProfileForm.$valid) {
+    if($scope.basicInfoForm.$valid) {
       //call our updateUser method to take care of the heavy lifting
-      ApiUsers.updateUser($scope.editProfileModel.id, userData, onSuccess, onError);
+      ApiUsers.updateUser($scope.basicInfoModel.id, userData).then(onBasicInfoSuccess, onBasicInfoError);
     }
   };
 
-  function onSuccess(resp) {
-    //send them back to their profile
-    $location.path('/'+resp.username);
+  function onBasicInfoSuccess(resp) {
+    $scope.alertMessage = 'Successfully updated your basic info';
+    $scope.alertType = 'success';
   }
 
-  function onError(resp) {
-    HandleErrors.onError(resp, $scope.editProfileForm);
+  function onBasicInfoError(resp) {
+    HandleErrors.onError(resp, $scope.basicInfoForm);
   }
 
   ApiUsers.getMyData().then(function(userData) {
-    $scope.editProfileModel = userData;
+    $scope.basicInfoModel = userData;
 
     ApiUsers.getCuisines(userData.id).then(function(cuisineData) {
       $scope.userCuisines = cuisineData;
     });
   }, function() {
-    //if there's an error retrieving user data (bad username?), go to home page for now
-    $location.path('/');
+    //if there's an error retrieving user data, go to login
+    $window.location.href = '/login';
   });
 });

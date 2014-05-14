@@ -1,17 +1,20 @@
 <div>
   <h1>Edit Profile</h1>
-  <form name="editProfileForm" method="post" ng-submit="updateProfile()" class="padded-form" novalidate>
-    <h3>Edit Basic Profile Info</h3>
-    <div mrsl-base-errors mrsl-val-form="editProfileForm"></div>
-    <input mrsl-validated-element mrsl-val-form="editProfileForm" mrsl-val-en-name="First Name" mrsl-val-type="text" mrsl-val-name="first_name" mrsl-val-form-model="editProfileModel" mrsl-val-placeholder="John" mrsl-val-required="false" mrsl-existing-val="user.first_name" />{{user.first_name}}
+  <div ng-show="alertMessage" class="alert alert-{{alertType}}">
+    <p ng-bind="alertMessage"></p>
+  </div>
+  <form name="basicInfoForm" method="post" ng-submit="updateBasicInfo()" class="padded-form" novalidate>
+    <h3>Basic Info</h3>
+    <div mrsl-base-errors mrsl-val-form="basicInfoForm"></div>
+    <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="First Name" mrsl-val-type="text" mrsl-val-name="first_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="John" mrsl-val-required="false" mrsl-existing-val="user.first_name" />{{user.first_name}}
 
-    <input mrsl-validated-element mrsl-val-form="editProfileForm" mrsl-val-en-name="Last Name" mrsl-val-type="text" mrsl-val-name="last_name" mrsl-val-form-model="editProfileModel" mrsl-val-placeholder="Smith" mrsl-val-required="false" />
+    <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Last Name" mrsl-val-type="text" mrsl-val-name="last_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="Smith" mrsl-val-required="false" />
 
-    <input mrsl-validated-element mrsl-val-form="editProfileForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="editProfileModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="true" />
+    <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="false" />
 
-    <textarea mrsl-validated-element mrsl-val-form="editProfileForm" mrsl-val-en-name="Bio" mrsl-val-name="bio" mrsl-val-form-model="editProfileModel" mrsl-val-placeholder="Tell us a little about yourself" mrsl-val-required="false" mrsl-val-tag-type="textarea"></textarea>
+    <textarea mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Bio" mrsl-val-name="bio" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="Tell us a little about yourself" mrsl-val-required="false" mrsl-val-tag-type="textarea"></textarea>
 
-    <button mrsl-submit-btn mrsl-submit-btn-form="editProfileForm" mrsl-submit-btn-copy="Update Basic Info"></button>
+    <button mrsl-submit-btn mrsl-submit-btn-form="basicInfoForm" mrsl-submit-btn-copy="Update Basic Info"></button>
   </form>
   <h3>Cuisines</h3>
   <a href="">Update Cuisines</a>
@@ -21,8 +24,17 @@
         <span class="user-tags-empty">None selected</span>
       </li>
       <li ng-repeat="cuisine in userCuisines">
-        <span href="">{{cuisine.name}}</span>
+        <span>{{cuisine.keyword.name}}</span>
       </li>
     </ul>
   </div>
+
+  <form name="cuisinesForm" method="post" ng-submit="updateCuisines()" class="padded-form" novalidate>
+    <h3>Cuisines</h3>
+    <div mrsl-base-errors mrsl-val-form=""></div>
+    <input mrsl-validated-element mrsl-val-form="cuisinesForm" mrsl-val-en-name="Cuisines" mrsl-val-name="cuisine" mrsl-val-form-model="cuisinesModel" mrsl-val-required="false" mrsl-val-tag-type="checkbox" mrsl-val-multiple-vals="allCuisines" />
+
+    <button mrsl-submit-btn mrsl-submit-btn-form="cuisinesForm" mrsl-submit-btn-copy="Update Cuisines"></button>
+  </form>
+
 </div>

@@ -78,5 +78,10 @@
   .account-main {
     background-color: $morsel-background;
     border-left: 1px solid $morsel-medium;
+
+    h1 {
+      font-size: 40px;
+      text-align: center;
+    }
   }
 }

@@ -7,6 +7,7 @@ angular.module( 'Morsel.account', [
   'ui.route',
   //filters
   //API
+  'Morsel.common.apiKeywords',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
   //templates

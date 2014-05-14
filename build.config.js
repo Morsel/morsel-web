@@ -152,6 +152,7 @@ module.exports = {
     common: {
       js: [
         'src/common/analytics/mixpanel.js',
+        'src/common/api/keywords.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
         'src/common/auth/afterLogin.js',
