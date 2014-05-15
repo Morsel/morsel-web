@@ -152,11 +152,13 @@ module.exports = {
     common: {
       js: [
         'src/common/analytics/mixpanel.js',
+        'src/common/api/keywords.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
         'src/common/auth/afterLogin.js',
         'src/common/auth/auth.js',
         'src/common/forms/baseErrors.js',
+        'src/common/forms/checklist.js',
         'src/common/forms/formNameFix.js',
         'src/common/forms/handleErrors.js',
         'src/common/forms/submitBtn.js',
@@ -167,6 +169,7 @@ module.exports = {
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
+        'src/common/forms/checklist.tpl.html',
         'src/common/forms/submitBtn.tpl.html',
         'src/common/forms/validatedCheckbox.tpl.html',
         'src/common/forms/validatedInput.tpl.html',
