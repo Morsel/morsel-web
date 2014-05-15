@@ -7,13 +7,14 @@ var express = require("express"),
     nodeEnv = process.env.NODE_ENV || 'development',
     isProd = nodeEnv === 'production',
     siteURL = process.env.SITEURL || 'localhost:5000',
-    apiURL = process.env.APIURL || 'http://api-staging.eatmorsel.com',
+    apiUrl = process.env.apiUrl || 'http://api-staging.eatmorsel.com',
     apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
     devMixpanelToken = 'fc91c2a6f8d8388f077f6b9618e90499',
     mixpanelToken = process.env.MIXPANELTOKEN || devMixpanelToken,
     prerender,
     prerenderDevUrl = 'http://morsel-seo.herokuapp.com/',
     prerenderToken = process.env.PRERENDER_TOKEN || '',
+    facebookAppId = process.env.FACEBOOK_APP_ID || '1406459019603393',
     metabase = '/',
     app = express();
 
@@ -70,7 +71,7 @@ app.get('/', function(req, res) {
   res.render('claim', {
     siteUrl : siteURL,
     isProd : isProd,
-    apiURL : apiURL,
+    apiUrl : apiUrl,
     mixpanelToken : mixpanelToken
   });
 });
@@ -107,48 +108,28 @@ app.get('/unsubscribe', function(req, res){
   res.render('unsubscribe', {
     siteUrl : siteURL,
     isProd : isProd,
-    apiURL : apiURL,
+    apiUrl : apiUrl,
     mixpanelToken : mixpanelToken
   });
 });
 
 //login
 app.get('/login', function(req, res){
-  res.render('login', {
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiURL : apiURL,
-    mixpanelToken : mixpanelToken
-  });
+  renderLoginPage(res);
 });
 
 //logout
 app.get('/logout', function(req, res){
-  res.render('login', {
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiURL : apiURL,
-    mixpanelToken : mixpanelToken
-  });
+  renderLoginPage(res);
 });
 
 //join
 app.get('/join/:step', function(req, res){
-  res.render('login', {
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiURL : apiURL,
-    mixpanelToken : mixpanelToken
-  });
+  renderLoginPage(res);
 });
 
 app.get('/join', function(req, res){
-  res.render('login', {
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiURL : apiURL,
-    mixpanelToken : mixpanelToken
-  });
+  renderLoginPage(res);
 });
 
 //account pages
@@ -156,7 +137,7 @@ app.get('/account*', function(req, res){
   res.render('account', {
     siteUrl : siteURL,
     isProd : isProd,
-    apiURL : apiURL,
+    apiUrl : apiUrl,
     mixpanelToken : mixpanelToken
   });
 });
@@ -175,7 +156,7 @@ app.get('/:route', function(req, res, next){
     renderStatic(res, route);
   } else {
     //check and see if it's a reserved route
-    request(apiURL+'/configuration'+apiQuerystring, function (error, response, body) {
+    request(apiUrl+'/configuration'+apiQuerystring, function (error, response, body) {
       var configData,
           nonUsernamePaths,
           //Maximum 15 characters (alphanumeric or _), must start with a letter
@@ -221,7 +202,7 @@ function renderAngular(res, mData) {
   res.render('public', {
     metadata: fullMetadata,
     metabase: metabase,
-    apiUrl: apiURL,
+    apiUrl: apiUrl,
     isProd : isProd,
     mixpanelToken : mixpanelToken
   });
@@ -231,7 +212,7 @@ function renderStatic(res, route) {
   var fullMetadata = findMetadata(route) || findMetadata('default'),
       templateVars = {
         metadata: fullMetadata,
-        apiUrl: apiURL,
+        apiUrl: apiUrl,
         isProd : isProd,
         mixpanelToken : mixpanelToken,
         staticPartial: {}
@@ -258,7 +239,7 @@ function findMetadata(route) {
 }
 
 function renderUserPage(res, username) {  
-  request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
+  request(apiUrl+'/users/'+username+apiQuerystring, function (error, response, body) {
     var user,
         userImage,
         userMetadata;
@@ -290,13 +271,13 @@ function renderUserPage(res, username) {
 }
 
 function renderMorselPage(res, username, morselIdSlug) {
-  request(apiURL+'/users/'+username+apiQuerystring, function (error, response, body) {
+  request(apiUrl+'/users/'+username+apiQuerystring, function (error, response, body) {
     var user;
 
     if (!error && response.statusCode == 200) {
       user = JSON.parse(body).data;
 
-      request(apiURL+'/morsels/'+morselIdSlug+apiQuerystring, function (error, response, body) {
+      request(apiUrl+'/morsels/'+morselIdSlug+apiQuerystring, function (error, response, body) {
         var morsel,
             morselMetadata,
             description;
@@ -346,6 +327,16 @@ function renderMorselPage(res, username, morselIdSlug) {
       //not a valid user - must be a bad route
       render404(res);
     }
+  });
+}
+
+function renderLoginPage(res) {
+  res.render('login', {
+    siteUrl : siteURL,
+    isProd : isProd,
+    apiUrl : apiUrl,
+    mixpanelToken : mixpanelToken,
+    facebookAppId : facebookAppId
   });
 }
 

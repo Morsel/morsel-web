@@ -13,7 +13,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       if(!window.fbAsyncInit) {
         window.fbAsyncInit = function() {
           FB.init({
-            appId      : '1406459019603393',//1402286360015732',
+            appId      : window.MorselConfig.facebookAppId,
             cookie     : true,  // enable cookies to allow the server to access 
                                 // the session
             xfbml      : false,  // parse social plugins on this page
