@@ -17,24 +17,9 @@
     <button mrsl-submit-btn mrsl-submit-btn-form="basicInfoForm" mrsl-submit-btn-copy="Update Basic Info"></button>
   </form>
   <h3>Cuisines</h3>
-  <a href="">Update Cuisines</a>
-  <div>
-    <ul>
-      <li ng-show="cuisines.length === 0">
-        <span class="user-tags-empty">None selected</span>
-      </li>
-      <li ng-repeat="cuisine in userCuisines">
-        <span>{{cuisine.keyword.name}}</span>
-      </li>
-    </ul>
-  </div>
+  <ul mrsl-checklist mrsl-checklist-vals="cuisineList" mrsl-checklist-change="toggleTag"></ul>
 
-  <form name="cuisinesForm" method="post" ng-submit="updateCuisines()" class="padded-form" novalidate>
-    <h3>Cuisines</h3>
-    <div mrsl-base-errors mrsl-val-form=""></div>
-    <input mrsl-validated-element mrsl-val-form="cuisinesForm" mrsl-val-en-name="Cuisines" mrsl-val-name="cuisine" mrsl-val-form-model="cuisinesModel" mrsl-val-required="false" mrsl-val-tag-type="checkbox" mrsl-val-multiple-vals="allCuisines" />
-
-    <button mrsl-submit-btn mrsl-submit-btn-form="cuisinesForm" mrsl-submit-btn-copy="Update Cuisines"></button>
-  </form>
+  <h3>Specialties</h3>
+  <ul mrsl-checklist mrsl-checklist-vals="specialtyList" mrsl-checklist-change="toggleTag"></ul>
 
 </div>

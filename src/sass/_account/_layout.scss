@@ -77,11 +77,39 @@
 
   .account-main {
     background-color: $morsel-background;
-    border-left: 1px solid $morsel-medium;
+    padding-bottom: 20px;
 
     h1 {
       font-size: 40px;
       text-align: center;
+    }
+  }
+}
+
+@media (min-width: $screen-xs-min) {
+  .account {
+    .account-main {
+      .checklist {
+        @include column-count(2);
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .account {
+    .account-main {
+      border-left: 1px solid $morsel-medium;
+    }
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+  .account {
+    .account-main {
+      .checklist {
+        @include column-count(4);
+      }
     }
   }
 }
