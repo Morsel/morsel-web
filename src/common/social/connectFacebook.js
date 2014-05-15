@@ -56,7 +56,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       function checkAuthentication() {
         ApiUsers.checkAuthentication('facebook', loginResponse.authResponse.userID).then(function(resp){
           //if we already have them on file
-          if(resp) {
+          if(resp.data) {
             //just sign them in
             login();
           } else {

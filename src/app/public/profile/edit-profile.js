@@ -27,8 +27,8 @@ angular.module( 'Morsel.public.editProfile', [])
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
-  ApiKeywords.getAllCuisines().then(function(cuisineData) {
-    $scope.allCuisines = cuisineData;
+  ApiKeywords.getAllCuisines().then(function(cuisineResp) {
+    $scope.allCuisines = cuisineResp.data;
   });
 
   //model to store our profile data
@@ -61,11 +61,11 @@ angular.module( 'Morsel.public.editProfile', [])
     HandleErrors.onError(resp, $scope.editProfileForm);
   }
 
-  ApiUsers.getMyData().then(function(userData) {
-    $scope.editProfileModel = userData;
+  ApiUsers.getMyData().then(function(userResp) {
+    $scope.editProfileModel = userResp.data;
 
-    ApiUsers.getCuisines(userData.id).then(function(cuisineData) {
-      $scope.userCuisines = cuisineData;
+    ApiUsers.getCuisines(userData.id).then(function(cuisineResp) {
+      $scope.userCuisines = cuisineResp.data;
     });
   }, function() {
     //if there's an error retrieving user data (bad username?), go to home page for now

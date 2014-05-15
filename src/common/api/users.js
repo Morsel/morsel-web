@@ -90,7 +90,7 @@ angular.module( 'Morsel.common.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', username).one('morsels').get().then(function(resp) {
-      var morselsData = Restangular.stripRestangular(resp);
+      var morselsData = Restangular.stripRestangular(resp).data;
       //correctly sort morsels by published_at before we even deal with them
       morselsData = _.sortBy(morselsData, 'published_at');
       deferred.resolve(morselsData);

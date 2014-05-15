@@ -96,9 +96,9 @@ angular.module( 'Morsel.common.auth', [
 
   //create a new user
   Auth.join = function(uploadUserData, onSuccess, onError) {
-    ApiUsers.newUser(uploadUserData).then(function(loggedInUser) {
-      Auth._updateUser(loggedInUser);
-      onSuccess(loggedInUser);
+    ApiUsers.newUser(uploadUserData).then(function(loggedInUserResp) {
+      Auth._updateUser(loggedInUserResp.data);
+      onSuccess(loggedInUserResp.data);
     }, function(resp){
       Auth._clearUser();
       onError(resp);
@@ -107,8 +107,8 @@ angular.module( 'Morsel.common.auth', [
 
   //log in an existing user
   Auth.login = function(userData, success, error) {
-    ApiUsers.loginUser(userData).then(function(loggedInUser) {
-      Auth._updateUser(loggedInUser);
+    ApiUsers.loginUser(userData).then(function(loggedInUserResp) {
+      Auth._updateUser(loggedInUserResp.data);
       success();
     }, function(resp){
       Auth._clearUser();
@@ -185,9 +185,9 @@ angular.module( 'Morsel.common.auth', [
       //reset our key
       Auth._resetApiKey();
       //get the rest of the users data from the server
-      ApiUsers.getMyData().then(function(loggedInUser) {
+      ApiUsers.getMyData().then(function(loggedInUserResp) {
         //update the app's user
-        Auth._updateUser(loggedInUser);
+        Auth._updateUser(loggedInUserResp.data);
         hasLoadedUser.resolve(Auth._currentUser);
       }, function() {
         //oops. must have been a faulty user. go anonymous for now

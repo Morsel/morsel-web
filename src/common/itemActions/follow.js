@@ -41,7 +41,7 @@ angular.module( 'Morsel.common.follow', [] )
         var deferred = $q.defer();
 
         if(scope.isFollowing) {
-          ApiUsers.unfollowUser(scope.idToFollow).then(function(data) {
+          ApiUsers.unfollowUser(scope.idToFollow).then(function(resp) {
             scope.isFollowing = false;
 
             //emit this so if we're on a profile page, it can update the count
@@ -50,7 +50,7 @@ angular.module( 'Morsel.common.follow', [] )
             deferred.resolve();
           });
         } else {
-          ApiUsers.followUser(scope.idToFollow).then(function(data) {
+          ApiUsers.followUser(scope.idToFollow).then(function(resp) {
             scope.isFollowing = true;
             
             //emit this so if we're on a profile page, it can update the count

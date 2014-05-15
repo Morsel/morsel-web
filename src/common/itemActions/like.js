@@ -29,8 +29,8 @@ angular.module( 'Morsel.common.itemLike', [] )
         var deferred = $q.defer();
 
         if(scope.item.liked) {
-          ApiItems.unlikeItem(scope.item.id).then(function(data) {
-            scope.item.liked = data;
+          ApiItems.unlikeItem(scope.item.id).then(function(resp) {
+            scope.item.liked = resp.data;
 
             //remove user from liker list
             if(scope.item.likers) {
@@ -45,8 +45,8 @@ angular.module( 'Morsel.common.itemLike', [] )
             deferred.resolve();
           });
         } else {
-          ApiItems.likeItem(scope.item.id).then(function(data) {
-            scope.item.liked = data;
+          ApiItems.likeItem(scope.item.id).then(function(resp) {
+            scope.item.liked = resp.data;
 
             //add user to liker list
             if(scope.item.likers) {
@@ -91,8 +91,8 @@ angular.module( 'Morsel.common.itemLike', [] )
         });
 
         if(!$scope.users) {
-          ApiItems.getLikers(item.id).then(function(likerData){
-            $scope.users = likerData;
+          ApiItems.getLikers(item.id).then(function(likerResp){
+            $scope.users = likerResp.data;
           });
         }
       };

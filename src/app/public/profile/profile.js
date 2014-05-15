@@ -13,8 +13,8 @@ angular.module( 'Morsel.public.profile', [])
     resolve: {
       //get our user data before we try to render the page
       userData: function(ApiUsers, $stateParams, $location) {
-        return ApiUsers.getUser($stateParams.username).then(function(userData) {
-          return userData;
+        return ApiUsers.getUser($stateParams.username).then(function(userResp) {
+          return userResp.data;
         }, function() {
           //if there's an error retrieving user data (bad username?), go to home page for now
           $location.path('/');
@@ -34,12 +34,12 @@ angular.module( 'Morsel.public.profile', [])
   $scope.canEdit = userData.id === Auth.getCurrentUser()['id'];
   $scope.isChef = userData.industry === 'chef';
 
-  ApiUsers.getCuisines(userData.id).then(function(cuisineData) {
-    $scope.cuisines = cuisineData;
+  ApiUsers.getCuisines(userData.id).then(function(cuisineResp) {
+    $scope.cuisines = cuisineResp.data;
   });
 
-  ApiUsers.getSpecialties(userData.id).then(function(specialityData) {
-    $scope.specialties = specialityData;
+  ApiUsers.getSpecialties(userData.id).then(function(specialtyResp) {
+    $scope.specialties = specialtyResp.data;
   });
 
   $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
@@ -126,8 +126,8 @@ angular.module( 'Morsel.public.profile', [])
 
   function getLikeFeed(scope, user) {
     if(!scope.likeFeed) {
-      ApiUsers.getLikeables(user.id, 'Item').then(function(likeableData){
-        _.each(likeableData, function(likeable) {
+      ApiUsers.getLikeables(user.id, 'Item').then(function(likeableResp){
+        _.each(likeableResp.data, function(likeable) {
           //construct message to display
           likeable.itemMessage = likeable.morsel.title+(likeable.description ? ': '+likeable.description : '');
 
@@ -138,7 +138,7 @@ angular.module( 'Morsel.public.profile', [])
           likeable.display_photo = likeable.photos ? likeable.photos._80x80 : MORSELPLACEHOLDER;
         });
 
-        scope.likeFeed = likeableData;
+        scope.likeFeed = likeableResp.data;
       });
     }
   }
