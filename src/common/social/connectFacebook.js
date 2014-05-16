@@ -5,7 +5,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
   return {
     restrict: 'A',
     scope: {
-      btnText: '@mrslConnectFacebookText'
+      btnText: '@mrslConnectFacebookText',
+      form: '=mrslConnectFacebookForm'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -207,9 +208,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function onLoginError(resp) {
-        alert('error!');
-        //how to handle errors?
-        //HandleErrors.onError(resp.data, $scope.loginForm);
+        HandleErrors.onError(resp.data, scope.form);
       }
     },
     template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg"><i class="common-share-facebook"></i>{{btnText}}</a>'
