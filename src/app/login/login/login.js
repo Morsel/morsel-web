@@ -44,7 +44,7 @@ angular.module( 'Morsel.login.login', [])
     }
 
     function onError(resp) {
-      HandleErrors.onError(resp, $scope.loginForm);
+      HandleErrors.onError(resp.data, $scope.loginForm);
     }
   };
 });

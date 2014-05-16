@@ -58,7 +58,7 @@ angular.module( 'Morsel.public.editProfile', [])
   }
 
   function onError(resp) {
-    HandleErrors.onError(resp, $scope.editProfileForm);
+    HandleErrors.onError(resp.data, $scope.editProfileForm);
   }
 
   ApiUsers.getMyData().then(function(userResp) {

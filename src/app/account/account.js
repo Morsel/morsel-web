@@ -54,8 +54,8 @@ angular.module( 'Morsel.account', [
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  //if we don't recognize the URL, send them to the login page for now
-  $urlRouterProvider.otherwise( '/account/login' );
+  //if we don't recognize the URL, send them to the edit profile page for now
+  $urlRouterProvider.otherwise( '/account/edit-profile' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);

@@ -48,7 +48,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           }
         }, {
           //grab this stuff from fb
-          scope: 'public_profile,email,user_friends'
+          scope: 'public_profile,email'
         });
       };
 
@@ -140,7 +140,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
           $scope.combineAccounts = function() {
             AfterLogin.addCallbacks(function() {
-              ApiUsers.updateUser(scopeWithData.userData.registered.id, {
+              ApiUsers.createUserAuthentication({
                 'authentication': {
                   'provider': 'facebook',
                   'token': loginResponse.authResponse.accessToken,
@@ -151,9 +151,11 @@ angular.module( 'Morsel.common.connectFacebook', [] )
               }).then(function() {
                 //send them home (trigger page refresh to switch apps)
                 $window.location.href = '/';
+              }, function(resp) {
+                console.log(resp);
               });
             });
-            $location.path('/account/login');
+            $location.path('/login');
           };
 
           $rootScope.$on('$locationChangeSuccess', function () {
@@ -205,7 +207,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       function onLoginError(resp) {
         alert('error!');
         //how to handle errors?
-        //HandleErrors.onError(resp, $scope.loginForm);
+        //HandleErrors.onError(resp.data, $scope.loginForm);
       }
     },
     template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook"><i class="common-share-facebook"></i>Connect with Facebook</a>'

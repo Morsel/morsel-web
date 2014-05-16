@@ -162,7 +162,7 @@ angular.module( 'Morsel.common.auth', [
       if(response.data && response.data.errors && response.data.errors.api) {
         //response returned an api issue
         //report and error back to user
-        Auth.showApiError(response.status,errors);
+        Auth.showApiError(response.status, response.status.errors);
       }
     });
   };
