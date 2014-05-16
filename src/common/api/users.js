@@ -249,5 +249,17 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.forgotPassword = function(email) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', 0, true).post('forgot_password', email).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Users;
 });

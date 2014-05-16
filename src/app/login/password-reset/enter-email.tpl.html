@@ -1,0 +1,15 @@
+<div class="container container-max-xs morsel-bg container-shadow container-margin-bottom">
+  <h1>Password Reset</h1>
+  <div ng-show="alertMessage" class="alert alert-{{alertType}}">
+    <p ng-bind="alertMessage"></p>
+  </div>
+  <p>Enter the email of your Morsel account</p>
+  <form name="emailPasswordForm" method="post" ng-submit="submitEmail()" class="padded-form" novalidate>
+    <div ng-hide="alertType==='success'" mrsl-base-errors mrsl-val-form="emailPasswordForm"></div>
+    <div>
+      <input mrsl-validated-element mrsl-val-form="emailPasswordForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="emailPasswordModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="true" />
+
+      <button mrsl-submit-btn mrsl-submit-btn-form="emailPasswordForm" mrsl-submit-btn-copy="Submit" mrsl-submit-btn-block="true" mrsl-submit-btn-tooltip-placement="top"></button>
+    </div>
+  </form>
+</div>
