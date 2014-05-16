@@ -44,6 +44,10 @@ angular.module( 'Morsel.login.login', [])
     }
 
     function onError(resp) {
+      //wipe out last password
+      $scope.loginModel.password = '';
+      //set pristine so error handling doesn't trigger immediately
+      $scope.loginForm.password.$setPristine();
       HandleErrors.onError(resp.data, $scope.loginForm);
     }
   };
