@@ -63,6 +63,14 @@ angular.module( 'Morsel.login.passwordReset', [])
   //model to store our password data
   $scope.newPasswordModel = {};
 
+  //custom validation configs for password verification
+  $scope.customMatchVer = {
+    'match': {
+      'matches': 'password',
+      'message': 'Passwords don\'t match'
+    }
+  };
+  
   //called on submit of password reset form
   $scope.submitNewPassword = function() {
     var passwordData = {
