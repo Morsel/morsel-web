@@ -194,7 +194,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             }
           };
 
-        Auth.login(authenticationData, onLoginSuccess, onLoginError);
+        Auth.login(authenticationData).then(onLoginSuccess, onLoginError);
       }
 
       function onLoginSuccess(resp) {

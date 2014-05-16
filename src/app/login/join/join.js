@@ -161,7 +161,7 @@ angular.module( 'Morsel.login.join', [])
     //check if everything is valid
     if($scope.basicInfoForm.$valid) {
       //call our join to take care of the heavy lifting
-      Auth.join(uploadData, onSuccess, onError);
+      Auth.join(uploadData).then(onSuccess, onError);
     }
   };
 

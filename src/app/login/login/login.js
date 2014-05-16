@@ -30,7 +30,7 @@ angular.module( 'Morsel.login.login', [])
 
     //check if everything is valid
     if($scope.loginForm.$valid) {
-      Auth.login(userData, onSuccess, onError);
+      Auth.login(userData).then(onSuccess, onError);
     }
     
     function onSuccess(resp) {
