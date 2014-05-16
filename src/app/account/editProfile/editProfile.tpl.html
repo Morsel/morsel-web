@@ -1,3 +1,25 @@
 <div>
-  <h1>{{testing}}</h1>
+  <h1>Edit Profile</h1>
+  <div ng-show="alertMessage" class="alert alert-{{alertType}}">
+    <p ng-bind="alertMessage"></p>
+  </div>
+  <form name="basicInfoForm" method="post" ng-submit="updateBasicInfo()" class="padded-form" novalidate>
+    <h3>Basic Info</h3>
+    <div mrsl-base-errors mrsl-val-form="basicInfoForm"></div>
+    <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="First Name" mrsl-val-type="text" mrsl-val-name="first_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="John" mrsl-val-required="false" mrsl-existing-val="user.first_name" />{{user.first_name}}
+
+    <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Last Name" mrsl-val-type="text" mrsl-val-name="last_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="Smith" mrsl-val-required="false" />
+
+    <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="false" />
+
+    <textarea mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Bio" mrsl-val-name="bio" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="Tell us a little about yourself" mrsl-val-required="false" mrsl-val-tag-type="textarea"></textarea>
+
+    <button mrsl-submit-btn mrsl-submit-btn-form="basicInfoForm" mrsl-submit-btn-copy="Update Basic Info"></button>
+  </form>
+  <h3>Cuisines</h3>
+  <ul mrsl-checklist mrsl-checklist-vals="cuisineList" mrsl-checklist-change="toggleTag"></ul>
+
+  <h3>Specialties</h3>
+  <ul mrsl-checklist mrsl-checklist-vals="specialtyList" mrsl-checklist-change="toggleTag"></ul>
+
 </div>

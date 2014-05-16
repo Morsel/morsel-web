@@ -1,7 +1,7 @@
 <div class="form-group" ng-class="{'has-error': (inForm[inputName].$dirty && hasClientError()) || inForm[inputName].$error.server}">
   <label class="control-label" ng-class="{'required':required === 'true'}" for="{{inputName}}">{{enName}}</label>
 
-  <div ng-repeat="checkboxVal in multipleVals" class="radio">
+  <div ng-repeat="checkboxVal in multipleVals" class="checkbox">
     <label>
       <input type="checkbox" ng-change="removeServerError()" name="{{inputName}}" ng-attr="customValAttrs" ng-model="formModel[inputName]" value="{{checkboxVal.value}}" ng-required="{{required}}">
       {{checkboxVal.name}}

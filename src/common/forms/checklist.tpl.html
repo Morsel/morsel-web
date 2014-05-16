@@ -1,5 +1,8 @@
-<ul>
-  <li>
-    <label ng-repeat="checklistItem in checklist">{{checklistItem.name}}<input class="form-control"  type="checkbox"/></label>
-  </li>
-</ul>
+<div class="form-group checklist">
+  <div ng-repeat="item in checklist" class="checkbox">
+    <label>
+      <input type="checkbox" ng-change="changeFunc(item)" ng-model="item.isChecked">
+      {{item.name}}
+    </label>
+  </div>
+</div>

@@ -16,6 +16,18 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     return deferred.promise;
   };
 
+  Keywords.getAllSpecialties = function() {
+    var deferred = $q.defer();
+    
+    Restangular.one('specialties').get().then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   Keywords.getCuisineUsers = function(cuisineId) {
     var deferred = $q.defer();
 
@@ -32,6 +44,34 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     var deferred = $q.defer();
 
     Restangular.one('specialties', specialtyId).one('users').get().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Keywords.createUserTag = function(userId, keywordId) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', userId).post('tags', {
+      tag: {
+        keyword_id: keywordId
+      }
+    }).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Keywords.deleteUserTag = function(userId, tagId) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', userId).one('tags', tagId).remove().then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

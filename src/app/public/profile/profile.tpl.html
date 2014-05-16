@@ -1,6 +1,6 @@
 <div class="profile" ng-style="viewOptions.minimumMainHeight()">
   <div class="container">
-    <a href="/{{user.username}}/edit" ng-show="canEdit" class="edit-profile-btn"><i class="common-settings"></i></a>
+    <a href="/account/edit-profile" ng-show="canEdit" class="edit-profile-btn" target="_self"><i class="common-settings"></i></a>
     <ul rn-carousel rn-carousel-indicator rn-carousel-off="{{largeBreakpoint || !isChef}}" class="user-container">
       <li>
         <div class="user-info col-sm-6">
@@ -44,7 +44,7 @@
           <ul>
             <li ng-show="cuisines.length === 0">
               <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
-              <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</a>
+              <a ng-show="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
             </li>
             <li ng-repeat="cuisine in cuisines" >
               <a mrsl-cuisine-users mrsl-cuisine="cuisine"></a>{{$last ? '':','}}
@@ -56,7 +56,7 @@
           <ul>
             <li ng-show="specialties.length === 0">
               <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
-              <a ng-show="canEdit" href="/{{user.username}}/edit">Add &#43;</a>
+              <a ng-show="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
             </li>
             <li ng-repeat="specialty in specialties">
               <a mrsl-specialty-users mrsl-specialty="specialty"></a>{{$last ? '':','}}

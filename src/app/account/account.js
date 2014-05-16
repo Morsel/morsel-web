@@ -7,6 +7,7 @@ angular.module( 'Morsel.account', [
   'ui.route',
   //filters
   //API
+  'Morsel.common.apiKeywords',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
   //templates
@@ -15,6 +16,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.afterLogin',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
+  'Morsel.common.checklist',
   'Morsel.common.connectFacebook',
   'Morsel.common.formNameFix',
   'Morsel.common.handleErrors',
@@ -24,6 +26,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.account.body',
   'Morsel.account.editProfile'
 ])
 
@@ -54,7 +57,7 @@ angular.module( 'Morsel.account', [
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  //if we don't recognize the URL, send them to the edit profile page for now
+  //if we don't recognize the URL, send them to edit their profile for now
   $urlRouterProvider.otherwise( '/account/edit-profile' );
 
   //Restangular configuration
@@ -157,4 +160,3 @@ angular.module( 'Morsel.account', [
     }
   };
 });
-
