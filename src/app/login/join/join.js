@@ -174,7 +174,7 @@ angular.module( 'Morsel.login.join', [])
   }
 
   function onError(resp) {
-    HandleErrors.onError(resp, $scope.basicInfoForm);
+    HandleErrors.onError(resp.data, $scope.basicInfoForm);
   }
 
   function setRemotePhotoUrl(url) {
@@ -228,6 +228,6 @@ angular.module( 'Morsel.login.join', [])
   }
 
   function onError(resp) {
-    HandleErrors.onError(resp, $scope.additionalInfoForm);
+    HandleErrors.onError(resp.data, $scope.additionalInfoForm);
   }
 });

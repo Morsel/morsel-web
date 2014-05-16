@@ -34,8 +34,8 @@ angular.module( 'Morsel.common.cuisineUsers', [] )
         });
 
         if(!$scope.users) {
-          ApiKeywords.getCuisineUsers(cuisine.keyword.id).then(function(userData){
-            $scope.users = userData;
+          ApiKeywords.getCuisineUsers(cuisine.keyword.id).then(function(userResp){
+            $scope.users = userResp.data;
           });
         }
       };

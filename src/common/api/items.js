@@ -32,7 +32,7 @@ angular.module( 'Morsel.common.apiItems', [] )
   Items.getComments = function(itemId) {
     var deferred = $q.defer();
 
-    Restangular.one('items', itemId).getList('comments').then(function(resp){
+    Restangular.one('items', itemId).one('comments', 1, true).get().then(function(resp){
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));
@@ -60,7 +60,7 @@ angular.module( 'Morsel.common.apiItems', [] )
   Items.getLikers = function(itemId) {
     var deferred = $q.defer();
 
-    Restangular.one('items', itemId).getList('likers').then(function(resp){
+    Restangular.one('items', itemId).one('likers', 1, true).get().then(function(resp){
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));

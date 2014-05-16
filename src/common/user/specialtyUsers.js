@@ -34,8 +34,8 @@ angular.module( 'Morsel.common.specialtyUsers', [] )
         });
 
         if(!$scope.users) {
-          ApiKeywords.getSpecialtyUsers(specialty.keyword.id).then(function(userData){
-            $scope.users = userData;
+          ApiKeywords.getSpecialtyUsers(specialty.keyword.id).then(function(userResp){
+            $scope.users = userResp.data;
           });
         }
       };

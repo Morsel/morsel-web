@@ -13,7 +13,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       if(!window.fbAsyncInit) {
         window.fbAsyncInit = function() {
           FB.init({
-            appId      : '1402286360015732',
+            appId      : window.MorselConfig.facebookAppId,
             cookie     : true,  // enable cookies to allow the server to access 
                                 // the session
             xfbml      : false,  // parse social plugins on this page
@@ -48,7 +48,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           }
         }, {
           //grab this stuff from fb
-          scope: 'public_profile,email,user_friends'
+          scope: 'public_profile,email'
         });
       };
 
@@ -56,7 +56,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       function checkAuthentication() {
         ApiUsers.checkAuthentication('facebook', loginResponse.authResponse.userID).then(function(resp){
           //if we already have them on file
-          if(resp) {
+          if(resp.data) {
             //just sign them in
             login();
           } else {
@@ -140,7 +140,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
           $scope.combineAccounts = function() {
             AfterLogin.addCallbacks(function() {
-              ApiUsers.updateUser(scopeWithData.userData.registered.id, {
+              ApiUsers.createUserAuthentication({
                 'authentication': {
                   'provider': 'facebook',
                   'token': loginResponse.authResponse.accessToken,
@@ -151,9 +151,11 @@ angular.module( 'Morsel.common.connectFacebook', [] )
               }).then(function() {
                 //send them home (trigger page refresh to switch apps)
                 $window.location.href = '/';
+              }, function(resp) {
+                console.log(resp);
               });
             });
-            $location.path('/account/login');
+            $location.path('/login');
           };
 
           $rootScope.$on('$locationChangeSuccess', function () {
@@ -182,7 +184,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
        var authenticationData = {
             'authentication': {
               'provider': 'facebook',
-              'token': loginResponse.authResponse.accessToken
+              'token': loginResponse.authResponse.accessToken,
+              //tokens coming from the JS SDK are short-lived
+              'short_lived': true,
+              'uid': loginResponse.authResponse.userID
             }
           };
 
@@ -202,7 +207,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       function onLoginError(resp) {
         alert('error!');
         //how to handle errors?
-        //HandleErrors.onError(resp, $scope.loginForm);
+        //HandleErrors.onError(resp.data, $scope.loginForm);
       }
     },
     template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook"><i class="common-share-facebook"></i>Connect with Facebook</a>'

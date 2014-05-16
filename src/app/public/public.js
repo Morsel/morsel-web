@@ -81,19 +81,6 @@ angular.module( 'Morsel.public', [
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
-  RestangularProvider.setResponseExtractor(function(response, operation, what, url) {
-    // This is a get for a list
-    var newResponse;
-    if (operation === "get") {
-      // Here we're returning our data object, with one special metadata property with extra information
-      newResponse = response.data || {};
-      newResponse.metadata = response.meta;
-    } else {
-      // This is an element
-      newResponse = response.data;
-    }
-    return newResponse;
-  });
 })
 
 .run( function run ($window) {

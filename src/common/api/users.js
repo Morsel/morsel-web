@@ -90,7 +90,7 @@ angular.module( 'Morsel.common.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', username).one('morsels').get().then(function(resp) {
-      var morselsData = Restangular.stripRestangular(resp);
+      var morselsData = Restangular.stripRestangular(resp).data;
       //correctly sort morsels by published_at before we even deal with them
       morselsData = _.sortBy(morselsData, 'published_at');
       deferred.resolve(morselsData);
@@ -217,9 +217,9 @@ angular.module( 'Morsel.common.apiUsers', [] )
         };
 
     Restangular.one('authentications', 0, true).customGET('check', params).then(function(resp) {
-      deferred.resolve(resp);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.reject(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -229,6 +229,18 @@ angular.module( 'Morsel.common.apiUsers', [] )
     var deferred = $q.defer();
 
     RestangularUsers.customGET('validate_email', {email: email}).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.createUserAuthentication = function(authenticationData) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', 0, true).post('authentications', authenticationData).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

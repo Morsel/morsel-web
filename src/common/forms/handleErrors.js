@@ -9,16 +9,16 @@ angular.module( 'Morsel.common.handleErrors', [] )
         serverErrors,
         i;
 
-    if(resp.data.errors) {
+    if(resp.errors) {
       //go through each type of error
-      for (fieldName in resp.data.errors) {
+      for (fieldName in resp.errors) {
         if(form[fieldName]) {
           //must be associated with a specific input
 
           //we need an english phrase for the field name
           fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
           //get the errors for this field
-          serverErrors = resp.data.errors[fieldName];
+          serverErrors = resp.errors[fieldName];
 
           //make good english
           for(i=0; i<serverErrors.length; i++) {
@@ -32,7 +32,7 @@ angular.module( 'Morsel.common.handleErrors', [] )
         } else {
           //this is either a generic form error, an API error, or catching mismatched input
           //get the errors for this field
-          serverErrors = resp.data.errors[fieldName];
+          serverErrors = resp.errors[fieldName];
 
           //capitalize first letter
           for(i=0; i<serverErrors.length; i++) {

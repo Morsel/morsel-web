@@ -46,8 +46,8 @@ angular.module( 'Morsel.public.morselDetail', [])
       $location.path('/'+$stateParams.username);
     });
 
-    ApiUsers.getUser(username).then(function(userData){
-      $scope.owner = userData;
+    ApiUsers.getUser(username).then(function(userResp){
+      $scope.owner = userResp.data;
     }, function() {
       //if there's an error retrieving user data (bad username?), go to home page for now
       $location.path('/');

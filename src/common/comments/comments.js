@@ -49,20 +49,20 @@ angular.module( 'Morsel.common.comments', [] )
 
         //fetch comments for the item
         function getComments() {
-          ApiItems.getComments($scope.item.id).then(function(commentData){
-            $scope.item.comments = commentData;
+          ApiItems.getComments($scope.item.id).then(function(commentResp){
+            $scope.item.comments = commentResp.data;
           });
         }
 
         function postComment() {
           var deferred = $q.defer();
 
-          ApiItems.postComment($scope.item.id, $scope.comment.description).then(function(commentData){
+          ApiItems.postComment($scope.item.id, $scope.comment.description).then(function(commentResp){
 
             if($scope.item.comments) {
-              $scope.item.comments.unshift(commentData);
+              $scope.item.comments.unshift(commentResp.data);
             } else {
-              $scope.item.comments = commentData;
+              $scope.item.comments = commentResp.data;
             }
             //clear comment textarea
             $scope.comment.description = '';
