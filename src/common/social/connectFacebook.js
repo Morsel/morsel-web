@@ -4,7 +4,9 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 .directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window){
   return {
     restrict: 'A',
-    scope: false,
+    scope: {
+      btnText: '@mrslConnectFacebookText'
+    },
     replace: true,
     link: function(scope, element, attrs) {
       var loginResponse,
@@ -210,6 +212,6 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         //HandleErrors.onError(resp.data, $scope.loginForm);
       }
     },
-    template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook"><i class="common-share-facebook"></i>Connect with Facebook</a>'
+    template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg"><i class="common-share-facebook"></i>{{btnText}}</a>'
   };
 });

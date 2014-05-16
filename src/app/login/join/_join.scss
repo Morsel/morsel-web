@@ -1,55 +1,36 @@
 .join-page {
-  padding-bottom: 20px;
-
-  h1 {
-    font-size: 40px;
-    text-align: center;
-    color: $morsel-dark;
+  .have-an-account {
+    margin-top: 10px;
   }
-}
 
-.join-landing {
-  text-align: center;
-
-  .btn {
-    display: block;
-    margin-bottom: 10px;
-    text-align: left;
+  .industry-btns {
+    .radio {
+      width: 33%;
+      padding: 0 5px;
+    }
   }
-}
 
-.have-an-account {
-  margin-top: 10px;
-}
-
-.industry-btns {
-  .radio {
-    width: 33%;
-    padding: 0 5px;
+  .join-bg {
+    display: none;
   }
-}
-
-.join-bg {
-  display: none;
 }
 
 @media (min-width: $screen-md-min) {
   .join-page {
-    background-image: url(images/bg/join.jpg);
-    background-position: right center;
-    background-repeat: no-repeat;
+    background: url(images/bg/join.jpg) right top no-repeat;
     margin-left: 0;
     margin-right: 0;
     width: auto;
-  }
+    min-height: 600px;
 
-  .join-bg {
-    display: block;
-    position: absolute;
-    bottom: 30px;
-    right: 30px;
-    color: white;
-    font-weight: 400;
-    @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+    .join-bg {
+      display: block;
+      position: absolute;
+      bottom: 30px;
+      right: 30px;
+      color: white;
+      font-weight: 400;
+      @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+    }
   }
 }

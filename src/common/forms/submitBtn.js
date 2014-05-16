@@ -6,7 +6,9 @@ angular.module('Morsel.common.submitBtn', [])
     replace: true,
     scope: {
       form: '=mrslSubmitBtnForm',
-      copy: '@mrslSubmitBtnCopy'
+      copy: '@mrslSubmitBtnCopy',
+      btnBlock: '@mrslSubmitBtnBlock',
+      tooltipPlacement: '@mrslSubmitBtnTooltipPlacement'
     },
     link: function(scope) {
     },

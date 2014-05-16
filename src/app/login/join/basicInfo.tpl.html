@@ -1,6 +1,11 @@
 <form name="basicInfoForm" method="post" ng-submit="basicInfoSubmit()" class="padded-form" novalidate>
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-10 col-md-offset-1">
+      <div mrsl-base-errors mrsl-val-form="basicInfoForm"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-5 col-md-4 col-md-offset-1">
       <div class="form-group">
         <div class="avatar-add img-circle" tooltip-placement="bottom" tooltip="Click to select or drag and drop a photo from your computer" tooltip-trigger="{{{true:'mouseenter', false:'never'}[dropSupported]}}">
           <div ng-show="dropSupported" class="drop-box " ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true"></div>
@@ -14,12 +19,14 @@
         <label class="control-label center-block text-center" for="photo">Profile Photo</label>
       </div>
     </div>
-    <div class="col-md-7">
-      <div mrsl-base-errors mrsl-val-form="basicInfoForm"></div>
+    <div class="col-sm-7 col-md-6">
       <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="First Name" mrsl-val-type="text" mrsl-val-name="first_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="John" mrsl-val-required="true" />
 
       <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Last Name" mrsl-val-type="text" mrsl-val-name="last_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="Smith" mrsl-val-required="true" />
-
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
       <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Username" mrsl-val-type="text" mrsl-val-name="username" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="johnnyboy" mrsl-val-required="true" mrsl-val-help-text="Must be alphanumeric and not include spaces" />
 
       <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="true" />
@@ -28,7 +35,7 @@
 
       <input ng-if="usingEmail" mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Repeat Password" mrsl-val-type="password" mrsl-val-name="verification" mrsl-val-form-model="basicInfoModel" mrsl-val-custom="customMatchVer" mrsl-val-required="true" />
 
-      <button mrsl-submit-btn mrsl-submit-btn-form="basicInfoForm" mrsl-submit-btn-copy="Sign Up"></button>
+      <button mrsl-submit-btn mrsl-submit-btn-form="basicInfoForm" mrsl-submit-btn-copy="Sign Up" mrsl-submit-btn-block="true"  mrsl-submit-btn-tooltip-placement="top"></button>
     </div>
   </div>
   <p class="have-an-account">Have an account already? <a ng-click="goTo('login')">Login here.</a></p>
