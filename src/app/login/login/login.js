@@ -23,7 +23,7 @@ angular.module( 'Morsel.login.login', [])
   $scope.login = function() {
     var userData = {
       'user': {
-        'email': $scope.loginModel.email,
+        'login': $scope.loginModel.login,
         'password': $scope.loginModel.password
       }
     };
