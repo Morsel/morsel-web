@@ -132,6 +132,16 @@ app.get('/join', function(req, res){
   renderLoginPage(res);
 });
 
+//password reset
+app.get('/password-reset', function(req, res){
+  renderLoginPage(res);
+});
+
+//password reset
+app.get('/password-reset/new', function(req, res){
+  renderLoginPage(res);
+});
+
 //account pages
 app.get('/account*', function(req, res){
   res.render('account', {

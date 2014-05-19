@@ -18,6 +18,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.connectFacebook',
   'Morsel.common.formNameFix',
   'Morsel.common.handleErrors',
+  'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
   'Morsel.common.photoHelpers',
   'Morsel.common.submitBtn',
@@ -26,7 +27,8 @@ angular.module( 'Morsel.login', [
   //app
   'Morsel.login.join',
   'Morsel.login.login',
-  'Morsel.login.logout'
+  'Morsel.login.logout',
+  'Morsel.login.passwordReset'
 ])
 
 //define some constants for the app
@@ -126,6 +128,12 @@ angular.module( 'Morsel.login', [
       $window._gaq.push(['_trackPageview', $location.path()]);
     }
   });
+
+  //to store user data as they're signing up/logging in
+  $scope.userData = {
+    social: {},
+    registered: {}
+  };
 
   //refresh user data
   function updateUserData() {

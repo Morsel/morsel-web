@@ -1,5 +1,5 @@
 <div class="form-group" ng-class="{'has-error': (inForm[inputName].$dirty && hasClientError()) || inForm[inputName].$error.server}">
-  <label class="control-label" ng-class="{'required':required === 'true'}" for="{{inputName}}">{{enName}}</label>
+  <label ng-show="enName" class="control-label" ng-class="{'required':required === 'true'}" for="{{inputName}}">{{enName}}</label>
 
   <div ng-repeat="checkboxVal in multipleVals" class="checkbox">
     <label>

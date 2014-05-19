@@ -95,25 +95,33 @@ angular.module( 'Morsel.common.auth', [
   //public stuff
 
   //create a new user
-  Auth.join = function(uploadUserData, onSuccess, onError) {
+  Auth.join = function(uploadUserData) {
+    var deferred = $q.defer();
+
     ApiUsers.newUser(uploadUserData).then(function(loggedInUserResp) {
       Auth._updateUser(loggedInUserResp.data);
-      onSuccess(loggedInUserResp.data);
+      deferred.resolve(loggedInUserResp.data);
     }, function(resp){
       Auth._clearUser();
-      onError(resp);
+      deferred.reject(resp);
     });
+
+    return deferred.promise;
   };
 
   //log in an existing user
-  Auth.login = function(userData, success, error) {
+  Auth.login = function(userData) {
+    var deferred = $q.defer();
+
     ApiUsers.loginUser(userData).then(function(loggedInUserResp) {
       Auth._updateUser(loggedInUserResp.data);
-      success();
+      deferred.resolve(loggedInUserResp.data);
     }, function(resp){
       Auth._clearUser();
-      error(resp);
+      deferred.reject(resp);
     });
+
+    return deferred.promise;
   };
 
   //log out a user

@@ -219,6 +219,7 @@ module.exports = {
         'src/common/forms/submitBtn.js',
         'src/common/forms/validatedElement.js',
         'src/common/images/photoHelpers.js',
+        'src/common/images/upload.js',
         'src/common/social/connectFacebook.js',
         'src/common/user/userImage.js'
       ],
@@ -229,6 +230,7 @@ module.exports = {
         'src/common/forms/validatedInput.tpl.html',
         'src/common/forms/validatedRadio.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
+        'src/common/images/upload.tpl.html',
         'src/common/user/duplicateEmailOverlay.tpl.html'
       ]
     },

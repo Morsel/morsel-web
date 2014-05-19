@@ -4,7 +4,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 .directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window){
   return {
     restrict: 'A',
-    scope: false,
+    scope: {
+      btnText: '@mrslConnectFacebookText',
+      form: '=mrslConnectFacebookForm'
+    },
     replace: true,
     link: function(scope, element, attrs) {
       var loginResponse,
@@ -75,9 +78,9 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         //once all promises are resolved with data from fb, send to main form
         $q.all([fbUserPromise, fbPicturePromise]).then(function(){
           //where we pulled the data
-          scope.userData.social.type = 'facebook';
+          scope.$parent.userData.social.type = 'facebook';
           //social token
-          scope.userData.social.token = loginResponse.authResponse.accessToken;
+          scope.$parent.userData.social.token = loginResponse.authResponse.accessToken;
 
           //send to main form
           $state.go('join.basicInfo');
@@ -90,7 +93,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         FB.api('/me', function(myInfo) {
           //store our basic user info so we can prepopulate form
           //use extend so we don't overwrite the picture
-          _.extend(scope.userData.social, myInfo);
+          _.extend(scope.$parent.userData.social, myInfo);
 
           //check to see if this user's email is already in use on morsel
           ApiUsers.validateEmail(myInfo.email).then(function(resp){
@@ -103,7 +106,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
               existingAccountModal();
             } else {
               //the email wasn't valid - just scrap it, move to sign up
-              scope.userData.social.email = '';
+              scope.$parent.userData.social.email = '';
               userInfoDeferred.resolve();
             }
           });
@@ -120,7 +123,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           'height': '144'
         }, function(myPicture) {
           //store our picture info so we can prepopulate form
-          scope.userData.social.picture = myPicture;
+          scope.$parent.userData.social.picture = myPicture;
           deferred.resolve();
         });
 
@@ -129,11 +132,11 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
       function existingAccountModal() {
         var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, scopeWithData, userInfoDeferred) {
-          $scope.email = scopeWithData.userData.social.email;
+          $scope.email = scopeWithData.$parent.userData.social.email;
 
           //if user cancels, allow fb info to go through, but strip out email
           $scope.cancel = function () {
-            scopeWithData.userData.social.email = '';
+            scopeWithData.$parent.userData.social.email = '';
             $modalInstance.dismiss('cancel');
             userInfoDeferred.resolve();
           };
@@ -146,7 +149,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
                   'token': loginResponse.authResponse.accessToken,
                   //tokens coming from the JS SDK are short-lived
                   'short_lived': true,
-                  'uid': scopeWithData.userData.social.id
+                  'uid': scopeWithData.$parent.userData.social.id
                 }
               }).then(function() {
                 //send them home (trigger page refresh to switch apps)
@@ -191,7 +194,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             }
           };
 
-        Auth.login(authenticationData, onLoginSuccess, onLoginError);
+        Auth.login(authenticationData).then(onLoginSuccess, onLoginError);
       }
 
       function onLoginSuccess(resp) {
@@ -205,11 +208,9 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function onLoginError(resp) {
-        alert('error!');
-        //how to handle errors?
-        //HandleErrors.onError(resp.data, $scope.loginForm);
+        HandleErrors.onError(resp.data, scope.form);
       }
     },
-    template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook"><i class="common-share-facebook"></i>Connect with Facebook</a>'
+    template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg"><i class="common-share-facebook"></i>{{btnText}}</a>'
   };
 });

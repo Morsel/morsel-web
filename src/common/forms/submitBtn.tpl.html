@@ -1,5 +1,5 @@
-<div class="form-group">
-  <span class="btn-submit-wrap" tooltip-placement="left" tooltip="{{form.$error.required ? 'Please complete all required fields' : 'Please correct errors in indicated fields'}}" tooltip-trigger="{{{true:'mouseenter', false:'never'}[form.$invalid]}}">
-    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">{{copy}}</button>
+<div class="form-group clearfix">
+  <span class="btn-submit-wrap" ng-class="{'btn-submit-block': btnBlock}" tooltip-placement="{{tooltipPlacement === 'top' ? 'top':'left'}}" tooltip="{{form.$error.required ? 'Please complete all required fields' : 'Please correct errors in indicated fields'}}" tooltip-trigger="{{{true:'mouseenter', false:'never'}[form.$invalid]}}">
+    <button type="submit" class="btn btn-primary" ng-class="{'btn-lg': btnBlock}" ng-disabled="form.$invalid">{{copy}}</button>
   </span>
 </div>

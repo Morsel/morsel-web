@@ -6,6 +6,16 @@
 .btn-submit-wrap {
   float: right;
   display: inline-block;
+
+  &.btn-submit-block {
+    float: none;
+    display: block;
+
+    .btn {
+      width: 100%;
+      float: none;
+    }
+  }
 }
 
 .label-btns {
@@ -114,13 +124,30 @@ img {
 }
 
 form {
-  .avatar-add {
+  .image-add {
     display: block;
-    background-image: url(images/utility/avatars/avatar_144x144.jpg);
-    height: $profile-pic-l;
-    width: $profile-pic-l;
-    margin: 0 auto 10px;
-    position: relative;
+
+    .img-circle {
+      display: block;
+      height: $profile-pic-l;
+      width: $profile-pic-l;
+      background-color: $morsel-light;
+      margin: 0 auto 10px;
+      position: relative;
+
+      &:hover {
+        .plus-sign {
+          @include opacity(.9);
+          color: $morsel-primary;
+        }
+      }
+    }
+
+    &.avatar-add {
+      .img-circle {
+        background-image: url(images/utility/avatars/avatar_144x144.jpg);
+      }
+    }
 
     .plus-sign {
       line-height: $profile-pic-l;
@@ -130,13 +157,6 @@ form {
       display: block;
       @include transition(all .2s ease-in-out);
       @include opacity(.7);
-    }
-
-    &:hover {
-      .plus-sign {
-        @include opacity(.9);
-        color: $morsel-primary;
-      }
     }
 
     input[type="file"] {
@@ -151,7 +171,7 @@ form {
       @include opacity(0);
     }
 
-    .avatar-preview {
+    .image-preview {
       position: absolute;
       top: 0;
       right: 0;
@@ -307,7 +327,11 @@ form {
   }
 }
 
-@media (min-width: $screen-sm) {
+.container-margin-bottom {
+  margin-bottom: 25px;
+}
+
+@media (min-width: $screen-sm-min) {
   .activity-feed {
     li {
       .profile-pic-link {
@@ -320,8 +344,8 @@ form {
 
 @media (min-width: $screen-xs-min) {
   form {
-    .avatar-add {
-      &:hover {
+    .image-add {
+      .img-circle:hover {
         .drop-box {
           border: 2px dashed $morsel-primary;
         }

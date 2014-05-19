@@ -1,12 +1,31 @@
 .login {
+  text-align: center;
+
   .page-wrapper {
     background: $morsel-background;
   }
 
   .main-view {
-    .container {
-      padding-top: 40px;
+    background: $morsel-background url(images/bg/tile.png) right top repeat;
+
+    h1 {
+      font-size: 30px;
+      color: $morsel-dark;
     }
+
+    > .container {
+      padding-top: 40px;
+      padding-bottom: 20px;
+    }
+  }
+
+  .form-group {
+    text-align: left;
+  }
+
+  .btn-social {
+    display: block;
+    margin-bottom: 10px;
   }
 
   .login-header {
@@ -26,6 +45,16 @@
 
     nav {
       display: block;
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .login {
+    .main-view {
+      h1 {
+        font-size: 40px;
+      }
     }
   }
 }

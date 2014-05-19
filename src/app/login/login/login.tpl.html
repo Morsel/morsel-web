@@ -1,14 +1,21 @@
-<div class="container morsel-bg container-shadow container-max-xs">
+<div class="container login-page">
+  <h1>Log In to Morsel</h1>
   <form name="loginForm" method="post" ng-submit="login()" class="padded-form" novalidate>
+    <div mrsl-base-errors mrsl-val-form="loginForm"></div>
     <div class="row">
-      <div class="col-md-12">
-        <div mrsl-base-errors mrsl-val-form="loginForm"></div>
-
-        <input mrsl-validated-element mrsl-val-form="loginForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="loginModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="true" />
+      <div class="col-md-5">
+        <input mrsl-validated-element mrsl-val-form="loginForm" mrsl-val-en-name="Email or Username" mrsl-val-type="text" mrsl-val-name="login" mrsl-val-form-model="loginModel" mrsl-val-placeholder="johnsmith@example.com or johnnyboy" mrsl-val-required="true" />
 
         <input mrsl-validated-element mrsl-val-form="loginForm" mrsl-val-en-name="Password" mrsl-val-type="password" mrsl-val-name="password" mrsl-val-form-model="loginModel" mrsl-val-required="true" />
 
-        <button mrsl-submit-btn mrsl-submit-btn-form="loginForm" mrsl-submit-btn-copy="Login"></button>
+        <button mrsl-submit-btn mrsl-submit-btn-form="loginForm" mrsl-submit-btn-copy="Login" mrsl-submit-btn-block="true" mrsl-submit-btn-tooltip-placement="top"></button>
+      </div>
+      <div class="col-md-2 login-or">
+        <p class="h2">Or</p>
+        <hr />
+      </div>
+      <div class="col-md-5">
+        <a mrsl-connect-facebook mrsl-connect-facebook-text="Log in with Facebook" mrsl-connect-facebook-form="loginForm"></a>
       </div>
     </div>
     <p class="have-an-account">Don't have an account? <a ng-click="goTo('join')">Sign up here.</a></p>
