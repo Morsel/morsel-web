@@ -7,15 +7,7 @@
   <div class="row">
     <div class="col-sm-5 col-md-4 col-md-offset-1">
       <div class="form-group">
-        <div class="avatar-add img-circle" tooltip-placement="bottom" tooltip="Click to select or drag and drop a photo from your computer" tooltip-trigger="{{{true:'mouseenter', false:'never'}[dropSupported]}}">
-          <div ng-show="dropSupported" class="drop-box " ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true"></div>
-          <span class="h1 plus-sign">+</span>
-          <input type="file" id="photo" ng-file-select="onFileSelect($files)">
-          <div ng-show="(selectedFile != null) || remotePhotoUrl" class="avatar-preview" >
-            <img class="img-circle" ng-show="photoDataUrl" ng-src="{{photoDataUrl}}">
-            <img class="img-circle" ng-show="remotePhotoUrl" ng-src="{{remotePhotoUrl}}">
-          </div>
-        </div>
+        <div mrsl-image-upload mrsl-image-to-upload="profilePhoto" mrsl-image-remote-url="remotePhotoUrl" class="avatar-add"></div>
         <label class="control-label center-block text-center" for="photo">Profile Photo</label>
       </div>
     </div>

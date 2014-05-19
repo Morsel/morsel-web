@@ -70,6 +70,9 @@ angular.module( 'Morsel.login.join', [])
     'email': $scope.userData.social.email || ''
   };
 
+  //to store the picture a user might upload
+  $scope.profilePhoto = null;
+
   if($scope.userData.social.picture) {
     setRemotePhotoUrl($scope.userData.social.picture.data.url);
   }
@@ -79,42 +82,6 @@ angular.module( 'Morsel.login.join', [])
     'match': {
       'matches': 'password',
       'message': 'Passwords don\'t match'
-    }
-  };
-
-  //file upload stuff (should be moved eventually...)
-  //abort upload
-  $scope.abort = function() {
-    $scope.upload.abort(); 
-    $scope.upload = null;
-  };
-
-  //set our preview
-  function setPreview(fileReader) {
-    fileReader.onload = function(e) {
-      $timeout(function() {
-        $scope.photoDataUrl = e.target.result;
-      });
-    };
-  }
-
-  //user chooses a file
-  $scope.onFileSelect = function($files) {
-    //we only allow one file - pull the first
-    $scope.selectedFile = $files[0];
-    if ($scope.upload) {
-      $scope.upload.abort();
-    }
-    $scope.upload = null;
-    $scope.uploadResult = null;
-    $scope.photoDataUrl = '';
-
-    //if Filereader API is available, use it to preview
-    if (window.FileReader && $scope.selectedFile.type.indexOf('image') > -1) {
-      var fileReader = new FileReader();
-      fileReader.readAsphotoDataUrl($scope.selectedFile);
-      
-      setPreview(fileReader);
     }
   };
 
@@ -131,8 +98,8 @@ angular.module( 'Morsel.login.join', [])
         },
         socialData;
 
-    if(this.selectedFile) {
-      uploadData.user.photo = this.selectedFile;
+    if($scope.profilePhoto) {
+      uploadData.user.photo = $scope.profilePhoto;
     }
 
     if($scope.remotePhotoUrl) {

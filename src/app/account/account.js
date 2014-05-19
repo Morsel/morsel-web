@@ -20,6 +20,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.connectFacebook',
   'Morsel.common.formNameFix',
   'Morsel.common.handleErrors',
+  'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
   'Morsel.common.photoHelpers',
   'Morsel.common.submitBtn',
