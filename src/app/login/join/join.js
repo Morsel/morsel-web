@@ -43,14 +43,11 @@ angular.module( 'Morsel.login.join', [])
 })
 
 .controller( 'JoinCtrl', function JoinCtrl( $scope, $state ) {
-  //for storing data to pass between views
-  $scope.userData = {
-    social: {},
-    registered: {}
-  };
-
-  //immediately send them
-  $state.go('join.landing');
+  //if they're not trying to go to the second step
+  if($state.current.name != 'join.basicInfo') {
+    //send them to the landing page
+    $state.go('join.landing');
+  }
 })
 
 .controller( 'LandingCtrl', function LandingCtrl( $scope, $state ) {

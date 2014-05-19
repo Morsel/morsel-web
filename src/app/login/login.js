@@ -129,6 +129,12 @@ angular.module( 'Morsel.login', [
     }
   });
 
+  //to store user data as they're signing up/logging in
+  $scope.userData = {
+    social: {},
+    registered: {}
+  };
+
   //refresh user data
   function updateUserData() {
     $scope.currentUser = Auth.getCurrentUser();
