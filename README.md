@@ -22,6 +22,8 @@ NODE_ENV:             development
 PRERENDER_TOKEN:      
 SITEURL:              http://dev.eatmorsel.com
 FACEBOOK_APP_ID:      
+TWITTER_CONSUMER_KEY:
+TWITTER_CONSUMER_TOKEN:
 
 When adding new angular app
 ==========

@@ -56,7 +56,7 @@ angular.module( 'Morsel.login.join', [])
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $timeout, HandleErrors, $state ) {
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $timeout, HandleErrors, $state, AfterLogin, ApiUsers, $modal, $rootScope ) {
   //used to differentiate between login types for UI
   $scope.usingEmail = _.isEmpty($scope.userData.social); 
 
@@ -109,7 +109,7 @@ angular.module( 'Morsel.login.join', [])
           'provider': $scope.userData.social.type,
           'token': $scope.userData.social.token,
           //tokens coming from the JS SDK are short-lived
-          'short_lived': true,
+          'short_lived': $scope.userData.social.short_lived || false,
           'uid': $scope.userData.social.id
         }
       };
@@ -138,11 +138,74 @@ angular.module( 'Morsel.login.join', [])
   }
 
   function onError(resp) {
+    //if user tried to authenticate with twitter and failed, check if it was because
+    //their email might have already existed. split this into nested ifs for readability...
+    //if there was an email error
+    if(resp.data && resp.data.errors && resp.data.errors.email) {
+      //if there was only one email error and it was that the email was already taken
+      if((resp.data.errors.email.length === 1) && (resp.data.errors.email[0] === 'has already been taken')) {
+        //user entered an email that already exists. prompt them to merge accounts
+
+        showExistingAccountModal();
+      }
+    }
+
     HandleErrors.onError(resp.data, $scope.basicInfoForm);
   }
 
   function setRemotePhotoUrl(url) {
     $scope.remotePhotoUrl = url;
+  }
+
+  function showExistingAccountModal() {
+    var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, HandleErrors, scopeWithData) {
+      $scope.email = scopeWithData.basicInfoModel.email;
+      $scope.socialType = 'Twitter';
+
+      $scope.cancel = function () {
+        scopeWithData.userData.social.email = '';
+        $modalInstance.dismiss('cancel');
+      };
+
+      $scope.combineAccounts = function() {
+        AfterLogin.addCallbacks(function() {
+          ApiUsers.createUserAuthentication({
+            'authentication': {
+              'provider': 'twitter',
+              'token': scopeWithData.userData.social.token,
+              'secret': scopeWithData.userData.social.secret,
+              //tokens coming from twitter are long-lived
+              'short_lived': false,
+              'uid': scopeWithData.userData.social.id
+            }
+          }).then(function() {
+            //send them home (trigger page refresh to switch apps)
+            $window.location.href = '/';
+          }, function(resp) {
+            HandleErrors.onError(resp.data, scopeWithData.basicInfoForm);
+          });
+        });
+
+        $location.path('/login');
+      };
+
+      $rootScope.$on('$locationChangeSuccess', function () {
+        $modalInstance.dismiss('cancel');
+      });
+    };
+    //we need to implicitly inject dependencies here, otherwise minification will botch them
+    ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'HandleErrors', 'scopeWithData'];
+
+    var modalInstance = $modal.open({
+      templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',
+      controller: ModalInstanceCtrl,
+      resolve: {
+        //pass the outside scope
+        scopeWithData: function () {
+          return $scope;
+        }
+      }
+    });
   }
 })
 

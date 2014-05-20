@@ -66,6 +66,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             //otherwise get some stuff from FB to start sign up process
             gatherSignUpData();
           }
+        }, function(resp) {
+          HandleErrors.onError(resp.data, scope.form);
         });
       }
 
@@ -81,6 +83,9 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           scope.$parent.userData.social.type = 'facebook';
           //social token
           scope.$parent.userData.social.token = loginResponse.authResponse.accessToken;
+
+          //fb sends short-lived tokens
+          scope.$parent.userData.social.short_lived = true;
 
           //send to main form
           $state.go('join.basicInfo');
@@ -131,8 +136,9 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function existingAccountModal() {
-        var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, scopeWithData, userInfoDeferred) {
+        var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, HandleErrors, scopeWithData, userInfoDeferred) {
           $scope.email = scopeWithData.$parent.userData.social.email;
+          $scope.socialType = 'Facebook';
 
           //if user cancels, allow fb info to go through, but strip out email
           $scope.cancel = function () {
@@ -155,7 +161,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
                 //send them home (trigger page refresh to switch apps)
                 $window.location.href = '/';
               }, function(resp) {
-                console.log(resp);
+                HandleErrors.onError(resp.data, scopeWithData.form);
               });
             });
             $location.path('/login');
@@ -166,7 +172,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           });
         };
         //we need to implicitly inject dependencies here, otherwise minification will botch them
-        ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'scopeWithData', 'userInfoDeferred'];
+        ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'HandleErrors', 'scopeWithData', 'userInfoDeferred'];
 
         var modalInstance = $modal.open({
           templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',

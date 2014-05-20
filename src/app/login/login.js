@@ -16,6 +16,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
   'Morsel.common.connectFacebook',
+  'Morsel.common.connectTwitter',
   'Morsel.common.formNameFix',
   'Morsel.common.handleErrors',
   'Morsel.common.imageUpload',
@@ -70,7 +71,7 @@ angular.module( 'Morsel.login', [
   $window.moment.lang('en');
 })
 
-.controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
+.controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel, $state ) {
   var viewOptions = {
     miniHeader : false,
     hideFooter : false
@@ -101,6 +102,10 @@ angular.module( 'Morsel.login', [
   }, function() {
     console.log('Trouble initiating user...');
   });
+
+  if(MorselConfig.twitterData) {
+    $location.path('/join');
+  }
 
   //when a user starts to access a new route
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
