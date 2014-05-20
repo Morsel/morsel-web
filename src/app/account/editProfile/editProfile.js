@@ -37,6 +37,8 @@ angular.module( 'Morsel.account.editProfile', [])
   //model to store our profile data
   $scope.basicInfoModel = accountUser;
 
+  $scope.profilePhoto = null;
+
   //submit our form
   $scope.updateBasicInfo = function() {
     var userData = {
@@ -47,6 +49,10 @@ angular.module( 'Morsel.account.editProfile', [])
         'bio': $scope.basicInfoModel.bio
       }
     };
+
+    if($scope.profilePhoto) {
+      userData.user.photo = $scope.profilePhoto;
+    }
 
     //check if everything is valid
     if($scope.basicInfoForm.$valid) {
