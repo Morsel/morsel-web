@@ -17,6 +17,8 @@ var express = require("express"),
     prerenderDevUrl = 'http://morsel-seo.herokuapp.com/',
     prerenderToken = process.env.PRERENDER_TOKEN || '',
     facebookAppId = process.env.FACEBOOK_APP_ID || '1406459019603393',
+    twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY || '12345';
+    twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET || '12345';
     metabase = '/',
     app = express();
 
@@ -361,7 +363,7 @@ function renderLoginPage(res, twitterData) {
     apiUrl : apiUrl,
     mixpanelToken : mixpanelToken,
     facebookAppId : facebookAppId,
-    twitterData : twitterData || 'null'
+    twitterData : JSON.stringify(twitterData) || 'null'
   });
 }
 
@@ -419,18 +421,13 @@ function updateMetabase(req, done) {
   done();
 }
 
-//twitter auth
-
-var _twitterConsumerKey = 'OWJtM9wGQSSdMctOI0gHkQ';
-var _twitterConsumerSecret = '21EsTV2n8QjBUGZPfYx5JPKnxjicxboV0IHflBZB6w';
-console.log("_twitterConsumerKey: %s and _twitterConsumerSecret %s", _twitterConsumerKey, _twitterConsumerSecret);
- 
+//twitter auth 
 function twitterConsumer() {
   return new oauth.OAuth(
     'https://api.twitter.com/oauth/request_token', 
     'https://api.twitter.com/oauth/access_token', 
-     _twitterConsumerKey, 
-     _twitterConsumerSecret, 
+     twitterConsumerKey, 
+     twitterConsumerSecret, 
      "1.0A", 
      siteURL+'/auth/twitter/callback', 
      "HMAC-SHA1"

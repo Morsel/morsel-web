@@ -136,6 +136,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       function existingAccountModal() {
         var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, scopeWithData, userInfoDeferred) {
           $scope.email = scopeWithData.$parent.userData.social.email;
+          $scope.socialType = 'Facebook';
 
           //if user cancels, allow fb info to go through, but strip out email
           $scope.cancel = function () {
