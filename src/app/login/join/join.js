@@ -109,7 +109,7 @@ angular.module( 'Morsel.login.join', [])
           'provider': $scope.userData.social.type,
           'token': $scope.userData.social.token,
           //tokens coming from the JS SDK are short-lived
-          'short_lived': true,
+          'short_lived': $scope.userData.social.short_lived || false,
           'uid': $scope.userData.social.id
         }
       };

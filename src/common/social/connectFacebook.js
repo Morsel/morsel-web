@@ -82,6 +82,9 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           //social token
           scope.$parent.userData.social.token = loginResponse.authResponse.accessToken;
 
+          //fb sends short-lived tokens
+          scope.$parent.userData.social.short_lived = true;
+
           //send to main form
           $state.go('join.basicInfo');
         });

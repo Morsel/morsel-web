@@ -221,6 +221,7 @@ module.exports = {
         'src/common/images/photoHelpers.js',
         'src/common/images/upload.js',
         'src/common/social/connectFacebook.js',
+        'src/common/social/connectTwitter.js',
         'src/common/user/userImage.js'
       ],
       tpl: [

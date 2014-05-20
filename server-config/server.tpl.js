@@ -1,6 +1,8 @@
 var express = require("express"),
     mustacheExpress = require('mustache-express'),
     _ = require('underscore'),
+    oauth = require('oauth'),
+    sys = require('util'),
     staticRoutes = require('./data/static-routes.json'),
     request = require('request'),
     metadata = require('./data/metadata.json'),
@@ -43,6 +45,9 @@ app.configure(function(){
   app.use('/src', express.static(__dirname + '/src'));
   app.use('/vendor', express.static(__dirname + '/vendor'));
   app.use('/launch', express.static(__dirname + '/launch'));
+
+  app.use(express.cookieParser());
+  app.use(express.session({secret: 'THESESESSIONSARENOTSECURE'}));
 
   /*prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
     console.log('req is:');
@@ -196,6 +201,15 @@ app.get('/:route', function(req, res, next){
   }
 });
 
+//twitter auth
+app.get('/auth/twitter/connect', function(req, res){
+  getTwitterOAuthRequestToken(res, req);
+});
+
+app.get('/auth/twitter/callback', function(req, res){
+  getTwitterOAuthAccessToken(res, req);
+});
+
 //anything else must be a 404 at this point - this will obviously change
 app.get('*', function(req, res) {
   render404(res);
@@ -340,13 +354,14 @@ function renderMorselPage(res, username, morselIdSlug) {
   });
 }
 
-function renderLoginPage(res) {
+function renderLoginPage(res, twitterData) {
   res.render('login', {
     siteUrl : siteURL,
     isProd : isProd,
     apiUrl : apiUrl,
     mixpanelToken : mixpanelToken,
-    facebookAppId : facebookAppId
+    facebookAppId : facebookAppId,
+    twitterData : twitterData || 'null'
   });
 }
 
@@ -402,4 +417,85 @@ function updateMetabase(req, done) {
   //we need to make sure everything renders properly even when it's hosted on s3 or wherever
   metabase = siteURL;
   done();
+}
+
+//twitter auth
+
+var _twitterConsumerKey = 'OWJtM9wGQSSdMctOI0gHkQ';
+var _twitterConsumerSecret = '21EsTV2n8QjBUGZPfYx5JPKnxjicxboV0IHflBZB6w';
+console.log("_twitterConsumerKey: %s and _twitterConsumerSecret %s", _twitterConsumerKey, _twitterConsumerSecret);
+ 
+function twitterConsumer() {
+  return new oauth.OAuth(
+    'https://api.twitter.com/oauth/request_token', 
+    'https://api.twitter.com/oauth/access_token', 
+     _twitterConsumerKey, 
+     _twitterConsumerSecret, 
+     "1.0A", 
+     siteURL+'/auth/twitter/callback', 
+     "HMAC-SHA1"
+   );
+}
+
+function getTwitterOAuthRequestToken(res, req) {
+  twitterConsumer().getOAuthRequestToken(function(error, oauthToken, oauthTokenSecret, results) {
+    if (error) {
+      renderLoginPage(res, {
+        errors: {
+          base: [
+            'There was a problem logging into Twitter'
+          ]
+        }
+      });
+    } else {
+      req.session.oauthRequestToken = oauthToken;
+      req.session.oauthRequestTokenSecret = oauthTokenSecret;
+      res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token="+oauthToken);
+    }
+  });
+}
+
+function getTwitterOAuthAccessToken(res, req) {
+  twitterConsumer().getOAuthAccessToken(
+    req.session.oauthRequestToken, 
+    req.session.oauthRequestTokenSecret, 
+    req.query.oauth_verifier, 
+    function(error, oauthAccessToken, oauthAccessTokenSecret, results) {
+    if (error) {
+      renderLoginPage(res, {
+        errors: {
+          base: [
+            'There was a problem logging into Twitter'
+          ]
+        }
+      });
+    } else {
+      req.session.oauthAccessToken = oauthAccessToken;
+      req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
+      twitterConsumer().get("https://api.twitter.com/1.1/account/verify_credentials.json",
+        req.session.oauthAccessToken,
+        req.session.oauthAccessTokenSecret,
+        function (error, data, response) {
+        if (error) {
+          renderLoginPage(res, {
+            errors: {
+              base: [
+                'There was a problem logging into Twitter'
+              ]
+            }
+          });
+        } else {
+          var tData = JSON.parse(data);
+
+          //add our token and secret
+          tData.userData = {
+            token: req.session.oauthAccessToken,
+            secret: req.session.oauthAccessTokenSecret
+          };
+
+          renderLoginPage(res, tData);
+        }
+      });
+    }
+  });
 }

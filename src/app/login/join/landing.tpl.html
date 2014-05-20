@@ -3,7 +3,7 @@
     <form name="landingForm" method="post" novalidate>
       <div mrsl-base-errors mrsl-val-form="landingForm"></div>
       <a mrsl-connect-facebook mrsl-connect-facebook-text="Connect with Facebook" mrsl-connect-facebook-form="landingForm"></a>
-      <a class="btn btn-social btn-twitter btn-lg"><i class="common-share-twitter"></i>Connect with Twitter</a>
+      <a mrsl-connect-twitter mrsl-connect-twitter-text="Connect with Twitter" mrsl-connect-twitter-form="landingForm"></a>
       <a ng-click="joinEmail()" class="btn btn-social btn-email btn-lg"><i class="common-share-email"></i>Sign up with Email</a>
     </form>
     <p class="have-an-account">Already have an account? <a href="/login">Login here.</a></p>
