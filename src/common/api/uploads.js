@@ -4,14 +4,35 @@ angular.module( 'Morsel.common.apiUploads', [] )
 .factory('ApiUploads', function($http, Restangular, $q) {
   var Uploads = {};
 
-  //sends a restangular multi-part post
-  Uploads.upload = function(path, formData) {
+  //sends a restangular multi-part POST
+  Uploads.postUpload = function(RestangularObj, formData) {
     var deferred = $q.defer();
 
-    //post our multi-part data with custom headers
-    Restangular.one(path).withHttpConfig({
+    //POST our multi-part data with custom headers
+    RestangularObj.withHttpConfig({
       transformRequest: angular.identity
     }).customPOST(
+      formData,
+      undefined,
+      {},
+      {'Content-type':undefined}
+    ).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  //sends a restangular multi-part PUT
+  Uploads.putUpload = function(RestangularObj, formData) {
+    var deferred = $q.defer();
+
+    //PUT our multi-part data with custom headers
+    RestangularObj.withHttpConfig({
+      transformRequest: angular.identity
+    }).customPUT(
       formData,
       undefined,
       {},

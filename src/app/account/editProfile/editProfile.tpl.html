@@ -6,10 +6,19 @@
   <form name="basicInfoForm" method="post" ng-submit="updateBasicInfo()" class="padded-form" novalidate>
     <h3>Basic Info</h3>
     <div mrsl-base-errors mrsl-val-form="basicInfoForm"></div>
-    <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="First Name" mrsl-val-type="text" mrsl-val-name="first_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="John" mrsl-val-required="false" mrsl-existing-val="user.first_name" />{{user.first_name}}
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="form-group">
+          <div mrsl-image-upload mrsl-image-to-upload="profilePhoto" class="avatar-add"></div>
+          <label class="control-label center-block text-center" for="photo">Profile Photo</label>
+        </div>
+      </div>
+      <div class="col-sm-7">
+        <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="First Name" mrsl-val-type="text" mrsl-val-name="first_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="John" mrsl-val-required="false" mrsl-existing-val="user.first_name" />{{user.first_name}}
 
-    <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Last Name" mrsl-val-type="text" mrsl-val-name="last_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="Smith" mrsl-val-required="false" />
-
+        <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Last Name" mrsl-val-type="text" mrsl-val-name="last_name" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="Smith" mrsl-val-required="false" />
+      </div>
+    </div>
     <input mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="false" />
 
     <textarea mrsl-validated-element mrsl-val-form="basicInfoForm" mrsl-val-en-name="Bio" mrsl-val-name="bio" mrsl-val-form-model="basicInfoModel" mrsl-val-placeholder="Tell us a little about yourself" mrsl-val-required="false" mrsl-val-tag-type="textarea"></textarea>

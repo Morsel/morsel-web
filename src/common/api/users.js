@@ -44,7 +44,7 @@ angular.module( 'Morsel.common.apiUsers', [] )
       }
 
       //use our restangular multi-part post
-      ApiUploads.upload('users', fd).then(function(resp){
+      ApiUploads.postUpload(Restangular.one('users'), fd).then(function(resp){
         deferred.resolve(Restangular.stripRestangular(resp));
       }, function(resp){
         deferred.reject(Restangular.stripRestangular(resp));
@@ -102,13 +102,36 @@ angular.module( 'Morsel.common.apiUsers', [] )
   };
 
   Users.updateUser = function(userId, userData) {
-    var deferred = $q.defer();
+    var deferred = $q.defer(),
+        fd,
+        k;
 
-    Restangular.one('users', userId).customPUT(userData).then(function(resp) {
-      deferred.resolve(Restangular.stripRestangular(resp));
-    }, function(resp) {
-      deferred.reject(Restangular.stripRestangular(resp));
-    });
+    //if user has a photo, need to use a multi-part request
+    if(userData.user.photo) {
+      //create a new formdata object to hold all our data
+      fd = new FormData();
+
+      //loop through our data and append to fd
+      for(k in userData.user) {
+        if(userData.user[k]) {
+          fd.append('user['+k+']', userData.user[k]);
+        }
+      }
+
+      //use our restangular multi-part post
+      ApiUploads.putUpload(Restangular.one('users', userId), fd).then(function(resp){
+        deferred.resolve(Restangular.stripRestangular(resp));
+      }, function(resp){
+        deferred.reject(Restangular.stripRestangular(resp));
+      });
+    } else {
+      //no photo - use normal PUT
+      Restangular.one('users', userId).customPUT(userData).then(function(resp) {
+        deferred.resolve(Restangular.stripRestangular(resp));
+      }, function(resp) {
+        deferred.reject(Restangular.stripRestangular(resp));
+      });
+    }
 
     return deferred.promise;
   };
