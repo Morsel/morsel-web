@@ -57,6 +57,8 @@ angular.module( 'Morsel.common.connectTwitter', [] )
             //send to main form
             $state.go('join.basicInfo');
           }
+        }, function(resp) {
+          HandleErrors.onError(resp.data, scope.form);
         });
       }
 
