@@ -21,13 +21,13 @@ angular.module( 'Morsel.login.passwordReset', [])
     },
     data:{ pageTitle: 'Password Reset - Choose Password' },
     resolve: {
-      passwordToken: function($stateParams, $location) {
+      /*passwordToken: function($stateParams, $location) {
         //if user doesn't have a reset_password_token as a query param
         if(!$stateParams.reset_password_token) {
           $location.$$search = {};
           $location.path('/password-reset');
         }
-      }
+      }*/
     }
   });
 })
@@ -49,7 +49,7 @@ angular.module( 'Morsel.login.passwordReset', [])
     
     function onSuccess(resp) {
       //if email successfully sent, show message
-      $scope.alertMessage = 'A link has been sent to your email address containing instructions for how to complete the password reset process.';
+      $scope.alertMessage = 'A link has been sent to '+$scope.emailPasswordModel.email+' containing instructions for how to complete the password reset process.';
       $scope.alertType = 'success';
     }
 
@@ -59,7 +59,7 @@ angular.module( 'Morsel.login.passwordReset', [])
   };
 })
 
-.controller( 'PasswordResetNewPasswordCtrl', function PasswordResetNewPasswordCtrl( $scope, $stateParams, ApiUsers, HandleErrors ) {
+.controller( 'PasswordResetNewPasswordCtrl', function PasswordResetNewPasswordCtrl( $scope, $stateParams, ApiUsers, HandleErrors, $sce ) {
   //model to store our password data
   $scope.newPasswordModel = {};
 
@@ -70,7 +70,7 @@ angular.module( 'Morsel.login.passwordReset', [])
       'message': 'Passwords don\'t match'
     }
   };
-  
+
   //called on submit of password reset form
   $scope.submitNewPassword = function() {
     var passwordData = {
@@ -85,7 +85,7 @@ angular.module( 'Morsel.login.passwordReset', [])
     
     function onSuccess(resp) {
       //if password reset, show message
-      $scope.alertMessage = 'Your password has been reset. You can now <a href="/login">login</a> with your new password';
+      $scope.alertMessage = $sce.trustAsHtml('Your password has been reset. You can now <a href="/login">login</a> with your new password');
       $scope.alertType = 'success';
     }
 
