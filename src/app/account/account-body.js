@@ -11,9 +11,13 @@ angular.module( 'Morsel.account.body', [])
         template: '<div ui-view="main"></div>'
       }
     },
+    access: {
+      restricted : true
+    },
     resolve: {
+      //make sure we resolve a user before displaying
       accountUser:  function(Auth){
-        return Auth.hasCurrentUser();
+        return Auth.getCurrentUserPromise();
       }
     }
   });

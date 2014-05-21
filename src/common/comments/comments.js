@@ -8,6 +8,14 @@ angular.module( 'Morsel.common.comments', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
+      var isLoggedIn,
+          isChef;
+
+      Auth.getCurrentUserPromise().then(function(userData){
+        isLoggedIn = Auth.isLoggedIn();
+        isChef = Auth.isChef();
+      });
+
       scope.openComments = function () {
         var modalInstance = $modal.open({
           templateUrl: 'common/comments/comments.tpl.html',
@@ -21,10 +29,11 @@ angular.module( 'Morsel.common.comments', [] )
       };
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, item) {
-
         $scope.item = item;
-        $scope.isChef = Auth.isChef();
-        $scope.isLoggedIn = Auth.isLoggedIn();
+
+        $scope.isChef = isChef;
+        $scope.isLoggedIn = isLoggedIn;
+
         $scope.comment = {
           description: ''
         };
@@ -34,7 +43,7 @@ angular.module( 'Morsel.common.comments', [] )
         };
 
         $scope.addComment = function() {
-          if(Auth.isLoggedIn()) {
+          if(isLoggedIn) {
             postComment();
           }
         };

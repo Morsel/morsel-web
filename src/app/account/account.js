@@ -85,13 +85,13 @@ angular.module( 'Morsel.account', [
   angular.element($window).bind('resize', _.debounce(onBrowserResize, 300));
 
   //initial fetching of user data for header/footer
-  Auth.setInitialUserData().then(function(){
-    updateUserData();
+  Auth.setInitialUserData().then(function(currentUser){
+    $scope.currentUser = currentUser;
 
     //get and send some super properties to mixpanel
-    if(Auth.hasCurrentUser()) {
-      //identify our users by their ID, also don't overwrite their id if they log out
-      Mixpanel.identify(Auth.getCurrentUser()['id']);
+    if(Auth.isLoggedIn()) {
+      //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
+      Mixpanel.identify(currentUser.id);
     }
 
     Mixpanel.register({
@@ -104,7 +104,7 @@ angular.module( 'Morsel.account', [
   //when a user starts to access a new route
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     //if non logged in user tries to access a restricted route
-    if(toState.access && toState.access.restricted && !Auth.isLoggedIn()) {
+    if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
       event.preventDefault();
       //send them to the login page
       $window.location.href ='/login';
@@ -119,19 +119,16 @@ angular.module( 'Morsel.account', [
       $scope.pageTitle = toState.data.pageTitle + ' | Morsel';
     }
     //refresh our user data
-    $scope.isLoggedIn = Auth.isLoggedIn();
-    updateUserData();
+    Auth.getCurrentUserPromise().then(function(userData){
+      $scope.isLoggedIn = Auth.isLoggedIn();
+      $scope.currentUser = userData;
+    });
 
     //manually push a GA pageview
     if($window._gaq) {
       $window._gaq.push(['_trackPageview', $location.path()]);
     }
   });
-
-  //refresh user data
-  function updateUserData() {
-    $scope.currentUser = Auth.getCurrentUser();
-  }
 
   //reset our view options
   function resetViewOptions() {
