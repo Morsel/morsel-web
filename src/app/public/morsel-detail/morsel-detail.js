@@ -9,11 +9,17 @@ angular.module( 'Morsel.public.morselDetail', [])
         templateUrl: 'app/public/morsel-detail/morsel-detail.tpl.html'
       }
     },
-    data:{ pageTitle: 'Morsel Detail' }
+    data:{ pageTitle: 'Morsel Detail' },
+    resolve: {
+      //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
+      currentUser: function(Auth) {
+        return Auth.getCurrentUserPromise();
+      }
+    }
   });
 })
 
-.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $modal, $window ) {
+.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $window, currentUser ) {
   var username = $stateParams.username,
       morselDetailsArr = $stateParams.morselDetails.split('/'),
       morselIdSlug = morselDetailsArr[0],

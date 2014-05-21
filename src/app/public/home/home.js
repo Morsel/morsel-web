@@ -13,13 +13,13 @@ angular.module( 'Morsel.public.home', [
     },
     data:{ pageTitle: 'Home' },
     resolve: {
-      hasCurrentUser : function(Auth) {
-        return Auth.hasCurrentUser();
+       currentUser: function(Auth) {
+        return Auth.getCurrentUserPromise();
       }
     }
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, Auth ) {
-  $scope.welcomeUserName = Auth.getCurrentUser().first_name;
+.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser ) {
+  $scope.welcomeUserName = currentUser.first_name;
 });

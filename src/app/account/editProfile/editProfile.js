@@ -14,12 +14,11 @@ angular.module( 'Morsel.account.editProfile', [])
     },
     access: {
       restricted : true
-    },
-    resolve: {}
+    }
   });
 })
 
-.controller( 'EditProfileCtrl', function EditProfileCtrl( $scope, $stateParams, ApiUsers, ApiKeywords, HandleErrors, $window, accountUser, $q){
+.controller( 'EditProfileCtrl', function EditProfileCtrl( $scope, $stateParams, ApiUsers, ApiKeywords, HandleErrors, $window, accountUser, $q, Auth){
   var allCuisinesPromise,
       userCuisinesPromise,
       allCuisines,
@@ -35,7 +34,7 @@ angular.module( 'Morsel.account.editProfile', [])
   //basic info
 
   //model to store our profile data
-  $scope.basicInfoModel = accountUser;
+  $scope.basicInfoModel = _.clone(accountUser);
 
   $scope.profilePhoto = null;
 
@@ -62,6 +61,8 @@ angular.module( 'Morsel.account.editProfile', [])
   };
 
   function onBasicInfoSuccess(resp) {
+    //update our scoped current user
+    Auth.updateUser(resp.data);
     $scope.alertMessage = 'Successfully updated your basic info';
     $scope.alertType = 'success';
   }

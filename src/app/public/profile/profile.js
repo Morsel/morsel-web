@@ -11,34 +11,39 @@ angular.module( 'Morsel.public.profile', [])
     },
     data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
-      //get our user data before we try to render the page
-      userData: function(ApiUsers, $stateParams, $location) {
+      //get the user data of the profile before we try to render the page
+      profileUserData: function(ApiUsers, $stateParams, $location) {
         return ApiUsers.getUser($stateParams.username).then(function(userResp) {
           return userResp.data;
         }, function() {
           //if there's an error retrieving user data (bad username?), go to home page for now
           $location.path('/');
         });
+      },
+      //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
+      currentUser: function(Auth) {
+        return Auth.getCurrentUserPromise();
       }
     }
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, Auth, $window, $location, $anchorScroll, $modal, $rootScope, userData ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $anchorScroll, $modal, $rootScope, profileUserData, currentUser ) {
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
   $scope.largeBreakpoint = $window.innerWidth > 768; //total hack
 
-  $scope.user = userData;
-  $scope.canEdit = userData.id === Auth.getCurrentUser()['id'];
-  $scope.isChef = userData.industry === 'chef';
+  $scope.user = profileUserData;
+  $scope.isChef = profileUserData.industry === 'chef';
 
-  ApiUsers.getCuisines(userData.id).then(function(cuisineResp) {
+  $scope.canEdit = profileUserData.id === currentUser.id;
+
+  ApiUsers.getCuisines(profileUserData.id).then(function(cuisineResp) {
     $scope.cuisines = cuisineResp.data;
   });
 
-  ApiUsers.getSpecialties(userData.id).then(function(specialtyResp) {
+  ApiUsers.getSpecialties(profileUserData.id).then(function(specialtyResp) {
     $scope.specialties = specialtyResp.data;
   });
 
@@ -55,7 +60,7 @@ angular.module( 'Morsel.public.profile', [])
     getLikeFeed($scope, $scope.user);
   }
 
-  ApiUsers.getMorsels($stateParams.username).then(function(morselsData) {
+  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
     $scope.morsels = morselsData;
   }, function() {
     //if there's an error retrieving user data (bad username?), go to home page for now

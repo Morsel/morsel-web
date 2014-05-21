@@ -9,11 +9,17 @@ angular.module( 'Morsel.common.follow', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
+      var currentUser,
+          isLoggedIn;
+
+      Auth.getCurrentUserPromise().then(function(userData) {
+        currentUser = userData;
+        isLoggedIn = Auth.isLoggedIn();
+      });
+
       //wait until we have the data on who to follow, then decide if we need to show the follow button or not
       scope.$watch('idToFollow', function(newValue, oldValue) {
         if(newValue) {
-          var currentUser = Auth.getCurrentUser();
-
           if(currentUser && currentUser.id === scope.idToFollow) {
             scope.isSelf = true;
           }
@@ -22,7 +28,7 @@ angular.module( 'Morsel.common.follow', [] )
 
       scope.toggleFollow = function() {
         //check if we're logged in
-        if(Auth.isLoggedIn()) {
+        if(isLoggedIn) {
           performToggleFollow();
         } else {
           var currentUrl = $location.url();

@@ -8,9 +8,16 @@ angular.module( 'Morsel.common.itemLike', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
+      var isLoggedIn;
+
+      Auth.getCurrentUserPromise().then(function(userData) {
+        currentUser = userData;
+        isLoggedIn = Auth.isLoggedIn();
+      });
+
       scope.toggleItemLike = function() {
         //check if we're logged in
-        if(Auth.isLoggedIn()) {
+        if(isLoggedIn) {
           toggleLike();
         } else {
           var currentUrl = $location.url();
@@ -35,7 +42,7 @@ angular.module( 'Morsel.common.itemLike', [] )
             //remove user from liker list
             if(scope.item.likers) {
               scope.item.likers = _.reject(scope.item.likers, function(liker) {
-                return liker.id === Auth.getCurrentUser()['id'];
+                return liker.id === currentUser.id;
               });
             }
             
@@ -50,9 +57,9 @@ angular.module( 'Morsel.common.itemLike', [] )
 
             //add user to liker list
             if(scope.item.likers) {
-              scope.item.likers.unshift(Auth.getCurrentUser());
+              scope.item.likers.unshift(currentUser);
             } else {
-              scope.item.likers = [Auth.getCurrentUser()];
+              scope.item.likers = [currentUser];
             }
 
             //decrement count for display

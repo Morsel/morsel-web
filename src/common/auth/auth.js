@@ -6,15 +6,13 @@ angular.module( 'Morsel.common.auth', [
 .factory('Auth', function($window, ApiUsers, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel){
   var Auth = {},
       defaultRequestParams = {},
-      hasLoadedUser = $q.defer();
+      loadedUser = $q.defer();
 
   //our fallback
   defaultRequestParams[DEVICEKEY] = DEVICEVALUE;
   defaultRequestParams[VERSIONKEY] = VERSIONVALUE;
 
-  //"private" methods, for my own sanity
-
-  //"private" methods, for my own sanity
+  //"private" methods
 
   //an anonymous user
   Auth._blankUser = function() { 
@@ -130,28 +128,6 @@ angular.module( 'Morsel.common.auth', [
     $window.location.href = '/';
   };
 
-  //check if a user is logged in
-  Auth.isLoggedIn = function() {
-    return Auth._getSavedUserId() && Auth._getSavedUserAuthToken();
-  };
-
-  //check user industry type
-  Auth.isChef = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'chef');
-  };
-
-  Auth.isMedia = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'media');
-  };
-
-  Auth.isDiner = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'diner');
-  };
-
-  Auth.isStaff = function() {
-    return Auth.isLoggedIn() && Auth._currentUser.staff;
-  };
-
   //intercept our API calls
   Auth.setupInterceptor = function() {
     Restangular.setErrorInterceptor(function(response) {
@@ -182,41 +158,76 @@ angular.module( 'Morsel.common.auth', [
 
   //return a promise about data for our current user
   Auth.setInitialUserData = function() {
-    var savedUserId = Auth._getSavedUserId();
 
-    //if we have a currentUser in our app
-    if(Auth._currentUser && Auth._currentUser.id && Auth._currentUser.auth_token) {
-      //return her
-      $timeout(function(){hasLoadedUser.resolve(Auth._currentUser);}, 0);
-    } else if(savedUserId) {
-      //if there's a user id saved
-      //reset our key
-      Auth._resetApiKey();
-      //get the rest of the users data from the server
-      ApiUsers.getMyData().then(function(loggedInUserResp) {
-        //update the app's user
-        Auth._updateUser(loggedInUserResp.data);
-        hasLoadedUser.resolve(Auth._currentUser);
-      }, function() {
-        //oops. must have been a faulty user. go anonymous for now
-        Auth._clearUser();
-        hasLoadedUser.resolve(Auth._currentUser);
-      });
+    //if the current user is blank
+    if(_.isEqual(Auth._currentUser, Auth._blankUser())) {
+      //if there's a userId in the cookie
+      if(Auth._getSavedUserId()) {
+        //reset our key
+        Auth._resetApiKey();
+        //get the rest of the users data from the server
+        ApiUsers.getMyData().then(function(loggedInUserResp) {
+          //update the app's user
+          Auth._updateUser(loggedInUserResp.data);
+          loadedUser.resolve(Auth._currentUser);
+        }, function() {
+          //oops. must have been a faulty user. go anonymous for now
+          Auth._clearUser();
+          loadedUser.resolve(Auth._currentUser);
+        });
+      } else {
+        //they're anonymous
+        Auth._resetUser();
+        $timeout(function(){
+          loadedUser.resolve(Auth._currentUser);
+        });
+      }
     } else {
-      //they're anonymous
-      Auth._resetUser();
-      $timeout(function(){hasLoadedUser.resolve(Auth._currentUser);}, 0);
+      //already have a user loaded. return her
+      $timeout(function(){
+        loadedUser.resolve(Auth._currentUser);
+      });
     }
 
-    return hasLoadedUser.promise;
+    return loadedUser.promise;
   };
 
-  Auth.getCurrentUser = function() {
-    return Auth._currentUser;
+  Auth.getCurrentUserPromise = function() {
+    return loadedUser.promise;
   };
 
-  Auth.hasCurrentUser = function() {
-    return hasLoadedUser.promise;
+  //a bit sketchy, but we need this to check for restricted routes without having to wait for the user to resolve. check if userId and authToken are present in the cookie (doesn't account for potentially invalid values)
+  Auth.potentiallyLoggedIn = function() {
+    return Auth._getSavedUserId() && Auth._getSavedUserAuthToken() ? true : false;
+  };
+
+  //the following methods shouldn't be called until we've returned a user (getCurrentUserPromise has been called) since they assume that we have our "final" user loaded
+
+  Auth.isLoggedIn = function() {
+    return !_.isEqual(Auth._currentUser, Auth._blankUser());
+  };
+
+  //check user industry type
+  Auth.isChef = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'chef');
+  };
+
+  Auth.isMedia = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'media');
+  };
+
+  Auth.isDiner = function() {
+    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'diner');
+  };
+
+  Auth.isStaff = function() {
+    return Auth.isLoggedIn() && Auth._currentUser.staff;
+  };
+
+  //end logged-in methods
+
+  Auth.updateUser = function(userData) {
+    Auth._updateUser(userData);
   };
 
   Auth.showApiError = function(status, errors) {
