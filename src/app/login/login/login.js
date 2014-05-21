@@ -9,11 +9,31 @@ angular.module( 'Morsel.login.login', [])
         templateUrl: 'app/login/login/login.tpl.html'
       }
     },
-    data:{ pageTitle: 'Login' }
+    data:{
+      pageTitle: 'Login'
+    },
+    resolve: {
+      //make sure we resolve a user before displaying
+      loginUser:  function(Auth, $window, $q){
+        var deferred = $q.defer();
+
+        Auth.getCurrentUserPromise().then(function(userData){
+          //don't let a logged in user to this page
+          if(Auth.isLoggedIn()) {
+            $window.location.href = '/';
+          } else {
+            deferred.resolve(userData);
+          }
+        });
+
+        return deferred.promise;
+      }
+    }
   });
 })
 
-.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $window, HandleErrors, AfterLogin ) {
+.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $window, HandleErrors, AfterLogin, loginUser ) {
+
   //model to store our join data
   $scope.loginModel = {};
 

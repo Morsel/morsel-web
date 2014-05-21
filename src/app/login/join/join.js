@@ -9,8 +9,25 @@ angular.module( 'Morsel.login.join', [])
         templateUrl: 'app/login/join/join.tpl.html'
       }
     },
-    data:{
+    data: {
       pageTitle: 'Join Morsel'
+    },
+    resolve: {
+      //make sure we resolve a user before displaying
+      joinUser:  function(Auth, $window, $q){
+        var deferred = $q.defer();
+
+        Auth.getCurrentUserPromise().then(function(userData){
+          //don't let a logged in user to this page
+          if(Auth.isLoggedIn()) {
+            $window.location.href = '/';
+          } else {
+            deferred.resolve(userData);
+          }
+        });
+
+        return deferred.promise;
+      }
     }
   })
   .state( 'join.landing', {
@@ -42,7 +59,7 @@ angular.module( 'Morsel.login.join', [])
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, $state ) {
+.controller( 'JoinCtrl', function JoinCtrl( $scope, $state, joinUser ) {
   //if they're not trying to go to the second step
   if($state.current.name != 'join.basicInfo') {
     //send them to the landing page
