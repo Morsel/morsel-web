@@ -51,7 +51,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           }
         }, {
           //grab this stuff from fb
-          scope: 'public_profile,email'
+          scope: 'public_profile,email,user_friends'
         });
       };
 
