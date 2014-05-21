@@ -52,7 +52,7 @@
     {{> partials/mixpanel}}
   </head>
   <body class="login">
-    <header class="login-header">
+    <header class="login-header" ng-hide="viewOptions.hideHeader">
       <div class="container">
         <h1>
           <a href="/" target="_self" class="morsel-text">Morsel</a>
@@ -62,7 +62,7 @@
 
     <div ui-view="main" class="main-view"></div>
 
-    <footer class="login-footer">
+    <footer class="login-footer" ng-hide="viewOptions.hideFooter">
       <div class="container">
         <div class="footer-inner">
           <nav role="navigation">

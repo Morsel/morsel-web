@@ -64,7 +64,7 @@ angular.module( 'Morsel.common.follow', [] )
       }
     },
     template: '<button ng-hide="isSelf" ng-click="toggleFollow()" class="btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
-              '{{isFollowing ? \'Unfollow\' : \'Follow\'}}'+
+              '{{isFollowing ? \'Following\' : \'Follow\'}}'+
               '</button>'
   };
 });
