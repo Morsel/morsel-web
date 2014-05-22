@@ -8,28 +8,29 @@ angular.module( 'Morsel.common.itemLike', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var isLoggedIn,
+      var currentUser,
+          isLoggedIn,
           afterLoginCallback;
-
-      //check for an afterlogin callback on load
-      if(AfterLogin.hasCallback('like')) {
-        afterLoginCallback = AfterLogin.getCallback();
-
-        //make sure it's the right item
-        if(afterLoginCallback.data && (afterLoginCallback.data.itemId === scope.item.id)) {
-          //make sure we're actually loggeed in just in case
-          if(Auth.isLoggedIn()) {
-            toggleLike().then(function(){
-              //remove callback after completion
-              AfterLogin.removeCallback();
-            });
-          }
-        }
-      }
 
       Auth.getCurrentUserPromise().then(function(userData) {
         currentUser = userData;
         isLoggedIn = Auth.isLoggedIn();
+
+        //check for an afterlogin callback on load
+        if(AfterLogin.hasCallback('like')) {
+          afterLoginCallback = AfterLogin.getCallback();
+
+          //make sure it's the right item
+          if(afterLoginCallback.data && (afterLoginCallback.data.itemId === scope.item.id)) {
+            //make sure we're actually loggeed in just in case
+            if(isLoggedIn) {
+              toggleLike().then(function(){
+                //remove callback after completion
+                AfterLogin.removeCallback();
+              });
+            }
+          }
+        }
       });
 
       scope.toggleItemLike = function() {
