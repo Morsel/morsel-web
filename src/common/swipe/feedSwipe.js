@@ -252,6 +252,10 @@ angular.module('Morsel.common.feedSwipe', [
           return;
         }
         scope.currentMorselIndex = capIndex(i);
+
+        //emit where we are so we can go fetch more data
+        scope.$emit('feed.atMorsel', scope.currentMorselIndex);
+        
         // if outside of angular scope, trigger angular digest cycle
         // use local digest only for perfs if no index bound
         if (scope.$$phase!=='$apply' && scope.$$phase!=='$digest') {
