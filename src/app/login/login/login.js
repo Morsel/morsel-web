@@ -52,9 +52,9 @@ angular.module( 'Morsel.login.login', [])
     }
     
     function onSuccess(resp) {
-      //if successfully jogged in check if we have anything in the to-do queue
-      if(AfterLogin.hasCallbacks()) {
-        AfterLogin.executeCallbacks();
+      //if successfully logged in check if we have anything in the to-do queue
+      if(AfterLogin.hasCallback()) {
+        AfterLogin.goToCallbackPath();
       } else {
         //if they were on their way to a certain page
         if($stateParams.next) {

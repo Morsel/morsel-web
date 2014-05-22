@@ -210,8 +210,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
       function onLoginSuccess(resp) {
         //if successfully logged in check if we have anything in the to-do queue
-        if(AfterLogin.hasCallbacks()) {
-          AfterLogin.executeCallbacks();
+        if(AfterLogin.hasCallback()) {
+          AfterLogin.goToCallbackPath();
         } else {
           //send them home (trigger page refresh to switch apps)
           sendToNextUrl();

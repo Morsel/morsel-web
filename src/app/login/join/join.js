@@ -265,8 +265,8 @@ angular.module( 'Morsel.login.join', [])
 
   function onSuccess(resp) {
     //if successfully joined check if we have anything in the to-do queue
-    if(AfterLogin.hasCallbacks()) {
-      AfterLogin.executeCallbacks();
+    if(AfterLogin.hasCallback()) {
+      AfterLogin.goToCallbackPath();
     } else {
       //if they were on their way to a certain page
       if($stateParams.next) {

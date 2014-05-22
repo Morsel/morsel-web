@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.follow', [] )
 
 //follow/unfollow something
-.directive('mrslFollow', function(ApiUsers, AfterLogin, $location, Auth, $q){
+.directive('mrslFollow', function(ApiUsers, AfterLogin, $location, Auth, $q, $window){
   return {
     scope: {
       idToFollow: '=mrslIdToFollow',
@@ -39,7 +39,8 @@ angular.module( 'Morsel.common.follow', [] )
               $location.path(currentUrl);
             });
           });
-          $location.path('/join');
+          
+          $window.location.href = '/join';
         }
       };
 

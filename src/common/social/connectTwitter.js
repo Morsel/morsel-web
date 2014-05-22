@@ -89,8 +89,8 @@ angular.module( 'Morsel.common.connectTwitter', [] )
 
       function onLoginSuccess(resp) {
         //if successfully logged in check if we have anything in the to-do queue
-        if(AfterLogin.hasCallbacks()) {
-          AfterLogin.executeCallbacks();
+        if(AfterLogin.hasCallback()) {
+          AfterLogin.goToCallbackPath();
         } else {
           //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
 
