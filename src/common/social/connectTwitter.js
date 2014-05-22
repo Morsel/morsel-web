@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectTwitter', [] )
 
 //connect (sign up/login) with twitter Oauth (handled on server)
-.directive('mrslConnectTwitter', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window){
+.directive('mrslConnectTwitter', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window, $location){
   return {
     restrict: 'A',
     scope: {
@@ -16,13 +16,18 @@ angular.module( 'Morsel.common.connectTwitter', [] )
           loginNext;
 
       if($state && $state.params && $state.params.next) {
-        $scope.loginNext = '?next='+encodeURIComponent($state.params.next);
+        scope.loginNext = '?next='+encodeURIComponent($state.params.next);
       }
 
       //check if there is any twitter initialization data on the page
       if(tData) {
         //remove the on-page config data now that he have it locally
         MorselConfig.twitterData = null;
+
+        //if they were coming from somewhere, add it back to the URL
+        if(tData.loginNext) {
+          $location.search('next', tData.loginNext);
+        }
 
         //if there are errors, show them
         if(tData.errors) {

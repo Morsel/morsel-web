@@ -205,6 +205,7 @@ app.get('/:route', function(req, res, next){
 
 //twitter auth
 app.get('/auth/twitter/connect', function(req, res){
+  console.log('got route');
   getTwitterOAuthRequestToken(res, req);
 });
 
@@ -437,7 +438,9 @@ function twitterConsumer() {
 function getTwitterOAuthRequestToken(res, req) {
   twitterConsumer().getOAuthRequestToken(function(error, oauthToken, oauthTokenSecret, results) {
 
+    console.log('got oauth reqest token');
     if (error) {
+      sys.puts('got error',  sys.inspect(error));
       renderLoginPage(res, {
         errors: {
           base: [
@@ -446,11 +449,13 @@ function getTwitterOAuthRequestToken(res, req) {
         }
       });
     } else {
+       console.log('got without error');
       //remember where the user was headed
       if(req.query.next) {
+        console.log('req.quest.next');
         req.session.loginNext = req.query.next;
       }
-
+      console.log('after  req.quest.next');
       req.session.oauthRequestToken = oauthToken;
       req.session.oauthRequestTokenSecret = oauthTokenSecret;
       res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token="+oauthToken);
