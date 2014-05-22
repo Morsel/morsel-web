@@ -32,6 +32,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.itemActionBar',
   'Morsel.common.immersiveSwipe',
   'Morsel.common.mixpanel',
+  'Morsel.common.morsel',
   'Morsel.common.morselSwipe',
   'Morsel.common.itemLike',
   'Morsel.common.photoHelpers',

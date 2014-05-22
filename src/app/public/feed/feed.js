@@ -28,7 +28,13 @@ angular.module( 'Morsel.public.feed', [])
   };
   
   ApiFeed.getFeed().then(function(feedResp) {
-    $scope.feed = feedResp.data;
+    $scope.morsels = [];
+
+    _.each(feedResp.data, function(f) {
+      if(f.subject_type==='Morsel') {
+        $scope.morsels.push(f.subject);
+      }
+    });
   }, function(resp){
     console.log('oops, couldnt get feed');
   });

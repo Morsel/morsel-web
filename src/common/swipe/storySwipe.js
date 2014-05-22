@@ -12,7 +12,7 @@ angular.module('Morsel.common.morselSwipe', [
     replace: true,
     scope: {
       index: '=mrslIndex',
-      morsel: '=mrslMorsel'
+      morsel: '=mrslThumbsOfMorsel'
     },
     link: function(scope, element, attrs) {
       var morselId;

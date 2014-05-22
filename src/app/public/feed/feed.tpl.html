@@ -1,3 +1,13 @@
-<div>
-{{feed}}
+<div class="immersive">
+  <div immersive-swipe ng-class="{'in-morsel': immersiveState.inMorsel}">
+    <div immersive-controls index="currentControlIndex" count="morselsCount"></div>
+    <div class="morsels-wrap">
+      <ul class="morsels">
+        <li ng-repeat="morsel in morsels" class="morsel">
+          <div mrsl-morsel></div>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
+
