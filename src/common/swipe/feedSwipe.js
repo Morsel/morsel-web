@@ -37,7 +37,9 @@ angular.module('Morsel.common.feedSwipe', [
       // in absolute pixels, at which distance the slide stick to the edge on release
       rubberTreshold = 3,
       //max time between scrolls
-      scrollThreshold = 500;
+      scrollThreshold = 500,
+      //use a debounce function so keydown events don't fire multiple times
+      keyDebounceTime = 350;
 
   return {
     restrict: 'A',
@@ -286,6 +288,28 @@ angular.module('Morsel.common.feedSwipe', [
       function onOrientationChange() {
         goToSlide();
       }
+
+      //handle navigation for left and right keypresses
+      function handleKeydown(e) {
+        //ignore if it it's not coming from the body (could be in an input, etc)
+        if(e.srcElement.tagName === 'BODY') {
+          if(e.which === 37) {
+            //left arrow pressed
+            scope.goToPrevMorsel();
+          } else if(e.which === 39) {
+            //right arrow pressed
+            scope.goToNextMorsel();
+          }
+        }
+      }
+
+      debouncedKeydown = _.debounce(handleKeydown, keyDebounceTime, true);
+      $document.on('keydown', debouncedKeydown);
+
+      // unbind keydown event when user leaves
+      scope.$on('$destroy', function(){
+        $document.off('keydown', debouncedKeydown);
+      });
     }
   };
 });

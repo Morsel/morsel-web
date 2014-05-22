@@ -545,42 +545,46 @@ angular.module('Morsel.common.morselSwipe', [
       }
 
       function tryGoingUp() {
-        //if we're on the first morsel
+        //if we're on the first item
         if (scope.currentItemIndex === 0) {
-          //go to the previous morsel
+          //go to the previous morsel if we're in a feed
           if(scope.goToPrevMorsel) {
             scope.goToPrevMorsel();
           }
         } else {
-          //else go to the previous morsel
+          //else go to the previous item
           goToSlide(scope.currentItemIndex-1, true);
         }
       }
 
       function tryGoingDown() {
         //if we scroll down
-        //if we're on the last morsel
+        //if we're on the last item
         if(scope.currentItemIndex === scope.itemCount - 1) {
-          //go to the next morsel
+          //go to the next morsel if we're in a feed
           if(scope.goToNextMorsel) {
             scope.goToNextMorsel();
           }
         } else {
-          //and aren't on the last morsel
+          //and aren't on the last item
           goToSlide(scope.currentItemIndex+1, true);
         }
       }
 
       //handle navigation for up and down keypresses
       function handleKeydown(e) {
-        //ignore if it it's not coming from the body (could be in an input, etc)
-        if(e.srcElement.tagName === 'BODY') {
-          if(e.which === 38) {
-            //up arrow pressed
-            tryGoingUp();
-          } else if(e.which === 40) {
-            //down arrow pressed
-            tryGoingDown();
+        //make sure this morsel is currently in view - if this morsel instance is the one being viewed. if $index doesn't exist it means this one is the only one
+        if(scope.$index ? scope.currentMorselIndex === scope.$index : true) {
+          console.log('handlingkeydown');
+          //ignore if it it's not coming from the body (could be in an input, etc)
+          if(e.srcElement.tagName === 'BODY') {
+            if(e.which === 38) {
+              //up arrow pressed
+              tryGoingUp();
+            } else if(e.which === 40) {
+              //down arrow pressed
+              tryGoingDown();
+            }
           }
         }
       }
