@@ -5,7 +5,15 @@ angular.module( 'Morsel.common.apiFeed', [] )
   var Feed = {};
 
   Feed.getFeed = function() {
-    return Restangular.one('feed').get();
+    var deferred = $q.defer();
+
+    Restangular.one('feed').get().then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
   };
 
   return Feed;

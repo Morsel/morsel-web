@@ -70,7 +70,7 @@ app.configure(function(){
 });
 
 app.get('/', function(req, res) {
-  renderAngular(res, findMetadata(''));
+  renderPublicPage(res, findMetadata(''));
 });
 
 /* from dev-launch
@@ -159,6 +159,11 @@ app.get('/account*', function(req, res){
   });
 });
 
+//feed
+app.get('/feed', function(req, res){
+  renderPublicPage(res);
+});
+
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
   renderMorselPage(res, req.params.username, req.params.postidslug);
@@ -222,7 +227,7 @@ app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
-function renderAngular(res, mData) {
+function renderPublicPage(res, mData) {
   var fullMetadata = mData || findMetadata('default');
 
   res.render('public', {
@@ -288,7 +293,7 @@ function renderUserPage(res, username) {
       userMetadata.og = _.defaults(userMetadata.og || {}, metadata.default.og);
       userMetadata = _.defaults(userMetadata || {}, metadata.default);
 
-      renderAngular(res, userMetadata);
+      renderPublicPage(res, userMetadata);
     } else {
       //not a valid user - must be a bad route
       render404(res);
@@ -343,7 +348,7 @@ function renderMorselPage(res, username, morselIdSlug) {
           morselMetadata.og = _.defaults(morselMetadata.og || {}, metadata.default.og);
           morselMetadata = _.defaults(morselMetadata || {}, metadata.default);
          
-          renderAngular(res, morselMetadata);
+          renderPublicPage(res, morselMetadata);
         } else {
           //not a valid morsel id - must be a bad route
           render404(res);

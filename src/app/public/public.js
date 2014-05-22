@@ -43,6 +43,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.morselDetail',
   'Morsel.public.profile'//:username in route clobbers other routes - this needs to be last until a better solution is found
