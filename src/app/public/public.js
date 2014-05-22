@@ -30,7 +30,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.formNameFix',
   'Morsel.common.handleErrors',
   'Morsel.common.itemActionBar',
-  'Morsel.common.immersiveSwipe',
+  'Morsel.common.feedSwipe',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
   'Morsel.common.morselSwipe',

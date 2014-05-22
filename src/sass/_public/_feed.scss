@@ -1,22 +1,22 @@
-$immersive-header-padding: 10px;
-$immersive-footer-vert-padding: 5px;
-$immersive-footer-hor-padding: 10px;
-$immersive-header-lg-line-height: 40px;
-$immersive-footer-height: $immersive-footer-vert-padding*2 + $immersive-header-lg-line-height;
+$feed-header-padding: 10px;
+$feed-footer-vert-padding: 5px;
+$feed-footer-hor-padding: 10px;
+$feed-header-lg-line-height: 40px;
+$feed-footer-height: $feed-footer-vert-padding*2 + $feed-header-lg-line-height;
 $detail-left-col-width: 55%;
 $detail-right-col-width: 42%;
 
-.immersive {
+.feed {
   background: $morsel-background-dark;
 
-  .immersive-footer {
+  .feed-footer {
     display: block;
     position: fixed;
     z-index: 7;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: $immersive-footer-vert-padding $immersive-footer-hor-padding;
+    padding: $feed-footer-vert-padding $feed-footer-hor-padding;
     @include translate3d(0,0,0);
     @include transition(all .2s ease-out);
 
@@ -26,7 +26,7 @@ $detail-right-col-width: 42%;
       a {
         font-size: 20px;
         color: $morsel-dark;
-        line-height: $immersive-header-lg-line-height;
+        line-height: $feed-header-lg-line-height;
       }
     }
 
@@ -44,7 +44,7 @@ $detail-right-col-width: 42%;
       }
     }
 
-    .immersive-footer {
+    .feed-footer {
       h2 {
         a {
           color: white;
@@ -54,7 +54,7 @@ $detail-right-col-width: 42%;
     }
   }
 
-  .immersive-control {
+  .feed-control {
     display: none; //for now
 
     width: $arrow-height;
@@ -73,12 +73,12 @@ $detail-right-col-width: 42%;
     }
   }
 
-  .immersive-control-prev {
+  .feed-control-prev {
     background-position: 18px center;
     left: 0;
   }
 
-  .immersive-control-next {
+  .feed-control-next {
     background-position: -41px center;
     right: 0;
   }
@@ -118,7 +118,7 @@ $detail-right-col-width: 42%;
     top: 0;
     z-index: 2;
     text-align: center;
-    padding: $immersive-header-padding;
+    padding: $feed-header-padding;
     @include transition(all .2s ease-out);
     @include translate3d(0,-$mini-header-height,0);
     width: 100%;
@@ -299,7 +299,7 @@ $detail-right-col-width: 42%;
       .item-info {
         position: absolute;
         bottom: 0;
-        padding: 0 30px ($immersive-footer-height + 10px) 15px;
+        padding: 0 30px ($feed-footer-height + 10px) 15px;
         width: 100%;
       }
       
@@ -364,7 +364,7 @@ $detail-right-col-width: 42%;
 }
 
 @media (min-width: $screen-sm-min) {
-  .immersive {
+  .feed {
     .extra-page {
       .cover-title-wrap {
         h2 {
@@ -382,9 +382,9 @@ $detail-right-col-width: 42%;
 }
 
 @media (max-width: $screen-md) {
-  .immersive {
+  .feed {
     .on-share {
-      .immersive-footer {
+      .feed-footer {
         @include translate3d(0,$mini-header-height,0);
       }
     }
@@ -412,7 +412,7 @@ $detail-right-col-width: 42%;
 }
 
 @media (min-width: $screen-md-min) {
-  .immersive {
+  .feed {
     .morsel-title {
       h1 {
         font-size: 22px;
@@ -427,7 +427,7 @@ $detail-right-col-width: 42%;
 
         h5 {
           font-size: 20px;
-          line-height: $immersive-header-lg-line-height;
+          line-height: $feed-header-lg-line-height;
           margin: 0;
           color: $morsel-dark;
 
@@ -501,7 +501,7 @@ $detail-right-col-width: 42%;
       }
     }
 
-    .immersive-footer {
+    .feed-footer {
       display: none;
     }
     
@@ -618,7 +618,7 @@ $detail-right-col-width: 42%;
         .morsel-title {
           h2 {
             font-size: 24px;
-            line-height: $immersive-header-lg-line-height;
+            line-height: $feed-header-lg-line-height;
           }
         }
       }
@@ -627,7 +627,7 @@ $detail-right-col-width: 42%;
 }
 
 @media (min-width: $screen-lg-min) {
-  .immersive {
+  .feed {
     .item {
       .morsel-container {
         width: $screen-lg-min;

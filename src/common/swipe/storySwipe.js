@@ -254,7 +254,7 @@ angular.module('Morsel.common.morselSwipe', [
             event.preventDefault();
             event.stopPropagation();
 
-            //call our immersive function
+            //call our feed function
             if(scope.swipeStarted) {
               scope.swipeStarted(coords);
             }
@@ -286,7 +286,7 @@ angular.module('Morsel.common.morselSwipe', [
               
               //if we're swiping in x
               if(swipeDirection === 'x') {
-                //call our immersive function
+                //call our feed function
                 if(scope.swipeMoved) {
                   scope.swipeMoved(coords);
                 }
@@ -366,7 +366,7 @@ angular.module('Morsel.common.morselSwipe', [
             event.stopPropagation();
           }
 
-          //call our immersive function
+          //call our feed function
           if(scope.swipeEnded) {
             scope.swipeEnded(coords, forceAnimation);
           }
@@ -396,7 +396,7 @@ angular.module('Morsel.common.morselSwipe', [
 
         function updateItemHeight() {
           itemHeight = window.innerHeight;
-          scope.immersiveHeight = itemHeight+'px';
+          scope.feedHeight = itemHeight+'px';
         }
 
         //scrolling
@@ -450,8 +450,8 @@ angular.module('Morsel.common.morselSwipe', [
           //console.log('350 - currentItemIndex set with: '+i);
           scope.currentItemIndex = capIndex(i);
 
-          if(scope.updateImmersiveState) {
-            scope.updateImmersiveState({
+          if(scope.updatefeedState) {
+            scope.updatefeedState({
               inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
               onShare: scope.currentItemIndex === scope.itemCount - 1
             });
@@ -499,7 +499,7 @@ angular.module('Morsel.common.morselSwipe', [
         handleMouseWheel = function(event, delta, deltaX, deltaY){
           var elementScope = angular.element(event.target).scope(),
               nonScrollable = elementScope.nonScrollable,
-              //use immersive checklastscroll if we can, fall back to morsel version
+              //use feed checklastscroll if we can, fall back to morsel version
               hasScrolled = scope.checkLastScroll ? scope.checkLastScroll() : checkLastScroll();
 
           //make sure we can scroll on this element and user only scrolls one at a time

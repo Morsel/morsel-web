@@ -1,7 +1,7 @@
-<div class="immersive">
-  <div ng-class="{'in-morsel': immersiveState.inMorsel, 'on-share': immersiveState.onShare}">
+<div class="feed">
+  <div ng-class="{'in-morsel': feedState.inMorsel, 'on-share': feedState.onShare}">
     <div class="morsel current-morsel">
-      <div mrsl-morsel-swipe="{{morsel.items.length > 0}}" mrsl-morsel-swipe-count="{{morsel.items.length}}" ng-style="{'height': immersiveHeight}">
+      <div mrsl-morsel-swipe="{{morsel.items.length > 0}}" mrsl-morsel-swipe-count="{{morsel.items.length}}" ng-style="{'height': feedHeight}">
         <div class="morsel-title">
           <div class="morsel-container">
             <h1>{{morsel.title}}</h1>
@@ -9,7 +9,7 @@
         </div>
         <div mrsl-item-indicators mrsl-index="currentIndicatorIndex" mrsl-count="itemCount"></div>
         <ul class="items">
-          <li class="cover-page extra-page" ng-style="{'height': immersiveHeight}">
+          <li class="cover-page extra-page" ng-style="{'height': feedHeight}">
             <div class="morsel-container">
               <div ng-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background"></div>
               <div class="cover-title-wrap">
@@ -34,7 +34,7 @@
               </div>
             </div>
           </li>
-          <li ng-repeat="item in morsel.items" class="item" ng-class="{'full-photo': fullPhoto}" ng-style="{'height': immersiveHeight}">
+          <li ng-repeat="item in morsel.items" class="item" ng-class="{'full-photo': fullPhoto}" ng-style="{'height': feedHeight}">
             <div class="morsel-container">
               <div class="item-photo-wrap">
                 <img class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
@@ -52,7 +52,7 @@
               </div>
             </div>
           </li>
-          <li class="share-page extra-page" ng-style="{'height': immersiveHeight}">
+          <li class="share-page extra-page" ng-style="{'height': feedHeight}">
             <div class="morsel-container">
               <div ng-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background"></div>
               <div class="cover-title-wrap">
@@ -73,7 +73,7 @@
         </ul>
       </div>
     </div>
-    <footer class="immersive-footer user-info">
+    <footer class="feed-footer user-info">
       <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
       <h2 class="overflow-ellipsis">
         <a href="/{{morsel.creator.username}}">{{morsel.creator.first_name + ' ' + morsel.creator.last_name}}</a>

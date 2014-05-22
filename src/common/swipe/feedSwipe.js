@@ -2,11 +2,11 @@
  * Based off: http://github.com/revolunet/angular-carousel
 */
 
-angular.module('Morsel.common.immersiveSwipe', [
+angular.module('Morsel.common.feedSwipe', [
   'ngTouch'
 ])
 
-.directive('immersiveControls', [function() {
+.directive('feedControls', [function() {
   return {
     restrict: 'A',
     replace: true,
@@ -23,13 +23,13 @@ angular.module('Morsel.common.immersiveSwipe', [
       };
     },
     template: '<div>' +
-                '<span class="immersive-control immersive-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
-                '<span class="immersive-control immersive-control-next" ng-click="next()" ng-if="index < count - 1"></span>' +
+                '<span class="feed-control feed-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
+                '<span class="feed-control feed-control-next" ng-click="next()" ng-if="index < count - 1"></span>' +
               '</div>'
   };
 }])
 
-.directive('immersiveSwipe', ['$window', function($window) {
+.directive('feedSwipe', ['$window', function($window) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -49,14 +49,14 @@ angular.module('Morsel.common.immersiveSwipe', [
             amplitude,
             timestamp,
             offset = 0,
-            immersiveWidth,
+            feedWidth,
             destination,
             transformProperty = 'transform',
             swipeXMoved = false,
             winEl = angular.element($window),
             lastScrollTimestamp;
 
-        updateImmersiveWidth();
+        updatefeedWidth();
 
         //our scope vars, accessible by indicators
         scope.currentMorselIndex = 0; //track which morsel we're on
@@ -64,13 +64,13 @@ angular.module('Morsel.common.immersiveSwipe', [
         scope.morselsCount = 0;
 
         //scope vars for individual morsels
-        scope.immersiveState = {
+        scope.feedState = {
           inMorsel : false,
           onShare : false
         };
 
-        scope.updateImmersiveState = function(obj) {
-          _.extend(scope.immersiveState, obj);
+        scope.updatefeedState = function(obj) {
+          _.extend(scope.feedState, obj);
           scope.$digest();
         };
 
@@ -148,9 +148,9 @@ angular.module('Morsel.common.immersiveSwipe', [
           pressed = false;
           swipeXMoved = false;
           destination = offset;
-          currentOffset = (scope.currentMorselIndex * immersiveWidth);
+          currentOffset = (scope.currentMorselIndex * feedWidth);
           absMove = currentOffset - destination;
-          morselsMove = -Math[absMove>=0?'ceil':'floor'](absMove / immersiveWidth);
+          morselsMove = -Math[absMove>=0?'ceil':'floor'](absMove / feedWidth);
           shouldMove = Math.abs(absMove) > getAbsMoveTreshold();
 
           if ((morselsMove + scope.currentMorselIndex) >= scope.morselsCount ) {
@@ -162,7 +162,7 @@ angular.module('Morsel.common.immersiveSwipe', [
           
           moveOffset = shouldMove ? morselsMove : 0;
 
-          destination = (moveOffset + scope.currentMorselIndex) * immersiveWidth;
+          destination = (moveOffset + scope.currentMorselIndex) * feedWidth;
           amplitude = destination - offset;
           timestamp = Date.now();
           if (forceAnimation) {
@@ -177,7 +177,7 @@ angular.module('Morsel.common.immersiveSwipe', [
           if (scope.currentMorselIndex===0) {
             position = Math.max(-getAbsMoveTreshold(), position);
           } else if (scope.currentMorselIndex===scope.morselsCount-1) {
-            position = Math.min(((scope.morselsCount-1)*immersiveWidth + getAbsMoveTreshold()), position);
+            position = Math.min(((scope.morselsCount-1)*feedWidth + getAbsMoveTreshold()), position);
           }
           return position;
         }
@@ -189,11 +189,11 @@ angular.module('Morsel.common.immersiveSwipe', [
 
         function getAbsMoveTreshold() {
           // return min pixels required to move a slide
-          return moveTreshold * immersiveWidth;
+          return moveTreshold * feedWidth;
         }
 
-        function updateImmersiveWidth() {
-          immersiveWidth = window.innerWidth;
+        function updatefeedWidth() {
+          feedWidth = window.innerWidth;
         }
 
         //keep this here so you don't fire a scroll event in each morsel as you switch
@@ -213,7 +213,7 @@ angular.module('Morsel.common.immersiveSwipe', [
         function scroll(x) {
           // use CSS 3D transform to move the screen
           if (isNaN(x)) {
-            x = scope.currentMorselIndex * immersiveWidth;
+            x = scope.currentMorselIndex * feedWidth;
           }
 
           offset = x;
@@ -234,7 +234,7 @@ angular.module('Morsel.common.immersiveSwipe', [
               scroll(destination - delta);
               requestAnimationFrame(autoScroll);
             } else {
-              goToSlide(destination / immersiveWidth);
+              goToSlide(destination / feedWidth);
             }
           }
         }
@@ -246,7 +246,7 @@ angular.module('Morsel.common.immersiveSwipe', [
           if (animate) {
             // simulate a swipe so we have the standard animation
             // used when external binding index is updated or touch canceed
-            offset = (i * immersiveWidth);
+            offset = (i * feedWidth);
             scope.swipeEnded(null, true);
             return;
           }

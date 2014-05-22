@@ -89,7 +89,7 @@ module.exports = {
         'src/common/itemActions/like.js',
         'src/common/social/socialSharing.js',
         'src/common/swipe/carousel.js',
-        'src/common/swipe/immersiveSwipe.js',
+        'src/common/swipe/feedSwipe.js',
         'src/common/swipe/morsel.js',
         'src/common/swipe/storySwipe.js',
         'src/common/text/textLimit.js',
