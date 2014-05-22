@@ -12,7 +12,12 @@ angular.module( 'Morsel.common.connectTwitter', [] )
     link: function(scope, element, attrs) {
       var loginResponse,
           userInfoDeferred,
-          tData = MorselConfig.twitterData;
+          tData = MorselConfig.twitterData,
+          loginNext;
+
+      if($state && $state.params && $state.params.next) {
+        $scope.loginNext = '?next='+encodeURIComponent($state.params.next);
+      }
 
       //check if there is any twitter initialization data on the page
       if(tData) {
@@ -82,8 +87,10 @@ angular.module( 'Morsel.common.connectTwitter', [] )
         if(AfterLogin.hasCallbacks()) {
           AfterLogin.executeCallbacks();
         } else {
-          //send them home (trigger page refresh to switch apps)
-          $window.location.href = '/';
+          //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
+
+          //send them to the login page
+          $window.location.href = tData.loginNext ? tData.loginNext : '/';
         }
       }
 
@@ -91,6 +98,6 @@ angular.module( 'Morsel.common.connectTwitter', [] )
         HandleErrors.onError(resp.data, scope.form);
       }
     },
-    template: '<a href="/auth/twitter/connect" class="btn btn-social btn-twitter btn-lg" target="_self"><i class="common-share-twitter"></i>{{btnText}}</a>'
+    template: '<a href="/auth/twitter/connect{{loginNext}}" class="btn btn-social btn-twitter btn-lg" target="_self"><i class="common-share-twitter"></i>{{btnText}}</a>'
   };
 });

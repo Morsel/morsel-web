@@ -436,6 +436,7 @@ function twitterConsumer() {
 
 function getTwitterOAuthRequestToken(res, req) {
   twitterConsumer().getOAuthRequestToken(function(error, oauthToken, oauthTokenSecret, results) {
+
     if (error) {
       renderLoginPage(res, {
         errors: {
@@ -445,6 +446,11 @@ function getTwitterOAuthRequestToken(res, req) {
         }
       });
     } else {
+      //remember where the user was headed
+      if(req.query.next) {
+        req.session.loginNext = req.query.next;
+      }
+
       req.session.oauthRequestToken = oauthToken;
       req.session.oauthRequestTokenSecret = oauthTokenSecret;
       res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token="+oauthToken);
@@ -489,6 +495,10 @@ function getTwitterOAuthAccessToken(res, req) {
             token: req.session.oauthAccessToken,
             secret: req.session.oauthAccessTokenSecret
           };
+
+          if(req.session.loginNext) {
+            tData.loginNext = req.session.loginNext;
+          }
 
           renderLoginPage(res, tData);
         }

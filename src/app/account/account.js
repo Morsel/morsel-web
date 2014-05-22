@@ -69,7 +69,7 @@ angular.module( 'Morsel.account', [
   $window.moment.lang('en');
 })
 
-.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
+.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, Mixpanel, $state ) {
   var viewOptions = {
     miniHeader : false,
     hideFooter : false
@@ -103,11 +103,17 @@ angular.module( 'Morsel.account', [
 
   //when a user starts to access a new route
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    var currentLocation = $location.path(),
+        nextPath;
+
     //if non logged in user tries to access a restricted route
     if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
       event.preventDefault();
+
+      //if the user is trying to get somewhere that's not able to be accessed until logging in, plug it into the URL as a query so they can be redirected after login
+      nextPath = currentLocation ? '?next='+encodeURIComponent(currentLocation) : '';
       //send them to the login page
-      $window.location.href ='/login';
+      $window.location.href ='/login' + nextPath;
     }
     resetViewOptions();
   });

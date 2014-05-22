@@ -2,7 +2,7 @@ angular.module( 'Morsel.login.login', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'login', {
-    url: '/login',
+    url: '/login?next',
     views: {
       "main": {
         controller: 'LoginCtrl',
@@ -56,8 +56,13 @@ angular.module( 'Morsel.login.login', [])
       if(AfterLogin.hasCallbacks()) {
         AfterLogin.executeCallbacks();
       } else {
-        //send them home (trigger page refresh to switch apps)
-        $window.location.href = '/';
+        //if they were on their way to a certain page
+        if($stateParams.next) {
+          $window.location.href = $stateParams.next;
+        } else {
+          //send them home
+          $window.location.href = '/';
+        }
       }
     }
 

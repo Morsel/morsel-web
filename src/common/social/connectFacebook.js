@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectFacebook', [] )
 
 //connect (sign up/login) with facebook SDK
-.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window){
+.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window, $location){
   return {
     restrict: 'A',
     scope: {
@@ -11,7 +11,12 @@ angular.module( 'Morsel.common.connectFacebook', [] )
     replace: true,
     link: function(scope, element, attrs) {
       var loginResponse,
-          userInfoDeferred;
+          userInfoDeferred,
+          loginNext;
+
+      if($state && $state.params && $state.params.next) {
+        loginNext = $state.params.next;
+      }
 
       if(!window.fbAsyncInit) {
         window.fbAsyncInit = function() {
@@ -159,7 +164,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
                 }
               }).then(function() {
                 //send them home (trigger page refresh to switch apps)
-                $window.location.href = '/';
+                sendToNextUrl();
               }, function(resp) {
                 HandleErrors.onError(resp.data, scopeWithData.form);
               });
@@ -209,12 +214,19 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           AfterLogin.executeCallbacks();
         } else {
           //send them home (trigger page refresh to switch apps)
-          $window.location.href = '/';
+          sendToNextUrl();
         }
       }
 
       function onLoginError(resp) {
         HandleErrors.onError(resp.data, scope.form);
+      }
+
+      function sendToNextUrl() {
+        //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
+
+        //send them to the login page
+        $window.location.href = loginNext ? loginNext : '/';
       }
     },
     template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg"><i class="common-share-facebook"></i>{{btnText}}</a>'

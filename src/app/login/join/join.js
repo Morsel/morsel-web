@@ -2,7 +2,7 @@ angular.module( 'Morsel.login.join', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'join', {
-    url: '/join',
+    url: '/join?next',
     views: {
       "main": {
         controller: 'JoinCtrl',
@@ -226,7 +226,7 @@ angular.module( 'Morsel.login.join', [])
   }
 })
 
-.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors, $window) {
+.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors, $window, $stateParams) {
   //a cleaner way of building radio buttons
   $scope.industryValues = [{
     'name':'Chef',
@@ -253,7 +253,9 @@ angular.module( 'Morsel.login.join', [])
     if($scope.additionalInfoForm.$valid) {
       industryPromise = ApiUsers.updateIndustry($scope.userData.registered.id, $scope.additionalInfoModel.industry);
       userInfoPromise = ApiUsers.updateUser($scope.userData.registered.id, {
-        bio: $scope.additionalInfoModel.bio
+        user: {
+          bio: $scope.additionalInfoModel.bio
+        }
       });
 
       //once all promises are resolved, send them on their way
@@ -266,8 +268,13 @@ angular.module( 'Morsel.login.join', [])
     if(AfterLogin.hasCallbacks()) {
       AfterLogin.executeCallbacks();
     } else {
-      //send them home (trigger page refresh to switch apps)
-      $window.location.href = '/';
+      //if they were on their way to a certain page
+      if($stateParams.next) {
+        $window.location.href = $stateParams.next;
+      } else {
+        //send them home
+        $window.location.href = '/';
+      }
     }
   }
 
