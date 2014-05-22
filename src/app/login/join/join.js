@@ -99,6 +99,16 @@ angular.module( 'Morsel.login.join', [])
     }
   };
 
+  //check for an afterlogin callback on load
+  if(AfterLogin.hasCallback('combineAccounts.twitter')) {
+    afterLoginCallback = AfterLogin.getCallback();
+
+    //make sure we're actually loggeed in just in case
+    if(Auth.isLoggedIn()) {
+      afterLoginCombineAccountCallback(afterLoginCallback);
+    }
+  }
+
   //submit our form
   $scope.basicInfoSubmit = function() {
     var uploadData = {
@@ -170,12 +180,24 @@ angular.module( 'Morsel.login.join', [])
     HandleErrors.onError(resp.data, $scope.basicInfoForm);
   }
 
+  function afterLoginCombineAccountCallback(afterLoginCallback) {
+    ApiUsers.createUserAuthentication(afterLoginCallback.data).then(function() {
+      //remove callback after completion
+      AfterLogin.removeCallback();
+
+      //send them home (trigger page refresh to switch apps)
+      $window.location.href = '/';
+    }, function(resp) {
+      HandleErrors.onError(resp.data, scopeWithData.basicInfoForm);
+    });
+  }
+
   function setRemotePhotoUrl(url) {
     $scope.remotePhotoUrl = url;
   }
 
   function showExistingAccountModal() {
-    var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, HandleErrors, scopeWithData) {
+    var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, HandleErrors, AfterLogin, scopeWithData) {
       $scope.email = scopeWithData.basicInfoModel.email;
       $scope.socialType = 'Twitter';
 
@@ -185,8 +207,10 @@ angular.module( 'Morsel.login.join', [])
       };
 
       $scope.combineAccounts = function() {
-        AfterLogin.addCallbacks(function() {
-          ApiUsers.createUserAuthentication({
+        AfterLogin.setCallback({
+          type: 'combineAccounts.twitter',
+          path: $location.url(),
+          data: {
             'authentication': {
               'provider': 'twitter',
               'token': scopeWithData.userData.social.token,
@@ -195,12 +219,7 @@ angular.module( 'Morsel.login.join', [])
               'short_lived': false,
               'uid': scopeWithData.userData.social.id
             }
-          }).then(function() {
-            //send them home (trigger page refresh to switch apps)
-            $window.location.href = '/';
-          }, function(resp) {
-            HandleErrors.onError(resp.data, scopeWithData.basicInfoForm);
-          });
+          }
         });
 
         $location.path('/login');
@@ -211,7 +230,7 @@ angular.module( 'Morsel.login.join', [])
       });
     };
     //we need to implicitly inject dependencies here, otherwise minification will botch them
-    ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'HandleErrors', 'scopeWithData'];
+    ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'HandleErrors', 'AfterLogin', 'scopeWithData'];
 
     var modalInstance = $modal.open({
       templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',

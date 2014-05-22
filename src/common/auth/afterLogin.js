@@ -51,7 +51,9 @@ angular.module( 'Morsel.common.afterLogin', [])
     removeCallback: function() {
       //unset our callback
       callback = null;
-      delete $window.sessionStorage.afterlogin;
+      if($window.sessionStorage.afterlogin) {
+        delete $window.sessionStorage.afterlogin;
+      }
     }
   };
 });
