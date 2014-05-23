@@ -19,7 +19,7 @@ angular.module( 'Morsel.public.feed', [])
   });
 })
 
-.controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed ) {
+.controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed, $timeout ) {
   var feedFetchCount = 5,
       totalFetchCount = 0,
       oldestId;
