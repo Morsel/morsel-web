@@ -9,6 +9,21 @@ $detail-right-col-width: 42%;
 .feed {
   background: $morsel-background-dark;
 
+  &:after {
+    @include replace-text-with-dimensions('icons/loader-030000.gif');
+    display: block;
+    content: ' ';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+  }
+
+  &.reached-oldest {
+    &:after {
+      display: none;
+    }
+  }
+
   .feed-footer {
     display: block;
     position: fixed;

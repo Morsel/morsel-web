@@ -22,13 +22,13 @@ angular.module( 'Morsel.public.feed', [])
 .controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed ) {
   var feedFetchCount = 5,
       totalFetchCount = 0,
-      oldestId,
-      reachedOldest = false;
+      oldestId;
 
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
 
   $scope.morsels = [];
+  $scope.reachedOldest = false;
 
   $scope.goHome = function() {
     $window.open($location.protocol() + '://'+ $location.host(), '_self');
@@ -50,7 +50,7 @@ angular.module( 'Morsel.public.feed', [])
     };
 
     //if we've already gotten the oldest items, don't keep pinging the API
-    if(reachedOldest) {
+    if($scope.reachedOldest) {
       return;
     }
 
@@ -59,7 +59,7 @@ angular.module( 'Morsel.public.feed', [])
     }
 
     ApiFeed.getFeed(feedParams).then(function(feedResp){
-      if(feedResp.data) {
+      if(feedResp.data && feedResp.data.length > 0) {
         _.each(feedResp.data, function(f) {
           if(f.subject_type==='Morsel') {
             $scope.morsels.push(f.subject);
@@ -71,7 +71,7 @@ angular.module( 'Morsel.public.feed', [])
         oldestId = _.last(feedResp.data)['id'];
       } else {
         //there are no more feed items to get, we've gone all the way back
-        reachedOldest = true;
+        $scope.reachedOldest = true;
       }
       
     }, function(resp){

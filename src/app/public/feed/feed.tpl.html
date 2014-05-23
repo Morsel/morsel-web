@@ -1,4 +1,4 @@
-<div class="feed">
+<div class="feed" ng-class="{'reached-oldest': reachedOldest}">
   <div feed-swipe ng-class="{'in-morsel': feedState.inMorsel}">
     <div feed-controls index="currentControlIndex" count="morselsCount"></div>
     <div class="morsels-wrap">
