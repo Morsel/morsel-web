@@ -63,6 +63,8 @@ angular.module('Morsel.common.feedSwipe', [
       scope.currentMorselIndex = 0; //track which morsel we're on
       scope.currentControlIndex = 0; //track which indicator is active
       scope.morselsCount = 0;
+      scope.feedBufferIndex = 0;
+      scope.feedBufferSize = 3;
 
       //scope vars for individual morsels
       scope.feedState = {
@@ -188,6 +190,24 @@ angular.module('Morsel.common.feedSwipe', [
         return (idx >= scope.morselsCount) ? scope.morselsCount: (idx <= 0) ? 0 : idx;
       }
 
+      function updateBufferIndex() {
+        // update and cap the buffer index
+        var bufferIndex = 0;
+        var bufferEdgeSize = (scope.feedBufferSize - 1) / 2;
+
+        if (scope.currentMorselIndex <= bufferEdgeSize) {
+          bufferIndex = 0;
+        } else if (scope.morselsCount < scope.feedBufferSize) {
+          bufferIndex = 0;
+        } else if (scope.currentMorselIndex > scope.morselsCount - scope.feedBufferSize) {
+          bufferIndex = scope.morselsCount - scope.feedBufferSize;
+        } else {
+          bufferIndex = scope.currentMorselIndex - bufferEdgeSize;
+        }
+
+        scope.feedBufferIndex = bufferIndex;
+      }
+
       function getAbsMoveTreshold() {
         // return min pixels required to move a slide
         return moveTreshold * feedWidth;
@@ -219,6 +239,8 @@ angular.module('Morsel.common.feedSwipe', [
 
         offset = x;
         var move = -Math.round(offset);
+
+        move += (scope.feedBufferIndex * feedWidth);
         iElement.find('ul')[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
       }
 
@@ -252,7 +274,7 @@ angular.module('Morsel.common.feedSwipe', [
           return;
         }
         scope.currentMorselIndex = capIndex(i);
-
+        updateBufferIndex();
         //emit where we are so we can go fetch more data
         scope.$emit('feed.atMorsel', scope.currentMorselIndex);
         
@@ -315,5 +337,11 @@ angular.module('Morsel.common.feedSwipe', [
         $document.off('keydown', debouncedKeydown);
       });
     }
+  };
+})
+
+.filter('feedSlice', function() {
+  return function(collection, start, size) {
+    return collection.slice(start, start + size);
   };
 });

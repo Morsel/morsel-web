@@ -23,15 +23,14 @@ angular.module( 'Morsel.public.feed', [])
   var feedFetchCount = 5, //the number of morsels to fetch at a time from the server
       totalFetchCount = 0, //the total number of morsels that have been fetched from the server
       oldestId, //the id of the oldest morsel fetched from the server
-      currentFeedItemIndex = 0, //the index of the feed item the user is currently on
-      fetchThreshold = 2 //how many morsels away from the last one we have data for before we fetch more
-      ;
+      fetchThreshold = 2, //how many morsels away from the last one we have data for before we fetch more
+      oldestDisplayFeedItemIndex; //keeping track of the index on the right that is rendered
+
+  $scope.morsels = []; //our morsel array
+  $scope.reachedOldest = false; //whether or not we've gotten to the end of the data
 
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
-
-  $scope.morsels = [];
-  $scope.reachedOldest = false;
 
   $scope.goHome = function() {
     $window.open($location.protocol() + '://'+ $location.host(), '_self');
@@ -42,23 +41,15 @@ angular.module( 'Morsel.public.feed', [])
 
   //when user moves to a new feed item
   $scope.$on('feed.atMorsel', function(e, morselIndex){
-    //update the current index that a user is on. two things need to happen here -
-    //1. need to check if we should load any more data from the server
-    //2. need to update what is being displayed in the DOM so it doesn't become overloaded
-    currentFeedItemIndex = morselIndex;
-    updateMorselData();
-  });
-
-  function updateMorselData() {
     if(totalFetchCount !== 0) {
       //make sure we've fetched data already before we start trying to get more
 
-      if(totalFetchCount - (currentFeedItemIndex + 1) <= fetchThreshold) {
+      if(totalFetchCount - (morselIndex + 1) <= fetchThreshold) {
         //we're within fetchThreshold morsels of the end of the data
         grabOldFeed();
       }
     }
-  }
+  });
 
   function grabOldFeed() {
     var feedParams = {
