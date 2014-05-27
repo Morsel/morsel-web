@@ -19,7 +19,7 @@ angular.module( 'Morsel.public.feed', [])
   });
 })
 
-.controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed, $interval ) {
+.controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed, $interval, Auth ) {
   var feedFetchCount = 5, //the number of feed items to fetch at a time from the server
       totalFetchCount = 0, //the total number of feed items that have been fetched from the server
       oldestId, //the id of the oldest morsel fetched from the server
@@ -31,6 +31,7 @@ angular.module( 'Morsel.public.feed', [])
   $scope.feedItems = []; //our feed item array
   $scope.reachedOldest = false; //whether or not we've gotten to the end of the data
   $scope.newFeedItemCount = 0; //how many feed items are newer than what's been loaded so far
+  $scope.initialDataLoading = true; //for loading visuals
 
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
@@ -75,6 +76,8 @@ angular.module( 'Morsel.public.feed', [])
 
     ApiFeed.getFeed(feedParams).then(function(feedResp){
       if(feedResp.data && feedResp.data.length > 0) {
+        $scope.initialDataLoading = false;
+
         _.each(feedResp.data, function(f) {
           //only allow morsels for now
           if(f.subject_type==='Morsel') {
@@ -90,7 +93,11 @@ angular.module( 'Morsel.public.feed', [])
         $scope.reachedOldest = true;
       }
     }, function(resp){
-      console.log('oops, couldnt get feed');
+      if(resp.data && resp.data.errors && resp.data.errors.api) {
+        //resp returned an api issue
+        //report and error back to user
+        Auth.showApiError(resp.status, resp.status.errors);
+      }
     });
   }
 
@@ -127,7 +134,11 @@ angular.module( 'Morsel.public.feed', [])
         $scope.newFeedItemCount = newFeedItems.length;
       }
     }, function(resp){
-      console.log('oops, couldnt get feed');
+      if(resp.data && resp.data.errors && resp.data.errors.api) {
+        //resp returned an api issue
+        //report and error back to user
+        Auth.showApiError(resp.status, resp.status.errors);
+      }
     });
   }
 

@@ -3,6 +3,11 @@ $feed-notification-width: 90px;
 .feed {
   background-color: $morsel-background-dark;
 
+  &.feed-data-loading {
+    background: url(images/icons/loader.gif) center center no-repeat;
+    min-height: 300px;
+  }
+
   &.reached-oldest .morsel:last-child:after {
     display: none;
   }
@@ -53,6 +58,10 @@ $feed-notification-width: 90px;
 
 @media (min-width: $screen-md-min) {
   .feed {
+    &.feed-data-loading {
+      min-height: 450px;
+    }
+
     .feed-control {
       width: $arrow-height;
       height: $arrow-height;
