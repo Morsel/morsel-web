@@ -58,7 +58,7 @@
         </h1>
         <div class="account-dropdown btn-group" dropdown>
           <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
-            <img ng-src="{{currentUser.photos['_40x40']}}" class="img-circle" />
+            <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-no-link="true" mrsl-user-image-size="profile-pic-xs"></div>
             <span ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></span>
             <span class="caret"></span>
           </button>
