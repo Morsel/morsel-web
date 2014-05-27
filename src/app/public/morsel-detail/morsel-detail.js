@@ -33,13 +33,13 @@ angular.module( 'Morsel.public.morselDetail', [])
   };
   
   //scope vars for individual morsel
-  $scope.immersiveState = {
+  $scope.feedState = {
     inMorsel : false,
     onShare : false
   };
 
-  $scope.updateImmersiveState = function(obj) {
-    _.extend($scope.immersiveState, obj);
+  $scope.updatefeedState = function(obj) {
+    _.extend($scope.feedState, obj);
     $scope.$digest();
   };
 

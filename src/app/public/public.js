@@ -30,8 +30,9 @@ angular.module( 'Morsel.public', [
   'Morsel.common.formNameFix',
   'Morsel.common.handleErrors',
   'Morsel.common.itemActionBar',
-  'Morsel.common.immersiveSwipe',
+  'Morsel.common.feedSwipe',
   'Morsel.common.mixpanel',
+  'Morsel.common.morsel',
   'Morsel.common.morselSwipe',
   'Morsel.common.itemLike',
   'Morsel.common.photoHelpers',
@@ -43,6 +44,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.morselDetail',
   'Morsel.public.profile'//:username in route clobbers other routes - this needs to be last until a better solution is found
