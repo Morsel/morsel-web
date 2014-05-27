@@ -91,7 +91,7 @@ module.exports = {
         'src/common/swipe/carousel.js',
         'src/common/swipe/feedSwipe.js',
         'src/common/swipe/morsel.js',
-        'src/common/swipe/storySwipe.js',
+        'src/common/swipe/morselSwipe.js',
         'src/common/text/textLimit.js',
         'src/common/user/cuisineUsers.js',
         'src/common/user/specialtyUsers.js',
