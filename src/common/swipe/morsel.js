@@ -4,7 +4,12 @@ angular.module('Morsel.common.morsel', [])
   return {
     restrict: 'A',
     replace: true,
-    scope: false,
+    scope: {
+      morsel: '=mrslMorsel'
+    },
+    link: function(scope) {
+      console.log(scope);
+    },
     templateUrl: 'common/swipe/morsel.tpl.html'
   };
 }]);

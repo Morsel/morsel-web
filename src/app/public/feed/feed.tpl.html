@@ -1,10 +1,13 @@
 <div class="feed" ng-class="{'reached-oldest': reachedOldest}">
   <div feed-swipe ng-class="{'in-morsel': feedState.inMorsel}">
     <div feed-controls index="currentControlIndex" count="morselsCount"></div>
+    <div class="feed-notification" ng-class="{'no-new-items': newFeedItemCount === 0}">
+      <a ng-click="showNewFeedItems()">{{newFeedItemCount}} new morsel{{newFeedItemCount === 1? '':'s'}}</a>
+    </div>
     <div class="morsels-wrap">
       <ul class="morsels">
-        <li ng-repeat="morsel in morsels | feedSlice:feedBufferIndex:feedBufferSize" class="morsel">
-          <div mrsl-morsel></div>
+        <li ng-repeat="feedItem in feedItems | feedSlice:feedBufferIndex:feedBufferSize" class="morsel">
+          <div mrsl-morsel="feedItem.subject"></div>
         </li>
       </ul>
     </div>

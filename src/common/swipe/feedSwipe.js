@@ -78,8 +78,8 @@ angular.module('Morsel.common.feedSwipe', [
       };
 
       //set up our scope watches
-      //watch our morsels
-      scope.$watchCollection('morsels', function(newValue, oldValue) {
+      //watch our feed items
+      scope.$watchCollection('feedItems', function(newValue, oldValue) {
         scope.morselsCount = 0;
         if (angular.isArray(newValue)) {
           scope.morselsCount = newValue.length;
