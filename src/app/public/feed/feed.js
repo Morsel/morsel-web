@@ -26,7 +26,8 @@ angular.module( 'Morsel.public.feed', [])
       fetchThreshold = 2, //how many feed items away from the last one we have data for before we fetch more
       oldestDisplayFeedItemIndex, //keeping track of the index on the right that is rendered
       newFeedItems = [], //hold any feed item data that comes back from the server after the initial load
-      newFeedItemCheckTime = 60000; //milliseconds to wait between checks of new feed items from server
+      newFeedItemCheckTime = 60000, //milliseconds to wait between checks of new feed items from server
+      hittingServer = false; //track whether we are currently performing a request to the API
 
   $scope.feedItems = []; //our feed item array
   $scope.reachedOldest = false; //whether or not we've gotten to the end of the data
@@ -65,14 +66,16 @@ angular.module( 'Morsel.public.feed', [])
       count: feedFetchCount
     };
 
-    //if we've already gotten the oldest items, don't keep pinging the API
-    if($scope.reachedOldest) {
+    //if we've already gotten the oldest items or we're still processing a previous API request, don't keep pinging the API
+    if($scope.reachedOldest || hittingServer) {
       return;
     }
 
     if(oldestId) {
       feedParams.max_id = oldestId -1;
     }
+
+    hittingServer = true;
 
     ApiFeed.getFeed(feedParams).then(function(feedResp){
       if(feedResp.data && feedResp.data.length > 0) {
@@ -86,18 +89,24 @@ angular.module( 'Morsel.public.feed', [])
           }
         });
 
+        console.log('feedresp.data: ',feedResp.data);
+        console.log('scope.feeditems: ', $scope.feedItems);
         //the oldest id we have fetched from the server so far
         oldestId = _.last(feedResp.data)['id'];
       } else {
         //there are no more feed items to get, we've gone all the way back
         $scope.reachedOldest = true;
       }
+
+      hittingServer = false;
     }, function(resp){
       if(resp.data && resp.data.errors && resp.data.errors.api) {
         //resp returned an api issue
         //report and error back to user
         Auth.showApiError(resp.status, resp.status.errors);
       }
+
+      hittingServer = false;
     });
   }
 
