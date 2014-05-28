@@ -8,12 +8,10 @@ angular.module( 'Morsel.common.comments', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var isLoggedIn,
-          isChef;
+      var isLoggedIn;
 
       Auth.getCurrentUserPromise().then(function(userData){
         isLoggedIn = Auth.isLoggedIn();
-        isChef = Auth.isChef();
       });
 
       scope.openComments = function () {
@@ -28,10 +26,9 @@ angular.module( 'Morsel.common.comments', [] )
         });
       };
 
-      var ModalInstanceCtrl = function ($scope, $modalInstance, item) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, $location, item) {
         $scope.item = item;
 
-        $scope.isChef = isChef;
         $scope.isLoggedIn = isLoggedIn;
 
         $scope.comment = {
@@ -45,6 +42,16 @@ angular.module( 'Morsel.common.comments', [] )
         $scope.addComment = function() {
           if(isLoggedIn) {
             postComment();
+          } else {
+            var currentUrl = $location.url();
+
+            //if not, set our callback for after we're logged in
+            AfterLogin.addCallbacks(function() {
+              postComment().then(function(){
+                $location.path(currentUrl);
+              });
+            });
+            $location.path('/join');
           }
         };
 
@@ -84,7 +91,7 @@ angular.module( 'Morsel.common.comments', [] )
         }
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item'];
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', 'item'];
     },
     template: '<a ng-click="openComments()"><i class="common-chat"></i>{{item.comment_count}} comment{{item.comment_count===1?\'\':\'s\'}}</a>'
   };
