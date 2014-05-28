@@ -65,6 +65,20 @@ angular.module( 'Morsel.login', [
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
+
+  $stateProvider.state( '404', {
+    url: '/404',
+    views: {
+      "main": {
+        controller: function($scope){
+        },
+        templateUrl: 'common/util/404.tpl.html'
+      }
+    },
+    data: {
+      pageTitle: 'Page Not Found'
+    }
+  });
 })
 
 .run( function run ($window) {
@@ -134,6 +148,11 @@ angular.module( 'Morsel.login', [
     if($window._gaq) {
       $window._gaq.push(['_trackPageview', $location.path()]);
     }
+  });
+
+  //if there are internal state issues, go to 404
+  $scope.$on('$stateChangeError', function(e) {
+    $state.go('404');
   });
 
   //to store user data as they're signing up/logging in
