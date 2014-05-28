@@ -5,12 +5,18 @@
     {{> partials/header}}
 
     <div ui-view="main" class="main-view" ng-click="menuOpen = false">
-      {{#staticPartial.terms}}
-      {{> partials/static/terms}}
-      {{/staticPartial.terms}}
+      {{#staticPartial.about}}
+      {{> partials/static/about}}
+      {{/staticPartial.about}}
+      {{#staticPartial.press}}
+      {{> partials/static/press}}
+      {{/staticPartial.press}}
       {{#staticPartial.privacy}}
       {{> partials/static/privacy}}
       {{/staticPartial.privacy}}
+      {{#staticPartial.terms}}
+      {{> partials/static/terms}}
+      {{/staticPartial.terms}}
     </div>
   </div>
 </div>
