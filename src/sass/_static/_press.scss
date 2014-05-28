@@ -1,0 +1,26 @@
+.press-resources {
+  text-align: center;
+
+  div {
+    margin-bottom: 15px;
+  }
+
+  span, a {
+    display: block;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .press-resources {
+    text-align: left;
+    
+    img {
+      width: 40%;
+      margin-right: 15px;
+    }
+
+    span, a {
+      display: inline;
+    }
+  }
+}
