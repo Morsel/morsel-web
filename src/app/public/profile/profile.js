@@ -30,7 +30,6 @@ angular.module( 'Morsel.public.profile', [])
 
 .controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $anchorScroll, $modal, $rootScope, profileUserData, currentUser, $state ) {
   $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.hideFooter = true;
 
   $scope.largeBreakpoint = $window.innerWidth > 768; //total hack
 

@@ -6,9 +6,9 @@ angular.module( 'Morsel.account.body', [])
     abstract: true,
     url: '/account',
     views: {
-      "account-body": {
+      "main": {
         controller: 'AccountBodyCtrl',
-        template: '<div ui-view="main"></div>'
+        templateUrl: 'app/account/accountBody/account-body.tpl.html'
       }
     },
     access: {

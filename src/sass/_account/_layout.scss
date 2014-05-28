@@ -3,32 +3,6 @@
     background-color: $morsel-light-off;
   }
 
-  .account-header {
-    background: url(images/bg/light-line.png) right top repeat;
-    border-bottom: 1px solid $morsel-light;
-
-    h1 {
-      float: left;
-      margin: 5px 0;
-    }
-
-    .account-dropdown {
-      float: right;
-      margin-top: 25px;
-    }
-  }
-
-  .account-footer {
-    background: url(images/bg/light-line.png) right top repeat;
-    border-top: 1px solid $morsel-light;
-    margin-top: 20px;
-    padding: 10px 0;
-
-    nav {
-      display: block;
-    }
-  }
-
   .account-menu {
     padding: 0;
 
@@ -98,6 +72,10 @@
 
 @media (min-width: $screen-sm-min) {
   .account {
+    .account-menu {
+      padding-top: 40px;
+    }
+    
     .account-main {
       border-left: 1px solid $morsel-medium;
     }

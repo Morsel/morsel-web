@@ -14,6 +14,5 @@ angular.module( 'Morsel.login.logout', [])
 
 .controller( 'LogoutCtrl', function LogoutCtrl( $scope, $stateParams, Auth ) {
   $scope.viewOptions.hideHeader = true;
-  $scope.viewOptions.hideFooter = true;
   Auth.logout();
 });

@@ -1,0 +1,15 @@
+<div class="container container-shadow">
+  <div class="row">
+    <div class="col-sm-3 account-menu">
+      <h2>Your Account</h2>
+      <ul>
+        <li ui-route="/account/edit-profile" ng-class="{active:$uiRoute}">
+          <a href="/account/edit-profile">Edit Profile</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-9 account-main">
+      <div ui-view="account-body"></div>
+    </div>
+  </div>
+</div>

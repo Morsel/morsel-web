@@ -1,0 +1,65 @@
+<nav class="side-nav" ng-class="{open:menuOpen}" role="navigation">
+  <a ng-if="isLoggedIn" ng-click="goToProfile()" class="profile-link">
+    <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-no-link="true" mrsl-user-image-size="profile-pic-xs"></div>
+    <h5 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h5>
+  </a>
+  <div class="prompt-btns" ng-if="!isLoggedIn">
+    <a href="/join" target="_self">Sign Up</a>
+    <a href="/login"  target="_self">Login</a>
+  </div>
+  <span>Explore</span>
+  <ul>
+    <li ui-route="/feed" ng-class="{active:$uiRoute}">
+      {{#pageType.public}}
+      <a href="/feed" ng-click="closeMenu()"><i class="sidenav-feed"></i>My Feed</a>
+      {{/pageType.public}}
+      {{#pageType.account}}
+      <a href="/feed" ng-click="closeMenu()" target="_self"><i class="sidenav-feed"></i>My Feed</a>
+      {{/pageType.account}}
+      {{#pageType.static}}
+      <a href="/feed" ng-click="closeMenu()" target="_self"><i class="sidenav-feed"></i>My Feed</a>
+      {{/pageType.static}}
+    </li>
+  </ul>
+  <span ng-if="isLoggedIn">Help &amp; Settings</span>
+  <span ng-if="!isLoggedIn">Help</span>
+  <ul>
+    <li ng-if="isLoggedIn">
+      {{#pageType.public}}
+      <a href="/account/edit-profile" target="_self"><i class="sidenav-account-settings"></i>Account Settings</a>
+      {{/pageType.public}}
+      {{#pageType.account}}
+      <a href="/account/edit-profile"><i class="sidenav-account-settings"></i>Account Settings</a>
+      {{/pageType.account}}
+      {{#pageType.static}}
+      <a href="/account/edit-profile" target="_self"><i class="sidenav-account-settings"></i>Account Settings</a>
+      {{/pageType.static}}
+    </li>
+    <li>
+      <a href="/about" target="_self">About</a>
+    </li>
+    <li>
+      <a href="http://insights.eatmorsel.com" target="_blank">Insights Blog</a>
+    </li>
+    <li>
+      <a href="/press" target="_self">Press &amp; Media</a>
+    </li>
+    <li>
+      <a href="mailto:support@eatmorsel.com" target="_blank">Contact Us</a>
+    </li>
+    <li>
+      <a href="/terms" target="_self"><i class="sidenav-terms"></i>Terms of Use</a>
+    </li>
+    <li>
+      <a href="/privacy" target="_self">Privacy</a>
+    </li>
+    <li ng-if="isLoggedIn">
+      <a href="/logout" target="_self"><i class="sidenav-logout"></i>Logout</a>
+    </li>
+  </ul>
+  <div class="morsel-social-links">
+    <a href="https://facebook.com/eatmorsel" target="_blank"><i class="common-share-facebook"></i></a>
+    <a href="https://twitter.com/eatmorsel" target="_blank"><i class="common-share-twitter"></i></a>
+  </div>
+  <p class="menu-copyright">&copy; Morsel Labs, Inc. 2014</p>
+</nav>

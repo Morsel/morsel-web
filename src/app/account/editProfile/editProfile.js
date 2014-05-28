@@ -4,7 +4,7 @@ angular.module( 'Morsel.account.editProfile', [])
   $stateProvider.state( 'account.edit-profile', {
     url: '/edit-profile',
     views: {
-      "main": {
+      "account-body": {
         controller: 'EditProfileCtrl',
         templateUrl: 'app/account/editProfile/editProfile.tpl.html'
       }
@@ -27,9 +27,6 @@ angular.module( 'Morsel.account.editProfile', [])
       userSpecialtiesPromise,
       allSpecialties,
       userSpecialties;
-
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.hideFooter = true;
 
   //basic info
 

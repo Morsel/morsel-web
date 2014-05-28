@@ -26,7 +26,6 @@ angular.module( 'Morsel.public.morselDetail', [])
       itemNumber = parseInt(morselDetailsArr[1], 10);*/
 
   $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.hideFooter = true;
 
   $scope.goHome = function() {
     $window.open($location.protocol() + '://'+ $location.host(), '_self');
