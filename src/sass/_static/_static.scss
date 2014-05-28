@@ -28,6 +28,11 @@
       background-size: contain;
       background-attachment: fixed;
       background-position: center top;
+
+      & + .container {
+        padding-left: 70px;
+        padding-right: 70px;
+      }
     }
   }
 }
