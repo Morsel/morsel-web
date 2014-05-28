@@ -87,8 +87,7 @@ angular.module( 'Morsel.login', [
 
 .controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel, $state ) {
   var viewOptions = {
-    miniHeader : false,
-    hideFooter : false
+    miniHeader : false
   };
 
   Auth.setupInterceptor();
@@ -100,7 +99,7 @@ angular.module( 'Morsel.login', [
   //also bind on resize
   angular.element($window).bind('resize', _.debounce(onBrowserResize, 300));
 
-  //initial fetching of user data for header/footer
+  //initial fetching of user data for header
   Auth.setInitialUserData().then(function(currentUser){
     $scope.currentUser = currentUser;
 

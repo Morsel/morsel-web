@@ -1,28 +1,33 @@
-.static-header {
-  padding: 55px 0;
-  background-image: url(images/bg/static-header.jpg);
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  
-  h1 {
-    margin: 0;
-    padding: 0;
-    color: $morsel-static-header;
-    text-align: center;
-  }
+.static {
+  .static-header {
+    padding: 55px 0;
+    background-image: url(images/bg/static-header.jpg);
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+    h1 {
+      margin: 0;
+      padding: 0;
+      color: $morsel-static-header;
+      text-align: center;
+    }
 
-  & + .container {
-    padding-top: 30px;
-    padding-bottom: 20px;
-    background-color: $morsel-background;
+    & + .container {
+      padding-top: 30px;
+      padding-bottom: 20px;
+      background-color: $morsel-background;
+    }
   }
 }
 
+
 @media (min-width: $screen-md-min) {
-  .static-header {
-    background-size: contain;
-    background-attachment: fixed;
-    background-position: center top;
+  .static {
+    .static-header {
+      background-size: contain;
+      background-attachment: fixed;
+      background-position: center top;
+    }
   }
 }

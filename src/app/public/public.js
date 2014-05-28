@@ -105,9 +105,15 @@ angular.module( 'Morsel.public', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
   var viewOptions = {
-    miniHeader : false,
-    hideFooter : false
+    miniHeader : false
   };
+
+  $scope.currentUser = {
+    username: 'something',
+    first_name: 'firstie'
+  };
+
+  $scope.testprop = 'hello';
 
   Auth.setupInterceptor();
   Auth.resetAPIParams();
@@ -118,7 +124,7 @@ angular.module( 'Morsel.public', [
   //also bind on resize
   angular.element($window).bind('resize', _.debounce(onBrowserResize, 300));
 
-  //initial fetching of user data for header/footer
+  //initial fetching of user data for header
   Auth.setInitialUserData().then(function(currentUser){
     $scope.currentUser = currentUser;
 
@@ -190,8 +196,14 @@ angular.module( 'Morsel.public', [
     $scope.$apply('viewOptions');
   }
 
-  $scope.goTo = function(path) {
-    $location.path(path);
+  $scope.closeMenu = function() {
+    $scope.menuOpen = false;
+  };
+
+  $scope.goToProfile = function() {
+    if($scope.currentUser && $scope.currentUser.username) {
+      $location.path('/'+$scope.currentUser.username);
+    }
     $scope.menuOpen = false;
   };
 });

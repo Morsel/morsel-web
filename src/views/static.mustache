@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html id="ng-app" ng-app="Morsel.static" ng-controller="StaticCtrl">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -25,6 +25,7 @@
     <meta property="fb:app_id" content="{{{metadata.fb_app_id}}}"/>
 
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <base href="{{{metabase}}}">
     <meta name="fragment" content="!" />
 
     <link rel="canonical" href="{{{metadata.url}}}">
@@ -48,63 +49,8 @@
     <% }); %>
     {{> partials/mixpanel}}
   </head>
-  <body>
-    <header class="main-header" ng-class="{'mini-header': viewOptions.miniHeader, 'full-header': !viewOptions.miniHeader}">
-      <div class="container">
-        <h1 class="morsel-logo">
-          <a ng-click="goTo('home')">Morsel</a>
-        </h1>
-        <nav role="navigation">
-          <ul>
-            <li ng-if="!isLoggedIn">
-              <a ng-click="goTo('join')" class="btn btn-primary">Sign Up</a>
-            </li>
-            <li ng-class="{active:$uiRoute}">
-              <a ng-click="">Placeholder</a>
-            </li>
-            <li ng-class="{active:$uiRoute}">
-              <a ng-click="">Placeholder</a>
-            </li>
-            <li ng-class="{active:$uiRoute}">
-              <a ng-click="">Get the App</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
-    </header>
-    <div>
-    {{#staticPartial.terms}}
-    {{> partials/static/terms}}
-    {{/staticPartial.terms}}
-    {{#staticPartial.privacy}}
-    {{> partials/static/privacy}}
-    {{/staticPartial.privacy}}
-    </div>
-    <footer class="footer" ng-class="{hide: viewOptions.hideFooter}">
-      <div class="container">
-        <div class="footer-inner">
-          <a ng-click="goTo('home')" class="text-hide morsel-link">Morsel</a>
-          <a ng-click="goTo('join')" class="btn btn-primary" ng-if="!isLoggedIn">Sign Up</a>
-          <form role="form">
-            <input class="form-control" type="text" placeholder="Search chefs, dishes, ingredients" />
-          </form>
-          <nav role="navigation">
-            <ul class="">
-              <li ui-route="/add-morsel">
-                <a ng-click="goTo('add-morsel')">Add Morsel</a>
-              </li>
-              <li ui-route="/myfeed">
-                <a ng-click="goTo('myfeed')" ng-if="isLoggedIn">My Feed</a>
-              </li>
-              <li>
-                <a ng-click="">Get The App</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </footer>
+  <body class="static">
+    {{> partials/pageWrapper}}
     {{> partials/ga}}
   </body>
 </html>

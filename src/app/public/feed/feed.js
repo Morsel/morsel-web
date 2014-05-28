@@ -35,7 +35,6 @@ angular.module( 'Morsel.public.feed', [])
   $scope.initialDataLoading = true; //for loading visuals
 
   $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.hideFooter = true;
 
   $scope.goHome = function() {
     $window.open($location.protocol() + '://'+ $location.host(), '_self');

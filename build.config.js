@@ -268,6 +268,43 @@ module.exports = {
     }
   },
 
+  /* files just related to our static app */
+  static_files: {
+    atpl: [ 'src/app/static/**/*.tpl.html' ],
+    common: {
+      js: [
+        'src/common/analytics/mixpanel.js',
+        'src/common/api/uploads.js',
+        'src/common/api/users.js',
+        'src/common/auth/auth.js',
+        'src/common/user/userImage.js'
+      ],
+      tpl: [
+        'src/common/util/404.tpl.html'
+      ]
+    },
+    vendor_files: {
+      js: [
+        'vendor/angular/angular.js',
+        'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-touch/angular-touch.js',
+        'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/angular-ui-utils/modules/route/route.js',
+        'vendor/lodash/dist/lodash.js',
+        'vendor/ngstorage/ngStorage.js',
+        'vendor/restangular/dist/restangular.js'
+      ],
+      css: [
+      ],
+      assets: [
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+      ]
+    }
+  },
+
   /**
    * This is a collection of files used during testing only.
    */

@@ -97,6 +97,10 @@ app.get('/templates-login.js', function(req, res){
   res.sendfile('templates-login.js');
 });
 
+app.get('/templates-static.js', function(req, res){
+  res.sendfile('templates-static.js');
+});
+
 //SEO
 app.get('/BingSiteAuth.xml', function(req, res){
   res.sendfile('seo/BingSiteAuth.xml');
@@ -155,7 +159,11 @@ app.get('/account*', function(req, res){
     siteUrl : siteURL,
     isProd : isProd,
     apiUrl : apiUrl,
-    mixpanelToken : mixpanelToken
+    mixpanelToken : mixpanelToken,
+    //determine how to render menu
+    pageType: {
+      account: true
+    }
   });
 });
 
@@ -235,7 +243,11 @@ function renderPublicPage(res, mData) {
     metabase: metabase,
     apiUrl: apiUrl,
     isProd : isProd,
-    mixpanelToken : mixpanelToken
+    mixpanelToken : mixpanelToken,
+    //determine how to render menu
+    pageType: {
+      public: true
+    }
   });
 }
 
@@ -246,7 +258,11 @@ function renderStatic(res, route) {
         apiUrl: apiUrl,
         isProd : isProd,
         mixpanelToken : mixpanelToken,
-        staticPartial: {}
+        staticPartial: {},
+        //determine how to render menu
+        pageType: {
+          static: true
+        }
       };
 
   //set a var here to let our static template render off it

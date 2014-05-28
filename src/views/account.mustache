@@ -23,7 +23,6 @@
     <meta property="og:description" content="{{{metadata.description}}}">
     <meta property="og:site_name" content="{{{metadata.og.site_name}}}"/>
     <meta property="fb:app_id" content="{{{metadata.fb_app_id}}}"/>
-    
 
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <base href="{{{metabase}}}">
@@ -51,65 +50,7 @@
     {{> partials/mixpanel}}
   </head>
   <body class="account">
-    <header class="account-header">
-      <div class="container">
-        <h1>
-          <a href="/" target="_self" class="morsel-text">Morsel</a>
-        </h1>
-        <div class="account-dropdown btn-group" dropdown>
-          <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
-            <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-no-link="true" mrsl-user-image-size="profile-pic-xs"></div>
-            <span ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></span>
-            <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu pull-right" role="menu">
-            <li>
-              <a ng-click="viewProfile()">View Profile</a>
-            </li>
-            <li class="divider"></li>
-            <li>
-              <a href="/logout" target="_self">Logout</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </header>
-
-    <div class="container container-shadow">
-      <div class="row">
-        <div class="col-sm-3 account-menu">
-          <h2>Your Account</h2>
-          <ul>
-            <li ui-route="/account/edit-profile" ng-class="{active:$uiRoute}">
-              <a href="/account/edit-profile">Edit Profile</a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-sm-9 account-main">
-          <div ui-view="account-body"></div>
-        </div>
-      </div>
-    </div>
-
-    <footer class="account-footer">
-      <div class="container">
-        <div class="footer-inner">
-          <nav role="navigation">
-            <ul>
-              <li>
-                <a>A Placeholder link</a>
-              </li>
-              <li>
-                <a>A placeholder</a>
-              </li>
-              <li>
-                <a>Get The App</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </footer>
+    {{> partials/pageWrapper}}
     {{> partials/ga}}
   </body>
 </html>

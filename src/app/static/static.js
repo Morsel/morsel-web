@@ -1,33 +1,18 @@
-angular.module( 'Morsel.account', [
+angular.module( 'Morsel.static', [
   //libs
-  'angularMoment',
   'restangular',
   'ui.bootstrap',
-  'ui.router',
-  'ui.route',
   //filters
   //API
-  'Morsel.common.apiKeywords',
-  'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
+  'Morsel.common.apiUsers',
   //templates
-  'templates-account',
+  'templates-static',
   //common
-  'Morsel.common.afterLogin',
   'Morsel.common.auth',
-  'Morsel.common.baseErrors',
-  'Morsel.common.checklist',
-  'Morsel.common.formNameFix',
-  'Morsel.common.handleErrors',
-  'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
-  'Morsel.common.photoHelpers',
-  'Morsel.common.submitBtn',
-  'Morsel.common.userImage',
-  'Morsel.common.validatedElement',
+  'Morsel.common.userImage'
   //app
-  'Morsel.account.body',
-  'Morsel.account.editProfile'
 ])
 
 //define some constants for the app
@@ -52,38 +37,21 @@ angular.module( 'Morsel.account', [
 
 .constant('MORSELPLACEHOLDER', '/assets/images/logos/morsel-placeholder.jpg')
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL ) {
+.config( function myAppConfig ( $locationProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};
 
   $locationProvider.html5Mode(true).hashPrefix('!');
-
-  //if we don't recognize the URL, send them to 404
-  $urlRouterProvider.otherwise( '/404' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
 
-  $stateProvider.state( '404', {
-    url: '/404',
-    views: {
-      "main": {
-        controller: function($scope){
-        },
-        templateUrl: 'common/util/404.tpl.html'
-      }
-    },
-    data: {
-      pageTitle: 'Page Not Found'
-    }
-  });
 })
 
 .run( function run ($window) {
-  $window.moment.lang('en');
 })
 
-.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
+.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
   var viewOptions = {
     miniHeader : false
   };
@@ -112,40 +80,6 @@ angular.module( 'Morsel.account', [
     });
   }, function() {
     console.log('Trouble initiating user...');
-  });
-
-  //when a user starts to access a new route
-  $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-    //if non logged in user tries to access a restricted route
-    if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
-      event.preventDefault();
-      //send them to the login page
-      $window.location.href ='/login';
-    }
-    resetViewOptions();
-  });
-
-  //when a user accesses a new route
-  $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-    if ( angular.isDefined( toState.data.pageTitle ) ) {
-      //update the page title
-      $scope.pageTitle = toState.data.pageTitle + ' | Morsel';
-    }
-    //refresh our user data
-    Auth.getCurrentUserPromise().then(function(userData){
-      $scope.isLoggedIn = Auth.isLoggedIn();
-      $scope.currentUser = userData;
-    });
-
-    //manually push a GA pageview
-    if($window._gaq) {
-      $window._gaq.push(['_trackPageview', $location.path()]);
-    }
-  });
-
-  //if there are internal state issues, go to 404
-  $scope.$on('$stateChangeError', function(e) {
-    $state.go('404');
   });
 
   //reset our view options

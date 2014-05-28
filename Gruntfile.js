@@ -325,6 +325,7 @@ module.exports = function ( grunt ) {
       },
       build_static_css: {
         src: [
+          '<%= static_files.vendor_files.css %>',
           '<%= build_dir %>/assets/static.css'
         ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
@@ -352,6 +353,7 @@ module.exports = function ( grunt ) {
       },
       compile_static_css: {
         src: [
+          '<%= static_files.vendor_files.css %>',
           '<%= compile_dir %>/assets/static.css'
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
@@ -403,6 +405,21 @@ module.exports = function ( grunt ) {
         ],
 
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>_login-<%= pkg.version %>.js'
+      },
+      compile_static_js: {
+        options: {
+          banner: '<%= meta.banner %>'
+        },
+        src: [ 
+          '<%= static_files.vendor_files.js %>', 
+          'module.prefix', 
+          '<%= build_dir %>/src/app/static/**/*.js',
+          '<%= static_files.common.js %>',
+          '<%= html2js.static.dest %>', 
+          'module.suffix' 
+        ],
+
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.js'
       }
     },
 
@@ -417,7 +434,8 @@ module.exports = function ( grunt ) {
             src: [ 
               'assets/<%= pkg.name %>_public-<%= pkg.version %>.js',
               'assets/<%= pkg.name %>_account-<%= pkg.version %>.js',
-              'assets/<%= pkg.name %>_login-<%= pkg.version %>.js'
+              'assets/<%= pkg.name %>_login-<%= pkg.version %>.js',
+              'assets/<%= pkg.name %>_static-<%= pkg.version %>.js'
             ],
             cwd: '<%= compile_dir %>',
             dest: '<%= compile_dir %>',
@@ -444,6 +462,9 @@ module.exports = function ( grunt ) {
           },
           {
           '<%= concat.compile_login_js.dest %>': '<%= concat.compile_login_js.dest %>'
+          },
+          {
+          '<%= concat.compile_static_js.dest %>': '<%= concat.compile_static_js.dest %>'
           }
         ]
       }
@@ -558,6 +579,20 @@ module.exports = function ( grunt ) {
           '<%= login_files.common.tpl %>'
         ],
         dest: '<%= build_dir %>/templates-login.js'
+      },
+
+      /**
+       * These are the templates from `src/app/static`.
+       */
+      static: {
+        options: {
+          base: 'src'
+        },
+        src: [
+          '<%= static_files.atpl %>',
+          '<%= static_files.common.tpl %>'
+        ],
+        dest: '<%= build_dir %>/templates-static.js'
       }
     },
 
@@ -668,12 +703,17 @@ module.exports = function ( grunt ) {
       build: {
         dir: '<%= build_dir %>',
         src: [
+          '<%= static_files.vendor_files.js %>',
+          '<%= build_dir %>/src/app/static/**/*.js',
+          '<%= static_files.common.js %>',
+          '<%= html2js.static.dest %>',
           '<%= build_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
         ]
       },
       compile: {
         dir: '<%= compile_dir %>',
         src: [
+          '<%= concat.compile_static_js.dest %>',
           '<%= compile_dir %>/assets/<%= pkg.name %>_static--<%= pkg.version %>.css'
         ]
       }
@@ -713,6 +753,7 @@ module.exports = function ( grunt ) {
           '<%= html2js.public.dest %>',
           '<%= html2js.account.dest %>',
           '<%= html2js.login.dest %>',
+          '<%= html2js.static.dest %>',
           '<%= app_files.ctpl %>',
           '<%= test_files.js %>'
         ]
@@ -1093,7 +1134,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'concat:compile_static_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**
@@ -1240,6 +1281,35 @@ module.exports = function ( grunt ) {
             version: grunt.config( 'pkg.version' ),
             favicon_dir: grunt.config('favicon_dir')
           }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/partials/pageWrapper.mustache', this.data.dir + '/views/partials/pageWrapper.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/partials/sidenav.mustache', this.data.dir + '/views/partials/sidenav.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {}
+        });
+      }
+    });
+
+    grunt.file.copy('src/views/partials/header.mustache', this.data.dir + '/views/partials/header.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {}
         });
       }
     });
