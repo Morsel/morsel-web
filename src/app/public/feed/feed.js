@@ -103,7 +103,7 @@ angular.module( 'Morsel.public.feed', [])
       if(resp.data && resp.data.errors && resp.data.errors.api) {
         //resp returned an api issue
         //report and error back to user
-        Auth.showApiError(resp.status, resp.status.errors);
+        Auth.showApiError(resp.status, resp.data.errors);
       }
 
       hittingServer = false;
@@ -130,7 +130,7 @@ angular.module( 'Morsel.public.feed', [])
     ApiFeed.getFeed(feedParams).then(function(feedResp){
       //reset our new feed items array
       newFeedItems = [];
-
+      
       if(feedResp.data && feedResp.data.length > 0) {
         //get all our feed items in an array and count them
         //only allow morsels for now
@@ -146,7 +146,7 @@ angular.module( 'Morsel.public.feed', [])
       if(resp.data && resp.data.errors && resp.data.errors.api) {
         //resp returned an api issue
         //report and error back to user
-        Auth.showApiError(resp.status, resp.status.errors);
+        Auth.showApiError(resp.status, resp.data.errors);
       }
     });
   }

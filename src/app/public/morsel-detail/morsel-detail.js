@@ -19,11 +19,11 @@ angular.module( 'Morsel.public.morselDetail', [])
   });
 })
 
-.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $window, currentUser ) {
+.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $window, currentUser, $state ) {
   var username = $stateParams.username,
       morselDetailsArr = $stateParams.morselDetails.split('/'),
-      morselIdSlug = morselDetailsArr[0],
-      itemNumber = parseInt(morselDetailsArr[1], 10);
+      morselIdSlug = morselDetailsArr[0];/*,
+      itemNumber = parseInt(morselDetailsArr[1], 10);*/
 
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideFooter = true;
@@ -55,8 +55,8 @@ angular.module( 'Morsel.public.morselDetail', [])
     ApiUsers.getUser(username).then(function(userResp){
       $scope.owner = userResp.data;
     }, function() {
-      //if there's an error retrieving user data (bad username?), go to home page for now
-      $location.path('/');
+      //if there's an error retrieving user data (bad username?), go to 404
+      $state.go('404');
     });
   } else {
     //if not, send to profile page

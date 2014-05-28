@@ -57,12 +57,26 @@ angular.module( 'Morsel.account', [
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  //if we don't recognize the URL, send them to edit their profile for now
-  $urlRouterProvider.otherwise( '/account/edit-profile' );
+  //if we don't recognize the URL, send them to 404
+  $urlRouterProvider.otherwise( '/404' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
+
+  $stateProvider.state( '404', {
+    url: '/404',
+    views: {
+      "main": {
+        controller: function($scope){
+        },
+        templateUrl: 'common/util/404.tpl.html'
+      }
+    },
+    data: {
+      pageTitle: 'Page Not Found'
+    }
+  });
 })
 
 .run( function run ($window) {
@@ -128,6 +142,11 @@ angular.module( 'Morsel.account', [
     if($window._gaq) {
       $window._gaq.push(['_trackPageview', $location.path()]);
     }
+  });
+
+  //if there are internal state issues, go to 404
+  $scope.$on('$stateChangeError', function(e) {
+    $state.go('404');
   });
 
   //reset our view options

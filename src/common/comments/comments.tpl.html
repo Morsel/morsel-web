@@ -21,7 +21,7 @@
   <div ng-show="item.comments && item.comments.length === 0" class="empty-state">
     <p>There are no comments</p>
   </div>
-  <div ng-if="isChef" class="add-comment">
+  <div class="add-comment">
     <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
       <div class="form-group">
         <textarea class="form-control" rows="3" ng-model="comment.description" placeholder="Write your comment" required></textarea>

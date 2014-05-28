@@ -391,7 +391,7 @@ function truncateAt(text, limit) {
 }
 
 function render404(res) {
-  res.render('404', {
+  res.status(404).render('404', {
     metadata: findMetadata('404')
   });
 }

@@ -114,7 +114,8 @@ module.exports = {
         'src/common/text/textOverlay.tpl.html',
         'src/common/user/activityFeed.tpl.html',
         'src/common/user/userActivityOverlay.tpl.html',
-        'src/common/user/userList.tpl.html'
+        'src/common/user/userList.tpl.html',
+        'src/common/util/404.tpl.html'
       ]
     },
     vendor_files: {
@@ -178,7 +179,8 @@ module.exports = {
         'src/common/forms/validatedRadio.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/upload.tpl.html',
-        'src/common/user/duplicateEmailOverlay.tpl.html'
+        'src/common/user/duplicateEmailOverlay.tpl.html',
+        'src/common/util/404.tpl.html'
       ]
     },
     vendor_files: {
@@ -236,7 +238,8 @@ module.exports = {
         'src/common/forms/validatedRadio.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/upload.tpl.html',
-        'src/common/user/duplicateEmailOverlay.tpl.html'
+        'src/common/user/duplicateEmailOverlay.tpl.html',
+        'src/common/util/404.tpl.html'
       ]
     },
     vendor_files: {
