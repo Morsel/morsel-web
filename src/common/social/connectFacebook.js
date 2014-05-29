@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectFacebook', [] )
 
 //connect (sign up/login) with facebook SDK
-.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window){
+.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location){
   return {
     restrict: 'A',
     scope: {
@@ -11,7 +11,12 @@ angular.module( 'Morsel.common.connectFacebook', [] )
     replace: true,
     link: function(scope, element, attrs) {
       var loginResponse,
-          userInfoDeferred;
+          userInfoDeferred,
+          loginNext;
+
+      if($state && $state.params && $state.params.next) {
+        loginNext = $state.params.next;
+      }
 
       if(!window.fbAsyncInit) {
         window.fbAsyncInit = function() {
@@ -35,7 +40,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
       }
-      
+
       scope.connectFacebook = function() {
         FB.login(function(response) {
           var fbUserPromise,
@@ -107,8 +112,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           }, function(resp) {
             //if this email already exists...
             if(resp.data && resp.data.errors && resp.data.errors.email && (_.indexOf(resp.data.errors.email, 'has already been taken')>=0)) {
-              //pop an overlay prompting user to associated fb data to existing morsel account
-              existingAccountModal();
+              //show errors
+              HandleErrors.onError(resp.data, scope.form);
             } else {
               //the email wasn't valid - just scrap it, move to sign up
               scope.$parent.userData.social.email = '';
@@ -135,60 +140,6 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         return deferred.promise;
       }
 
-      function existingAccountModal() {
-        var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, HandleErrors, scopeWithData, userInfoDeferred) {
-          $scope.email = scopeWithData.$parent.userData.social.email;
-          $scope.socialType = 'Facebook';
-
-          //if user cancels, allow fb info to go through, but strip out email
-          $scope.cancel = function () {
-            scopeWithData.$parent.userData.social.email = '';
-            $modalInstance.dismiss('cancel');
-            userInfoDeferred.resolve();
-          };
-
-          $scope.combineAccounts = function() {
-            AfterLogin.addCallbacks(function() {
-              ApiUsers.createUserAuthentication({
-                'authentication': {
-                  'provider': 'facebook',
-                  'token': loginResponse.authResponse.accessToken,
-                  //tokens coming from the JS SDK are short-lived
-                  'short_lived': true,
-                  'uid': scopeWithData.$parent.userData.social.id
-                }
-              }).then(function() {
-                //send them home (trigger page refresh to switch apps)
-                $window.location.href = '/';
-              }, function(resp) {
-                HandleErrors.onError(resp.data, scopeWithData.form);
-              });
-            });
-            $location.path('/login');
-          };
-
-          $rootScope.$on('$locationChangeSuccess', function () {
-            $modalInstance.dismiss('cancel');
-          });
-        };
-        //we need to implicitly inject dependencies here, otherwise minification will botch them
-        ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'HandleErrors', 'scopeWithData', 'userInfoDeferred'];
-
-        var modalInstance = $modal.open({
-          templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',
-          controller: ModalInstanceCtrl,
-          resolve: {
-            //pass the outside scope
-            scopeWithData: function () {
-              return scope;
-            },
-            userInfoDeferred: function () {
-              return userInfoDeferred;
-            }
-          }
-        });
-      }
-
       function login() {
        var authenticationData = {
             'authentication': {
@@ -205,16 +156,23 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
       function onLoginSuccess(resp) {
         //if successfully logged in check if we have anything in the to-do queue
-        if(AfterLogin.hasCallbacks()) {
-          AfterLogin.executeCallbacks();
+        if(AfterLogin.hasCallback()) {
+          AfterLogin.goToCallbackPath();
         } else {
           //send them home (trigger page refresh to switch apps)
-          $window.location.href = '/';
+          sendToNextUrl();
         }
       }
 
       function onLoginError(resp) {
         HandleErrors.onError(resp.data, scope.form);
+      }
+
+      function sendToNextUrl() {
+        //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
+
+        //send them to the login page
+        $window.location.href = loginNext ? loginNext : '/';
       }
     },
     template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg"><i class="common-share-facebook"></i>{{btnText}}</a>'

@@ -3,6 +3,7 @@ angular.module( 'Morsel.account.editProfile', [])
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'account.edit-profile', {
     url: '/edit-profile',
+    parent: 'account',
     views: {
       "account-body": {
         controller: 'EditProfileCtrl',

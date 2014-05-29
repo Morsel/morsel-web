@@ -19,16 +19,7 @@ angular.module( 'Morsel.login.passwordReset', [])
         templateUrl: 'app/login/password-reset/new-password.tpl.html'
       }
     },
-    data:{ pageTitle: 'Password Reset - Choose Password' },
-    resolve: {
-      /*passwordToken: function($stateParams, $location) {
-        //if user doesn't have a reset_password_token as a query param
-        if(!$stateParams.reset_password_token) {
-          $location.$$search = {};
-          $location.path('/password-reset');
-        }
-      }*/
-    }
+    data:{ pageTitle: 'Password Reset - Choose Password' }
   });
 })
 

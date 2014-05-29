@@ -1,18 +1,36 @@
 angular.module( 'Morsel.common.itemLike', [] )
 
 //like/unlike an item
-.directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q, $modal, $rootScope){
+.directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q, $modal, $rootScope, $window){
   return {
     scope: {
       item: '=mrslItemLike'
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var isLoggedIn;
+      var currentUser,
+          isLoggedIn,
+          afterLoginCallback;
 
       Auth.getCurrentUserPromise().then(function(userData) {
         currentUser = userData;
         isLoggedIn = Auth.isLoggedIn();
+
+        //check for an afterlogin callback on load
+        if(AfterLogin.hasCallback('like')) {
+          afterLoginCallback = AfterLogin.getCallback();
+
+          //make sure it's the right item
+          if(afterLoginCallback.data && (afterLoginCallback.data.itemId === scope.item.id)) {
+            //make sure we're actually loggeed in just in case
+            if(isLoggedIn) {
+              toggleLike().then(function(){
+                //remove callback after completion
+                AfterLogin.removeCallback();
+              });
+            }
+          }
+        }
       });
 
       scope.toggleItemLike = function() {
@@ -23,12 +41,15 @@ angular.module( 'Morsel.common.itemLike', [] )
           var currentUrl = $location.url();
 
           //if not, set our callback for after we're logged in
-          AfterLogin.addCallbacks(function() {
-            toggleLike().then(function(){
-              $location.path(currentUrl);
-            });
+          AfterLogin.setCallback({
+            type: 'like',
+            path: currentUrl,
+            data: {
+              itemId: scope.item.id
+            }
           });
-          $location.path('/join');
+
+          $window.location.href = '/join';
         }
       };
 

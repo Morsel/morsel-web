@@ -1,33 +1,58 @@
 angular.module( 'Morsel.common.afterLogin', [])
 
 //things to be completed after a successful login/registration
-.factory('AfterLogin', function($location) {
-  var info = {
-        //an array of callback functions to be completed when logged in
-        callbacks: []
-      };
-  
+.factory('AfterLogin', function($location, $window) {
+  /* a callback object of the following format to be read upon login:
+   * {
+   *   path: '/some/path', //path to redirect to
+   *   type: 'like', //namespace of afterlogin event for code to check
+   *   data: {
+   *     arbitrary: 'object' //data to be used on callback
+   *   }
+   * }
+   */
+  var callback;
+
+  fetchCallback();
+
+  function fetchCallback() {
+    callback = $window.sessionStorage.afterlogin;
+
+    if(callback) {
+      callback = JSON.parse(callback);
+    }
+  }
+
   return {
-    callbacks: function() {
-      return info.callbacks;
+    getCallback: function() {
+      return callback;
     },
-    hasCallbacks: function() {
-      return info.callbacks.length > 0;
-    },
-    addCallbacks: function() {
-      for (var i = 0; i < arguments.length; i++) {
-        //add callback to the beginning of the array, so we can work backwards and pop off completed tasks
-        info.callbacks.unshift(arguments[i]);
+    hasCallback: function(type) {
+      //if looking for a certain type of callback
+      if(type && callback) {
+        return callback.type === type;
+      } else {
+        //just looking for any callback
+        return callback ? true : false;
       }
     },
-    executeCallbacks: function() {
-      var i = info.callbacks.length - 1;
-
-      for (i; i >= 0; i--) {
-        //execute last callback
-        info.callbacks[i]();
-        //pop it off
-        info.callbacks.pop();
+    setCallback: function(callbackObj) {
+      $window.sessionStorage.afterlogin = JSON.stringify(callbackObj);
+      fetchCallback();
+    },
+    goToCallbackPath: function() {
+      if(callback.path) {
+        $window.location.href = callback.path;
+      } else {
+        //oops, missing a path, just go home
+        $window.location.href = '/';
+      }
+    },
+    removeCallback: function() {
+      //unset our callback
+      callback = null;
+      if($window.sessionStorage.afterlogin) {
+        delete $window.sessionStorage.afterlogin;
       }
     }
   };

@@ -2,15 +2,32 @@ angular.module( 'Morsel.login.join', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'join', {
-    url: '/join',
+    url: '/join?next',
     views: {
       "main": {
         controller: 'JoinCtrl',
         templateUrl: 'app/login/join/join.tpl.html'
       }
     },
-    data:{
+    data: {
       pageTitle: 'Join Morsel'
+    },
+    resolve: {
+      //make sure we resolve a user before displaying
+      joinUser:  function(Auth, $window, $q){
+        var deferred = $q.defer();
+
+        Auth.getCurrentUserPromise().then(function(userData){
+          //don't let a logged in user to this page
+          if(Auth.isLoggedIn()) {
+            $window.location.href = '/';
+          } else {
+            deferred.resolve(userData);
+          }
+        });
+
+        return deferred.promise;
+      }
     }
   })
   .state( 'join.landing', {
@@ -42,7 +59,7 @@ angular.module( 'Morsel.login.join', [])
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, $state ) {
+.controller( 'JoinCtrl', function JoinCtrl( $scope, $state, joinUser ) {
   //if they're not trying to go to the second step
   if($state.current.name != 'join.basicInfo') {
     //send them to the landing page
@@ -56,7 +73,7 @@ angular.module( 'Morsel.login.join', [])
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, $timeout, HandleErrors, $state, AfterLogin, ApiUsers, $modal, $rootScope ) {
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers ) {
   //used to differentiate between login types for UI
   $scope.usingEmail = _.isEmpty($scope.userData.social); 
 
@@ -138,78 +155,15 @@ angular.module( 'Morsel.login.join', [])
   }
 
   function onError(resp) {
-    //if user tried to authenticate with twitter and failed, check if it was because
-    //their email might have already existed. split this into nested ifs for readability...
-    //if there was an email error
-    if(resp.data && resp.data.errors && resp.data.errors.email) {
-      //if there was only one email error and it was that the email was already taken
-      if((resp.data.errors.email.length === 1) && (resp.data.errors.email[0] === 'has already been taken')) {
-        //user entered an email that already exists. prompt them to merge accounts
-
-        showExistingAccountModal();
-      }
-    }
-
     HandleErrors.onError(resp.data, $scope.basicInfoForm);
   }
 
   function setRemotePhotoUrl(url) {
     $scope.remotePhotoUrl = url;
   }
-
-  function showExistingAccountModal() {
-    var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, HandleErrors, scopeWithData) {
-      $scope.email = scopeWithData.basicInfoModel.email;
-      $scope.socialType = 'Twitter';
-
-      $scope.cancel = function () {
-        scopeWithData.userData.social.email = '';
-        $modalInstance.dismiss('cancel');
-      };
-
-      $scope.combineAccounts = function() {
-        AfterLogin.addCallbacks(function() {
-          ApiUsers.createUserAuthentication({
-            'authentication': {
-              'provider': 'twitter',
-              'token': scopeWithData.userData.social.token,
-              'secret': scopeWithData.userData.social.secret,
-              //tokens coming from twitter are long-lived
-              'short_lived': false,
-              'uid': scopeWithData.userData.social.id
-            }
-          }).then(function() {
-            //send them home (trigger page refresh to switch apps)
-            $window.location.href = '/';
-          }, function(resp) {
-            HandleErrors.onError(resp.data, scopeWithData.basicInfoForm);
-          });
-        });
-
-        $location.path('/login');
-      };
-
-      $rootScope.$on('$locationChangeSuccess', function () {
-        $modalInstance.dismiss('cancel');
-      });
-    };
-    //we need to implicitly inject dependencies here, otherwise minification will botch them
-    ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'HandleErrors', 'scopeWithData'];
-
-    var modalInstance = $modal.open({
-      templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',
-      controller: ModalInstanceCtrl,
-      resolve: {
-        //pass the outside scope
-        scopeWithData: function () {
-          return $scope;
-        }
-      }
-    });
-  }
 })
 
-.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors, $window) {
+.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors, $window, $stateParams) {
   //a cleaner way of building radio buttons
   $scope.industryValues = [{
     'name':'Chef',
@@ -236,7 +190,9 @@ angular.module( 'Morsel.login.join', [])
     if($scope.additionalInfoForm.$valid) {
       industryPromise = ApiUsers.updateIndustry($scope.userData.registered.id, $scope.additionalInfoModel.industry);
       userInfoPromise = ApiUsers.updateUser($scope.userData.registered.id, {
-        bio: $scope.additionalInfoModel.bio
+        user: {
+          bio: $scope.additionalInfoModel.bio
+        }
       });
 
       //once all promises are resolved, send them on their way
@@ -246,11 +202,16 @@ angular.module( 'Morsel.login.join', [])
 
   function onSuccess(resp) {
     //if successfully joined check if we have anything in the to-do queue
-    if(AfterLogin.hasCallbacks()) {
-      AfterLogin.executeCallbacks();
+    if(AfterLogin.hasCallback()) {
+      AfterLogin.goToCallbackPath();
     } else {
-      //send them home (trigger page refresh to switch apps)
-      $window.location.href = '/';
+      //if they were on their way to a certain page
+      if($stateParams.next) {
+        $window.location.href = $stateParams.next;
+      } else {
+        //send them home
+        $window.location.href = '/';
+      }
     }
   }
 

@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.follow', [] )
 
 //follow/unfollow something
-.directive('mrslFollow', function(ApiUsers, AfterLogin, $location, Auth, $q){
+.directive('mrslFollow', function(ApiUsers, AfterLogin, $location, Auth, $q, $window){
   return {
     scope: {
       idToFollow: '=mrslIdToFollow',
@@ -10,11 +10,30 @@ angular.module( 'Morsel.common.follow', [] )
     replace: true,
     link: function(scope, element, attrs) {
       var currentUser,
-          isLoggedIn;
+          isLoggedIn,
+          afterLoginCallback;
+
+
 
       Auth.getCurrentUserPromise().then(function(userData) {
         currentUser = userData;
         isLoggedIn = Auth.isLoggedIn();
+
+        //check for an afterlogin callback on load
+        if(AfterLogin.hasCallback('follow')) {
+          afterLoginCallback = AfterLogin.getCallback();
+
+          //make sure it's the right item
+          if(afterLoginCallback.data && (afterLoginCallback.data.id === scope.idToFollow)) {
+            //make sure we're actually loggeed in just in case
+            if(isLoggedIn) {
+              performToggleFollow().then(function(){
+                //remove callback after completion
+                AfterLogin.removeCallback();
+              });
+            }
+          }
+        }
       });
 
       //wait until we have the data on who to follow, then decide if we need to show the follow button or not
@@ -34,12 +53,15 @@ angular.module( 'Morsel.common.follow', [] )
           var currentUrl = $location.url();
 
           //if not, set our callback for after we're logged in
-          AfterLogin.addCallbacks(function() {
-            performToggleFollow().then(function(){
-              $location.path(currentUrl);
-            });
+          AfterLogin.setCallback({
+            type: 'follow',
+            path: currentUrl,
+            data: {
+              id: scope.idToFollow
+            }
           });
-          $location.path('/join');
+          
+          $window.location.href = '/join';
         }
       };
 
