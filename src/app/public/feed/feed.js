@@ -88,8 +88,6 @@ angular.module( 'Morsel.public.feed', [])
           }
         });
 
-        console.log('feedresp.data: ',feedResp.data);
-        console.log('scope.feeditems: ', $scope.feedItems);
         //the oldest id we have fetched from the server so far
         oldestId = _.last(feedResp.data)['id'];
       } else {
