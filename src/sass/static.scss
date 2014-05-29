@@ -5,3 +5,7 @@
 
 //our general static css
 @import "_static/_static";
+
+//our page-specific public css
+@import "_static/_about";
+@import "_static/_press";

@@ -10,7 +10,7 @@ angular.module('Morsel.common.userImage', [])
       userImageSize: '@mrslUserImageSize'
     },
     link: function(scope) {
-      var placeholderAvatarUrl = 'assets/images/utility/avatars/avatar';
+      var placeholderAvatarUrl = '/assets/images/utility/avatars/avatar';
 
       scope.returnPhoto = function(){
         var photoSize;
@@ -45,7 +45,7 @@ angular.module('Morsel.common.userImage', [])
     },
     template: function(tElement, tAttrs) {
       if(tAttrs.mrslNoLink) {
-        return '<span href="/{{username}}" class="profile-pic-link {{userImageSize}}">' +
+        return '<span class="profile-pic-link {{userImageSize}}">' +
                 '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
               '</span>';
       } else {

@@ -25,7 +25,7 @@
     "description": "This is the morsel homepage"
   },
   "404": {
-    "title": "404 | Morsel",
+    "title": "Page Not Found | Morsel",
     "description": "Oops, this page doesn't exist"
   }
 }

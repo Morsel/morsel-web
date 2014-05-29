@@ -70,7 +70,7 @@ app.configure(function(){
 });
 
 app.get('/', function(req, res) {
-  renderAngular(res, findMetadata(''));
+  renderPublicPage(res, findMetadata(''));
 });
 
 /* from dev-launch
@@ -95,6 +95,10 @@ app.get('/templates-account.js', function(req, res){
 
 app.get('/templates-login.js', function(req, res){
   res.sendfile('templates-login.js');
+});
+
+app.get('/templates-static.js', function(req, res){
+  res.sendfile('templates-static.js');
 });
 
 //SEO
@@ -155,8 +159,17 @@ app.get('/account*', function(req, res){
     siteUrl : siteURL,
     isProd : isProd,
     apiUrl : apiUrl,
-    mixpanelToken : mixpanelToken
+    mixpanelToken : mixpanelToken,
+    //determine how to render menu
+    pageType: {
+      account: true
+    }
   });
+});
+
+//feed
+app.get('/feed', function(req, res){
+  renderPublicPage(res);
 });
 
 //morsel detail with post id/slug
@@ -223,7 +236,7 @@ app.listen(port, function() {
   console.log("Listening on " + port);
 });
 
-function renderAngular(res, mData) {
+function renderPublicPage(res, mData) {
   var fullMetadata = mData || findMetadata('default');
 
   res.render('public', {
@@ -231,7 +244,11 @@ function renderAngular(res, mData) {
     metabase: metabase,
     apiUrl: apiUrl,
     isProd : isProd,
-    mixpanelToken : mixpanelToken
+    mixpanelToken : mixpanelToken,
+    //determine how to render menu
+    pageType: {
+      public: true
+    }
   });
 }
 
@@ -242,7 +259,11 @@ function renderStatic(res, route) {
         apiUrl: apiUrl,
         isProd : isProd,
         mixpanelToken : mixpanelToken,
-        staticPartial: {}
+        staticPartial: {},
+        //determine how to render menu
+        pageType: {
+          static: true
+        }
       };
 
   //set a var here to let our static template render off it
@@ -289,7 +310,7 @@ function renderUserPage(res, username) {
       userMetadata.og = _.defaults(userMetadata.og || {}, metadata.default.og);
       userMetadata = _.defaults(userMetadata || {}, metadata.default);
 
-      renderAngular(res, userMetadata);
+      renderPublicPage(res, userMetadata);
     } else {
       //not a valid user - must be a bad route
       render404(res);
@@ -344,7 +365,7 @@ function renderMorselPage(res, username, morselIdSlug) {
           morselMetadata.og = _.defaults(morselMetadata.og || {}, metadata.default.og);
           morselMetadata = _.defaults(morselMetadata || {}, metadata.default);
          
-          renderAngular(res, morselMetadata);
+          renderPublicPage(res, morselMetadata);
         } else {
           //not a valid morsel id - must be a bad route
           render404(res);
@@ -387,7 +408,7 @@ function truncateAt(text, limit) {
 }
 
 function render404(res) {
-  res.render('404', {
+  res.status(404).render('404', {
     metadata: findMetadata('404')
   });
 }

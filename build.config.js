@@ -89,8 +89,9 @@ module.exports = {
         'src/common/itemActions/like.js',
         'src/common/social/socialSharing.js',
         'src/common/swipe/carousel.js',
-        'src/common/swipe/immersiveSwipe.js',
-        'src/common/swipe/storySwipe.js',
+        'src/common/swipe/feedSwipe.js',
+        'src/common/swipe/morsel.js',
+        'src/common/swipe/morselSwipe.js',
         'src/common/text/textLimit.js',
         'src/common/user/cuisineUsers.js',
         'src/common/user/specialtyUsers.js',
@@ -108,11 +109,13 @@ module.exports = {
         'src/common/itemActions/itemActionBar.tpl.html',
         'src/common/social/socialSharing.tpl.html',
         'src/common/swipe/itemThumbnails.tpl.html',
+        'src/common/swipe/morsel.tpl.html',
         'src/common/text/textLimit.tpl.html',
         'src/common/text/textOverlay.tpl.html',
         'src/common/user/activityFeed.tpl.html',
         'src/common/user/userActivityOverlay.tpl.html',
-        'src/common/user/userList.tpl.html'
+        'src/common/user/userList.tpl.html',
+        'src/common/util/404.tpl.html'
       ]
     },
     vendor_files: {
@@ -176,7 +179,8 @@ module.exports = {
         'src/common/forms/validatedRadio.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/upload.tpl.html',
-        'src/common/user/duplicateEmailOverlay.tpl.html'
+        'src/common/user/duplicateEmailOverlay.tpl.html',
+        'src/common/util/404.tpl.html'
       ]
     },
     vendor_files: {
@@ -234,7 +238,8 @@ module.exports = {
         'src/common/forms/validatedRadio.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/upload.tpl.html',
-        'src/common/user/duplicateEmailOverlay.tpl.html'
+        'src/common/user/duplicateEmailOverlay.tpl.html',
+        'src/common/util/404.tpl.html'
       ]
     },
     vendor_files: {
@@ -249,6 +254,43 @@ module.exports = {
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.js',
         'vendor/ng-file-upload/angular-file-upload-shim.js',
+        'vendor/ngstorage/ngStorage.js',
+        'vendor/restangular/dist/restangular.js'
+      ],
+      css: [
+      ],
+      assets: [
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
+        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+      ]
+    }
+  },
+
+  /* files just related to our static app */
+  static_files: {
+    atpl: [ 'src/app/static/**/*.tpl.html' ],
+    common: {
+      js: [
+        'src/common/analytics/mixpanel.js',
+        'src/common/api/uploads.js',
+        'src/common/api/users.js',
+        'src/common/auth/auth.js',
+        'src/common/user/userImage.js'
+      ],
+      tpl: [
+        'src/common/util/404.tpl.html'
+      ]
+    },
+    vendor_files: {
+      js: [
+        'vendor/angular/angular.js',
+        'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-touch/angular-touch.js',
+        'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/angular-ui-utils/modules/route/route.js',
+        'vendor/lodash/dist/lodash.js',
         'vendor/ngstorage/ngStorage.js',
         'vendor/restangular/dist/restangular.js'
       ],

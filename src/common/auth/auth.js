@@ -241,19 +241,20 @@ angular.module( 'Morsel.common.auth', [
       error_message : JSON.stringify(errorList)
     });
 
-    modalInstance = $modal.open({
-      templateUrl: 'common/auth/apiError.tpl.html',
-      controller: ModalInstanceCtrl,
-      resolve: {}
-    });
-
     ModalInstanceCtrl = function ($scope, $modalInstance) {
       $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
       };
     };
+
     //we need to implicitly inject dependencies here, otherwise minification will botch them
     ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance'];
+
+    modalInstance = $modal.open({
+      templateUrl: 'common/auth/apiError.tpl.html',
+      controller: ModalInstanceCtrl,
+      resolve: {}
+    });
   };
 
   //to start, reset our user

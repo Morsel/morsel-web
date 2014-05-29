@@ -30,8 +30,9 @@ angular.module( 'Morsel.public', [
   'Morsel.common.formNameFix',
   'Morsel.common.handleErrors',
   'Morsel.common.itemActionBar',
-  'Morsel.common.immersiveSwipe',
+  'Morsel.common.feedSwipe',
   'Morsel.common.mixpanel',
+  'Morsel.common.morsel',
   'Morsel.common.morselSwipe',
   'Morsel.common.itemLike',
   'Morsel.common.photoHelpers',
@@ -43,6 +44,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.morselDetail',
   'Morsel.public.profile'//:username in route clobbers other routes - this needs to be last until a better solution is found
@@ -75,12 +77,26 @@ angular.module( 'Morsel.public', [
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  //if we don't recognize the URL, send it to the homepage for now
-  $urlRouterProvider.otherwise( '/' );
+  //if we don't recognize the URL, send them to the 404 page
+  $urlRouterProvider.otherwise( '/404' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
+
+  $stateProvider.state( '404', {
+    url: '/404',
+    views: {
+      "main": {
+        controller: function($scope){
+        },
+        templateUrl: 'common/util/404.tpl.html'
+      }
+    },
+    data: {
+      pageTitle: 'Page Not Found'
+    }
+  });
 })
 
 .run( function run ($window) {
@@ -89,9 +105,15 @@ angular.module( 'Morsel.public', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
   var viewOptions = {
-    miniHeader : false,
-    hideFooter : false
+    miniHeader : false
   };
+
+  $scope.currentUser = {
+    username: 'something',
+    first_name: 'firstie'
+  };
+
+  $scope.testprop = 'hello';
 
   Auth.setupInterceptor();
   Auth.resetAPIParams();
@@ -102,7 +124,7 @@ angular.module( 'Morsel.public', [
   //also bind on resize
   angular.element($window).bind('resize', _.debounce(onBrowserResize, 300));
 
-  //initial fetching of user data for header/footer
+  //initial fetching of user data for header
   Auth.setInitialUserData().then(function(currentUser){
     $scope.currentUser = currentUser;
 
@@ -153,6 +175,11 @@ angular.module( 'Morsel.public', [
     }
   });
 
+  //if there are internal state issues, go to 404
+  $scope.$on('$stateChangeError', function(e) {
+    $state.go('404');
+  });
+
   //reset our view options
   function resetViewOptions() {
     if(!$scope.viewOptions) {
@@ -174,8 +201,14 @@ angular.module( 'Morsel.public', [
     $scope.$apply('viewOptions');
   }
 
-  $scope.goTo = function(path) {
-    $location.path(path);
+  $scope.closeMenu = function() {
+    $scope.menuOpen = false;
+  };
+
+  $scope.goToProfile = function() {
+    if($scope.currentUser && $scope.currentUser.username) {
+      $location.path('/'+$scope.currentUser.username);
+    }
     $scope.menuOpen = false;
   };
 });

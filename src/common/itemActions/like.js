@@ -58,7 +58,7 @@ angular.module( 'Morsel.common.itemLike', [] )
 
         if(scope.item.liked) {
           ApiItems.unlikeItem(scope.item.id).then(function(resp) {
-            scope.item.liked = resp.data;
+            scope.item.liked = resp;
 
             //remove user from liker list
             if(scope.item.likers) {
@@ -74,7 +74,7 @@ angular.module( 'Morsel.common.itemLike', [] )
           });
         } else {
           ApiItems.likeItem(scope.item.id).then(function(resp) {
-            scope.item.liked = resp.data;
+            scope.item.liked = resp;
 
             //add user to liker list
             if(scope.item.likers) {
@@ -127,6 +127,6 @@ angular.module( 'Morsel.common.itemLike', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item'];
     },
-    template: '<a><i ng-click="toggleItemLike()" class="{{item.liked ? \'common-like\' : \'common-like-empty\'}}"></i><span ng-click="openLikes()">{{item.like_count}} like{{item.like_count===1?\'\':\'s\'}}</span></a>'
+    template: '<a><i ng-click="toggleItemLike()" ng-class="{\'common-like\': item.liked, \'common-like-empty\' : !item.liked}"></i><span ng-click="openLikes()">{{item.like_count}} like{{item.like_count===1?\'\':\'s\'}}</span></a>'
   };
 });

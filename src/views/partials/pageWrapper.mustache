@@ -1,0 +1,22 @@
+<div class="page-wrapper">
+  {{> partials/sidenav}}
+
+  <div id="site" ng-class="{site: true, open:menuOpen}">
+    {{> partials/header}}
+
+    <div ui-view="main" class="main-view" ng-click="menuOpen = false">
+      {{#staticPartial.about}}
+      {{> partials/static/about}}
+      {{/staticPartial.about}}
+      {{#staticPartial.press}}
+      {{> partials/static/press}}
+      {{/staticPartial.press}}
+      {{#staticPartial.privacy}}
+      {{> partials/static/privacy}}
+      {{/staticPartial.privacy}}
+      {{#staticPartial.terms}}
+      {{> partials/static/terms}}
+      {{/staticPartial.terms}}
+    </div>
+  </div>
+</div>

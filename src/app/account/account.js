@@ -57,12 +57,26 @@ angular.module( 'Morsel.account', [
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
-  //if we don't recognize the URL, send them to edit their profile for now
-  $urlRouterProvider.otherwise( '/account/edit-profile' );
+  //if we don't recognize the URL, send them to 404
+  $urlRouterProvider.otherwise( '/404' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
+
+  $stateProvider.state( '404', {
+    url: '/404',
+    views: {
+      "main": {
+        controller: function($scope){
+        },
+        templateUrl: 'common/util/404.tpl.html'
+      }
+    },
+    data: {
+      pageTitle: 'Page Not Found'
+    }
+  });
 })
 
 .run( function run ($window) {
@@ -71,8 +85,7 @@ angular.module( 'Morsel.account', [
 
 .controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, Mixpanel, $state ) {
   var viewOptions = {
-    miniHeader : false,
-    hideFooter : false
+    miniHeader : false
   };
 
   Auth.setupInterceptor();
@@ -84,7 +97,7 @@ angular.module( 'Morsel.account', [
   //also bind on resize
   angular.element($window).bind('resize', _.debounce(onBrowserResize, 300));
 
-  //initial fetching of user data for header/footer
+  //initial fetching of user data for header
   Auth.setInitialUserData().then(function(currentUser){
     $scope.currentUser = currentUser;
 
@@ -136,6 +149,11 @@ angular.module( 'Morsel.account', [
     }
   });
 
+  //if there are internal state issues, go to 404
+  $scope.$on('$stateChangeError', function(e) {
+    $state.go('404');
+  });
+
   //reset our view options
   function resetViewOptions() {
     if(!$scope.viewOptions) {
@@ -157,9 +175,14 @@ angular.module( 'Morsel.account', [
     $scope.$apply('viewOptions');
   }
 
-  $scope.viewProfile = function(path) {
-    if($scope.currentUser) {
-      $window.location.href = '/'+$scope.currentUser.username;
+  $scope.closeMenu = function() {
+    $scope.menuOpen = false;
+  };
+
+  $scope.goToProfile = function() {
+    if($scope.currentUser && $scope.currentUser.username) {
+      $location.path('/'+$scope.currentUser.username);
     }
+    $scope.menuOpen = false;
   };
 });

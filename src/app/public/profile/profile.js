@@ -12,12 +12,12 @@ angular.module( 'Morsel.public.profile', [])
     data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get the user data of the profile before we try to render the page
-      profileUserData: function(ApiUsers, $stateParams, $location) {
+      profileUserData: function(ApiUsers, $stateParams, $location, $state) {
         return ApiUsers.getUser($stateParams.username).then(function(userResp) {
           return userResp.data;
         }, function() {
-          //if there's an error retrieving user data (bad username?), go to home page for now
-          $location.path('/');
+          //if there's an error retrieving user data (bad username?), send to 404
+          $state.go('404');
         });
       },
       //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
@@ -28,9 +28,8 @@ angular.module( 'Morsel.public.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $anchorScroll, $modal, $rootScope, profileUserData, currentUser ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $anchorScroll, $modal, $rootScope, profileUserData, currentUser, $state ) {
   $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.hideFooter = true;
 
   $scope.largeBreakpoint = $window.innerWidth > 768; //total hack
 
@@ -63,8 +62,8 @@ angular.module( 'Morsel.public.profile', [])
   ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
     $scope.morsels = morselsData;
   }, function() {
-    //if there's an error retrieving user data (bad username?), go to home page for now
-    $location.path('/');
+    //if there's an error retrieving user data (bad username?), go to 404
+    $state.go('404');
   });
 
   $scope.getCoverPhotoArray = function(morsel) {
