@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectFacebook', [] )
 
 //connect (sign up/login) with facebook SDK
-.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window, $location){
+.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location){
   return {
     restrict: 'A',
     scope: {
@@ -41,16 +41,6 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         }(document, 'script', 'facebook-jssdk'));
       }
 
-      //check for an afterlogin callback on load
-      if(AfterLogin.hasCallback('combineAccounts.facebook')) {
-        afterLoginCallback = AfterLogin.getCallback();
-
-        //make sure we're actually loggeed in just in case
-        if(Auth.isLoggedIn()) {
-          afterLoginCombineAccountCallback(afterLoginCallback);
-        }
-      }
-      
       scope.connectFacebook = function() {
         FB.login(function(response) {
           var fbUserPromise,
@@ -122,8 +112,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
           }, function(resp) {
             //if this email already exists...
             if(resp.data && resp.data.errors && resp.data.errors.email && (_.indexOf(resp.data.errors.email, 'has already been taken')>=0)) {
-              //pop an overlay prompting user to associated fb data to existing morsel account
-              existingAccountModal();
+              //show errors
+              HandleErrors.onError(resp.data, scope.form);
             } else {
               //the email wasn't valid - just scrap it, move to sign up
               scope.$parent.userData.social.email = '';
@@ -148,78 +138,6 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         });
 
         return deferred.promise;
-      }
-
-      function afterLoginCombineAccountCallback(afterLoginCallback) {
-        ApiUsers.createUserAuthentication(afterLoginCallback.data).then(function() {
-          //remove callback after completion
-          AfterLogin.removeCallback();
-
-          //send them home (trigger page refresh to switch apps)
-          sendToNextUrl();
-          $window.location.href = '/';
-        }, function(resp) {
-          HandleErrors.onError(resp.data, scopeWithData.basicInfoForm);
-        });
-      }
-
-      function existingAccountModal() {
-        var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, HandleErrors, AfterLogin, scopeWithData, userInfoDeferred) {
-          $scope.email = scopeWithData.$parent.userData.social.email;
-          $scope.socialType = 'Facebook';
-
-          //if user cancels, allow fb info to go through, but strip out email
-          $scope.cancel = function () {
-            scopeWithData.$parent.userData.social.email = '';
-            $modalInstance.dismiss('cancel');
-            userInfoDeferred.resolve();
-          };
-
-          $scope.combineAccounts = function() {
-            AfterLogin.setCallback({
-              type: 'combineAccounts.facebook',
-              path: $location.url(),
-              data: {
-                'authentication': {
-                  'provider': 'facebook',
-                  'token': loginResponse.authResponse.accessToken,
-                  //tokens coming from the JS SDK are short-lived
-                  'short_lived': true,
-                  'uid': scopeWithData.$parent.userData.social.id
-                }
-              }
-            });
-
-            //check if we're already on the login page
-            if($location.path() === '/login') {
-              //dismiss this overlay
-              $modalInstance.dismiss('cancel');
-            } else {
-              //otherwise send to login
-              $location.path('/login');
-            }
-          };
-
-          $rootScope.$on('$locationChangeSuccess', function () {
-            $modalInstance.dismiss('cancel');
-          });
-        };
-        //we need to implicitly inject dependencies here, otherwise minification will botch them
-        ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'HandleErrors', 'AfterLogin', 'scopeWithData', 'userInfoDeferred'];
-
-        var modalInstance = $modal.open({
-          templateUrl: 'common/user/duplicateEmailOverlay.tpl.html',
-          controller: ModalInstanceCtrl,
-          resolve: {
-            //pass the outside scope
-            scopeWithData: function () {
-              return scope;
-            },
-            userInfoDeferred: function () {
-              return userInfoDeferred;
-            }
-          }
-        });
       }
 
       function login() {

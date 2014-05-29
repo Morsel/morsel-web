@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectTwitter', [] )
 
 //connect (sign up/login) with twitter Oauth (handled on server)
-.directive('mrslConnectTwitter', function(ApiUsers, $state, $q, HandleErrors, $modal, $rootScope, AfterLogin, Auth, $window, $location){
+.directive('mrslConnectTwitter', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location){
   return {
     restrict: 'A',
     scope: {

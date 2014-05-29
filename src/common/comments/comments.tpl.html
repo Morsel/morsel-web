@@ -1,6 +1,6 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()">&times;</button>
-  <h4 class="h2">Chef's Comments <span ng-show="item.comments.length > 0">({{item.comments.length}})</span><i class="common-comments"></i></h4>
+  <h4 class="h2">Comments <span ng-show="item.comments.length > 0">({{item.comments.length}})</span><i class="common-comments"></i></h4>
 </div>
 <div class="modal-body user-list comment-list">
   <ul ng-show="item.comments.length > 0">
@@ -29,5 +29,4 @@
       <button type="submit" ng-disabled="addCommentForm.$invalid" class="btn btn-primary">Add Comment</button>
     </form>
   </div>
-  <p ng-if="!isLoggedIn">Are you a chef? <a href="/login">Sign up here</a></p>
 </div>
