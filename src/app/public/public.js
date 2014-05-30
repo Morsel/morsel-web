@@ -104,7 +104,7 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack ) {
   var viewOptions = {
     miniHeader : false
   };
@@ -145,7 +145,8 @@ angular.module( 'Morsel.public', [
   //when a user starts to access a new route
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     var currentLocation = $location.path(),
-        nextPath;
+        nextPath,
+        topModal = $modalStack.getTop();
         
     //if non logged in user tries to access a restricted route
     if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
@@ -155,6 +156,12 @@ angular.module( 'Morsel.public', [
       //send them to the login page
       $window.location.href ='/login' + nextPath;
     }
+
+    //if there are any modals open, close them
+    if (topModal) {
+      $modalStack.dismiss(topModal.key);
+    }
+
     resetViewOptions();
   });
 

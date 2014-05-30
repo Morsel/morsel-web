@@ -94,7 +94,7 @@ angular.module( 'Morsel.common.itemLike', [] )
       }
 
       scope.openLikes = function () {
-        var modalInstance = $modal.open({
+        $rootScope.modalInstance = $modal.open({
           templateUrl: 'common/user/userList.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
@@ -113,10 +113,6 @@ angular.module( 'Morsel.common.itemLike', [] )
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
         };
-
-        $rootScope.$on('$locationChangeSuccess', function () {
-          $modalInstance.dismiss('cancel');
-        });
 
         if(!$scope.users) {
           ApiItems.getLikers(item.id).then(function(likerResp){

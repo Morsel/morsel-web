@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.textLimit', [] )
 
 //show/hide an amount of text
-.directive('mrslTextLimit', function($modal, $window){
+.directive('mrslTextLimit', function($modal, $window, $rootScope){
   return {
     restrict: 'A',
     scope: {
@@ -38,7 +38,7 @@ angular.module( 'Morsel.common.textLimit', [] )
       };
 
       scope.expand = function () {
-        var modalInstance = $modal.open({
+        $rootScope.modalInstance = $modal.open({
           templateUrl: 'common/text/textOverlay.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {

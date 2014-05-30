@@ -34,7 +34,7 @@ angular.module( 'Morsel.common.comments', [] )
       });
 
       scope.openComments = function () {
-        var modalInstance = $modal.open({
+        $rootScope.modalInstance = $modal.open({
           templateUrl: 'common/comments/comments.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
@@ -110,10 +110,6 @@ angular.module( 'Morsel.common.comments', [] )
             $window.location.href = '/join';
           }
         };
-
-        $rootScope.$on('$locationChangeSuccess', function () {
-          $modalInstance.dismiss('cancel');
-        });
 
         if(!$scope.item.comments) {
           getComments();

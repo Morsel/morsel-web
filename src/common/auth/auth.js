@@ -3,7 +3,7 @@ angular.module( 'Morsel.common.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel){
+.factory('Auth', function($window, ApiUsers, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel, $rootScope){
   var Auth = {},
       defaultRequestParams = {},
       loadedUser = $q.defer();
@@ -231,8 +231,7 @@ angular.module( 'Morsel.common.auth', [
   };
 
   Auth.showApiError = function(status, errors) {
-    var modalInstance,
-        ModalInstanceCtrl,
+    var ModalInstanceCtrl,
         errorList = errors || 'No error message';
 
     //send error report to mixpanel
@@ -250,7 +249,7 @@ angular.module( 'Morsel.common.auth', [
     //we need to implicitly inject dependencies here, otherwise minification will botch them
     ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance'];
 
-    modalInstance = $modal.open({
+    $rootScope.modalInstance = $modal.open({
       templateUrl: 'common/auth/apiError.tpl.html',
       controller: ModalInstanceCtrl,
       resolve: {}

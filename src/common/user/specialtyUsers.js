@@ -10,7 +10,7 @@ angular.module( 'Morsel.common.specialtyUsers', [] )
     link: function(scope, element, attrs) {
 
       scope.showSpecialtyUsers = function() {
-        var modalInstance = $modal.open({
+        $rootScope.modalInstance = $modal.open({
           templateUrl: 'common/user/userList.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
@@ -28,10 +28,6 @@ angular.module( 'Morsel.common.specialtyUsers', [] )
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
         };
-
-        $rootScope.$on('$locationChangeSuccess', function () {
-          $modalInstance.dismiss('cancel');
-        });
 
         if(!$scope.users) {
           ApiKeywords.getSpecialtyUsers(specialty.keyword.id).then(function(userResp){
