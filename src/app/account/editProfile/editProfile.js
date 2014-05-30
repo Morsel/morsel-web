@@ -33,8 +33,8 @@ angular.module( 'Morsel.account.editProfile', [])
 
   //model to store our profile data
   $scope.basicInfoModel = _.clone(accountUser);
-
   $scope.profilePhoto = null;
+  $scope.isChef = Auth.isChef();
 
   //submit our form
   $scope.updateBasicInfo = function() {
@@ -78,24 +78,40 @@ angular.module( 'Morsel.account.editProfile', [])
     HandleErrors.onError(resp, $scope.basicInfoForm);
   }
 
-  //cuisines
+  //only chef's have cuisines and specialities
+  if($scope.isChef) {
 
-  //get all the cuisines
-  allCuisinesPromise = getAllCuisines();
-  //get the cuisines the user has
-  userCuisinesPromise = getUserCuisines();
+    //cuisines
 
-  //when all cuisine data has returned
-  $q.all([allCuisinesPromise, userCuisinesPromise]).then(function(){
-    //an array of objects of form {keyword:{}, tag:{}}
-    $scope.cuisineList = constructList(allCuisines, userCuisines);
-  });
+    //get all the cuisines
+    allCuisinesPromise = getAllCuisines();
+    //get the cuisines the user has
+    userCuisinesPromise = getUserCuisines();
+
+    //when all cuisine data has returned
+    $q.all([allCuisinesPromise, userCuisinesPromise]).then(function(){
+      //an array of objects of form {keyword:{}, tag:{}}
+      $scope.cuisineList = constructList(allCuisines, userCuisines);
+    });
+
+    //specialties
+    //get all the specialties
+    allSpecialtiesPromise = getAllSpecialties();
+    //get the specialties the user has
+    userSpecialtiesPromise = getUserSpecialties();
+
+    //when all specialty data has returned
+    $q.all([allSpecialtiesPromise, userSpecialtiesPromise]).then(function(){
+      //an array of objects of form {keyword:{}, tag:{}}
+      $scope.specialtyList = constructList(allSpecialties, userSpecialties);
+    });
+  }
 
   function getAllCuisines() {
     var deferred = $q.defer();
 
-    ApiKeywords.getAllCuisines().then(function(allCuisineData){
-      allCuisines = allCuisineData;
+    ApiKeywords.getAllCuisines().then(function(allCuisineResp){
+      allCuisines = allCuisineResp.data;
       deferred.resolve();
     });
 
@@ -105,31 +121,19 @@ angular.module( 'Morsel.account.editProfile', [])
   function getUserCuisines() {
     var deferred = $q.defer();
 
-    ApiUsers.getCuisines(accountUser.id).then(function(userCuisineData){
-      userCuisines = userCuisineData;
+    ApiUsers.getCuisines(accountUser.id).then(function(userCuisineResp){
+      userCuisines = userCuisineResp.data;
       deferred.resolve();
     });
 
     return deferred.promise;
   }
 
-  //specialties
-  //get all the specialties
-  allSpecialtiesPromise = getAllSpecialties();
-  //get the specialties the user has
-  userSpecialtiesPromise = getUserSpecialties();
-
-  //when all specialty data has returned
-  $q.all([allSpecialtiesPromise, userSpecialtiesPromise]).then(function(){
-    //an array of objects of form {keyword:{}, tag:{}}
-    $scope.specialtyList = constructList(allSpecialties, userSpecialties);
-  });
-
   function getAllSpecialties() {
     var deferred = $q.defer();
 
-    ApiKeywords.getAllSpecialties().then(function(allSpecialtyData){
-      allSpecialties = allSpecialtyData;
+    ApiKeywords.getAllSpecialties().then(function(allSpecialtyResp){
+      allSpecialties = allSpecialtyResp.data;
       deferred.resolve();
     });
 
@@ -139,8 +143,8 @@ angular.module( 'Morsel.account.editProfile', [])
   function getUserSpecialties() {
     var deferred = $q.defer();
 
-    ApiUsers.getSpecialties(accountUser.id).then(function(userSpecialtyData){
-      userSpecialties = userSpecialtyData;
+    ApiUsers.getSpecialties(accountUser.id).then(function(userSpecialtyResp){
+      userSpecialties = userSpecialtyResp.data;
       deferred.resolve();
     });
 
@@ -186,9 +190,9 @@ angular.module( 'Morsel.account.editProfile', [])
     //check our model
     if(item.isChecked) {
       //user toggled on, create tag
-      ApiKeywords.createUserTag(accountUser.id, item.keyword.id).then(function(newTagData){
+      ApiKeywords.createUserTag(accountUser.id, item.keyword.id).then(function(newTagResp){
         //confirmed delete, update local array
-        item.tag = newTagData;
+        item.tag = newTagResp.data;
       });
     } else {
       //user toggled off, delete tag

@@ -25,10 +25,10 @@
 
     <button mrsl-submit-btn mrsl-submit-btn-form="basicInfoForm" mrsl-submit-btn-copy="Update Basic Info"></button>
   </form>
-  <h3>Cuisines</h3>
-  <ul mrsl-checklist mrsl-checklist-vals="cuisineList" mrsl-checklist-change="toggleTag"></ul>
+  <h3 ng-show="isChef">Cuisines</h3>
+  <ul ng-show="isChef" mrsl-checklist mrsl-checklist-vals="cuisineList" mrsl-checklist-change="toggleTag"></ul>
 
-  <h3>Specialties</h3>
-  <ul mrsl-checklist mrsl-checklist-vals="specialtyList" mrsl-checklist-change="toggleTag"></ul>
+  <h3 ng-show="isChef">Specialties</h3>
+  <ul ng-show="isChef" mrsl-checklist mrsl-checklist-vals="specialtyList" mrsl-checklist-change="toggleTag"></ul>
 
 </div>
