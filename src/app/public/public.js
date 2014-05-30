@@ -171,7 +171,7 @@ angular.module( 'Morsel.public', [
     });
 
     //manually push a GA pageview
-    GA.sendPageView($scope.pageTitle);
+    GA.sendPageview($scope.pageTitle);
   });
 
   //if there are internal state issues, go to 404
