@@ -73,7 +73,7 @@ angular.module( 'Morsel.login.join', [])
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers ) {
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers, $cookies ) {
   //used to differentiate between login types for UI
   $scope.usingEmail = _.isEmpty($scope.userData.social); 
 
@@ -110,7 +110,8 @@ angular.module( 'Morsel.login.join', [])
             'last_name': $scope.basicInfoModel.last_name
           }
         },
-        socialData;
+        socialData,
+        gaCookie = $cookies._ga;
 
     if($scope.profilePhoto) {
       uploadData.user.photo = $scope.profilePhoto;
@@ -118,6 +119,11 @@ angular.module( 'Morsel.login.join', [])
 
     if($scope.remotePhotoUrl) {
       uploadData.user.remote_photo_url = $scope.remotePhotoUrl;
+    }
+
+    if(gaCookie) {
+      //send _ga value as __utmz until API is updated
+      uploadData.__utmz = gaCookie;
     }
 
     if(!$scope.usingEmail) {

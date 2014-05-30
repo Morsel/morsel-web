@@ -1,6 +1,7 @@
 angular.module( 'Morsel.login', [
   //libs
   'angularMoment',
+  'ngCookies',
   'restangular',
   'ui.bootstrap',
   'ui.router',

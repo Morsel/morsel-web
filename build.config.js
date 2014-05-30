@@ -245,6 +245,7 @@ module.exports = {
       js: [
         'vendor/angular/angular.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-cookies/angular-cookies.min.js',
         'vendor/angular-moment/angular-moment.min.js',
         'vendor/angular-touch/angular-touch.js',
         'vendor/angular-ui-router/release/angular-ui-router.js',
@@ -334,6 +335,7 @@ module.exports = {
       'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       /*'vendor/angular-carousel/dist/angular-carousel.min.js',*///until I figure out how to turn off conditionally
+      'vendor/angular-cookies/angular-cookies.min.js',
       'vendor/angular-moment/angular-moment.min.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
       'vendor/angular-touch/angular-touch.js',
