@@ -155,7 +155,11 @@ app.get('/password-reset/new', function(req, res){
 
 //account pages
 app.get('/account*', function(req, res){
+  var fullMetadata = findMetadata('default');
+
   res.render('account', {
+    metadata: fullMetadata,
+    metabase: metabase,
     siteUrl : siteURL,
     isProd : isProd,
     apiUrl : apiUrl,
@@ -256,6 +260,7 @@ function renderStatic(res, route) {
   var fullMetadata = findMetadata(route) || findMetadata('default'),
       templateVars = {
         metadata: fullMetadata,
+        metabase: metabase,
         apiUrl: apiUrl,
         isProd : isProd,
         mixpanelToken : mixpanelToken,
@@ -379,8 +384,12 @@ function renderMorselPage(res, username, morselIdSlug) {
 }
 
 function renderLoginPage(res, twitterData) {
+  var fullMetadata = findMetadata('login');
+
   res.render('login', {
+    metadata: fullMetadata,
     siteUrl : siteURL,
+    metabase: metabase,
     isProd : isProd,
     apiUrl : apiUrl,
     mixpanelToken : mixpanelToken,
