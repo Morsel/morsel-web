@@ -101,6 +101,7 @@ angular.module( 'Morsel.account', [
   //initial fetching of user data for header
   Auth.setInitialUserData().then(function(currentUser){
     $scope.currentUser = currentUser;
+    $scope.isLoggedIn = Auth.isLoggedIn();
 
     //get and send some super properties to mixpanel
     if(Auth.isLoggedIn()) {

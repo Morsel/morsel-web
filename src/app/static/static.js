@@ -68,7 +68,8 @@ angular.module( 'Morsel.static', [
   //initial fetching of user data for header
   Auth.setInitialUserData().then(function(currentUser){
     $scope.currentUser = currentUser;
-
+    $scope.isLoggedIn = Auth.isLoggedIn();
+    
     //get and send some super properties to mixpanel
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
