@@ -114,6 +114,10 @@ app.get('/google1739f11000682532.html', function(req, res){
   res.sendfile('seo/google1739f11000682532.html');
 });
 
+app.get('/pinterest-98fe2.html', function(req, res){
+  res.sendfile('seo/pinterest-98fe2.html');
+});
+
 //unsubscribe
 app.get('/unsubscribe', function(req, res){
   res.render('unsubscribe', {
