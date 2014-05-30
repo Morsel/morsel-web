@@ -53,12 +53,18 @@ angular.module( 'Morsel.account.editProfile', [])
 
     //check if everything is valid
     if($scope.basicInfoForm.$valid) {
+      //disable form while request fires
+      $scope.basicInfoForm.$setValidity('loading', false);
+
       //call our updateUser method to take care of the heavy lifting
       ApiUsers.updateUser($scope.basicInfoModel.id, userData).then(onBasicInfoSuccess, onBasicInfoError);
     }
   };
 
   function onBasicInfoSuccess(resp) {
+    //make form valid again
+    $scope.basicInfoForm.$setValidity('loading', true);
+
     //update our scoped current user
     Auth.updateUser(resp.data);
     $scope.alertMessage = 'Successfully updated your basic info';
@@ -66,6 +72,9 @@ angular.module( 'Morsel.account.editProfile', [])
   }
 
   function onBasicInfoError(resp) {
+    //make form valid again (until errors show)
+    $scope.basicInfoForm.$setValidity('loading', true);
+      
     HandleErrors.onError(resp, $scope.basicInfoForm);
   }
 

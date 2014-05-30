@@ -11,6 +11,27 @@ angular.module('Morsel.common.submitBtn', [])
       tooltipPlacement: '@mrslSubmitBtnTooltipPlacement'
     },
     link: function(scope) {
+      var originalCopy = scope.copy;
+
+      scope.toolTipMessage = function(){
+        if(scope.form.$error.loading) {
+          return 'Your request is loading...';
+        } else {
+          if(scope.form.$error.required) {
+            return 'Please complete all required fields';
+          } else {
+            return 'Please correct errors in indicated fields';
+          }
+        }
+      };
+
+      scope.copyMessage = function(){
+        if(scope.form.$error.loading) {
+          return 'Loading...';
+        } else {
+          return originalCopy;
+        }
+      };
     },
     templateUrl: 'common/forms/submitBtn.tpl.html'
   };

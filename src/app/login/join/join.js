@@ -141,12 +141,17 @@ angular.module( 'Morsel.login.join', [])
 
     //check if everything is valid
     if($scope.basicInfoForm.$valid) {
+      //disable form while request fires
+      $scope.basicInfoForm.$setValidity('loading', false);
       //call our join to take care of the heavy lifting
       Auth.join(uploadData).then(onSuccess, onError);
     }
   };
 
   function onSuccess(resp) {
+    //make form valid again
+    $scope.basicInfoForm.$setValidity('loading', true);
+
     //store our user data for the next step if we need it
     $scope.userData.registered = resp;
 
@@ -155,6 +160,9 @@ angular.module( 'Morsel.login.join', [])
   }
 
   function onError(resp) {
+    //make form valid again (until errors show)
+    $scope.basicInfoForm.$setValidity('loading', true);
+
     HandleErrors.onError(resp.data, $scope.basicInfoForm);
   }
 
@@ -188,6 +196,9 @@ angular.module( 'Morsel.login.join', [])
 
     //check if everything is valid
     if($scope.additionalInfoForm.$valid) {
+      //disable form while request fires
+      $scope.additionalInfoForm.$setValidity('loading', false);
+
       industryPromise = ApiUsers.updateIndustry($scope.userData.registered.id, $scope.additionalInfoModel.industry);
       userInfoPromise = ApiUsers.updateUser($scope.userData.registered.id, {
         user: {
@@ -201,6 +212,9 @@ angular.module( 'Morsel.login.join', [])
   };
 
   function onSuccess(resp) {
+    //make form valid again
+    $scope.additionalInfoForm.$setValidity('loading', true);
+
     //if successfully joined check if we have anything in the to-do queue
     if(AfterLogin.hasCallback()) {
       AfterLogin.goToCallbackPath();
@@ -216,6 +230,9 @@ angular.module( 'Morsel.login.join', [])
   }
 
   function onError(resp) {
+    //make form valid again (until errors show)
+    $scope.additionalInfoForm.$setValidity('loading', true);
+    
     HandleErrors.onError(resp.data, $scope.additionalInfoForm);
   }
 });
