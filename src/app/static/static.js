@@ -109,7 +109,7 @@ angular.module( 'Morsel.static', [
 
   $scope.goToProfile = function() {
     if($scope.currentUser && $scope.currentUser.username) {
-      $location.path('/'+$scope.currentUser.username);
+      $window.location.href= '/'+$scope.currentUser.username;
     }
     $scope.menuOpen = false;
   };

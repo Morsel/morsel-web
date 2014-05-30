@@ -109,13 +109,6 @@ angular.module( 'Morsel.public', [
     miniHeader : false
   };
 
-  $scope.currentUser = {
-    username: 'something',
-    first_name: 'firstie'
-  };
-
-  $scope.testprop = 'hello';
-
   Auth.setupInterceptor();
   Auth.resetAPIParams();
 
