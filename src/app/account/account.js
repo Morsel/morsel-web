@@ -18,6 +18,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.baseErrors',
   'Morsel.common.checklist',
   'Morsel.common.formNameFix',
+  'Morsel.common.ga',
   'Morsel.common.handleErrors',
   'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
@@ -83,7 +84,7 @@ angular.module( 'Morsel.account', [
   $window.moment.lang('en');
 })
 
-.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, Mixpanel, $state ) {
+.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, Mixpanel, $state, GA ) {
   var viewOptions = {
     miniHeader : false
   };
@@ -144,9 +145,7 @@ angular.module( 'Morsel.account', [
     });
 
     //manually push a GA pageview
-    if($window._gaq) {
-      $window._gaq.push(['_trackPageview', $location.path()]);
-    }
+    GA.sendPageView($scope.pageTitle);
   });
 
   //if there are internal state issues, go to 404

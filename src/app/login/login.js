@@ -18,6 +18,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.connectFacebook',
   'Morsel.common.connectTwitter',
   'Morsel.common.formNameFix',
+  'Morsel.common.ga',
   'Morsel.common.handleErrors',
   'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
@@ -85,7 +86,7 @@ angular.module( 'Morsel.login', [
   $window.moment.lang('en');
 })
 
-.controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel, $state ) {
+.controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel, $state, GA ) {
   var viewOptions = {
     miniHeader : false
   };
@@ -144,9 +145,7 @@ angular.module( 'Morsel.login', [
     });
 
     //manually push a GA pageview
-    if($window._gaq) {
-      $window._gaq.push(['_trackPageview', $location.path()]);
-    }
+    GA.sendPageView($scope.pageTitle);
   });
 
   //if there are internal state issues, go to 404

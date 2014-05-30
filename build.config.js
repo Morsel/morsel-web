@@ -63,6 +63,7 @@ module.exports = {
     atpl: [ 'src/app/public/**/*.tpl.html' ],
     common: {
       js: [
+        'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
         'src/common/api/feed.js',
         'src/common/api/items.js',
@@ -150,6 +151,7 @@ module.exports = {
     atpl: [ 'src/app/account/**/*.tpl.html' ],
     common: {
       js: [
+        'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
         'src/common/api/keywords.js',
         'src/common/api/uploads.js',
@@ -210,6 +212,7 @@ module.exports = {
     atpl: [ 'src/app/login/**/*.tpl.html' ],
     common: {
       js: [
+        'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
