@@ -35,16 +35,28 @@ angular.module( 'Morsel.login.passwordReset', [])
 
     //check if everything is valid
     if($scope.emailPasswordForm.$valid) {
+      //disable form while request fires
+      $scope.emailPasswordForm.$setValidity('loading', false);
+
       ApiUsers.forgotPassword(email).then(onSuccess, onError);
     }
     
     function onSuccess(resp) {
+      //make form valid again
+      $scope.emailPasswordForm.$setValidity('loading', true);
+
+      //remove the form
+      $scope.emailSubmitted = true;
+
       //if email successfully sent, show message
       $scope.alertMessage = 'A link has been sent to '+$scope.emailPasswordModel.email+' containing instructions for how to complete the password reset process.';
       $scope.alertType = 'success';
     }
 
     function onError(resp) {
+      //make form valid again (until errors show)
+      $scope.emailPasswordForm.$setValidity('loading', true);
+
       HandleErrors.onError(resp.data, $scope.emailPasswordForm);
     }
   };
@@ -71,16 +83,25 @@ angular.module( 'Morsel.login.passwordReset', [])
 
     //check if everything is valid
     if($scope.newPasswordForm.$valid) {
+      //disable form while request fires
+      $scope.newPasswordForm.$setValidity('loading', false);
+
       ApiUsers.resetPassword(passwordData).then(onSuccess, onError);
     }
     
     function onSuccess(resp) {
+      //make form valid again
+      $scope.newPasswordForm.$setValidity('loading', true);
+
       //if password reset, show message
       $scope.alertMessage = $sce.trustAsHtml('Your password has been reset. You can now <a href="/login">login</a> with your new password');
       $scope.alertType = 'success';
     }
 
     function onError(resp) {
+      //make form valid again (until errors show)
+      $scope.newPasswordForm.$setValidity('loading', true);
+
       HandleErrors.onError(resp.data, $scope.newPasswordForm);
     }
   };

@@ -10,7 +10,7 @@ angular.module( 'Morsel.common.cuisineUsers', [] )
     link: function(scope, element, attrs) {
 
       scope.showCuisineUsers = function() {
-        var modalInstance = $modal.open({
+        $rootScope.modalInstance = $modal.open({
           templateUrl: 'common/user/userList.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
@@ -28,10 +28,6 @@ angular.module( 'Morsel.common.cuisineUsers', [] )
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
         };
-
-        $rootScope.$on('$locationChangeSuccess', function () {
-          $modalInstance.dismiss('cancel');
-        });
 
         if(!$scope.users) {
           ApiKeywords.getCuisineUsers(cuisine.keyword.id).then(function(userResp){

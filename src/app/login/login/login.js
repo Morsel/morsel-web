@@ -48,10 +48,15 @@ angular.module( 'Morsel.login.login', [])
 
     //check if everything is valid
     if($scope.loginForm.$valid) {
+      //disable form while request fires
+      $scope.loginForm.$setValidity('loading', false);
       Auth.login(userData).then(onSuccess, onError);
     }
-    
+
     function onSuccess(resp) {
+      //make form valid again
+      $scope.loginForm.$setValidity('loading', true);
+
       //if successfully logged in check if we have anything in the to-do queue
       if(AfterLogin.hasCallback()) {
         AfterLogin.goToCallbackPath();
@@ -67,6 +72,9 @@ angular.module( 'Morsel.login.login', [])
     }
 
     function onError(resp) {
+      //make form valid again (until errors show)
+      $scope.loginForm.$setValidity('loading', true);
+
       //wipe out last password
       $scope.loginModel.password = '';
       //set pristine so error handling doesn't trigger immediately

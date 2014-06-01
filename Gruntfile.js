@@ -1313,6 +1313,16 @@ module.exports = function ( grunt ) {
         });
       }
     });
+
+    grunt.file.copy('src/views/partials/headContent.mustache', this.data.dir + '/views/partials/headContent.mustache', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
   });
 
   /* analogous to app_public */

@@ -73,7 +73,7 @@ angular.module( 'Morsel.login.join', [])
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers ) {
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers, $cookies ) {
   //used to differentiate between login types for UI
   $scope.usingEmail = _.isEmpty($scope.userData.social); 
 
@@ -110,7 +110,8 @@ angular.module( 'Morsel.login.join', [])
             'last_name': $scope.basicInfoModel.last_name
           }
         },
-        socialData;
+        socialData,
+        gaCookie = $cookies._ga;
 
     if($scope.profilePhoto) {
       uploadData.user.photo = $scope.profilePhoto;
@@ -118,6 +119,11 @@ angular.module( 'Morsel.login.join', [])
 
     if($scope.remotePhotoUrl) {
       uploadData.user.remote_photo_url = $scope.remotePhotoUrl;
+    }
+
+    if(gaCookie) {
+      //send _ga value as __utmz until API is updated
+      uploadData.__utmz = gaCookie;
     }
 
     if(!$scope.usingEmail) {
@@ -141,12 +147,17 @@ angular.module( 'Morsel.login.join', [])
 
     //check if everything is valid
     if($scope.basicInfoForm.$valid) {
+      //disable form while request fires
+      $scope.basicInfoForm.$setValidity('loading', false);
       //call our join to take care of the heavy lifting
       Auth.join(uploadData).then(onSuccess, onError);
     }
   };
 
   function onSuccess(resp) {
+    //make form valid again
+    $scope.basicInfoForm.$setValidity('loading', true);
+
     //store our user data for the next step if we need it
     $scope.userData.registered = resp;
 
@@ -155,6 +166,9 @@ angular.module( 'Morsel.login.join', [])
   }
 
   function onError(resp) {
+    //make form valid again (until errors show)
+    $scope.basicInfoForm.$setValidity('loading', true);
+
     HandleErrors.onError(resp.data, $scope.basicInfoForm);
   }
 
@@ -188,6 +202,9 @@ angular.module( 'Morsel.login.join', [])
 
     //check if everything is valid
     if($scope.additionalInfoForm.$valid) {
+      //disable form while request fires
+      $scope.additionalInfoForm.$setValidity('loading', false);
+
       industryPromise = ApiUsers.updateIndustry($scope.userData.registered.id, $scope.additionalInfoModel.industry);
       userInfoPromise = ApiUsers.updateUser($scope.userData.registered.id, {
         user: {
@@ -201,6 +218,9 @@ angular.module( 'Morsel.login.join', [])
   };
 
   function onSuccess(resp) {
+    //make form valid again
+    $scope.additionalInfoForm.$setValidity('loading', true);
+
     //if successfully joined check if we have anything in the to-do queue
     if(AfterLogin.hasCallback()) {
       AfterLogin.goToCallbackPath();
@@ -216,6 +236,9 @@ angular.module( 'Morsel.login.join', [])
   }
 
   function onError(resp) {
+    //make form valid again (until errors show)
+    $scope.additionalInfoForm.$setValidity('loading', true);
+    
     HandleErrors.onError(resp.data, $scope.additionalInfoForm);
   }
 });

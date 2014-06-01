@@ -100,7 +100,7 @@ angular.module( 'Morsel.public.profile', [])
 
   $scope.openLikeFeed = function () {
     if($scope.user) {
-      var modalInstance = $modal.open({
+      $rootScope.modalInstance = $modal.open({
         templateUrl: 'common/user/userActivityOverlay.tpl.html',
         controller: ModalInstanceCtrl,
         resolve: {
@@ -118,10 +118,6 @@ angular.module( 'Morsel.public.profile', [])
     $scope.cancel = function () {
       $modalInstance.dismiss('cancel');
     };
-
-    $rootScope.$on('$locationChangeSuccess', function () {
-      $modalInstance.dismiss('cancel');
-    });
 
     getLikeFeed($scope, user);
   };

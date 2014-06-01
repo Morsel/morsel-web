@@ -24,17 +24,18 @@ angular.module( 'Morsel.public', [
   'Morsel.common.baseErrors',
   'Morsel.common.comments',
   'Morsel.common.cuisineUsers',
+  'Morsel.common.feedSwipe',
   'Morsel.common.follow',
   'Morsel.common.followedUsers',
   'Morsel.common.followers',
   'Morsel.common.formNameFix',
+  'Morsel.common.ga',
   'Morsel.common.handleErrors',
   'Morsel.common.itemActionBar',
-  'Morsel.common.feedSwipe',
+  'Morsel.common.itemLike',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
   'Morsel.common.morselSwipe',
-  'Morsel.common.itemLike',
   'Morsel.common.photoHelpers',
   'Morsel.common.responsiveImages',
   'Morsel.common.socialSharing',
@@ -103,17 +104,10 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack ) {
   var viewOptions = {
     miniHeader : false
   };
-
-  $scope.currentUser = {
-    username: 'something',
-    first_name: 'firstie'
-  };
-
-  $scope.testprop = 'hello';
 
   Auth.setupInterceptor();
   Auth.resetAPIParams();
@@ -144,7 +138,8 @@ angular.module( 'Morsel.public', [
   //when a user starts to access a new route
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     var currentLocation = $location.path(),
-        nextPath;
+        nextPath,
+        topModal = $modalStack.getTop();
         
     //if non logged in user tries to access a restricted route
     if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
@@ -154,6 +149,12 @@ angular.module( 'Morsel.public', [
       //send them to the login page
       $window.location.href ='/login' + nextPath;
     }
+
+    //if there are any modals open, close them
+    if (topModal) {
+      $modalStack.dismiss(topModal.key);
+    }
+
     resetViewOptions();
   });
 
@@ -170,9 +171,7 @@ angular.module( 'Morsel.public', [
     });
 
     //manually push a GA pageview
-    if($window._gaq) {
-      $window._gaq.push(['_trackPageview', $location.path()]);
-    }
+    GA.sendPageview($scope.pageTitle);
   });
 
   //if there are internal state issues, go to 404

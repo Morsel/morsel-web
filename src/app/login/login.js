@@ -1,6 +1,7 @@
 angular.module( 'Morsel.login', [
   //libs
   'angularMoment',
+  'ngCookies',
   'restangular',
   'ui.bootstrap',
   'ui.router',
@@ -18,6 +19,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.connectFacebook',
   'Morsel.common.connectTwitter',
   'Morsel.common.formNameFix',
+  'Morsel.common.ga',
   'Morsel.common.handleErrors',
   'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
@@ -85,7 +87,7 @@ angular.module( 'Morsel.login', [
   $window.moment.lang('en');
 })
 
-.controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel, $state ) {
+.controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel, $state, GA, $modalStack ) {
   var viewOptions = {
     miniHeader : false
   };
@@ -102,7 +104,8 @@ angular.module( 'Morsel.login', [
   //initial fetching of user data for header
   Auth.setInitialUserData().then(function(currentUser){
     $scope.currentUser = currentUser;
-
+    $scope.isLoggedIn = Auth.isLoggedIn();
+    
     //get and send some super properties to mixpanel
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
@@ -122,12 +125,20 @@ angular.module( 'Morsel.login', [
 
   //when a user starts to access a new route
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    var topModal = $modalStack.getTop();
+    
     //if non logged in user tries to access a restricted route
     if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
       event.preventDefault();
       //send them to the login page
       $location.path('/login');
     }
+
+    //if there are any modals open, close them
+    if (topModal) {
+      $modalStack.dismiss(topModal.key);
+    }
+
     resetViewOptions();
   });
 
@@ -144,9 +155,7 @@ angular.module( 'Morsel.login', [
     });
 
     //manually push a GA pageview
-    if($window._gaq) {
-      $window._gaq.push(['_trackPageview', $location.path()]);
-    }
+    GA.sendPageview($scope.pageTitle);
   });
 
   //if there are internal state issues, go to 404

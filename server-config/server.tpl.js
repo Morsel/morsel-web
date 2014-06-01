@@ -114,6 +114,10 @@ app.get('/google1739f11000682532.html', function(req, res){
   res.sendfile('seo/google1739f11000682532.html');
 });
 
+app.get('/pinterest-98fe2.html', function(req, res){
+  res.sendfile('seo/pinterest-98fe2.html');
+});
+
 //unsubscribe
 app.get('/unsubscribe', function(req, res){
   res.render('unsubscribe', {
@@ -155,7 +159,11 @@ app.get('/password-reset/new', function(req, res){
 
 //account pages
 app.get('/account*', function(req, res){
+  var fullMetadata = findMetadata('default');
+
   res.render('account', {
+    metadata: fullMetadata,
+    metabase: metabase,
     siteUrl : siteURL,
     isProd : isProd,
     apiUrl : apiUrl,
@@ -256,6 +264,7 @@ function renderStatic(res, route) {
   var fullMetadata = findMetadata(route) || findMetadata('default'),
       templateVars = {
         metadata: fullMetadata,
+        metabase: metabase,
         apiUrl: apiUrl,
         isProd : isProd,
         mixpanelToken : mixpanelToken,
@@ -379,8 +388,12 @@ function renderMorselPage(res, username, morselIdSlug) {
 }
 
 function renderLoginPage(res, twitterData) {
+  var fullMetadata = findMetadata('login');
+
   res.render('login', {
+    metadata: fullMetadata,
     siteUrl : siteURL,
+    metabase: metabase,
     isProd : isProd,
     apiUrl : apiUrl,
     mixpanelToken : mixpanelToken,

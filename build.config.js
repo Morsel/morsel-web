@@ -63,6 +63,7 @@ module.exports = {
     atpl: [ 'src/app/public/**/*.tpl.html' ],
     common: {
       js: [
+        'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
         'src/common/api/feed.js',
         'src/common/api/items.js',
@@ -75,7 +76,6 @@ module.exports = {
         'src/common/comments/comments.js',
         'src/common/filters/reverse.js',
         'src/common/forms/baseErrors.js',
-        'src/common/forms/checklist.js',
         'src/common/forms/formNameFix.js',
         'src/common/forms/handleErrors.js',
         'src/common/forms/submitBtn.js',
@@ -100,7 +100,6 @@ module.exports = {
       tpl: [
         'src/common/auth/apiError.tpl.html',
         'src/common/comments/comments.tpl.html',
-        'src/common/forms/checklist.tpl.html',
         'src/common/forms/submitBtn.tpl.html',
         'src/common/forms/validatedCheckbox.tpl.html',
         'src/common/forms/validatedInput.tpl.html',
@@ -132,8 +131,6 @@ module.exports = {
         'vendor/hamsterjs/hamster.js',
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/ng-file-upload/angular-file-upload.js',
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
         'vendor/ngstorage/ngStorage.js',
         'vendor/restangular/dist/restangular.js'
       ],
@@ -154,6 +151,7 @@ module.exports = {
     atpl: [ 'src/app/account/**/*.tpl.html' ],
     common: {
       js: [
+        'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
         'src/common/api/keywords.js',
         'src/common/api/uploads.js',
@@ -214,6 +212,7 @@ module.exports = {
     atpl: [ 'src/app/login/**/*.tpl.html' ],
     common: {
       js: [
+        'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
@@ -246,6 +245,7 @@ module.exports = {
       js: [
         'vendor/angular/angular.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-cookies/angular-cookies.min.js',
         'vendor/angular-moment/angular-moment.min.js',
         'vendor/angular-touch/angular-touch.js',
         'vendor/angular-ui-router/release/angular-ui-router.js',
@@ -288,8 +288,6 @@ module.exports = {
         'vendor/angular/angular.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'vendor/angular-touch/angular-touch.js',
-        'vendor/angular-ui-router/release/angular-ui-router.js',
-        'vendor/angular-ui-utils/modules/route/route.js',
         'vendor/lodash/dist/lodash.js',
         'vendor/ngstorage/ngStorage.js',
         'vendor/restangular/dist/restangular.js'
@@ -337,6 +335,7 @@ module.exports = {
       'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       /*'vendor/angular-carousel/dist/angular-carousel.min.js',*///until I figure out how to turn off conditionally
+      'vendor/angular-cookies/angular-cookies.min.js',
       'vendor/angular-moment/angular-moment.min.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
       'vendor/angular-touch/angular-touch.js',
