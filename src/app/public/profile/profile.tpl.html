@@ -35,32 +35,6 @@
           </li>
         </ul>
       </li>
-      <li ng-show="isChef">
-        <div class="user-tags col-sm-6">
-          <span class="h5">Cuisines:</span>
-          <ul>
-            <li ng-show="cuisines.length === 0">
-              <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
-              <a ng-show="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
-            </li>
-            <li ng-repeat="cuisine in cuisines" >
-              <a mrsl-cuisine-users mrsl-cuisine="cuisine"></a>{{$last ? '':','}}
-            </li>
-          </ul>
-        </div>
-        <div class="user-tags col-sm-6">
-          <span class="h5">Specialties:</span>
-          <ul>
-            <li ng-show="specialties.length === 0">
-              <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
-              <a ng-show="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
-            </li>
-            <li ng-repeat="specialty in specialties">
-              <a mrsl-specialty-users mrsl-specialty="specialty"></a>{{$last ? '':','}}
-            </li>
-          </ul>
-        </div>
-      </li>
     </ul>
     <hr />
 
@@ -82,15 +56,32 @@
             <p>This user hasn't made any morsels yet</p>
           </div>
         </tab>
-        <!--<tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
-          {{tab.content}}
+        <tab heading="Tags">
+          <div class="user-tags col-sm-6">
+            <span class="h5">Cuisines:</span>
+            <ul>
+              <li ng-show="cuisines.length === 0">
+                <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
+                <a ng-show="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
+              </li>
+              <li ng-repeat="cuisine in cuisines" >
+                <a mrsl-cuisine-users mrsl-cuisine="cuisine"></a>{{$last ? '':','}}
+              </li>
+            </ul>
+          </div>
+          <div class="user-tags col-sm-6">
+            <span class="h5">Specialties:</span>
+            <ul>
+              <li ng-show="specialties.length === 0">
+                <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
+                <a ng-show="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
+              </li>
+              <li ng-repeat="specialty in specialties">
+                <a mrsl-specialty-users mrsl-specialty="specialty"></a>{{$last ? '':','}}
+              </li>
+            </ul>
+          </div>
         </tab>
-        <tab select="alertMe()">
-          <tab-heading>
-            <i class="glyphicon glyphicon-bell"></i> Alert!
-          </tab-heading>
-          I've got an HTML heading, and a select callback. Pretty cool!
-        </tab>-->
       </tabset>
     </div>
 
