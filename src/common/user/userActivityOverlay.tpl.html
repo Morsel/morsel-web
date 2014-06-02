@@ -1,7 +1,0 @@
-<div class="modal-header">
-  <button type="button" class="close" ng-click="cancel()">&times;</button>
-  <h4 class="h2">{{user.first_name+' '+user.last_name}}'s Like{{likeFeed.length === 1 ? '':'s'}} <span ng-show="likeFeed.length > 0">({{likeFeed.length}})</span></h4>
-</div>
-<div class="modal-body">
-  <div ng-include src="'common/user/activityFeed.tpl.html'"></div>
-</div>

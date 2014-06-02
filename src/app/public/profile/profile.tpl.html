@@ -77,13 +77,13 @@
           </div>
         </tab>
         <tab heading="Likes">
-          <div ng-include src="'common/user/activityFeed.tpl.html'"></div>
+          <div mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>
         </tab>
       </tabset>
     </div>
 
     <div ng-if="!isChef" class="user-likes">
-      <div ng-include src="'common/user/activityFeed.tpl.html'"></div>
+      <div mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>
     </div>
   </div>
 </div>

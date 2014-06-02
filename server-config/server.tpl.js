@@ -180,6 +180,11 @@ app.get('/feed', function(req, res){
   renderPublicPage(res);
 });
 
+//activity
+app.get('/activity', function(req, res){
+  renderPublicPage(res);
+});
+
 //morsel detail with post id/slug
 app.get('/:username/:postidslug', function(req, res){
   renderMorselPage(res, req.params.username, req.params.postidslug);

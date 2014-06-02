@@ -295,6 +295,19 @@ form {
 
 @include error-page();
 
+.nav-tabs {
+  margin: 0;
+
+  > li {
+    text-align: center;
+
+    > a {
+      @include border-radius(0);
+      margin: 0;
+    }
+  }
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .morsel-text {
     background-image: url(images/logos/morsel-text@2x.png);

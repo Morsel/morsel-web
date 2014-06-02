@@ -92,7 +92,10 @@ module.exports = {
         'src/common/swipe/morsel.js',
         'src/common/swipe/morselSwipe.js',
         'src/common/text/textLimit.js',
+        'src/common/text/truncate.js',
+        'src/common/user/activityFeed.js',
         'src/common/user/cuisineUsers.js',
+        'src/common/user/likeableFeed.js',
         'src/common/user/specialtyUsers.js',
         'src/common/user/userImage.js'
       ],
@@ -111,7 +114,7 @@ module.exports = {
         'src/common/text/textLimit.tpl.html',
         'src/common/text/textOverlay.tpl.html',
         'src/common/user/activityFeed.tpl.html',
-        'src/common/user/userActivityOverlay.tpl.html',
+        'src/common/user/likeableFeed.tpl.html',
         'src/common/user/userList.tpl.html',
         'src/common/util/404.tpl.html'
       ]

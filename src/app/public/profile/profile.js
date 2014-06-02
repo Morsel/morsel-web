@@ -52,7 +52,9 @@ angular.module( 'Morsel.public.profile', [])
     }
   });
 
-  getLikeFeed($scope, $scope.user);
+  ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
+    $scope.likeFeed = likeableResp.data;
+  });
 
   ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
     $scope.morsels = morselsData;
@@ -82,23 +84,4 @@ angular.module( 'Morsel.public.profile', [])
       return [];
     }
   };
-
-  function getLikeFeed(scope, user) {
-    if(!scope.likeFeed) {
-      ApiUsers.getLikeables(user.id, 'Item').then(function(likeableResp){
-        _.each(likeableResp.data, function(likeable) {
-          //construct message to display
-          likeable.itemMessage = likeable.morsel.title+(likeable.description ? ': '+likeable.description : '');
-
-          //truncate message
-          likeable.itemMessage = likeable.itemMessage.length > 80 ? likeable.itemMessage.substr(0, 80) + '...' : likeable.itemMessage;
-
-          //pick proper photo to display
-          likeable.display_photo = likeable.photos ? likeable.photos._80x80 : MORSELPLACEHOLDER;
-        });
-
-        scope.likeFeed = likeableResp.data;
-      });
-    }
-  }
 });

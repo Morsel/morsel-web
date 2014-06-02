@@ -18,6 +18,7 @@ angular.module( 'Morsel.public', [
   //templates
   'templates-public',
   //common
+  'Morsel.common.activityFeed',
   'Morsel.common.afterLogin',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
@@ -32,6 +33,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.handleErrors',
   'Morsel.common.itemActionBar',
   'Morsel.common.itemLike',
+  'Morsel.common.likeableFeed',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
   'Morsel.common.morselSwipe',
@@ -41,9 +43,11 @@ angular.module( 'Morsel.public', [
   'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
   'Morsel.common.textLimit',
+  'Morsel.common.truncate',
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.public.activity',
   'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.morselDetail',
