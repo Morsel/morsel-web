@@ -179,9 +179,18 @@
     margin: 0;
 
     > li {
-      width: 25%;
+      width: 33%;
       text-align: center;
+
+      > a {
+        @include border-radius(0);
+        margin: 0;
+      }
     }
+  }
+
+  .activity-feed {
+    padding: 20px 15px;
   }
 }
 

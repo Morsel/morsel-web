@@ -21,9 +21,6 @@
           </div>
         </div>
         <ul class="user-stats col-sm-6">
-          <li ng-if="isChef">
-            <a class="h3" ng-click="openLikeFeed()">{{user.liked_item_count}}<span class="h6">like{{user.liked_item_count === 1 ? '':'s'}}</span></a>
-          </li>
           <li ng-if="!isChef">
             <a class="h3" ng-click="scrollToLikes()">{{user.liked_item_count}}<span class="h6">like{{user.liked_item_count === 1 ? '':'s'}}</span></a>
           </li>
@@ -81,6 +78,9 @@
               </li>
             </ul>
           </div>
+        </tab>
+        <tab heading="Likes">
+          <div ng-include src="'common/user/activityFeed.tpl.html'"></div>
         </tab>
       </tabset>
     </div>
