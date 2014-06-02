@@ -28,7 +28,7 @@ angular.module( 'Morsel.public.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $anchorScroll, $modal, $rootScope, profileUserData, currentUser, $state ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $modal, $rootScope, profileUserData, currentUser, $state ) {
   $scope.viewOptions.miniHeader = true;
 
   $scope.user = profileUserData;
@@ -53,7 +53,7 @@ angular.module( 'Morsel.public.profile', [])
   });
 
   getLikeFeed($scope, $scope.user);
-  
+
   ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
     $scope.morsels = morselsData;
   }, function() {
@@ -81,11 +81,6 @@ angular.module( 'Morsel.public.profile', [])
       //return blank
       return [];
     }
-  };
-
-  $scope.scrollToLikes = function() {
-    $location.hash('user-likes');
-    $anchorScroll();
   };
 
   function getLikeFeed(scope, user) {

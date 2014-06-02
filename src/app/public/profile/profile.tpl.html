@@ -21,9 +21,6 @@
           </div>
         </div>
         <ul class="user-stats col-sm-6">
-          <li ng-if="!isChef">
-            <a class="h3" ng-click="scrollToLikes()">{{user.liked_item_count}}<span class="h6">like{{user.liked_item_count === 1 ? '':'s'}}</span></a>
-          </li>
           <li>
             <a mrsl-followers mrsl-follow-id="user.id" mrsl-follower-count="user.follower_count"></a>
           </li>
@@ -85,7 +82,7 @@
       </tabset>
     </div>
 
-    <div ng-if="!isChef" id="user-likes" class="user-likes">
+    <div ng-if="!isChef" class="user-likes">
       <div ng-include src="'common/user/activityFeed.tpl.html'"></div>
     </div>
   </div>

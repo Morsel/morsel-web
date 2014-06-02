@@ -100,7 +100,8 @@
   }
 
   .user-tags {
-    margin-top: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     > span {
       padding: 2px 5px;
@@ -172,14 +173,13 @@
   .user-likes {
     max-width: $screen-sm;
     margin: 0 auto;
-    padding: 15px;
   }
 
   .nav-tabs {
     margin: 0;
 
     > li {
-      width: 33%;
+      width: percentage(1/3);
       text-align: center;
 
       > a {
