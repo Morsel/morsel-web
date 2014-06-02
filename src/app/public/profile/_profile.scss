@@ -100,7 +100,8 @@
   }
 
   .user-tags {
-    margin-bottom: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
 
     > span {
       padding: 2px 5px;
@@ -137,10 +138,8 @@
   }
 
   .user-morsels {
-    ul {
-      width: 100%;
-      margin: 0;
-    }
+    width: 100%;
+    margin: 0;
 
     li {
       position: relative;
@@ -174,7 +173,24 @@
   .user-likes {
     max-width: $screen-sm;
     margin: 0 auto;
-    padding: 15px;
+  }
+
+  .nav-tabs {
+    margin: 0;
+
+    > li {
+      width: percentage(1/3);
+      text-align: center;
+
+      > a {
+        @include border-radius(0);
+        margin: 0;
+      }
+    }
+  }
+
+  .activity-feed {
+    padding: 20px 15px;
   }
 }
 

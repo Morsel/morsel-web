@@ -28,10 +28,8 @@ angular.module( 'Morsel.public.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $anchorScroll, $modal, $rootScope, profileUserData, currentUser, $state ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $modal, $rootScope, profileUserData, currentUser, $state ) {
   $scope.viewOptions.miniHeader = true;
-
-  $scope.largeBreakpoint = $window.innerWidth > 768; //total hack
 
   $scope.user = profileUserData;
   $scope.isChef = profileUserData.industry === 'chef';
@@ -54,10 +52,7 @@ angular.module( 'Morsel.public.profile', [])
     }
   });
 
-  //if user isn't a chef, we want to show their like feed in the main section of the profile page
-  if(!$scope.isChef) {
-    getLikeFeed($scope, $scope.user);
-  }
+  getLikeFeed($scope, $scope.user);
 
   ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
     $scope.morsels = morselsData;
@@ -87,42 +82,6 @@ angular.module( 'Morsel.public.profile', [])
       return [];
     }
   };
-
-  $scope.scrollToMorsels = function() {
-    $location.hash('user-morsels');
-    $anchorScroll();
-  };
-
-  $scope.scrollToLikes = function() {
-    $location.hash('user-likes');
-    $anchorScroll();
-  };
-
-  $scope.openLikeFeed = function () {
-    if($scope.user) {
-      $rootScope.modalInstance = $modal.open({
-        templateUrl: 'common/user/userActivityOverlay.tpl.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-          user: function () {
-            return $scope.user;
-          }
-        }
-      });
-    }
-  };
-
-  var ModalInstanceCtrl = function ($scope, $modalInstance, user) {
-    $scope.user = user;
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
-
-    getLikeFeed($scope, user);
-  };
-  //we need to implicitly inject dependencies here, otherwise minification will botch them
-  ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'user'];
 
   function getLikeFeed(scope, user) {
     if(!scope.likeFeed) {

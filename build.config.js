@@ -88,7 +88,6 @@ module.exports = {
         'src/common/itemActions/followers.js',
         'src/common/itemActions/like.js',
         'src/common/social/socialSharing.js',
-        'src/common/swipe/carousel.js',
         'src/common/swipe/feedSwipe.js',
         'src/common/swipe/morsel.js',
         'src/common/swipe/morselSwipe.js',
@@ -121,7 +120,6 @@ module.exports = {
       js: [
         'vendor/angular/angular.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-        /*'vendor/angular-carousel/dist/angular-carousel.min.js',*///until I figure out how to turn off conditionally
         'vendor/angular-moment/angular-moment.min.js',
         'vendor/angular-swipe/dist/angular-swipe.min.js',
         'vendor/angular-touch/angular-touch.js',
@@ -135,7 +133,6 @@ module.exports = {
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
-        'vendor/angular-carousel/dist/angular-carousel.min.css'
       ],
       assets: [
         'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
@@ -334,7 +331,6 @@ module.exports = {
     js: [
       'vendor/angular/angular.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
-      /*'vendor/angular-carousel/dist/angular-carousel.min.js',*///until I figure out how to turn off conditionally
       'vendor/angular-cookies/angular-cookies.min.js',
       'vendor/angular-moment/angular-moment.min.js',
       'vendor/angular-swipe/dist/angular-swipe.min.js',
@@ -351,7 +347,6 @@ module.exports = {
       'vendor/restangular/dist/restangular.js'
     ],
     css: [
-      'vendor/angular-carousel/dist/angular-carousel.min.css'
     ],
     assets: [
       'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
