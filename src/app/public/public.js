@@ -1,7 +1,6 @@
 angular.module( 'Morsel.public', [
   //libs
   'angularMoment',
-  'angular-carousel',
   'restangular',
   'swipe',
   'ui.bootstrap',

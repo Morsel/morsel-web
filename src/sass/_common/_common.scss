@@ -233,34 +233,6 @@ form {
   }
 }
 
-.rn-carousel-indicator {
-  background-color: transparent;
-  
-  span {
-    width: $indicator-size;
-    height: $indicator-size;
-    background-color: $morsel-dark;
-    border: 1px solid $morsel-light;
-    border-radius: 50%;
-    margin: 2px;
-    display: inline-block;
-    @include transition(background-color .2s ease-out);
-    padding: 0;
-
-    &:before {
-      content: '';
-    }
-
-    &:hover, &:focus {
-      cursor: pointer;
-    }
-
-    &.active {
-      background-color: $morsel-primary;
-    }
-  }
-}
-
 .activity-feed {
   $activity-feed-padding-right: 90px;
 
