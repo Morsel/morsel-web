@@ -137,10 +137,8 @@
   }
 
   .user-morsels {
-    ul {
-      width: 100%;
-      margin: 0;
-    }
+    width: 100%;
+    margin: 0;
 
     li {
       position: relative;
@@ -175,6 +173,15 @@
     max-width: $screen-sm;
     margin: 0 auto;
     padding: 15px;
+  }
+
+  .nav-tabs {
+    margin: 0;
+
+    > li {
+      width: 25%;
+      text-align: center;
+    }
   }
 }
 

@@ -101,6 +101,12 @@ $socialPalette:
   expand #c5c5c5,
   email $morsel-secondary;
 
+//nav-tabs
+$nav-tabs-border-color: $btn-primary-border;
+$nav-tabs-active-link-hover-bg: $morsel-primary;
+$nav-tabs-active-link-hover-color: white;
+
+
 // Core Bootstrap variables and mixins
 @import "../../../vendor/sass-bootstrap/lib/_variables.scss";
 

@@ -27,9 +27,6 @@
           <li ng-if="!isChef">
             <a class="h3" ng-click="scrollToLikes()">{{user.liked_item_count}}<span class="h6">like{{user.liked_item_count === 1 ? '':'s'}}</span></a>
           </li>
-          <li ng-if="isChef">
-            <a class="h3" ng-click="scrollToMorsels()">{{user.morsel_count}}<span class="h6">morsel{{user.morsel_count === 1 ? '':'s'}}</span></a>
-          </li>
           <li>
             <a mrsl-followers mrsl-follow-id="user.id" mrsl-follower-count="user.follower_count"></a>
           </li>
@@ -66,22 +63,37 @@
       </li>
     </ul>
     <hr />
-    <div ng-if="isChef" id="user-morsels" class="user-morsels">
-      <ul class="clearfix">
-        <li ng-repeat="morsel in morsels | reverse">
-          <a href="/{{user.username}}/{{morsel.id}}-{{morsel.slug}}" class="centered-white">
-            <div>
-              <span class="user-morsel-title">{{morsel.title}}</span>
-            </div>
-            <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
-          </a>
-        </li>
-      </ul>
-      <div ng-show="!morsels" class="loader"></div>
-      <div ng-show="morsels && morsels.length === 0" class="empty-state">
-        <p>This user hasn't made any morsels yet</p>
-      </div>
+
+    <div ng-if="isChef">
+      <tabset>
+        <tab heading="Morsels">
+          <ul class="clearfix user-morsels">
+            <li ng-repeat="morsel in morsels | reverse">
+              <a href="/{{user.username}}/{{morsel.id}}-{{morsel.slug}}" class="centered-white">
+                <div>
+                  <span class="user-morsel-title">{{morsel.title}}</span>
+                </div>
+                <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
+              </a>
+            </li>
+          </ul>
+          <div ng-show="!morsels" class="loader"></div>
+          <div ng-show="morsels && morsels.length === 0" class="empty-state">
+            <p>This user hasn't made any morsels yet</p>
+          </div>
+        </tab>
+        <!--<tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+          {{tab.content}}
+        </tab>
+        <tab select="alertMe()">
+          <tab-heading>
+            <i class="glyphicon glyphicon-bell"></i> Alert!
+          </tab-heading>
+          I've got an HTML heading, and a select callback. Pretty cool!
+        </tab>-->
+      </tabset>
     </div>
+
     <div ng-if="!isChef" id="user-likes" class="user-likes">
       <div ng-include src="'common/user/activityFeed.tpl.html'"></div>
     </div>
