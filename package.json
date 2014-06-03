@@ -17,7 +17,10 @@
     "request": "~2.34.0",
     "oauth": "~0.9.11",
     "util": "~0.10.3",
-    "hbs": "~2.7.0"
+    "hbs": "~2.7.0",
+    "compression": "~1.0.3",
+    "cookie-parser": "~1.1.0",
+    "express-session": "~1.2.1"
   },
   "devDependencies": {
     "bower": "*",

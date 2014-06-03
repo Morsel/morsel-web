@@ -44,38 +44,38 @@ app.on('error', function (err) {
 
 app.set('view engine', 'hbs');
 
-app.configure(function(){
-  //enable gzip
-  app.use(express.compress());
+//enable gzip
+var compress = require('compression');
+app.use(compress());
 
-  app.set('view engine', 'mustache');
-  app.set('views', __dirname + '/views');
+app.set('view engine', 'mustache');
+app.set('views', __dirname + '/views');
 
-  app.use('/assets', express.static(__dirname + '/assets'));
-  app.use('/src', express.static(__dirname + '/src'));
-  app.use('/vendor', express.static(__dirname + '/vendor'));
-  app.use('/launch', express.static(__dirname + '/launch'));
+app.use('/assets', express.static(__dirname + '/assets'));
+app.use('/src', express.static(__dirname + '/src'));
+app.use('/vendor', express.static(__dirname + '/vendor'));
+app.use('/launch', express.static(__dirname + '/launch'));
 
-  app.use(express.cookieParser());
-  app.use(express.session({secret: 'THESESESSIONSARENOTSECURE'}));
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+app.use(cookieParser());
+app.use(session({secret: 'THESESESSIONSARENOTSECURE'}));
 
-  /*prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
-    console.log('req is:');
-    console.log(req);
-    console.log('prerender_res is:');
-    console.log(prerender_res);
-    console.log('using prerender server');
-  });
-  
-  if(currEnv === 'production' && prerenderToken) {
-    prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
-  } else {
-    prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase);
-  }
-  app.use(prerender);
-  */
-  app.use(app.router);
+/*prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
+  console.log('req is:');
+  console.log(req);
+  console.log('prerender_res is:');
+  console.log(prerender_res);
+  console.log('using prerender server');
 });
+
+if(currEnv === 'production' && prerenderToken) {
+  prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
+} else {
+  prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase);
+}
+app.use(prerender);
+*/
 
 app.get('/', function(req, res) {
   renderPublicPage(res, findMetadata(''));
