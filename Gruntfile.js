@@ -142,7 +142,7 @@ module.exports = function ( grunt ) {
       build_static_templates: {
         files: [
           {
-            src: ['views/partials/static/*.mustache'],
+            src: ['views/partials/static/*.hbs'],
             dest: '<%= build_dir %>/',
             cwd: 'src/',
             expand: true
@@ -1198,7 +1198,7 @@ module.exports = function ( grunt ) {
    * the list into variables for the template to use and then runs the
    * compilation.
    */
-  grunt.registerMultiTask( 'app_public', 'Process public.mustache template', function () {
+  grunt.registerMultiTask( 'app_public', 'Process public.hbs template', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
       return '/'+file.replace( dirRE, '' );
@@ -1207,7 +1207,7 @@ module.exports = function ( grunt ) {
       return '/'+file.replace( dirRE, '' );
     });
 
-    grunt.file.copy('src/views/public.mustache', this.data.dir + '/views/public.mustache', { 
+    grunt.file.copy('src/views/public.hbs', this.data.dir + '/views/public.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1220,7 +1220,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/404.mustache', this.data.dir + '/views/404.mustache', { 
+    grunt.file.copy('src/views/404.hbs', this.data.dir + '/views/404.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1233,7 +1233,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/claim.mustache', this.data.dir + '/views/claim.mustache', { 
+    grunt.file.copy('src/views/claim.hbs', this.data.dir + '/views/claim.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1246,7 +1246,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/unsubscribe.mustache', this.data.dir + '/views/unsubscribe.mustache', { 
+    grunt.file.copy('src/views/unsubscribe.hbs', this.data.dir + '/views/unsubscribe.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1259,7 +1259,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/partials/ga.mustache', this.data.dir + '/views/partials/ga.mustache', { 
+    grunt.file.copy('src/views/partials/ga.hbs', this.data.dir + '/views/partials/ga.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1272,7 +1272,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/partials/mixpanel.mustache', this.data.dir + '/views/partials/mixpanel.mustache', { 
+    grunt.file.copy('src/views/partials/mixpanel.hbs', this.data.dir + '/views/partials/mixpanel.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1285,7 +1285,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/partials/pageWrapper.mustache', this.data.dir + '/views/partials/pageWrapper.mustache', { 
+    grunt.file.copy('src/views/partials/pageWrapper.hbs', this.data.dir + '/views/partials/pageWrapper.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1298,7 +1298,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/partials/sidenav.mustache', this.data.dir + '/views/partials/sidenav.mustache', { 
+    grunt.file.copy('src/views/partials/sidenav.hbs', this.data.dir + '/views/partials/sidenav.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {}
@@ -1306,7 +1306,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/partials/header.mustache', this.data.dir + '/views/partials/header.mustache', { 
+    grunt.file.copy('src/views/partials/header.hbs', this.data.dir + '/views/partials/header.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {}
@@ -1314,7 +1314,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/partials/headContent.mustache', this.data.dir + '/views/partials/headContent.mustache', { 
+    grunt.file.copy('src/views/partials/headContent.hbs', this.data.dir + '/views/partials/headContent.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1326,7 +1326,7 @@ module.exports = function ( grunt ) {
   });
 
   /* analogous to app_public */
-  grunt.registerMultiTask( 'app_account', 'Process account.mustache template', function () {
+  grunt.registerMultiTask( 'app_account', 'Process account.hbs template', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
       return '/'+file.replace( dirRE, '' );
@@ -1335,31 +1335,7 @@ module.exports = function ( grunt ) {
       return '/'+file.replace( dirRE, '' );
     });
 
-    grunt.file.copy('src/views/account.mustache', this.data.dir + '/views/account.mustache', { 
-      process: function ( contents, path ) {
-        return grunt.template.process( contents, {
-          data: {
-            scripts: jsFiles,
-            styles: cssFiles,
-            version: grunt.config( 'pkg.version' ),
-            favicon_dir: grunt.config('favicon_dir')
-          }
-        });
-      }
-    });
-  });
-
-  /* analogous to app_public */
-  grunt.registerMultiTask( 'app_login', 'Process login.mustache template', function () {
-    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
-    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
-      return '/'+file.replace( dirRE, '' );
-    });
-    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
-      return '/'+file.replace( dirRE, '' );
-    });
-
-    grunt.file.copy('src/views/login.mustache', this.data.dir + '/views/login.mustache', { 
+    grunt.file.copy('src/views/account.hbs', this.data.dir + '/views/account.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1374,7 +1350,7 @@ module.exports = function ( grunt ) {
   });
 
   /* analogous to app_public */
-  grunt.registerMultiTask( 'static_pages', 'Process static.mustache template', function () {
+  grunt.registerMultiTask( 'app_login', 'Process login.hbs template', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
     var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
       return '/'+file.replace( dirRE, '' );
@@ -1383,7 +1359,31 @@ module.exports = function ( grunt ) {
       return '/'+file.replace( dirRE, '' );
     });
 
-    grunt.file.copy('src/views/static.mustache', this.data.dir + '/views/static.mustache', { 
+    grunt.file.copy('src/views/login.hbs', this.data.dir + '/views/login.hbs', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+  });
+
+  /* analogous to app_public */
+  grunt.registerMultiTask( 'static_pages', 'Process static.hbs template', function () {
+    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
+    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+
+    grunt.file.copy('src/views/static.hbs', this.data.dir + '/views/static.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
@@ -1456,6 +1456,10 @@ module.exports = function ( grunt ) {
         });
       }
     });
+
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/routes.js', this.data.dir + '/routes.js');
+
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/account/index.js', this.data.dir + '/apps/account/index.js');
   });
 
   /*

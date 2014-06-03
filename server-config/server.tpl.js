@@ -1,5 +1,4 @@
 var express = require("express"),
-    mustacheExpress = require('mustache-express'),
     _ = require('underscore'),
     oauth = require('oauth'),
     sys = require('util'),
@@ -7,20 +6,29 @@ var express = require("express"),
     request = require('request'),
     metadata = require('./data/metadata.json'),
     nodeEnv = process.env.NODE_ENV || 'development',
-    isProd = nodeEnv === 'production',
-    siteURL = process.env.SITEURL || 'localhost:5000',
-    apiUrl = process.env.apiUrl || 'http://api-staging.eatmorsel.com',
     apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
     devMixpanelToken = 'fc91c2a6f8d8388f077f6b9618e90499',
-    mixpanelToken = process.env.MIXPANELTOKEN || devMixpanelToken,
     prerender,
     prerenderDevUrl = 'http://morsel-seo.herokuapp.com/',
     prerenderToken = process.env.PRERENDER_TOKEN || '',
     facebookAppId = process.env.FACEBOOK_APP_ID || '1406459019603393',
     twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY || '12345';
     twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET || '12345';
-    metabase = '/',
     app = express();
+
+var templateVars = {
+  metabase: '/',
+  siteURL: process.env.SITEURL || 'localhost:5000',
+  isProd: nodeEnv === 'production',
+  apiUrl: process.env.apiUrl || 'http://api-staging.eatmorsel.com',
+  mixpanelToken: process.env.MIXPANELTOKEN || devMixpanelToken
+};
+
+var apps = {
+  account: require('./apps/account')(templateVars)
+};
+
+var routes = require('./routes')(app, apps);
 
 //if something goes wrong, exit so heroku can try to restart
 process.on('uncaughtException', function (err) {
@@ -34,7 +42,7 @@ app.on('error', function (err) {
   console.error(err);
 });
 
-app.engine('mustache', mustacheExpress());
+app.set('view engine', 'hbs');
 
 app.configure(function(){
   //enable gzip
@@ -72,17 +80,6 @@ app.configure(function(){
 app.get('/', function(req, res) {
   renderPublicPage(res, findMetadata(''));
 });
-
-/* from dev-launch
-app.get('/', function(req, res) {
-  res.render('claim', {
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiUrl : apiUrl,
-    mixpanelToken : mixpanelToken
-  });
-});
-*/
 
 //templates
 app.get('/templates-public.js', function(req, res){
@@ -155,24 +152,6 @@ app.get('/password-reset', function(req, res){
 //password reset
 app.get('/password-reset/new', function(req, res){
   renderLoginPage(res);
-});
-
-//account pages
-app.get('/account*', function(req, res){
-  var fullMetadata = findMetadata('default');
-
-  res.render('account', {
-    metadata: fullMetadata,
-    metabase: metabase,
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiUrl : apiUrl,
-    mixpanelToken : mixpanelToken,
-    //determine how to render menu
-    pageType: {
-      account: true
-    }
-  });
 });
 
 //feed

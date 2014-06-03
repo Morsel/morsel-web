@@ -54,7 +54,7 @@ module.exports = {
     atpl: [ 'src/app/**/*.tpl.html' ],
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
-    html: [ 'src/views/*.mustache' ],
+    html: [ 'src/views/*.hbs' ],
     sass: ['src/sass/main.scss', 'src/sass/error-page.scss']
   },
 
