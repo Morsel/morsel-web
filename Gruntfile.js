@@ -1436,7 +1436,7 @@ module.exports = function ( grunt ) {
   grunt.registerMultiTask( 'appserver', 'Process server files', function () {
     var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
 
-    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/server.tpl.js', this.data.dir + '/server.js', { 
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/util.tpl.js', this.data.dir + '/util.js', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           //don't need to pass anything at the moment
@@ -1457,9 +1457,15 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/routes.js', this.data.dir + '/routes.js');
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/server.tpl.js', this.data.dir + '/server.js');
 
     grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/account/index.js', this.data.dir + '/apps/account/index.js');
+
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/login/index.js', this.data.dir + '/apps/login/index.js');
+
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/public/index.js', this.data.dir + '/apps/public/index.js');
+
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/static/index.js', this.data.dir + '/apps/static/index.js');
   });
 
   /*

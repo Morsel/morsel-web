@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html id="ng-app" ng-app="Morsel.login" ng-controller="LoginAppCtrl">
   <head>
-    {{> partials/headContent}}
+    {{> headContent}}
     <!-- compiled CSS -->
     <% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" />
@@ -10,7 +10,7 @@
     <% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script>
     <% }); %>
-    {{> partials/mixpanel}}
+    {{> mixpanel}}
   </head>
   <body class="login">
     <header class="login-header" ng-hide="viewOptions.hideHeader">
@@ -30,6 +30,6 @@
         </div>
       </div>
     </footer>
-    {{> partials/ga}}
+    {{> ga}}
   </body>
 </html>

@@ -11,9 +11,9 @@
     <meta property="og:type" content="company"/> 
     <meta property="og:site_name" content="Morsel"/> 
     <meta property="og:description" content="Morsel is building something awesome for the artists who use food and drink as their medium: chefs, sommeliers, mixologists and more." />
-    <meta property="og:url" content="{{{siteUrl}}}" />
-    <meta property="og:image" content="{{{siteUrl}}}/launch/images/morsel-m.png"/>
-    <link rel="image_src" href="{{{siteUrl}}}/launch/images/morsel-m.png" />
+    <meta property="og:url" content="{{@siteUrl}}" />
+    <meta property="og:image" content="{{@siteUrl}}/launch/images/morsel-m.png"/>
+    <link rel="image_src" href="{{@siteUrl}}/launch/images/morsel-m.png" />
 
     <link rel="stylesheet" href="/launch/css/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -21,16 +21,16 @@
   </head>
   <body class="unsubscribe">
     <div class="welcome">
-      <h1><a href="{{{siteUrl}}}">Morsel</a></h1>
+      <h1><a href="{{@siteUrl}}">Morsel</a></h1>
       <div class="welcome-step current-step">
         <img class="loader" src="/launch/images/loader.gif" />
         <h2 id="unsubscribe-text"></h2>
       </div>
     </div>
-    {{> partials/ga}}
+    {{> ga}}
     <script type="text/javascript">
       var Morsel = {
-        apiURL : '{{{apiURL}}}'
+        apiURL : '{{@apiURL}}'
       };
     </script>
     <script type="text/javascript" src="/launch/js/libs/jquery.min.js"></script>
