@@ -6,14 +6,14 @@
         <div class="user-body">
           <div ng-if="activity.subject_type === 'Item'">
           <!-- COME BACK TO THIS -->
-            <a href="/{{activity.subject.creator.username}}/{{activity.subject.morsel_id}}-{{activity.subject.morsel_slug}}">
+            <a class="activity-subject" href="/{{activity.subject.creator.username}}/{{activity.subject.morsel_id}}-{{activity.subject.morsel_slug}}">
               <img ng-src="{{activity.subject.photos ? activity.subject.photos._80x80 : morselPlaceholder}}" />
             </a>
-            <p>{{activity.creator.id === user.id ? 'You' : activity.creator.first_name}} {{activity.action_type === 'Like' ? 'liked':''}}{{activity.action_type === 'Comment' ? 'commented on':''}} <a href="/{{activity.creator.username}}">{{activity.creator.first_name+' '+activity.creator.last_name}}</a>'s {{activity.morsel.title+(likeable.description ? ': '+likeable.description : '') | truncate:80}}</p>
+            <p>{{activity.creator.id === user.id ? 'You' : activity.creator.first_name}} {{activity.action_type === 'Like' ? 'liked':''}}{{activity.action_type === 'Comment' ? 'commented on':''}} <a href="/{{activity.subject.creator.username}}">{{activity.subject.creator.first_name+' '+activity.subject.creator.last_name}}</a>'s {{activity.subject.morsel_title+(activity.subject.description ? ': '+activity.subject.description : '') | truncate:80}}</p>
           </div>
           <div ng-if="activity.subject_type === 'User' && activity.action_type === 'Follow'">
-            <div mrsl-user-image mrsl-username="activity.subject.username" mrsl-user-photos="activity.subject.photos" mrsl-user-image-size="profile-pic-s"></div>
-            <p>{{activity.creator.id === user.id ? 'You' : activity.creator.first_name}} followed 
+            <div class="activity-subject" mrsl-user-image mrsl-username="activity.subject.username" mrsl-user-photos="activity.subject.photos" mrsl-user-image-size="profile-pic-s"></div>
+            <p>{{activity.creator.id === user.id ? 'You' : activity.creator.first_name}} followed {{activity.subject.first_name+' '+activity.subject.last_name}} (<a href="/{{activity.subject.username}}">{{activity.subject.username}}</a>)</p>
           </div>
           <span am-time-ago="activity.liked_at" class="time-ago"></span>
         </div>

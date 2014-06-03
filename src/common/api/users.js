@@ -308,5 +308,29 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.getFollowablesActivities = function() {
+    var deferred = $q.defer();
+
+    RestangularUsers.get('followables_activities').then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.getNotifications = function() {
+    var deferred = $q.defer();
+
+    RestangularUsers.get('notifications').then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Users;
 });
