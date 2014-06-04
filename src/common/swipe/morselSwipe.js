@@ -572,7 +572,6 @@ angular.module('Morsel.common.morselSwipe', [
       function handleKeydown(e) {
         //make sure this morsel is currently in view - if this morsel instance is the one being viewed. if $index doesn't exist it means this one is the only one
         if(scope.$index ? scope.currentMorselIndex === scope.$index : true) {
-          console.log('handlingkeydown');
           //ignore if it it's not coming from the body (could be in an input, etc)
           if(e.srcElement.tagName === 'BODY') {
             if(e.which === 38) {
