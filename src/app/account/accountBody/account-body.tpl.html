@@ -1,10 +1,13 @@
-<div class="container container-shadow">
+<div class="container container-shadow container-margin-bottom">
   <div class="row">
     <div class="col-sm-3 account-menu">
       <h2>Your Account</h2>
       <ul>
         <li ui-route="/account/edit-profile" ng-class="{active:$uiRoute}">
           <a href="/account/edit-profile">Edit Profile</a>
+        </li>
+        <li ui-route="/account/cuisines-specialties" ng-class="{active:$uiRoute}" ng-show="isChef">
+          <a href="/account/cuisines-specialties">Cuisines &amp; Specialties</a>
         </li>
       </ul>
     </div>

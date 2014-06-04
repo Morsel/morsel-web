@@ -28,6 +28,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.validatedElement',
   //app
   'Morsel.account.body',
+  'Morsel.account.cuisinesSpecialties',
   'Morsel.account.editProfile'
 ])
 
