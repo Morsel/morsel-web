@@ -228,6 +228,13 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       publicApp.renderPublicPage(res, metadata);
     });
 
+    //convenience route
+    app.get('/users/:id', function(req, res){
+      var id = req.params.id;
+
+      publicApp.renderUserPage(res, id);
+    });
+
     //morsel detail with post id/slug
     app.get('/:username/:postidslug', function(req, res){
       publicApp.renderMorselPage(req, res);

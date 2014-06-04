@@ -25,6 +25,31 @@ angular.module( 'Morsel.public.profile', [])
         return Auth.getCurrentUserPromise();
       }
     }
+  })
+  .state( 'profile_alias', {
+    url: '/users/{userId:[0-9]*}',
+    views: {
+      "main": {
+        controller: 'ProfileCtrl',
+        templateUrl: 'app/public/profile/profile.tpl.html'
+      }
+    },
+    data:{ /*pageTitle: 'Profile'*/ },
+    resolve: {
+      //get the user data of the profile before we try to render the page
+      profileUserData: function(ApiUsers, $stateParams, $location, $state) {
+        return ApiUsers.getUser($stateParams.userId).then(function(userResp) {
+          return userResp.data;
+        }, function() {
+          //if there's an error retrieving user data (bad id?), send to 404
+          $state.go('404');
+        });
+      },
+      //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
+      currentUser: function(Auth) {
+        return Auth.getCurrentUserPromise();
+      }
+    }
   });
 })
 
