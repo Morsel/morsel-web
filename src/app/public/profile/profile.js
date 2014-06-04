@@ -61,12 +61,12 @@ angular.module( 'Morsel.public.profile', [])
 
   $scope.canEdit = profileUserData.id === currentUser.id;
 
-  ApiUsers.getCuisines(profileUserData.id).then(function(cuisineResp) {
-    $scope.cuisines = cuisineResp.data;
-  });
-
-  ApiUsers.getSpecialties(profileUserData.id).then(function(specialtyResp) {
-    $scope.specialties = specialtyResp.data;
+  //load our morsels immediately
+  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
+    $scope.morsels = morselsData;
+  }, function() {
+    //if there's an error retrieving user data (bad username?), go to 404
+    $state.go('404');
   });
 
   $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
@@ -77,14 +77,38 @@ angular.module( 'Morsel.public.profile', [])
     }
   });
 
-  getLikeFeed($scope, $scope.user);
+  $scope.loadTags = function() {
+    if(!$scope.cuisines) {
+      ApiUsers.getCuisines(profileUserData.id).then(function(cuisineResp) {
+        $scope.cuisines = cuisineResp.data;
+      });
+    }
+    
+    if(!$scope.specialties) {
+      ApiUsers.getSpecialties(profileUserData.id).then(function(specialtyResp) {
+        $scope.specialties = specialtyResp.data;
+      });
+    }
+  };
 
-  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
-    $scope.morsels = morselsData;
-  }, function() {
-    //if there's an error retrieving user data (bad username?), go to 404
-    $state.go('404');
-  });
+  $scope.loadLikeFeed = function() {
+    if(!$scope.likeFeed) {
+      ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
+        _.each(likeableResp.data, function(likeable) {
+          //construct message to display
+          likeable.itemMessage = likeable.morsel.title+(likeable.description ? ': '+likeable.description : '');
+
+          //truncate message
+          likeable.itemMessage = likeable.itemMessage.length > 80 ? likeable.itemMessage.substr(0, 80) + '...' : likeable.itemMessage;
+
+          //pick proper photo to display
+          likeable.display_photo = likeable.photos ? likeable.photos._80x80 : MORSELPLACEHOLDER;
+        });
+
+        $scope.likeFeed = likeableResp.data;
+      });
+    }
+  };
 
   $scope.getCoverPhotoArray = function(morsel) {
     var primaryItemPhotos;
@@ -107,23 +131,4 @@ angular.module( 'Morsel.public.profile', [])
       return [];
     }
   };
-
-  function getLikeFeed(scope, user) {
-    if(!scope.likeFeed) {
-      ApiUsers.getLikeables(user.id, 'Item').then(function(likeableResp){
-        _.each(likeableResp.data, function(likeable) {
-          //construct message to display
-          likeable.itemMessage = likeable.morsel.title+(likeable.description ? ': '+likeable.description : '');
-
-          //truncate message
-          likeable.itemMessage = likeable.itemMessage.length > 80 ? likeable.itemMessage.substr(0, 80) + '...' : likeable.itemMessage;
-
-          //pick proper photo to display
-          likeable.display_photo = likeable.photos ? likeable.photos._80x80 : MORSELPLACEHOLDER;
-        });
-
-        scope.likeFeed = likeableResp.data;
-      });
-    }
-  }
 });
