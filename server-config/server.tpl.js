@@ -1,11 +1,11 @@
-/*var maxWorkers = process.env.MAX_WORKERS || 1,
+var maxWorkers = process.env.MAX_WORKERS || 1,
     cluster = require('cluster'),
     numCPUs = require('os').cpus().length,
     workers = numCPUs >= maxWorkers ? maxWorkers : numCPUs,
     Logger = {},//require('./hgnode/framework/HgLog.js'),
     index = 0;
-*/
-/*if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
+
+if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
   //Logger.info('Web server initializing with a maximum of ' + maxWorkers + ' workers. Master PID: ' + process.pid);
   //Logger.info(numCPUs + ' CPUs detected. Clustering up to ' + workers + ' instances.');
 
@@ -33,8 +33,8 @@
   for (index = 0; index < workers; index += 1) {
     cluster.fork();
   }
-} else {*/
-/*  var serverDomain = require('domain').create(),
+} else {
+  var serverDomain = require('domain').create(),
       httpServer,
       nodetime;
 
@@ -64,25 +64,24 @@
       console.log('Unhandled Exception in domain of cluster worker ' + process.pid);
       console.log(err.stack || err);
     } catch (er2) {
-      */
       /*exceptionNotifyer(er2, function (notifierError, notifierResponse) {
         console.log('Error cleaning up after error in cluster worker ' + process.pid + ' domain: ');
         console.log(er2.stack || er2);
         process.exit(1);
       });*/
-/*    }
+    }
   });
-*/
-//  serverDomain.run(function () {
+
+  serverDomain.run(function () {
     // nodetime should be the first require
-/*    if (process.env.NODETIME_ACCOUNT_KEY) {
+    if (process.env.NODETIME_ACCOUNT_KEY) {
       nodetime = require('nodetime');
       nodetime.profile({
         accountKey: process.env.NODETIME_ACCOUNT_KEY,
         appName: process.env.NODE_ENV || 'local-dev'
       });
     }
-*/
+
     //middleware
     var express = require("express");
 
@@ -247,5 +246,5 @@
     httpServer = app.listen(port, function() {
       console.log("Listening on " + port);
     });
- // });
-//}
+  });
+}
