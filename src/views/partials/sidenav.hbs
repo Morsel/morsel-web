@@ -29,7 +29,7 @@
       <a href="/account/edit-profile" target="_self"><i class="sidenav-account-settings"></i>Settings</a>
       {{/pageType.public}}
       {{#pageType.account}}
-      <a href="/account/edit-profile"><i class="sidenav-account-settings"></i>Settings</a>
+      <a href="/account/edit-profile" ng-click="closeMenu()"><i class="sidenav-account-settings"></i>Settings</a>
       {{/pageType.account}}
       {{#pageType.static}}
       <a href="/account/edit-profile" target="_self"><i class="sidenav-account-settings"></i>Settings</a>

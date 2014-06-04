@@ -65,6 +65,10 @@
     .account-main {
       .checklist {
         @include column-count(2);
+
+        .checkbox {
+          margin-top: 0;
+        }
       }
     }
   }

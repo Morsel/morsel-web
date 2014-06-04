@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectFacebook', [] )
 
 //connect (sign up/login) with facebook SDK
-.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location){
+.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location, FacebookApi){
   return {
     restrict: 'A',
     scope: {
@@ -11,41 +11,18 @@ angular.module( 'Morsel.common.connectFacebook', [] )
     replace: true,
     link: function(scope, element, attrs) {
       var loginResponse,
-          userInfoDeferred,
           loginNext;
 
       if($state && $state.params && $state.params.next) {
         loginNext = $state.params.next;
       }
 
-      if(!window.fbAsyncInit) {
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : window.MorselConfig.facebookAppId,
-            cookie     : true,  // enable cookies to allow the server to access 
-                                // the session
-            xfbml      : false,  // parse social plugins on this page
-            version    : 'v2.0' // use version 2.0
-          });
-        };
-      }
+      FacebookApi.init();
 
-      // Load the SDK asynchronously if it hasn't been yet
-      if(!window.FB) {
-        (function(d, s, id) {
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {return;}
-          js = d.createElement(s); js.id = id;
-          js.src = "//connect.facebook.net/en_US/sdk.js";
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-      }
+      FacebookApi.loadSdk();
 
       scope.connectFacebook = function() {
-        FB.login(function(response) {
-          var fbUserPromise,
-              fbPicturePromise;
-
+        FacebookApi.login(function(response) {
           loginResponse = response;
 
           if (loginResponse.status === 'connected') {
@@ -54,13 +31,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
               checkAuthentication();
             }
           }
-        }, {
-          //grab this stuff from fb
-          scope: 'public_profile,email,user_friends'
         });
       };
 
-      //decide whether to sign them up or log them in
+      //check if we've already got their info
       function checkAuthentication() {
         ApiUsers.checkAuthentication('facebook', loginResponse.authResponse.userID).then(function(resp){
           //if we already have them on file
@@ -68,39 +42,44 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             //just sign them in
             login();
           } else {
-            //otherwise get some stuff from FB to start sign up process
-            gatherSignUpData();
+            //otherwise get info and pic from FB to start sign up process
+            gatherData();
           }
         }, function(resp) {
           HandleErrors.onError(resp.data, scope.form);
         });
       }
 
-      function gatherSignUpData() {
+      function gatherData() {
+        var promises = [];
+
         //basic fb info
-        fbUserPromise = getUserInfo();
-        //and get user's picture
-        fbPicturePromise = getUserPicture();
+        promises.push(getUserInfo());
+      
+        //user's picture
+        promises.push(getUserPicture());
 
-        //once all promises are resolved with data from fb, send to main form
-        $q.all([fbUserPromise, fbPicturePromise]).then(function(){
-          //where we pulled the data
-          scope.$parent.userData.social.type = 'facebook';
-          //social token
-          scope.$parent.userData.social.token = loginResponse.authResponse.accessToken;
+        //once all promises are resolved with data from fb, call callback
+        $q.all(promises).then(updateSignupData);
+      }
 
-          //fb sends short-lived tokens
-          scope.$parent.userData.social.short_lived = true;
+      function updateSignupData() {
+        //where we pulled the data
+        scope.$parent.userData.social.type = 'facebook';
+        //social token
+        scope.$parent.userData.social.token = loginResponse.authResponse.accessToken;
 
-          //send to main form
-          $state.go('join.basicInfo');
-        });
+        //fb sends short-lived tokens
+        scope.$parent.userData.social.short_lived = true;
+
+        //send to main form
+        $state.go('join.basicInfo');
       }
 
       function getUserInfo() {
-        userInfoDeferred = $q.defer();
+        var userInfoDeferred = $q.defer();
 
-        FB.api('/me', function(myInfo) {
+        FacebookApi.getUserInfo(function(myInfo) {
           //store our basic user info so we can prepopulate form
           //use extend so we don't overwrite the picture
           _.extend(scope.$parent.userData.social, myInfo);
@@ -128,10 +107,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       function getUserPicture() {
         var deferred = $q.defer();
 
-        FB.api('/me/picture', {
-          'width': '144',
-          'height': '144'
-        }, function(myPicture) {
+        FacebookApi.getPicture(function(myPicture) {
           //store our picture info so we can prepopulate form
           scope.$parent.userData.social.picture = myPicture;
           deferred.resolve();

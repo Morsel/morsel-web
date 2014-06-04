@@ -13,10 +13,12 @@ angular.module( 'Morsel.account', [
   //templates
   'templates-account',
   //common
+  'Morsel.common.addFacebook',
   'Morsel.common.afterLogin',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
   'Morsel.common.checklist',
+  'Morsel.common.facebookApi',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',
@@ -29,7 +31,8 @@ angular.module( 'Morsel.account', [
   //app
   'Morsel.account.body',
   'Morsel.account.cuisinesSpecialties',
-  'Morsel.account.editProfile'
+  'Morsel.account.editProfile',
+  'Morsel.account.socialAccounts'
 ])
 
 //define some constants for the app

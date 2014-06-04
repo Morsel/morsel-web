@@ -1,0 +1,23 @@
+.social-account-toggle {
+  text-align: center;
+
+  div {
+    overflow: hidden;
+    text-align: left;
+
+    p {
+      display: inline-block;
+      font-weight: bold;
+      margin-bottom: 0;
+
+      i {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    }
+    
+    a {
+      float: right;
+    }
+  }
+}

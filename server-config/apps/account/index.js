@@ -8,6 +8,7 @@ module.exports.renderAccountPage = function(req, res) {
   util.updateMetadata('default');
 
   res.render('account', {
+    facebookAppId : util.facebookAppId,
     //determine how to render menu
     pageType: {
       account: true

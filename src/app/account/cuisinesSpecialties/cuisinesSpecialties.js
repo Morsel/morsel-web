@@ -19,7 +19,7 @@ angular.module( 'Morsel.account.cuisinesSpecialties', [])
   });
 })
 
-.controller( 'CuisinesSpecialtiesCtrl', function EditProfileCtrl( $scope, $stateParams, ApiUsers, ApiKeywords, HandleErrors, $window, accountUser, $q, Auth){
+.controller( 'CuisinesSpecialtiesCtrl', function CuisinesSpecialtiesCtrl( $scope, ApiUsers, ApiKeywords, accountUser, $q){
   var allCuisinesPromise,
       userCuisinesPromise,
       allCuisines,
