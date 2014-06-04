@@ -176,6 +176,15 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       accountApp.test(req, res);
     });
 
+    //FOR APP
+    app.get('/terms_text', function(req, res) {
+      res.set('Content-Type', 'text/html').sendfile('views/partials/static/terms.hbs');
+    });
+
+    app.get('/privacy_text', function(req, res) {
+      res.set('Content-Type', 'text/html').sendfile('views/partials/static/privacy.hbs');
+    });
+
     //ACCOUNT
     app.get('/account*', function(req, res){
       accountApp.renderAccountPage(req, res);
@@ -226,6 +235,13 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       var metadata = utilApp.getMetadata('feed');
 
       publicApp.renderPublicPage(res, metadata);
+    });
+
+    //convenience route
+    app.get('/users/:id', function(req, res){
+      var id = req.params.id;
+
+      publicApp.renderUserPage(res, id);
     });
 
     //morsel detail with post id/slug

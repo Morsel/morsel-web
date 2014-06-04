@@ -120,11 +120,11 @@ module.exports.renderMorselPage = function(req, res) {
   });
 };
 
-module.exports.renderUserPage = function(res, username) {
+module.exports.renderUserPage = function(res, userIdOrUsername) {
   var request = require('request'),
       app = require('./../../server');
 
-  request(app.locals.apiUrl+'/users/'+username+util.apiQuerystring, function (error, response, body) {
+  request(app.locals.apiUrl+'/users/'+userIdOrUsername+util.apiQuerystring, function (error, response, body) {
     var user,
         userImage,
         userMetadata;

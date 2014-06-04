@@ -2,6 +2,7 @@ angular.module( 'Morsel.public.morselDetail', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'morselDetail', {
+    //make sure our "username" isn't "users"
     url: '/:username/{morselDetails:.*}',
     views: {
       "main": {

@@ -166,8 +166,6 @@ angular.module( 'Morsel.account.editProfile', [])
       });
     });
 
-    console.log(list);
-
     return list;
   }
 
