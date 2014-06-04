@@ -1,176 +1,251 @@
-//middleware
-var express = require("express");
+/*var maxWorkers = process.env.MAX_WORKERS || 1,
+    cluster = require('cluster'),
+    numCPUs = require('os').cpus().length,
+    workers = numCPUs >= maxWorkers ? maxWorkers : numCPUs,
+    Logger = {},//require('./hgnode/framework/HgLog.js'),
+    index = 0;
+*/
+/*if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
+  //Logger.info('Web server initializing with a maximum of ' + maxWorkers + ' workers. Master PID: ' + process.pid);
+  //Logger.info(numCPUs + ' CPUs detected. Clustering up to ' + workers + ' instances.');
 
-//create our app and expose it
-var app = module.exports = express();
-var port = Number(process.env.PORT || 5000);
+  cluster.on('exit', function (worker, code, signal) {
+    if (code !== 130) {
+      //Logger.warn('Cluster worker ' + worker.process.pid + ' died. code: \'' + code + '\' signal: \'' + (signal || '') + '\' restarting.');
+      cluster.fork();
+    } else {
+      //Logger.info('Cluster worker ' + worker.process.pid + ' died. code: ' + code + ' signal: ' + (signal || '') + ' not restarting due to shutdown.');
+    }
+  });
 
-//load our other apps
-var utilApp = require('./util');
-var accountApp = require('./apps/account');
-var loginApp = require('./apps/login');
-var staticApp = require('./apps/static');
-var publicApp = require('./apps/public');
+  cluster.on('listening', function (worker, address) {
+    //Logger.info('Cluster worker ' + worker.process.pid + ' is now connected to ' + address.address + ':' + address.port);
+  });
 
-//enable gzip
-var compress = require('compression');
-app.use(compress());
+  process.on('SIGINT', function () {
+    //Logger.info('SIGINT received, waiting for connections to finish so process can exit gracefully.');
+    cluster.disconnect(function () {
+      //Logger.info('Cluster has gracefully shutdown.');
+      process.exit(1);
+    });
+  });
 
-//set up sessions
-var cookieParser = require('cookie-parser');
-var session = require('express-session');
-app.use(cookieParser());
-app.use(session({secret: utilApp.sessionSecret}));
+  for (index = 0; index < workers; index += 1) {
+    cluster.fork();
+  }
+} else {*/
+/*  var serverDomain = require('domain').create(),
+      httpServer,
+      nodetime;
 
-//use hbs for templates
-var hbs = require('hbs');
-hbs.registerPartials(__dirname + '/views/partials');
-app.set('view engine', 'hbs');
-app.set('views', __dirname + '/views');
+  serverDomain.on('error', function (err) {
+    var exceptionNotifyer = {},//require('./hgnode/framework/ExceptionNotifier.js'),
+        killtimer = setTimeout(function () {
+           process.exit(1);
+        }, 5000);
 
-//expose our locals
-hbs.localsAsTemplateData(app);
+    killtimer.unref();
+    try {
+      // kill nodetime
+      if (nodetime) {
+        nodetime.destroy();
+      }
+      if (httpServer) {
+        // force all connections to be zero so callback can be called without throwing another exception
+        httpServer._connections = 0;
+        httpServer.close(function () {
+           cluster.worker.disconnect();
+        });
+      } else if (cluster.worker) {
+        cluster.worker.disconnect();
+      }
+      //exceptionNotifyer(err);
+      // change this to the console logger - since there is now no connections to the database
+      console.log('Unhandled Exception in domain of cluster worker ' + process.pid);
+      console.log(err.stack || err);
+    } catch (er2) {
+      */
+      /*exceptionNotifyer(er2, function (notifierError, notifierResponse) {
+        console.log('Error cleaning up after error in cluster worker ' + process.pid + ' domain: ');
+        console.log(er2.stack || er2);
+        process.exit(1);
+      });*/
+/*    }
+  });
+*/
+//  serverDomain.run(function () {
+    // nodetime should be the first require
+/*    if (process.env.NODETIME_ACCOUNT_KEY) {
+      nodetime = require('nodetime');
+      nodetime.profile({
+        accountKey: process.env.NODETIME_ACCOUNT_KEY,
+        appName: process.env.NODE_ENV || 'local-dev'
+      });
+    }
+*/
+    //middleware
+    var express = require("express");
 
-//static files
-app.use('/assets', express.static(__dirname + '/assets'));
-app.use('/src', express.static(__dirname + '/src'));
-app.use('/vendor', express.static(__dirname + '/vendor'));
-app.use('/launch', express.static(__dirname + '/launch'));
+    //create our app and expose it
+    var app = module.exports = express();
+    var port = Number(process.env.PORT || 5000);
 
-//set our initial default metadata
-utilApp.updateMetadata('default');
+    //load our other apps
+    var utilApp = require('./util');
+    var accountApp = require('./apps/account');
+    var loginApp = require('./apps/login');
+    var staticApp = require('./apps/static');
+    var publicApp = require('./apps/public');
 
-//routes
+    //enable gzip
+    var compress = require('compression');
+    app.use(compress());
 
-//HOME
-app.get('/', function(req, res) {
-  var metadata = utilApp.getMetadata('home');
+    //set up sessions
+    var cookieParser = require('cookie-parser');
+    var session = require('express-session');
+    app.use(cookieParser());
+    app.use(session({secret: utilApp.sessionSecret}));
 
-  publicApp.renderPublicPage(res, metadata);
-});
+    //use hbs for templates
+    var hbs = require('hbs');
+    hbs.registerPartials(__dirname + '/views/partials');
+    app.set('view engine', 'hbs');
+    app.set('views', __dirname + '/views');
 
-//TEMPLATES
-app.get('/templates-public.js', function(req, res){
-  res.sendfile('templates-public.js');
-});
+    //expose our locals
+    hbs.localsAsTemplateData(app);
 
-app.get('/templates-account.js', function(req, res){
-  res.sendfile('templates-account.js');
-});
+    //static files
+    app.use('/assets', express.static(__dirname + '/assets'));
+    app.use('/src', express.static(__dirname + '/src'));
+    app.use('/vendor', express.static(__dirname + '/vendor'));
+    app.use('/launch', express.static(__dirname + '/launch'));
 
-app.get('/templates-login.js', function(req, res){
-  res.sendfile('templates-login.js');
-});
+    //set our initial default metadata
+    utilApp.updateMetadata('default');
 
-app.get('/templates-static.js', function(req, res){
-  res.sendfile('templates-static.js');
-});
+    //routes
 
-//SEO
-app.get('/BingSiteAuth.xml', function(req, res){
-  res.sendfile('seo/BingSiteAuth.xml');
-});
+    //HOME
+    app.get('/', function(req, res) {
+      var metadata = utilApp.getMetadata('home');
 
-app.get('/bOeAHuseytu27v9K8MznKwOWZFk.html', function(req, res){
-  res.sendfile('seo/bOeAHuseytu27v9K8MznKwOWZFk.html');
-});
+      publicApp.renderPublicPage(res, metadata);
+    });
 
-app.get('/google1739f11000682532.html', function(req, res){
-  res.sendfile('seo/google1739f11000682532.html');
-});
+    //TEMPLATES
+    app.get('/templates-public.js', function(req, res){
+      res.sendfile('templates-public.js');
+    });
 
-app.get('/pinterest-98fe2.html', function(req, res){
-  res.sendfile('seo/pinterest-98fe2.html');
-});
+    app.get('/templates-account.js', function(req, res){
+      res.sendfile('templates-account.js');
+    });
 
-//unsubscribe
-app.get('/unsubscribe', function(req, res){
-  res.render('unsubscribe');
-});
+    app.get('/templates-login.js', function(req, res){
+      res.sendfile('templates-login.js');
+    });
 
-app.get('/testing', function(req, res){
-  accountApp.test(req, res);
-});
+    app.get('/templates-static.js', function(req, res){
+      res.sendfile('templates-static.js');
+    });
 
-//ACCOUNT
-app.get('/account*', function(req, res){
-  accountApp.renderAccountPage(req, res);
-});
+    //SEO
+    app.get('/BingSiteAuth.xml', function(req, res){
+      res.sendfile('seo/BingSiteAuth.xml');
+    });
 
-//LOGIN
+    app.get('/bOeAHuseytu27v9K8MznKwOWZFk.html', function(req, res){
+      res.sendfile('seo/bOeAHuseytu27v9K8MznKwOWZFk.html');
+    });
 
-//login
-app.get('/login', function(req, res){
-  loginApp.renderLoginPage(res);
-});
+    app.get('/google1739f11000682532.html', function(req, res){
+      res.sendfile('seo/google1739f11000682532.html');
+    });
 
-//logout
-app.get('/logout', function(req, res){
-  loginApp.renderLoginPage(res);
-});
+    app.get('/pinterest-98fe2.html', function(req, res){
+      res.sendfile('seo/pinterest-98fe2.html');
+    });
 
-//join
-app.get('/join/:step', function(req, res){
-  loginApp.renderLoginPage(res);
-});
+    //unsubscribe
+    app.get('/unsubscribe', function(req, res){
+      res.render('unsubscribe');
+    });
 
-app.get('/join', function(req, res){
-  loginApp.renderLoginPage(res);
-});
+    app.get('/testing', function(req, res){
+      accountApp.test(req, res);
+    });
 
-//password reset
-app.get('/password-reset', function(req, res){
-  loginApp.renderLoginPage(res);
-});
+    //ACCOUNT
+    app.get('/account*', function(req, res){
+      accountApp.renderAccountPage(req, res);
+    });
 
-//password reset
-app.get('/password-reset/new', function(req, res){
-  loginApp.renderLoginPage(res);
-});
+    //LOGIN
 
-//twitter auth
-app.get('/auth/twitter/connect', function(req, res){
-  loginApp.getTwitterOAuthRequestToken(req, res);
-});
+    //login
+    app.get('/login', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
 
-app.get('/auth/twitter/callback', function(req, res){
-  loginApp.getTwitterOAuthAccessToken(req, res);
-});
+    //logout
+    app.get('/logout', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
 
-//feed
-app.get('/feed', function(req, res){
-  var metadata = utilApp.getMetadata('feed');
+    //join
+    app.get('/join/:step', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
 
-  publicApp.renderPublicPage(res, metadata);
-});
+    app.get('/join', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
 
-//morsel detail with post id/slug
-app.get('/:username/:postidslug', function(req, res){
-  publicApp.renderMorselPage(req, res);
-});
+    //password reset
+    app.get('/password-reset', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
 
-//anything with a single route param
-app.get('/:route', function(req, res, next){
-  utilApp.handleSingleRoute(req, res, next);
-});
+    //password reset
+    app.get('/password-reset/new', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
 
-//anything else must be a 404 at this point
-app.get('*', function(req, res) {
-  utilApp.render404(res);
-});
+    //twitter auth
+    app.get('/auth/twitter/connect', function(req, res){
+      loginApp.getTwitterOAuthRequestToken(req, res);
+    });
 
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
+    app.get('/auth/twitter/callback', function(req, res){
+      loginApp.getTwitterOAuthAccessToken(req, res);
+    });
 
-//if something goes wrong, exit so heroku can try to restart
-process.on('uncaughtException', function (err) {
-  console.error('uncaughtException:', err.message);
-  console.error(err.stack);
-  process.exit(1);
-});
+    //feed
+    app.get('/feed', function(req, res){
+      var metadata = utilApp.getMetadata('feed');
 
-//log any errors
-app.on('error', function (err) {
-  console.error(err);
-});
+      publicApp.renderPublicPage(res, metadata);
+    });
+
+    //morsel detail with post id/slug
+    app.get('/:username/:postidslug', function(req, res){
+      publicApp.renderMorselPage(req, res);
+    });
+
+    //anything with a single route param
+    app.get('/:route', function(req, res, next){
+      utilApp.handleSingleRoute(req, res, next);
+    });
+
+    //anything else must be a 404 at this point
+    app.get('*', function(req, res) {
+      utilApp.render404(res);
+    });
+
+    httpServer = app.listen(port, function() {
+      console.log("Listening on " + port);
+    });
+ // });
+//}

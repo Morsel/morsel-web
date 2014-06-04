@@ -20,7 +20,10 @@
     "hbs": "~2.7.0",
     "compression": "~1.0.3",
     "cookie-parser": "~1.1.0",
-    "express-session": "~1.2.1"
+    "express-session": "~1.2.1",
+    "cluster": "~0.7.7",
+    "domain": "~0.2.8",
+    "nodetime": "~0.8.15"
   },
   "devDependencies": {
     "bower": "*",
