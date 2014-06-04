@@ -1459,6 +1459,8 @@ module.exports = function ( grunt ) {
 
     grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/server.tpl.js', this.data.dir + '/server.js');
 
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/config.js', this.data.dir + '/config.js');
+
     grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/account/index.js', this.data.dir + '/apps/account/index.js');
 
     grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/login/index.js', this.data.dir + '/apps/login/index.js');

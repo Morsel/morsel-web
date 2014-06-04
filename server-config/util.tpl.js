@@ -1,13 +1,13 @@
 var app = require('./server');
 var _ = require('underscore');
+var config = require('./config');
 
 //any keys, tokens, etc
 var apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>';
-var devMixpanelToken = 'fc91c2a6f8d8388f077f6b9618e90499';
-var facebookAppId = process.env.FACEBOOK_APP_ID || '1406459019603393';
+var facebookAppId = process.env.FACEBOOK_APP_ID || config.facebookAppId;
 var twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY || '12345';
 var twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET || '12345';
-var nodeEnv = process.env.NODE_ENV || 'development';
+var nodeEnv = process.env.NODE_ENV || config.node_env;
 var sessionSecret = 'THESESESSIONSARENOTSECURE';
 
 //static JSON data
@@ -16,10 +16,10 @@ var metadata = require('./data/metadata.json');
 
 //set up some app locals that will be rendered to any templates
 app.locals.metabase = '/';
-app.locals.siteURL= process.env.SITEURL || 'localhost:5000';
-app.locals.apiUrl= process.env.apiUrl || 'http://api-staging.eatmorsel.com';
-app.locals.mixpanelToken= process.env.MIXPANELTOKEN || devMixpanelToken;
-app.locals.isProd= nodeEnv === 'production';
+app.locals.siteUrl = process.env.SITEURL || config.siteUrl;
+app.locals.apiUrl = process.env.APIURL || config.apiUrl;
+app.locals.mixpanelToken = process.env.MIXPANELTOKEN || config.devMixpanelToken;
+app.locals.isProd = nodeEnv === 'production';
 
 function updateMetadata(route){
   app.locals.metadata = getMetadata(route);

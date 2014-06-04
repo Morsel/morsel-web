@@ -11,7 +11,7 @@ function twitterConsumer() {
      util.twitterConsumerKey, 
      util.twitterConsumerSecret, 
      "1.0A", 
-     app.locals.siteURL+'/auth/twitter/callback', 
+     app.locals.siteUrl+'/auth/twitter/callback', 
      "HMAC-SHA1"
   );
 }

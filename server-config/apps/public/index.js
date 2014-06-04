@@ -89,7 +89,7 @@ module.exports.renderMorselPage = function(req, res) {
               "article_modified_at":morsel.updated_at,
               "is_article": true
             },
-            "url": app.locals.siteURL + '/' + user.username + '/' + morsel.id + '-' + morsel.slug
+            "url": app.locals.siteUrl + '/' + user.username + '/' + morsel.id + '-' + morsel.slug
           };
 
           description = _.escape(util.truncateAt(getFirstDescription(morsel.items), 155)) + '...';
@@ -141,7 +141,7 @@ module.exports.renderUserPage = function(res, username) {
         "twitter": {
           "creator": '@'+(user.twitter_username || 'eatmorsel')
         },
-        "url": app.locals.siteURL + '/' + user.username
+        "url": app.locals.siteUrl + '/' + user.username
       };
 
       userMetadata.twitter = _.defaults(userMetadata.twitter || {}, util.defaultMetadata.twitter);
