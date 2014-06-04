@@ -1,547 +1,250 @@
-var express = require("express"),
-    mustacheExpress = require('mustache-express'),
-    _ = require('underscore'),
-    oauth = require('oauth'),
-    sys = require('util'),
-    staticRoutes = require('./data/static-routes.json'),
-    request = require('request'),
-    metadata = require('./data/metadata.json'),
-    nodeEnv = process.env.NODE_ENV || 'development',
-    isProd = nodeEnv === 'production',
-    siteURL = process.env.SITEURL || 'localhost:5000',
-    apiUrl = process.env.apiUrl || 'http://api-staging.eatmorsel.com',
-    apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>',
-    devMixpanelToken = 'fc91c2a6f8d8388f077f6b9618e90499',
-    mixpanelToken = process.env.MIXPANELTOKEN || devMixpanelToken,
-    prerender,
-    prerenderDevUrl = 'http://morsel-seo.herokuapp.com/',
-    prerenderToken = process.env.PRERENDER_TOKEN || '',
-    facebookAppId = process.env.FACEBOOK_APP_ID || '1406459019603393',
-    twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY || '12345';
-    twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET || '12345';
-    metabase = '/',
-    app = express();
+var maxWorkers = process.env.MAX_WORKERS || 1,
+    cluster = require('cluster'),
+    numCPUs = require('os').cpus().length,
+    workers = numCPUs >= maxWorkers ? maxWorkers : numCPUs,
+    Logger = {},//require('./hgnode/framework/HgLog.js'),
+    index = 0;
 
-//if something goes wrong, exit so heroku can try to restart
-process.on('uncaughtException', function (err) {
-  console.error('uncaughtException:', err.message);
-  console.error(err.stack);
-  process.exit(1);
-});
+if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
+  //Logger.info('Web server initializing with a maximum of ' + maxWorkers + ' workers. Master PID: ' + process.pid);
+  //Logger.info(numCPUs + ' CPUs detected. Clustering up to ' + workers + ' instances.');
 
-//log any errors
-app.on('error', function (err) {
-  console.error(err);
-});
-
-app.engine('mustache', mustacheExpress());
-
-app.configure(function(){
-  //enable gzip
-  app.use(express.compress());
-
-  app.set('view engine', 'mustache');
-  app.set('views', __dirname + '/views');
-
-  app.use('/assets', express.static(__dirname + '/assets'));
-  app.use('/src', express.static(__dirname + '/src'));
-  app.use('/vendor', express.static(__dirname + '/vendor'));
-  app.use('/launch', express.static(__dirname + '/launch'));
-
-  app.use(express.cookieParser());
-  app.use(express.session({secret: 'THESESESSIONSARENOTSECURE'}));
-
-  /*prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase).set('afterRender', function(req, prerender_res) {
-    console.log('req is:');
-    console.log(req);
-    console.log('prerender_res is:');
-    console.log(prerender_res);
-    console.log('using prerender server');
-  });
-  
-  if(currEnv === 'production' && prerenderToken) {
-    prerender = require('prerender-node').set('prerenderToken', prerenderToken).set('beforeRender', updateMetabase);
-  } else {
-    prerender = require('prerender-node').set('prerenderServiceUrl', prerenderDevUrl).set('beforeRender', updateMetabase);
-  }
-  app.use(prerender);
-  */
-  app.use(app.router);
-});
-
-app.get('/', function(req, res) {
-  renderPublicPage(res, findMetadata(''));
-});
-
-/* from dev-launch
-app.get('/', function(req, res) {
-  res.render('claim', {
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiUrl : apiUrl,
-    mixpanelToken : mixpanelToken
-  });
-});
-*/
-
-//templates
-app.get('/templates-public.js', function(req, res){
-  res.sendfile('templates-public.js');
-});
-
-app.get('/templates-account.js', function(req, res){
-  res.sendfile('templates-account.js');
-});
-
-app.get('/templates-login.js', function(req, res){
-  res.sendfile('templates-login.js');
-});
-
-app.get('/templates-static.js', function(req, res){
-  res.sendfile('templates-static.js');
-});
-
-//SEO
-app.get('/BingSiteAuth.xml', function(req, res){
-  res.sendfile('seo/BingSiteAuth.xml');
-});
-
-app.get('/bOeAHuseytu27v9K8MznKwOWZFk.html', function(req, res){
-  res.sendfile('seo/bOeAHuseytu27v9K8MznKwOWZFk.html');
-});
-
-app.get('/google1739f11000682532.html', function(req, res){
-  res.sendfile('seo/google1739f11000682532.html');
-});
-
-app.get('/pinterest-98fe2.html', function(req, res){
-  res.sendfile('seo/pinterest-98fe2.html');
-});
-
-//unsubscribe
-app.get('/unsubscribe', function(req, res){
-  res.render('unsubscribe', {
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiUrl : apiUrl,
-    mixpanelToken : mixpanelToken
-  });
-});
-
-//login
-app.get('/login', function(req, res){
-  renderLoginPage(res);
-});
-
-//logout
-app.get('/logout', function(req, res){
-  renderLoginPage(res);
-});
-
-//join
-app.get('/join/:step', function(req, res){
-  renderLoginPage(res);
-});
-
-app.get('/join', function(req, res){
-  renderLoginPage(res);
-});
-
-//password reset
-app.get('/password-reset', function(req, res){
-  renderLoginPage(res);
-});
-
-//password reset
-app.get('/password-reset/new', function(req, res){
-  renderLoginPage(res);
-});
-
-//account pages
-app.get('/account*', function(req, res){
-  var fullMetadata = findMetadata('default');
-
-  res.render('account', {
-    metadata: fullMetadata,
-    metabase: metabase,
-    siteUrl : siteURL,
-    isProd : isProd,
-    apiUrl : apiUrl,
-    mixpanelToken : mixpanelToken,
-    //determine how to render menu
-    pageType: {
-      account: true
+  cluster.on('exit', function (worker, code, signal) {
+    if (code !== 130) {
+      //Logger.warn('Cluster worker ' + worker.process.pid + ' died. code: \'' + code + '\' signal: \'' + (signal || '') + '\' restarting.');
+      cluster.fork();
+    } else {
+      //Logger.info('Cluster worker ' + worker.process.pid + ' died. code: ' + code + ' signal: ' + (signal || '') + ' not restarting due to shutdown.');
     }
   });
-});
 
-//feed
-app.get('/feed', function(req, res){
-  renderPublicPage(res);
-});
+  cluster.on('listening', function (worker, address) {
+    //Logger.info('Cluster worker ' + worker.process.pid + ' is now connected to ' + address.address + ':' + address.port);
+  });
 
-//morsel detail with post id/slug
-app.get('/:username/:postidslug', function(req, res){
-  renderMorselPage(res, req.params.username, req.params.postidslug);
-});
-
-//anything with a single route param
-app.get('/:route', function(req, res, next){
-  var route = req.params.route;
-
-  //check against our known routes
-  if(isStaticRoute(route)) {
-    renderStatic(res, route);
-  } else {
-    //check and see if it's a reserved route
-    request(apiUrl+'/configuration'+apiQuerystring, function (error, response, body) {
-      var configData,
-          nonUsernamePaths,
-          //Maximum 15 characters (alphanumeric or _), must start with a letter
-          usernameRegex = /^[a-zA-Z]\w{0,14}$/;
-
-      if (!error && response.statusCode == 200) {
-        configData = JSON.parse(body).data;
-        nonUsernamePaths = configData.non_username_paths;
-
-        if(_.find(nonUsernamePaths, function(path) {
-          return path === route;
-        })) {
-          //this is a reserved path that isn't in use - send them to a 404
-          render404(res);
-        } else {
-          //check and see if the route could be a valid username
-          if(usernameRegex.test(route)) {
-            //this could be a user
-            renderUserPage(res, route);
-          } else {
-            //not sure what this could be, send it to next route
-            next();
-          }
-        }
-      }
+  process.on('SIGINT', function () {
+    //Logger.info('SIGINT received, waiting for connections to finish so process can exit gracefully.');
+    cluster.disconnect(function () {
+      //Logger.info('Cluster has gracefully shutdown.');
+      process.exit(1);
     });
+  });
+
+  for (index = 0; index < workers; index += 1) {
+    cluster.fork();
   }
-});
+} else {
+  var serverDomain = require('domain').create(),
+      httpServer,
+      nodetime;
 
-//twitter auth
-app.get('/auth/twitter/connect', function(req, res){
-  console.log('got route');
-  getTwitterOAuthRequestToken(res, req);
-});
+  serverDomain.on('error', function (err) {
+    var exceptionNotifyer = {},//require('./hgnode/framework/ExceptionNotifier.js'),
+        killtimer = setTimeout(function () {
+           process.exit(1);
+        }, 5000);
 
-app.get('/auth/twitter/callback', function(req, res){
-  getTwitterOAuthAccessToken(res, req);
-});
-
-//anything else must be a 404 at this point - this will obviously change
-app.get('*', function(req, res) {
-  render404(res);
-});
-
-var port = Number(process.env.PORT || 5000);
-app.listen(port, function() {
-  console.log("Listening on " + port);
-});
-
-function renderPublicPage(res, mData) {
-  var fullMetadata = mData || findMetadata('default');
-
-  res.render('public', {
-    metadata: fullMetadata,
-    metabase: metabase,
-    apiUrl: apiUrl,
-    isProd : isProd,
-    mixpanelToken : mixpanelToken,
-    //determine how to render menu
-    pageType: {
-      public: true
+    killtimer.unref();
+    try {
+      // kill nodetime
+      if (nodetime) {
+        nodetime.destroy();
+      }
+      if (httpServer) {
+        // force all connections to be zero so callback can be called without throwing another exception
+        httpServer._connections = 0;
+        httpServer.close(function () {
+           cluster.worker.disconnect();
+        });
+      } else if (cluster.worker) {
+        cluster.worker.disconnect();
+      }
+      //exceptionNotifyer(err);
+      // change this to the console logger - since there is now no connections to the database
+      console.log('Unhandled Exception in domain of cluster worker ' + process.pid);
+      console.log(err.stack || err);
+    } catch (er2) {
+      /*exceptionNotifyer(er2, function (notifierError, notifierResponse) {
+        console.log('Error cleaning up after error in cluster worker ' + process.pid + ' domain: ');
+        console.log(er2.stack || er2);
+        process.exit(1);
+      });*/
     }
   });
-}
 
-function renderStatic(res, route) {
-  var fullMetadata = findMetadata(route) || findMetadata('default'),
-      templateVars = {
-        metadata: fullMetadata,
-        metabase: metabase,
-        apiUrl: apiUrl,
-        isProd : isProd,
-        mixpanelToken : mixpanelToken,
-        staticPartial: {},
-        //determine how to render menu
-        pageType: {
-          static: true
-        }
-      };
-
-  //set a var here to let our static template render off it
-  templateVars.staticPartial[route] = true;
-
-  res.render('static', templateVars);
-}
-
-function isStaticRoute(route) {
-  return _.find(staticRoutes, function(staticRoute) {
-    return staticRoute === route;
-  });
-}
-
-function findMetadata(route) {
-  var mdata = _.find(metadata, function(r, ind) {
-    return ind === route;
-  });
-
-  return _.defaults(mdata || {}, metadata.default);
-}
-
-function renderUserPage(res, username) {  
-  request(apiUrl+'/users/'+username+apiQuerystring, function (error, response, body) {
-    var user,
-        userImage,
-        userMetadata;
-
-    if (!error && response.statusCode == 200) {
-      user = JSON.parse(body).data;
-      userImage = user.photos && user.photos._144x144;
-
-      userMetadata = {
-        "title": _.escape(user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel'),
-        "description": _.escape(user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : '')),
-        "image": userImage || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
-        "twitter": {
-          "creator": '@'+(user.twitter_username || 'eatmorsel')
-        },
-        "url": siteURL + '/' + user.username
-      };
-
-      userMetadata.twitter = _.defaults(userMetadata.twitter || {}, metadata.default.twitter);
-      userMetadata.og = _.defaults(userMetadata.og || {}, metadata.default.og);
-      userMetadata = _.defaults(userMetadata || {}, metadata.default);
-
-      renderPublicPage(res, userMetadata);
-    } else {
-      //not a valid user - must be a bad route
-      render404(res);
-    }
-  });
-}
-
-function renderMorselPage(res, username, morselIdSlug) {
-  request(apiUrl+'/users/'+username+apiQuerystring, function (error, response, body) {
-    var user;
-
-    if (!error && response.statusCode == 200) {
-      user = JSON.parse(body).data;
-
-      request(apiUrl+'/morsels/'+morselIdSlug+apiQuerystring, function (error, response, body) {
-        var morsel,
-            morselMetadata,
-            description;
-
-        if (!error && response.statusCode == 200) {
-          morsel = JSON.parse(body).data;
-
-          morselMetadata = {
-            "title": _.escape(morsel.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "image": getMetadataImage(morsel) || 'http://www.eatmorsel.com/assets/images/logos/morsel-large.png',
-            "twitter": {
-              "card" : 'summary_large_image',
-              "creator": '@'+(user.twitter_username || 'eatmorsel')
-            },
-            "og": {
-              "type":"article",
-              "article_publisher": "https://www.facebook.com/eatmorsel",
-              "article_published_at":morsel.published_at,
-              "article_modified_at":morsel.updated_at,
-              "is_article": true
-            },
-            "url": siteURL + '/' + user.username + '/' + morsel.id + '-' + morsel.slug
-          };
-
-          description = _.escape(truncateAt(getFirstDescription(morsel.items), 155)) + '...';
-          //there's a change none of the morsels have a description
-          if(description) {
-            morselMetadata.description = description;
-          }
-
-          //only include fb id if we have one
-          if(morsel.facebook_uid) {
-            morselMetadata.og.author = morsel.facebook_uid;
-          }
-
-          morselMetadata.twitter = _.defaults(morselMetadata.twitter || {}, metadata.default.twitter);
-          morselMetadata.og = _.defaults(morselMetadata.og || {}, metadata.default.og);
-          morselMetadata = _.defaults(morselMetadata || {}, metadata.default);
-         
-          renderPublicPage(res, morselMetadata);
-        } else {
-          //not a valid morsel id - must be a bad route
-          render404(res);
-        }
+  serverDomain.run(function () {
+    // nodetime should be the first require
+    if (process.env.NODETIME_ACCOUNT_KEY) {
+      nodetime = require('nodetime');
+      nodetime.profile({
+        accountKey: process.env.NODETIME_ACCOUNT_KEY,
+        appName: process.env.NODE_ENV || 'local-dev'
       });
-    } else {
-      //not a valid user - must be a bad route
-      render404(res);
     }
-  });
-}
 
-function renderLoginPage(res, twitterData) {
-  var fullMetadata = findMetadata('login');
+    //middleware
+    var express = require("express");
 
-  res.render('login', {
-    metadata: fullMetadata,
-    siteUrl : siteURL,
-    metabase: metabase,
-    isProd : isProd,
-    apiUrl : apiUrl,
-    mixpanelToken : mixpanelToken,
-    facebookAppId : facebookAppId,
-    twitterData : JSON.stringify(twitterData) || 'null'
-  });
-}
+    //create our app and expose it
+    var app = module.exports = express();
+    var port = Number(process.env.PORT || 5000);
 
-function getFirstDescription(items) {
-  var firstItemWithDescription;
+    //load our other apps
+    var utilApp = require('./util');
+    var accountApp = require('./apps/account');
+    var loginApp = require('./apps/login');
+    var staticApp = require('./apps/static');
+    var publicApp = require('./apps/public');
 
-  firstItemWithDescription = _.find(items, function(m) {
-    return m.description && m.description.length > 0;
-  });
+    //enable gzip
+    var compress = require('compression');
+    app.use(compress());
 
-  if(firstItemWithDescription) {
-    return firstItemWithDescription.description;
-  } else {
-    return '';
-  }
-}
+    //set up sessions
+    var cookieParser = require('cookie-parser');
+    var session = require('express-session');
+    app.use(cookieParser());
+    app.use(session({secret: utilApp.sessionSecret}));
 
-function truncateAt(text, limit) {
-  return text.substring(0, limit);
-}
+    //use hbs for templates
+    var hbs = require('hbs');
+    hbs.registerPartials(__dirname + '/views/partials');
+    app.set('view engine', 'hbs');
+    app.set('views', __dirname + '/views');
 
-function render404(res) {
-  res.status(404).render('404', {
-    metadata: findMetadata('404')
-  });
-}
+    //expose our locals
+    hbs.localsAsTemplateData(app);
 
-function getMetadataImage(morsel) {
-  var primaryItem;
+    //static files
+    app.use('/assets', express.static(__dirname + '/assets'));
+    app.use('/src', express.static(__dirname + '/src'));
+    app.use('/vendor', express.static(__dirname + '/vendor'));
+    app.use('/launch', express.static(__dirname + '/launch'));
 
-  //if they have a collage, use it
-  if(morsel.photos) {
-    if(morsel.photos._800x600) {
-      return morsel.photos._800x600;
-    } else {
-      return morsel.photos._400x300;
-    }
-  } else {
-    //use their cover photo as backup
-    primaryItem = _.find(morsel.items, function(i) {
-      return i.id === morsel.primary_item_id;
+    //set our initial default metadata
+    utilApp.updateMetadata('default');
+
+    //routes
+
+    //HOME
+    app.get('/', function(req, res) {
+      var metadata = utilApp.getMetadata('home');
+
+      publicApp.renderPublicPage(res, metadata);
     });
 
-    if(primaryItem && primaryItem.photos) {
-      return primaryItem.photos._992x992;
-    } else {
-      return morsels[0].photos._992x992;
-    }
-  }
-}
+    //TEMPLATES
+    app.get('/templates-public.js', function(req, res){
+      res.sendfile('templates-public.js');
+    });
 
-function updateMetabase(req, done) {
-  //we need to make sure everything renders properly even when it's hosted on s3 or wherever
-  metabase = siteURL;
-  done();
-}
+    app.get('/templates-account.js', function(req, res){
+      res.sendfile('templates-account.js');
+    });
 
-//twitter auth 
-function twitterConsumer() {
-  return new oauth.OAuth(
-    'https://api.twitter.com/oauth/request_token', 
-    'https://api.twitter.com/oauth/access_token', 
-     twitterConsumerKey, 
-     twitterConsumerSecret, 
-     "1.0A", 
-     siteURL+'/auth/twitter/callback', 
-     "HMAC-SHA1"
-   );
-}
+    app.get('/templates-login.js', function(req, res){
+      res.sendfile('templates-login.js');
+    });
 
-function getTwitterOAuthRequestToken(res, req) {
-  twitterConsumer().getOAuthRequestToken(function(error, oauthToken, oauthTokenSecret, results) {
+    app.get('/templates-static.js', function(req, res){
+      res.sendfile('templates-static.js');
+    });
 
-    console.log('got oauth reqest token');
-    if (error) {
-      sys.puts('got error',  sys.inspect(error));
-      renderLoginPage(res, {
-        errors: {
-          base: [
-            'There was a problem logging into Twitter'
-          ]
-        }
-      });
-    } else {
-       console.log('got without error');
-      //remember where the user was headed
-      if(req.query.next) {
-        console.log('req.quest.next');
-        req.session.loginNext = req.query.next;
-      }
-      console.log('after  req.quest.next');
-      req.session.oauthRequestToken = oauthToken;
-      req.session.oauthRequestTokenSecret = oauthTokenSecret;
-      res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token="+oauthToken);
-    }
-  });
-}
+    //SEO
+    app.get('/BingSiteAuth.xml', function(req, res){
+      res.sendfile('seo/BingSiteAuth.xml');
+    });
 
-function getTwitterOAuthAccessToken(res, req) {
-  twitterConsumer().getOAuthAccessToken(
-    req.session.oauthRequestToken, 
-    req.session.oauthRequestTokenSecret, 
-    req.query.oauth_verifier, 
-    function(error, oauthAccessToken, oauthAccessTokenSecret, results) {
-    if (error) {
-      renderLoginPage(res, {
-        errors: {
-          base: [
-            'There was a problem logging into Twitter'
-          ]
-        }
-      });
-    } else {
-      req.session.oauthAccessToken = oauthAccessToken;
-      req.session.oauthAccessTokenSecret = oauthAccessTokenSecret;
-      twitterConsumer().get("https://api.twitter.com/1.1/account/verify_credentials.json",
-        req.session.oauthAccessToken,
-        req.session.oauthAccessTokenSecret,
-        function (error, data, response) {
-        if (error) {
-          renderLoginPage(res, {
-            errors: {
-              base: [
-                'There was a problem logging into Twitter'
-              ]
-            }
-          });
-        } else {
-          var tData = JSON.parse(data);
+    app.get('/bOeAHuseytu27v9K8MznKwOWZFk.html', function(req, res){
+      res.sendfile('seo/bOeAHuseytu27v9K8MznKwOWZFk.html');
+    });
 
-          //add our token and secret
-          tData.userData = {
-            token: req.session.oauthAccessToken,
-            secret: req.session.oauthAccessTokenSecret
-          };
+    app.get('/google1739f11000682532.html', function(req, res){
+      res.sendfile('seo/google1739f11000682532.html');
+    });
 
-          if(req.session.loginNext) {
-            tData.loginNext = req.session.loginNext;
-          }
+    app.get('/pinterest-98fe2.html', function(req, res){
+      res.sendfile('seo/pinterest-98fe2.html');
+    });
 
-          renderLoginPage(res, tData);
-        }
-      });
-    }
+    //unsubscribe
+    app.get('/unsubscribe', function(req, res){
+      res.render('unsubscribe');
+    });
+
+    app.get('/testing', function(req, res){
+      accountApp.test(req, res);
+    });
+
+    //ACCOUNT
+    app.get('/account*', function(req, res){
+      accountApp.renderAccountPage(req, res);
+    });
+
+    //LOGIN
+
+    //login
+    app.get('/login', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
+
+    //logout
+    app.get('/logout', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
+
+    //join
+    app.get('/join/:step', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
+
+    app.get('/join', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
+
+    //password reset
+    app.get('/password-reset', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
+
+    //password reset
+    app.get('/password-reset/new', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
+
+    //twitter auth
+    app.get('/auth/twitter/connect', function(req, res){
+      loginApp.getTwitterOAuthRequestToken(req, res);
+    });
+
+    app.get('/auth/twitter/callback', function(req, res){
+      loginApp.getTwitterOAuthAccessToken(req, res);
+    });
+
+    //feed
+    app.get('/feed', function(req, res){
+      var metadata = utilApp.getMetadata('feed');
+
+      publicApp.renderPublicPage(res, metadata);
+    });
+
+    //morsel detail with post id/slug
+    app.get('/:username/:postidslug', function(req, res){
+      publicApp.renderMorselPage(req, res);
+    });
+
+    //anything with a single route param
+    app.get('/:route', function(req, res, next){
+      utilApp.handleSingleRoute(req, res, next);
+    });
+
+    //anything else must be a 404 at this point
+    app.get('*', function(req, res) {
+      utilApp.render404(res);
+    });
+
+    httpServer = app.listen(port, function() {
+      console.log("Listening on " + port);
+    });
   });
 }
