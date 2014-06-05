@@ -1,23 +1,29 @@
-.social-account-toggle {
+.social-accounts {
   text-align: center;
+  
+  .social-account-toggle {
+    div {
+      overflow: hidden;
+      text-align: left;
 
-  div {
-    overflow: hidden;
-    text-align: left;
+      p {
+        display: inline-block;
+        font-weight: bold;
+        margin-bottom: 0;
 
-    p {
-      display: inline-block;
-      font-weight: bold;
-      margin-bottom: 0;
-
-      i {
-        vertical-align: middle;
-        margin-right: 5px;
+        i {
+          vertical-align: middle;
+          margin-right: 5px;
+        }
+      }
+      
+      a {
+        float: right;
       }
     }
-    
-    a {
-      float: right;
-    }
+  }
+
+  .list-group {
+    margin-left: 0;
   }
 }

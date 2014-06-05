@@ -5,12 +5,28 @@
     <div class="col-md-8 col-md-offset-2">
       <ul class="list-group">
         <li class="list-group-item">
-          <div mrsl-add-facebook mrsl-add-facebook-text="Connect my Facebook account" mrsl-add-facebook-form="socialAccountForm" mrsl-add-authentication="authentications.facebook"></div>
+          <div mrsl-add-facebook mrsl-add-facebook-text="Connect with Facebook" mrsl-add-facebook-form="socialAccountForm" mrsl-add-authentication="authentications.facebook"></div>
         </li>
         <li class="list-group-item">
-          <div mrsl-add-twitter mrsl-add-twitter-text="Connect my Twitter account" mrsl-add-twitter-form="socialAccountForm" mrsl-add-authentication="authentications.twitter"></div>
+          <div mrsl-add-twitter mrsl-add-twitter-text="Connect with Twitter" mrsl-add-twitter-form="socialAccountForm" mrsl-add-authentication="authentications.twitter"></div>
         </li>
       </ul>
+      <div class="form-group row">
+        <div class="col-xs-6 col-sm-4 col-sm-offset-2">
+          <label class="radio-inline control-label">Auto-follow</label>
+        </div>
+        <div class="col-xs-6 col-sm-4">
+          <label class="radio-inline">
+            <input type="radio" name="autofollow" ng-change="updateAutofollow()" ng-model="userSettings.auto_follow" value="on">
+            On
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="autofollow" ng-change="updateAutofollow()" ng-model="userSettings.auto_follow" value="off">
+            Off
+          </label>
+          </div>
+        </div>
+      </div>
     </div>
   </form>
 </div>

@@ -37,6 +37,40 @@ angular.module( 'Morsel.account.socialAccounts', [])
   });
 })
 
-.controller( 'SocialAccountsCtrl', function SocialAccountsCtrl( $scope, authentications ){
+.controller( 'SocialAccountsCtrl', function SocialAccountsCtrl( $scope, authentications, accountUser, ApiUsers, HandleErrors, Auth ){
   $scope.authentications = authentications;
+
+  //convert to strings for ng-model matching
+  if(accountUser.settings.auto_follow) {
+    accountUser.settings.auto_follow = 'on';
+  } else {
+    accountUser.settings.auto_follow = 'off';
+  }
+
+  $scope.userSettings = accountUser.settings;
+
+  $scope.updateAutofollow = function() {
+    var userData = {
+          user: {
+            settings: {}
+          }
+        };
+
+    if(accountUser.settings.auto_follow === 'on') {
+      userData.user.settings.auto_follow = true;
+    } else {
+      userData.user.settings.auto_follow = false;
+    }
+
+    ApiUsers.updateUser(accountUser.id, userData).then(onSuccess, onError);
+  };
+
+  function onSuccess(resp) {
+    //update our scoped current user
+    Auth.updateUser(resp.data);
+  }
+
+  function onError(resp) {
+    HandleErrors.onError(resp, $scope.socialAccountForm);
+  }
 });
