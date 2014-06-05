@@ -30,6 +30,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.account.accountSettings',
   'Morsel.account.body',
   'Morsel.account.cuisinesSpecialties',
   'Morsel.account.editProfile',

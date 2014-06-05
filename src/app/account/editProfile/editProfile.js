@@ -19,7 +19,7 @@ angular.module( 'Morsel.account.editProfile', [])
   });
 })
 
-.controller( 'EditProfileCtrl', function EditProfileCtrl( $scope, $stateParams, ApiUsers, HandleErrors, accountUser, Auth){
+.controller( 'EditProfileCtrl', function EditProfileCtrl( $scope, ApiUsers, HandleErrors, accountUser, Auth){
   //basic info
 
   //model to store our profile data
@@ -64,7 +64,10 @@ angular.module( 'Morsel.account.editProfile', [])
   function onBasicInfoError(resp) {
     //make form valid again (until errors show)
     $scope.basicInfoForm.$setValidity('loading', true);
-      
-    HandleErrors.onError(resp, $scope.basicInfoForm);
+    
+    //remove whatever message is there
+    $scope.alertMessage = null;
+
+    HandleErrors.onError(resp.data, $scope.basicInfoForm);
   }
 });
