@@ -16,7 +16,7 @@ angular.module( 'Morsel.common.handleErrors', [] )
           //must be associated with a specific input
 
           //we need an english phrase for the field name
-          fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
+          fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/_/g," ");
           //get the errors for this field
           serverErrors = resp.errors[fieldName];
 
@@ -43,7 +43,7 @@ angular.module( 'Morsel.common.handleErrors', [] )
               //something's wrong on the API side, possibly not related to client input
               Auth.showApiError(resp.status, serverErrors[i]);
             } else {
-              fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/ /g,"_");
+              fnEnglish = fieldName.charAt(0).toUpperCase() + fieldName.slice(1).replace(/_/g," ");
               //misplaced input - make good english
               for(i=0; i<serverErrors.length; i++) {
                 serverErrors[i] = fnEnglish+' '+serverErrors[i];

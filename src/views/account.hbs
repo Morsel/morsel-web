@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html id="ng-app" ng-app="Morsel.account" ng-controller="AccountCtrl">
   <head>
-    {{> partials/headContent}}
+    {{> headContent}}
     <!-- compiled CSS -->
     <% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" />
@@ -10,10 +10,10 @@
     <% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script>
     <% }); %>
-    {{> partials/mixpanel}}
+    {{> mixpanel}}
   </head>
   <body class="account">
-    {{> partials/pageWrapper}}
-    {{> partials/ga}}
+    {{> pageWrapper}}
+    {{> ga}}
   </body>
 </html>

@@ -50,7 +50,7 @@
             <p>This user hasn't made any morsels yet</p>
           </div>
         </tab>
-        <tab heading="Tags">
+        <tab heading="Tags" select="loadTags()">
           <div class="user-tags col-sm-6">
             <span class="h5">Cuisines:</span>
             <ul>
@@ -75,6 +75,7 @@
               </li>
             </ul>
           </div>
+          <div ng-show="!specialties && !cuisines" class="loader"></div>
         </tab>
         <tab heading="Likes">
           <div mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>

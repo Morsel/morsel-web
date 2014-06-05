@@ -260,10 +260,34 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
-  Users.createUserAuthentication = function(authenticationData) {
+  Users.getAuthentications = function() {
     var deferred = $q.defer();
 
-    Restangular.one('users', 0, true).post('authentications', authenticationData).then(function(resp) {
+    Restangular.one('authentications').get().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.createAuthentication = function(authenticationData) {
+    var deferred = $q.defer();
+
+    Restangular.all('authentications').post(authenticationData).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.deleteAuthentication = function(authenticationId) {
+    var deferred = $q.defer();
+
+    Restangular.one('authentications', authenticationId).remove().then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

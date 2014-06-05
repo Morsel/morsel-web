@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title ng-bind="pageTitle">{{{metadata.title}}}</title>
-    <meta name="description" content="{{{metadata.description}}}">
-    <meta name="keywords" content="{{{metadata.keywords}}}" />
+    <title ng-bind="pageTitle">{{@metadata.title}}</title>
+    <meta name="description" content="{{@metadata.description}}">
+    <meta name="keywords" content="{{@metadata.keywords}}" />
     <meta name="prerender-status-code" content="404">
     <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon" />
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">

@@ -25,6 +25,31 @@ angular.module( 'Morsel.public.profile', [])
         return Auth.getCurrentUserPromise();
       }
     }
+  })
+  .state( 'profile_alias', {
+    url: '/users/{userId:[0-9]*}',
+    views: {
+      "main": {
+        controller: 'ProfileCtrl',
+        templateUrl: 'app/public/profile/profile.tpl.html'
+      }
+    },
+    data:{ /*pageTitle: 'Profile'*/ },
+    resolve: {
+      //get the user data of the profile before we try to render the page
+      profileUserData: function(ApiUsers, $stateParams, $location, $state) {
+        return ApiUsers.getUser($stateParams.userId).then(function(userResp) {
+          return userResp.data;
+        }, function() {
+          //if there's an error retrieving user data (bad id?), send to 404
+          $state.go('404');
+        });
+      },
+      //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
+      currentUser: function(Auth) {
+        return Auth.getCurrentUserPromise();
+      }
+    }
   });
 })
 
@@ -36,12 +61,12 @@ angular.module( 'Morsel.public.profile', [])
 
   $scope.canEdit = profileUserData.id === currentUser.id;
 
-  ApiUsers.getCuisines(profileUserData.id).then(function(cuisineResp) {
-    $scope.cuisines = cuisineResp.data;
-  });
-
-  ApiUsers.getSpecialties(profileUserData.id).then(function(specialtyResp) {
-    $scope.specialties = specialtyResp.data;
+  //load our morsels immediately
+  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
+    $scope.morsels = morselsData;
+  }, function() {
+    //if there's an error retrieving user data (bad username?), go to 404
+    $state.go('404');
   });
 
   $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
@@ -52,16 +77,27 @@ angular.module( 'Morsel.public.profile', [])
     }
   });
 
-  ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
-    $scope.likeFeed = likeableResp.data;
-  });
+  $scope.loadTags = function() {
+    if(!$scope.cuisines) {
+      ApiUsers.getCuisines(profileUserData.id).then(function(cuisineResp) {
+        $scope.cuisines = cuisineResp.data;
+      });
+    }
+    
+    if(!$scope.specialties) {
+      ApiUsers.getSpecialties(profileUserData.id).then(function(specialtyResp) {
+        $scope.specialties = specialtyResp.data;
+      });
+    }
+  };
 
-  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
-    $scope.morsels = morselsData;
-  }, function() {
-    //if there's an error retrieving user data (bad username?), go to 404
-    $state.go('404');
-  });
+  $scope.loadLikeFeed = function() {
+    if(!$scope.likeFeed) {
+      ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
+        $scope.likeFeed = likeableResp.data;
+      });
+    }
+  };
 
   $scope.getCoverPhotoArray = function(morsel) {
     var primaryItemPhotos;

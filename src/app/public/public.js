@@ -50,8 +50,8 @@ angular.module( 'Morsel.public', [
   'Morsel.public.activity',
   'Morsel.public.feed',
   'Morsel.public.home',
-  'Morsel.public.morselDetail',
-  'Morsel.public.profile'//:username in route clobbers other routes - this needs to be last until a better solution is found
+  'Morsel.public.profile',//profile comes before morselDetail so /users/:id doesn't get clobbered by '/:username/:morseldetails'...not ideal
+  'Morsel.public.morselDetail'
 ])
 
 //define some constants for the app
