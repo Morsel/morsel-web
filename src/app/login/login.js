@@ -18,6 +18,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.baseErrors',
   'Morsel.common.connectFacebook',
   'Morsel.common.connectTwitter',
+  'Morsel.common.facebookApi',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',

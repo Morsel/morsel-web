@@ -1,4 +1,4 @@
-<div class="container container-shadow">
+<div class="container container-shadow container-margin-bottom">
   <div class="row">
     <div class="col-sm-3 account-menu">
       <h2>Your Account</h2>
@@ -6,10 +6,19 @@
         <li ui-route="/account/edit-profile" ng-class="{active:$uiRoute}">
           <a href="/account/edit-profile">Edit Profile</a>
         </li>
+        <li ui-route="/account/cuisines-specialties" ng-class="{active:$uiRoute}" ng-show="isChef">
+          <a href="/account/cuisines-specialties">Cuisines &amp; Specialties</a>
+        </li>
+        <li ui-route="/account/social-accounts" ng-class="{active:$uiRoute}">
+          <a href="/account/social-accounts">Social Accounts</a>
+        </li>
+        <li ui-route="/account/account-settings" ng-class="{active:$uiRoute}">
+          <a href="/account/account-settings">Account Settings</a>
+        </li>
       </ul>
     </div>
     <div class="col-sm-9 account-main">
-      <div ui-view="account-body"></div>
+      <div ui-view="account-body" class="account-body"></div>
     </div>
   </div>
 </div>

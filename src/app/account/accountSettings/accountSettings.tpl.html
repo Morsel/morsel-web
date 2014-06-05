@@ -1,0 +1,20 @@
+<div>
+  <h1>Account Settings</h1>
+  <div ng-show="alertMessage" class="alert alert-{{alertType}}">
+    <p ng-bind="alertMessage"></p>
+  </div>
+  <form name="accountSettingsForm" method="post" ng-submit="updateAccountSettings()" class="padded-form" novalidate>
+    <div mrsl-base-errors mrsl-val-form="accountSettingsForm"></div>
+
+    <input mrsl-validated-element mrsl-val-form="accountSettingsForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="accountSettingsModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="false" />
+
+    <input mrsl-validated-element mrsl-val-form="accountSettingsForm" mrsl-val-en-name="New Password" mrsl-val-type="password" mrsl-val-name="password" mrsl-val-form-model="accountSettingsModel" mrsl-val-required="false" />
+
+    <input mrsl-validated-element mrsl-val-form="accountSettingsForm" mrsl-val-en-name="Confirm New Password" mrsl-val-type="password" mrsl-val-name="verification" mrsl-val-form-model="accountSettingsModel" mrsl-val-custom="customMatchVer" mrsl-val-required="false" />
+
+    <hr/>
+    <input mrsl-validated-element mrsl-val-form="accountSettingsForm" mrsl-val-en-name="Current Password" mrsl-val-type="password" mrsl-val-name="current_password" mrsl-val-form-model="accountSettingsModel" mrsl-val-required="true" mrsl-val-help-text="For your security, your current password is required to update any sensitive account information" />
+
+    <button mrsl-submit-btn mrsl-submit-btn-form="accountSettingsForm" mrsl-submit-btn-copy="Update Account Settings"></button>
+  </form>
+</div>

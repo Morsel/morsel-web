@@ -163,6 +163,9 @@ module.exports = {
         'src/common/forms/validatedElement.js',
         'src/common/images/photoHelpers.js',
         'src/common/images/upload.js',
+        'src/common/social/addFacebook.js',
+        'src/common/social/addTwitter.js',
+        'src/common/social/facebookApi.js',
         'src/common/user/userImage.js'
       ],
       tpl: [
@@ -174,6 +177,8 @@ module.exports = {
         'src/common/forms/validatedRadio.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/upload.tpl.html',
+        'src/common/social/addFacebook.tpl.html',
+        'src/common/social/addTwitter.tpl.html',
         'src/common/user/duplicateEmailOverlay.tpl.html',
         'src/common/util/404.tpl.html'
       ]
@@ -224,6 +229,7 @@ module.exports = {
         'src/common/images/upload.js',
         'src/common/social/connectFacebook.js',
         'src/common/social/connectTwitter.js',
+        'src/common/social/facebookApi.js',
         'src/common/user/userImage.js'
       ],
       tpl: [
