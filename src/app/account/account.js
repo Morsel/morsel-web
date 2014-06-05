@@ -14,6 +14,7 @@ angular.module( 'Morsel.account', [
   'templates-account',
   //common
   'Morsel.common.addFacebook',
+  'Morsel.common.addTwitter',
   'Morsel.common.afterLogin',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',

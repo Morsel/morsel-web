@@ -1,4 +1,5 @@
 var util = require('./../../util');
+var sys = require('util');
 
 //twitter auth 
 function twitterConsumer() {
@@ -42,6 +43,11 @@ module.exports.getTwitterOAuthRequestToken = function(req, res) {
       //remember where the user was headed
       if(req.query.next) {
         req.session.loginNext = req.query.next;
+      }
+
+      //did user come from adding a social account?
+      if(req.query.social) {
+        req.session.social = true;
       }
       req.session.oauthRequestToken = oauthToken;
       req.session.oauthRequestTokenSecret = oauthTokenSecret;
@@ -92,7 +98,13 @@ module.exports.getTwitterOAuthAccessToken = function(req, res) {
             tData.loginNext = req.session.loginNext;
           }
 
-          renderLoginPage(res, tData);
+          //check if we're trying to add a social account
+          if(req.session.social) {
+            req.session.tData = tData;
+            res.redirect(301, '/account/social-accounts');
+          } else {
+            renderLoginPage(res, tData);
+          }
         }
       });
     }
