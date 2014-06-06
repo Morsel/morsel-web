@@ -6,10 +6,7 @@ angular.module( 'Morsel.public.search.people', [])
     abstract: true,
     url: '/people',
     controller: 'SearchPeopleCtrl',
-    template: '<div ui-view="search-results"></div>',
-    access: {
-      restricted : true
-    }
+    template: '<div ui-view="search-results"></div>'
   });
 })
 

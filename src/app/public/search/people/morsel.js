@@ -3,15 +3,13 @@ angular.module( 'Morsel.public.search.people.morsel', [])
 .config(function config( $stateProvider ) {
   //set up an abstract state for our main views
   $stateProvider.state( 'search.people.morsel', {
-    url: '/morsel',
+    //blank so it'll be the default for /search/people
+    url: '',
     views: {
       "search-results": {
         controller: 'SearchPeopleMorselCtrl',
         templateUrl: 'app/public/search/results.tpl.html'
       }
-    },
-    access: {
-      restricted : true
     }
   });
 })

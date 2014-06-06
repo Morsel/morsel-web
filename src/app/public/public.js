@@ -51,6 +51,7 @@ angular.module( 'Morsel.public', [
   'Morsel.public.search.people',
   'Morsel.public.search.people.morsel',
   'Morsel.public.search.people.facebook',
+  'Morsel.public.search.people.twitter',
   'Morsel.public.profile',//profile comes before morselDetail so /users/:id doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.morselDetail'
 ])

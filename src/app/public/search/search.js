@@ -14,9 +14,6 @@ angular.module( 'Morsel.public.search', [])
     data: {
       pageTitle: 'Search'
     },
-    access: {
-      restricted : true
-    },
     resolve: {
       //make sure we resolve a user before displaying
       searchUser:  function(Auth){
@@ -26,16 +23,15 @@ angular.module( 'Morsel.public.search', [])
   });
 })
 
-.controller( 'SearchCtrl', function SearchCtrl ($scope, searchUser){
+.controller( 'SearchCtrl', function SearchCtrl ($scope, searchUser, Auth){
   //our model for search
   $scope.search = {
     query: '',
-    customSearch: search,
+    //placeholder for children to overwrite
+    customSearch: angular.noop,
     //time to debounce keystrokes
     waitTime: 300
   };
 
-  function search() {
-    //do nothing
-  }
+  $scope.isLoggedIn = Auth.isLoggedIn();
 });
