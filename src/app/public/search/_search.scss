@@ -1,5 +1,6 @@
 .search-page {
   .search-menu {
+    margin-top: 60px;
     list-style: none;
 
     li {
@@ -10,5 +11,14 @@
       text-align: left;
       display: block;
     }
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .empty-state {
+    padding-top: 60px;
+    padding-bottom: 60px;
   }
 }

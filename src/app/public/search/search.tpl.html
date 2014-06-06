@@ -1,4 +1,4 @@
-<div class="container container-shadow container-margin-bottom search-page">
+<div class="container container-shadow container-margin-bottom morsel-bg search-page">
   <div class="row">
     <div class="col-sm-3">
       <ul class="search-menu">
@@ -15,7 +15,7 @@
     </div>
     <div class="col-sm-9 search-main">
       <h2>Find people on Morsel</h2>
-      <input type="text" placeholder="Search for people on Morsel" class="form-control" />
+      <input type="text" placeholder="Search for people on Morsel" class="form-control" ng-model="search.query" ng-change="search.customSearch()" />
       <div ui-view></div>
     </div>
   </div>

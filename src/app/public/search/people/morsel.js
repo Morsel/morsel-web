@@ -16,6 +16,25 @@ angular.module( 'Morsel.public.search.people.morsel', [])
   });
 })
 
-.controller( 'SearchPeopleMorselCtrl', function SearchPeopleMorselCtrl ($scope, searchUser){
-  $scope.type = 'morsel';
+.controller( 'SearchPeopleMorselCtrl', function SearchPeopleMorselCtrl ($scope, searchUser, ApiUsers){
+  //override the parent scope function
+  $scope.search.customSearch = searchMorselUsers;
+  
+  //our initial state should be empty
+  $scope.searchResultUsers = [];
+
+  function searchMorselUsers() {
+    var userSearchData = {
+          'user[query]': $scope.search.query
+        };
+
+    if($scope.search.query.length >= 3) {
+      //remove current users to show loader
+      $scope.searchResultUsers = null;
+
+      ApiUsers.search(userSearchData).then(function(searchResp) {
+        $scope.searchResultUsers = searchResp.data;
+      });
+    }
+  }
 });

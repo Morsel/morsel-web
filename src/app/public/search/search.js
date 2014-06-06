@@ -11,6 +11,9 @@ angular.module( 'Morsel.public.search', [])
         templateUrl: 'app/public/search/search.tpl.html'
       }
     },
+    data: {
+      pageTitle: 'Search'
+    },
     access: {
       restricted : true
     },
@@ -24,4 +27,13 @@ angular.module( 'Morsel.public.search', [])
 })
 
 .controller( 'SearchCtrl', function SearchCtrl ($scope, searchUser){
+  //our model for search
+  $scope.search = {
+    query: '',
+    customSearch: search
+  };
+
+  function search() {
+    //do nothing
+  }
 });
