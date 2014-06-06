@@ -230,11 +230,17 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       loginApp.getTwitterOAuthAccessToken(req, res);
     });
 
+    //PUBLIC
+
     //feed
     app.get('/feed', function(req, res){
       var metadata = utilApp.getMetadata('feed');
 
       publicApp.renderPublicPage(res, metadata);
+    });
+
+    app.get('/search*', function(req, res){
+      publicApp.renderPublicPage(res);
     });
 
     //convenience route

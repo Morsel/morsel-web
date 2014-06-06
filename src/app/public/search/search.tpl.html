@@ -1,0 +1,22 @@
+<div class="container container-shadow container-margin-bottom search-page">
+  <div class="row">
+    <div class="col-sm-3">
+      <ul class="search-menu">
+        <li ui-route="/search/people/morsel" ng-class="{active:$uiRoute}">
+          <a href="/search/people/morsel" class="btn btn-social btn-morsel"><i class="morsel-icon"></i> Morsel</a>
+        </li>
+        <li ui-route="/search/people/facebook" ng-class="{active:$uiRoute}">
+          <a href="/search/people/facebook" class="btn btn-social btn-facebook"><i class="common-share-facebook"></i> Facebook</a>
+        </li>
+        <li ui-route="/search/people/twitter" ng-class="{active:$uiRoute}">
+          <a href="/search/people/twitter" class="btn btn-social btn-twitter"><i class="common-share-twitter"></i> Twitter</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-9 search-main">
+      <h2>Find people on Morsel</h2>
+      <input type="text" placeholder="Search for people on Morsel" class="form-control" />
+      <div ui-view></div>
+    </div>
+  </div>
+</div>

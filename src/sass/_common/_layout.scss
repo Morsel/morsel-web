@@ -11,6 +11,12 @@
   background-color: $morsel-background;
 }
 
+.morsel-icon {
+  @include replace-text-with-dimensions('logos/morsel-m.png');
+  background-size: image-width('logos/morsel-m.png') image-height('logos/morsel-m.png');
+  display: inline-block;
+}
+
 //side nav and header
 .side-nav {
   position: absolute;
@@ -195,8 +201,7 @@
     @include opacity(1);
 
     a {
-      @include replace-text-with-dimensions('logos/morsel-m.png');
-      background-size: image-width('logos/morsel-m.png') image-height('logos/morsel-m.png');
+      @extend .morsel-icon;
       display: block;
     }
 
