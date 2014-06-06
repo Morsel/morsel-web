@@ -30,7 +30,9 @@ angular.module( 'Morsel.public.search', [])
   //our model for search
   $scope.search = {
     query: '',
-    customSearch: search
+    customSearch: search,
+    //time to debounce keystrokes
+    waitTime: 300
   };
 
   function search() {
