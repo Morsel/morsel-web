@@ -42,6 +42,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.submitBtn',
   'Morsel.common.textLimit',
   'Morsel.common.userImage',
+  'Morsel.common.userList',
   'Morsel.common.validatedElement',
   //app
   'Morsel.public.feed',

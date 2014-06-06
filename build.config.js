@@ -94,7 +94,8 @@ module.exports = {
         'src/common/text/textLimit.js',
         'src/common/user/cuisineUsers.js',
         'src/common/user/specialtyUsers.js',
-        'src/common/user/userImage.js'
+        'src/common/user/userImage.js',
+        'src/common/user/userList.js'
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
@@ -113,6 +114,7 @@ module.exports = {
         'src/common/user/activityFeed.tpl.html',
         'src/common/user/userActivityOverlay.tpl.html',
         'src/common/user/userList.tpl.html',
+        'src/common/user/userListOverlay.tpl.html',
         'src/common/util/404.tpl.html'
       ]
     },
