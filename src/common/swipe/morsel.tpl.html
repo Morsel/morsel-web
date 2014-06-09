@@ -21,7 +21,6 @@
                   <a href="/{{morsel.creator.username}}">{{morsel.creator.first_name + ' ' + morsel.creator.last_name}}</a>
                 </h5>
               </div>
-              <div mrsl-item-thumbnails mrsl-index="currentIndicatorIndex" mrsl-thumbs-of-morsel="morsel"></div>
               <div class="cover-actions">
                 <span am-time-ago="morsel.created_at" class="time-ago"></span>
                 <a ng-click="currentIndicatorIndex = morsel.items.length+1"><i class="common-share"></i></a>

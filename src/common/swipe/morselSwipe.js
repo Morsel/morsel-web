@@ -6,59 +6,6 @@ angular.module('Morsel.common.morselSwipe', [
   'ngTouch'
 ])
 
-.directive('mrslItemThumbnails', function(Mixpanel, MORSELPLACEHOLDER) {
-  return {
-    restrict: 'A',
-    replace: true,
-    scope: {
-      index: '=mrslIndex',
-      morsel: '=mrslThumbsOfMorsel'
-    },
-    link: function(scope, element, attrs) {
-      var morselId;
-
-      scope.nonSwipeable = true;
-      scope.range = function(n) {
-        return new Array(n);
-      };
-
-      scope.$watch('mrslMorsel', function(newValue, oldValue) {
-        if(newValue) {
-          morselId = newValue.id;
-        }
-      });
-
-      scope.sendMixpanel = function(itemId) {
-        Mixpanel.send('Tapped Morsel Item Thumbnail', {
-          morsel_id : morselId,
-          morsel_item_id : itemId
-        });
-      };
-
-      scope.getItemThumbnailArray = function(item) {
-        //if there's no item yet, don't show anything
-        if(item) {
-          if(item.photos) {
-            return [
-              ['default', item.photos._100x100],
-              ['screen-xs', item.photos._240x240]
-            ];
-          } else {
-            //no photos, return default placeholder
-            return [
-              ['default', MORSELPLACEHOLDER]
-            ];
-          }
-        } else {
-          //return blank
-          return [];
-        }
-      };
-    },
-    templateUrl: 'common/swipe/itemThumbnails.tpl.html'
-  };
-})
-
 .directive('mrslItemIndicators', function() {
   return {
     restrict: 'A',

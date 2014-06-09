@@ -54,35 +54,6 @@ $detail-right-col-width: 42%;
       height: 40%;
     }
 
-    .thumbnails-wrap {
-      margin: 10px 0;
-      padding: 0 10px;
-
-      ul {
-        margin: 0;
-        text-align: center;
-      }
-
-      li {
-        display: inline-block;
-        width: 21%;
-        margin-right: 4%;
-        position: relative;
-
-        img {
-          width: 100%;
-        }
-
-        &:last-child {
-          margin: 0;
-        }
-
-        &:hover {
-          cursor: pointer;
-        }
-      }
-    }
-
     .cover-browse {
       display: none;
     }
@@ -478,24 +449,6 @@ $detail-right-col-width: 42%;
       .cover-info {
         width: $detail-right-col-width;
         float: right;
-      }
-
-      .thumbnails-wrap {
-        margin: 0;
-
-        li {
-          width: 48%;
-          float: left;
-          margin-bottom: 3%;
-
-          &:nth-child(odd) {
-            margin-right: 4%;
-          }
-
-          &:nth-child(even) {
-            margin-right: 0;
-          }
-        }
       }
 
       .cover-browse {
