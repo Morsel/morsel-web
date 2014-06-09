@@ -241,6 +241,12 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
 
     app.get('/search*', function(req, res){
       publicApp.renderPublicPage(res);
+
+    //invite
+    app.get('/invite', function(req, res){
+      var metadata = utilApp.getMetadata('invite');
+
+      publicApp.renderPublicPage(res, metadata);
     });
 
     //convenience route
