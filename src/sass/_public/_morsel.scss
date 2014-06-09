@@ -5,6 +5,7 @@ $morsel-header-lg-line-height: 40px;
 $morsel-footer-height: $morsel-footer-vert-padding*2 + $morsel-header-lg-line-height;
 $detail-left-col-width: 55%;
 $detail-right-col-width: 42%;
+$cover-block-height: 140px;
 
 .morsel {
   position: relative;
@@ -50,27 +51,73 @@ $detail-right-col-width: 42%;
   }
 
   .cover-page {
-    .cover-photo-wrap, .cover-title-wrap {
-      height: 40%;
-    }
-
-    .cover-browse {
-      display: none;
+    div[class*="col-"] {
+      padding-left: 0;
+      padding-right: 0;
     }
 
     .cover-actions {
-      padding: 10px 20px;
-      overflow:hidden;
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      z-index: 2;
+    }
 
-      a {
-        float: right;
-        display: inline-block;
-        vertical-align: middle;
-      }
+    .cover-info {
+      padding: 25px 5px 0;
+      text-align: center;
+      height: $cover-block-height;
 
       .time-ago {
-        float: left;
-        font-size: 14px;
+        position: absolute;
+        left: 5px;
+        top: 3px;
+      }
+
+      h5 {
+        margin-top: 10px;
+        font-size: 15px;
+        text-transform: none;
+
+        a {
+          color: $morsel-primary;
+        }
+      }
+    }
+
+    .cover-more {
+      position: relative;
+      height: $cover-block-height;
+      overflow: hidden;
+
+      .cover-more-btn {
+        display: block;
+        @include replace-text('icons/more.png');
+        background-position: center center;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+
+        &:hover + .cover-more-bg {
+          @include filter(grayscale(70%) blur(0px));
+          @include opacity(.8);
+        }
+      }
+
+      .cover-more-bg {
+        background-position: center center;
+        background-size: cover;
+        @include filter(grayscale(100%) blur(2px));
+        @include opacity(.5);
+        @include transition(all .1s ease-out);
+        width: 110%;
+        height: 110%;
+        position: absolute;
+        top: -3px;
+        left: -3px;
       }
     }
   }
@@ -227,8 +274,8 @@ $detail-right-col-width: 42%;
 
   .item-indicators {
     position: absolute;
-    right: 10px;
-    bottom: 20px;
+    right: 8px;
+    top: $mini-header-height + 15px;
     z-index: 8;
   
     span {
@@ -251,47 +298,10 @@ $detail-right-col-width: 42%;
     }
   }
 
-  .morsel-footer {
-    display: block;
-    position: fixed;
-    z-index: 7;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: $morsel-footer-vert-padding $morsel-footer-horz-padding;
-    @include translate3d(0,0,0);
-    @include transition(all .2s ease-out);
-
-    h2 {
-      margin: 0;
-
-      a {
-        font-size: 20px;
-        color: $morsel-dark;
-        line-height: $morsel-header-lg-line-height;
-      }
-    }
-
-    h5 {
-      font-size: 14px;
-      color: $morsel-dark;
-      margin: 5px 0 0;
-    }
-  }
-
   .in-morsel {
     .current-morsel {
       .morsel-title {
         @include translate3d(0,0,0);
-      }
-    }
-
-    .morsel-footer {
-      h2 {
-        a {
-          color: white;
-          @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-        }
       }
     }
   }
@@ -317,13 +327,16 @@ $detail-right-col-width: 42%;
 
 @media (max-width: $screen-md) {
   .morsel {
-    .on-share {
-      .morsel-footer {
-        @include translate3d(0,$mini-header-height,0);
+    .cover-page {
+      .cover-info {
+        .profile-pic-link {
+          width: $profile-pic-xs;
+          height: $profile-pic-xs;
+        }
       }
     }
 
-    .cover-page, .item {
+    .item {
       .morsel-container {
         .user-info {
           display: none;
@@ -368,6 +381,27 @@ $detail-right-col-width: 42%;
           a {
             color: $morsel-dark;
           }
+        }
+      }
+    }
+
+    .cover-page {
+      .cover-actions {
+        right: -40px;
+        top: 5px;
+        bottom: auto;
+      }
+
+      .cover-info {
+        padding-top: 50px;
+
+        h5 {
+          font-size: 22px;
+        }
+
+        .time-ago {
+          top: auto;
+          bottom: 3px;
         }
       }
     }
@@ -435,51 +469,7 @@ $detail-right-col-width: 42%;
         }
       }
     }
-
-    .morsel-footer {
-      display: none;
-    }
     
-    .cover-page {
-      .cover-photo-wrap, .cover-title-wrap {
-        height: 98%;
-        width: $detail-left-col-width;
-      }
-
-      .cover-info {
-        width: $detail-right-col-width;
-        float: right;
-      }
-
-      .cover-browse {
-        display: none;
-        text-align: center;
-        width: 100%;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-
-        span {
-          text-transform: uppercase;
-          font-size: 12px;
-          display: block;
-          font-weight: bold;
-
-          i {
-            display: inline-block
-          }
-        }
-      }
-
-      .cover-photo-wrap {
-        float: left;
-      }
-
-      .cover-actions {
-        width: 100%;
-      }
-    }
-
     .extra-page {
       background-image: url(images/bg/morsel-detail-noise.png);
 

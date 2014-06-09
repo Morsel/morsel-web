@@ -25,7 +25,7 @@ angular.module('Morsel.common.morselSwipe', [
   };
 })
 
-.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER) {
+.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -41,7 +41,11 @@ angular.module('Morsel.common.morselSwipe', [
       //min intensity for scrolls
       scrollMinIntensity = 1,
       //number of additional "pages". 1. cover page 2. share page
-      extraPages = 2;
+      extraPages = 2,
+      //height of the cover page blocks on the bottome;
+      coverPageBlockHeight = 140,
+      //height of our header
+      headerHeight = 60;
 
   return {
     restrict: 'A',
@@ -343,6 +347,14 @@ angular.module('Morsel.common.morselSwipe', [
       function updateItemHeight() {
         itemHeight = window.innerHeight;
         scope.feedHeight = itemHeight+'px';
+
+        if (matchMedia(presetMediaQueries['screen-md']).matches) {
+          scope.coverPhotoHeight = (itemHeight - headerHeight) +'px';
+          scope.coverBlockMinHeight = (itemHeight - headerHeight)/2 +'px';
+        } else {
+          scope.coverPhotoHeight = (itemHeight - coverPageBlockHeight - headerHeight) +'px';
+          scope.coverBlockMinHeight = '0';
+        }
       }
 
       //scrolling
