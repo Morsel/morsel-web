@@ -57,6 +57,18 @@ angular.module( 'Morsel.common.apiItems', [] )
     return deferred.promise;
   };
 
+  Items.deleteComment = function(itemId, commentId) {
+    var deferred = $q.defer();
+
+    Restangular.one('items', itemId).one('comments', commentId).remove().then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   Items.getLikers = function(itemId) {
     var deferred = $q.defer();
 
