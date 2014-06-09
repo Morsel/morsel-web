@@ -8,12 +8,14 @@ angular.module( 'Morsel.common.comments', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var isLoggedIn,
+      var currentUser,
+          isLoggedIn,
           afterLoginCallback,
           //whether we've hit the server to get comment data yet
           hasFetchedComments = false;
 
       Auth.getCurrentUserPromise().then(function(userData){
+        currentUser = userData;
         isLoggedIn = Auth.isLoggedIn();
 
         //check for an afterlogin callback on load
@@ -75,6 +77,18 @@ angular.module( 'Morsel.common.comments', [] )
         return deferred.promise;
       }
 
+      function deleteComment(commentId) {
+        ApiItems.deleteComment(scope.item.id, commentId).then(function(commentResp){
+          //remove the comment from our list
+          scope.item.comments = _.reject(scope.item.comments, function(c){
+            return c.id === commentId;
+          });
+
+          //update comment number
+          scope.item.comment_count = scope.item.comments.length;
+        });
+      }
+
       var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, AfterLogin, item) {
         $scope.item = item;
 
@@ -84,7 +98,10 @@ angular.module( 'Morsel.common.comments', [] )
           description: ''
         };
 
+        $scope.currentUser = currentUser;
+
         $scope.cancel = function () {
+          $scope.$broadcast('commentupdate', 5);
           $modalInstance.dismiss('cancel');
         };
 
@@ -108,6 +125,14 @@ angular.module( 'Morsel.common.comments', [] )
             });
             
             $window.location.href = '/join';
+          }
+        };
+
+        $scope.deleteComment = function(commentId) {
+          var confirmed = confirm('Are you sure you want to delete this comment?');
+
+          if(confirmed) {
+            deleteComment(commentId);
           }
         };
 
