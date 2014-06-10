@@ -187,6 +187,14 @@ angular.module('Morsel.common.morselSwipe', [
         winEl.unbind('resize', onOrientationChange);
       });
 
+      //when we switch morsels in a feed, we need to recheck where we are in the newly current morsel
+      scope.$on('feed.switchedMorsels', function(e, morselId){
+        //make sure we're currently on this morsel
+        if(morselId === scope.morsel.id) {
+          updateFeedState();
+        }
+      });
+
       //our swiping functions
       function swipeStart(coords, event) {
         var elementScope = angular.element(event.target).scope(),
@@ -412,10 +420,7 @@ angular.module('Morsel.common.morselSwipe', [
         //console.log('350 - currentItemIndex set with: '+i);
         scope.currentItemIndex = capIndex(i);
 
-        scope.$emit('feed.updateState', {
-          inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
-          onShare: scope.currentItemIndex === scope.itemCount - 1
-        });
+        updateFeedState();
 
         // if outside of angular scope, trigger angular digest cycle
         // use local digest only for perfs if no index bound
@@ -423,6 +428,13 @@ angular.module('Morsel.common.morselSwipe', [
           scope.$digest();
         }
         scroll();
+      }
+
+      function updateFeedState() {
+        scope.$emit('feed.updateState', {
+          inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
+          onShare: scope.currentItemIndex === scope.itemCount - 1
+        });
       }
 
       function documentMouseUpEvent(event) {

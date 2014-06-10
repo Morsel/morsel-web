@@ -55,7 +55,8 @@ angular.module('Morsel.common.feedSwipe', [
           transformProperty = 'transform',
           swipeXMoved = false,
           winEl = angular.element($window),
-          lastScrollTimestamp;
+          lastScrollTimestamp,
+          feedItems;
 
       updatefeedWidth();
 
@@ -71,9 +72,11 @@ angular.module('Morsel.common.feedSwipe', [
       scope.$watchCollection('feedItems', function(newValue, oldValue) {
         scope.morselsCount = 0;
         if (angular.isArray(newValue)) {
-          scope.morselsCount = newValue.length;
+          feedItems = newValue;
+          scope.morselsCount = feedItems.length;
         } else if (angular.isObject(newValue)) {
-          scope.morselsCount = Object.keys(newValue).length;
+          feedItems = Object.keys(newValue);
+          scope.morselsCount = feedItems.length;
         }
         
         goToSlide(scope.currentMorselIndex);
@@ -252,6 +255,8 @@ angular.module('Morsel.common.feedSwipe', [
       }
 
       function goToSlide(i, animate) {
+        var thisFeedItem;
+
         if (isNaN(i)) {
           i = scope.currentMorselIndex;
         }
@@ -266,6 +271,16 @@ angular.module('Morsel.common.feedSwipe', [
         updateBufferIndex();
         //emit where we are so we can go fetch more data
         scope.$emit('feed.atMorsel', scope.currentMorselIndex);
+
+        if(feedItems) {
+          thisFeedItem = feedItems[scope.currentMorselIndex];
+
+          if(thisFeedItem) {
+            //broadcast that we've switched so we can update our feedstate
+            scope.$broadcast('feed.switchedMorsels', thisFeedItem.subject.id);
+          }
+        }
+        
         
         // if outside of angular scope, trigger angular digest cycle
         // use local digest only for perfs if no index bound

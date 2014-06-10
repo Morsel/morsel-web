@@ -16,7 +16,7 @@ angular.module('Morsel.common.morsel', [])
 
       scope.$on('feed.updateState', function(e, feedState){
         _.extend(scope.feedState, feedState);
-        scope.$digest();
+        _.defer(function(){scope.$apply();});
       });
     },
     templateUrl: 'common/swipe/morsel.tpl.html'

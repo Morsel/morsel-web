@@ -54,54 +54,74 @@ $feed-notification-width: 90px;
       left: -$feed-notification-width;
     }
   }
+
+  .feed-control {
+    display: none;
+    width: $arrow-height;
+    height: $arrow-height;
+    position: absolute;
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    @include transition(background-color .1s ease-out, box-shadow .1s ease-out);
+    @include box-shadow(0px 0px 0px 0px rgba(0, 0, 0, 0));
+
+    background-image: url(data:image/png;base64,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);
+
+    &:hover {
+      cursor: pointer;
+      background-color: $morsel-primary;
+      @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
+    }
+  }
+
+  .feed-control-prev {
+    background-position: left top;
+    left: 0;
+    @include border-top-right-radius(5px);
+    @include border-bottom-right-radius(5px);
+
+    &:hover {
+      background-position: left bottom;
+    }
+  }
+
+  .feed-control-next {
+    background-position: right top;
+    right: 0;
+    @include border-top-left-radius(5px);
+    @include border-bottom-left-radius(5px);
+
+    &:hover {
+      background-position: right bottom;
+    }
+  }
+
+  &.on-share {
+    .feed-control {
+      display: block;
+      bottom: 20px;
+    }
+  }
 }
 
 @media (min-width: $screen-md-min) {
   .feed {
+    .feed-control {
+      display: block;
+      top: 40%;
+      bottom: auto;
+    }
+
+    &.on-share {
+      .feed-control {
+        top: 40%;
+        bottom: auto;
+      }
+    }
+
     &.feed-data-loading {
       min-height: 450px;
-    }
-
-    .feed-control {
-      width: $arrow-height;
-      height: $arrow-height;
-      position: absolute;
-      top: 40%;
-      z-index: 1;
-      background-repeat: no-repeat;
-      background-color: transparent;
-      @include transition(background-color .1s ease-out, box-shadow .1s ease-out);
-      @include box-shadow(0px 0px 0px 0px rgba(0, 0, 0, 0));
-
-      background-image: url(data:image/png;base64,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);
-
-      &:hover {
-        cursor: pointer;
-        background-color: $morsel-primary;
-        @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
-      }
-    }
-
-    .feed-control-prev {
-      background-position: left top;
-      left: 0;
-      @include border-top-right-radius(5px);
-      @include border-bottom-right-radius(5px);
-
-      &:hover {
-        background-position: left bottom;
-      }
-    }
-
-    .feed-control-next {
-      background-position: right top;
-      right: 0;
-      @include border-top-left-radius(5px);
-      @include border-bottom-left-radius(5px);
-
-      &:hover {
-        background-position: right bottom;
-      }
     }
   }
 }
