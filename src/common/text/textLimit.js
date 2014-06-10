@@ -31,6 +31,7 @@ angular.module( 'Morsel.common.textLimit', [] )
 
       scope.textContent = limitedContent;
       scope.expanded = false;
+      scope.nonSwipeable = true;
 
       scope.collapse = function() {
         scope.textContent = limitedContent;

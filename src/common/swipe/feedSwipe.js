@@ -66,17 +66,6 @@ angular.module('Morsel.common.feedSwipe', [
       scope.feedBufferIndex = 0;
       scope.feedBufferSize = 3;
 
-      //scope vars for individual morsels
-      scope.feedState = {
-        inMorsel : false,
-        onShare : false
-      };
-
-      scope.updatefeedState = function(obj) {
-        _.extend(scope.feedState, obj);
-        scope.$digest();
-      };
-
       //set up our scope watches
       //watch our feed items
       scope.$watchCollection('feedItems', function(newValue, oldValue) {

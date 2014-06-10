@@ -1,11 +1,10 @@
 $morsel-header-padding: 10px;
-$morsel-footer-vert-padding: 5px;
-$morsel-footer-horz-padding: 10px;
 $morsel-header-lg-line-height: 40px;
-$morsel-footer-height: $morsel-footer-vert-padding*2 + $morsel-header-lg-line-height;
 $detail-left-col-width: 55%;
 $detail-right-col-width: 42%;
 $cover-block-height: 140px;
+$item-actions-width: 90px;
+$item-info-bottom-height: 55px;
 
 .morsel {
   position: relative;
@@ -39,8 +38,7 @@ $cover-block-height: 140px;
       width: 50%;
       font-size: 14px;
       margin: 0 auto;
-      color: white;
-      @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+      color: $morsel-dark;
     }
   }
 
@@ -48,6 +46,7 @@ $cover-block-height: 140px;
     height: 100%;
     position: relative;
     margin: 0 auto;
+    overflow: hidden;
   }
 
   .cover-page {
@@ -74,14 +73,8 @@ $cover-block-height: 140px;
         top: 3px;
       }
 
-      h5 {
-        margin-top: 10px;
-        font-size: 15px;
-        text-transform: none;
-
-        a {
-          color: $morsel-primary;
-        }
+      .profile-pic-link {
+        float: none;
       }
     }
 
@@ -118,6 +111,19 @@ $cover-block-height: 140px;
         position: absolute;
         top: -3px;
         left: -3px;
+      }
+    }
+  }
+
+  .user-info {
+    h5 {
+      margin-top: 10px;
+      font-size: 15px;
+      text-transform: none;
+      color: $morsel-primary;
+
+      a {
+        color: $morsel-primary;
       }
     }
   }
@@ -196,10 +202,13 @@ $cover-block-height: 140px;
       display: block;
       position: relative;
 
+      .morsel-container {
+        background-color: $morsel-light-off;
+      }
+
       .item-photo-wrap {
         padding-top: $mini-header-height;
         text-align: center;
-        height: 100%;
       }
 
       .item-img {
@@ -207,10 +216,31 @@ $cover-block-height: 140px;
       }
 
       .item-info {
-        position: absolute;
-        bottom: 0;
-        padding: 0 30px ($morsel-footer-height + 10px) 15px;
         width: 100%;
+        height: 100%;
+        background-color: $morsel-light-off;
+
+        .item-info-bottom {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          height: $item-info-bottom-height;
+          background-color: $morsel-background;
+        }
+
+        .user-info {
+          width: 100%;
+          padding-right: $item-actions-width + 5px;
+
+          a {
+            margin-top: 5px;
+          }
+
+          h5 {
+            margin: 0;
+            line-height: 50px;
+          }
+        }
       }
       
       .item-description {
@@ -221,38 +251,41 @@ $cover-block-height: 140px;
         @include transition(opacity .2s ease-out);
         @include opacity(1);
         clear: both;
+        padding: 10px 10px $item-info-bottom-height;
 
         p {
           width: 100%;
-          color: white;
           z-index: 3;
           margin: 0;
         }
       }
 
       .item-actions {
-        padding: 10px 0;
+        padding: 0;
         z-index: 10;
-        margin: 0;
-        float: right;
+        margin: 0 8px 0 0;
 
         li {
-          display: inline-block;
+          display: block;
+          float: left;
+          padding-left: 8px;
+          border-left: 1px solid $morsel-medium;
+          height: $item-info-bottom-height;
+          padding-top: 3px;
 
           & + li {
-            margin-left: 12px;
+            margin-left: 8px;
           }
         }
 
         a {
-          display: inline-block;
-          color: white;
-          font-weight: 300;
+          line-height: 1;
+          font-weight: bold;
+        }
 
-          i {
-            vertical-align: middle;
-            margin-right: 8px;
-          }
+        div {
+          display: inline-block;
+          text-align: center;
         }
 
         i:hover {
@@ -337,22 +370,22 @@ $cover-block-height: 140px;
     }
 
     .item {
-      .morsel-container {
-        .user-info {
+      .item-actions {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+
+        a {
+          display: block;
+
+          span {
+            display: none;
+          }
+        }
+
+        li:last-child {
           display: none;
         }
-      }
-    }
-
-    .item-description {
-      p {
-        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-      }
-    }
-
-    .item-actions {
-      a {
-        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
       }
     }
   }
@@ -363,26 +396,12 @@ $cover-block-height: 140px;
     .morsel-title {
       h1 {
         font-size: 22px;
+        color: white;
       }
     }
 
     .morsel-container {
       width: $screen-md-min;
-
-      .user-info {
-        margin-bottom: 10px;
-
-        h5 {
-          font-size: 20px;
-          line-height: $morsel-header-lg-line-height;
-          margin: 0;
-          color: $morsel-dark;
-
-          a {
-            color: $morsel-dark;
-          }
-        }
-      }
     }
 
     .cover-page {
@@ -415,11 +434,14 @@ $cover-block-height: 140px;
         .morsel-container {
           overflow: hidden;
           @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
-          background-color: $morsel-light-off;
           height: auto;
           @include border-radius(3px);
 
           .user-info {
+            h5 {
+              font-size: 20px;
+            }
+
             span {
               margin-left: 0;
             }
@@ -428,6 +450,7 @@ $cover-block-height: 140px;
 
         .item-description {
           margin-bottom: 25px;
+          padding-bottom: 0;
 
           p {
             color: $morsel-dark;
@@ -451,14 +474,33 @@ $cover-block-height: 140px;
           position: relative;
           padding-top: 20px;
 
+          .item-info-bottom {
+            position: relative;
+            background-color: transparent;
+          }
+
           .scrollable-info {
             overflow-y: auto;
           }
         }
 
         .item-actions {
-          float: none;
+          margin-top: 10px;
 
+          li {
+            border: none;
+            height: auto;
+          }
+
+          div {
+            text-align: center;
+          }
+
+          i {
+            vertical-align: middle;
+            margin-right: 8px;
+          }
+          
           a {
             color: $morsel-dark;
           }

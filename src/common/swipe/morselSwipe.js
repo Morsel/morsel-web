@@ -25,7 +25,7 @@ angular.module('Morsel.common.morselSwipe', [
   };
 })
 
-.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries) {
+.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries, $rootScope) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -73,6 +73,7 @@ angular.module('Morsel.common.morselSwipe', [
       scope.currentItemIndex = 0; //track which item we're on
       scope.currentIndicatorIndex = 0; //track which indicator is active
       scope.itemCount = extraPages; //account for cover page + share page
+      scope.layout = {}; //hold all our computed layout measurements
 
       scope.getCoverPhotoArray = function(morsel) {
         var primaryItemPhotos;
@@ -345,15 +346,18 @@ angular.module('Morsel.common.morselSwipe', [
       }
 
       function updateItemHeight() {
+        var windowWidth = window.innerWidth;
         itemHeight = window.innerHeight;
-        scope.feedHeight = itemHeight+'px';
+        scope.layout.feedHeight = itemHeight+'px';
 
         if (matchMedia(presetMediaQueries['screen-md']).matches) {
-          scope.coverPhotoHeight = (itemHeight - headerHeight) +'px';
-          scope.coverBlockMinHeight = (itemHeight - headerHeight)/2 +'px';
+          scope.layout.coverPhotoHeight = (itemHeight - headerHeight) +'px';
+          scope.layout.coverBlockMinHeight = (itemHeight - headerHeight)/2 +'px';
+          scope.layout.itemDescriptionHeight = 'auto';
         } else {
-          scope.coverPhotoHeight = (itemHeight - coverPageBlockHeight - headerHeight) +'px';
-          scope.coverBlockMinHeight = '0';
+          scope.layout.coverPhotoHeight = (itemHeight - coverPageBlockHeight - headerHeight) +'px';
+          scope.layout.coverBlockMinHeight = '0';
+          scope.layout.itemDescriptionHeight = (window.innerHeight - windowWidth - headerHeight) + 'px';
         }
       }
 
@@ -408,12 +412,10 @@ angular.module('Morsel.common.morselSwipe', [
         //console.log('350 - currentItemIndex set with: '+i);
         scope.currentItemIndex = capIndex(i);
 
-        if(scope.updatefeedState) {
-          scope.updatefeedState({
-            inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
-            onShare: scope.currentItemIndex === scope.itemCount - 1
-          });
-        }
+        scope.$emit('feed.updateState', {
+          inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
+          onShare: scope.currentItemIndex === scope.itemCount - 1
+        });
 
         // if outside of angular scope, trigger angular digest cycle
         // use local digest only for perfs if no index bound

@@ -31,17 +31,6 @@ angular.module( 'Morsel.public.morselDetail', [])
   $scope.goHome = function() {
     $window.open($location.protocol() + '://'+ $location.host(), '_self');
   };
-  
-  //scope vars for individual morsel
-  $scope.feedState = {
-    inMorsel : false,
-    onShare : false
-  };
-
-  $scope.updatefeedState = function(obj) {
-    _.extend($scope.feedState, obj);
-    $scope.$digest();
-  };
 
   //check and make sure we pulled an idslug from the URL
   if(morselIdSlug && username) {
