@@ -296,12 +296,6 @@ $item-info-bottom-height: 55px;
       .social-sharing {
         display: none;
       }
-
-      &.full-photo {
-        .item-description, .item-actions {
-          @include opacity(0);
-        }
-      }
     }
   }
 

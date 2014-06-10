@@ -36,7 +36,7 @@
             </div>
           </div>
         </li>
-        <li ng-repeat="item in morsel.items" class="item" ng-class="{'full-photo': fullPhoto}" ng-style="{'height': layout.feedHeight}">
+        <li ng-repeat="item in morsel.items" class="item" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container">
             <div class="item-photo-wrap">
               <img class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
