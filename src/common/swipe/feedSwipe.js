@@ -29,7 +29,7 @@ angular.module('Morsel.common.feedSwipe', [
   };
 }])
 
-.directive('feedSwipe', function($window, $document) {
+.directive('feedSwipe', function($window, $document, Transform) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -52,10 +52,10 @@ angular.module('Morsel.common.feedSwipe', [
           offset = 0,
           feedWidth,
           destination,
-          transformProperty = 'transform',
           swipeXMoved = false,
           winEl = angular.element($window),
-          lastScrollTimestamp;
+          lastScrollTimestamp,
+          feedItems;
 
       updatefeedWidth();
 
@@ -66,25 +66,16 @@ angular.module('Morsel.common.feedSwipe', [
       scope.feedBufferIndex = 0;
       scope.feedBufferSize = 3;
 
-      //scope vars for individual morsels
-      scope.feedState = {
-        inMorsel : false,
-        onShare : false
-      };
-
-      scope.updatefeedState = function(obj) {
-        _.extend(scope.feedState, obj);
-        scope.$digest();
-      };
-
       //set up our scope watches
       //watch our feed items
       scope.$watchCollection('feedItems', function(newValue, oldValue) {
         scope.morselsCount = 0;
         if (angular.isArray(newValue)) {
-          scope.morselsCount = newValue.length;
+          feedItems = newValue;
+          scope.morselsCount = feedItems.length;
         } else if (angular.isObject(newValue)) {
-          scope.morselsCount = Object.keys(newValue).length;
+          feedItems = Object.keys(newValue);
+          scope.morselsCount = feedItems.length;
         }
         
         goToSlide(scope.currentMorselIndex);
@@ -241,7 +232,7 @@ angular.module('Morsel.common.feedSwipe', [
         var move = -Math.round(offset);
 
         move += (scope.feedBufferIndex * feedWidth);
-        iElement.find('ul')[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
+        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate3d(' + move + 'px, 0, 0)';
       }
 
       function autoScroll() {
@@ -263,6 +254,8 @@ angular.module('Morsel.common.feedSwipe', [
       }
 
       function goToSlide(i, animate) {
+        var thisFeedItem;
+
         if (isNaN(i)) {
           i = scope.currentMorselIndex;
         }
@@ -277,6 +270,16 @@ angular.module('Morsel.common.feedSwipe', [
         updateBufferIndex();
         //emit where we are so we can go fetch more data
         scope.$emit('feed.atMorsel', scope.currentMorselIndex);
+
+        if(feedItems) {
+          thisFeedItem = feedItems[scope.currentMorselIndex];
+
+          if(thisFeedItem) {
+            //broadcast that we've switched so we can update our feedstate
+            scope.$broadcast('feed.switchedMorsels', thisFeedItem.subject.id);
+          }
+        }
+        
         
         // if outside of angular scope, trigger angular digest cycle
         // use local digest only for perfs if no index bound
@@ -300,16 +303,6 @@ angular.module('Morsel.common.feedSwipe', [
           goToSlide(scope.currentMorselIndex+1, true);
         }
       };
-
-      // detect supported CSS property
-      ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
-        var e = prefix + 'Transform';
-        if (typeof document.body.style[e] !== 'undefined') {
-          transformProperty = e;
-          return false;
-        }
-        return true;
-      });
 
       function onOrientationChange() {
         goToSlide();

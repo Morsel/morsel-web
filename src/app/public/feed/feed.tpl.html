@@ -1,5 +1,5 @@
-<div class="feed" ng-class="{'reached-oldest': reachedOldest, 'feed-data-loading': initialDataLoading}">
-  <div feed-swipe ng-class="{'in-morsel': feedState.inMorsel}">
+<div class="feed" ng-class="{'reached-oldest': reachedOldest, 'feed-data-loading': initialDataLoading, 'in-morsel': feedState.inMorsel, 'on-share': feedState.onShare}">
+  <div feed-swipe>
     <div feed-controls index="currentControlIndex" count="morselsCount"></div>
     <div class="feed-notification" ng-class="{'no-new-items': newFeedItemCount === 0}">
       <a ng-click="showNewFeedItems()">{{newFeedItemCount}} new morsel{{newFeedItemCount === 1? '':'s'}}</a>
@@ -13,4 +13,3 @@
     </div>
   </div>
 </div>
-

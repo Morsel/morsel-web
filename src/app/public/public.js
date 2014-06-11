@@ -41,6 +41,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
   'Morsel.common.textLimit',
+  'Morsel.common.transform',
   'Morsel.common.userImage',
   'Morsel.common.userList',
   'Morsel.common.validatedElement',
@@ -70,6 +71,7 @@ angular.module( 'Morsel.public', [
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
+.constant('MINIHEADERHEIGHT', '60')
 
 // Default queries
 .value('presetMediaQueries', {

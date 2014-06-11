@@ -1,35 +1,35 @@
 <div class="profile" ng-style="viewOptions.minimumMainHeight()">
   <div class="container">
     <a href="/account/edit-profile" ng-show="canEdit" class="edit-profile-btn" target="_self"><i class="common-settings"></i></a>
-    <ul class="user-container">
-      <li>
-        <div class="user-info col-sm-6">
-          <div class="row">
-            <div class="col-xs-4">
-              <div class="row">
-                <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos"  mrsl-no-link="true" class="profile-pic-m col-12"></div>
-                <div class="col-12">
-                  <button mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>
-                </div>
+    <hr />
+    <div class="user-container">
+      <div class="user-info col-sm-6">
+        <div class="row">
+          <div class="col-xs-4">
+            <div class="row">
+              <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-m" mrsl-no-link="true" class="col-12"></div>
+              <div class="col-12">
+                <button mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>
               </div>
             </div>
-            <div class="user-body col-xs-8">
-              <h3 class="user-username" ng-bind="user.username"></h3>
-              <h1 class="h3" ng-bind="user.first_name+' '+user.last_name"></h1>
-              <p ng-bind="user.bio"></p>
-            </div>
+          </div>
+          <div class="user-body col-xs-8">
+            <h3 class="user-username" ng-bind="user.username"></h3>
+            <h1 class="h3" ng-bind="user.first_name+' '+user.last_name"></h1>
+            <p ng-bind="user.bio"></p>
           </div>
         </div>
-        <ul class="user-stats col-sm-6">
-          <li>
-            <a mrsl-followers mrsl-follow-id="user.id" mrsl-follower-count="user.follower_count"></a>
-          </li>
-          <li>
-            <a mrsl-followed-users mrsl-follower-id="user.id" mrsl-following-count="user.followed_user_count"></a>
-          </li>
-        </ul>
-      </li>
-    </ul>
+      </div>
+      <ul class="user-stats col-sm-6">
+        <li>
+          <a mrsl-followers mrsl-follow-id="user.id" mrsl-follower-count="user.follower_count"></a>
+        </li>
+        <li>
+          <a mrsl-followed-users mrsl-follower-id="user.id" mrsl-following-count="user.followed_user_count"></a>
+        </li>
+      </ul>
+      <div class="user-bg" mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-m" mrsl-no-link="true"></div>
+    </div>
     <hr />
 
     <div ng-if="isChef">

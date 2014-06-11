@@ -6,59 +6,6 @@ angular.module('Morsel.common.morselSwipe', [
   'ngTouch'
 ])
 
-.directive('mrslItemThumbnails', function(Mixpanel, MORSELPLACEHOLDER) {
-  return {
-    restrict: 'A',
-    replace: true,
-    scope: {
-      index: '=mrslIndex',
-      morsel: '=mrslThumbsOfMorsel'
-    },
-    link: function(scope, element, attrs) {
-      var morselId;
-
-      scope.nonSwipeable = true;
-      scope.range = function(n) {
-        return new Array(n);
-      };
-
-      scope.$watch('mrslMorsel', function(newValue, oldValue) {
-        if(newValue) {
-          morselId = newValue.id;
-        }
-      });
-
-      scope.sendMixpanel = function(itemId) {
-        Mixpanel.send('Tapped Morsel Item Thumbnail', {
-          morsel_id : morselId,
-          morsel_item_id : itemId
-        });
-      };
-
-      scope.getItemThumbnailArray = function(item) {
-        //if there's no item yet, don't show anything
-        if(item) {
-          if(item.photos) {
-            return [
-              ['default', item.photos._100x100],
-              ['screen-xs', item.photos._240x240]
-            ];
-          } else {
-            //no photos, return default placeholder
-            return [
-              ['default', MORSELPLACEHOLDER]
-            ];
-          }
-        } else {
-          //return blank
-          return [];
-        }
-      };
-    },
-    templateUrl: 'common/swipe/itemThumbnails.tpl.html'
-  };
-})
-
 .directive('mrslItemIndicators', function() {
   return {
     restrict: 'A',
@@ -78,7 +25,7 @@ angular.module('Morsel.common.morselSwipe', [
   };
 })
 
-.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER) {
+.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries, Transform, MINIHEADERHEIGHT) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -94,7 +41,9 @@ angular.module('Morsel.common.morselSwipe', [
       //min intensity for scrolls
       scrollMinIntensity = 1,
       //number of additional "pages". 1. cover page 2. share page
-      extraPages = 2;
+      extraPages = 2,
+      //height of the cover page blocks on the bottome;
+      coverPageBlockHeight = 140;
 
   return {
     restrict: 'A',
@@ -109,7 +58,6 @@ angular.module('Morsel.common.morselSwipe', [
           offset = 0,
           itemHeight,
           destination,
-          transformProperty = 'transform',
           swipeMoved = false,
           swipeDirection = false,
           winEl = angular.element($window),
@@ -233,6 +181,14 @@ angular.module('Morsel.common.morselSwipe', [
         $document.unbind('touchend', documentMouseUpEvent);
         winEl.unbind('orientationchange', onOrientationChange);
         winEl.unbind('resize', onOrientationChange);
+      });
+
+      //when we switch morsels in a feed, we need to recheck where we are in the newly current morsel
+      scope.$on('feed.switchedMorsels', function(e, morselId){
+        //make sure we're currently on this morsel
+        if(morselId === scope.morsel.id) {
+          updateFeedState();
+        }
       });
 
       //our swiping functions
@@ -395,7 +351,17 @@ angular.module('Morsel.common.morselSwipe', [
 
       function updateItemHeight() {
         itemHeight = window.innerHeight;
-        scope.feedHeight = itemHeight+'px';
+        scope.layout.feedHeight = itemHeight+'px';
+
+        if (matchMedia(presetMediaQueries['screen-md']).matches) {
+          scope.layout.coverPhotoHeight = (itemHeight - MINIHEADERHEIGHT) +'px';
+          scope.layout.coverBlockMinHeight = (itemHeight - MINIHEADERHEIGHT)/2 +'px';
+          scope.layout.textDescriptionHeight = window.innerHeight/2 + 'px';
+        } else {
+          scope.layout.coverPhotoHeight = (itemHeight - coverPageBlockHeight - MINIHEADERHEIGHT) +'px';
+          scope.layout.coverBlockMinHeight = '0';
+          scope.layout.textDescriptionHeight = '100%';
+        }
       }
 
       //scrolling
@@ -410,7 +376,7 @@ angular.module('Morsel.common.morselSwipe', [
         offset = y;
         move = -Math.round(offset);
 
-        iElement.find('ul')[0].style[transformProperty] = 'translate3d(0, ' + move + 'px, 0)';
+        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate3d(0, ' + move + 'px, 0)';
       }
 
       function autoScroll() {
@@ -449,12 +415,7 @@ angular.module('Morsel.common.morselSwipe', [
         //console.log('350 - currentItemIndex set with: '+i);
         scope.currentItemIndex = capIndex(i);
 
-        if(scope.updatefeedState) {
-          scope.updatefeedState({
-            inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
-            onShare: scope.currentItemIndex === scope.itemCount - 1
-          });
-        }
+        updateFeedState();
 
         // if outside of angular scope, trigger angular digest cycle
         // use local digest only for perfs if no index bound
@@ -462,6 +423,13 @@ angular.module('Morsel.common.morselSwipe', [
           scope.$digest();
         }
         scroll();
+      }
+
+      function updateFeedState() {
+        scope.$emit('feed.updateState', {
+          inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
+          onShare: scope.currentItemIndex === scope.itemCount - 1
+        });
       }
 
       function documentMouseUpEvent(event) {
@@ -472,16 +440,6 @@ angular.module('Morsel.common.morselSwipe', [
           y: event.clientY
         }, event);
       }
-
-      // detect supported CSS property
-      ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
-        var e = prefix + 'Transform';
-        if (typeof document.body.style[e] !== 'undefined') {
-          transformProperty = e;
-          return false;
-        }
-        return true;
-      });
 
       function onOrientationChange() {
         updateItemHeight();
