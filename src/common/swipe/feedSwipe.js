@@ -29,7 +29,7 @@ angular.module('Morsel.common.feedSwipe', [
   };
 }])
 
-.directive('feedSwipe', function($window, $document) {
+.directive('feedSwipe', function($window, $document, Transform) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -52,7 +52,6 @@ angular.module('Morsel.common.feedSwipe', [
           offset = 0,
           feedWidth,
           destination,
-          transformProperty = 'transform',
           swipeXMoved = false,
           winEl = angular.element($window),
           lastScrollTimestamp,
@@ -233,7 +232,7 @@ angular.module('Morsel.common.feedSwipe', [
         var move = -Math.round(offset);
 
         move += (scope.feedBufferIndex * feedWidth);
-        iElement.find('ul')[0].style[transformProperty] = 'translate3d(' + move + 'px, 0, 0)';
+        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate3d(' + move + 'px, 0, 0)';
       }
 
       function autoScroll() {
@@ -304,16 +303,6 @@ angular.module('Morsel.common.feedSwipe', [
           goToSlide(scope.currentMorselIndex+1, true);
         }
       };
-
-      // detect supported CSS property
-      ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
-        var e = prefix + 'Transform';
-        if (typeof document.body.style[e] !== 'undefined') {
-          transformProperty = e;
-          return false;
-        }
-        return true;
-      });
 
       function onOrientationChange() {
         goToSlide();

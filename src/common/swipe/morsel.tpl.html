@@ -1,6 +1,6 @@
 <div ng-class="{'in-morsel': feedState.inMorsel, 'on-share': feedState.onShare}">
   <div ng-class="{'current-morsel': $index ? currentMorselIndex === $index : true}">
-    <div mrsl-morsel-swipe="{{morsel.items.length > 0}}" mrsl-morsel-swipe-count="{{morsel.items.length}}" ng-style="{'height': layout.feedHeight}">
+    <div mrsl-morsel-swipe="{{morsel.items.length > 0}}" mrsl-morsel-swipe-count="{{morsel.items.length}}" ng-style="{'height': layout.feedHeight}" ng-class="{'item-description-open': layout.descriptionOpen}">
       <div class="morsel-title">
         <div class="morsel-container">
           <h1>{{morsel.title}}</h1>
@@ -39,10 +39,12 @@
         <li ng-repeat="item in morsel.items" class="item" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container">
             <div class="item-photo-wrap">
+              <a class="item-info-btn" ng-click="expandDescription(item.id)" href><i class="glyphicon glyphicon-info-sign"></i></a>
               <img class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
             </div>
             <div class="item-info">
               <div class="item-info-bottom">
+                <hr />
                 <div class="user-info">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
                   <h5 class="h2 overflow-ellipsis">
@@ -51,7 +53,7 @@
                 </div>
                 <div mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
               </div>
-              <p mrsl-text-limit mrsl-char-limit="200" mrsl-text-content="item.description" class="item-description" ng-style="{'height':layout.itemDescriptionHeight}"></p>
+              <div mrsl-item-description="item" mrsl-non-scrollable="true" ng-style="{'height': layout.textDescriptionHeight}"></div>
               <div mrsl-social-sharing="morsel"></div>
             </div>
           </div>

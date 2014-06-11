@@ -25,7 +25,7 @@ angular.module('Morsel.common.morselSwipe', [
   };
 })
 
-.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries, $rootScope) {
+.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries, Transform, MINIHEADERHEIGHT) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -43,9 +43,7 @@ angular.module('Morsel.common.morselSwipe', [
       //number of additional "pages". 1. cover page 2. share page
       extraPages = 2,
       //height of the cover page blocks on the bottome;
-      coverPageBlockHeight = 140,
-      //height of our header
-      headerHeight = 60;
+      coverPageBlockHeight = 140;
 
   return {
     restrict: 'A',
@@ -60,7 +58,6 @@ angular.module('Morsel.common.morselSwipe', [
           offset = 0,
           itemHeight,
           destination,
-          transformProperty = 'transform',
           swipeMoved = false,
           swipeDirection = false,
           winEl = angular.element($window),
@@ -73,7 +70,6 @@ angular.module('Morsel.common.morselSwipe', [
       scope.currentItemIndex = 0; //track which item we're on
       scope.currentIndicatorIndex = 0; //track which indicator is active
       scope.itemCount = extraPages; //account for cover page + share page
-      scope.layout = {}; //hold all our computed layout measurements
 
       scope.getCoverPhotoArray = function(morsel) {
         var primaryItemPhotos;
@@ -354,18 +350,17 @@ angular.module('Morsel.common.morselSwipe', [
       }
 
       function updateItemHeight() {
-        var windowWidth = window.innerWidth;
         itemHeight = window.innerHeight;
         scope.layout.feedHeight = itemHeight+'px';
 
         if (matchMedia(presetMediaQueries['screen-md']).matches) {
-          scope.layout.coverPhotoHeight = (itemHeight - headerHeight) +'px';
-          scope.layout.coverBlockMinHeight = (itemHeight - headerHeight)/2 +'px';
-          scope.layout.itemDescriptionHeight = 'auto';
+          scope.layout.coverPhotoHeight = (itemHeight - MINIHEADERHEIGHT) +'px';
+          scope.layout.coverBlockMinHeight = (itemHeight - MINIHEADERHEIGHT)/2 +'px';
+          scope.layout.textDescriptionHeight = window.innerHeight/2 + 'px';
         } else {
-          scope.layout.coverPhotoHeight = (itemHeight - coverPageBlockHeight - headerHeight) +'px';
+          scope.layout.coverPhotoHeight = (itemHeight - coverPageBlockHeight - MINIHEADERHEIGHT) +'px';
           scope.layout.coverBlockMinHeight = '0';
-          scope.layout.itemDescriptionHeight = (window.innerHeight - windowWidth - headerHeight) + 'px';
+          scope.layout.textDescriptionHeight = '100%';
         }
       }
 
@@ -381,7 +376,7 @@ angular.module('Morsel.common.morselSwipe', [
         offset = y;
         move = -Math.round(offset);
 
-        iElement.find('ul')[0].style[transformProperty] = 'translate3d(0, ' + move + 'px, 0)';
+        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate3d(0, ' + move + 'px, 0)';
       }
 
       function autoScroll() {
@@ -445,16 +440,6 @@ angular.module('Morsel.common.morselSwipe', [
           y: event.clientY
         }, event);
       }
-
-      // detect supported CSS property
-      ['webkit', 'Moz', 'O', 'ms'].every(function (prefix) {
-        var e = prefix + 'Transform';
-        if (typeof document.body.style[e] !== 'undefined') {
-          transformProperty = e;
-          return false;
-        }
-        return true;
-      });
 
       function onOrientationChange() {
         updateItemHeight();
