@@ -100,6 +100,6 @@ button[type="submit"] {
 
 hr {
   background-image: url(images/bg/dark-line.png);
-  height: 4px;
+  height: $hr-height;
   border: 0;
 }

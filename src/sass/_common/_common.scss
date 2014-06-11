@@ -56,6 +56,10 @@ img {
 
 .profile-pic-link {
   display: inline-block;
+
+  img {
+    @include box-shadow(0 0 0 1px hsl(0, 0%, 90%), 0 0 0 2px hsl(0, 0%, 98%));
+  }
 }
 
 .profile-pic-xs {

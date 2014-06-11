@@ -40,6 +40,17 @@ angular.module( 'Morsel.public.feed', [])
     $window.open($location.protocol() + '://'+ $location.host(), '_self');
   };
 
+  //scope vars for individual morsel
+  $scope.feedState = {
+    inMorsel : false,
+    onShare : false
+  };
+
+  $scope.$on('feed.updateState', function(e, feedState){
+    _.extend($scope.feedState, feedState);
+    _.defer(function(){$scope.$apply();});
+  });
+
   //get our initial feed items
   grabOldFeed();
 
