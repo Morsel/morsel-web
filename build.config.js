@@ -71,6 +71,7 @@ module.exports = {
         'src/common/api/morsels.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
+        'src/common/api/util.js',
         'src/common/auth/afterLogin.js',
         'src/common/auth/auth.js',
         'src/common/comments/comments.js',

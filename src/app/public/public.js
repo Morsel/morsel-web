@@ -16,6 +16,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.apiMorsels',
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
+  'Morsel.common.apiUtil',
   //templates
   'templates-public',
   //common
@@ -52,6 +53,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.validatedElement',
   //app
   'Morsel.public.activity',
+  'Morsel.public.contact',
   'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.invite',

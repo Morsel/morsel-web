@@ -239,6 +239,13 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       publicApp.renderPublicPage(res, metadata);
     });
 
+    //contact
+    app.get('/contact', function(req, res){
+      var metadata = utilApp.getMetadata('contact');
+
+      publicApp.renderPublicPage(res, metadata);
+    });
+
     //activity
     app.get('/activity', function(req, res){
       publicApp.renderPublicPage(res);
