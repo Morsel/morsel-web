@@ -19,8 +19,6 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
       FacebookApi.init();
 
-      FacebookApi.loadSdk();
-
       scope.connectFacebook = function() {
         FacebookApi.login(function(response) {
           loginResponse = response;

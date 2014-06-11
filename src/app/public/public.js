@@ -48,15 +48,12 @@ angular.module( 'Morsel.public', [
   //app
   'Morsel.public.feed',
   'Morsel.public.home',
-<<<<<<< HEAD
+  'Morsel.public.invite',
   'Morsel.public.search',//profile comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search.people',
   'Morsel.public.search.people.morsel',
   'Morsel.public.search.people.facebook',
   'Morsel.public.search.people.twitter',
-=======
-  'Morsel.public.invite',
->>>>>>> master
   'Morsel.public.profile',//profile comes before morselDetail so /users/:id doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.morselDetail'
 ])

@@ -16,9 +16,7 @@ angular.module( 'Morsel.common.facebookApi', [] )
         });
       };
     }
-  };
 
-  fb.loadSdk = function(){
     // Load the SDK asynchronously if it hasn't been yet
     if(!window.FB) {
       (function(d, s, id) {
@@ -32,9 +30,16 @@ angular.module( 'Morsel.common.facebookApi', [] )
   };
 
   fb.login = function(callback) {
-    FB.login(callback, {
-      //grab this stuff from fb
-      scope: 'public_profile,email,user_friends'
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        callback();
+      }
+      else {
+        FB.login(callback, {
+          //grab this stuff from fb
+          scope: 'public_profile,email,user_friends'
+        });
+      }
     });
   };
 
@@ -47,6 +52,10 @@ angular.module( 'Morsel.common.facebookApi', [] )
 
   fb.getUserInfo = function(callback) {
     FB.api('/me', callback);
+  };
+
+  fb.getFriends = function() {
+    //FB.api('/me/feed', 'post', {message: 'Hello, world!'});
   };
 
   return fb;

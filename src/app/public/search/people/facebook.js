@@ -16,6 +16,34 @@ angular.module( 'Morsel.public.search.people.facebook', [])
   });
 })
 
-.controller( 'SearchPeopleFacebookCtrl', function SearchPeopleFacebookCtrl ($scope, searchUser){
-  $scope.type = 'facebook';
+.controller( 'SearchPeopleFacebookCtrl', function SearchPeopleFacebookCtrl ($scope, searchUser, FacebookApi){
+  //override the parent scope function
+  $scope.search.customSearch = _.debounce(searchFacebookUsers, $scope.search.waitTime);
+  
+  //our initial state should be empty
+  $scope.searchResultUsers = [];
+
+
+  //login with fb
+  FacebookApi.login(getFriends);
+
+  function getFriends() {
+
+  }
+
+  function searchFacebookUsers() {
+    var userSearchData = {
+          'user[query]': $scope.search.query
+        };
+
+    if($scope.search.query.length >= 3) {
+      //remove current users to show loader
+      $scope.searchResultUsers = null;
+
+
+      /*ApiUsers.search(userSearchData).then(function(searchResp) {
+        $scope.searchResultUsers = searchResp.data;
+      });*/
+    }
+  }
 });
