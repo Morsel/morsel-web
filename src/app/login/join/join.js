@@ -195,6 +195,14 @@ angular.module( 'Morsel.login.join', [])
   //model to store our additional data
   $scope.additionalInfoModel = {};
 
+  //bio length validation
+  $scope.bioLengthVer = {
+    'length': {
+      'limit': '255',
+      'message': 'Must be less than 255 characters'
+    }
+  };
+
   //submit our form
   $scope.submitAdditionalInfo = function() {
     var industryPromise,

@@ -26,6 +26,14 @@ angular.module( 'Morsel.account.editProfile', [])
   $scope.basicInfoModel = _.clone(accountUser);
   $scope.profilePhoto = null;
 
+  //bio length validation
+  $scope.bioLengthVer = {
+    'length': {
+      'limit': '255',
+      'message': 'Must be less than 255 characters'
+    }
+  };
+
   //submit our form
   $scope.updateBasicInfo = function() {
     var userData = {
