@@ -47,6 +47,7 @@ function renderPublicPage(res, customMetadata) {
   }
 
   res.render('public', {
+    facebookAppId : util.facebookAppId,
     pageType: {
       public: true
     }

@@ -30,7 +30,8 @@ angular.module( 'Morsel.public.search', [])
     //placeholder for children to overwrite
     customSearch: angular.noop,
     //time to debounce keystrokes
-    waitTime: 300
+    waitTime: 300,
+    searchPlaceholder: 'Search for people on Morsel'
   };
 
   $scope.isLoggedIn = Auth.isLoggedIn();

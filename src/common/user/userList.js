@@ -5,7 +5,8 @@ angular.module('Morsel.common.userList', [])
     restrict: 'A',
     replace: true,
     scope: {
-      users: '=mrslUserList'
+      users: '=mrslUserList',
+      emptyText: '=mrslUserListEmpty'
     },
     templateUrl: 'common/user/userList.tpl.html'
   };

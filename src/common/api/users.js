@@ -296,6 +296,21 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.AuthenticationConnects = function(provider, uids) {
+    var deferred = $q.defer();
+
+    Restangular.one('authentications', 0, true).customGET('connections', {
+      provider : provider,
+      uids: uids
+    }).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   Users.forgotPassword = function(email) {
     var deferred = $q.defer();
 

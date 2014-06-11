@@ -1,1 +1,2 @@
-<div mrsl-user-list="searchResultUsers"></div>
+<p ng-if="socialNotConnectedMessage" class="empty-state" ng-bind-html="socialNotConnectedMessage"></p>
+<div mrsl-user-list="searchResultUsers" ng-if="!socialNotConnectedMessage"></div>

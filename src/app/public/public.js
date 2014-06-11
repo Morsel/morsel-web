@@ -8,6 +8,7 @@ angular.module( 'Morsel.public', [
   'ui.route',
   //filters
   'Morsel.common.reverse',
+  'Morsel.common.nameMatch',
   //API
   'Morsel.common.apiFeed',
   'Morsel.common.apiItems',
@@ -23,6 +24,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.baseErrors',
   'Morsel.common.comments',
   'Morsel.common.cuisineUsers',
+  'Morsel.common.facebookApi',
   'Morsel.common.feedSwipe',
   'Morsel.common.follow',
   'Morsel.common.followedUsers',

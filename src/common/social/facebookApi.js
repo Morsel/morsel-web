@@ -1,11 +1,16 @@
 angular.module( 'Morsel.common.facebookApi', [] )
 
 // FacebookApi is the middleman for dealing with requests/initialization of fb
-.factory('FacebookApi', function() {
-  var fb = {};
+.factory('FacebookApi', function($q) {
+  var fb = {},
+      sdkLoaded = false;
 
-  fb.init = function() {
-    if(!window.fbAsyncInit) {
+  fb.init = function(callback) {
+    // Load the SDK asynchronously if it hasn't been yet
+    if(sdkLoaded) {
+      //loaded already, call our callback immediately
+      callback();
+    } else {
       window.fbAsyncInit = function() {
         FB.init({
           appId      : window.MorselConfig.facebookAppId,
@@ -14,11 +19,11 @@ angular.module( 'Morsel.common.facebookApi', [] )
           xfbml      : false,  // parse social plugins on this page
           version    : 'v2.0' // use version 2.0
         });
-      };
-    }
 
-    // Load the SDK asynchronously if it hasn't been yet
-    if(!window.FB) {
+        sdkLoaded = true;
+        callback();
+      };
+
       (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
@@ -32,7 +37,7 @@ angular.module( 'Morsel.common.facebookApi', [] )
   fb.login = function(callback) {
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-        callback();
+        callback(response);
       }
       else {
         FB.login(callback, {
@@ -54,8 +59,8 @@ angular.module( 'Morsel.common.facebookApi', [] )
     FB.api('/me', callback);
   };
 
-  fb.getFriends = function() {
-    //FB.api('/me/feed', 'post', {message: 'Hello, world!'});
+  fb.getFriends = function(callback) {
+    FB.api('/me/friends', callback);
   };
 
   return fb;

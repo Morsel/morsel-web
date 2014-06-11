@@ -17,18 +17,18 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         loginNext = $state.params.next;
       }
 
-      FacebookApi.init();
-
       scope.connectFacebook = function() {
-        FacebookApi.login(function(response) {
-          loginResponse = response;
+        FacebookApi.init(function(){
+          FacebookApi.login(function(response) {
+            loginResponse = response;
 
-          if (loginResponse.status === 'connected') {
-            // user is logged into your app and Facebook.
-            if(loginResponse.authResponse && loginResponse.authResponse.userID) {
-              checkAuthentication();
+            if (loginResponse.status === 'connected') {
+              // user is logged into your app and Facebook.
+              if(loginResponse.authResponse && loginResponse.authResponse.userID) {
+                checkAuthentication();
+              }
             }
-          }
+          });
         });
       };
 

@@ -239,8 +239,10 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       publicApp.renderPublicPage(res, metadata);
     });
 
+    //search
     app.get('/search*', function(req, res){
       publicApp.renderPublicPage(res);
+    });
 
     //invite
     app.get('/invite', function(req, res){

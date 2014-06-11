@@ -17,6 +17,7 @@ angular.module( 'Morsel.public.search.people.morsel', [])
 .controller( 'SearchPeopleMorselCtrl', function SearchPeopleMorselCtrl ($scope, searchUser, ApiUsers){
   //override the parent scope function
   $scope.search.customSearch = _.debounce(searchMorselUsers, $scope.search.waitTime);
+  $scope.search.searchPlaceholder = 'Search for people on Morsel';
   
   //our initial state should be empty
   $scope.searchResultUsers = [];
