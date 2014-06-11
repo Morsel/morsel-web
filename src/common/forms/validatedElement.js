@@ -58,6 +58,14 @@ angular.module('Morsel.common.validatedElement', [])
                 scope.builtInErrorMessages['match'] = matchSettings.message;
               }
               break;
+            case 'length':
+              var lengthSettings = scope.customVal['length'];
+
+              setupLengthWatch(lengthSettings);
+
+              if(lengthSettings.message) {
+                scope.builtInErrorMessages['length'] = lengthSettings.message;
+              }
           }
         }
       }
@@ -66,6 +74,22 @@ angular.module('Morsel.common.validatedElement', [])
       function handleMatch(value) {
         if(value) {
           scope.inForm[scope.inputName].$setValidity('match', value[0] === value[1] );
+        }
+      }
+
+      function setupLengthWatch(lengthSettings) {
+        scope.$watch('formModel[inputName]', function(value){
+          handleLength(value, lengthSettings.limit);
+        }, true);
+      }
+
+      //handle values from custom length validation
+      function handleLength(value, limit) {
+        if(value) {
+          scope.inForm[scope.inputName].$setValidity('length', value.length < limit );
+        } else {
+          //if there isn't a value, it clearly isn't too long
+          scope.inForm[scope.inputName].$setValidity('length', true);
         }
       }
     },
