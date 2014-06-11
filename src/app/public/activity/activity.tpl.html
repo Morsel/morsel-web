@@ -1,0 +1,14 @@
+<div class="activity" ng-style="viewOptions.minimumMainHeight()">
+  <div class="container container-no-padding container-shadow container-margin-bottom morsel-bg">
+    <tabset>
+    <tab heading="Following">
+      <div mrsl-activity-feed="followingFeed" mrsl-activity-feed-user="user"></div>
+    </tab>
+    <tab heading="My Activity">
+      <div mrsl-activity-feed="myActivityFeed" mrsl-activity-feed-user="user"></div>
+    </tab>
+    <tab heading="Notifications">
+      <div mrsl-activity-feed="notificationsFeed" mrsl-activity-feed-user="user"></div>
+    </tab>
+  </tabset>
+</div>

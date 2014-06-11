@@ -265,11 +265,6 @@ form {
     .user-body {
       position: relative;
 
-      img {
-        float: right;
-        width: 80px;
-      }
-
       p {
         padding-right: $activity-feed-padding-right;
         margin-bottom: 15px;
@@ -282,6 +277,13 @@ form {
         display: block;
         text-align: right;
         color: $morsel-medium;
+      }
+
+      .activity-subject {
+        float: right;
+        width: 80px;
+        margin-right: 0;
+        text-align: center;
       }
     }
   }
@@ -299,6 +301,19 @@ form {
 
 @include error-page();
 
+.nav-tabs {
+  margin: 0;
+
+  > li {
+    text-align: center;
+
+    > a {
+      @include border-radius(0);
+      margin: 0;
+    }
+  }
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .morsel-text {
     background-image: url(images/logos/morsel-text@2x.png);
@@ -307,6 +322,11 @@ form {
 
 .container-margin-bottom {
   margin-bottom: 25px;
+}
+
+.container-no-padding {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 @media (min-width: $screen-sm-min) {
