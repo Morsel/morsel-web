@@ -230,6 +230,8 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       loginApp.getTwitterOAuthAccessToken(req, res);
     });
 
+    //PUBLIC
+
     //feed
     app.get('/feed', function(req, res){
       var metadata = utilApp.getMetadata('feed');
@@ -240,6 +242,12 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
     //activity
     app.get('/activity', function(req, res){
       publicApp.renderPublicPage(res);
+    });
+
+    //search
+    app.get('/search*', function(req, res){
+      publicApp.renderPublicPage(res);
+    });
 
     //invite
     app.get('/invite', function(req, res){

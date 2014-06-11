@@ -8,6 +8,7 @@ angular.module( 'Morsel.public', [
   'ui.route',
   //filters
   'Morsel.common.reverse',
+  'Morsel.common.nameMatch',
   //API
   'Morsel.common.apiFeed',
   'Morsel.common.apiItems',
@@ -24,6 +25,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.baseErrors',
   'Morsel.common.comments',
   'Morsel.common.cuisineUsers',
+  'Morsel.common.facebookApi',
   'Morsel.common.feedSwipe',
   'Morsel.common.follow',
   'Morsel.common.followedUsers',
@@ -46,12 +48,18 @@ angular.module( 'Morsel.public', [
   'Morsel.common.truncate',
   'Morsel.common.transform',
   'Morsel.common.userImage',
+  'Morsel.common.userList',
   'Morsel.common.validatedElement',
   //app
   'Morsel.public.activity',
   'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.invite',
+  'Morsel.public.search',//profile comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
+  'Morsel.public.search.people',
+  'Morsel.public.search.people.morsel',
+  'Morsel.public.search.people.facebook',
+  'Morsel.public.search.people.twitter',
   'Morsel.public.profile',//profile comes before morselDetail so /users/:id doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.morselDetail'
 ])
