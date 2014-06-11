@@ -94,7 +94,8 @@ module.exports = {
         'src/common/text/textLimit.js',
         'src/common/user/cuisineUsers.js',
         'src/common/user/specialtyUsers.js',
-        'src/common/user/userImage.js'
+        'src/common/user/userImage.js',
+        'src/common/util/transform.js'
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
