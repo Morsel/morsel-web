@@ -1,0 +1,28 @@
+.pic-header {
+  padding: 55px 0;
+  background-image: url(images/bg/static-header.jpg);
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  
+  h1 {
+    margin: 0;
+    padding: 0;
+    color: $morsel-static-header;
+    text-align: center;
+  }
+
+  & + .container {
+    padding-top: 30px;
+    padding-bottom: 20px;
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .pic-header {
+    & + .container {
+      padding-left: 70px;
+      padding-right: 70px;
+    }
+  }
+}

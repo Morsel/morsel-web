@@ -45,7 +45,15 @@
       <a href="/press" target="_self">Press &amp; Media</a>
     </li>
     <li>
-      <a href="mailto:support@eatmorsel.com" target="_blank">Contact Us</a>
+      {{#pageType.public}}
+      <a href="/contact" ng-click="closeMenu()">Contact</a>
+      {{/pageType.public}}
+      {{#pageType.account}}
+      <a href="/contact" target="_self">Contact</a>
+      {{/pageType.account}}
+      {{#pageType.static}}
+      <a href="/contact" target="_self">Contact</a>
+      {{/pageType.static}}
     </li>
     <li>
       <a href="/terms" target="_self"><i class="sidenav-terms"></i>Terms of Use</a>

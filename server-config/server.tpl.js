@@ -237,6 +237,13 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       publicApp.renderPublicPage(res, metadata);
     });
 
+    //contact
+    app.get('/contact', function(req, res){
+      var metadata = utilApp.getMetadata('contact');
+
+      publicApp.renderPublicPage(res, metadata);
+    });
+
     //invite
     app.get('/invite', function(req, res){
       var metadata = utilApp.getMetadata('invite');
