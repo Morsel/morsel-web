@@ -22,6 +22,11 @@ angular.module( 'Morsel.public.search.people.morsel', [])
   //our initial state should be empty
   $scope.searchResultUsers = [];
 
+  //get our promoted folks
+  ApiUsers.search({'user[promoted]': true}).then(function(searchResp) {
+    $scope.suggestedUsers = searchResp.data;
+  });
+
   function searchMorselUsers() {
     var userSearchData = {
           'user[query]': $scope.search.query
@@ -33,7 +38,12 @@ angular.module( 'Morsel.public.search.people.morsel', [])
 
       ApiUsers.search(userSearchData).then(function(searchResp) {
         $scope.searchResultUsers = searchResp.data;
+        _.defer(function(){$scope.$apply();});
       });
+    } else {
+      //don't show anybody if we haven't searched 3 characters
+      $scope.searchResultUsers = [];
+      _.defer(function(){$scope.$apply();});
     }
   }
 });

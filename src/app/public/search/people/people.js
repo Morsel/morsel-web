@@ -10,5 +10,5 @@ angular.module( 'Morsel.public.search.people', [])
   });
 })
 
-.controller( 'SearchPeopleCtrl', function SearchPeopleCtrl ($scope, searchUser){
+.controller( 'SearchPeopleCtrl', function SearchPeopleCtrl ($scope, searchUser, ApiUsers){
 });
