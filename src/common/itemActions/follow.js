@@ -13,8 +13,6 @@ angular.module( 'Morsel.common.follow', [] )
           isLoggedIn,
           afterLoginCallback;
 
-
-
       Auth.getCurrentUserPromise().then(function(userData) {
         currentUser = userData;
         isLoggedIn = Auth.isLoggedIn();
@@ -34,15 +32,15 @@ angular.module( 'Morsel.common.follow', [] )
             }
           }
         }
-      });
 
-      //wait until we have the data on who to follow, then decide if we need to show the follow button or not
-      scope.$watch('idToFollow', function(newValue, oldValue) {
-        if(newValue) {
-          if(currentUser && currentUser.id === scope.idToFollow) {
-            scope.isSelf = true;
+        //wait until we have the data on who to follow, then decide if we need to show the follow button or not
+        scope.$watch('idToFollow', function(newValue, oldValue) {
+          if(newValue) {
+            if(currentUser && currentUser.id === scope.idToFollow) {
+              scope.isSelf = true;
+            }
           }
-        }
+        });
       });
 
       scope.toggleFollow = function() {

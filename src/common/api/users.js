@@ -248,7 +248,7 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
-   Users.validateEmail = function(email) {
+  Users.validateEmail = function(email) {
     var deferred = $q.defer();
 
     RestangularUsers.customGET('validate_email', {email: email}).then(function(resp) {
@@ -296,6 +296,21 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.AuthenticationConnects = function(provider, uids) {
+    var deferred = $q.defer();
+
+    Restangular.one('authentications', 0, true).customGET('connections', {
+      provider : provider,
+      uids: uids
+    }).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   Users.forgotPassword = function(email) {
     var deferred = $q.defer();
 
@@ -312,6 +327,54 @@ angular.module( 'Morsel.common.apiUsers', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', 0, true).post('reset_password', passwordData).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.getActivities = function() {
+    var deferred = $q.defer();
+
+    RestangularUsers.get('activities').then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.getFollowablesActivities = function() {
+    var deferred = $q.defer();
+
+    RestangularUsers.get('followables_activities').then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.getNotifications = function() {
+    var deferred = $q.defer();
+
+    RestangularUsers.get('notifications').then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Users.search = function(searchUser) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', 0, true).customGET('search', searchUser).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

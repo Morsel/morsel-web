@@ -14,10 +14,32 @@
       <a href="/feed" ng-click="closeMenu()"><i class="sidenav-feed"></i>My Feed</a>
       {{/pageType.public}}
       {{#pageType.account}}
-      <a href="/feed" ng-click="closeMenu()" target="_self"><i class="sidenav-feed"></i>My Feed</a>
+      <a href="/feed" target="_self"><i class="sidenav-feed"></i>My Feed</a>
       {{/pageType.account}}
       {{#pageType.static}}
-      <a href="/feed" ng-click="closeMenu()" target="_self"><i class="sidenav-feed"></i>My Feed</a>
+      <a href="/feed" target="_self"><i class="sidenav-feed"></i>My Feed</a>
+      {{/pageType.static}}
+    </li>
+    <li ui-route="/search/people" ng-class="{active:$uiRoute}">
+      {{#pageType.public}}
+      <a href="/search/people" ng-click="closeMenu()">Search</a>
+      {{/pageType.public}}
+      {{#pageType.account}}
+      <a href="/search/people" target="_self">Search</a>
+      {{/pageType.account}}
+      {{#pageType.static}}
+      <a href="/search/people" target="_self">Search</a>
+      {{/pageType.static}}
+    </li>
+    <li ui-route="/activity" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+      {{#pageType.public}}
+      <a href="/activity" ng-click="closeMenu()"><i class="sidenav-activity"></i>Activity</a>
+      {{/pageType.public}}
+      {{#pageType.account}}
+      <a href="/activity" ng-click="closeMenu()" target="_self"><i class="sidenav-activity"></i>Activity</a>
+      {{/pageType.account}}
+      {{#pageType.static}}
+      <a href="/activity" ng-click="closeMenu()" target="_self"><i class="sidenav-activity"></i>Activity</a>
       {{/pageType.static}}
     </li>
   </ul>

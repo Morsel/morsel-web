@@ -1,0 +1,19 @@
+.activity {
+  .activity-feed {
+    padding: 20px;
+  }
+
+  .nav-tabs {
+    > li {
+      width: percentage(1/3);
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .activity {
+    > .container {
+      margin-top: 40px
+    }
+  }
+}

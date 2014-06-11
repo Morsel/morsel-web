@@ -88,14 +88,20 @@ module.exports = {
         'src/common/itemActions/followedUsers.js',
         'src/common/itemActions/followers.js',
         'src/common/itemActions/like.js',
+        'src/common/social/facebookApi.js',
         'src/common/social/socialSharing.js',
+        'src/common/filters/nameMatch.js',
         'src/common/swipe/feedSwipe.js',
         'src/common/swipe/morsel.js',
         'src/common/swipe/morselSwipe.js',
         'src/common/text/textLimit.js',
+        'src/common/text/truncate.js',
+        'src/common/user/activityFeed.js',
         'src/common/user/cuisineUsers.js',
+        'src/common/user/likeableFeed.js',
         'src/common/user/specialtyUsers.js',
         'src/common/user/userImage.js',
+        'src/common/user/userList.js',
         'src/common/util/transform.js'
       ],
       tpl: [
@@ -113,8 +119,9 @@ module.exports = {
         'src/common/text/textLimit.tpl.html',
         'src/common/text/textOverlay.tpl.html',
         'src/common/user/activityFeed.tpl.html',
-        'src/common/user/userActivityOverlay.tpl.html',
+        'src/common/user/likeableFeed.tpl.html',
         'src/common/user/userList.tpl.html',
+        'src/common/user/userListOverlay.tpl.html',
         'src/common/util/404.tpl.html'
       ]
     },
