@@ -13,19 +13,18 @@ angular.module( 'Morsel.common.addFacebook', [] )
     link: function(scope, element, attrs) {
       var loginResponse;
 
-      FacebookApi.init();
-      FacebookApi.loadSdk();
-
       scope.add = function() {
-        FacebookApi.login(function(response) {
-          loginResponse = response;
+        FacebookApi.init(function(){
+          FacebookApi.login(function(response) {
+            loginResponse = response;
 
-          if (loginResponse.status === 'connected') {
-            // user is logged into your app and Facebook.
-            if(loginResponse.authResponse && loginResponse.authResponse.userID) {
-              createAuthentication();
+            if (loginResponse.status === 'connected') {
+              // user is logged into your app and Facebook.
+              if(loginResponse.authResponse && loginResponse.authResponse.userID) {
+                createAuthentication();
+              }
             }
-          }
+          });
         });
       };
 
