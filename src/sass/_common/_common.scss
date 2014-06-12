@@ -239,7 +239,7 @@ form {
 }
 
 .activity-feed {
-  $activity-feed-padding-right: 90px;
+  $activity-feed-padding-right: $profile-pic-xs + 10px;
 
   ul {
     margin: 0;
@@ -273,7 +273,7 @@ form {
 
       .time-ago {
         position: absolute;
-        right: $activity-feed-padding-right+10px;
+        right: $activity-feed-padding-right;
         bottom: 0;
         display: block;
         text-align: right;
@@ -332,6 +332,8 @@ form {
 }
 
 @media (min-width: $screen-sm-min) {
+  $activity-feed-padding-right: $profile-pic-s + 10px;
+
   .activity-feed {
     li {
       .profile-pic-link {
@@ -339,6 +341,14 @@ form {
         height: $profile-pic-s;
       }
       .user-body {
+        p {
+          padding-right: $activity-feed-padding-right;
+        }
+
+        .time-ago {
+          right: $activity-feed-padding-right;
+        }
+
         .activity-subject {
           width: $profile-pic-s;
           height: $profile-pic-s;
