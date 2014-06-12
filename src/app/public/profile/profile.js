@@ -61,13 +61,20 @@ angular.module( 'Morsel.public.profile', [])
 
   $scope.canEdit = profileUserData.id === currentUser.id;
 
-  //load our morsels immediately
-  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
-    $scope.morsels = morselsData;
-  }, function() {
-    //if there's an error retrieving user data (bad username?), go to 404
-    $state.go('404');
-  });
+  $scope.loadLikeFeed = loadLikeFeed;
+
+  if($scope.isChef) {
+    //load our morsels immediately
+    ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
+      $scope.morsels = morselsData;
+    }, function() {
+      //if there's an error retrieving user data (bad username?), go to 404
+      $state.go('404');
+    });
+  } else {
+    $scope.loadLikeFeed();
+  }
+  
 
   $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
     if(dir === 'increase') {
@@ -87,14 +94,6 @@ angular.module( 'Morsel.public.profile', [])
     if(!$scope.specialties) {
       ApiUsers.getSpecialties(profileUserData.id).then(function(specialtyResp) {
         $scope.specialties = specialtyResp.data;
-      });
-    }
-  };
-
-  $scope.loadLikeFeed = function() {
-    if(!$scope.likeFeed) {
-      ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
-        $scope.likeFeed = likeableResp.data;
       });
     }
   };
@@ -120,4 +119,12 @@ angular.module( 'Morsel.public.profile', [])
       return [];
     }
   };
+
+  function loadLikeFeed() {
+    if(!$scope.likeFeed) {
+      ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
+        $scope.likeFeed = likeableResp.data;
+      });
+    }
+  }
 });
