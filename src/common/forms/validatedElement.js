@@ -86,7 +86,7 @@ angular.module('Morsel.common.validatedElement', [])
       //handle values from custom length validation
       function handleLength(value, limit) {
         if(value) {
-          scope.inForm[scope.inputName].$setValidity('length', value.length < limit );
+          scope.inForm[scope.inputName].$setValidity('length', value.length <= limit );
         } else {
           //if there isn't a value, it clearly isn't too long
           scope.inForm[scope.inputName].$setValidity('length', true);

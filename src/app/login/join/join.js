@@ -198,8 +198,8 @@ angular.module( 'Morsel.login.join', [])
   //bio length validation
   $scope.bioLengthVer = {
     'length': {
-      'limit': '255',
-      'message': 'Must be less than 255 characters'
+      'limit': '160',
+      'message': 'Must be 160 characters or less'
     }
   };
 
