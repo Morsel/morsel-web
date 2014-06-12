@@ -281,7 +281,8 @@ form {
 
       .activity-subject {
         float: right;
-        width: 80px;
+        width: $profile-pic-xs;
+        height: $profile-pic-xs;
         margin-right: 0;
         text-align: center;
       }
@@ -336,6 +337,12 @@ form {
         width: $profile-pic-s;
         height: $profile-pic-s;
       }
+      .user-body {
+        .activity-subject {
+          width: $profile-pic-s;
+          height: $profile-pic-s;
+        }
+      }
     }
   }
 
@@ -379,6 +386,10 @@ form {
 }
 
 @media (min-width: $screen-sm-min) {
+  .container-max-sm {
+    width: $screen-sm;
+  }
+
   //to be put on .container or equivalent
   .container-shadow {
     @include container-shadow();
