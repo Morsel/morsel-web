@@ -56,6 +56,7 @@ img {
 
 .profile-pic-link {
   display: inline-block;
+  padding: $profile-bic-border-width;
 
   img {
     @include box-shadow(0 0 0 1px hsl(0, 0%, 90%), 0 0 0 2px hsl(0, 0%, 98%));
