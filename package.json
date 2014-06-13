@@ -23,7 +23,8 @@
     "express-session": "~1.2.1",
     "cluster": "~0.7.7",
     "domain": "~0.2.8",
-    "nodetime": "~0.8.15"
+    "nodetime": "~0.8.15",
+    "rollbar": "~0.3.8"
   },
   "devDependencies": {
     "bower": "*",

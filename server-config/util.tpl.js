@@ -2,13 +2,18 @@ var app = require('./server');
 var _ = require('underscore');
 var config = require('./config');
 
+var port = Number(process.env.PORT || 5000);
+
 //any keys, tokens, etc
 var apiQuerystring = '.json?client%5Bdevice%5D=webserver&client%5Bversion%5D=<%= version %>';
 var facebookAppId = process.env.FACEBOOK_APP_ID || config.facebookAppId;
+//twitter doesn't matter for local dev because it requires a callback that localhost can't support anyway
 var twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY || '12345';
 var twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET || '12345';
+
 var nodeEnv = process.env.NODE_ENV || config.node_env;
 var sessionSecret = 'THESESESSIONSARENOTSECURE';
+//rollbar account key is in server.js as it needs to load earlier
 
 //static JSON data
 var staticRoutes = require('./data/static-routes.json');
@@ -105,3 +110,5 @@ module.exports.twitterConsumerKey = twitterConsumerKey;
 module.exports.twitterConsumerSecret = twitterConsumerSecret;
 module.exports.apiQuerystring = apiQuerystring;
 module.exports.defaultMetadata = metadata.default;
+module.exports.nodeEnv = nodeEnv;
+module.exports.port = port;
