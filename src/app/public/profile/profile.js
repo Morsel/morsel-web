@@ -84,6 +84,19 @@ angular.module( 'Morsel.public.profile', [])
     }
   });
 
+  $scope.getUserPhoto = function() {
+    if($scope.user.photos) {
+      return [
+        ['default', $scope.user.photos._80x80],
+        ['screen-md', $scope.user.photos._144x144]
+      ];
+    } else {
+      return [
+        ['default', MORSELPLACEHOLDER]
+      ];
+    }
+  };
+
   $scope.loadTags = function() {
     if(!$scope.cuisines) {
       ApiUsers.getCuisines(profileUserData.id).then(function(cuisineResp) {
