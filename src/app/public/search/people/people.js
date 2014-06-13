@@ -11,4 +11,5 @@ angular.module( 'Morsel.public.search.people', [])
 })
 
 .controller( 'SearchPeopleCtrl', function SearchPeopleCtrl ($scope, searchUser, ApiUsers){
+  $scope.search.emptyText = 'No users match your search';
 });
