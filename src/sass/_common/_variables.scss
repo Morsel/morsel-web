@@ -67,10 +67,11 @@ $arrow-height: 60px;
 $indicator-size: 10px;
 
 //users
-$profile-pic-xs: 40px;
-$profile-pic-s: 72px;
-$profile-pic-m: 80px;
-$profile-pic-l: 144px;
+$profile-bic-border-width: 2px;
+$profile-pic-xs: 40px + $profile-bic-border-width*2;
+$profile-pic-s: 72px + $profile-bic-border-width*2;
+$profile-pic-m: 80px + $profile-bic-border-width*2;
+$profile-pic-l: 144px + $profile-bic-border-width*2;
 
 //layout
 $sidenav-width: 250px;

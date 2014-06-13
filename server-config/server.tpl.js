@@ -5,7 +5,7 @@ var maxWorkers = process.env.MAX_WORKERS || 1,
     Logger = {},//require('./hgnode/framework/HgLog.js'),
     index = 0;
 
-if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
+if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
   //Logger.info('Web server initializing with a maximum of ' + maxWorkers + ' workers. Master PID: ' + process.pid);
   //Logger.info(numCPUs + ' CPUs detected. Clustering up to ' + workers + ' instances.');
 
@@ -36,7 +36,7 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
 } else {
   var serverDomain = require('domain').create(),
       httpServer,
-      nodetime;
+      rollbar;
 
   serverDomain.on('error', function (err) {
     var exceptionNotifyer = {},//require('./hgnode/framework/ExceptionNotifier.js'),
@@ -46,9 +46,9 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
 
     killtimer.unref();
     try {
-      // kill nodetime
-      if (nodetime) {
-        nodetime.destroy();
+      // kill rollbar
+      if (rollbar) {
+        rollbar.shutdown();
       }
       if (httpServer) {
         // force all connections to be zero so callback can be called without throwing another exception
@@ -73,12 +73,14 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
   });
 
   serverDomain.run(function () {
-    // nodetime should be the first require
-    if (process.env.NODETIME_ACCOUNT_KEY) {
-      nodetime = require('nodetime');
-      nodetime.profile({
-        accountKey: process.env.NODETIME_ACCOUNT_KEY,
-        appName: process.env.NODE_ENV || 'local-dev'
+    var config = require('./config');
+    var rollbarAccountKey = process.env.ROLLBAR_ACCOUNT_KEY || config.rollbarAccountKey;
+
+    // rollbar should be the first require
+    if (rollbarAccountKey) {
+      rollbar = require('rollbar');
+      rollbar.handleUncaughtExceptions(rollbarAccountKey, {
+        environment: process.env.NODE_ENV || 'local'
       });
     }
 
@@ -87,7 +89,6 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
 
     //create our app and expose it
     var app = module.exports = express();
-    var port = Number(process.env.PORT || 5000);
 
     //load our other apps
     var utilApp = require('./util');
@@ -285,8 +286,14 @@ if (cluster.isMaster && !process.env.LOCAL_DEBUG) {
       utilApp.render404(res);
     });
 
-    httpServer = app.listen(port, function() {
-      console.log("Listening on " + port);
+    if(rollbar) {
+      app.use(rollbar.errorHandler(rollbarAccountKey, {
+        environment: utilApp.nodeEnv
+      }));
+    }
+
+    httpServer = app.listen(utilApp.port, function() {
+      console.log("Listening on " + utilApp.port);
     });
   });
 }

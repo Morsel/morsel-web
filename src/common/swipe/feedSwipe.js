@@ -91,15 +91,6 @@ angular.module('Morsel.common.feedSwipe', [
         scope.currentControlIndex = newValue;
       });
 
-      // handle orientation change
-      winEl.bind('orientationchange', onOrientationChange);
-      winEl.bind('resize', onOrientationChange);
-
-      scope.$on('$destroy', function() {
-        winEl.unbind('orientationchange', onOrientationChange);
-        winEl.unbind('resize', onOrientationChange);
-      });
-
       //our swiping functions
       scope.swipeStarted = function(coords) {
         pressed = true;
@@ -303,10 +294,6 @@ angular.module('Morsel.common.feedSwipe', [
           goToSlide(scope.currentMorselIndex+1, true);
         }
       };
-
-      function onOrientationChange() {
-        goToSlide();
-      }
 
       //handle navigation for left and right keypresses
       function handleKeydown(e) {

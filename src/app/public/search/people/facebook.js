@@ -18,16 +18,30 @@ angular.module( 'Morsel.public.search.people.facebook', [])
 
 .controller( 'SearchPeopleFacebookCtrl', function SearchPeopleFacebookCtrl ($scope, searchUser, FacebookApi, $sce, $timeout, ApiUsers, $filter){
   $scope.search.searchPlaceholder = 'Search for Facebook friends on Morsel';
+  $scope.searchType = 'facebook';
+  $scope.socialSearch = true;
+  //clear query when switching
+  $scope.search.query = '';
 
   if(searchUser.facebook_uid) {
     //override the parent scope function
     $scope.search.customSearch = _.debounce(filterFacebookUsers, $scope.search.waitTime);
 
+    //assume we have friends to start
+    $scope.hasFriendsOnMorsel = true;
+    $scope.socialConnected = true;
+
     FacebookApi.init(function(){
-      FacebookApi.login(getFacebookFriends);
+      //after we log in, make sure our fb token is up to date
+      FacebookApi.login(updateFbToken);
     });
   } else {
+    $scope.socialConnected = false;
     $scope.socialNotConnectedMessage = $sce.trustAsHtml('You haven\'t connected your Facebook account. <a href="/account/social-accounts" target="_self">Click here</a> to connect.');
+  }
+
+  function updateFbToken(fbResp) {
+    FacebookApi.updateToken(fbResp.authResponse.accessToken, getFacebookFriends);
   }
 
   function getFacebookFriends() {
@@ -61,9 +75,19 @@ angular.module( 'Morsel.public.search.people.facebook', [])
   }
 
   function showResults(friendsData) {
-    $scope.allSearchResultUsers = friendsData;
-    //this one will be our filtered version
-    $scope.searchResultUsers = $scope.allSearchResultUsers;
+    //if the user has facebook friends on morsel
+    if(friendsData.length > 0) {
+      $scope.hasFriendsOnMorsel = true;
+      //either there are some on morsel or there aren't
+      $scope.allSearchResultUsers = friendsData;
+      //this one will be our filtered version
+      $scope.searchResultUsers = $scope.allSearchResultUsers;
+    } else {
+      //set invite state
+      $scope.hasFriendsOnMorsel = false;
+    }
+
+    //refresh our scope
     _.defer(function(){$scope.$apply();});
   }
 

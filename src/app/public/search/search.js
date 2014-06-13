@@ -34,5 +34,6 @@ angular.module( 'Morsel.public.search', [])
     searchPlaceholder: 'Search for people on Morsel'
   };
 
+  $scope.searchUser = searchUser;
   $scope.isLoggedIn = Auth.isLoggedIn();
 });

@@ -28,7 +28,7 @@
           <a mrsl-followed-users mrsl-follower-id="user.id" mrsl-following-count="user.followed_user_count"></a>
         </li>
       </ul>
-      <div class="user-bg" mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-m" mrsl-no-link="true"></div>
+      <div class="user-bg" mrsl-responsive-images="{{getUserPhoto()}}" mrsl-ri-image-type="background"></div>
     </div>
     <hr />
 
@@ -77,7 +77,7 @@
           </div>
           <div ng-show="!specialties && !cuisines" class="loader"></div>
         </tab>
-        <tab heading="Likes">
+        <tab heading="Likes" select="loadLikeFeed()">
           <div mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>
         </tab>
       </tabset>

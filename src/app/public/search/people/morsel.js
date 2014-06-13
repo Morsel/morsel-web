@@ -14,13 +14,18 @@ angular.module( 'Morsel.public.search.people.morsel', [])
   });
 })
 
-.controller( 'SearchPeopleMorselCtrl', function SearchPeopleMorselCtrl ($scope, searchUser, ApiUsers){
+.controller( 'SearchPeopleMorselCtrl', function SearchPeopleMorselCtrl ($scope, ApiUsers){
   //override the parent scope function
   $scope.search.customSearch = _.debounce(searchMorselUsers, $scope.search.waitTime);
   $scope.search.searchPlaceholder = 'Search for people on Morsel';
-  
+  $scope.searchType = 'morsel';
+  $scope.socialSearch = false;
+  //clear query when switching
+  $scope.search.query = '';
+
   //our initial state should be empty
   $scope.searchResultUsers = [];
+  $scope.hasSearched = false;
 
   //get our promoted folks
   ApiUsers.search({'user[promoted]': true}).then(function(searchResp) {
@@ -35,6 +40,7 @@ angular.module( 'Morsel.public.search.people.morsel', [])
     if($scope.search.query.length >= 3) {
       //remove current users to show loader
       $scope.searchResultUsers = null;
+      $scope.hasSearched = true;
 
       ApiUsers.search(userSearchData).then(function(searchResp) {
         $scope.searchResultUsers = searchResp.data;
@@ -42,6 +48,7 @@ angular.module( 'Morsel.public.search.people.morsel', [])
       });
     } else {
       //don't show anybody if we haven't searched 3 characters
+      $scope.hasSearched = false;
       $scope.searchResultUsers = [];
       _.defer(function(){$scope.$apply();});
     }

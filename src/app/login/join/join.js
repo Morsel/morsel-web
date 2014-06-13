@@ -198,30 +198,35 @@ angular.module( 'Morsel.login.join', [])
   //bio length validation
   $scope.bioLengthVer = {
     'length': {
-      'limit': '255',
-      'message': 'Must be less than 255 characters'
+      'limit': '160',
+      'message': 'Must be 160 characters or less'
     }
   };
 
   //submit our form
   $scope.submitAdditionalInfo = function() {
-    var industryPromise,
-        userInfoPromise;
+    var promises = [];
 
     //check if everything is valid
     if($scope.additionalInfoForm.$valid) {
       //disable form while request fires
       $scope.additionalInfoForm.$setValidity('loading', false);
 
-      industryPromise = ApiUsers.updateIndustry($scope.userData.registered.id, $scope.additionalInfoModel.industry);
-      userInfoPromise = ApiUsers.updateUser($scope.userData.registered.id, {
-        user: {
-          bio: $scope.additionalInfoModel.bio
-        }
-      });
+      //add industry to our array of promises
+      promises.push(ApiUsers.updateIndustry($scope.userData.registered.id, $scope.additionalInfoModel.industry));
+
+      //if user has a bio filled out
+      if($scope.additionalInfoModel.bio) {
+        //add promise to array
+        promises.push(ApiUsers.updateUser($scope.userData.registered.id, {
+          user: {
+            bio: $scope.additionalInfoModel.bio
+          }
+        }));
+      }
 
       //once all promises are resolved, send them on their way
-      $q.all([industryPromise, userInfoPromise]).then(onSuccess, onError);
+      $q.all(promises).then(onSuccess, onError);
     }
   };
 

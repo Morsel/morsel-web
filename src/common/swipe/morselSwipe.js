@@ -25,7 +25,7 @@ angular.module('Morsel.common.morselSwipe', [
   };
 })
 
-.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries, Transform, MINIHEADERHEIGHT) {
+.directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, $state, $stateParams, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries, Transform, MINIHEADERHEIGHT) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -38,6 +38,8 @@ angular.module('Morsel.common.morselSwipe', [
       scrollDebounceTime = 40,
       //same as ^ for keys
       keyDebounceTime = 350,
+      //debounce on page resize/orientation change
+      orientationChangeTime = 500,
       //min intensity for scrolls
       scrollMinIntensity = 1,
       //number of additional "pages". 1. cover page 2. share page
@@ -64,7 +66,8 @@ angular.module('Morsel.common.morselSwipe', [
           handleMouseWheel,
           hamster,
           animationFrame = new AnimationFrame(),
-          debouncedKeydown;
+          debouncedKeydown,
+          onOrientationChange;
 
       //our scope vars, accessible by indicators
       scope.currentItemIndex = 0; //track which item we're on
@@ -171,6 +174,15 @@ angular.module('Morsel.common.morselSwipe', [
         //console.log('130 - currentItemIndex watch: '+newValue);
         scope.currentIndicatorIndex = newValue;
       });
+
+      //refresh the whole state on resize for now - too much to reconfigure based on viewport size
+      onOrientationChange = _.debounce(function(){
+        $state.transitionTo($state.current, $stateParams, { 
+          reload: true,
+          inherit: true,
+          notify: true
+        });
+      }, orientationChangeTime);
 
       // handle orientation change
       winEl.bind('orientationchange', onOrientationChange);
@@ -439,11 +451,6 @@ angular.module('Morsel.common.morselSwipe', [
           x: event.clientX,
           y: event.clientY
         }, event);
-      }
-
-      function onOrientationChange() {
-        updateItemHeight();
-        goToSlide();
       }
 
       //deal with mousewheel scrolling
