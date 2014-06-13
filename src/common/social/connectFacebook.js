@@ -23,7 +23,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             loginResponse = response;
 
             if (loginResponse.status === 'connected') {
-              // user is logged into your app and Facebook.
+              // user is logged into Facebook.
               if(loginResponse.authResponse && loginResponse.authResponse.userID) {
                 checkAuthentication();
               }

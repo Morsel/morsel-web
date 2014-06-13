@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.facebookApi', [] )
 
 // FacebookApi is the middleman for dealing with requests/initialization of fb
-.factory('FacebookApi', function($q) {
+.factory('FacebookApi', function($q, ApiUsers) {
   var fb = {},
       sdkLoaded = false;
 
@@ -21,6 +21,7 @@ angular.module( 'Morsel.common.facebookApi', [] )
         });
 
         sdkLoaded = true;
+
         callback();
       };
 
@@ -43,6 +44,27 @@ angular.module( 'Morsel.common.facebookApi', [] )
         FB.login(callback, {
           //grab this stuff from fb
           scope: 'public_profile,email,user_friends'
+        });
+      }
+    });
+  };
+
+  //needs to be called whenever a user logs into facebook while already logged into morsel
+  fb.updateToken = function(token, callback) {
+    var authenticationData = {
+      'authentication': {
+        'token': token
+      }
+    };
+
+    ApiUsers.getAuthentications().then(function(authenticationsResp){
+      var fbAuth = _.find(authenticationsResp.data, function(auth) {
+        return auth.provider === 'facebook';
+      });
+
+      if(fbAuth) {
+        ApiUsers.updateAuthentication(fbAuth.id, authenticationData).then(function(){
+          callback();
         });
       }
     });

@@ -284,6 +284,18 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.updateAuthentication = function(authenticationId, authenticationData) {
+    var deferred = $q.defer();
+
+    Restangular.one('authentications', authenticationId).customPUT(authenticationData).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   Users.deleteAuthentication = function(authenticationId) {
     var deferred = $q.defer();
 

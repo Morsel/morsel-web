@@ -32,11 +32,16 @@ angular.module( 'Morsel.public.search.people.facebook', [])
     $scope.socialConnected = true;
 
     FacebookApi.init(function(){
-      FacebookApi.login(getFacebookFriends);
+      //after we log in, make sure our fb token is up to date
+      FacebookApi.login(updateFbToken);
     });
   } else {
     $scope.socialConnected = false;
     $scope.socialNotConnectedMessage = $sce.trustAsHtml('You haven\'t connected your Facebook account. <a href="/account/social-accounts" target="_self">Click here</a> to connect.');
+  }
+
+  function updateFbToken(fbResp) {
+    FacebookApi.updateToken(fbResp.authResponse.accessToken, getFacebookFriends);
   }
 
   function getFacebookFriends() {
