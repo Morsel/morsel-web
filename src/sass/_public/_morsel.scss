@@ -42,6 +42,11 @@ $item-info-bottom-height: 55px + $hr-height;
     }
   }
 
+  .morsel-loader {
+    height: 250px;
+    margin-top: $mini-header-height;
+  }
+
   .morsel-container {
     height: 100%;
     position: relative;

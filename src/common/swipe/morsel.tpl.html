@@ -1,5 +1,6 @@
 <div ng-class="{'in-morsel': feedState.inMorsel, 'on-share': feedState.onShare}">
-  <div ng-class="{'current-morsel': $index ? currentMorselIndex === $index : true}">
+  <div ng-if="!morsel" class="loader morsel-loader"></div>
+  <div ng-if="morsel"  ng-class="{'current-morsel': $index ? currentMorselIndex === $index : true}">
     <div mrsl-morsel-swipe="{{morsel.items.length > 0}}" mrsl-morsel-swipe-count="{{morsel.items.length}}" ng-style="{'height': layout.feedHeight}" ng-class="{'item-description-open': layout.descriptionOpen}">
       <div class="morsel-title">
         <div class="morsel-container">
