@@ -188,8 +188,9 @@ angular.module( 'Morsel.account', [
     $scope.$apply('viewOptions');
   }
 
-  $scope.closeMenu = function() {
+  $scope.menuGoTo = function(route) {
     $scope.menuOpen = false;
+    $location.path('/'+route);
   };
 
   $scope.goToProfile = function() {

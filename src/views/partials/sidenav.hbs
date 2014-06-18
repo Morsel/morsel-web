@@ -11,7 +11,7 @@
   <ul>
     <li ui-route="/feed" ng-class="{active:$uiRoute}">
       {{#pageType.public}}
-      <a href="/feed" ng-click="closeMenu()"><i class="sidenav-feed"></i>My Feed</a>
+      <a href="/feed" ng-click="menuGoTo('feed')"><i class="sidenav-feed"></i>My Feed</a>
       {{/pageType.public}}
       {{#pageType.account}}
       <a href="/feed" target="_self"><i class="sidenav-feed"></i>My Feed</a>
@@ -22,7 +22,7 @@
     </li>
     <li ui-route="/search/people" ng-class="{active:$uiRoute}">
       {{#pageType.public}}
-      <a href="/search/people" ng-click="closeMenu()">Search</a>
+      <a href="/search/people" ng-click="menuGoTo('search/people')">Search</a>
       {{/pageType.public}}
       {{#pageType.account}}
       <a href="/search/people" target="_self">Search</a>
@@ -33,13 +33,13 @@
     </li>
     <li ui-route="/activity" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
       {{#pageType.public}}
-      <a href="/activity" ng-click="closeMenu()"><i class="sidenav-activity"></i>Activity</a>
+      <a href="/activity" ng-click="menuGoTo('activity')"><i class="sidenav-activity"></i>Activity</a>
       {{/pageType.public}}
       {{#pageType.account}}
-      <a href="/activity" ng-click="closeMenu()" target="_self"><i class="sidenav-activity"></i>Activity</a>
+      <a href="/activity" ng-click="menuGoTo('activity')" target="_self"><i class="sidenav-activity"></i>Activity</a>
       {{/pageType.account}}
       {{#pageType.static}}
-      <a href="/activity" ng-click="closeMenu()" target="_self"><i class="sidenav-activity"></i>Activity</a>
+      <a href="/activity" ng-click="menuGoTo('activity')" target="_self"><i class="sidenav-activity"></i>Activity</a>
       {{/pageType.static}}
     </li>
   </ul>
@@ -51,7 +51,7 @@
       <a href="/account/edit-profile" target="_self"><i class="sidenav-account-settings"></i>Settings</a>
       {{/pageType.public}}
       {{#pageType.account}}
-      <a href="/account/edit-profile" ng-click="closeMenu()"><i class="sidenav-account-settings"></i>Settings</a>
+      <a href="/account/edit-profile" ng-click="menuGoTo('account/edit-profile')"><i class="sidenav-account-settings"></i>Settings</a>
       {{/pageType.account}}
       {{#pageType.static}}
       <a href="/account/edit-profile" target="_self"><i class="sidenav-account-settings"></i>Settings</a>
@@ -68,7 +68,7 @@
     </li>
     <li>
       {{#pageType.public}}
-      <a href="/contact" ng-click="closeMenu()">Contact</a>
+      <a href="/contact" ng-click="menuGoTo('contact')">Contact</a>
       {{/pageType.public}}
       {{#pageType.account}}
       <a href="/contact" target="_self">Contact</a>

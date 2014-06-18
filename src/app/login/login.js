@@ -193,7 +193,6 @@ angular.module( 'Morsel.login', [
 
   $scope.goTo = function(path) {
     $location.path(path);
-    $scope.menuOpen = false;
   };
 });
 
