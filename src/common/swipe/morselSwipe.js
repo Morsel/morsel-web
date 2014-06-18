@@ -206,7 +206,8 @@ angular.module('Morsel.common.morselSwipe', [
       //our swiping functions
       function swipeStart(coords, event) {
         var elementScope = angular.element(event.target).scope(),
-            nonSwipeable = elementScope.nonSwipeable;
+            hasNonSwipeAttr = angular.isDefined(event.target.attributes['non-swipeable']),
+            nonSwipeable = elementScope.nonSwipeable || hasNonSwipeAttr;
 
         if(!nonSwipeable) {
           $document.bind('mouseup', documentMouseUpEvent);

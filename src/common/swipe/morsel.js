@@ -85,6 +85,6 @@ angular.module('Morsel.common.morsel', [])
         scope.$emit('item.toggleDescriptionOpen', false);
       };
     },
-    template: '<div class="item-description"><button type="button" class="close" ng-click="closeDescription()">&times;</button><hr/><p ng-click="expandDescription(item.id)">{{item.description}}</p></div>'
+    template: '<div class="item-description" non-swipeable><button type="button" class="close" ng-click="closeDescription()" non-swipeable>&times;</button><hr/><p ng-click="expandDescription(item.id)" non-swipeable>{{item.description}}</p></div>'
   };
 });

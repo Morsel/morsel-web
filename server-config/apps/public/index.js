@@ -20,7 +20,7 @@ function getMetadataImage(morsel) {
     if(primaryItem && primaryItem.photos) {
       return primaryItem.photos._992x992;
     } else {
-      return morsels[0].photos._992x992;
+      return morsel.items[0].photos._992x992;
     }
   }
 }

@@ -40,7 +40,7 @@
         <li ng-repeat="item in morsel.items" class="item" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container">
             <div class="item-photo-wrap">
-              <a class="item-info-btn" ng-click="expandDescription(item.id)" href><i class="glyphicon glyphicon-info-sign"></i></a>
+              <span class="item-info-btn" ng-click="expandDescription(item.id)" non-swipeable><i class="glyphicon glyphicon-info-sign" non-swipeable></i></span>
               <img class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
             </div>
             <div class="item-info">
