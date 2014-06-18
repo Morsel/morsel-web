@@ -376,6 +376,12 @@ $item-info-bottom-height: 55px + $hr-height;
       .cover-title-wrap, .cover-photo-wrap {
         height: 30%;
       }
+
+      .user-info {
+        p {
+          clear: none;
+        }
+      }
     }
   }
 }
@@ -605,10 +611,6 @@ $item-info-bottom-height: 55px + $hr-height;
 
         h5 {
           display: inline-block;
-        }
-
-        p {
-          clear: none;
         }
       }
     }
