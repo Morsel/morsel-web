@@ -120,7 +120,7 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack, $rootScope ) {
   var viewOptions = {
     miniHeader : false
   };
@@ -225,6 +225,10 @@ angular.module( 'Morsel.public', [
       $location.path('/'+$scope.currentUser.username);
     }
     $scope.menuOpen = false;
+  };
+
+  $rootScope.goTo = function(route) {
+    $location.path(route);
   };
 });
 
