@@ -1318,6 +1318,7 @@ module.exports = function ( grunt ) {
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {
+            version: grunt.config( 'pkg.version' ),
             favicon_dir: grunt.config('favicon_dir')
           }
         });
