@@ -502,6 +502,10 @@ $item-info-bottom-height: 55px + $hr-height;
           }
         }
 
+        .item-info-btn {
+          display: none;
+        }
+
         .item-description {
           margin-bottom: 25px;
           padding-bottom: 0;
