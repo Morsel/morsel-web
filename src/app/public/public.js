@@ -36,6 +36,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.handleErrors',
   'Morsel.common.itemActionBar',
   'Morsel.common.itemLike',
+  'Morsel.common.landscapeAlert',
   'Morsel.common.likeableFeed',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
@@ -84,7 +85,9 @@ angular.module( 'Morsel.public', [
   'screen-xs': 'only screen and (min-width: 480px)',
   'screen-sm': 'only screen and (min-width: 768px)',
   'screen-md': 'only screen and (min-width: 992px)',
-  'screen-lg': 'only screen and (min-width: 1200px)'
+  'screen-lg': 'only screen and (min-width: 1200px)',
+  'screen-sm-max': 'only screen and (max-width: 767px)',
+  'orientation-landscape': 'screen and (orientation:landscape)'
 })
 
 .constant('MORSELPLACEHOLDER', '/assets/images/logos/morsel-placeholder.jpg')

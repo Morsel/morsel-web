@@ -20,11 +20,14 @@ angular.module( 'Morsel.public.morselDetail', [])
   });
 })
 
-.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $window, currentUser, $state ) {
+.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $window, currentUser, $state, landscapeAlert ) {
   var username = $stateParams.username,
       morselDetailsArr = $stateParams.morselDetails.split('/'),
       morselIdSlug = morselDetailsArr[0];/*,
       itemNumber = parseInt(morselDetailsArr[1], 10);*/
+
+  //these pages should be viewed in portrait
+  landscapeAlert();
 
   $scope.viewOptions.miniHeader = true;
 

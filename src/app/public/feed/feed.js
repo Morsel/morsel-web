@@ -19,7 +19,7 @@ angular.module( 'Morsel.public.feed', [])
   });
 })
 
-.controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed, $interval, Auth ) {
+.controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed, $interval, Auth, landscapeAlert ) {
   var feedFetchCount = 5, //the number of feed items to fetch at a time from the server
       totalFetchCount = 0, //the total number of feed items that have been fetched from the server
       oldestId, //the id of the oldest morsel fetched from the server
@@ -35,6 +35,9 @@ angular.module( 'Morsel.public.feed', [])
   $scope.initialDataLoading = true; //for loading visuals
 
   $scope.viewOptions.miniHeader = true;
+
+  //feed should be viewed in portrait
+  landscapeAlert();
 
   $scope.goHome = function() {
     $window.open($location.protocol() + '://'+ $location.host(), '_self');

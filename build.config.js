@@ -102,6 +102,7 @@ module.exports = {
         'src/common/user/specialtyUsers.js',
         'src/common/user/userImage.js',
         'src/common/user/userList.js',
+        'src/common/util/landscapeAlert.js',
         'src/common/util/transform.js'
       ],
       tpl: [
@@ -122,7 +123,8 @@ module.exports = {
         'src/common/user/likeableFeed.tpl.html',
         'src/common/user/userList.tpl.html',
         'src/common/user/userListOverlay.tpl.html',
-        'src/common/util/404.tpl.html'
+        'src/common/util/404.tpl.html',
+        'src/common/util/landscapeAlert.tpl.html'
       ]
     },
     vendor_files: {
