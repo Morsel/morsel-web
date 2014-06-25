@@ -63,10 +63,10 @@ angular.module( 'Morsel.common.socialSharing', [] )
         shareMixpanel(socialType);
 
         if(socialType === 'facebook') {
-          url = 'https://www.facebook.com/sharer/sharer.php?u='+s.url;
+          url = 'https://www.facebook.com/sharer/sharer.php?u='+s.facebook_mrsl;
         } else if(socialType === 'twitter') {
           shareText = encodeURIComponent('"'+s.title+'" from '+(twitterUsername || (s.creator.first_name+' '+s.creator.last_name))+' on @eatmorsel ');
-          url = 'https://twitter.com/home?status='+shareText+s.url;
+          url = 'https://twitter.com/home?status='+shareText+s.twitter_mrsl;
         } else if(socialType === 'linkedin') {
           url = 'https://www.linkedin.com/shareArticle?mini=true&url='+s.url;
         } else if(socialType === 'pinterest') {
