@@ -1,9 +1,9 @@
 <div>
   <h1>Cuisines &amp; Specialties</h1>
-  <h3 ng-show="isChef">Cuisines</h3>
-  <ul ng-show="isChef" mrsl-checklist mrsl-checklist-vals="cuisineList" mrsl-checklist-change="toggleTag"></ul>
+  <h3 ng-show="isProfessional">Cuisines</h3>
+  <ul ng-show="isProfessional" mrsl-checklist mrsl-checklist-vals="cuisineList" mrsl-checklist-change="toggleTag"></ul>
   <div ng-show="!cuisineList" class="loader"></div>
-  <h3 ng-show="isChef">Specialties</h3>
-  <ul ng-show="isChef" mrsl-checklist mrsl-checklist-vals="specialtyList" mrsl-checklist-change="toggleTag"></ul>
+  <h3 ng-show="isProfessional">Specialties</h3>
+  <ul ng-show="isProfessional" mrsl-checklist mrsl-checklist-vals="specialtyList" mrsl-checklist-change="toggleTag"></ul>
   <div ng-show="!specialtyList" class="loader"></div>
 </div>

@@ -180,18 +180,21 @@
     }
   }
 
-  .user-likes {
-    max-width: $screen-sm;
-    margin: 0 auto;
-  }
-
   .activity-feed {
     padding: 20px 15px;
   }
 
   .nav-tabs {
     > li {
-      width: percentage(1/3);
+      width: percentage(1/2);
+    }
+  }
+
+  .professional-tabs {
+    .nav-tabs {
+      > li {
+        width: percentage(1/3);
+      }
     }
   }
 }

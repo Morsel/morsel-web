@@ -32,8 +32,8 @@
     </div>
     <hr />
 
-    <div ng-if="isChef">
-      <tabset>
+    <div>
+      <tabset ng-class="{'professional-tabs':isProfessional}">
         <tab heading="Morsels">
           <ul class="clearfix user-morsels">
             <li ng-repeat="morsel in morsels | reverse">
@@ -51,7 +51,7 @@
             <p ng-if="canEdit">You haven't made any morsels yet. <a href="" target="_blank">Download the app</a> to make one!</p>
           </div>
         </tab>
-        <tab heading="Tags" select="loadTags()">
+        <tab heading="Tags" select="loadTags()" ng-if="isProfessional">
           <div class="user-tags col-sm-6">
             <span class="h5">Cuisines:</span>
             <ul>
@@ -82,10 +82,6 @@
           <div mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>
         </tab>
       </tabset>
-    </div>
-
-    <div ng-if="!isChef" class="user-likes">
-      <div mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>
     </div>
   </div>
 </div>

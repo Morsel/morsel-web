@@ -27,7 +27,8 @@ angular.module( 'Morsel.common.auth', [
       'auth_token': '',
       'username': null,
       'industry': null,
-      'staff': false
+      'staff': false,
+      'professional': false
     };
   };
 
@@ -207,21 +208,13 @@ angular.module( 'Morsel.common.auth', [
     return !_.isEqual(Auth._currentUser, Auth._blankUser());
   };
 
-  //check user industry type
-  Auth.isChef = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'chef');
-  };
-
-  Auth.isMedia = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'media');
-  };
-
-  Auth.isDiner = function() {
-    return Auth.isLoggedIn() && (Auth._currentUser.industry === 'diner');
-  };
-
+  //check user type
   Auth.isStaff = function() {
     return Auth.isLoggedIn() && Auth._currentUser.staff;
+  };
+
+  Auth.isProfessional = function() {
+    return Auth.isLoggedIn() && Auth._currentUser.professional;
   };
 
   //end logged-in methods

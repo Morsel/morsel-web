@@ -53,28 +53,23 @@ angular.module( 'Morsel.public.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, $stateParams, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, $window, $location, $modal, $rootScope, profileUserData, currentUser, $state ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth ) {
   $scope.viewOptions.miniHeader = true;
 
   $scope.user = profileUserData;
-  $scope.isChef = profileUserData.industry === 'chef';
+  $scope.isProfessional = profileUserData.professional;
 
   $scope.canEdit = profileUserData.id === currentUser.id;
 
   $scope.loadLikeFeed = loadLikeFeed;
 
-  if($scope.isChef) {
-    //load our morsels immediately
-    ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
-      $scope.morsels = morselsData;
-    }, function() {
-      //if there's an error retrieving user data (bad username?), go to 404
-      $state.go('404');
-    });
-  } else {
-    $scope.loadLikeFeed();
-  }
-  
+  //load our morsels immediately (it's the default tab)
+  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
+    $scope.morsels = morselsData;
+  }, function() {
+    //if there's an error retrieving user data (bad username?), go to 404
+    $state.go('404');
+  });
 
   $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
     if(dir === 'increase') {
