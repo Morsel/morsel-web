@@ -59,12 +59,27 @@ angular.module( 'Morsel.login.join', [])
   });
 })
 
-.controller( 'JoinCtrl', function JoinCtrl( $scope, $state, joinUser ) {
+.controller( 'JoinCtrl', function JoinCtrl( $scope, $state, AfterLogin, $window, $stateParams ) {
   //if they're not trying to go to the second step
   if($state.current.name != 'join.basicInfo') {
     //send them to the landing page
     $state.go('join.landing');
   }
+
+  $scope.finishedSignup = function() {
+    //if successfully joined check if we have anything in the to-do queue
+    if(AfterLogin.hasCallback()) {
+      AfterLogin.goToCallbackPath();
+    } else {
+      //if they were on their way to a certain page
+      if($stateParams.next) {
+        $window.location.href = $stateParams.next;
+      } else {
+        //send them home
+        $window.location.href = '/';
+      }
+    }
+  };
 })
 
 .controller( 'LandingCtrl', function LandingCtrl( $scope, $state ) {
@@ -107,7 +122,8 @@ angular.module( 'Morsel.login.join', [])
             'username': $scope.basicInfoModel.username,
             'password': $scope.basicInfoModel.password,
             'first_name': $scope.basicInfoModel.first_name,
-            'last_name': $scope.basicInfoModel.last_name
+            'last_name': $scope.basicInfoModel.last_name,
+            'professional': $scope.basicInfoModel.professional
           }
         },
         socialData,
@@ -162,7 +178,13 @@ angular.module( 'Morsel.login.join', [])
     $scope.userData.registered = resp;
 
     //if successfully joined send to the next step
-    $state.go('join.additionalInfo');
+    if($scope.userData.registered.professional) {
+      //pros need more info
+      $state.go('join.additionalInfo');
+    } else {
+      //they're done
+      $scope.finishedSignup();
+    }
   }
 
   function onError(resp) {
@@ -177,81 +199,14 @@ angular.module( 'Morsel.login.join', [])
   }
 })
 
-.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, ApiUsers, $q, AfterLogin, HandleErrors, $window, $stateParams) {
-  //a cleaner way of building radio buttons
-  $scope.industryValues = [{
-    'name':'Chef',
-    'value':'chef'
-  },
-  {
-    'name':'Media',
-    'value':'media'
-  },
-  {
-    'name':'Diner',
-    'value':'diner'
-  }];
-
-  //model to store our additional data
-  $scope.additionalInfoModel = {};
-
-  //bio length validation
-  $scope.bioLengthVer = {
-    'length': {
-      'limit': '160',
-      'message': 'Must be 160 characters or less'
-    }
+.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, $window ) {
+  $scope.goToCS = function(){
+    $window.location.href = '/account/cuisines-specialties';
   };
 
-  //submit our form
-  $scope.submitAdditionalInfo = function() {
-    var promises = [];
-
-    //check if everything is valid
-    if($scope.additionalInfoForm.$valid) {
-      //disable form while request fires
-      $scope.additionalInfoForm.$setValidity('loading', false);
-
-      //add industry to our array of promises
-      promises.push(ApiUsers.updateIndustry($scope.userData.registered.id, $scope.additionalInfoModel.industry));
-
-      //if user has a bio filled out
-      if($scope.additionalInfoModel.bio) {
-        //add promise to array
-        promises.push(ApiUsers.updateUser($scope.userData.registered.id, {
-          user: {
-            bio: $scope.additionalInfoModel.bio
-          }
-        }));
-      }
-
-      //once all promises are resolved, send them on their way
-      $q.all(promises).then(onSuccess, onError);
-    }
+  //skip cuisines and specialties
+  $scope.skipCS = function() {
+    //they're done
+    $scope.finishedSignup();
   };
-
-  function onSuccess(resp) {
-    //make form valid again
-    $scope.additionalInfoForm.$setValidity('loading', true);
-
-    //if successfully joined check if we have anything in the to-do queue
-    if(AfterLogin.hasCallback()) {
-      AfterLogin.goToCallbackPath();
-    } else {
-      //if they were on their way to a certain page
-      if($stateParams.next) {
-        $window.location.href = $stateParams.next;
-      } else {
-        //send them home
-        $window.location.href = '/';
-      }
-    }
-  }
-
-  function onError(resp) {
-    //make form valid again (until errors show)
-    $scope.additionalInfoForm.$setValidity('loading', true);
-    
-    HandleErrors.onError(resp.data, $scope.additionalInfoForm);
-  }
 });

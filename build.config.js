@@ -112,6 +112,7 @@ module.exports = {
         'src/common/forms/validatedCheckbox.tpl.html',
         'src/common/forms/validatedInput.tpl.html',
         'src/common/forms/validatedRadio.tpl.html',
+        'src/common/forms/validatedSingleCheckbox.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/itemActions/itemActionBar.tpl.html',
         'src/common/social/socialSharing.tpl.html',
@@ -177,6 +178,7 @@ module.exports = {
         'src/common/social/addFacebook.js',
         'src/common/social/addTwitter.js',
         'src/common/social/facebookApi.js',
+        'src/common/user/cuisinesSpecialties.js',
         'src/common/user/userImage.js'
       ],
       tpl: [
@@ -186,12 +188,14 @@ module.exports = {
         'src/common/forms/validatedCheckbox.tpl.html',
         'src/common/forms/validatedInput.tpl.html',
         'src/common/forms/validatedRadio.tpl.html',
+        'src/common/forms/validatedSingleCheckbox.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/upload.tpl.html',
         'src/common/social/addFacebook.tpl.html',
         'src/common/social/addTwitter.tpl.html',
         'src/common/user/duplicateEmailOverlay.tpl.html',
-        'src/common/util/404.tpl.html'
+        'src/common/util/404.tpl.html',
+        'src/common/user/cuisinesSpecialties.tpl.html'
       ]
     },
     vendor_files: {
@@ -227,11 +231,13 @@ module.exports = {
       js: [
         'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
+        'src/common/api/keywords.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
         'src/common/auth/afterLogin.js',
         'src/common/auth/auth.js',
         'src/common/forms/baseErrors.js',
+        'src/common/forms/checklist.js',
         'src/common/forms/formNameFix.js',
         'src/common/forms/handleErrors.js',
         'src/common/forms/submitBtn.js',
@@ -241,18 +247,22 @@ module.exports = {
         'src/common/social/connectFacebook.js',
         'src/common/social/connectTwitter.js',
         'src/common/social/facebookApi.js',
+        'src/common/user/cuisinesSpecialties.js',
         'src/common/user/userImage.js'
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
+        'src/common/forms/checklist.tpl.html',
         'src/common/forms/submitBtn.tpl.html',
         'src/common/forms/validatedCheckbox.tpl.html',
         'src/common/forms/validatedInput.tpl.html',
         'src/common/forms/validatedRadio.tpl.html',
+        'src/common/forms/validatedSingleCheckbox.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/upload.tpl.html',
         'src/common/user/duplicateEmailOverlay.tpl.html',
-        'src/common/util/404.tpl.html'
+        'src/common/util/404.tpl.html',
+        'src/common/user/cuisinesSpecialties.tpl.html'
       ]
     },
     vendor_files: {

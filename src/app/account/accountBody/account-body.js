@@ -24,5 +24,5 @@ angular.module( 'Morsel.account.body', [])
 })
 
 .controller( 'AccountBodyCtrl', function AccountBodyCtrl ($scope, accountUser, Auth){
-  $scope.isChef = Auth.isChef();
+  $scope.isProfessional = Auth.isProfessional();
 });

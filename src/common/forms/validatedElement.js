@@ -105,6 +105,8 @@ angular.module('Morsel.common.validatedElement', [])
         templateMid = 'Radio';
       } else if(tAttrs.mrslValTagType === 'checkbox') {
         templateMid = 'Checkbox';
+      } else if(tAttrs.mrslValTagType === 'single-checkbox') {
+        templateMid = 'SingleCheckbox';
       }
       
       return templateRoot + templateMid + templateEnd;

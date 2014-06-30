@@ -8,6 +8,7 @@ angular.module( 'Morsel.login', [
   'ui.route',
   //filters
   //API
+  'Morsel.common.apiKeywords',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
   //templates
@@ -16,8 +17,10 @@ angular.module( 'Morsel.login', [
   'Morsel.common.afterLogin',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
+  'Morsel.common.checklist',
   'Morsel.common.connectFacebook',
   'Morsel.common.connectTwitter',
+  'Morsel.common.cuisinesSpecialties',
   'Morsel.common.facebookApi',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
