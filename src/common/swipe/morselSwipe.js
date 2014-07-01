@@ -207,9 +207,10 @@ angular.module('Morsel.common.morselSwipe', [
       function swipeStart(coords, event) {
         var elementScope = angular.element(event.target).scope(),
             hasNonSwipeAttr = angular.isDefined(event.target.attributes['non-swipeable']),
-            nonSwipeable = elementScope.nonSwipeable || hasNonSwipeAttr;
+            nonSwipeable = elementScope.nonSwipeable || hasNonSwipeAttr,
+            itemDescriptionOpen = iElement.hasClass('item-description-open');
 
-        if(!nonSwipeable) {
+        if(!nonSwipeable && !itemDescriptionOpen) {
           $document.bind('mouseup', documentMouseUpEvent);
           $document.bind('touchend', documentMouseUpEvent);
           pressed = true;
