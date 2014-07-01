@@ -390,7 +390,7 @@ angular.module('Morsel.common.morselSwipe', [
         offset = y;
         move = -Math.round(offset);
 
-        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate3d(0, ' + move + 'px, 0)';
+        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate(0, ' + move + 'px)';
       }
 
       function autoScroll() {

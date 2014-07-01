@@ -19,7 +19,7 @@ $feed-notification-width: 90px;
   .morsels {
     list-style: none;
     position: relative;
-    @include translate3d(0,0,0);
+    @include translate(0,0);
     white-space: nowrap;
     overflow: visible;
     padding: 0;

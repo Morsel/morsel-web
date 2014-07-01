@@ -223,7 +223,7 @@ angular.module('Morsel.common.feedSwipe', [
         var move = -Math.round(offset);
 
         move += (scope.feedBufferIndex * feedWidth);
-        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate3d(' + move + 'px, 0, 0)';
+        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate(' + move + 'px, 0)';
       }
 
       function autoScroll() {

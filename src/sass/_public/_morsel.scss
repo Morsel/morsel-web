@@ -362,7 +362,7 @@ $item-info-bottom-height: 55px + $hr-height;
   .in-morsel {
     .current-morsel {
       .morsel-title {
-        @include translate3d(0,0,0);
+        @include translate(0,0);
       }
     }
   }
