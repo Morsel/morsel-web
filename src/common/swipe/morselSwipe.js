@@ -535,7 +535,7 @@ angular.module('Morsel.common.morselSwipe', [
         }
       }
 
-      //handle navigation for up and down keypresses
+      /*//handle navigation for up and down keypresses
       function handleKeydown(e) {
         //make sure this morsel is currently in view - if this morsel instance is the one being viewed. if $index doesn't exist it means this one is the only one
         if(scope.$index ? scope.currentMorselIndex === scope.$index : true) {
@@ -558,7 +558,7 @@ angular.module('Morsel.common.morselSwipe', [
       // unbind keydown event when user leaves
       scope.$on('$destroy', function(){
         $document.off('keydown', debouncedKeydown);
-      });
+      });*/
     }
   };
 });

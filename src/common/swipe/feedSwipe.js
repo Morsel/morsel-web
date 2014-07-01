@@ -295,7 +295,7 @@ angular.module('Morsel.common.feedSwipe', [
         }
       };
 
-      //handle navigation for left and right keypresses
+      /*//handle navigation for left and right keypresses
       function handleKeydown(e) {
         //ignore if it it's not coming from the body (could be in an input, etc)
         if(e.srcElement.tagName === 'BODY') {
@@ -315,7 +315,7 @@ angular.module('Morsel.common.feedSwipe', [
       // unbind keydown event when user leaves
       scope.$on('$destroy', function(){
         $document.off('keydown', debouncedKeydown);
-      });
+      });*/
     }
   };
 })
