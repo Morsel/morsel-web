@@ -336,7 +336,7 @@ nav {
 
         a {
           @include replace-text-with-dimensions('logos/morsel-header.png');
-          background-size: initial;
+          background-size: auto;
         }
 
         .site.open & {
