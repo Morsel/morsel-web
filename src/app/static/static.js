@@ -40,8 +40,6 @@ angular.module( 'Morsel.static', [
 .config( function myAppConfig ( $locationProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};
 
-  $locationProvider.html5Mode(true).hashPrefix('!');
-
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');

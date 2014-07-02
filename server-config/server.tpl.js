@@ -186,40 +186,21 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       res.set('Content-Type', 'text/html').sendfile('views/partials/static/privacy.hbs');
     });
 
-    //ACCOUNT
-    app.get('/account*', function(req, res){
-      accountApp.renderAccountPage(req, res);
-    });
-
     //LOGIN
 
-    //login
+    //login convenience
     app.get('/login', function(req, res){
-      loginApp.renderLoginPage(res);
+      res.redirect('/auth/login');
     });
 
-    //logout
+    //logout convenience
     app.get('/logout', function(req, res){
-      loginApp.renderLoginPage(res);
+      res.redirect('/auth/logout');
     });
 
-    //join
-    app.get('/join/:step', function(req, res){
-      loginApp.renderLoginPage(res);
-    });
-
+    //join convenience
     app.get('/join', function(req, res){
-      loginApp.renderLoginPage(res);
-    });
-
-    //password reset
-    app.get('/password-reset', function(req, res){
-      loginApp.renderLoginPage(res);
-    });
-
-    //password reset
-    app.get('/password-reset/new', function(req, res){
-      loginApp.renderLoginPage(res);
+      res.redirect('/auth/join');
     });
 
     //twitter auth
@@ -229,6 +210,16 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     app.get('/auth/twitter/callback', function(req, res){
       loginApp.getTwitterOAuthAccessToken(req, res);
+    });
+
+    //catch all our requests
+    app.get('/auth*', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
+
+    //ACCOUNT
+    app.get('/account*', function(req, res){
+      accountApp.renderAccountPage(req, res);
     });
 
     //PUBLIC

@@ -2,19 +2,21 @@ angular.module( 'Morsel.login.passwordReset', [])
 
 .config(function config( $stateProvider ) {
   //these are totally separate states - same file for convenience
-  $stateProvider.state( 'password-reset-enter-email', {
+  $stateProvider.state( 'auth.password-reset-enter-email', {
     url: '/password-reset',
+    parent: 'auth',
     views: {
-      "main": {
+      "auth-view": {
         controller: 'PasswordResetEnterEmailCtrl',
         templateUrl: 'app/login/password-reset/enter-email.tpl.html'
       }
     },
     data:{ pageTitle: 'Password Reset' }
-  }).state( 'password-reset-new-password', {
+  }).state( 'auth.password-reset-new-password', {
     url: '/password-reset/new?reset_password_token',
+    parent: 'auth',
     views: {
-      "main": {
+      "auth-view": {
         controller: 'PasswordResetNewPasswordCtrl',
         templateUrl: 'app/login/password-reset/new-password.tpl.html'
       }

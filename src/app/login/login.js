@@ -32,6 +32,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.login.auth',
   'Morsel.login.join',
   'Morsel.login.login',
   'Morsel.login.logout',
@@ -71,20 +72,6 @@ angular.module( 'Morsel.login', [
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
-
-  $stateProvider.state( '404', {
-    url: '/404',
-    views: {
-      "main": {
-        controller: function($scope){
-        },
-        templateUrl: 'common/util/404.tpl.html'
-      }
-    },
-    data: {
-      pageTitle: 'Page Not Found'
-    }
-  });
 })
 
 .run( function run ($window) {
@@ -162,9 +149,9 @@ angular.module( 'Morsel.login', [
     GA.sendPageview($scope.pageTitle);
   });
 
-  //if there are internal state issues, go to 404
+  //if there are internal state issues, go to login
   $scope.$on('$stateChangeError', function(e) {
-    $state.go('404');
+    $state.go('login');
   });
 
   //to store user data as they're signing up/logging in
@@ -197,5 +184,9 @@ angular.module( 'Morsel.login', [
   $scope.goTo = function(path) {
     $location.path(path);
   };
+
+  setTimeout(function(){
+
+  }, 10000);
 });
 

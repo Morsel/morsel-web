@@ -22,7 +22,8 @@ function renderLoginPage(res, twitterData) {
 
   res.render('login', {
     facebookAppId : util.facebookAppId,
-    twitterData : JSON.stringify(twitterData) || 'null'
+    twitterData : JSON.stringify(twitterData) || 'null',
+    metabase: '/auth'
   });
 };
 

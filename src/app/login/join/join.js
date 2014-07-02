@@ -1,10 +1,11 @@
 angular.module( 'Morsel.login.join', [])
 
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'join', {
+  $stateProvider.state( 'auth.join', {
     url: '/join?next',
+    parent: 'auth',
     views: {
-      "main": {
+      "auth-view": {
         controller: 'JoinCtrl',
         templateUrl: 'app/login/join/join.tpl.html'
       }
@@ -30,8 +31,9 @@ angular.module( 'Morsel.login.join', [])
       }
     }
   })
-  .state( 'join.landing', {
+  .state( 'auth.join.landing', {
     url: '/1',
+    parent: 'auth',
     views: {
       "landing": {
         controller: 'LandingCtrl',
@@ -39,8 +41,9 @@ angular.module( 'Morsel.login.join', [])
       }
     }
   })
-  .state( 'join.basicInfo', {
+  .state( 'auth.join.basicInfo', {
     url: '/2',
+    parent: 'auth',
     views: {
       "basicInfo": {
         controller: 'BasicInfoCtrl',
@@ -48,8 +51,9 @@ angular.module( 'Morsel.login.join', [])
       }
     }
   })
-  .state( 'join.additionalInfo', {
+  .state( 'auth.join.additionalInfo', {
     url: '/3',
+    parent: 'auth',
     views: {
       "additionalInfo": {
         controller: 'AdditionalInfoCtrl',
@@ -61,9 +65,9 @@ angular.module( 'Morsel.login.join', [])
 
 .controller( 'JoinCtrl', function JoinCtrl( $scope, $state, AfterLogin, $window, $stateParams ) {
   //if they're not trying to go to the second step
-  if($state.current.name != 'join.basicInfo') {
+  if($state.current.name != 'auth.join.basicInfo') {
     //send them to the landing page
-    $state.go('join.landing');
+    $state.go('auth.join.landing');
   }
 
   $scope.finishedSignup = function() {
@@ -84,7 +88,7 @@ angular.module( 'Morsel.login.join', [])
 
 .controller( 'LandingCtrl', function LandingCtrl( $scope, $state ) {
   $scope.joinEmail = function() {
-    $state.go('join.basicInfo');
+    $state.go('auth.join.basicInfo');
   };
 })
 
@@ -180,7 +184,7 @@ angular.module( 'Morsel.login.join', [])
     //if successfully joined send to the next step
     if($scope.userData.registered.professional) {
       //pros need more info
-      $state.go('join.additionalInfo');
+      $state.go('auth.join.additionalInfo');
     } else {
       //they're done
       $scope.finishedSignup();

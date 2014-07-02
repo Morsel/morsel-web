@@ -6,7 +6,8 @@ module.exports.renderStaticPage = function(res, route) {
         //determine how to render menu
         pageType: {
           static: true
-        }
+        },
+        metabase: '/'
       };
 
   util.updateMetadata(route);
