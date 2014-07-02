@@ -55,7 +55,8 @@ angular.module('Morsel.common.feedSwipe', [
           swipeXMoved = false,
           winEl = angular.element($window),
           lastScrollTimestamp,
-          feedItems;
+          feedItems,
+          animationFrame = new AnimationFrame();
 
       updatefeedWidth();
 
@@ -111,7 +112,7 @@ angular.module('Morsel.common.feedSwipe', [
           if (xDelta > 2 || xDelta < -2) {
             swipeXMoved = true;
             startX = x;
-            requestAnimationFrame(function() {
+            animationFrame.request(function() {
               scroll(capPosition(offset + xDelta));
             });
           }
@@ -153,7 +154,7 @@ angular.module('Morsel.common.feedSwipe', [
         if (forceAnimation) {
           amplitude = offset - currentOffset;
         }
-        requestAnimationFrame(autoScroll);
+        animationFrame.request(autoScroll);
       };
 
       //helpers
@@ -228,7 +229,7 @@ angular.module('Morsel.common.feedSwipe', [
 
       function autoScroll() {
         // scroll smoothly to "destination" until we reach it
-        // using requestAnimationFrame
+        // using animationFrame
         var elapsed,
             delta;
 
@@ -237,7 +238,7 @@ angular.module('Morsel.common.feedSwipe', [
           delta = amplitude * Math.exp(-elapsed / timeConstant);
           if (delta > rubberTreshold || delta < -rubberTreshold) {
             scroll(destination - delta);
-            requestAnimationFrame(autoScroll);
+            animationFrame.request(autoScroll);
           } else {
             goToSlide(destination / feedWidth);
           }

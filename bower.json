@@ -21,6 +21,7 @@
     "sass-bootstrap": "git://github.com/jlong/sass-bootstrap.git#2b2bd7cce7693e25518cace258a89ad9621169d0",
     "angular-bootstrap": "~0.11.0",
     "angular-ui-router": "~0.2.10",
-    "angular-cookies": "~1.2.16"
+    "angular-cookies": "~1.2.16",
+    "matchMedia": "~0.2.0"
   }
 }

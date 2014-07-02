@@ -31,7 +31,7 @@ $item-info-bottom-height: 55px + $hr-height;
     text-align: center;
     padding: $morsel-header-padding;
     @include transition(all .2s ease-out);
-    @include translate3d(0,-$mini-header-height,0);
+    @include translate(0,-$mini-header-height);
     width: 100%;
 
     h1 {
