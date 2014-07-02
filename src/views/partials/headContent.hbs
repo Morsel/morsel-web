@@ -39,6 +39,16 @@
 
 <link rel="canonical" href="{{@metadata.url}}">
 
+<!--[if gte IE 9]> 
+<script src="http://jpillora.com/xdomain/dist/0.6/xdomain.min.js"></script>
+<script>
+  xdomain.slaves({
+    "http://api-staging.eatmorsel.com": "/proxy.html",
+    "http://api.eatmorsel.com": "/proxy.html"
+  });
+</script>
+<![endif]-->
+
 <script type="text/javascript">
   var MorselConfig = {
     version: '<%= version %>',
