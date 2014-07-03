@@ -84,7 +84,8 @@ angular.module('Morsel.common.morselSwipe', [
             return [
               ['default', primaryItemPhotos._320x320],
               ['(min-width: 321px)', primaryItemPhotos._480x480],
-              ['screen-xs', primaryItemPhotos._640x640]
+              ['screen-xs', primaryItemPhotos._640x640],
+              ['screen-md', primaryItemPhotos._992x992]
             ];
           } else {
             var lastItemWithPhotos;
@@ -100,7 +101,8 @@ angular.module('Morsel.common.morselSwipe', [
               return [
                 ['default', lastItemWithPhotos.photos._320x320],
                 ['(min-width: 321px)', lastItemWithPhotos.photos._480x480],
-                ['screen-xs', lastItemWithPhotos.photos._640x640]
+                ['screen-xs', lastItemWithPhotos.photos._640x640],
+                ['screen-md', primaryItemPhotos._992x992]
               ];
             } else {
               //no items have photos
@@ -368,11 +370,13 @@ angular.module('Morsel.common.morselSwipe', [
         scope.layout.feedHeight = itemHeight+'px';
 
         if (matchMedia(presetMediaQueries['screen-md']).matches) {
-          scope.layout.coverPhotoHeight = (itemHeight - MINIHEADERHEIGHT) +'px';
+          scope.layout.coverPhotoHeight = itemHeight +'px';
+          scope.layout.coverTitleHeight = '70%';
           scope.layout.coverBlockMinHeight = (itemHeight - MINIHEADERHEIGHT)/2 +'px';
           scope.layout.textDescriptionHeight = window.innerHeight/2 + 'px';
         } else {
           scope.layout.coverPhotoHeight = (itemHeight - coverPageBlockHeight - MINIHEADERHEIGHT) +'px';
+          scope.layout.coverTitleHeight = (itemHeight - coverPageBlockHeight - MINIHEADERHEIGHT) +'px';
           scope.layout.coverBlockMinHeight = '0';
           scope.layout.textDescriptionHeight = '100%';
         }

@@ -11,24 +11,25 @@
       <ul class="items">
         <li class="cover-page extra-page" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container">
-            <div class="cover-jumbo col-md-6">
+            <div class="cover-jumbo">
               <div class="cover-actions">
                 <a ng-click="currentIndicatorIndex = morsel.items.length+1"><i class="common-share"></i></a>
               </div>
               <div ng-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" ng-style="{'height': layout.coverPhotoHeight}"></div>
-              <div class="cover-title-wrap" ng-style="{'height': layout.coverPhotoHeight}">
+              <div class="cover-title-wrap" ng-style="{'height': layout.coverTitleHeight}">
                 <h2 class="cover-title">{{morsel.title}}</h2>
               </div>
+              <div class="cover-bg"></div>
             </div>
-            <div class="col-md-6">
+            <div class="cover-jumbo-info">
               <div class="cover-info col-xs-6 col-md-12" ng-style="{'min-height': layout.coverBlockMinHeight}">
-                <span am-time-ago="morsel.created_at" class="time-ago"></span>
                 <div class="user-info">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
                   <h5 class="h2 overflow-ellipsis">
                     <a href="/{{morsel.creator.username}}">{{morsel.creator.first_name + ' ' + morsel.creator.last_name}}</a>
                   </h5>
                 </div>
+                <span am-time-ago="morsel.created_at" class="time-ago"></span>
               </div>
               <div class="cover-more col-xs-6 col-md-12" ng-style="{'min-height': layout.coverBlockMinHeight}">
                 <a class="cover-more-btn" ng-click="currentIndicatorIndex = 1">More</a>
