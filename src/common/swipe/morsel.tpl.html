@@ -2,6 +2,7 @@
   <div ng-if="!morsel" class="loader morsel-loader"></div>
   <div ng-if="morsel"  ng-class="{'current-morsel': $index ? currentMorselIndex === $index : true}">
     <div mrsl-morsel-swipe="{{morsel.items.length > 0}}" mrsl-morsel-swipe-count="{{morsel.items.length}}" ng-style="{'height': layout.feedHeight}" ng-class="{'item-description-open': layout.descriptionOpen}">
+      <div mrsl-morsel-controls index="currentIndicatorIndex" count="morsel.items.length"></div>
       <div class="morsel-title">
         <div class="morsel-container">
           <h1>{{morsel.title}}</h1>

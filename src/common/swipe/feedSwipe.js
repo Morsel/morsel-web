@@ -6,7 +6,7 @@ angular.module('Morsel.common.feedSwipe', [
   'ngTouch'
 ])
 
-.directive('feedControls', [function() {
+.directive('mrslFeedControls', [function() {
   return {
     restrict: 'A',
     replace: true,
@@ -23,13 +23,13 @@ angular.module('Morsel.common.feedSwipe', [
       };
     },
     template: '<div>' +
-                '<span class="feed-control feed-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
-                '<span class="feed-control feed-control-next" ng-click="next()" ng-if="index < count - 1"></span>' +
+                '<span class="feed-control morsel-control feed-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
+                '<span class="feed-control morsel-control feed-control-next" ng-click="next()" ng-if="index < count - 1"></span>' +
               '</div>'
   };
 }])
 
-.directive('feedSwipe', function($window, $document, Transform) {
+.directive('mrslFeedSwipe', function($window, $document, Transform) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change

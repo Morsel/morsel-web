@@ -25,6 +25,33 @@ angular.module('Morsel.common.morselSwipe', [
   };
 })
 
+.directive('mrslMorselControls', [function() {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      count: '=',
+      index: '='
+    },
+    link: function(scope, element, attrs) {
+      if(!scope.index) {
+        scope.index = 0;
+      }
+
+      scope.up = function() {
+        scope.index--;
+      };
+      scope.down = function() {
+        scope.index++;
+      };
+    },
+    template: '<div>' +
+                '<span class="morsel-control morsel-control-up" ng-click="up()" ng-if="index > 0"></span>' +
+                '<span class="morsel-control morsel-control-down" ng-click="down()" ng-if="index < count + 1"></span>' +
+              '</div>'
+  };
+}])
+
 .directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, $state, $stateParams, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries, Transform, MINIHEADERHEIGHT) {
   var // used to compute the sliding speed
       timeConstant = 75,
