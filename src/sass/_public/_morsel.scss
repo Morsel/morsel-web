@@ -509,6 +509,7 @@ $item-info-bottom-height: 55px + $hr-height;
         .item-description {
           margin-bottom: 25px;
           padding-bottom: 0;
+          padding-right: 10px;
 
           hr {
             display: none;
