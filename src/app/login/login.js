@@ -32,6 +32,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.login.auth',
   'Morsel.login.join',
   'Morsel.login.login',
   'Morsel.login.logout',
@@ -66,25 +67,11 @@ angular.module( 'Morsel.login', [
   $locationProvider.html5Mode(true).hashPrefix('!');
 
   //if we don't recognize the URL, send them to the login page for now
-  $urlRouterProvider.otherwise( '/login' );
+  $urlRouterProvider.otherwise( '/auth/login' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
-
-  $stateProvider.state( '404', {
-    url: '/404',
-    views: {
-      "main": {
-        controller: function($scope){
-        },
-        templateUrl: 'common/util/404.tpl.html'
-      }
-    },
-    data: {
-      pageTitle: 'Page Not Found'
-    }
-  });
 })
 
 .run( function run ($window) {
@@ -124,7 +111,7 @@ angular.module( 'Morsel.login', [
   });
 
   if(MorselConfig.twitterData) {
-    $location.path('/join');
+    $location.path('/auth/join');
   }
 
   //when a user starts to access a new route
@@ -135,7 +122,7 @@ angular.module( 'Morsel.login', [
     if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
       event.preventDefault();
       //send them to the login page
-      $location.path('/login');
+      $location.path('/auth/login');
     }
 
     //if there are any modals open, close them
@@ -162,9 +149,9 @@ angular.module( 'Morsel.login', [
     GA.sendPageview($scope.pageTitle);
   });
 
-  //if there are internal state issues, go to 404
+  //if there are internal state issues, go to login
   $scope.$on('$stateChangeError', function(e) {
-    $state.go('404');
+    $state.go('auth.login');
   });
 
   //to store user data as they're signing up/logging in

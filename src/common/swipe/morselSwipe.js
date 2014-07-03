@@ -25,6 +25,33 @@ angular.module('Morsel.common.morselSwipe', [
   };
 })
 
+.directive('mrslMorselControls', [function() {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      count: '=',
+      index: '='
+    },
+    link: function(scope, element, attrs) {
+      if(!scope.index) {
+        scope.index = 0;
+      }
+
+      scope.up = function() {
+        scope.index--;
+      };
+      scope.down = function() {
+        scope.index++;
+      };
+    },
+    template: '<div>' +
+                '<span class="morsel-control morsel-control-up" ng-click="up()" ng-if="index > 0"></span>' +
+                '<span class="morsel-control morsel-control-down" ng-click="down()" ng-if="index < count + 1"></span>' +
+              '</div>'
+  };
+}])
+
 .directive('mrslMorselSwipe', function(swipe, $window, $document, $parse, $compile, $state, $stateParams, Mixpanel, PhotoHelpers, MORSELPLACEHOLDER, presetMediaQueries, Transform, MINIHEADERHEIGHT) {
   var // used to compute the sliding speed
       timeConstant = 75,
@@ -84,7 +111,8 @@ angular.module('Morsel.common.morselSwipe', [
             return [
               ['default', primaryItemPhotos._320x320],
               ['(min-width: 321px)', primaryItemPhotos._480x480],
-              ['screen-xs', primaryItemPhotos._640x640]
+              ['screen-xs', primaryItemPhotos._640x640],
+              ['screen-md', primaryItemPhotos._992x992]
             ];
           } else {
             var lastItemWithPhotos;
@@ -100,7 +128,8 @@ angular.module('Morsel.common.morselSwipe', [
               return [
                 ['default', lastItemWithPhotos.photos._320x320],
                 ['(min-width: 321px)', lastItemWithPhotos.photos._480x480],
-                ['screen-xs', lastItemWithPhotos.photos._640x640]
+                ['screen-xs', lastItemWithPhotos.photos._640x640],
+                ['screen-md', primaryItemPhotos._992x992]
               ];
             } else {
               //no items have photos
@@ -207,9 +236,10 @@ angular.module('Morsel.common.morselSwipe', [
       function swipeStart(coords, event) {
         var elementScope = angular.element(event.target).scope(),
             hasNonSwipeAttr = angular.isDefined(event.target.attributes['non-swipeable']),
-            nonSwipeable = elementScope.nonSwipeable || hasNonSwipeAttr;
+            nonSwipeable = elementScope.nonSwipeable || hasNonSwipeAttr,
+            itemDescriptionOpen = iElement.hasClass('item-description-open');
 
-        if(!nonSwipeable) {
+        if(!nonSwipeable && !itemDescriptionOpen) {
           $document.bind('mouseup', documentMouseUpEvent);
           $document.bind('touchend', documentMouseUpEvent);
           pressed = true;
@@ -367,11 +397,13 @@ angular.module('Morsel.common.morselSwipe', [
         scope.layout.feedHeight = itemHeight+'px';
 
         if (matchMedia(presetMediaQueries['screen-md']).matches) {
-          scope.layout.coverPhotoHeight = (itemHeight - MINIHEADERHEIGHT) +'px';
+          scope.layout.coverPhotoHeight = itemHeight +'px';
+          scope.layout.coverTitleHeight = '70%';
           scope.layout.coverBlockMinHeight = (itemHeight - MINIHEADERHEIGHT)/2 +'px';
           scope.layout.textDescriptionHeight = window.innerHeight/2 + 'px';
         } else {
           scope.layout.coverPhotoHeight = (itemHeight - coverPageBlockHeight - MINIHEADERHEIGHT) +'px';
+          scope.layout.coverTitleHeight = (itemHeight - coverPageBlockHeight - MINIHEADERHEIGHT) +'px';
           scope.layout.coverBlockMinHeight = '0';
           scope.layout.textDescriptionHeight = '100%';
         }
@@ -389,7 +421,7 @@ angular.module('Morsel.common.morselSwipe', [
         offset = y;
         move = -Math.round(offset);
 
-        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate3d(0, ' + move + 'px, 0)';
+        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate(0, ' + move + 'px)';
       }
 
       function autoScroll() {
@@ -534,7 +566,7 @@ angular.module('Morsel.common.morselSwipe', [
         }
       }
 
-      //handle navigation for up and down keypresses
+      /*//handle navigation for up and down keypresses
       function handleKeydown(e) {
         //make sure this morsel is currently in view - if this morsel instance is the one being viewed. if $index doesn't exist it means this one is the only one
         if(scope.$index ? scope.currentMorselIndex === scope.$index : true) {
@@ -557,7 +589,7 @@ angular.module('Morsel.common.morselSwipe', [
       // unbind keydown event when user leaves
       scope.$on('$destroy', function(){
         $document.off('keydown', debouncedKeydown);
-      });
+      });*/
     }
   };
 });

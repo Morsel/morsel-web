@@ -50,7 +50,8 @@ function renderPublicPage(res, customMetadata) {
     facebookAppId : util.facebookAppId,
     pageType: {
       public: true
-    }
+    },
+    metabase: '/'
   });
 }
 

@@ -1,10 +1,11 @@
 angular.module( 'Morsel.login.login', [])
 
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'login', {
+  $stateProvider.state( 'auth.login', {
     url: '/login?next',
+    parent: 'auth',
     views: {
-      "main": {
+      "auth-view": {
         controller: 'LoginCtrl',
         templateUrl: 'app/login/login/login.tpl.html'
       }

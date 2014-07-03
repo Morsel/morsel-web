@@ -20,7 +20,6 @@ var staticRoutes = require('./data/static-routes.json');
 var metadata = require('./data/metadata.json');
 
 //set up some app locals that will be rendered to any templates
-app.locals.metabase = '/';
 app.locals.siteUrl = process.env.SITEURL || config.siteUrl;
 app.locals.apiUrl = process.env.APIURL || config.apiUrl;
 app.locals.mixpanelToken = process.env.MIXPANELTOKEN || config.devMixpanelToken;
@@ -65,6 +64,8 @@ module.exports.render404 = render404;
 module.exports.handleSingleRoute = function(req, res, next) {
   var route = req.params.route,
       request = require('request');
+
+  console.log('handleSingleRoute',req);
 
   //check against our known routes
   if(isStaticRoute(route)) {

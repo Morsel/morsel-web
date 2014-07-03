@@ -1,10 +1,11 @@
 angular.module( 'Morsel.login.logout', [])
 
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'logout', {
+  $stateProvider.state( 'auth.logout', {
     url: '/logout',
+    parent: 'auth',
     views: {
-      "main": {
+      "auth-view": {
         controller: 'LogoutCtrl'
       }
     },

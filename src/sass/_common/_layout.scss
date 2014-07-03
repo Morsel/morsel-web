@@ -154,11 +154,11 @@
   z-index: 10;
   left: 0;
   @include transition(all .2s ease-out);
-  @include translate3d(0, 0, 0);
+  @include translate(0, 0);
   overflow: hidden;
 
   &.open {
-    @include translate3d(-$sidenav-width, 0, 0);
+    @include translate(-$sidenav-width, 0);
 
     .main-header {
       background-color: rgba(1, 1, 1, 0.5);
@@ -313,7 +313,7 @@ nav {
     &.open {
       .main-header {
         .morsel-logo {
-          @include translate3d($sidenav-width, 0, 0);
+          @include translate($sidenav-width, 0);
         }
       }
     }
@@ -336,7 +336,7 @@ nav {
 
         a {
           @include replace-text-with-dimensions('logos/morsel-header.png');
-          background-size: initial;
+          background-size: auto;
         }
 
         .site.open & {

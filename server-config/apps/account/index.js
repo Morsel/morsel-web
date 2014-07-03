@@ -23,6 +23,7 @@ module.exports.renderAccountPage = function(req, res, twitterData) {
     //determine how to render menu
     pageType: {
       account: true
-    }
+    },
+    metabase: '/account'
   });
 };

@@ -6,7 +6,7 @@ angular.module('Morsel.common.feedSwipe', [
   'ngTouch'
 ])
 
-.directive('feedControls', [function() {
+.directive('mrslFeedControls', [function() {
   return {
     restrict: 'A',
     replace: true,
@@ -23,13 +23,13 @@ angular.module('Morsel.common.feedSwipe', [
       };
     },
     template: '<div>' +
-                '<span class="feed-control feed-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
-                '<span class="feed-control feed-control-next" ng-click="next()" ng-if="index < count - 1"></span>' +
+                '<span class="feed-control morsel-control feed-control-prev" ng-click="prev()" ng-if="index > 0"></span>' +
+                '<span class="feed-control morsel-control feed-control-next" ng-click="next()" ng-if="index < count - 1"></span>' +
               '</div>'
   };
 }])
 
-.directive('feedSwipe', function($window, $document, Transform) {
+.directive('mrslFeedSwipe', function($window, $document, Transform) {
   var // used to compute the sliding speed
       timeConstant = 75,
       // in container % how much we need to drag to trigger the slide change
@@ -55,7 +55,8 @@ angular.module('Morsel.common.feedSwipe', [
           swipeXMoved = false,
           winEl = angular.element($window),
           lastScrollTimestamp,
-          feedItems;
+          feedItems,
+          animationFrame = new AnimationFrame();
 
       updatefeedWidth();
 
@@ -111,7 +112,7 @@ angular.module('Morsel.common.feedSwipe', [
           if (xDelta > 2 || xDelta < -2) {
             swipeXMoved = true;
             startX = x;
-            requestAnimationFrame(function() {
+            animationFrame.request(function() {
               scroll(capPosition(offset + xDelta));
             });
           }
@@ -153,7 +154,7 @@ angular.module('Morsel.common.feedSwipe', [
         if (forceAnimation) {
           amplitude = offset - currentOffset;
         }
-        requestAnimationFrame(autoScroll);
+        animationFrame.request(autoScroll);
       };
 
       //helpers
@@ -223,12 +224,12 @@ angular.module('Morsel.common.feedSwipe', [
         var move = -Math.round(offset);
 
         move += (scope.feedBufferIndex * feedWidth);
-        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate3d(' + move + 'px, 0, 0)';
+        iElement.find('ul')[0].style[Transform.getProperty()] = 'translate(' + move + 'px, 0)';
       }
 
       function autoScroll() {
         // scroll smoothly to "destination" until we reach it
-        // using requestAnimationFrame
+        // using animationFrame
         var elapsed,
             delta;
 
@@ -237,7 +238,7 @@ angular.module('Morsel.common.feedSwipe', [
           delta = amplitude * Math.exp(-elapsed / timeConstant);
           if (delta > rubberTreshold || delta < -rubberTreshold) {
             scroll(destination - delta);
-            requestAnimationFrame(autoScroll);
+            animationFrame.request(autoScroll);
           } else {
             goToSlide(destination / feedWidth);
           }
@@ -295,7 +296,7 @@ angular.module('Morsel.common.feedSwipe', [
         }
       };
 
-      //handle navigation for left and right keypresses
+      /*//handle navigation for left and right keypresses
       function handleKeydown(e) {
         //ignore if it it's not coming from the body (could be in an input, etc)
         if(e.srcElement.tagName === 'BODY') {
@@ -315,7 +316,7 @@ angular.module('Morsel.common.feedSwipe', [
       // unbind keydown event when user leaves
       scope.$on('$destroy', function(){
         $document.off('keydown', debouncedKeydown);
-      });
+      });*/
     }
   };
 })
