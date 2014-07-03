@@ -173,10 +173,6 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       res.render('unsubscribe');
     });
 
-    app.get('/testing', function(req, res){
-      accountApp.test(req, res);
-    });
-
     //FOR APP
     app.get('/terms_text', function(req, res) {
       res.set('Content-Type', 'text/html').sendfile('views/partials/static/terms.hbs');
@@ -244,6 +240,10 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     });
 
     //search
+    app.get('/search', function(req, res){
+      res.redirect('/search/people');
+    });
+
     app.get('/search*', function(req, res){
       publicApp.renderPublicPage(res);
     });

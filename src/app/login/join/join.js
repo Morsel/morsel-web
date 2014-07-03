@@ -33,7 +33,9 @@ angular.module( 'Morsel.login.join', [])
   })
   .state( 'auth.join.landing', {
     url: '/1',
-    parent: 'auth',
+    data: {
+      pageTitle: 'Join Morsel'
+    },
     views: {
       "landing": {
         controller: 'LandingCtrl',
@@ -43,7 +45,6 @@ angular.module( 'Morsel.login.join', [])
   })
   .state( 'auth.join.basicInfo', {
     url: '/2',
-    parent: 'auth',
     views: {
       "basicInfo": {
         controller: 'BasicInfoCtrl',
@@ -53,7 +54,6 @@ angular.module( 'Morsel.login.join', [])
   })
   .state( 'auth.join.additionalInfo', {
     url: '/3',
-    parent: 'auth',
     views: {
       "additionalInfo": {
         controller: 'AdditionalInfoCtrl',

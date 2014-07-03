@@ -5,10 +5,10 @@
     "angular-mocks": "1.2.7"
   },
   "resolutions": {
-    "angular": "1.2.7"
+    "angular": ">= 1.0.8"
   },
   "dependencies": {
-    "angular": "1.2.7",
+    "angular": "~1.2.19",
     "angular-moment": "~0.6.0",
     "angular-swipe": "git@github.com:marmorkuchen-net/angular-swipe.git",
     "angular-touch": "~1.2.10",

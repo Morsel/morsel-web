@@ -67,7 +67,7 @@ angular.module( 'Morsel.login', [
   $locationProvider.html5Mode(true).hashPrefix('!');
 
   //if we don't recognize the URL, send them to the login page for now
-  $urlRouterProvider.otherwise( '/login' );
+  $urlRouterProvider.otherwise( '/auth/login' );
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
@@ -111,7 +111,7 @@ angular.module( 'Morsel.login', [
   });
 
   if(MorselConfig.twitterData) {
-    $location.path('/join');
+    $location.path('/auth/join');
   }
 
   //when a user starts to access a new route
@@ -122,7 +122,7 @@ angular.module( 'Morsel.login', [
     if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
       event.preventDefault();
       //send them to the login page
-      $location.path('/login');
+      $location.path('/auth/login');
     }
 
     //if there are any modals open, close them
@@ -151,7 +151,7 @@ angular.module( 'Morsel.login', [
 
   //if there are internal state issues, go to login
   $scope.$on('$stateChangeError', function(e) {
-    $state.go('login');
+    $state.go('auth.login');
   });
 
   //to store user data as they're signing up/logging in
@@ -184,9 +184,5 @@ angular.module( 'Morsel.login', [
   $scope.goTo = function(path) {
     $location.path(path);
   };
-
-  setTimeout(function(){
-
-  }, 10000);
 });
 
