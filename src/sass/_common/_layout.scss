@@ -28,6 +28,8 @@
   @include opacity(0);
   @include transition(all .2s ease-out);
   display: none;
+  background-image: url(images/bg/menu.jpg);
+  background-size: cover;
 
   &.open {
     display: block;
@@ -36,13 +38,15 @@
 
   .prompt-btns {
     overflow: hidden;
+    text-align: center;
 
     a {
-      background-color: $btn-primary-bg;
+      background-color: $morsel-off-white;
       width: 50%;
       float: left;
-      border-right: 2px solid $morsel-primary-light;
+      border-right: 1px solid $morsel-medium;
       padding: 20px;
+      font-weight: 300;
 
       &:last-child {
         border: 0;
@@ -51,7 +55,7 @@
   }
 
   .profile-link {
-    background-color: $btn-primary-bg;
+    background-color: $morsel-off-white;
     padding: 10px 20px;
     display: block;
 
@@ -73,21 +77,25 @@
     display: block;
     color: $morsel-dark;
     text-transform: uppercase;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 16px;
     border-left: 2px solid $morsel-medium;
+    font-family: $font-family-secondary;
   }
 
   a {
-    color: $btn-default-color;
+    color: $morsel-dark;
     display: block;
     padding: 10px 20px;
     text-transform: none;
-    background-color: $morsel-primary;
+    background-color: $morsel-off-white;
+    font-size: 14px;
+    @include transition(background-color .1s ease-out);
 
     &:hover, &:focus {
-      background-color: $morsel-secondary;
+      background-color: $morsel-primary;
       background-image: none;
+      color: white;
+      text-decoration: none;
     }
   }
 
@@ -102,7 +110,7 @@
       margin: 0;
 
       & + li {
-        border-top: 2px solid $morsel-primary-light;
+        border-top: 1px solid $morsel-medium;
       }
 
       &:last-child {
@@ -110,8 +118,6 @@
       }
 
       a {
-        font-size: 16px;
-
         i {
           vertical-align: middle;
           margin-right: 10px;
@@ -120,14 +126,15 @@
 
       &.active {
         a {
-          background-color: $morsel-secondary;
+          background-color: $morsel-primary;
+          color: white;
         }
       }
     }
   }
 
   .morsel-social-links {
-    border-top: 2px solid $morsel-primary-light;
+    border-top: 1px solid $morsel-medium;
     overflow: hidden;
 
     a {
@@ -239,10 +246,9 @@
 
 .side-nav-trigger {
   &:after {
-    width: 18px;
-    height: 14px;
-    background-repeat: no-repeat;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAMAAAAVBLyFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRFOUA4////////Q/v6MgAAAAN0Uk5T//8A18oNQQAAAB1JREFUeNpiYMQADIwMaAC7EKZGJgzAMHSMBwgwAGTKAMGbmQmrAAAAAElFTkSuQmCC);
+    width: 22px;
+    height: 18px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD5JREFUeNpi/P//PwM1AQuUbqCSeQ0wAxn09PTqKTHp0qVLjSCaiYHKgBEahlTzMuNopIxGymikDESkAAQYANo+JxGxa8X0AAAAAElFTkSuQmCC);
     content: ' ';
     display: inline-block;
     margin-left: 3px;
@@ -251,7 +257,7 @@
 
   &:hover {
     &:after {
-      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAOCAMAAAAVBLyFAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRF6WFE////////SehjnAAAAAN0Uk5T//8A18oNQQAAAB1JREFUeNpiYMQADIwMaAC7EKZGJgzAMHSMBwgwAGTKAMGbmQmrAAAAAElFTkSuQmCC);
+     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD5JREFUeNpi/P//PwM1AQuUNqaSeWdhBjK8SnI9Q4lJYvN2m4BoJgYqA0ZoGFLNy4yjkTIaKaORMhCRAhBgAFddJxGypPyoAAAAAElFTkSuQmCC);
     }
   }
 }
