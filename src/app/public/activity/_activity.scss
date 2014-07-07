@@ -12,8 +12,6 @@
 
 @media (min-width: $screen-sm-min) {
   .activity {
-    > .container {
-      margin-top: 40px
-    }
+    padding-top: 40px;
   }
 }
