@@ -62,9 +62,9 @@ $item-info-bottom-height: 55px + $hr-height;
 
     .cover-actions {
       position: absolute;
-      bottom: 5px;
-      right: 5px;
+      right: 51%;
       z-index: 2;
+      padding-top: 10px;
     }
 
     .cover-bg {
@@ -520,9 +520,7 @@ $item-info-bottom-height: 55px + $hr-height;
       }
 
       .cover-actions {
-        right: -40px;
-        top: 5px;
-        bottom: auto;
+        display: none;
       }
 
       .cover-info {

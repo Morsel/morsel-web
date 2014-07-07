@@ -13,7 +13,7 @@
         <li class="cover-page extra-page" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container">
             <div class="cover-jumbo">
-              <div class="cover-actions">
+              <div class="cover-actions" ng-style="{'top': layout.coverPhotoHeight}">
                 <a ng-click="currentIndicatorIndex = morsel.items.length+1"><i class="common-share"></i></a>
               </div>
               <div ng-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" ng-style="{'height': layout.coverPhotoHeight}"></div>
