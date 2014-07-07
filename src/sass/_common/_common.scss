@@ -316,6 +316,14 @@ form {
   }
 }
 
+.preloaded-image {
+  @include transition(all .3s ease-out);
+}
+
+.image-loading {
+  @include filter(blur(10px));
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .morsel-text {
     background-image: url(images/logos/morsel-text@2x.png);

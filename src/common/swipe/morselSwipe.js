@@ -101,19 +101,23 @@ angular.module('Morsel.common.morselSwipe', [
       scope.currentIndicatorIndex = 0; //track which indicator is active
       scope.itemCount = extraPages; //account for cover page + share page
 
-      scope.getCoverPhotoArray = function(morsel) {
+      scope.getCoverPhotoArray = function(morsel, previewSized) {
         var primaryItemPhotos;
 
         if(morsel.items) {
           primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
 
           if(primaryItemPhotos) {
-            return [
-              ['default', primaryItemPhotos._320x320],
-              ['(min-width: 321px)', primaryItemPhotos._480x480],
-              ['screen-xs', primaryItemPhotos._640x640],
-              ['screen-md', primaryItemPhotos._992x992]
-            ];
+            if(previewSized) {
+              return primaryItemPhotos._50x50;
+            } else {
+              return [
+                ['default', primaryItemPhotos._320x320],
+                ['(min-width: 321px)', primaryItemPhotos._480x480],
+                ['screen-xs', primaryItemPhotos._640x640],
+                ['screen-md', primaryItemPhotos._992x992]
+              ];
+            }
           } else {
             var lastItemWithPhotos;
 
@@ -125,17 +129,25 @@ angular.module('Morsel.common.morselSwipe', [
             });
 
             if(lastItemWithPhotos) {
-              return [
-                ['default', lastItemWithPhotos.photos._320x320],
-                ['(min-width: 321px)', lastItemWithPhotos.photos._480x480],
-                ['screen-xs', lastItemWithPhotos.photos._640x640],
-                ['screen-md', primaryItemPhotos._992x992]
-              ];
+              if(previewSized) {
+                return lastItemWithPhotos.photos._50x50;
+              } else {
+                return [
+                  ['default', lastItemWithPhotos.photos._320x320],
+                  ['(min-width: 321px)', lastItemWithPhotos.photos._480x480],
+                  ['screen-xs', lastItemWithPhotos.photos._640x640],
+                  ['screen-md', primaryItemPhotos._992x992]
+                ];
+              }
             } else {
               //no items have photos
-              return [
-                ['default', '/assets/images/logos/morsel-placeholder.jpg']
-              ];
+              if(previewSized) {
+                return '/assets/images/logos/morsel-placeholder.jpg';
+              } else {
+                return [
+                  ['default', '/assets/images/logos/morsel-placeholder.jpg']
+                ];
+              }
             }
             return [
               ['default', MORSELPLACEHOLDER]
