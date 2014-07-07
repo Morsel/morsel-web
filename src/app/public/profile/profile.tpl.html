@@ -48,7 +48,7 @@
           <div ng-show="!morsels" class="loader"></div>
           <div ng-show="morsels && morsels.length === 0" class="empty-state">
             <p ng-if="!canEdit">This user hasn't made any morsels yet</p>
-            <p ng-if="canEdit">You haven't made any morsels yet. <a href="" target="_blank">Download the app</a> to make one!</p>
+            <p ng-if="canEdit">You haven't made any morsels yet. <a href="/apps" target="_self">Download the app</a> to make one!</p>
           </div>
         </tab>
         <tab heading="Tags" select="loadTags()" ng-if="isProfessional">
