@@ -13,6 +13,7 @@
         <li class="cover-page extra-page" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container">
             <div class="cover-jumbo">
+              <span ng-if="morsel.featured" class="banner banner-featured">Featured</span>
               <div class="cover-actions" ng-style="{'top': layout.coverPhotoHeight}">
                 <a ng-click="currentIndicatorIndex = morsel.items.length+1"><i class="common-share"></i></a>
               </div>

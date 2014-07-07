@@ -372,6 +372,18 @@ $item-info-bottom-height: 55px + $hr-height;
   }
 }
 
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  z-index: 10;
+
+  &.banner-featured {
+    @include replace-text-with-dimensions('graphics/banner-featured-top.png');
+  }
+}
+
 .morsel-control {
   display: none;
   width: $arrow-height;
@@ -731,6 +743,14 @@ $item-info-bottom-height: 55px + $hr-height;
       bottom: 0;
       left: 50%;
       margin-left: -$arrow-height/2;
+    }
+  }
+
+  .banner {
+    &.banner-featured {
+      top: auto;
+      bottom: 0;
+      @include replace-text-with-dimensions('graphics/banner-featured-bottom.png');
     }
   }
 }
