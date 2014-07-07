@@ -113,4 +113,6 @@ angular.module( 'Morsel.static', [
     }
     $scope.menuOpen = false;
   };
+
+  $scope.currentRoute = $window.location.pathname;
 });
