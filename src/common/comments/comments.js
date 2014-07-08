@@ -98,6 +98,10 @@ angular.module( 'Morsel.common.comments', [] )
           description: ''
         };
 
+        $scope.formatComment = function(comment) {
+          return comment.replace(/(\r\n|\n|\r)/g,"<br />");
+        };
+
         $scope.currentUser = currentUser;
 
         $scope.cancel = function () {

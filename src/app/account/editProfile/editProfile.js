@@ -40,7 +40,6 @@ angular.module( 'Morsel.account.editProfile', [])
       user: {
         'first_name': $scope.basicInfoModel.first_name,
         'last_name': $scope.basicInfoModel.last_name,
-        'email': $scope.basicInfoModel.email,
         'bio': $scope.basicInfoModel.bio
       }
     };

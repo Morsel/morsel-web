@@ -248,6 +248,16 @@
   &.mini-header {
     height: 0;
   }
+
+  &.full-width-header {
+    > .container {
+      width: 100%;
+
+      .morsel-logo {
+        left: 18px;
+      }
+    }
+  }
 }
 
 .side-nav-trigger {

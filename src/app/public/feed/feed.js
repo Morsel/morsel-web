@@ -35,6 +35,7 @@ angular.module( 'Morsel.public.feed', [])
   $scope.initialDataLoading = true; //for loading visuals
 
   $scope.viewOptions.miniHeader = true;
+  $scope.viewOptions.fullWidthHeader = true;
 
   //feed should be viewed in portrait
   landscapeAlert();

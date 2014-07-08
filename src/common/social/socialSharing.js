@@ -38,7 +38,7 @@ angular.module( 'Morsel.common.socialSharing', [] )
 
         //if they have a collage, use it
         if(m.photos) {
-          return m.photos._400x300;
+          return m.photos._800x600;
         } else {
           //use their cover photo as backup
           primaryItem = _.find(m.items, function(i) {

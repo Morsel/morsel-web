@@ -7,5 +7,8 @@
       <img class="img-circle" ng-if="imageDataUrl" ng-src="{{imageDataUrl}}">
       <img class="img-circle" ng-if="remoteImageUrl" ng-src="{{remoteImageUrl}}">
     </div>
+    <div class="image-preview" ng-if="existingImage">
+      <img class="img-circle" ng-src="{{existingImage}}" />
+    </div>
   </div>
 </div>

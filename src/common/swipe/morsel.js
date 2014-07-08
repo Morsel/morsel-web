@@ -85,16 +85,14 @@ angular.module('Morsel.common.morsel', [])
         scope.$emit('item.toggleDescriptionOpen', false);
       };
 
-      scope.formattedDescription = formatDescription();
-
-      function formatDescription() {
+      scope.formatDescription = function() {
         if(scope.item && scope.item.description) {
           return scope.item.description.replace(/(\r\n|\n|\r)/g,"<br />");
         } else {
           return '';
         }
-      }
+      };
     },
-    template: '<div class="item-description" non-swipeable><button type="button" class="close" ng-click="closeDescription()" non-swipeable>&times;</button><hr/><p ng-click="expandDescription(item.id)" non-swipeable ng-bind-html="formattedDescription"></p></div>'
+    template: '<div class="item-description" non-swipeable><button type="button" class="close" ng-click="closeDescription()" non-swipeable>&times;</button><hr/><p ng-click="expandDescription(item.id)" non-swipeable ng-bind-html="formatDescription()"></p></div>'
   };
 });
