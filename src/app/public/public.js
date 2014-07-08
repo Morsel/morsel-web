@@ -126,7 +126,8 @@ angular.module( 'Morsel.public', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack, $rootScope ) {
   var viewOptions = {
-    miniHeader : false
+    miniHeader : false,
+    fullWidthHeader : false
   };
 
   Auth.setupInterceptor();
