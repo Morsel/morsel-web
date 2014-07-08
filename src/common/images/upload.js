@@ -6,7 +6,8 @@ angular.module( 'Morsel.common.imageUpload', [] )
     restrict: 'A',
     scope: {
       imageToUpload: '=mrslImageToUpload',
-      remoteImageUrl: '=mrslImageRemoteUrl'
+      remoteImageUrl: '=mrslImageRemoteUrl',
+      existingImage: '=mrslImageUploadExisting'
     },
     replace: true,
     link: function(scope, element, attrs) {

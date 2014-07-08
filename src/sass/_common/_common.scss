@@ -190,6 +190,10 @@ form {
         height: 100%;
         display: block;
       }
+
+      & + .image-preview {
+        z-index: 7;
+      }
     }
   }
   .drop-box {
