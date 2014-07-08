@@ -65,8 +65,6 @@ module.exports.handleSingleRoute = function(req, res, next) {
   var route = req.params.route,
       request = require('request');
 
-  console.log('handleSingleRoute',req);
-
   //check against our known routes
   if(isStaticRoute(route)) {
     var staticApp = require('./apps/static');

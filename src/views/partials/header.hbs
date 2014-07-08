@@ -11,22 +11,6 @@
       <a href="/" target="_self">Morsel</a>
       {{/pageType.static}}
     </h1>
-    <nav role="navigation">
-      <ul>
-        <li ng-if="!isLoggedIn">
-          <a href="/join" target="_self" class="btn btn-primary">Sign Up</a>
-        </li>
-        <li ng-class="{active:$uiRoute}">
-          <a ng-click="">Placeholder</a>
-        </li>
-        <li ng-class="{active:$uiRoute}">
-          <a ng-click="">Placeholder</a>
-        </li>
-        <li ng-class="{active:$uiRoute}">
-          <a ng-click="">Get the App</a>
-        </li>
-      </ul>
-    </nav>
   </div>
   <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
 </header>

@@ -26,7 +26,7 @@ angular.module( 'Morsel.public.feed', [])
       fetchThreshold = 2, //how many feed items away from the last one we have data for before we fetch more
       oldestDisplayFeedItemIndex, //keeping track of the index on the right that is rendered
       newFeedItems = [], //hold any feed item data that comes back from the server after the initial load
-      newFeedItemCheckTime = 60000, //milliseconds to wait between checks of new feed items from server
+      newFeedItemCheckTime = 180000, //milliseconds to wait between checks of new feed items from server
       hittingServer = false; //track whether we are currently performing a request to the API
 
   $scope.feedItems = []; //our feed item array
@@ -97,6 +97,8 @@ angular.module( 'Morsel.public.feed', [])
         _.each(feedResp.data, function(f) {
           //only allow morsels for now
           if(f.subject_type==='Morsel') {
+            //persist the featured data to the morsel level so it's available within the morsel directive
+            f.subject.featured = f.featured;
             $scope.feedItems.push(f);
             totalFetchCount++;
           }

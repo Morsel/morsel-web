@@ -1,4 +1,4 @@
-<nav class="side-nav" ng-class="{open:menuOpen}" role="navigation">
+<nav class="side-nav" ng-class="{open:menuOpen}" role="navigation" ng-style="viewOptions.minimumMainHeight()">
   <a ng-if="isLoggedIn" ng-click="goToProfile()" class="profile-link">
     <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-no-link="true" mrsl-user-image-size="profile-pic-xs"></div>
     <h5 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h5>
@@ -20,7 +20,7 @@
       <a href="/feed" target="_self"><i class="sidenav-feed"></i>My Feed</a>
       {{/pageType.static}}
     </li>
-    <li ui-route="/search/people" ng-class="{active:$uiRoute}">
+    <li ui-route="/search/[\w\/\-]*" ng-class="{active:$uiRoute}">
       {{#pageType.public}}
       <a href="/search/people" ng-click="menuGoTo('search/people')">Search</a>
       {{/pageType.public}}
@@ -46,7 +46,7 @@
   <span ng-if="isLoggedIn">Help &amp; Settings</span>
   <span ng-if="!isLoggedIn">Help</span>
   <ul>
-    <li ng-if="isLoggedIn">
+    <li ui-route="/account/[\w\/\-]*" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
       {{#pageType.public}}
       <a href="/account/edit-profile" target="_self"><i class="sidenav-account-settings"></i>Settings</a>
       {{/pageType.public}}
@@ -57,16 +57,16 @@
       <a href="/account/edit-profile" target="_self"><i class="sidenav-account-settings"></i>Settings</a>
       {{/pageType.static}}
     </li>
-    <li>
+    <li ng-class="{active : currentRoute === '/about'}">
       <a href="/about" target="_self">About</a>
     </li>
     <li>
       <a href="http://insights.eatmorsel.com" target="_blank">Insights Blog</a>
     </li>
-    <li>
+    <li ng-class="{active : currentRoute === '/press'}">
       <a href="/press" target="_self">Press &amp; Media</a>
     </li>
-    <li>
+    <li ui-route="/contact" ng-class="{active:$uiRoute}">
       {{#pageType.public}}
       <a href="/contact" ng-click="menuGoTo('contact')">Contact</a>
       {{/pageType.public}}
@@ -77,10 +77,13 @@
       <a href="/contact" target="_self">Contact</a>
       {{/pageType.static}}
     </li>
-    <li>
+    <li ng-class="{active : currentRoute === '/apps'}">
+      <a href="/apps" target="_self">Get the App</a>
+    </li>
+    <li ng-class="{active : currentRoute === '/terms'}">
       <a href="/terms" target="_self"><i class="sidenav-terms"></i>Terms of Use</a>
     </li>
-    <li>
+    <li ng-class="{active : currentRoute === '/privacy'}">
       <a href="/privacy" target="_self">Privacy</a>
     </li>
     <li ng-if="isLoggedIn">

@@ -13,10 +13,11 @@
         <li class="cover-page extra-page" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container">
             <div class="cover-jumbo">
-              <div class="cover-actions">
+              <span ng-if="morsel.featured" class="banner banner-featured">Featured</span>
+              <div class="cover-actions" ng-style="{'top': layout.coverPhotoHeight}">
                 <a ng-click="currentIndicatorIndex = morsel.items.length+1"><i class="common-share"></i></a>
               </div>
-              <div ng-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" ng-style="{'height': layout.coverPhotoHeight}"></div>
+              <div ng-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(morsel, true)}}" ng-style="{'height': layout.coverPhotoHeight}"></div>
               <div class="cover-title-wrap" ng-style="{'height': layout.coverTitleHeight}">
                 <h2 class="cover-title">{{morsel.title}}</h2>
               </div>

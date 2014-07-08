@@ -9,7 +9,8 @@ angular.module('Morsel.common.responsiveImages', [])
     restrict: 'A',
     priority: 100,
     scope: {
-      imageType: '@mrslRiImageType'
+      imageType: '@mrslRiImageType',
+      previewImage: '@mrslRiPreload'
     },
     link: function(scope, elm, attrs) {
       // Double-check that the matchMedia function matchMedia exists
@@ -92,11 +93,41 @@ angular.module('Morsel.common.responsiveImages', [])
 
       
       function setSrc(src) {
+        var preloadImg;
+
         if(src) {
           if(scope.imageType === 'background') {
-            elm.css('background-image', 'url('+src+')');
+            if(scope.previewImage) {
+              //create an <img> to preload the real image
+              preloadImg = angular.element('<img src="'+src+'"/>');
+              //use the preview image as the bg
+              elm.addClass('preloaded-image image-loading').css('background-image', 'url('+scope.previewImage+')');
+              //when the preloadImg is done loading
+              imagesLoaded(preloadImg, function(){
+                //use the full size image
+                elm.removeClass('image-loading').css('background-image', 'url('+src+')');
+                //delete the preloader
+                preloadImg.remove();
+              });
+            } else {
+              elm.css('background-image', 'url('+src+')');
+            }
           } else {
-            elm.attr('src', src);
+            if(scope.previewImage) {
+              //create an <img> to preload the real image
+              preloadImg = angular.element('<img src="'+src+'"/>');
+              //use the preview image as the bg
+              elm.addClass('preloaded-image image-loading').attr('src', scope.previewImage);
+              //when the preloadImg is done loading
+              imagesLoaded(preloadImg, function(){
+                //use the full size image
+                elm.removeClass('image-loading').attr('src', src);
+                //delete the preloader
+                preloadImg.remove();
+              });
+            } else {
+              elm.attr('src', src);
+            }
           }
         }
       }
