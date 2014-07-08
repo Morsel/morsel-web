@@ -7,7 +7,7 @@
     <li ng-repeat="comment in item.comments | reverse">
       <div class="user-info">
         <div mrsl-user-image mrsl-username="comment.creator.username" mrsl-user-photos="comment.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
-        <a ng-click="deleteComment(comment.id)" class="close" ng-show="(item.creator_id === currentUser.id) || (comment.creator.id === currentUser.id)">&times;</span>
+        <span ng-click="deleteComment(comment.id)" class="close" ng-show="(item.creator_id === currentUser.id) || (comment.creator.id === currentUser.id)">&times;</span>
         <div class="user-body user-extra-info">
           <h5 class="user-info-main">
             <a href="/{{comment.creator.username}}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a>
