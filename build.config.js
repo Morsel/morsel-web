@@ -131,6 +131,7 @@ module.exports = {
     vendor_files: {
       js: [
         'vendor/angular/angular.js',
+        'vendor/angular-bindonce/bindonce.min.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'vendor/angular-moment/angular-moment.min.js',
         'vendor/angular-sanitize/angular-sanitize.min.js',
@@ -367,6 +368,7 @@ module.exports = {
   vendor_files: {
     js: [
       'vendor/angular/angular.js',
+      'vendor/angular-bindonce/bindonce.min.js',
       'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
       'vendor/angular-cookies/angular-cookies.min.js',
       'vendor/angular-moment/angular-moment.min.js',

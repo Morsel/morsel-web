@@ -136,7 +136,7 @@ angular.module('Morsel.common.morselSwipe', [
                   ['default', lastItemWithPhotos.photos._320x320],
                   ['(min-width: 321px)', lastItemWithPhotos.photos._480x480],
                   ['screen-xs', lastItemWithPhotos.photos._640x640],
-                  ['screen-md', primaryItemPhotos._992x992]
+                  ['screen-md', lastItemWithPhotos.photos._992x992]
                 ];
               }
             } else {

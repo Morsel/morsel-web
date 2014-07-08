@@ -2,6 +2,7 @@ angular.module( 'Morsel.public', [
   //libs
   'angularMoment',
   'ngSanitize',
+  'pasvaz.bindonce',
   'restangular',
   'swipe',
   'ui.bootstrap',
