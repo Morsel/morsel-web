@@ -13,7 +13,7 @@
             <a href="/{{comment.creator.username}}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a>
           </h5>
           <span am-time-ago="comment.created_at" class="time-ago"></span>
-          <p class="user-list-text">{{comment.description}}</p>
+          <p class="user-list-text" ng-bind-html="formatComment(comment.description)"></p>
         </div>
       </div>
     </li>
