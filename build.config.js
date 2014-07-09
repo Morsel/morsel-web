@@ -69,6 +69,7 @@ module.exports = {
         'src/common/api/items.js',
         'src/common/api/keywords.js',
         'src/common/api/morsels.js',
+        'src/common/api/places.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
         'src/common/api/util.js',

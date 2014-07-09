@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.profile', [])
     data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get the user data of the profile before we try to render the page
-      profileUserData: function(ApiUsers, $stateParams, $location, $state) {
+      profileUserData: function(ApiUsers, $stateParams, $state) {
         return ApiUsers.getUser($stateParams.username).then(function(userResp) {
           return userResp.data;
         }, function() {
@@ -37,7 +37,7 @@ angular.module( 'Morsel.public.profile', [])
     data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get the user data of the profile before we try to render the page
-      profileUserData: function(ApiUsers, $stateParams, $location, $state) {
+      profileUserData: function(ApiUsers, $stateParams, $state) {
         return ApiUsers.getUser($stateParams.userId).then(function(userResp) {
           return userResp.data;
         }, function() {

@@ -78,7 +78,7 @@ angular.module( 'Morsel.login', [
   $window.moment.lang('en');
 })
 
-.controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel, $state, GA, $modalStack ) {
+.controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, Mixpanel, $state, GA, $modalStack) {
   var viewOptions = {
     miniHeader : false
   };

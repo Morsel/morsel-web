@@ -16,6 +16,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.apiItems',
   'Morsel.common.apiKeywords',
   'Morsel.common.apiMorsels',
+  'Morsel.common.apiPlaces',
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUtil',
@@ -126,7 +127,7 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack, $rootScope ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack, $rootScope, $state ) {
   var viewOptions = {
     miniHeader : false,
     fullWidthHeader : false
@@ -198,7 +199,7 @@ angular.module( 'Morsel.public', [
   });
 
   //if there are internal state issues, go to 404
-  $scope.$on('$stateChangeError', function(e) {
+  $scope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams) {
     $state.go('404');
   });
 

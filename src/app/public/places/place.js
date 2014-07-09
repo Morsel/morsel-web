@@ -12,14 +12,14 @@ angular.module( 'Morsel.public.place', [])
     data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get the place data of the before we try to render the page
-      /*profileUserData: function(ApiUsers, $stateParams, $location, $state) {
-        return ApiUsers.getUser($stateParams.username).then(function(userResp) {
-          return userResp.data;
+      placeData: function(ApiPlaces, $stateParams, $state) {
+        return ApiPlaces.getPlace($stateParams.placeIdSlug).then(function(placeResp) {
+          return placeResp.data;
         }, function() {
-          //if there's an error retrieving user data (bad username?), send to 404
+          //if there's an error retrieving place data (bad slug?), send to 404
           $state.go('404');
         });
-      },*/
+      },
       //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();
@@ -28,15 +28,13 @@ angular.module( 'Morsel.public.place', [])
   });
 })
 
-.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, currentUser, $state, Auth ) {
-  /*$scope.viewOptions.miniHeader = true;
+.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth ) {
+  $scope.viewOptions.miniHeader = true;
 
-  $scope.user = profileUserData;
-  $scope.isProfessional = profileUserData.professional;
+  $scope.place = placeData;
+  console.log(placeData);
 
-  $scope.canEdit = profileUserData.id === currentUser.id;
-
-  $scope.loadLikeFeed = loadLikeFeed;
+  /*$scope.loadLikeFeed = loadLikeFeed;
 
   //load our morsels immediately (it's the default tab)
   ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
