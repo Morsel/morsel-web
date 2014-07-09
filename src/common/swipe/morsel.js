@@ -68,8 +68,8 @@ angular.module('Morsel.common.morsel', [])
             element[0].style[Transform.getProperty()] = 'translate3d(0, -' + ($window.innerWidth-photoGap) + 'px, 0)';
             element[0].style.height = ($window.innerHeight - MINIHEADERHEIGHT - photoGap) + 'px';
 
-            scope.nonScrollable = true;
-            scope.nonSwipeable = true;
+            //scope.nonScrollable = true;
+            //scope.nonSwipeable = true;
 
             scope.$emit('item.toggleDescriptionOpen', true);
           }
@@ -93,6 +93,6 @@ angular.module('Morsel.common.morsel', [])
         }
       };
     },
-    template: '<div class="item-description" non-swipeable><button type="button" class="close" ng-click="closeDescription()" non-swipeable>&times;</button><hr/><p ng-click="expandDescription(item.id)" non-swipeable ng-bind-html="formatDescription()"></p></div>'
+    template: '<div class="item-description"><button type="button" class="close" ng-click="closeDescription()">&times;</button><hr/><p ng-click="expandDescription(item.id)" ng-bind-html="formatDescription()"></p></div>'
   };
 });
