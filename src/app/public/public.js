@@ -60,7 +60,8 @@ angular.module( 'Morsel.public', [
   'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.invite',
-  'Morsel.public.search',//profile comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
+  'Morsel.public.place',//place comes before morselDetail so /places/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
+  'Morsel.public.search',//search comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search.people',
   'Morsel.public.search.people.morsel',
   'Morsel.public.search.people.facebook',
