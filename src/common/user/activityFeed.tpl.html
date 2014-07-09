@@ -19,7 +19,7 @@
           </div>
           <div ng-if="activity.subject_type === 'Place' && activity.action_type === 'Follow'">
             <div class="activity-subject">Place icon!</div>
-            <p><span ng-if="activity.creator.id === user.id">You</span><a href="/{{activity.creator.username}}" ng-if="activity.creator.id !== user.id">{{activity.creator.first_name}}</a> followed {{activity.subject.name}}</p>
+            <p><span ng-if="activity.creator.id === user.id">You</span><a href="/{{activity.creator.username}}" ng-if="activity.creator.id !== user.id">{{activity.creator.first_name}}</a> followed <a ng-href="/places/{{activity.subject.id}}-{{activity.subject.slug}}">{{activity.subject.name}}</a></p>
             <span am-time-ago="activity.action.created_at" class="time-ago"></span>
           </div>
         </div>
