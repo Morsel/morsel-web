@@ -61,8 +61,6 @@ angular.module( 'Morsel.public.profile', [])
 
   $scope.canEdit = profileUserData.id === currentUser.id;
 
-  $scope.loadLikeFeed = loadLikeFeed;
-
   //load our morsels immediately (it's the default tab)
   ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
     $scope.morsels = morselsData;
@@ -128,11 +126,20 @@ angular.module( 'Morsel.public.profile', [])
     }
   };
 
-  function loadLikeFeed() {
+  $scope.loadLikeFeed = function() {
     if(!$scope.likeFeed) {
       ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
         $scope.likeFeed = likeableResp.data;
       });
     }
-  }
+  };
+
+  $scope.loadPlaces = function() {
+    if(!$scope.userPlaces) {
+      ApiUsers.getPlaces($scope.user.id).then(function(placesResp){
+        $scope.userPlaces = placesResp.data;
+        console.log($scope.userPlaces);
+      });
+    }
+  };
 });
