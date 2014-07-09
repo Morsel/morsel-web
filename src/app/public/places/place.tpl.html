@@ -12,8 +12,8 @@
             </div>
           </div>
           <div class="profile-body col-xs-8">
-            <h3 class="user-username" ng-bind=""></h3>
             <h1 class="h3" ng-bind="place.name"></h1>
+            <p ng-bind-html="place.address + '<br/>' + place.city + ', ' + place.state + ' ' + place.postal_code"></p>
           </div>
         </div>
       </div>
@@ -34,12 +34,12 @@
           </ul>
           <div ng-show="!morsels" class="loader"></div>
           <div ng-show="morsels && morsels.length === 0" class="empty-state">
-            <p ng-if="!canEdit">This user hasn't made any morsels yet</p>
-            <p ng-if="canEdit">You haven't made any morsels yet. <a href="/apps" target="_self">Download the app</a> to make one!</p>
+            <p ng-if="place.twitter_username">Eek! There are no morsels yet. <a ng-href="{{'https://twitter.com/home?status=Hey%20%40'+place.twitter_username+'%20I%27d%20love%20to%20see%20your%20food%20and%20drinks%20on%20%40eatmorsel!'}}" target="_blank">Tell them</a> you want to see their food and drinks on Morsel!</p>
+            <p ng-if="!place.twitter_username">Eek! There are no morsels yet.</p>
           </div>
         </tab>
         <tab heading="People" select="loadPeople()">
-          <div class="container container-max-sm profile-tab-content" mrsl-user-list="users"></div>
+          <div class="container container-max-sm profile-tab-content" mrsl-user-list="placeUsers" mrsl-user-list-empty="There are no users associated with this place"></div>
         </tab>
       </tabset>
     </div>

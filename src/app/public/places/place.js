@@ -64,9 +64,9 @@ angular.module( 'Morsel.public.place', [])
   */
 
   $scope.loadPeople = function() {
-    if(!$scope.users) {
+    if(!$scope.placeUsers) {
       ApiPlaces.getUsers($scope.place.id).then(function(usersResp) {
-        $scope.users = usersResp.data;
+        $scope.placeUsers = usersResp.data;
       });
     }
   };
