@@ -190,7 +190,7 @@ angular.module( 'Morsel.account', [
   }
 
   $scope.menuGoTo = function(route) {
-    $scope.menuOpen = false;
+    $scope.closeMenu();
     $location.path('/'+route);
   };
 
@@ -198,6 +198,10 @@ angular.module( 'Morsel.account', [
     if($scope.currentUser && $scope.currentUser.username) {
       $window.location.href= '/'+$scope.currentUser.username;
     }
+    $scope.closeMenu();
+  };
+
+  $scope.closeMenu = function() {
     $scope.menuOpen = false;
   };
 });

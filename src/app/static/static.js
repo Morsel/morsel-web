@@ -103,7 +103,7 @@ angular.module( 'Morsel.static', [
   }
 
   $scope.menuGoTo = function(route) {
-    $scope.menuOpen = false;
+    $scope.closeMenu();
     $location.path('/'+route);
   };
 
@@ -111,8 +111,12 @@ angular.module( 'Morsel.static', [
     if($scope.currentUser && $scope.currentUser.username) {
       $window.location.href= '/'+$scope.currentUser.username;
     }
-    $scope.menuOpen = false;
+    $scope.closeMenu();
   };
 
   $scope.currentRoute = $window.location.pathname;
+
+  $scope.closeMenu = function() {
+    $scope.menuOpen = false;
+  };
 });

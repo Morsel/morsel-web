@@ -4,7 +4,7 @@
   <div id="site" ng-class="{site: true, open:menuOpen}">
     {{> header}}
 
-    <div ui-view="main" class="main-view" ng-click="menuOpen = false">
+    <div ui-view="main" class="main-view" ng-click="closeMenu()">
       {{#staticPartial.about}}
       {{> static/about}}
       {{/staticPartial.about}}
