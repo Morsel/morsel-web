@@ -264,10 +264,8 @@ angular.module('Morsel.common.morselSwipe', [
           event.preventDefault();
           event.stopPropagation();
 
-          //call our feed function
-          if(scope.swipeStarted) {
-            scope.swipeStarted(coords);
-          }
+          //emit an event so the feed knows we swiped
+          scope.$emit('feed.swipeStart', coords);
 
           return false;
         }
@@ -296,10 +294,8 @@ angular.module('Morsel.common.morselSwipe', [
             
             //if we're swiping in x
             if(swipeDirection === 'x') {
-              //call our feed function
-              if(scope.swipeMoved) {
-                scope.swipeMoved(coords);
-              }
+              //emit an event so the feed knows we swiped
+              scope.$emit('feed.swipeMove', coords);
             }
           } else {
             //swipe was in the y direction
@@ -376,10 +372,11 @@ angular.module('Morsel.common.morselSwipe', [
           event.stopPropagation();
         }
 
-        //call our feed function
-        if(scope.swipeEnded) {
-          scope.swipeEnded(coords, forceAnimation);
-        }
+        //emit an event so the feed knows we swiped
+        scope.$emit('feed.swipeEnd', {
+          coords: coords,
+          forceAnimation: forceAnimation
+        });
         return false;
       }
 

@@ -317,6 +317,19 @@ angular.module('Morsel.common.feedSwipe', [
       scope.$on('$destroy', function(){
         $document.off('keydown', debouncedKeydown);
       });*/
+
+      //listen to events broadcast from individual morsel swipes
+      scope.$on('feed.swipeStart', function(e, coords){
+        scope.swipeStarted(coords);
+      });
+
+      scope.$on('feed.swipeMove', function(e, coords){
+        scope.swipeMoved(coords);
+      });
+
+      scope.$on('feed.swipeEnd', function(e, obj){
+        scope.swipeEnded(obj.coords, obj.forceAnimation);
+      });
     }
   };
 })
