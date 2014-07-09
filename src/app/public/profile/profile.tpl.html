@@ -1,9 +1,9 @@
-<div class="profile" ng-style="viewOptions.minimumMainHeight()">
+<div class="profile user-profile" ng-style="viewOptions.minimumMainHeight()">
   <div class="container">
     <a href="/account/edit-profile" ng-show="canEdit" class="edit-profile-btn" target="_self"><i class="common-settings"></i></a>
     <hr />
-    <div class="user-container">
-      <div class="user-info col-sm-6">
+    <div class="profile-container">
+      <div class="profile-info col-sm-6">
         <div class="row">
           <div class="col-xs-4">
             <div class="row">
@@ -13,7 +13,7 @@
               </div>
             </div>
           </div>
-          <div class="user-body col-xs-8">
+          <div class="profile-body col-xs-8">
             <h3 class="user-username" ng-bind="user.username"></h3>
             <h1 class="h3" ng-bind="user.first_name+' '+user.last_name"></h1>
             <p ng-bind="user.bio"></p>
@@ -28,18 +28,18 @@
           <a mrsl-followed-users mrsl-follower-id="user.id" mrsl-following-count="user.followed_user_count"></a>
         </li>
       </ul>
-      <div class="user-bg" mrsl-responsive-images="{{getUserPhoto()}}" mrsl-ri-image-type="background"></div>
+      <div class="profile-bg" mrsl-responsive-images="{{getUserPhoto()}}" mrsl-ri-image-type="background"></div>
     </div>
     <hr />
 
     <div>
       <tabset ng-class="{'professional-tabs':isProfessional}">
         <tab heading="Morsels">
-          <ul class="clearfix user-morsels">
+          <ul class="clearfix profile-morsels">
             <li ng-repeat="morsel in morsels | reverse">
               <a ng-click="goTo(user.username+'/'+morsel.id+'-'+morsel.slug)" class="centered-white">
                 <div>
-                  <span class="user-morsel-title">{{morsel.title}}</span>
+                  <span class="profile-morsel-title">{{morsel.title}}</span>
                 </div>
                 <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
               </a>

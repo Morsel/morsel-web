@@ -28,22 +28,21 @@ angular.module( 'Morsel.public.place', [])
   });
 })
 
-.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth ) {
+.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth ) {
   $scope.viewOptions.miniHeader = true;
 
   $scope.place = placeData;
-  console.log(placeData);
 
-  /*$scope.loadLikeFeed = loadLikeFeed;
+  /*$scope.loadLikeFeed = loadLikeFeed;*/
 
   //load our morsels immediately (it's the default tab)
-  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
+  ApiPlaces.getMorsels($scope.place.id).then(function(morselsData) {
     $scope.morsels = morselsData;
   }, function() {
-    //if there's an error retrieving user data (bad username?), go to 404
+    //if there's an error retrieving morsels, go to 404
     $state.go('404');
   });
-
+  /*
   $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
     if(dir === 'increase') {
       $scope.user.follower_count++;
@@ -77,7 +76,7 @@ angular.module( 'Morsel.public.place', [])
         $scope.specialties = specialtyResp.data;
       });
     }
-  };
+  };*/
 
   $scope.getCoverPhotoArray = function(morsel) {
     var primaryItemPhotos;
@@ -101,6 +100,7 @@ angular.module( 'Morsel.public.place', [])
     }
   };
 
+  /*
   function loadLikeFeed() {
     if(!$scope.likeFeed) {
       ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){

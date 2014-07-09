@@ -17,5 +17,20 @@ angular.module( 'Morsel.common.apiPlaces', [] )
     return deferred.promise;
   };
 
+  Places.getMorsels = function(id) {
+    var deferred = $q.defer();
+
+    Restangular.one('places', id).one('morsels').get().then(function(resp) {
+      var morselsData = Restangular.stripRestangular(resp).data;
+      //correctly sort morsels by published_at before we even deal with them
+      morselsData = _.sortBy(morselsData, 'published_at');
+      deferred.resolve(morselsData);
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Places;
 });
