@@ -226,7 +226,7 @@ angular.module( 'Morsel.public', [
     if($scope.currentUser && $scope.currentUser.username) {
       $location.path('/'+$scope.currentUser.username);
     }
-    $scope.menuOpen = false;
+    $scope.closeMenu();
   };
 
   $scope.goTo = function(route) {
@@ -234,8 +234,12 @@ angular.module( 'Morsel.public', [
   };
 
   $scope.menuGoTo = function(route) {
-    $scope.menuOpen = false;
+    $scope.closeMenu();
     $location.path('/'+route);
+  };
+
+  $scope.closeMenu = function() {
+    $scope.menuOpen = false;
   };
 });
 
