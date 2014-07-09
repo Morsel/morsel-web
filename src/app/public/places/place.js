@@ -33,8 +33,6 @@ angular.module( 'Morsel.public.place', [])
 
   $scope.place = placeData;
 
-  /*$scope.loadLikeFeed = loadLikeFeed;*/
-
   //load our morsels immediately (it's the default tab)
   ApiPlaces.getMorsels($scope.place.id).then(function(morselsData) {
     $scope.morsels = morselsData;
@@ -63,20 +61,15 @@ angular.module( 'Morsel.public.place', [])
       ];
     }
   };
+  */
 
-  $scope.loadTags = function() {
-    if(!$scope.cuisines) {
-      ApiUsers.getCuisines(profileUserData.id).then(function(cuisineResp) {
-        $scope.cuisines = cuisineResp.data;
+  $scope.loadPeople = function() {
+    if(!$scope.users) {
+      ApiPlaces.getUsers($scope.place.id).then(function(usersResp) {
+        $scope.users = usersResp.data;
       });
     }
-    
-    if(!$scope.specialties) {
-      ApiUsers.getSpecialties(profileUserData.id).then(function(specialtyResp) {
-        $scope.specialties = specialtyResp.data;
-      });
-    }
-  };*/
+  };
 
   $scope.getCoverPhotoArray = function(morsel) {
     var primaryItemPhotos;
@@ -99,13 +92,4 @@ angular.module( 'Morsel.public.place', [])
       return [];
     }
   };
-
-  /*
-  function loadLikeFeed() {
-    if(!$scope.likeFeed) {
-      ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
-        $scope.likeFeed = likeableResp.data;
-      });
-    }
-  }*/
 });
