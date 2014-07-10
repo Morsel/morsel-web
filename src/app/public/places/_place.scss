@@ -7,6 +7,10 @@
 
   .profile-container {
     text-align: center;
+
+    > div {
+      z-index: 2;
+    }
   }
 
   .place-details {
@@ -16,7 +20,7 @@
   }
 }
 
-@media (min-width: $screen-md-min) {
+@media (min-width: $screen-sm-min) {
   .place-profile {
     .profile-container {
       text-align: left;
