@@ -1,11 +1,12 @@
 angular.module( 'Morsel.common.follow', [] )
 
 //follow/unfollow something
-.directive('mrslFollow', function(ApiUsers, AfterLogin, $location, Auth, $q, $window){
+.directive('mrslFollow', function(ApiUsers, ApiPlaces, AfterLogin, $location, Auth, $q, $window){
   return {
     scope: {
       idToFollow: '=mrslIdToFollow',
-      isFollowing: '=mrslIsFollowing'
+      isFollowing: '=mrslIsFollowing',
+      followType: '@mrslFollowType'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -64,6 +65,16 @@ angular.module( 'Morsel.common.follow', [] )
       };
 
       function performToggleFollow() {
+        if(scope.followType === 'place') {
+          //trying to follow a place
+          togglePlace();
+        } else {
+          //trying to follow a user
+          toggleUser();
+        }
+      }
+
+      function toggleUser() {
         var deferred = $q.defer();
 
         if(scope.isFollowing) {
@@ -88,8 +99,28 @@ angular.module( 'Morsel.common.follow', [] )
 
         return deferred.promise;
       }
+
+      function togglePlace() {
+        var deferred = $q.defer();
+
+        if(scope.isFollowing) {
+          ApiPlaces.unfollowPlace(scope.idToFollow).then(function(resp) {
+            scope.isFollowing = false;
+
+            deferred.resolve();
+          });
+        } else {
+          ApiPlaces.followPlace(scope.idToFollow).then(function(resp) {
+            scope.isFollowing = true;
+            
+            deferred.resolve();
+          });
+        }
+
+        return deferred.promise;
+      }
     },
-    template: '<button ng-hide="isSelf" ng-click="toggleFollow()" class="btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
+    template: '<button ng-hide="isSelf" ng-click="toggleFollow()" class="btn follow-btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
               '{{isFollowing ? \'Following\' : \'Follow\'}}'+
               '</button>'
   };

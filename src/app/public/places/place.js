@@ -43,16 +43,8 @@ angular.module( 'Morsel.public.place', [])
     //if there's an error retrieving morsels, go to 404
     $state.go('404');
   });
-  /*
-  $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
-    if(dir === 'increase') {
-      $scope.user.follower_count++;
-    } else if (dir === 'decrease') {
-      $scope.user.follower_count--;
-    }
-  });
 
-  $scope.getUserPhoto = function() {
+  /*$scope.getUserPhoto = function() {
     if($scope.user.photos) {
       return [
         ['default', $scope.user.photos._80x80],

@@ -11,6 +11,10 @@
     padding: 15px 15px 10px;
     position: relative;
     overflow: hidden;
+
+    .follow-btn {
+      margin-top: 10px;
+    }
     
     .profile-bg {
       z-index: 1;
@@ -40,10 +44,6 @@
       .profile-pic-link {
         margin: 0;
         float: none;
-      }
-
-      button {
-        margin-top: 10px;
       }
 
       .user-body {

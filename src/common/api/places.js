@@ -44,5 +44,29 @@ angular.module( 'Morsel.common.apiPlaces', [] )
     return deferred.promise;
   };
 
+  Places.followPlace = function(id) {
+    var deferred = $q.defer();
+
+    Restangular.one('places', id).one('follow').post().then(function(resp){
+      deferred.resolve(true);
+    }, function(resp) {
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  };
+
+  Places.unfollowPlace = function(id) {
+    var deferred = $q.defer();
+
+    Restangular.one('places', id).one('follow').remove().then(function(resp){
+      deferred.resolve(true);
+    }, function(resp) {
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  };
+
   return Places;
 });
