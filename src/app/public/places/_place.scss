@@ -5,6 +5,10 @@
     }
   }
 
+  .profile-container {
+    text-align: center;
+  }
+
   .place-details {
     .place-open-time {
       display: inline;
@@ -12,8 +16,10 @@
   }
 }
 
-@media (min-width: $screen-sm-min) {
+@media (min-width: $screen-md-min) {
   .place-profile {
-
+    .profile-container {
+      text-align: left;
+    }
   }
 }

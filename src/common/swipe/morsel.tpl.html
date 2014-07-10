@@ -30,6 +30,10 @@
                   <h5 class="h2 overflow-ellipsis">
                     <a bo-href="'/'+morsel.creator.username" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
                   </h5>
+                  <h6 class="overflow-ellipsis" bo-if="morsel.place">
+                    <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" class="h2" bo-text="morsel.place.name"></a>
+                    <span bo-text="morsel.place.city+', '+morsel.place.state"></span>
+                  </h6>
                 </div>
                 <span am-time-ago="morsel.created_at" class="time-ago"></span>
               </div>
