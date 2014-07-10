@@ -138,7 +138,6 @@ angular.module( 'Morsel.public.profile', [])
     if(!$scope.userPlaces) {
       ApiUsers.getPlaces($scope.user.id).then(function(placesResp){
         $scope.userPlaces = placesResp.data;
-        console.log($scope.userPlaces);
       });
     }
   };

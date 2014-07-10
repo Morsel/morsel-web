@@ -33,6 +33,9 @@ angular.module( 'Morsel.public.place', [])
 
   $scope.place = placeData;
 
+  //for price display
+  $scope.priceRange = _.range(0, $scope.place.information.price_tier);
+
   //load our morsels immediately (it's the default tab)
   ApiPlaces.getMorsels($scope.place.id).then(function(morselsData) {
     $scope.morsels = morselsData;
