@@ -16,6 +16,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.apiItems',
   'Morsel.common.apiKeywords',
   'Morsel.common.apiMorsels',
+  'Morsel.common.apiPlaces',
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUtil',
@@ -44,6 +45,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.morsel',
   'Morsel.common.morselSwipe',
   'Morsel.common.photoHelpers',
+  'Morsel.common.placeList',
   'Morsel.common.responsiveImages',
   'Morsel.common.socialSharing',
   'Morsel.common.specialtyUsers',
@@ -60,7 +62,8 @@ angular.module( 'Morsel.public', [
   'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.invite',
-  'Morsel.public.search',//profile comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
+  'Morsel.public.place',//place comes before morselDetail so /places/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
+  'Morsel.public.search',//search comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search.people',
   'Morsel.public.search.people.morsel',
   'Morsel.public.search.people.facebook',
@@ -125,7 +128,7 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack, $rootScope ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack, $rootScope, $state ) {
   var viewOptions = {
     miniHeader : false,
     fullWidthHeader : false
@@ -197,7 +200,7 @@ angular.module( 'Morsel.public', [
   });
 
   //if there are internal state issues, go to 404
-  $scope.$on('$stateChangeError', function(e) {
+  $scope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams) {
     $state.go('404');
   });
 

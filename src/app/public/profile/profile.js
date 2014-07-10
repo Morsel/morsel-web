@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.profile', [])
     data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get the user data of the profile before we try to render the page
-      profileUserData: function(ApiUsers, $stateParams, $location, $state) {
+      profileUserData: function(ApiUsers, $stateParams, $state) {
         return ApiUsers.getUser($stateParams.username).then(function(userResp) {
           return userResp.data;
         }, function() {
@@ -37,7 +37,7 @@ angular.module( 'Morsel.public.profile', [])
     data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get the user data of the profile before we try to render the page
-      profileUserData: function(ApiUsers, $stateParams, $location, $state) {
+      profileUserData: function(ApiUsers, $stateParams, $state) {
         return ApiUsers.getUser($stateParams.userId).then(function(userResp) {
           return userResp.data;
         }, function() {
@@ -60,8 +60,6 @@ angular.module( 'Morsel.public.profile', [])
   $scope.isProfessional = profileUserData.professional;
 
   $scope.canEdit = profileUserData.id === currentUser.id;
-
-  $scope.loadLikeFeed = loadLikeFeed;
 
   //load our morsels immediately (it's the default tab)
   ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
@@ -128,11 +126,19 @@ angular.module( 'Morsel.public.profile', [])
     }
   };
 
-  function loadLikeFeed() {
+  $scope.loadLikeFeed = function() {
     if(!$scope.likeFeed) {
       ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
         $scope.likeFeed = likeableResp.data;
       });
     }
-  }
+  };
+
+  $scope.loadPlaces = function() {
+    if(!$scope.userPlaces) {
+      ApiUsers.getPlaces($scope.user.id).then(function(placesResp){
+        $scope.userPlaces = placesResp.data;
+      });
+    }
+  };
 });

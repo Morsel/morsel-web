@@ -1,0 +1,29 @@
+.place-profile {
+  .nav-tabs {
+    > li {
+      width: percentage(1/3);
+    }
+  }
+
+  .profile-container {
+    text-align: center;
+
+    > div {
+      z-index: 2;
+    }
+  }
+
+  .place-details {
+    .place-open-time {
+      display: inline;
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .place-profile {
+    .profile-container {
+      text-align: left;
+    }
+  }
+}

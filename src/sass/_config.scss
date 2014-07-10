@@ -1,57 +1,57 @@
-//This file is essentially a copy of '../../vendor/sass-bootstrap/lib/bootstrap.scss' except we only want to include the components that we're using for now.
+//This file is essentially a copy of '../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap.scss' except we only want to include the components that we're using for now.
 
 @import "compass";
 
 // Import our variables
 @import "_common/_variables.scss";
 
-@import "../../vendor/sass-bootstrap/lib/mixins";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/mixins";
 
 // Reset
-@import "../../vendor/sass-bootstrap/lib/normalize";
-//@import "../../vendor/sass-bootstrap/lib/print";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/normalize";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/print";
 
 // Core CSS
-@import "../../vendor/sass-bootstrap/lib/scaffolding";
-@import "../../vendor/sass-bootstrap/lib/type";
-//@import "../../vendor/sass-bootstrap/lib/code";
-@import "../../vendor/sass-bootstrap/lib/grid";
-@import "../../vendor/sass-bootstrap/lib/tables";
-@import "../../vendor/sass-bootstrap/lib/forms";
-@import "../../vendor/sass-bootstrap/lib/buttons";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/scaffolding";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/type";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/code";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/grid";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/tables";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/forms";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/buttons";
 
 // Components
-//@import "../../vendor/sass-bootstrap/lib/component-animations";
-@import "../../vendor/sass-bootstrap/lib/glyphicons";
-@import "../../vendor/sass-bootstrap/lib/dropdowns";
-@import "../../vendor/sass-bootstrap/lib/button-groups";
-//@import "../../vendor/sass-bootstrap/lib/input-groups";
-@import "../../vendor/sass-bootstrap/lib/navs";
-//@import "../../vendor/sass-bootstrap/lib/navbar";
-//@import "../../vendor/sass-bootstrap/lib/breadcrumbs";
-//@import "../../vendor/sass-bootstrap/lib/pagination";
-//@import "../../vendor/sass-bootstrap/lib/pager";
-//@import "../../vendor/sass-bootstrap/lib/labels";
-//@import "../../vendor/sass-bootstrap/lib/badges";
-//@import "../../vendor/sass-bootstrap/lib/jumbotron";
-//@import "../../vendor/sass-bootstrap/lib/thumbnails";
-@import "../../vendor/sass-bootstrap/lib/alerts";
-//@import "../../vendor/sass-bootstrap/lib/progress-bars";
-//@import "../../vendor/sass-bootstrap/lib/media";
-@import "../../vendor/sass-bootstrap/lib/list-group";
-//@import "../../vendor/sass-bootstrap/lib/panels";
-//@import "../../vendor/sass-bootstrap/lib/wells";
-@import "../../vendor/sass-bootstrap/lib/close";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/component-animations";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/glyphicons";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/dropdowns";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/button-groups";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/input-groups";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/navs";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/navbar";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/breadcrumbs";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/pagination";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/pager";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/labels";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/badges";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/jumbotron";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/thumbnails";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/alerts";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/progress-bars";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/media";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/list-group";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/panels";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/wells";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/close";
 
 // Components w/ JavaScript
-@import "../../vendor/sass-bootstrap/lib/modals";
-@import "../../vendor/sass-bootstrap/lib/tooltip";
-@import "../../vendor/sass-bootstrap/lib/popovers";
-//@import "../../vendor/sass-bootstrap/lib/carousel";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/modals";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/tooltip";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/popovers";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/carousel";
 
 // Utility classes
-@import "../../vendor/sass-bootstrap/lib/utilities";
-@import "../../vendor/sass-bootstrap/lib/responsive-utilities";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/utilities";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/responsive-utilities";
 
 
 //our stuff

@@ -69,6 +69,7 @@ module.exports = {
         'src/common/api/items.js',
         'src/common/api/keywords.js',
         'src/common/api/morsels.js',
+        'src/common/api/places.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
         'src/common/api/util.js',
@@ -91,6 +92,7 @@ module.exports = {
         'src/common/social/facebookApi.js',
         'src/common/social/socialSharing.js',
         'src/common/filters/nameMatch.js',
+        'src/common/places/placeList.js',
         'src/common/swipe/feedSwipe.js',
         'src/common/swipe/morsel.js',
         'src/common/swipe/morselSwipe.js',
@@ -115,6 +117,7 @@ module.exports = {
         'src/common/forms/validatedSingleCheckbox.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/itemActions/itemActionBar.tpl.html',
+        'src/common/places/placeList.tpl.html',
         'src/common/social/socialSharing.tpl.html',
         'src/common/swipe/itemThumbnails.tpl.html',
         'src/common/swipe/morsel.tpl.html',
@@ -152,10 +155,10 @@ module.exports = {
       css: [
       ],
       assets: [
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
       ]
     }
   },
@@ -223,10 +226,10 @@ module.exports = {
       css: [
       ],
       assets: [
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
       ]
     }
   },
@@ -293,10 +296,10 @@ module.exports = {
       css: [
       ],
       assets: [
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
       ]
     }
   },
@@ -330,10 +333,10 @@ module.exports = {
       css: [
       ],
       assets: [
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
-        'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
+        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
       ]
     }
   },
@@ -392,10 +395,10 @@ module.exports = {
     css: [
     ],
     assets: [
-      'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.eot',
-      'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.svg',
-      'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.ttf',
-      'vendor/sass-bootstrap/dist/fonts/glyphicons-halflings-regular.woff'
+      'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
+      'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
+      'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
+      'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
     ]
   },
 

@@ -1,0 +1,20 @@
+<div class="user-list">
+  <ul ng-show="places.length > 0">
+    <li ng-repeat="place in places">
+      <div class="user-info">
+        <div>place icon</div>
+        <div class="user-body">
+          <!--<button mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>-->
+          <h5 class="user-info-main">
+            <a ng-href="/places/{{place.id}}-{{place.slug}}" ng-bind="place.name"></a>
+          </h5>
+          <p ng-bind="place.title"></p>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div ng-show="!places" class="loader"></div>
+  <div ng-show="places && places.length === 0" class="empty-state">
+    <p>{{emptyText || 'No places'}}</p>
+  </div>
+</div>

@@ -157,3 +157,37 @@ module.exports.renderUserPage = function(res, userIdOrUsername) {
     }
   });
 };
+
+module.exports.renderPlacePage = function(res, placeIdSlug) {
+  var request = require('request'),
+      app = require('./../../server');
+
+  request(app.locals.apiUrl+'/places/'+placeIdSlug+util.apiQuerystring, function (error, response, body) {
+    var place,
+        placeMetadata;
+
+    if (!error && response.statusCode == 200) {
+
+      place = JSON.parse(body).data;
+
+      placeMetadata = {
+        "title": _.escape(place.name + ' | Morsel'),
+        "description": _.escape(place.name + ' | Morsel'),
+        "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "twitter": {
+          "creator": '@'+(place.twitter_username || 'eatmorsel')
+        },
+        "url": app.locals.siteUrl + '/places/' + place.id + '-' + place.slug
+      };
+
+      placeMetadata.twitter = _.defaults(placeMetadata.twitter || {}, util.defaultMetadata.twitter);
+      placeMetadata.og = _.defaults(placeMetadata.og || {}, util.defaultMetadata.og);
+      placeMetadata = _.defaults(placeMetadata || {}, util.defaultMetadata);
+
+      renderPublicPage(res, placeMetadata);
+    } else {
+      //not a valid user - must be a bad route
+      util.render404(res);
+    }
+  });
+};

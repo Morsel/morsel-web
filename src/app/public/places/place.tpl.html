@@ -1,0 +1,75 @@
+<div class="profile place-profile" ng-style="viewOptions.minimumMainHeight()">
+  <div class="container">
+    <div class="profile-container">
+      <div class="profile-info col-sm-10">
+        <div class="profile-body">
+          <h1 class="h3" ng-bind="place.name"></h1>
+          <p ng-bind-html="place.address + '<br/>' + place.city + ', ' + place.state + ' ' + place.postal_code"></p>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <button mrsl-follow mrsl-id-to-follow="place.id" mrsl-is-following="place.following" mrsl-follow-type="place"></button>
+      </div>
+      <div class="profile-bg" mrsl-responsive-images="{{getPlacePhoto()}}" mrsl-ri-image-type="background"></div>
+    </div>
+    <div>
+      <tabset class="places-tabs">
+        <tab heading="Morsels">
+          <ul class="clearfix profile-morsels">
+            <li ng-repeat="morsel in morsels | reverse">
+              <a ng-click="goTo(morsel.creator.username+'/'+morsel.id+'-'+morsel.slug)" class="centered-white">
+                <div>
+                  <span class="profile-morsel-title">{{morsel.title}}</span>
+                </div>
+                <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
+              </a>
+            </li>
+          </ul>
+          <div ng-show="!morsels" class="loader"></div>
+          <div ng-show="morsels && morsels.length === 0" class="empty-state">
+            <p ng-if="place.twitter_username">Eek! There are no morsels yet. <a ng-href="{{'https://twitter.com/home?status=Hey%20%40'+place.twitter_username+'%20I%27d%20love%20to%20see%20your%20food%20and%20drinks%20on%20%40eatmorsel!'}}" target="_blank">Tell {{place.name}}</a> you want to see their food and drinks on Morsel!</p>
+            <p ng-if="!place.twitter_username">Eek! There are no morsels yet.</p>
+          </div>
+        </tab>
+        <tab heading="People" select="loadPeople()">
+          <div class="container container-max-sm profile-tab-content" mrsl-user-list="placeUsers" mrsl-user-list-empty="'There are no users associated with this place'"></div>
+        </tab>
+        <tab heading="Details" select="loadDetails()">
+          <div class="place-details profile-tab-content">
+            <div class="row" bindonce="place">
+              <div class="col-md-6">
+                <a bo-href="place.information.menu_mobile_url" target="_blank" class="visible-xs-inline-block visible-sm-inline-block" bo-if="place.information.menu_mobile_url">View Menu</a>
+                <a bo-href="place.information.menu_url" target="_blank" class="visible-md-inline-block visible-lg-inline-block" bo-if="place.information.menu_url">View Menu</a>
+                <a bo-href="place.information.reservations_url" target="_blank" class="menu-link" bo-if="place.information.reservations_url">Make a Reservation</a>
+                <h5>Contact</h5>
+                <dl>
+                  <dt bo-if="place.information.website_url">Website</dt>
+                  <dd bo-if="place.information.website_url"><a bo-href="place.information.website_url" target="_blank" bo-text="place.information.website_url"></a></dd>
+                  <dt bo-if="place.information.formatted_phone">Phone</dt>
+                  <dd bo-if="place.information.formatted_phone"><a bo-href="'tel:'+place.information.formatted_phone" target="_blank" class="visible-xs-inline-block visible-sm-inline-block" bo-text="place.information.formatted_phone"></a></dd>
+                  <dd bo-if="place.information.formatted_phone"><span class="visible-md-inline-block visible-lg-inline-block" bo-text="place.information.formatted_phone"></span></dd>
+                  <dt bo-if="place.twitter_username">Twitter</dt>
+                  <dd bo-if="place.twitter_username"><a bo-href="'https://twitter.com/' + place.twitter_username" target="_blank" bo-text="place.twitter_username"></a></dd>
+                </dl>
+              </div>
+              <div class="col-md-6">
+                <h5 bo-if="place.information.price_tier || place.foursquare_timeframes">Dining</h5>
+                <dl bo-if="place.information.price_tier">
+                  <dt>Price</dt>
+                  <dd><span ng-repeat="i in priceRange">$</span></dd>
+                </dl>
+                <dl bo-if="place.foursquare_timeframes">
+                  <dt bindonce ng-repeat-start="timeframe in place.foursquare_timeframes" bo-text="timeframe.days"></dt>
+                  <dd ng-repeat-end>
+                    <p bindonce ng-repeat="openTime in timeframe.open" class="place-open-time"><span bo-if="$index > 0">, </span><span bo-text="openTime.renderedTime"></span></p>
+                  </dd>
+                </dl>
+                <img src="https://playfoursquare.s3.amazonaws.com/press/logo/poweredByFoursquare_gray.png" />
+              </div>
+            </div>
+          </div>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>

@@ -262,6 +262,11 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       publicApp.renderUserPage(res, id);
     });
 
+    //places
+    app.get('/places/:placeidslug', function(req, res){
+      publicApp.renderPlacePage(res, req.params.placeidslug);
+    });
+
     //morsel detail with post id/slug
     app.get('/:username/:postidslug', function(req, res){
       publicApp.renderMorselPage(req, res);
