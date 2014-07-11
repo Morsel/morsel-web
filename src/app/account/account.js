@@ -1,6 +1,7 @@
 angular.module( 'Morsel.account', [
   //libs
   'angularMoment',
+  'pasvaz.bindonce',
   'restangular',
   'ui.bootstrap',
   'ui.router',

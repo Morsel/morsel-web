@@ -1,19 +1,20 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()">&times;</button>
-  <h4 class="h2">Comments <span ng-show="item.comments.length > 0">({{item.comments.length}})</span><i class="common-comments"></i></h4>
+  <h4 class="h2">Comments <span ng-show="item.comments.length > 0" ng-bind="
+  '('+item.comments.length+')'"></span><i class="common-comments"></i></h4>
 </div>
 <div class="modal-body user-list comment-list">
   <ul ng-show="item.comments.length > 0">
-    <li ng-repeat="comment in item.comments | reverse">
+    <li bindonce ng-repeat="comment in item.comments | reverse">
       <div class="user-info">
         <div mrsl-user-image mrsl-username="comment.creator.username" mrsl-user-photos="comment.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
         <span ng-click="deleteComment(comment.id)" class="close" ng-show="(item.creator_id === currentUser.id) || (comment.creator.id === currentUser.id)">&times;</span>
         <div class="user-body user-extra-info">
           <h5 class="user-info-main">
-            <a href="/{{comment.creator.username}}">{{comment.creator.first_name}} {{comment.creator.last_name}}</a>
+            <a bo-href="'/'+comment.creator.username" bo-text="comment.creator.first_name+' '+comment.creator.last_name"></a>
           </h5>
           <span am-time-ago="comment.created_at" class="time-ago"></span>
-          <p class="user-list-text" ng-bind-html="formatComment(comment.description)"></p>
+          <p class="user-list-text" bo-html="formatComment(comment.description)"></p>
         </div>
       </div>
     </li>

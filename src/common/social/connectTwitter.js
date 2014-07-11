@@ -103,6 +103,6 @@ angular.module( 'Morsel.common.connectTwitter', [] )
         HandleErrors.onError(resp.data, scope.form);
       }
     },
-    template: '<a href="/auth/twitter/connect{{loginNext}}" class="btn btn-social btn-twitter btn-lg" target="_self"><i class="common-share-twitter"></i>{{btnText}}</a>'
+    template: '<a ng-href="/auth/twitter/connect{{loginNext}}" class="btn btn-social btn-twitter btn-lg" target="_self"><i class="common-share-twitter"></i>{{btnText}}</a>'
   };
 });

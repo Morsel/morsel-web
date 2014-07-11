@@ -1,10 +1,10 @@
-<div class="profile place-profile" ng-style="viewOptions.minimumMainHeight()">
+<div bindonce="place" class="profile place-profile" ng-style="viewOptions.minimumMainHeight()">
   <div class="container">
     <div class="profile-container">
       <div class="profile-info col-sm-10">
         <div class="profile-body">
-          <h1 class="h3" ng-bind="place.name"></h1>
-          <p ng-bind-html="place.address + '<br/>' + place.city + ', ' + place.state + ' ' + place.postal_code"></p>
+          <h1 class="h3" bo-text="place.name"></h1>
+          <p bo-html="place.address + '<br/>' + place.city + ', ' + place.state + ' ' + place.postal_code"></p>
         </div>
       </div>
       <div class="col-sm-2">
@@ -27,8 +27,8 @@
           </ul>
           <div ng-show="!morsels" class="loader"></div>
           <div ng-show="morsels && morsels.length === 0" class="empty-state">
-            <p ng-if="place.twitter_username">Eek! There are no morsels yet. <a ng-href="{{'https://twitter.com/home?status=Hey%20%40'+place.twitter_username+'%20I%27d%20love%20to%20see%20your%20food%20and%20drinks%20on%20%40eatmorsel!'}}" target="_blank">Tell {{place.name}}</a> you want to see their food and drinks on Morsel!</p>
-            <p ng-if="!place.twitter_username">Eek! There are no morsels yet.</p>
+            <p bo-if="place.twitter_username">Eek! There are no morsels yet. <a bo-href="'https://twitter.com/home?status=Hey%20%40'+place.twitter_username+'%20I%27d%20love%20to%20see%20your%20food%20and%20drinks%20on%20%40eatmorsel!'" target="_blank">Tell {{place.name}}</a> you want to see their food and drinks on Morsel!</p>
+            <p bo-if="!place.twitter_username">Eek! There are no morsels yet.</p>
           </div>
         </tab>
         <tab heading="People" select="loadPeople()">
