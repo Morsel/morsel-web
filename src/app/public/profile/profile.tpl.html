@@ -1,6 +1,6 @@
-<div class="profile user-profile" ng-style="viewOptions.minimumMainHeight()">
+<div bindonce="user" class="profile user-profile" ng-style="viewOptions.minimumMainHeight()">
   <div class="container">
-    <a href="/account/edit-profile" ng-show="canEdit" class="edit-profile-btn" target="_self"><i class="common-settings"></i></a>
+    <a href="/account/edit-profile" bo-if="canEdit" class="edit-profile-btn" target="_self"><i class="common-settings"></i></a>
     <hr />
     <div class="profile-container">
       <div class="profile-info col-sm-6">
@@ -14,9 +14,9 @@
             </div>
           </div>
           <div class="profile-body col-xs-8">
-            <h3 class="user-username" ng-bind="user.username"></h3>
-            <h1 class="h3" ng-bind="user.first_name+' '+user.last_name"></h1>
-            <p ng-bind="user.bio"></p>
+            <h3 class="user-username" bo-text="user.username"></h3>
+            <h1 class="h3" bo-text="user.first_name+' '+user.last_name"></h1>
+            <p bo-text="user.bio"></p>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
     <hr />
 
     <div>
-      <tabset ng-class="{'professional-tabs':isProfessional}">
+      <tabset bo-class="{'professional-tabs':isProfessional}">
         <tab heading="Morsels">
           <ul class="clearfix profile-morsels">
             <li ng-repeat="morsel in morsels | reverse">
@@ -45,22 +45,22 @@
               </a>
             </li>
           </ul>
-          <div ng-show="!morsels" class="loader"></div>
-          <div ng-show="morsels && morsels.length === 0" class="empty-state">
-            <p ng-if="!canEdit">This user hasn't made any morsels yet</p>
-            <p ng-if="canEdit">You haven't made any morsels yet. <a href="/apps" target="_self">Download the app</a> to make one!</p>
+          <div ng-if="!morsels" class="loader"></div>
+          <div ng-if="morsels && morsels.length === 0" class="empty-state">
+            <p bo-if="!canEdit">This user hasn't made any morsels yet</p>
+            <p bo-if="canEdit">You haven't made any morsels yet. <a href="/apps" target="_self">Download the app</a> to make one!</p>
           </div>
         </tab>
-        <tab heading="Places" select="loadPlaces()" ng-if="isProfessional">
+        <tab heading="Places" select="loadPlaces()" bo-show="isProfessional">
           <div class="container container-max-sm profile-tab-content" mrsl-place-list="userPlaces" mrsl-place-list-empty="'This user isn\'t associated with any places'"></div>
         </tab>
-        <tab heading="Tags" select="loadTags()" ng-if="isProfessional">
+        <tab heading="Tags" select="loadTags()" bo-show="isProfessional">
           <div class="user-tags col-sm-6">
             <span class="h5">Cuisines:</span>
             <ul>
-              <li ng-show="cuisines.length === 0">
-                <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
-                <a ng-show="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
+              <li ng-if="cuisines.length === 0">
+                <span bo-if="!canEdit" class="user-tags-empty">None selected</span>
+                <a bo-if="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
               </li>
               <li ng-repeat="cuisine in cuisines" >
                 <a mrsl-cuisine-users mrsl-cuisine="cuisine"></a>{{$last ? '':','}}
@@ -70,16 +70,16 @@
           <div class="user-tags col-sm-6">
             <span class="h5">Specialties:</span>
             <ul>
-              <li ng-show="specialties.length === 0">
-                <span ng-hide="canEdit" class="user-tags-empty">None selected</span>
-                <a ng-show="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
+              <li ng-if="specialties.length === 0">
+                <span bo-if="!canEdit" class="user-tags-empty">None selected</span>
+                <a bo-if="canEdit" href="/account/edit-profile" target="_self">Add &#43;</a>
               </li>
               <li ng-repeat="specialty in specialties">
                 <a mrsl-specialty-users mrsl-specialty="specialty"></a>{{$last ? '':','}}
               </li>
             </ul>
           </div>
-          <div ng-show="!specialties && !cuisines" class="loader"></div>
+          <div ng-if="!specialties && !cuisines" class="loader"></div>
         </tab>
         <tab heading="Likes" select="loadLikeFeed()">
           <div class="profile-tab-content" mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>

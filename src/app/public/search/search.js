@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.search', [])
       }
     },
     data: {
-      pageTitle: 'Search'
+      pageTitle: 'Search for Other Users Including Chefs, Mixologists & Sommeliers'
     },
     resolve: {
       //make sure we resolve a user before displaying

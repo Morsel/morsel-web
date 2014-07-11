@@ -91,7 +91,7 @@ module.exports.renderMorselPage = function(req, res) {
               "article_modified_at":morsel.updated_at,
               "is_article": true
             },
-            "url": app.locals.siteUrl + '/' + user.username + '/' + morsel.id + '-' + morsel.slug
+            "url": app.locals.siteUrl + '/' + user.username.toLowerCase() + '/' + morsel.id + '-' + morsel.slug
           };
 
           description = _.escape(util.truncateAt(getFirstDescription(morsel.items), 155)) + '...';
@@ -143,7 +143,7 @@ module.exports.renderUserPage = function(res, userIdOrUsername) {
         "twitter": {
           "creator": '@'+(user.twitter_username || 'eatmorsel')
         },
-        "url": app.locals.siteUrl + '/' + user.username
+        "url": app.locals.siteUrl + '/' + user.username.toLowerCase()
       };
 
       userMetadata.twitter = _.defaults(userMetadata.twitter || {}, util.defaultMetadata.twitter);
@@ -164,20 +164,35 @@ module.exports.renderPlacePage = function(res, placeIdSlug) {
 
   request(app.locals.apiUrl+'/places/'+placeIdSlug+util.apiQuerystring, function (error, response, body) {
     var place,
-        placeMetadata;
+        placeMetadata,
+        placeTitle,
+        placeDescription;
 
     if (!error && response.statusCode == 200) {
 
       place = JSON.parse(body).data;
 
+      placeTitle = place.name;
+      placeDescription = 'Learn more about '+place.name+' and the people, inspirations, dishes and drinks';
+
+      if(place.city) {
+        placeTitle+=', '+place.city;
+        placeDescription+=' in '+place.city;
+      }
+
+      if(place.state) {
+        placeTitle+=', '+place.state;
+        placeDescription+=', '+place.state;
+      }
+
       placeMetadata = {
-        "title": _.escape(place.name + ' | Morsel'),
-        "description": _.escape(place.name + ' | Morsel'),
+        "title": _.escape( placeTitle+ ' Inspirations, Dishes & Drinks | Morsel'),
+        "description": _.escape(placeDescription+' | Morsel'),
         "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "twitter": {
           "creator": '@'+(place.twitter_username || 'eatmorsel')
         },
-        "url": app.locals.siteUrl + '/places/' + place.id + '-' + place.slug
+        "url": app.locals.siteUrl + '/places/' + place.id + '-' + place.slug.toLowerCase()
       };
 
       placeMetadata.twitter = _.defaults(placeMetadata.twitter || {}, util.defaultMetadata.twitter);

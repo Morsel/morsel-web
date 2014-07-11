@@ -128,10 +128,15 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, Mixpanel, GA, $modalStack, $rootScope, $state ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state ) {
   var viewOptions = {
     miniHeader : false,
     fullWidthHeader : false
+  };
+
+  //to store things like page title
+  $scope.pageData = {
+    pageTitle: $document[0].title
   };
 
   Auth.setupInterceptor();
@@ -185,9 +190,9 @@ angular.module( 'Morsel.public', [
 
   //when a user accesses a new route
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-    if ( angular.isDefined( toState.data.pageTitle ) ) {
+    if ( angular.isDefined( toState.data && toState.data.pageTitle ) ) {
       //update the page title
-      $scope.pageTitle = toState.data.pageTitle + ' | Morsel';
+      $scope.pageData.pageTitle = toState.data.pageTitle + ' | Morsel';
     }
     //refresh our user data
     Auth.getCurrentUserPromise().then(function(userData){
@@ -196,7 +201,7 @@ angular.module( 'Morsel.public', [
     });
 
     //manually push a GA pageview
-    GA.sendPageview($scope.pageTitle);
+    GA.sendPageview($scope.pageData.pageTitle);
   });
 
   //if there are internal state issues, go to 404

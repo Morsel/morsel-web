@@ -96,7 +96,7 @@ angular.module( 'Morsel.login.passwordReset', [])
       $scope.newPasswordForm.$setValidity('loading', true);
 
       //if password reset, show message
-      $scope.alertMessage = $sce.trustAsHtml('Your password has been reset. You can now <a href="/login">login</a> with your new password');
+      $scope.alertMessage = $sce.trustAsHtml('Your password has been reset. You can now <a href="/auth/login">login</a> with your new password');
       $scope.alertType = 'success';
     }
 

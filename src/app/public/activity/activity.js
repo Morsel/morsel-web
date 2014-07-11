@@ -9,7 +9,7 @@ angular.module( 'Morsel.public.activity', [])
         templateUrl: 'app/public/activity/activity.tpl.html'
       }
     },
-    data:{ pageTitle: 'Your Activity' },
+    data:{ pageTitle: 'Activity' },
     access: {
       restricted : true
     }, 
