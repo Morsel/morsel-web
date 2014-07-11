@@ -245,14 +245,14 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     });
 
     app.get('/search*', function(req, res){
-      publicApp.renderPublicPage(res);
+      var metadata = utilApp.getMetadata('search');
+
+      publicApp.renderPublicPage(res, metadata);
     });
 
     //invite
     app.get('/invite', function(req, res){
-      var metadata = utilApp.getMetadata('invite');
-
-      publicApp.renderPublicPage(res, metadata);
+      publicApp.renderPublicPage(res);
     });
 
     //convenience route

@@ -1,7 +1,7 @@
 {
   "default": {
-    "title": "Morsel",
-    "description": "We're building something awesome for the artists who use food and drink as their medium: chefs, sommeliers, mixologists and more.",
+    "title": "Food & Drink Inspiration From the Top Chefs, Mixologists, Sommeliers & Restaurants | Morsel",
+    "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
     "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
     "fb_app_id": "1402286360015732",
     "twitter": {
@@ -16,13 +16,73 @@
     },
     "url": "http://www.eatmorsel.com"
   },
-  "about": {
-    "title": "This page is about morsel",
-    "description": "This is the about page for morsel"
+  "home": {
+    "title": "Food & Drink Inspiration From the Top Chefs, Mixologists, Sommeliers & Restaurants | Morsel",
+    "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
+    "twitter": {
+      "card": "app",
+      "creator": "@eatmorsel",
+      "site": "@eatmorsel",
+      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
+      "app:id:iphone":"",
+      "app:id:ipad":""
+    }
   },
-  "": {
-    "title": "The Morsel homepage",
-    "description": "This is the morsel homepage"
+  "about": {
+    "title": "About Us | Morsel",
+    "description": "Learn more about Morsel and the brilliant people who make up our team.",
+    "url": "http://www.eatmorsel.com/about"
+  },
+  "apps": {
+    "title": "Take Morsel on the Go With Our Apps | Morsel",
+    "description" : "Find information on Morsel's mobile and tablet presence including our live iOS app.",
+    "twitter": {
+      "card": "app",
+      "creator": "@eatmorsel",
+      "site": "@eatmorsel",
+      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
+      "app:id:iphone":"",
+      "app:id:ipad":""
+    },
+    "url": "http://www.eatmorsel.com/apps"
+  },
+  "contact": {
+    "title":"Contact Us | Morsel",
+    "description":"Please contact us. We'd love to hear from you.",
+    "url": "http://www.eatmorsel.com/contact"
+  },
+  "feed": {
+    "title": "Food & Drink Inspiration From the Top Chefs, Mixologists, Sommeliers & Restaurants | Morsel",
+    "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
+    "twitter": {
+      "card": "app",
+      "creator": "@eatmorsel",
+      "site": "@eatmorsel",
+      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
+      "app:id:iphone":"",
+      "app:id:ipad":""
+    },
+    "url": "http://www.eatmorsel.com/feed"
+  },
+  "press": {
+    "title": "Press & Media | Morsel",
+    "description": "Read the latest news on Morsel and find media-related content including screenshots and high-res logos.",
+    "url": "http://www.eatmorsel.com/press"
+  },
+  "privacy": {
+    "title": "Privacy Policy | Morsel",
+    "description": "Morsel is committed to your privacy and keeping your information secure.",
+    "url": "http://www.eatmorsel.com/privacy"
+  },
+  "search": {
+    "title":"Search for Other Users Including Chefs, Mixologists & Sommeliers | Morsel",
+    "description":"Search Morsel for the top chefs, sommeliers and mixologists.",
+    "url": "http://www.eatmorsel.com/search"
+  },
+  "terms": {
+    "title": "Terms of Use | Morsel",
+    "description": "Our terms of use explain your rights as a user of the Morsel properties including our website and mobile app.",
+    "url": "http://www.eatmorsel.com/terms"
   },
   "404": {
     "title": "Page Not Found | Morsel",
