@@ -9,7 +9,6 @@ angular.module( 'Morsel.public.profile', [])
         templateUrl: 'app/public/profile/profile.tpl.html'
       }
     },
-    data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get the user data of the profile before we try to render the page
       profileUserData: function(ApiUsers, $stateParams, $state) {
@@ -34,7 +33,6 @@ angular.module( 'Morsel.public.profile', [])
         templateUrl: 'app/public/profile/profile.tpl.html'
       }
     },
-    data:{ /*pageTitle: 'Profile'*/ },
     resolve: {
       //get the user data of the profile before we try to render the page
       profileUserData: function(ApiUsers, $stateParams, $state) {
@@ -57,9 +55,11 @@ angular.module( 'Morsel.public.profile', [])
   $scope.viewOptions.miniHeader = true;
 
   $scope.user = profileUserData;
-  $scope.isProfessional = profileUserData.professional;
+  $scope.isProfessional = $scope.user.professional;
+  $scope.canEdit = $scope.user.id === currentUser.id;
 
-  $scope.canEdit = profileUserData.id === currentUser.id;
+  //update page title
+  $scope.pageData.pageTitle = $scope.user.first_name+' '+$scope.user.last_name+' ('+$scope.user.username+') | Morsel';
 
   //load our morsels immediately (it's the default tab)
   ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
@@ -92,13 +92,13 @@ angular.module( 'Morsel.public.profile', [])
 
   $scope.loadTags = function() {
     if(!$scope.cuisines) {
-      ApiUsers.getCuisines(profileUserData.id).then(function(cuisineResp) {
+      ApiUsers.getCuisines($scope.user.id).then(function(cuisineResp) {
         $scope.cuisines = cuisineResp.data;
       });
     }
     
     if(!$scope.specialties) {
-      ApiUsers.getSpecialties(profileUserData.id).then(function(specialtyResp) {
+      ApiUsers.getSpecialties($scope.user.id).then(function(specialtyResp) {
         $scope.specialties = specialtyResp.data;
       });
     }

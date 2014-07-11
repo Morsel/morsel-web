@@ -40,16 +40,11 @@ angular.module( 'Morsel.public.morselDetail', [])
   if(morselIdSlug && username) {
     ApiMorsels.getMorsel(morselIdSlug).then(function(morselData){
       $scope.morsel = morselData;
+      //update page title
+      $scope.pageData.pageTitle = $scope.morsel.title+' - '+$scope.morsel.creator.first_name+' '+$scope.morsel.creator.last_name+' | Morsel';
     }, function() {
       //if there's an error retrieving morsel data (bad id?), go to profile page for now
       $location.path('/'+$stateParams.username);
-    });
-
-    ApiUsers.getUser(username).then(function(userResp){
-      $scope.owner = userResp.data;
-    }, function() {
-      //if there's an error retrieving user data (bad username?), go to 404
-      $state.go('404');
     });
   } else {
     //if not, send to profile page

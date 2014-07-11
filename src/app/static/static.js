@@ -49,9 +49,14 @@ angular.module( 'Morsel.static', [
 .run( function run ($window) {
 })
 
-.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, Mixpanel ) {
+.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel ) {
   var viewOptions = {
     miniHeader : false
+  };
+
+  //to store things like page title
+  $scope.pageData = {
+    pageTitle: $document[0].title
   };
 
   Auth.setupInterceptor();

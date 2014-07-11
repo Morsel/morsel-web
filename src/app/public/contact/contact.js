@@ -9,7 +9,7 @@ angular.module( 'Morsel.public.contact', [])
         templateUrl: 'app/public/contact/contact.tpl.html'
       }
     },
-    data:{ pageTitle: 'Contact Morsel' },
+    data:{ pageTitle: 'Contact Us' },
     resolve: {
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();

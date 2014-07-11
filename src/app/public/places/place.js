@@ -33,6 +33,9 @@ angular.module( 'Morsel.public.place', [])
 
   $scope.place = placeData;
 
+  //update page title
+  $scope.pageData.pageTitle = $scope.place.name+($scope.place.city ? ', '+$scope.place.city : '')+($scope.place.state ? ', '+$scope.place.state : '')+' Inspirations, Dishes & Drinks | Morsel';
+
   //for price display
   $scope.priceRange = _.range(0, $scope.place.information.price_tier);
 
