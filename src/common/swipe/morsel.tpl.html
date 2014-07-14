@@ -28,7 +28,7 @@
                 <div class="user-info">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
                   <h5 class="h2 overflow-ellipsis">
-                    <a bo-href="'/'+morsel.creator.username" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
+                    <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
                   </h5>
                   <h6 class="overflow-ellipsis" bo-if="morsel.place">
                     <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" class="h2" bo-text="morsel.place.name"></a>
@@ -56,7 +56,7 @@
                 <div class="user-info">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
                   <h5 class="h2 overflow-ellipsis">
-                    <a bo-href="'/'+morsel.creator.username" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
+                    <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
                   </h5>
                 </div>
                 <div mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
@@ -78,7 +78,7 @@
             <div class="user-info">
               <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-m"></div>
               <h4 class="h3">
-                <a bo-href="'/'+morsel.creator.username" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
+                <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
               </h4>
               <p bo-bind="morsel.creator.bio"></p>
             </div>

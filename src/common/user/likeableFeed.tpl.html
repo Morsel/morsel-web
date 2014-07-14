@@ -4,10 +4,10 @@
       <div class="user-info">
         <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s"></div>
         <div class="user-body">
-          <a class="activity-subject" bo-href="'/'+likeable.creator.username+'/'+likeable.morsel.id+'-'+likeable.morsel.slug">
+          <a class="activity-subject" bo-href="'/'+likeable.creator.username.toLowerCase()+'/'+likeable.morsel.id+'-'+likeable.morsel.slug">
             <img bo-src="likeable.photos ? likeable.photos._80x80 : morselPlaceholder" />
           </a>
-          <p>{{user.first_name}} liked <a bo-href="'/'+likeable.creator.username" bo-text="likeable.creator.first_name+' '+likeable.creator.last_name"></a>'s "{{likeable.morsel.title+(likeable.description ? ': '+likeable.description : '') | truncate:80}}"</p>
+          <p>{{user.first_name}} liked <a bo-href="'/'+likeable.creator.username.toLowerCase()" bo-text="likeable.creator.first_name+' '+likeable.creator.last_name"></a>'s "{{likeable.morsel.title+(likeable.description ? ': '+likeable.description : '') | truncate:80}}"</p>
           <span am-time-ago="likeable.liked_at" class="time-ago"></span>
         </div>
       </div>

@@ -122,6 +122,9 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     app.use('/vendor', express.static(__dirname + '/vendor'));
     app.use('/launch', express.static(__dirname + '/launch'));
 
+    //redirect all URLs (besides static files) to lowercase
+    app.use(require('express-uncapitalize')());
+
     //set our initial default metadata
     utilApp.updateMetadata('default');
 

@@ -232,7 +232,7 @@ angular.module( 'Morsel.public', [
 
   $scope.goToProfile = function() {
     if($scope.currentUser && $scope.currentUser.username) {
-      $location.path('/'+$scope.currentUser.username);
+      $location.path('/'+$scope.currentUser.username.toLowerCase());
     }
     $scope.closeMenu();
   };
