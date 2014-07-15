@@ -4,7 +4,7 @@
       <div class="profile-info col-sm-10">
         <div class="profile-body">
           <h1 class="h3" bo-text="place.name"></h1>
-          <p bo-html="place.address + '<br/>' + place.city + ', ' + place.state + ' ' + place.postal_code"></p>
+          <p bo-html="(place.address ? place.address + '<br/>' : '') + place.city + ', ' + place.state + (place.postal_code ? ' ' + place.postal_code : '')"></p>
         </div>
       </div>
       <div class="col-sm-2">
@@ -17,7 +17,7 @@
         <tab heading="Morsels">
           <ul class="clearfix profile-morsels">
             <li ng-repeat="morsel in morsels | reverse">
-              <a ng-click="goTo(morsel.creator.username+'/'+morsel.id+'-'+morsel.slug)" class="centered-white">
+              <a ng-click="goTo(morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug)" class="centered-white">
                 <div>
                   <span class="profile-morsel-title">{{morsel.title}}</span>
                 </div>

@@ -122,6 +122,9 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     app.use('/vendor', express.static(__dirname + '/vendor'));
     app.use('/launch', express.static(__dirname + '/launch'));
 
+    //redirect all URLs (besides static files) to lowercase
+    app.use(require('express-uncapitalize')());
+
     //set our initial default metadata
     utilApp.updateMetadata('default');
 
@@ -166,6 +169,10 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     app.get('/pinterest-98fe2.html', function(req, res){
       res.sendfile('seo/pinterest-98fe2.html');
+    });
+
+    app.get('/robots.txt', function(req, res){
+      res.sendfile('seo/robots.txt');
     });
 
     //unsubscribe

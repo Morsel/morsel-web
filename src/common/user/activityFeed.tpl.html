@@ -5,20 +5,20 @@
         <div mrsl-user-image mrsl-username="activity.creator.username" mrsl-user-photos="activity.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
         <div class="user-body">
           <div bo-if="activity.subject_type === 'Item'">
-            <a class="activity-subject" bo-href="'/'+activity.subject.creator.username+'/'+activity.subject.morsel.id+'-'+activity.subject.morsel.slug">
+            <a class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.morsel.id+'-'+activity.subject.morsel.slug">
               <img bo-src="activity.subject.photos ? activity.subject.photos._80x80 : morselPlaceholder" />
             </a>
-            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.first_name"></a> {{activity.action_type === 'Like' ? 'liked':''}}{{activity.action_type === 'Comment' ? 'commented on':''}} <span bo-if="activity.subject.creator.id === user.id">your</span><a bo-if="activity.subject.creator.id !== user.id" bo-href="'/'+activity.subject.creator.username" bo-text="activity.subject.creator.first_name+' '+activity.subject.creator.last_name+'\'s'"></a> "{{activity.subject.morsel.title+(activity.subject.description ? ': '+activity.subject.description : '') | truncate:80}}"</p>
+            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.first_name"></a> {{activity.action_type === 'Like' ? 'liked':''}}{{activity.action_type === 'Comment' ? 'commented on':''}} <span bo-if="activity.subject.creator.id === user.id">your</span><a bo-if="activity.subject.creator.id !== user.id" bo-href="'/'+activity.subject.creator.username.toLowerCase()" bo-text="activity.subject.creator.first_name+' '+activity.subject.creator.last_name+'\'s'"></a> "{{activity.subject.morsel.title+(activity.subject.description ? ': '+activity.subject.description : '') | truncate:80}}"</p>
             <span am-time-ago="activity.action.created_at" class="time-ago"></span>
           </div>
           <div ng-if="activity.subject_type === 'User' && activity.action_type === 'Follow'">
             <div class="activity-subject" mrsl-user-image mrsl-username="activity.subject.username" mrsl-user-photos="activity.subject.photos" mrsl-user-image-size="profile-pic-s"></div>
-            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.first_name"></a> followed {{activity.subject.first_name+' '+activity.subject.last_name}} (<a bo-href="'/'+activity.subject.username" bo-text="activity.subject.username"></a>)</p>
+            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.first_name"></a> followed {{activity.subject.first_name+' '+activity.subject.last_name}} (<a bo-href="'/'+activity.subject.username.toLowerCase()" bo-text="activity.subject.username"></a>)</p>
             <span am-time-ago="activity.action.created_at" class="time-ago"></span>
           </div>
           <div bo-if="activity.subject_type === 'Place' && activity.action_type === 'Follow'">
             <div class="activity-subject">Place icon!</div>
-            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.first_name"></a> followed <a bo-href="'/places/'+activity.subject.id+'-'+activity.subject.slug" bo-text="activity.subject.name"></a></p>
+            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.first_name"></a> followed <a bo-href="'/places/'+activity.subject.id+'-'+activity.subject.slug" bo-text="activity.subject.name"></a></p>
             <span am-time-ago="activity.action.created_at" class="time-ago"></span>
           </div>
         </div>

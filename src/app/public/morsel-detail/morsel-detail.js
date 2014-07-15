@@ -17,7 +17,7 @@ angular.module( 'Morsel.public.morselDetail', [])
         return Auth.getCurrentUserPromise();
       },
       theMorsel: function($location, $stateParams, ApiMorsels, $q) {
-        var username = $stateParams.username,
+        var username = $stateParams.username.toLowerCase(),
             morselDetailsArr = $stateParams.morselDetails.split('/'),
             morselIdSlug = morselDetailsArr[0];/*,
             itemNumber = parseInt(morselDetailsArr[1], 10);*/
