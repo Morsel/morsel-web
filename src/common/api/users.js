@@ -311,7 +311,7 @@ angular.module( 'Morsel.common.apiUsers', [] )
   Users.AuthenticationConnects = function(provider, uids) {
     var deferred = $q.defer();
 
-    Restangular.one('authentications', 0, true).customGET('connections', {
+    Restangular.one('authentications', 0, true).post('connections', {
       provider : provider,
       uids: uids
     }).then(function(resp) {
