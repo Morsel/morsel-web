@@ -25,7 +25,12 @@ angular.module( 'Morsel.public.morselDetail', [])
         //check and make sure we pulled an idslug from the URL
         if(morselIdSlug && username) {
           return ApiMorsels.getMorsel(morselIdSlug).then(function(morselData){
-            return morselData;
+            if(morselData.draft) {
+              //this morsel is still a draft - don't allow access
+              $location.path('/'+username);
+            } else {
+              return morselData;
+            }
           }, function() {
             //if there's an error retrieving morsel data (bad id?), go to profile page for now
             $location.path('/'+username);
