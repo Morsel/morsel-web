@@ -32,7 +32,7 @@
                   </h5>
                   <h6 class="overflow-ellipsis" bo-if="morsel.place">
                     <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" class="h2" bo-text="morsel.place.name"></a>
-                    <span bo-text="morsel.place.city+', '+morsel.place.state"></span>
+                    <span bo-text="(morsel.place.city ? morsel.place.city+', ':'')+morsel.place.state"></span>
                   </h6>
                 </div>
                 <span am-time-ago="morsel.created_at" class="time-ago"></span>

@@ -4,7 +4,7 @@
       <div class="profile-info col-sm-10">
         <div class="profile-body">
           <h1 class="h3" bo-text="place.name"></h1>
-          <p bo-html="(place.address ? place.address + '<br/>' : '') + place.city + ', ' + place.state + (place.postal_code ? ' ' + place.postal_code : '')"></p>
+          <p bo-html="(place.address ? place.address + '<br/>' : '') + (place.city ? place.city + ', ':'') + place.state + (place.postal_code ? ' ' + place.postal_code : '')"></p>
         </div>
       </div>
       <div class="col-sm-2">
