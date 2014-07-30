@@ -11,7 +11,7 @@
         <span ng-click="deleteComment(comment.id)" class="close" ng-show="(item.creator_id === currentUser.id) || (comment.creator.id === currentUser.id)">&times;</span>
         <div class="user-body user-extra-info">
           <h5 class="user-info-main">
-            <a bo-href="'/'+comment.creator.username.toLowerCase()" bo-text="comment.creator.first_name+' '+comment.creator.last_name"></a>
+            <a bo-href="'/'+comment.creator.username.toLowerCase()" bo-text="comment.creator.username"></a>
           </h5>
           <span am-time-ago="comment.created_at" class="time-ago"></span>
           <p class="user-list-text" bo-html="formatComment(comment.description)"></p>
