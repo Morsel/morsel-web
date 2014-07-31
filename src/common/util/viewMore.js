@@ -6,7 +6,8 @@ angular.module( 'Morsel.common.viewMore', [
       viewMoreFunc: '=mrslViewMoreFunc',
       viewMoreData: '=mrslViewMoreData',
       viewMoreInc: '=mrslViewMoreInc',
-      viewMoreCopy: '@mrslViewMoreCopy'
+      viewMoreCopy: '@mrslViewMoreCopy',
+      viewMoreOrder: '@mrslViewMoreOrder'
     },
     link:function (scope, element, attrs) {
       scope.loading = false;
@@ -26,7 +27,13 @@ angular.module( 'Morsel.common.viewMore', [
 
       scope.loadMore = function() {
         scope.loading = true;
-        scope.viewMoreFunc(_.last(scope.viewMoreData).id);
+
+        //which is the "end" of the data, the first or last item?
+        if(scope.viewMoreOrder === 'last') {
+          scope.viewMoreFunc(_.last(scope.viewMoreData).id);
+        } else {
+          scope.viewMoreFunc(_.first(scope.viewMoreData).id);
+        }
       };
     },
     templateUrl: 'common/util/viewMore.tpl.html'

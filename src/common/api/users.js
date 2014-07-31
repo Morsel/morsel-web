@@ -86,10 +86,10 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
-  Users.getMorsels = function(username) {
+  Users.getMorsels = function(username, morselsParams) {
     var deferred = $q.defer();
 
-    Restangular.one('users', username).one('morsels').get().then(function(resp) {
+    Restangular.one('users', username).one('morsels').get(morselsParams).then(function(resp) {
       var morselsData = Restangular.stripRestangular(resp).data;
       //correctly sort morsels by published_at before we even deal with them
       morselsData = _.sortBy(morselsData, 'published_at');

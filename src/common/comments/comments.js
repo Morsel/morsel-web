@@ -92,7 +92,7 @@ angular.module( 'Morsel.common.comments', [] )
       var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, AfterLogin, item) {
         $scope.item = item;
         //number of comments to load at a time
-        $scope.increment = 10;
+        $scope.increment = 5;
 
         $scope.isLoggedIn = isLoggedIn;
 

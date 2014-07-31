@@ -61,13 +61,33 @@ angular.module( 'Morsel.public.profile', [])
   //update page title
   $scope.pageData.pageTitle = $scope.user.first_name+' '+$scope.user.last_name+' ('+$scope.user.username+') | Morsel';
 
+  //# of morsels to load at a time
+  $scope.morselIncrement = 15;
+
+  $scope.getMorsels = function(max_id) {
+    var morselsParams = {
+          count: $scope.morselIncrement
+        };
+
+    if(max_id) {
+      morselsParams.max_id = parseInt(max_id, 10) - 1;
+    }
+
+    ApiUsers.getMorsels($scope.user.username, morselsParams).then(function(morselsData) {
+      if($scope.morsels) {
+        //concat them with new data after old data, then reverse with a filter
+        $scope.morsels = morselsData.concat($scope.morsels);
+      } else {
+        $scope.morsels = morselsData;
+      }
+    }, function() {
+      //if there's an error retrieving user data (bad username?), go to 404
+      $state.go('404');
+    });
+  };
+
   //load our morsels immediately (it's the default tab)
-  ApiUsers.getMorsels($scope.user.username).then(function(morselsData) {
-    $scope.morsels = morselsData;
-  }, function() {
-    //if there's an error retrieving user data (bad username?), go to 404
-    $state.go('404');
-  });
+  $scope.getMorsels();
 
   $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
     if(dir === 'increase') {
