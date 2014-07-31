@@ -28,10 +28,10 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     return deferred.promise;
   };
 
-  Keywords.getCuisineUsers = function(cuisineId) {
+  Keywords.getCuisineUsers = function(cuisineId, usersParams) {
     var deferred = $q.defer();
 
-    Restangular.one('cuisines', cuisineId).one('users').get().then(function(resp) {
+    Restangular.one('cuisines', cuisineId).one('users').get(usersParams).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));
@@ -40,10 +40,10 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     return deferred.promise;
   };
 
-  Keywords.getSpecialtyUsers = function(specialtyId) {
+  Keywords.getSpecialtyUsers = function(specialtyId, usersParams) {
     var deferred = $q.defer();
 
-    Restangular.one('specialties', specialtyId).one('users').get().then(function(resp) {
+    Restangular.one('specialties', specialtyId).one('users').get(usersParams).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

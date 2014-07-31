@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.followedUsers', [] )
 
 //show whom a user follows
-.directive('mrslFollowedUsers', function(ApiUsers, $modal, $rootScope){
+.directive('mrslFollowedUsers', function(ApiUsers, $modal, $rootScope, USER_LIST_NUMBER){
   return {
     scope: {
       followerId: '=mrslFollowerId',
@@ -29,11 +29,26 @@ angular.module( 'Morsel.common.followedUsers', [] )
           $modalInstance.dismiss('cancel');
         };
 
-        if(!$scope.users) {
-          ApiUsers.getFollowables(followerId, 'User').then(function(followerResp){
-            $scope.users = followerResp.data;
+        $scope.loadUsers = function(max_id) {
+          var followablesParams = {
+                count: USER_LIST_NUMBER,
+                type: 'User'
+              };
+
+          if(max_id) {
+            followablesParams.max_id = parseInt(max_id, 10) - 1;
+          }
+
+          ApiUsers.getFollowables(followerId, followablesParams).then(function(followableResp){
+            if($scope.users) {
+              $scope.users = $scope.users.concat(followableResp.data);
+            } else {
+              $scope.users = followableResp.data;
+            }
           });
-        }
+        };
+
+        $scope.loadUsers();
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'followerId'];

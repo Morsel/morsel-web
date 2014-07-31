@@ -12,6 +12,7 @@
       </div>
     </li>
   </ul>
+  <div mrsl-view-more mrsl-view-more-func="userLoadFunc" mrsl-view-more-data="users" mrsl-view-more-inc="userIncrement" mrsl-view-more-copy="View more" mrsl-view-more-order="last"></div>
   <div ng-if="!users" class="loader"></div>
   <div ng-if="users && users.length === 0" class="empty-state">
     <p bo-text="emptyText || 'No users'"></p>

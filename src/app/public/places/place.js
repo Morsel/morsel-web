@@ -28,7 +28,7 @@ angular.module( 'Morsel.public.place', [])
   });
 })
 
-.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth ) {
+.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth, USER_LIST_NUMBER ) {
   $scope.viewOptions.miniHeader = true;
 
   $scope.place = placeData;
@@ -91,12 +91,26 @@ angular.module( 'Morsel.public.place', [])
     }
   };
 
-  $scope.loadPeople = function() {
-    if(!$scope.placeUsers) {
-      ApiPlaces.getUsers($scope.place.id).then(function(usersResp) {
-        $scope.placeUsers = usersResp.data;
-      });
+  $scope.initialLoadPeople = function() {
+    $scope.loadPeople();
+  };
+
+  $scope.loadPeople = function(max_id) {
+    var usersParams = {
+          count: USER_LIST_NUMBER
+        };
+
+    if(max_id) {
+      usersParams.max_id = parseInt(max_id, 10) - 1;
     }
+
+    ApiPlaces.getUsers($scope.place.id, usersParams).then(function(usersResp) {
+      if($scope.placeUsers) {
+        $scope.placeUsers = $scope.placeUsers.concat(usersResp.data);
+      } else {
+        $scope.placeUsers = usersResp.data;
+      }
+    });
   };
 
   $scope.getCoverPhotoArray = function(morsel) {

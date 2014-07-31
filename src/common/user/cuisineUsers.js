@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.cuisineUsers', [] )
 
 //show which users are tagged with a certain cuisine
-.directive('mrslCuisineUsers', function(ApiKeywords, $modal, $rootScope){
+.directive('mrslCuisineUsers', function(ApiKeywords, $modal, $rootScope, USER_LIST_NUMBER){
   return {
     scope: {
       cuisine: '=mrslCuisine'
@@ -29,11 +29,25 @@ angular.module( 'Morsel.common.cuisineUsers', [] )
           $modalInstance.dismiss('cancel');
         };
 
-        if(!$scope.users) {
-          ApiKeywords.getCuisineUsers(cuisine.keyword.id).then(function(userResp){
-            $scope.users = userResp.data;
+        $scope.loadUsers = function(max_id) {
+          var usersParams = {
+                count: USER_LIST_NUMBER
+              };
+
+          if(max_id) {
+            usersParams.max_id = parseInt(max_id, 10) - 1;
+          }
+
+          ApiKeywords.getCuisineUsers(cuisine.keyword.id, usersParams).then(function(usersResp){
+            if($scope.users) {
+              $scope.users = $scope.users.concat(usersResp.data);
+            } else {
+              $scope.users = usersResp.data;
+            }
           });
-        }
+        };
+
+        $scope.loadUsers();
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'cuisine'];

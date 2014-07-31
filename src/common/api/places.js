@@ -32,10 +32,10 @@ angular.module( 'Morsel.common.apiPlaces', [] )
     return deferred.promise;
   };
 
-  Places.getUsers = function(id) {
+  Places.getUsers = function(id, usersParams) {
     var deferred = $q.defer();
 
-    Restangular.one('places', id).one('users').get().then(function(resp) {
+    Restangular.one('places', id).one('users').get(usersParams).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

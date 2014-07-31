@@ -172,10 +172,10 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
-  Users.getFollowers = function(userId) {
+  Users.getFollowers = function(userId, followersParams) {
     var deferred = $q.defer();
 
-    Restangular.one('users', userId).one('followers').get().then(function(resp) {
+    Restangular.one('users', userId).one('followers').get(followersParams).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));
@@ -184,10 +184,10 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
-  Users.getFollowables = function(userId, type) {
+  Users.getFollowables = function(userId, followablesParams) {
     var deferred = $q.defer();
 
-    Restangular.one('users', userId).one('followables').get({type: type}).then(function(resp) {
+    Restangular.one('users', userId).one('followables').get(followablesParams).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));
