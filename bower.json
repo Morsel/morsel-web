@@ -5,7 +5,7 @@
     "angular-mocks": "1.2.7"
   },
   "resolutions": {
-    "angular": ">= 1.0.8"
+    "angular": "1.2.7"
   },
   "dependencies": {
     "angular": "~1.2.19",

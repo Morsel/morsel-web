@@ -29,10 +29,10 @@ angular.module( 'Morsel.common.apiItems', [] )
     return deferred.promise;
   };
 
-  Items.getComments = function(itemId) {
+  Items.getComments = function(itemId, commentParams) {
     var deferred = $q.defer();
 
-    Restangular.one('items', itemId).one('comments', 1, true).get().then(function(resp){
+    Restangular.one('items', itemId).one('comments', 1, true).get(commentParams).then(function(resp){
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));

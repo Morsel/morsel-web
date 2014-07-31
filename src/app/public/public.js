@@ -56,6 +56,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.userImage',
   'Morsel.common.userList',
   'Morsel.common.validatedElement',
+  'Morsel.common.viewMore',
   //app
   'Morsel.public.activity',
   'Morsel.public.contact',
