@@ -59,7 +59,7 @@ angular.module( 'Morsel.public.search.people.facebook', [])
     if(fbFriends.length > 0) {
       //create a list "'id1','id2','id3'"
       _.each(fbFriends, function(f){
-        friendsIds+= "'"+f.id+"',";
+        friendsIds+= f.id+',';
       });
 
       //chop off that last comma

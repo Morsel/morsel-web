@@ -77,7 +77,8 @@ module.exports = function ( grunt ) {
     clean: {
       preDev: ['<%= build_dir %>'],
       preCompile: ['<%= compile_dir %>'],
-      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css', '<%= compile_dir %>/assets/login.css', '<%= compile_dir %>/assets/static.css']
+      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css', '<%= compile_dir %>/assets/login.css', '<%= compile_dir %>/assets/static.css'],
+      prePush: ['<%= build_dir %>/config.js','<%= compile_dir %>/config.js']
     },
 
     /**
@@ -1157,17 +1158,17 @@ module.exports = function ( grunt ) {
   /**
    * The `push-dev` task pushes the site to heroku (dev.eatmorsel.com)
    */
-  grunt.registerTask( 'push-dev', [ 'shell:dev_deploy_init', 'appserver:build', 'copy:build_deploy', 'shell:dev_deploy_push' ]);
+  grunt.registerTask( 'push-dev', [ 'shell:dev_deploy_init', 'appserver:build', 'clean:prePush', 'copy:build_deploy', 'shell:dev_deploy_push' ]);
 
   /**
    * The `push-staging` task pushes the site to heroku (staging.eatmorsel.com)
    */
-  grunt.registerTask( 'push-staging', [ 'shell:staging_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:staging_deploy_push' ]);
+  grunt.registerTask( 'push-staging', [ 'shell:staging_deploy_init', 'appserver:compile', 'clean:prePush', 'copy:compile_deploy', 'shell:staging_deploy_push' ]);
 
   /**
    * The `push-production` task pushes the site to heroku (staging.eatmorsel.com)
    */
-  grunt.registerTask( 'push-production', [ 'shell:production_deploy_init', 'appserver:compile', 'copy:compile_deploy', 'shell:production_deploy_push' ]);
+  grunt.registerTask( 'push-production', [ 'shell:production_deploy_init', 'appserver:compile', 'clean:prePush', 'copy:compile_deploy', 'shell:production_deploy_push' ]);
 
   /**
    * The `push-blog` task pushes the blog to insights.eatmorsel.com over ssh
