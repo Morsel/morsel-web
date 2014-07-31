@@ -33,19 +33,39 @@ angular.module( 'Morsel.public.place', [])
 
   $scope.place = placeData;
 
+  //# of morsels to load at a time
+  $scope.morselIncrement = 15;
+
   //update page title
   $scope.pageData.pageTitle = $scope.place.name+($scope.place.city ? ', '+$scope.place.city : '')+($scope.place.state ? ', '+$scope.place.state : '')+' Inspirations, Dishes & Drinks | Morsel';
 
   //for price display
   $scope.priceRange = _.range(0, $scope.place.information.price_tier);
 
+  $scope.getMorsels = function(max_id) {
+    var morselsParams = {
+          count: $scope.morselIncrement
+        };
+
+    if(max_id) {
+      morselsParams.max_id = parseInt(max_id, 10) - 1;
+    }
+
+    ApiPlaces.getMorsels($scope.place.id, morselsParams).then(function(morselsData) {
+      if($scope.morsels) {
+        //concat them with new data after old data, then reverse with a filter
+        $scope.morsels = morselsData.concat($scope.morsels);
+      } else {
+        $scope.morsels = morselsData;
+      }
+    }, function() {
+      //if there's an error retrieving morsels, go to 404
+      $state.go('404');
+    });
+  };
+
   //load our morsels immediately (it's the default tab)
-  ApiPlaces.getMorsels($scope.place.id).then(function(morselsData) {
-    $scope.morsels = morselsData;
-  }, function() {
-    //if there's an error retrieving morsels, go to 404
-    $state.go('404');
-  });
+  $scope.getMorsels();
 
   $scope.getPlacePhoto = function() {
     var mapsBaseUrl = 'http://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&format=jpg&zoom=15',

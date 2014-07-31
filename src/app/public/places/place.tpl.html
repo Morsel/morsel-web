@@ -25,6 +25,7 @@
               </a>
             </li>
           </ul>
+          <div mrsl-view-more mrsl-view-more-func="getMorsels" mrsl-view-more-data="morsels" mrsl-view-more-inc="morselIncrement" mrsl-view-more-copy="View more morsels"></div>
           <div ng-show="!morsels" class="loader"></div>
           <div ng-show="morsels && morsels.length === 0" class="empty-state">
             <p bo-if="place.twitter_username">Eek! There are no morsels yet. <a bo-href="'https://twitter.com/home?status=Hey%20%40'+place.twitter_username+'%20I%27d%20love%20to%20see%20your%20food%20and%20drinks%20on%20%40eatmorsel!'" target="_blank">Tell {{place.name}}</a> you want to see their food and drinks on Morsel!</p>

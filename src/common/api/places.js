@@ -17,10 +17,10 @@ angular.module( 'Morsel.common.apiPlaces', [] )
     return deferred.promise;
   };
 
-  Places.getMorsels = function(id) {
+  Places.getMorsels = function(id, morselsParams) {
     var deferred = $q.defer();
 
-    Restangular.one('places', id).one('morsels').get().then(function(resp) {
+    Restangular.one('places', id).one('morsels').get(morselsParams).then(function(resp) {
       var morselsData = Restangular.stripRestangular(resp).data;
       //correctly sort morsels by published_at before we even deal with them
       morselsData = _.sortBy(morselsData, 'published_at');
