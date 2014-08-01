@@ -91,6 +91,8 @@ angular.module( 'Morsel.common.comments', [] )
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, AfterLogin, item) {
         $scope.item = item;
+        //number of comments to load at a time
+        $scope.increment = 5;
 
         $scope.isLoggedIn = isLoggedIn;
 
@@ -140,16 +142,30 @@ angular.module( 'Morsel.common.comments', [] )
           }
         };
 
-        if(!$scope.item.comments) {
-          getComments();
-        }
-
         //fetch comments for the item
-        function getComments() {
-          ApiItems.getComments($scope.item.id).then(function(commentResp){
-            $scope.item.comments = commentResp.data;
+        $scope.getComments = function(max_id) {
+          var commentParams = {
+                count: $scope.increment
+              };
+
+          if(max_id) {
+            commentParams.max_id = parseInt(max_id, 10) - 1;
+          }
+
+          ApiItems.getComments($scope.item.id, commentParams).then(function(commentResp){
+            if($scope.item.comments) {
+              //concat them with new data after old data, then reverse with a filter
+              $scope.item.comments = $scope.item.comments.concat(commentResp.data);
+            } else {
+              $scope.item.comments = commentResp.data;
+            }
+            
             hasFetchedComments = true;
           });
+        };
+
+        if(!$scope.item.comments) {
+          $scope.getComments();
         }
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them

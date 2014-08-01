@@ -128,6 +128,24 @@ img {
   }
 }
 
+.view-more-btn {
+  text-align: center;
+
+  .loader, .btn {
+    height: 40px !important;
+  }
+}
+
+.view-more-list {
+  @include opacity(1);
+  @include transition(all linear .5s);
+
+  &.ng-move, &.ng-enter {
+    position: relative;
+    @include opacity(.5);
+  }
+}
+
 form {
   .image-add {
     display: block;

@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.itemLike', [] )
 
 //like/unlike an item
-.directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q, $modal, $rootScope, $window){
+.directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q, $modal, $rootScope, $window, USER_LIST_NUMBER){
   return {
     scope: {
       item: '=mrslItemLike'
@@ -59,15 +59,8 @@ angular.module( 'Morsel.common.itemLike', [] )
         if(scope.item.liked) {
           ApiItems.unlikeItem(scope.item.id).then(function(resp) {
             scope.item.liked = resp;
-
-            //remove user from liker list
-            if(scope.item.likers) {
-              scope.item.likers = _.reject(scope.item.likers, function(liker) {
-                return liker.id === currentUser.id;
-              });
-            }
             
-            //increment count for display
+            //decrement count for display
             scope.item.like_count--;
 
             deferred.resolve();
@@ -76,14 +69,7 @@ angular.module( 'Morsel.common.itemLike', [] )
           ApiItems.likeItem(scope.item.id).then(function(resp) {
             scope.item.liked = resp;
 
-            //add user to liker list
-            if(scope.item.likers) {
-              scope.item.likers.unshift(currentUser);
-            } else {
-              scope.item.likers = [currentUser];
-            }
-
-            //decrement count for display
+            //increment count for display
             scope.item.like_count++;
 
             deferred.resolve();
@@ -114,11 +100,25 @@ angular.module( 'Morsel.common.itemLike', [] )
           $modalInstance.dismiss('cancel');
         };
 
-        if(!$scope.users) {
-          ApiItems.getLikers(item.id).then(function(likerResp){
-            $scope.users = likerResp.data;
+        $scope.loadUsers = function(max_id) {
+          var usersParams = {
+                count: USER_LIST_NUMBER
+              };
+
+          if(max_id) {
+            usersParams.max_id = parseInt(max_id, 10) - 1;
+          }
+
+          ApiItems.getLikers(item.id, usersParams).then(function(likerResp){
+            if($scope.users) {
+              $scope.users = $scope.users.concat(likerResp.data);
+            } else {
+              $scope.users = likerResp.data;
+            }
           });
-        }
+        };
+
+        $scope.loadUsers();
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item'];

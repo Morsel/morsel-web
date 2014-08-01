@@ -3,5 +3,5 @@
   <h4 class="h2">{{heading || 'Users'}} <span ng-show="users.length > 0" ng-bind="'('+users.length+')'"></span></h4>
 </div>
 <div class="modal-body">
-  <div mrsl-user-list="users"></div>
+  <div mrsl-user-list="users" mrsl-user-list-load-func="loadUsers"></div>
 </div>

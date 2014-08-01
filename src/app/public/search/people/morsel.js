@@ -14,7 +14,7 @@ angular.module( 'Morsel.public.search.people.morsel', [])
   });
 })
 
-.controller( 'SearchPeopleMorselCtrl', function SearchPeopleMorselCtrl ($scope, ApiUsers){
+.controller( 'SearchPeopleMorselCtrl', function SearchPeopleMorselCtrl ($scope, ApiUsers, USER_LIST_NUMBER){
   //override the parent scope function
   $scope.search.customSearch = _.debounce(searchMorselUsers, $scope.search.waitTime);
   $scope.search.searchPlaceholder = 'Search for people on Morsel';
@@ -32,20 +32,34 @@ angular.module( 'Morsel.public.search.people.morsel', [])
     $scope.suggestedUsers = searchResp.data;
   });
 
-  function searchMorselUsers() {
+  $scope.loadSearchResultUsers = function(max_id){
     var userSearchData = {
+          count: USER_LIST_NUMBER,
           'user[query]': $scope.search.query
         };
 
+    if(max_id) {
+      userSearchData.max_id = parseInt(max_id, 10) - 1;
+    }
+
+    ApiUsers.search(userSearchData).then(function(searchResp) {
+      if($scope.searchResultUsers) {
+        $scope.searchResultUsers = $scope.searchResultUsers.concat(searchResp.data);
+      } else {
+        $scope.searchResultUsers = searchResp.data;
+      }
+
+      _.defer(function(){$scope.$apply();});
+    });
+  };
+
+  function searchMorselUsers() {
     if($scope.search.query.length >= 3) {
       //remove current users to show loader
       $scope.searchResultUsers = null;
       $scope.hasSearched = true;
 
-      ApiUsers.search(userSearchData).then(function(searchResp) {
-        $scope.searchResultUsers = searchResp.data;
-        _.defer(function(){$scope.$apply();});
-      });
+      $scope.loadSearchResultUsers();
     } else {
       //don't show anybody if we haven't searched 3 characters
       $scope.hasSearched = false;

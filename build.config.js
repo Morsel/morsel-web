@@ -105,7 +105,8 @@ module.exports = {
         'src/common/user/userImage.js',
         'src/common/user/userList.js',
         'src/common/util/landscapeAlert.js',
-        'src/common/util/transform.js'
+        'src/common/util/transform.js',
+        'src/common/util/viewMore.js'
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
@@ -128,7 +129,8 @@ module.exports = {
         'src/common/user/userList.tpl.html',
         'src/common/user/userListOverlay.tpl.html',
         'src/common/util/404.tpl.html',
-        'src/common/util/landscapeAlert.tpl.html'
+        'src/common/util/landscapeAlert.tpl.html',
+        'src/common/util/viewMore.tpl.html'
       ]
     },
     vendor_files: {

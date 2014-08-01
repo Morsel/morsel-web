@@ -4,8 +4,9 @@
   '('+item.comments.length+')'"></span><i class="common-comments"></i></h4>
 </div>
 <div class="modal-body user-list comment-list">
+  <div mrsl-view-more mrsl-view-more-func="getComments" mrsl-view-more-data="item.comments" mrsl-view-more-inc="increment" mrsl-view-more-copy="View previous comments" mrsl-view-more-order="last"></div>
   <ul ng-show="item.comments.length > 0">
-    <li bindonce ng-repeat="comment in item.comments | reverse">
+    <li bindonce ng-repeat="comment in item.comments | reverse" class="view-more-list">
       <div class="user-info">
         <div mrsl-user-image mrsl-username="comment.creator.username" mrsl-user-photos="comment.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
         <span ng-click="deleteComment(comment.id)" class="close" ng-show="(item.creator_id === currentUser.id) || (comment.creator.id === currentUser.id)">&times;</span>
