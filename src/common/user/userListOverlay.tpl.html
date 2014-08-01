@@ -1,6 +1,6 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()">&times;</button>
-  <h4 class="h2">{{heading || 'Users'}} <span ng-show="users.length > 0" ng-bind="'('+users.length+')'"></span></h4>
+  <h4 class="h2">{{heading || 'Users'}}</h4>
 </div>
 <div class="modal-body">
   <div mrsl-user-list="users" mrsl-user-list-load-func="loadUsers"></div>

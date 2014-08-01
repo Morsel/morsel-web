@@ -1,7 +1,6 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()">&times;</button>
-  <h4 class="h2">Comments <span ng-show="item.comments.length > 0" ng-bind="
-  '('+item.comments.length+')'"></span><i class="common-comments"></i></h4>
+  <h4 class="h2">Comments</h4>
 </div>
 <div class="modal-body user-list comment-list">
   <div mrsl-view-more mrsl-view-more-func="getComments" mrsl-view-more-data="item.comments" mrsl-view-more-inc="increment" mrsl-view-more-copy="View previous comments" mrsl-view-more-order="last"></div>

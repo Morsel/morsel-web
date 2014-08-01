@@ -84,7 +84,7 @@ angular.module( 'Morsel.public', [
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
 .constant('MINIHEADERHEIGHT', '60')
-.constant('USER_LIST_NUMBER', 2)
+.constant('USER_LIST_NUMBER', 5)
 
 // Default queries
 .value('presetMediaQueries', {
