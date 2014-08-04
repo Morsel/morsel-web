@@ -36,13 +36,13 @@
           <div class="container container-max-sm profile-tab-content" mrsl-user-list="placeUsers" mrsl-user-list-empty="'There are no users associated with this place'" mrsl-user-list-load-func="loadPeople"></div>
         </tab>
         <tab heading="Details" select="loadDetails()">
-          <div class="place-details profile-tab-content">
+          <div class="container container-max-sm place-details profile-tab-content">
             <div class="row" bindonce="place">
               <div class="col-md-6">
                 <a bo-href="place.information.menu_mobile_url" target="_blank" class="visible-xs-inline-block visible-sm-inline-block" bo-if="place.information.menu_mobile_url">View Menu</a>
                 <a bo-href="place.information.menu_url" target="_blank" class="visible-md-inline-block visible-lg-inline-block" bo-if="place.information.menu_url">View Menu</a>
                 <a bo-href="place.information.reservations_url" target="_blank" class="menu-link" bo-if="place.information.reservations_url">Make a Reservation</a>
-                <h5>Contact</h5>
+                <h5 class="h3">Contact</h5>
                 <dl>
                   <dt bo-if="place.information.website_url">Website</dt>
                   <dd bo-if="place.information.website_url"><a bo-href="place.information.website_url" target="_blank" bo-text="place.information.website_url"></a></dd>
@@ -54,20 +54,21 @@
                 </dl>
               </div>
               <div class="col-md-6">
-                <h5 bo-if="place.information.price_tier || place.foursquare_timeframes">Dining</h5>
+                <h5 bo-if="place.information.price_tier" class="h3">Dining</h5>
                 <dl bo-if="place.information.price_tier">
                   <dt>Price</dt>
                   <dd><span ng-repeat="i in priceRange">$</span></dd>
                 </dl>
+                <h5 bo-if="place.foursquare_timeframes" class="h3">Hours</h5>
                 <dl bo-if="place.foursquare_timeframes">
                   <dt bindonce ng-repeat-start="timeframe in place.foursquare_timeframes" bo-text="timeframe.days"></dt>
                   <dd ng-repeat-end>
                     <p bindonce ng-repeat="openTime in timeframe.open" class="place-open-time"><span bo-if="$index > 0">, </span><span bo-text="openTime.renderedTime"></span></p>
                   </dd>
                 </dl>
-                <img src="https://playfoursquare.s3.amazonaws.com/press/logo/poweredByFoursquare_gray.png" />
               </div>
             </div>
+            <img class="foursquare-icon" src="https://playfoursquare.s3.amazonaws.com/press/logo/poweredByFoursquare_gray.png" />
           </div>
         </tab>
       </tabset>

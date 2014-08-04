@@ -17,6 +17,32 @@
     .place-open-time {
       display: inline;
     }
+
+    .h3 {
+      font-size: 16px;
+      clear: both;
+    }
+
+    dl {
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+
+    dt {
+      margin-right: 10px;
+      clear: both;
+    }
+
+    dt, dd {
+      float: left;
+      line-height: 26px;
+    }
+
+    .foursquare-icon {
+      width: 250px;
+      margin: 0 auto;
+      display: block;
+    }
   }
 }
 
