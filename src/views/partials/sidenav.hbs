@@ -11,24 +11,24 @@
   <ul>
     <li ui-route="/feed" ng-class="{active:$uiRoute}">
       {{#pageType.public}}
-      <a href="/feed" ng-click="menuGoTo('feed')"><i class="sidenav-feed"></i>My Feed</a>
+      <a href="/feed" ng-click="menuGoTo('feed')"><i class="sidenav-feed"></i>Feed</a>
       {{/pageType.public}}
       {{#pageType.account}}
-      <a href="/feed" target="_self"><i class="sidenav-feed"></i>My Feed</a>
+      <a href="/feed" target="_self"><i class="sidenav-feed"></i>Feed</a>
       {{/pageType.account}}
       {{#pageType.static}}
-      <a href="/feed" target="_self"><i class="sidenav-feed"></i>My Feed</a>
+      <a href="/feed" target="_self"><i class="sidenav-feed"></i>Feed</a>
       {{/pageType.static}}
     </li>
     <li ui-route="/search/[\w\/\-]*" ng-class="{active:$uiRoute}">
       {{#pageType.public}}
-      <a href="/search/people" ng-click="menuGoTo('search/people')">Search</a>
+      <a href="/search/people" ng-click="menuGoTo('search/people')">Find people</a>
       {{/pageType.public}}
       {{#pageType.account}}
-      <a href="/search/people" target="_self">Search</a>
+      <a href="/search/people" target="_self">Find people</a>
       {{/pageType.account}}
       {{#pageType.static}}
-      <a href="/search/people" target="_self">Search</a>
+      <a href="/search/people" target="_self">Find people</a>
       {{/pageType.static}}
     </li>
     <li ui-route="/activity" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
@@ -58,7 +58,7 @@
       {{/pageType.static}}
     </li>
     <li ng-class="{active : currentRoute === '/about'}">
-      <a href="/about" target="_self">About</a>
+      <a href="/about" target="_self">About Morsel</a>
     </li>
     <li>
       <a href="http://insights.eatmorsel.com" target="_blank">Insights Blog</a>
@@ -68,13 +68,13 @@
     </li>
     <li ui-route="/contact" ng-class="{active:$uiRoute}">
       {{#pageType.public}}
-      <a href="/contact" ng-click="menuGoTo('contact')">Contact</a>
+      <a href="/contact" ng-click="menuGoTo('contact')">Contact Us</a>
       {{/pageType.public}}
       {{#pageType.account}}
-      <a href="/contact" target="_self">Contact</a>
+      <a href="/contact" target="_self">Contact Us</a>
       {{/pageType.account}}
       {{#pageType.static}}
-      <a href="/contact" target="_self">Contact</a>
+      <a href="/contact" target="_self">Contact Us</a>
       {{/pageType.static}}
     </li>
     <li ng-class="{active : currentRoute === '/apps'}">
@@ -84,7 +84,7 @@
       <a href="/terms" target="_self"><i class="sidenav-terms"></i>Terms of Use</a>
     </li>
     <li ng-class="{active : currentRoute === '/privacy'}">
-      <a href="/privacy" target="_self">Privacy</a>
+      <a href="/privacy" target="_self">Privacy Policy</a>
     </li>
     <li ng-if="isLoggedIn">
       <a href="/logout" target="_self"><i class="sidenav-logout"></i>Logout</a>
