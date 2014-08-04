@@ -100,6 +100,10 @@ angular.module('Morsel.common.morselSwipe', [
       scope.currentItemIndex = 0; //track which item we're on
       scope.currentIndicatorIndex = 0; //track which indicator is active
       scope.itemCount = extraPages; //account for cover page + share page
+      scope.hasEnteredMorsel = false; //whether user has scroll down below cover page
+      scope.logger = function(m) {
+        console.log(m);
+      };
 
       scope.getCoverPhotoArray = function(morsel, previewSized) {
         var primaryItemPhotos;
@@ -480,10 +484,15 @@ angular.module('Morsel.common.morselSwipe', [
       }
 
       function updateFeedState() {
+        var inMorsel = scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1;
+
         scope.$emit('feed.updateState', {
-          inMorsel: scope.currentItemIndex > 0 && scope.currentItemIndex < scope.itemCount - 1,
+          inMorsel: inMorsel,
           onShare: scope.currentItemIndex === scope.itemCount - 1
         });
+
+        //if user enters morsel, should turn true. should remain true after that
+        scope.hasEnteredMorsel = scope.hasEnteredMorsel || inMorsel;
       }
 
       function documentMouseUpEvent(event) {

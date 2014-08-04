@@ -45,10 +45,10 @@
           </div>
         </li>
         <li bindonce ng-repeat="item in morsel.items" class="item" ng-style="{'height': layout.feedHeight}">
-          <div class="morsel-container">
+          <div class="morsel-container loader">
             <div class="item-photo-wrap">
               <span class="item-info-btn" ng-click="expandDescription(item.id)" non-swipeable><i class="glyphicon glyphicon-info-sign" non-swipeable></i></span>
-              <img class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
+              <img ng-if="hasEnteredMorsel && (currentItemIndex >= $index)" class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
             </div>
             <div class="item-info">
               <div class="item-info-bottom">

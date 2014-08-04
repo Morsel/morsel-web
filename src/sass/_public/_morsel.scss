@@ -510,6 +510,10 @@ $item-info-bottom-height: 55px + $hr-height;
 
     .morsel-container {
       width: $screen-md-min;
+
+      &.loader {
+        background-position: 25% center;
+      }
     }
 
     .cover-page {
