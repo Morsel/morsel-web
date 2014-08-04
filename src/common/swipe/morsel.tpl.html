@@ -14,9 +14,6 @@
           <div class="morsel-container">
             <div class="cover-jumbo">
               <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
-              <div class="cover-actions" ng-style="{'top': layout.coverPhotoHeight}">
-                <a ng-click="currentIndicatorIndex = morsel.items.length+1"><i class="common-share"></i></a>
-              </div>
               <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(morsel, true)}}" ng-style="{'height': layout.coverPhotoHeight}"></div>
               <div class="cover-title-wrap" ng-style="{'height': layout.coverTitleHeight}">
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>
@@ -47,7 +44,7 @@
         <li bindonce ng-repeat="item in morsel.items" class="item" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container loader">
             <div class="item-photo-wrap">
-              <span class="item-info-btn" ng-click="expandDescription(item.id)" non-swipeable><i class="glyphicon glyphicon-info-sign" non-swipeable></i></span>
+              <span class="item-info-btn" ng-click="expandDescription(item.id)" non-swipeable><i class="common-info" non-swipeable></i></span>
               <img ng-if="hasEnteredMorsel && (currentItemIndex >= $index)" class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
             </div>
             <div class="item-info">

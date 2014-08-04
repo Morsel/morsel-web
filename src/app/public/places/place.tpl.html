@@ -44,12 +44,12 @@
                 <a bo-href="place.information.reservations_url" target="_blank" class="menu-link" bo-if="place.information.reservations_url">Make a Reservation</a>
                 <h5 class="h3">Contact</h5>
                 <dl>
-                  <dt bo-if="place.information.website_url">Website</dt>
+                  <dt bo-if="place.information.website_url"><i class="common-website"></i></dt>
                   <dd bo-if="place.information.website_url"><a bo-href="place.information.website_url" target="_blank" bo-text="place.information.website_url"></a></dd>
-                  <dt bo-if="place.information.formatted_phone">Phone</dt>
+                  <dt bo-if="place.information.formatted_phone"><i class="common-phone"></i></dt>
                   <dd bo-if="place.information.formatted_phone"><a bo-href="'tel:'+place.information.formatted_phone" target="_blank" class="visible-xs-inline-block visible-sm-inline-block" bo-text="place.information.formatted_phone"></a></dd>
                   <dd bo-if="place.information.formatted_phone"><span class="visible-md-inline-block visible-lg-inline-block" bo-text="place.information.formatted_phone"></span></dd>
-                  <dt bo-if="place.twitter_username">Twitter</dt>
+                  <dt bo-if="place.twitter_username"><i class="common-twitter"></i></dt>
                   <dd bo-if="place.twitter_username"><a bo-href="'https://twitter.com/' + place.twitter_username" target="_blank" bo-text="place.twitter_username"></a></dd>
                 </dl>
               </div>

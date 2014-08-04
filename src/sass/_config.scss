@@ -22,7 +22,7 @@
 
 // Components
 //@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/component-animations";
-@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/glyphicons";
+//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/glyphicons";
 @import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/dropdowns";
 @import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/button-groups";
 //@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/input-groups";
@@ -60,7 +60,6 @@
 @import "_common/_mixins";
 
 // Import sprites
-@import "spritesheets/_sidenav";
 @import "spritesheets/_common";
 
 // Import common styles
