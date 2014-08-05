@@ -1,7 +1,7 @@
 <div class="social-account-toggle">
   <a ng-hide="authentication" ng-click="add()" class="btn btn-social btn-facebook"><i class="common-share-facebook"></i>{{btnText}}</a>
   <div ng-show="authentication">
-    <p><i class="common-share-facebook-dark"></i> {{authentication.name}}</p>
+    <p><i class="common-facebook"></i> {{authentication.name}}</p>
     <a class="btn btn-danger" ng-click="remove()">Disconnect</a>
   </div>
 </div>

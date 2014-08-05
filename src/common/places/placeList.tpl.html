@@ -1,6 +1,6 @@
 <div class="user-list">
   <ul ng-if="places.length > 0">
-    <li bindonce ng-repeat="place in places">
+    <li bindonce ng-repeat="place in places | orderBy:'name'">
       <div class="user-info">
         <div>place icon</div>
         <div class="user-body">

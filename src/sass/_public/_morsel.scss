@@ -60,13 +60,6 @@ $item-info-bottom-height: 55px + $hr-height;
       padding-right: 0;
     }
 
-    .cover-actions {
-      position: absolute;
-      right: 51%;
-      z-index: 2;
-      padding-top: 10px;
-    }
-
     .cover-bg {
       display: none;
     }
@@ -510,6 +503,10 @@ $item-info-bottom-height: 55px + $hr-height;
 
     .morsel-container {
       width: $screen-md-min;
+
+      &.loader {
+        background-position: 25% center;
+      }
     }
 
     .cover-page {
@@ -544,10 +541,6 @@ $item-info-bottom-height: 55px + $hr-height;
         right: 0;
         z-index: 5;
         padding-bottom: $arrow-height + 10px;
-      }
-
-      .cover-actions {
-        display: none;
       }
 
       .cover-info {
