@@ -157,10 +157,6 @@ module.exports = {
       css: [
       ],
       assets: [
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
       ]
     }
   },
@@ -229,10 +225,6 @@ module.exports = {
       css: [
       ],
       assets: [
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
       ]
     }
   },
@@ -299,10 +291,6 @@ module.exports = {
       css: [
       ],
       assets: [
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
       ]
     }
   },
@@ -336,10 +324,6 @@ module.exports = {
       css: [
       ],
       assets: [
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
-        'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
       ]
     }
   },
@@ -398,10 +382,6 @@ module.exports = {
     css: [
     ],
     assets: [
-      'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.eot',
-      'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.svg',
-      'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.ttf',
-      'vendor/bootstrap-sass-official/assets/fonts/bootstrap/glyphicons-halflings-regular.woff'
     ]
   },
 
