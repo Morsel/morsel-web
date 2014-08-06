@@ -11,6 +11,12 @@
       text-align: left;
       display: block;
     }
+
+    .btn-social {
+      &:before {
+        margin-right: 10px;
+      }
+    }
   }
 
   h2 {
