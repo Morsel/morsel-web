@@ -2,7 +2,7 @@
   .btn-#{nth($color, 1)} {
     background-color: nth($color, 2);
 
-    &:hover {
+    &:hover, &.active {
       background-color: darken(nth($color, 2), 10%);
     }
   }
@@ -10,11 +10,6 @@
 
 .btn-social {
   color: white;
-
-  i {
-    vertical-align: middle;
-    margin-right: 8px;
-  }
 }
 
 .social-sharing {
@@ -33,7 +28,7 @@
       
       & + .share-expand {
         i {
-          @extend .common-contract;
+          //@extend .common-contract;
         }
       }
     }
@@ -68,8 +63,8 @@
     > .btn-social {
       font-size: $font-size-base;
 
-      i {
-        margin-right: 8px;
+      &:before {
+        margin-right: 5px;
       }
     }
 

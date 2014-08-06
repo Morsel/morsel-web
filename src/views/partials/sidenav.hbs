@@ -52,8 +52,11 @@
       <a href="/account/edit-profile" target="_self"><i class="common-gear"></i>Settings</a>
       {{/pageType.static}}
     </li>
+    <li ng-if="isLoggedIn">
+      <a href="/logout" target="_self"><i class="common-logout"></i>Logout</a>
+    </li>
   </ul>
-  <ul>
+  <ul class="secondary-menu">
     <li ng-class="{active : currentRoute === '/about'}">
       <a href="/about" target="_self">About Morsel</a>
     </li>
@@ -82,9 +85,6 @@
     </li>
     <li ng-class="{active : currentRoute === '/privacy'}">
       <a href="/privacy" target="_self">Privacy Policy</a>
-    </li>
-    <li ng-if="isLoggedIn">
-      <a href="/logout" target="_self">Logout</a>
     </li>
   </ul>
   <div class="morsel-social-links">
