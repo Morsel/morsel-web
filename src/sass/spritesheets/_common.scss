@@ -6,36 +6,3 @@ $common-sprite-dimensions: true;
 $common-sprite-inline: false;
 @import "spritesheets/common/*.png";
 @include all-common-sprites;
-
-@each $sprite in sprite_names($common-sprites) {
-  $height: icon-sprite-height($sprite);
-  $width: icon-sprite-width($sprite);
-  
-  .common-#{$sprite}_after {
-    &:before {
-      content: "";
-      display: inline-block;
-      margin-right: 5px;
-      vertical-align: middle;
-
-      background: $common-sprites no-repeat;
-      @include sprite-background-position($common-sprites, $sprite);
-      @include sprite-dimensions($common-sprites, $sprite);
-    }
-  }
-}
-
-//unused at the moment
-@mixin icon($icon, $top, $left) {
-  position: relative;
-  &:after {
-    content: "";
-    display: block;
-    position: absolute;
-    top: $top;
-    left: $left;
-    background: $common-sprites no-repeat;
-    @include sprite-background-position($common-sprites, $icon);
-    @include sprite-dimensions($common-sprites, $icon);
-  }
-}

@@ -1,0 +1,24 @@
+$social-sprite-dimensions: true;
+$social-sprite-inline: false;
+@import "spritesheets/social/*.png";
+
+.btn-social {
+  &:before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+@each $sprite in sprite_names($social-sprites) {
+  $height: icon-sprite-height($sprite);
+  $width: icon-sprite-width($sprite);
+  
+  .btn-#{$sprite} {
+    &:before {
+      background: $social-sprites no-repeat;
+      @include sprite-background-position($social-sprites, $sprite);
+      @include sprite-dimensions($social-sprites, $sprite);
+    }
+  }
+}
