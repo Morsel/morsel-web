@@ -21,11 +21,25 @@
     .h3 {
       font-size: 16px;
       clear: both;
+      margin-top: 0;
+    }
+
+    .place-details-section {
+      margin-bottom: 20px;
+
+      & > a {
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+
+      & > p {
+        margin-bottom: 10px;
+      }
     }
 
     dl {
-      margin-bottom: 20px;
       overflow: hidden;
+      margin-bottom: 0;
     }
 
     dt {

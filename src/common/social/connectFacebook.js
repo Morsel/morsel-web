@@ -149,6 +149,6 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         $window.location.href = loginNext ? loginNext : '/';
       }
     },
-    template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg"><i class="common-share-facebook"></i>{{btnText}}</a>'
+    template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg">{{btnText}}</a>'
   };
 });

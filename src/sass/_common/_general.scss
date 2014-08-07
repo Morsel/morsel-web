@@ -2,6 +2,18 @@ a {
   &:hover {
     cursor: pointer;
   }
+
+  > i {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+}
+
+p {
+  > i {
+    vertical-align: middle;
+    margin-right: 10px;
+  }
 }
 
 ul {
