@@ -43,7 +43,7 @@
         </li>
         <li bindonce ng-repeat="item in morsel.items" class="item" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container loader">
-            <div class="item-photo-wrap">
+            <div class="item-photo-wrap" ng-style="{'max-height': layout.itemPhotoHeight}">
               <span class="item-info-btn" ng-click="expandDescription(item.id)" non-swipeable><i class="common-info" non-swipeable></i></span>
               <img ng-if="hasEnteredMorsel && (currentItemIndex >= $index)" class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
             </div>
@@ -58,7 +58,7 @@
                 </div>
                 <div mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
               </div>
-              <div mrsl-item-description="item" ng-style="{'height': layout.textDescriptionHeight}"></div>
+              <div mrsl-item-description="item" ng-style="{'max-height': layout.textDescriptionHeight}"></div>
               <div mrsl-social-sharing="morsel"></div>
             </div>
           </div>

@@ -414,11 +414,13 @@ angular.module('Morsel.common.morselSwipe', [
           scope.layout.coverTitleHeight = '70%';
           scope.layout.coverBlockMinHeight = (itemHeight - MINIHEADERHEIGHT)/2 +'px';
           scope.layout.textDescriptionHeight = window.innerHeight/2 + 'px';
+          scope.layout.itemPhotoHeight = (itemHeight - MINIHEADERHEIGHT*2)+'px';
         } else {
           scope.layout.coverPhotoHeight = (itemHeight - coverPageBlockHeight - MINIHEADERHEIGHT) +'px';
           scope.layout.coverTitleHeight = (itemHeight - coverPageBlockHeight - MINIHEADERHEIGHT) +'px';
           scope.layout.coverBlockMinHeight = '0';
           scope.layout.textDescriptionHeight = '100%';
+          scope.layout.itemPhotoHeight = 'auto';
         }
       }
 
