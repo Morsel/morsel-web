@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.socialSharing', [] )
 
 //like/unlike a morsel
-.directive('mrslSocialSharing', function($location, Mixpanel, $window){
+.directive('mrslSocialSharing', function($location, Mixpanel, $window, PhotoHelpers, MORSELPLACEHOLDER){
   return {
     restrict: 'A',
     scope: {
@@ -33,18 +33,15 @@ angular.module( 'Morsel.common.socialSharing', [] )
       }
 
       function getMediaImage() {
-        var primaryItem = _.find(scope.morsel.items, function(i) {
-          return i.id === scope.morsel.primary_item_id;
-        });
+        var primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.morsel),
+            lastItemWithPhotos;
 
         //use their cover photo if there is one
-        if(primaryItem && primaryItem.photos) {
-          return primaryItem.photos._992x992;
+        if(primaryItemPhotos) {
+          return primaryItemPhotos._992x992;
         } else {
-          //if not, use first item with a photo
-          return _.find(scope.morsel.items, function(i) {
-            return i.photos;
-          }).photos._992x992;
+          lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(scope.morsel.items);
+          return lastItemWithPhotos ? lastItemWithPhotos.photos._992x992 : MORSELPLACEHOLDER;
         }
       }
 

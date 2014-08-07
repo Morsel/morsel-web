@@ -123,14 +123,7 @@ angular.module('Morsel.common.morselSwipe', [
               ];
             }
           } else {
-            var lastItemWithPhotos;
-
-            //loop through items, take the last one with photos
-            _.each(morsel.items, function(item) {
-              if(item.photos) {
-                lastItemWithPhotos = item;
-              }
-            });
+            var lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(morsel.items);
 
             if(lastItemWithPhotos) {
               if(previewSized) {
