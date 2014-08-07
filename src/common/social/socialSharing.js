@@ -33,23 +33,18 @@ angular.module( 'Morsel.common.socialSharing', [] )
       }
 
       function getMediaImage() {
-        var primaryItem,
-            m = scope.morsel;
+        var primaryItem = _.find(scope.morsel.items, function(i) {
+          return i.id === scope.morsel.primary_item_id;
+        });
 
-        //if they have a collage, use it
-        if(m.photos) {
-          return m.photos._800x600;
+        //use their cover photo if there is one
+        if(primaryItem && primaryItem.photos) {
+          return primaryItem.photos._992x992;
         } else {
-          //use their cover photo as backup
-          primaryItem = _.find(m.items, function(i) {
-            return i.id === m.primary_item_id;
-          });
-
-          if(primaryItem && primaryItem.photos) {
-            return primaryItem.photos._992x992;
-          } else {
-            return m[0].photos._992x992;
-          }
+          //if not, use first item with a photo
+          return _.find(scope.morsel.items, function(i) {
+            return i.photos;
+          }).photos._992x992;
         }
       }
 
@@ -58,22 +53,33 @@ angular.module( 'Morsel.common.socialSharing', [] )
             shareText,
             s = scope.morsel,
             //use their handle if they have one - otherwise use their name
-            twitterUsername = s.creator.twitter_username ? '@'+s.creator.twitter_username : s.creator.first_name+' '+s.creator.last_name;
+            twitterUsername = s.creator.twitter_username ? '@'+s.creator.twitter_username : s.creator.first_name+' '+s.creator.last_name,
+            //backup
+            morselUrl = s.url,
+            facebookUrl = s.mrsl && s.mrsl.facebook_mrsl ? s.mrsl.facebook_mrsl : morselUrl,
+            twitterUrl = s.mrsl && s.mrsl.twitter_mrsl ? s.mrsl.twitter_mrsl : morselUrl,
+            linkedinUrl = s.mrsl && s.mrsl.linkedin_mrsl ? s.mrsl.linkedin_mrsl : morselUrl,
+            pinterestUrl = s.mrsl && s.mrsl.pinterest_mrsl ? s.mrsl.pinterest_mrsl : morselUrl,
+            googleplusUrl = s.mrsl && s.mrsl.googleplus_mrsl ? s.mrsl.googleplus_mrsl : morselUrl,
+            clipboardUrl = s.mrsl && s.mrsl.clipboard_mrsl ? s.mrsl.clipboard_mrsl : morselUrl;
 
         shareMixpanel(socialType);
 
         if(socialType === 'facebook') {
-          url = 'https://www.facebook.com/sharer/sharer.php?u='+s.facebook_mrsl;
+          url = 'https://www.facebook.com/sharer/sharer.php?u='+facebookUrl;
         } else if(socialType === 'twitter') {
-          shareText = encodeURIComponent('"'+s.title+'" from '+(twitterUsername || (s.creator.first_name+' '+s.creator.last_name))+' on @eatmorsel ');
-          url = 'https://twitter.com/home?status='+shareText+s.twitter_mrsl;
+          shareText = encodeURIComponent('"'+s.title+'" from '+twitterUsername+' on @eatmorsel '+twitterUrl);
+          url = 'https://twitter.com/home?status='+shareText;
         } else if(socialType === 'linkedin') {
-          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+s.url;
+          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+linkedinUrl;
         } else if(socialType === 'pinterest') {
           shareText = encodeURIComponent('"'+s.title+'" from '+s.creator.first_name+' '+s.creator.last_name+' on Morsel');
-          url = 'https://pinterest.com/pin/create/button/?url='+s.url+'&media='+encodeURIComponent(getMediaImage())+'&description='+shareText;
-        } else if(socialType === 'google_plus') {
-          url = 'https://plus.google.com/share?url='+s.url;
+          url = 'https://pinterest.com/pin/create/button/?url='+pinterestUrl+'&media='+encodeURIComponent(getMediaImage())+'&description='+shareText;
+        } else if(socialType === 'google-plus') {
+          url = 'https://plus.google.com/share?url='+googleplusUrl;
+        } else if(socialType === 'clipboard') {
+          window.prompt("Copy the following link to share:", clipboardUrl);
+          return;
         }
 
         $window.open(url);
