@@ -1,6 +1,14 @@
 var app = require('./server');
 var _ = require('underscore');
-var config = require('./config');
+var config;
+
+try{
+  config = require('./config');
+  console.log('Config loaded');
+} catch(err) {
+  config = {};
+  console.log('Config not loaded');
+}
 
 var port = Number(process.env.PORT || 5000);
 

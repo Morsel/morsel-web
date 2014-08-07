@@ -73,7 +73,15 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
   });
 
   serverDomain.run(function () {
-    var config = require('./config');
+    var config;
+
+    try{
+      config = require('./config');
+      console.log('Config loaded');
+    } catch(err) {
+      config = {};
+      console.log('Config not loaded');
+    }
     var rollbarAccountKey = process.env.ROLLBAR_ACCOUNT_KEY || config.rollbarAccountKey;
 
     // rollbar should be the first require
