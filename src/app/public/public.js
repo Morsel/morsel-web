@@ -97,7 +97,7 @@ angular.module( 'Morsel.public', [
   'orientation-landscape': 'screen and (orientation:landscape)'
 })
 
-.constant('MORSELPLACEHOLDER', '/assets/images/logos/morsel-placeholder.jpg')
+.constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};

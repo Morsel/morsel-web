@@ -146,10 +146,10 @@ angular.module('Morsel.common.morselSwipe', [
             } else {
               //no items have photos
               if(previewSized) {
-                return '/assets/images/logos/morsel-placeholder.jpg';
+                return MORSELPLACEHOLDER;
               } else {
                 return [
-                  ['default', '/assets/images/logos/morsel-placeholder.jpg']
+                  ['default', MORSELPLACEHOLDER]
                 ];
               }
             }
