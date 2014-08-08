@@ -1,87 +1,94 @@
+$app-demo-screen-width:243px;
+$app-demo-screen-height: 431px;
+$app-demo-header-height: 49px;
+$app-demo-screen-flick-height: $app-demo-screen-height - $app-demo-header-height;
+$app-demo-duration: 15s;
+$app-demo-delay: 4s;
+
+@mixin app-demo-translate($x,$y,$o) {
+  @include opacity($o);
+  @include translate(-$app-demo-screen-width*$x, -$app-demo-screen-flick-height*$y);
+}
+
 @include keyframes(app-demo) {
   0% {
-    @include opacity(1);
-    -webkit-transform: translateX(-243px*0) translateY(-418px*0);
-    transform: translateX(-243px*0) translateY(-418px*0);
+    @include app-demo-translate(0,0,1);
+  }
+
+  4% {
+    @include app-demo-translate(1,0,1);
   }
 
   12% {
-    -webkit-transform: translateX(-243px*0) translateY(-418px*0);
-    transform: translateX(-243px*0) translateY(-418px*0);
+    @include app-demo-translate(1,0,1);
   }
 
   16% {
-    -webkit-transform: translateX(-243px*1) translateY(-418px*0);
-    transform: translateX(-243px*1) translateY(-418px*0);
+    @include app-demo-translate(2,0,1);
+  }
+
+  24% {
+    @include app-demo-translate(2,0,1);
   }
 
   28% {
-    -webkit-transform: translateX(-243px*1) translateY(-418px*0);
-    transform: translateX(-243px*1) translateY(-418px*0);
+    @include app-demo-translate(2,1,1);
   }
 
-  32% {
-    -webkit-transform: translateX(-243px*2) translateY(-418px*0);
-    transform: translateX(-243px*2) translateY(-418px*0);
+  36% {
+    @include app-demo-translate(2,1,1);
   }
 
-  44% {
-    -webkit-transform: translateX(-243px*2) translateY(-418px*0);
-    transform: translateX(-243px*2) translateY(-418px*0);
+  40% {
+    @include app-demo-translate(2,2,1);
   }
 
   48% {
-    -webkit-transform: translateX(-243px*2) translateY(-418px*1);
-    transform: translateX(-243px*2) translateY(-418px*1);
+    @include app-demo-translate(2,2,1);
+  }
+
+  52% {
+    @include app-demo-translate(2,3,1);
   }
 
   60% {
-    -webkit-transform: translateX(-243px*2) translateY(-418px*1);
-    transform: translateX(-243px*2) translateY(-418px*1);
+    @include app-demo-translate(2,3,1);
   }
 
   64% {
-    -webkit-transform: translateX(-243px*2) translateY(-418px*2);
-    transform: translateX(-243px*2) translateY(-418px*2);
+    @include app-demo-translate(2,4,1);
+  }
+
+  72% {
+    @include app-demo-translate(2,4,1);
   }
 
   76% {
-    -webkit-transform: translateX(-243px*2) translateY(-418px*2);
-    transform: translateX(-243px*2) translateY(-418px*2);
+    @include app-demo-translate(1,4,1);
   }
 
-  80% {
-    -webkit-transform: translateX(-243px*1) translateY(-418px*2);
-    transform: translateX(-243px*1) translateY(-418px*2);
+  84% {
+    @include app-demo-translate(1,4,1);
   }
 
-  92% {
-    -webkit-transform: translateX(-243px*1) translateY(-418px*2);
-    transform: translateX(-243px*1) translateY(-418px*2);
+  88% {
+    @include app-demo-translate(0,4,1);
   }
 
   96% {
-    @include opacity(1);
-    -webkit-transform: translateX(-243px*0) translateY(-418px*2);
-    transform: translateX(-243px*0) translateY(-418px*2);
+    @include app-demo-translate(0,4,1);
   }
 
   97% {
-    @include opacity(0);
-    -webkit-transform: translateX(-243px*0) translateY(-418px*2);
-    transform: translateX(-243px*0) translateY(-418px*2);
+    @include app-demo-translate(0,4,0);
   }
 
-  98% {
-    @include opacity(0);
-    -webkit-transform: translateX(-243px*0) translateY(-418px*0);
-    transform: translateX(-243px*0) translateY(-418px*0);
+  99% {
+    @include app-demo-translate(0,0,0);
   }
 
   100% {
-    @include opacity(1);
-    -webkit-transform: translateX(-243px*0) translateY(-418px*0);
-    transform: translateX(-243px*0) translateY(-418px*0);
+    @include app-demo-translate(0,0,1);
   }
 }
 
@@ -138,22 +145,22 @@
     .app-demo {
       .app-screenshots {
         display: block;
-        width: 243px;
-        height: 418px;
+        width: $app-demo-screen-width;
+        height: $app-demo-screen-height - $app-demo-header-height;
         position: absolute;
         left: 41px;
-        top: 106px;
+        top: 91px + $app-demo-header-height;
         overflow: hidden;
 
         img {
           max-width: none;
           -webkit-animation-name: app-demo;
           animation-name: app-demo;
-          -webkit-animation-duration: 10s;
-          -webkit-animation-delay: 2s;
+          -webkit-animation-duration: $app-demo-duration;
+          -webkit-animation-delay: $app-demo-delay;
           -webkit-animation-iteration-count: infinite;
-          animation-duration: 10s;
-          animation-delay: 2s;
+          animation-duration: $app-demo-duration;
+          animation-delay: $app-demo-delay;
           animation-iteration-count: infinite;
         }
       }
