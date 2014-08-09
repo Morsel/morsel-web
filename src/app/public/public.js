@@ -133,7 +133,8 @@ angular.module( 'Morsel.public', [
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state ) {
   var viewOptions = {
     miniHeader : false,
-    fullWidthHeader : false
+    fullWidthHeader : false,
+    hideLogo: false
   };
 
   //to store things like page title
