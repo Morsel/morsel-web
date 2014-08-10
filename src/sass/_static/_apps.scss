@@ -1,0 +1,11 @@
+.apps-page {
+  text-align: center;
+}
+
+@media (min-width: $screen-lg-min) {
+  .apps-page {
+    h2 {
+      margin-top: 100px;
+    }
+  }
+}

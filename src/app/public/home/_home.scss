@@ -95,7 +95,6 @@ $app-demo-delay: 4s;
 .home-page {
   text-align: center;
   padding-top: 60px;
-  padding-bottom: 60px;
 
   h1 {
     margin: 15px 0;
@@ -140,10 +139,13 @@ $app-demo-delay: 4s;
 @media (min-width: $screen-sm-min) {
   .home-page {
     background: url(images/bg/home.jpg) center top no-repeat;
-    background-size: cover;
+    background-size: 175%;
+
+    h1 {
+      margin: 0;
+    }
 
     h2 {
-      margin-bottom: 40px;
       font-size: 26px;
     }
 
@@ -158,6 +160,7 @@ $app-demo-delay: 4s;
 @media (min-width: $screen-md-min) {
   .home-page {
     padding-top: 30px;
+    background-size: cover;
 
     .app-demo {
       .app-screenshots {
