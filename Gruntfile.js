@@ -212,6 +212,17 @@ module.exports = function ( grunt ) {
           }
         ]
       },
+      //copy our static templates
+      compile_static_templates: {
+        files: [
+          {
+            src: ['views/partials/static/*.hbs'],
+            dest: '<%= compile_dir %>/',
+            cwd: 'src/',
+            expand: true
+          }
+        ]
+      },
       //copy our package.json for deployment
       compile_package_json: {
         files: [
@@ -669,7 +680,7 @@ module.exports = function ( grunt ) {
         dir: '<%= compile_dir %>',
         src: [
           '<%= concat.compile_account_js.dest %>',
-          '<%= compile_dir %>/assets/<%= pkg.name %>_account--<%= pkg.version %>.css'
+          '<%= compile_dir %>/assets/<%= pkg.name %>_account-<%= pkg.version %>.css'
         ]
       }
     },
@@ -692,7 +703,7 @@ module.exports = function ( grunt ) {
         dir: '<%= compile_dir %>',
         src: [
           '<%= concat.compile_login_js.dest %>',
-          '<%= compile_dir %>/assets/<%= pkg.name %>_login--<%= pkg.version %>.css'
+          '<%= compile_dir %>/assets/<%= pkg.name %>_login-<%= pkg.version %>.css'
         ]
       }
     },
@@ -715,7 +726,7 @@ module.exports = function ( grunt ) {
         dir: '<%= compile_dir %>',
         src: [
           '<%= concat.compile_static_js.dest %>',
-          '<%= compile_dir %>/assets/<%= pkg.name %>_static--<%= pkg.version %>.css'
+          '<%= compile_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
         ]
       }
     },
@@ -1135,7 +1146,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'concat:compile_static_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'copy:compile_package_json', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'concat:compile_static_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'copy:compile_package_json', 'copy:compile_static_templates', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**
