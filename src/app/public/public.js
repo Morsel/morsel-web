@@ -203,8 +203,11 @@ angular.module( 'Morsel.public', [
       $scope.currentUser = userData;
     });
 
-    //manually push a GA pageview
-    GA.sendPageview($scope.pageData.pageTitle);
+    //make sure we don't double count page views at the root (see home.js routing)
+    if(toState.url !== '') {
+      //manually push a GA pageview
+      GA.sendPageview($scope.pageData.pageTitle);
+    }
   });
 
   //if there are internal state issues, go to 404
