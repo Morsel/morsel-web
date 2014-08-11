@@ -101,7 +101,7 @@ $app-demo-delay: 2s;
   }
 
   h2 {
-    color: $morsel-dark;
+    color: $morsel-light-off;
     font-size: 15px;
   }
 
@@ -119,6 +119,10 @@ $app-demo-delay: 2s;
     a {
       display: inline-block;
       margin-top: 20px;
+      color: $morsel-tertiary;
+      font-weight: bold;
+      font-family: $font-family-secondary;
+      font-size: 18px;
     }
   }
 }
