@@ -131,7 +131,8 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     app.use('/launch', express.static(__dirname + '/launch'));
 
     //redirect all URLs (besides static files) to lowercase
-    app.use(require('express-uncapitalize')());
+    //commented out for now because it interferes with password reset tokens
+    //app.use(require('express-uncapitalize')());
 
     //set our initial default metadata
     utilApp.updateMetadata('default');

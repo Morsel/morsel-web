@@ -3,7 +3,7 @@ $app-demo-screen-height: 431px;
 $app-demo-header-height: 49px;
 $app-demo-screen-flick-height: $app-demo-screen-height - $app-demo-header-height;
 $app-demo-duration: 15s;
-$app-demo-delay: 4s;
+$app-demo-delay: 2s;
 
 @mixin app-demo-translate($x,$y,$o) {
   @include opacity($o);
