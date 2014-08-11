@@ -2,27 +2,36 @@ var util = require('./../../util');
 var _ = require('underscore');
 
 function getMetadataImage(morsel) {
-  var primaryItem;
+  var primaryItemPhotos = findPrimaryItemPhotos(morsel),
+            lastItemWithPhotos;
 
-  //if they have a collage, use it
-  if(morsel.photos) {
-    if(morsel.photos._800x600) {
-      return morsel.photos._800x600;
-    } else {
-      return morsel.photos._400x300;
-    }
+  //use their cover photo if there is one
+  if(primaryItemPhotos) {
+    return primaryItemPhotos._992x992;
   } else {
-    //use their cover photo as backup
-    primaryItem = _.find(morsel.items, function(i) {
-      return i.id === morsel.primary_item_id;
-    });
-
-    if(primaryItem && primaryItem.photos) {
-      return primaryItem.photos._992x992;
-    } else {
-      return morsel.items[0].photos._992x992;
-    }
+    lastItemWithPhotos = findLastItemWithPhotos(morsel.items);
+    return lastItemWithPhotos ? lastItemWithPhotos._992x992 : null;
   }
+}
+
+function findPrimaryItemPhotos(morsel) {
+  var primaryItem = _.find(morsel.items, function(i) {
+    return i.id === morsel.primary_item_id;
+  });
+
+  if(primaryItem && primaryItem.photos) {
+    return primaryItem.photos;
+  } else {
+    return null;
+  }
+}
+
+function findLastItemWithPhotos(items) {
+  var reverseItems = items.slice(0);
+
+  return _.find(reverseItems, function(i) {
+    return i.photos;
+  });
 }
 
 function getFirstDescription(items) {

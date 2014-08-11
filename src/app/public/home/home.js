@@ -27,6 +27,7 @@ angular.module( 'Morsel.public.home', [])
 
 .controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $window, $location ) {
   $scope.viewOptions.miniHeader = true;
+  $scope.viewOptions.hideLogo = true;
 
   $scope.continueToMorsel = function() {
     //user wants to continue on to their feed

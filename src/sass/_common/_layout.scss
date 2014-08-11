@@ -212,6 +212,10 @@
       @include opacity(0);
       top: -30px;
     }
+
+    &.hide-logo {
+      display: none;
+    }
   }
 
   > .side-nav-trigger {

@@ -13,6 +13,13 @@ angular.module( 'Morsel.common.photoHelpers', [])
       } else {
         return null;
       }
+    },
+    findLastItemWithPhotos : function(items) {
+      var reverseItems = items.slice(0);
+
+      return _.find(reverseItems, function(i) {
+        return i.photos;
+      });
     }
   };
 });
