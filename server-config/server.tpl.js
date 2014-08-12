@@ -121,9 +121,6 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     app.set('view engine', 'hbs');
     app.set('views', __dirname + '/views');
 
-    //expose our locals
-    hbs.localsAsTemplateData(app);
-
     //static files
     app.use('/assets', express.static(__dirname + '/assets'));
     app.use('/src', express.static(__dirname + '/src'));
