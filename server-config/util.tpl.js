@@ -33,8 +33,15 @@ app.locals.apiUrl = process.env.APIURL || config.apiUrl;
 app.locals.mixpanelToken = process.env.MIXPANELTOKEN || config.devMixpanelToken;
 app.locals.isProd = nodeEnv === 'production';
 
-function updateMetadata(route){
-  app.locals.metadata = getMetadata(route);
+function updateMetadata(route, res){
+  //if this is for a specific route
+  if(res) {
+    //replace metadata just for that request
+    res.locals.metadata = getMetadata(route);
+  } else {
+    //update global metadata for all requests
+    app.locals.metadata = getMetadata(route);
+  }
 }
 
 module.exports.updateMetadata = updateMetadata;
@@ -62,7 +69,7 @@ module.exports.truncateAt = function(text, limit) {
 };
 
 function render404(res) {
-  updateMetadata('404');
+  updateMetadata('404', res);
 
   res.status(404).render('404');
 }

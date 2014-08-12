@@ -7,37 +7,37 @@
 <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon" />
 <link rel="apple-touch-icon" href="<%= favicon_dir %>/apple-touch-icon.png" />
 
-<title ng-bind="pageData.pageTitle">{{@metadata.title}}</title>
-<meta name="description" content="{{@metadata.description}}">
+<title ng-bind="pageData.pageTitle">{{metadata.title}}</title>
+<meta name="description" content="{{metadata.description}}">
 
 <!-- social media tags -->
-<meta name="twitter:card" content="{{@metadata.twitter.card}}">
-<meta name="twitter:site" content="{{@metadata.twitter.site}}">
-<meta name="twitter:title" content="{{@metadata.title}}">
-<meta name="twitter:description" content="{{@metadata.description}}">
-<meta name="twitter:creator" content="{{@metadata.twitter.creator}}">
-<meta name="twitter:image:src" content="{{@metadata.image}}">
-<meta name="twitter:url" content="{{@metadata.url}}">
+<meta name="twitter:card" content="{{metadata.twitter.card}}">
+<meta name="twitter:site" content="{{metadata.twitter.site}}">
+<meta name="twitter:title" content="{{metadata.title}}">
+<meta name="twitter:description" content="{{metadata.description}}">
+<meta name="twitter:creator" content="{{metadata.twitter.creator}}">
+<meta name="twitter:image:src" content="{{metadata.image}}">
+<meta name="twitter:url" content="{{metadata.url}}">
 <meta property="og:locale" content="{{metadata.og.locale}}"/>
-<meta property="og:title" content="{{@metadata.title}}" />
-<meta property="og:type" content="{{@metadata.og.type}}" />
-<meta property="og:url" content="{{@metadata.url}}" />
-<meta property="og:image" content="{{@metadata.image}}" />
-<meta property="og:description" content="{{@metadata.description}}">
-<meta property="og:site_name" content="{{@metadata.og.site_name}}"/>
-<meta property="fb:app_id" content="{{@metadata.fb_app_id}}"/>
+<meta property="og:title" content="{{metadata.title}}" />
+<meta property="og:type" content="{{metadata.og.type}}" />
+<meta property="og:url" content="{{metadata.url}}" />
+<meta property="og:image" content="{{metadata.image}}" />
+<meta property="og:description" content="{{metadata.description}}">
+<meta property="og:site_name" content="{{metadata.og.site_name}}"/>
+<meta property="fb:app_id" content="{{metadata.fb_app_id}}"/>
 {{#metadata.og.is_article}}
 {{#metadata.og.author}}
-<meta property="article:author" content="{{@metadata.og.author}}"/>
+<meta property="article:author" content="{{metadata.og.author}}"/>
 {{/metadata.og.author}}
-<meta property="article:publisher" content="{{@metadata.og.article_publisher}}"/>
-<meta property="article:published_time" content="{{@metadata.og.article_published_at}}"/>
-<meta property="article:modified_time" content="{{@metadata.og.article_modified_at}}"/>
+<meta property="article:publisher" content="{{metadata.og.article_publisher}}"/>
+<meta property="article:published_time" content="{{metadata.og.article_published_at}}"/>
+<meta property="article:modified_time" content="{{metadata.og.article_modified_at}}"/>
 {{/metadata.og.is_article}}
 
 <!--end social tags-->
 
-<link rel="canonical" href="{{@metadata.url}}">
+<link rel="canonical" href="{{metadata.url}}">
 
 <!--[if IE 9]> 
 <script src="http://jpillora.com/xdomain/dist/0.6/xdomain.min.js"></script>
@@ -55,7 +55,7 @@
 <script type="text/javascript">
   var MorselConfig = {
     version: '<%= version %>',
-    apiUrl: '{{@apiUrl}}'
+    apiUrl: '{{apiUrl}}'
     {{#if facebookAppId}}
     ,facebookAppId: '{{{facebookAppId}}}'
     {{/if}}

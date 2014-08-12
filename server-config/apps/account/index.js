@@ -7,7 +7,7 @@ module.exports.test = function(req, res){
 module.exports.renderAccountPage = function(req, res, twitterData) {
   var twitterData;
 
-  util.updateMetadata('default');
+  util.updateMetadata('default', res);
 
   //if user is trying to add social account
   if(req.session.social && req.session.tData) {

@@ -18,7 +18,7 @@ function twitterConsumer() {
 }
 
 function renderLoginPage(res, twitterData) {
-  util.updateMetadata('login');
+  util.updateMetadata('login', res);
 
   res.render('login', {
     facebookAppId : util.facebookAppId,
