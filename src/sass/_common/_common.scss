@@ -308,6 +308,10 @@ form {
         height: $profile-pic-xs;
         margin-right: 0;
         text-align: center;
+
+        img {
+          max-height: 100%;
+        }
       }
     }
   }
