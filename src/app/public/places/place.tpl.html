@@ -38,7 +38,7 @@
         <tab heading="Details" select="loadDetails()">
           <div class="container container-max-sm place-details profile-tab-content">
             <div class="row" bindonce="place">
-              <div class="col-md-6">
+              <div class="col-sm-6">
                 <div class="place-details-section">
                   <a bo-if="place.information.menu_mobile_url" class="visible-xs-block visible-sm-block" bo-href="place.information.menu_mobile_url" target="_blank"><i class="common-menu"></i> View Menu</a>
                   <a bo-if="place.information.menu_url" class="visible-md-block visible-lg-block" bo-href="place.information.menu_url" target="_blank"> <i class="common-menu"></i>View Menu</a>
@@ -52,7 +52,7 @@
                   <a bo-if="place.twitter_username" bo-href="'https://twitter.com/' + place.twitter_username" target="_blank"><i class="common-twitter"></i><span bo-text="place.twitter_username"></span></a>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-sm-6">
                 <div class="place-details-section">
                   <h5 bo-if="place.information.price_tier" class="h3">Dining</h5>
                   <dl bo-if="place.information.price_tier">
