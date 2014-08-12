@@ -2,7 +2,7 @@ $app-demo-screen-width:243px;
 $app-demo-screen-height: 431px;
 $app-demo-header-height: 49px;
 $app-demo-screen-flick-height: $app-demo-screen-height - $app-demo-header-height;
-$app-demo-duration: 15s;
+$app-demo-duration: 18s;
 $app-demo-delay: 2s;
 
 @mixin app-demo-translate($x,$y,$o) {

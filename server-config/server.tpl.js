@@ -233,6 +233,11 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     //PUBLIC
 
+    //RIA
+    app.get('/ria', function(req, res){
+      res.redirect('/');
+    });
+
     //feed
     app.get('/feed', function(req, res){
       var metadata = utilApp.getMetadata('feed');
