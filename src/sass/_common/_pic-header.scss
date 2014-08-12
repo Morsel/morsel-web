@@ -11,6 +11,7 @@
     color: $morsel-static-header;
     text-align: center;
     @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+    font-size: 32px;
   }
 
   & + .container {
@@ -21,6 +22,10 @@
 
 @media (min-width: $screen-md-min) {
   .pic-header {
+    h1 {
+      font-size: 64px;
+    }
+
     & + .container {
       padding-left: 70px;
       padding-right: 70px;
