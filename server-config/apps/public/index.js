@@ -52,7 +52,7 @@ function renderPublicPage(res, customMetadata) {
   var app = require('./../../server');
 
   if(customMetadata) {
-    app.locals.metadata = customMetadata;
+    res.locals.metadata = customMetadata;
   }
 
   res.render('public', {
