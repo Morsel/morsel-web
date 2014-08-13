@@ -76,8 +76,9 @@ $profile-pic-l: 144px + $profile-bic-border-width*2;
 //layout
 $sidenav-width: 250px;
 $mini-header-height: 60px;
-$full-nav-vert-padding: 25px;
-$side-nav-trigger-vert: 12px;
+$side-nav-trigger-vert: 21px;
+$side-nav-trigger: 'icons/menu-burger-bar.png';
+$side-nav-trigger-full: 'images/icons/menu-burger-bar.png';
 
 //forms
 $input-bg: $morsel-lightest;
