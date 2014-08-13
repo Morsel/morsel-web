@@ -1,8 +1,10 @@
-<div class="form-group checklist">
-  <div ng-repeat="item in checklist" class="checkbox">
-    <label>
-      <input type="checkbox" ng-change="changeFunc(item)" ng-model="item.isChecked">
-      {{item.name}}
-    </label>
+<div class="row">
+  <div ng-repeat="checklistcol in checklist" class="checklist" ng-class="colWidths">
+    <div ng-repeat="item in checklistcol" class="checkbox">
+      <label>
+        <input type="checkbox" ng-change="changeFunc(item)" ng-model="item.isChecked">
+        {{item.name}}
+      </label>
+    </div>
   </div>
 </div>
