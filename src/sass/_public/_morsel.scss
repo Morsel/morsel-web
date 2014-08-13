@@ -87,7 +87,7 @@ $item-info-bottom-height: 55px + $hr-height;
 
       .cover-more-btn {
         display: block;
-        @include replace-text('icons/more.png');
+        @include replace-text('graphics/more.png');
         background-position: center center;
         width: 100%;
         height: 100%;
