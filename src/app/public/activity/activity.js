@@ -32,14 +32,4 @@ angular.module( 'Morsel.public.activity', [])
   ApiUsers.getFollowablesActivities().then(function(activityResp){
     $scope.followingFeed = activityResp.data;
   });
-
-  ApiUsers.getNotifications().then(function(notificationResp){
-    var notificationsFeed = [];
-
-    _.each(notificationResp.data, function(notification){
-      notificationsFeed.push(notification.payload);
-    });
-
-    $scope.notificationsFeed = notificationsFeed;
-  });
 });
