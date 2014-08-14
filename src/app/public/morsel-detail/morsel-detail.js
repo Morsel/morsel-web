@@ -28,6 +28,9 @@ angular.module( 'Morsel.public.morselDetail', [])
             if(morselData.draft) {
               //this morsel is still a draft - don't allow access
               $location.path('/'+username);
+            } else if (username != morselData.creator.username) {
+              //this isn't a valid morsel for this user
+              $location.path('/'+username);
             } else {
               return morselData;
             }
