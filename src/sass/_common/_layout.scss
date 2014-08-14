@@ -168,6 +168,8 @@
     }
 
     .main-view {
+      overflow: hidden;
+      
       &:after {
         content: ' ';
         position: absolute;
