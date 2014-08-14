@@ -119,7 +119,7 @@ $item-info-bottom-height: 55px + $hr-height;
 
   .user-info {
     h5 {
-      margin: 10px auto 0;
+      margin: 5px auto 0;
       font-size: 15px;
       text-transform: none;
       color: $morsel-primary;
@@ -141,6 +141,7 @@ $item-info-bottom-height: 55px + $hr-height;
 
       span {
         font-size: 13px;
+        display: block;
       }
     }
   }
@@ -561,6 +562,7 @@ $item-info-bottom-height: 55px + $hr-height;
           span {
             color: white;
             font-size: 14px;
+            display: inline;
           }
         }
 
