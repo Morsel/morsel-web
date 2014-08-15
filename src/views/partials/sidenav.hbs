@@ -30,6 +30,17 @@
       <a href="/search/people" target="_self"><i class="common-find-people"></i>Find people</a>
       {{/pageType.static}}
     </li>
+    <li ui-route="/notifications" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+      {{#pageType.public}}
+      <a href="/notifications" ng-click="menuGoTo('notifications')"><i class="common-notifications"></i>Notifications</a>
+      {{/pageType.public}}
+      {{#pageType.account}}
+      <a href="/notifications" ng-click="menuGoTo('notifications')" target="_self"><i class="common-notifications"></i>Notifications</a>
+      {{/pageType.account}}
+      {{#pageType.static}}
+      <a href="/notifications" ng-click="menuGoTo('notifications')" target="_self"><i class="common-notifications"></i>Notifications</a>
+      {{/pageType.static}}
+    </li>
     <li ui-route="/activity" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
       {{#pageType.public}}
       <a href="/activity" ng-click="menuGoTo('activity')"><i class="common-activity"></i>Activity</a>

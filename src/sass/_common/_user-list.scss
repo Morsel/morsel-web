@@ -80,6 +80,19 @@
       }
     }
   }
+
+  &.place-list {
+    li {
+      .user-info-main {
+        line-height: $profile-pic-xs;
+      }
+
+      .user-info-icon {
+        float: left;
+        margin-right: 15px;
+      }
+    }
+  }
 }
 
 @media (min-width: $screen-sm) {

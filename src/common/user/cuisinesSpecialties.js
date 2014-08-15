@@ -88,18 +88,37 @@ angular.module( 'Morsel.common.cuisinesSpecialties', [] )
 
       //tag helpers
       function constructList(allKeywords, userTags) {
-        var list = [];
+        var keywords = [],
+            list = [],
+            //max 4 column layout
+            cols = 4,
+            rows,
+            count = 0;
 
         _.each(allKeywords, function(keyword) {
           var matchingTag = findTagByKeywordId(userTags, keyword.id);
 
-          list.push({
+          keywords.push({
             keyword: keyword,
             name: keyword.name,
             tag: matchingTag,
             isChecked: matchingTag ? true : false
           });
         });
+
+        //how many rows do we need per column
+        rows = Math.ceil(keywords.length/cols);
+
+        for( var i =0 ; i < cols;i++){
+          list.push([]);
+          for( var j =0 ; j < rows;j++){
+            list[i][j] = keywords[count];
+            count++;
+            if(count>=keywords.length) {
+              break;
+            }
+          }
+        }
 
         return list;
       }

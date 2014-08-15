@@ -165,13 +165,11 @@
 
     .main-header {
       background-color: rgba(1, 1, 1, 0.5);
-
-      li {
-        @include opacity(0);
-      }
     }
 
     .main-view {
+      overflow: hidden;
+      
       &:after {
         content: ' ';
         position: absolute;
@@ -212,22 +210,9 @@
       @include opacity(0);
       top: -30px;
     }
-  }
 
-  > .side-nav-trigger {
-    position: absolute;
-    top: $side-nav-trigger-vert;
-    right: 20px;
-    @include transition(opacity .2s ease-out);
-    padding: $padding-base-vertical 5px;
-    color: $morsel-dark;
-    text-transform: uppercase;
-    font-size: 16px;
-    display: block;
-    z-index: 12;
-
-    &:hover {
-      color: $link-hover-color;
+    &.hide-logo {
+      display: none;
     }
   }
 
@@ -251,19 +236,34 @@
 }
 
 .side-nav-trigger {
+  position: absolute;
+  top: $side-nav-trigger-vert;
+  right: 20px;
+  @include transition(opacity .2s ease-out);
+  padding: $padding-base-vertical 5px;
+  color: $morsel-dark;
+  text-transform: uppercase;
+  font-size: 16px;
+  display: block;
+  z-index: 12;
+
   &:after {
-    width: 20px;
-    height: 16px;
-    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD5JREFUeNpi/P//PwM1AQuUbqCSeQ0wAxn09PTqKTHp0qVLjSCaiYHKgBEahlTzMuNopIxGymikDESkAAQYANo+JxGxa8X0AAAAAElFTkSuQmCC);
-    content: ' ';
+    content: '';
+    background-image: url($side-nav-trigger-full);
+    background-position: right top;
+    height: image-height($side-nav-trigger)/2;
+    width: 19px;
     display: inline-block;
-    margin-left: 3px;
-    visibility: visible;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   &:hover {
+    background-position: left bottom;
+
     &:after {
-     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAQCAYAAAAWGF8bAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD5JREFUeNpi/P//PwM1AQuUNqaSeWdhBjK8SnI9Q4lJYvN2m4BoJgYqA0ZoGFLNy4yjkTIaKaORMhCRAhBgAFddJxGypPyoAAAAAElFTkSuQmCC);
+      background-position: right bottom;
     }
   }
 }
@@ -298,7 +298,6 @@
   .main-header {
     &.full-header {
       background-image: url(images/bg/light-line.png);
-      height: auto;
 
       .morsel-logo {
         left: -5px;
@@ -318,25 +317,14 @@
           @include opacity(1);
         }
       }
-
-      .side-nav-trigger {
-        top: $full-nav-vert-padding;
-        @include transition(top .2s ease-out);
-
-        .site.open & {
-          top: $side-nav-trigger-vert;
-        }
-      }
     }
+  }
 
-    > .container {
-      height: 84px;
-      @include transition(height .2s ease-out);
-
-      .site.open & {
-        height: 58px;
-      }
-    }
+  .side-nav-trigger {
+    width: image-width($side-nav-trigger);
+    height: image-height($side-nav-trigger)/2;
+    @include replace-text($side-nav-trigger);
+    background-position: left top;
   }
 }
 

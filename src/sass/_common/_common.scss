@@ -231,6 +231,8 @@ form {
 }
 
 .centered-white {
+  font-family: $font-family-secondary;
+  
   div {
     position: absolute;
     top: 0;
@@ -308,6 +310,10 @@ form {
         height: $profile-pic-xs;
         margin-right: 0;
         text-align: center;
+
+        img {
+          max-height: 100%;
+        }
       }
     }
   }

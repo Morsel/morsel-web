@@ -31,6 +31,11 @@ angular.module( 'Morsel.public.place', [])
 .controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth, USER_LIST_NUMBER ) {
   $scope.viewOptions.miniHeader = true;
 
+  //knock off the protocol so it displays nicer
+  if(placeData.information && placeData.information.website_url) {
+    placeData.information.website_url_text = placeData.information.website_url.replace(/^.*?:\/\//,'');
+  }
+
   $scope.place = placeData;
 
   //# of morsels to load at a time
@@ -92,13 +97,24 @@ angular.module( 'Morsel.public.place', [])
   };
 
   $scope.initialLoadPeople = function() {
-    $scope.loadPeople();
+    $scope.loadPeople(null, true);
   };
 
-  $scope.loadPeople = function(max_id) {
+  $scope.loadPeople = function(max_id, tabClick) {
     var usersParams = {
           count: USER_LIST_NUMBER
         };
+
+    //if user clicks tab multiple times, shouldn't keep making API call
+    if(tabClick) {
+      if ($scope.initiallyLoadedPeople) {
+        return;
+      } else {
+        //set this so it won't call again
+        $scope.initiallyLoadedPeople = true;
+      }
+    }
+
 
     if(max_id) {
       usersParams.max_id = parseInt(max_id, 10) - 1;

@@ -14,6 +14,7 @@
           <div class="morsel-container">
             <div class="cover-jumbo">
               <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
+              <span bo-if="morsel.draft" class="banner banner-draft">Draft</span>
               <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(morsel, true)}}" ng-style="{'height': layout.coverPhotoHeight}"></div>
               <div class="cover-title-wrap" ng-style="{'height': layout.coverTitleHeight}">
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>
@@ -32,7 +33,7 @@
                     <span bo-text="(morsel.place.city ? morsel.place.city+', ':'')+morsel.place.state"></span>
                   </h6>
                 </div>
-                <span am-time-ago="morsel.created_at" class="time-ago"></span>
+                <span am-time-ago="morsel.published_at" class="time-ago"></span>
               </div>
               <div class="cover-more col-xs-6 col-md-12" ng-style="{'min-height': layout.coverBlockMinHeight}">
                 <a class="cover-more-btn" ng-click="currentIndicatorIndex = 1">More</a>
@@ -43,7 +44,7 @@
         </li>
         <li bindonce ng-repeat="item in morsel.items" class="item" ng-style="{'height': layout.feedHeight}">
           <div class="morsel-container loader">
-            <div class="item-photo-wrap">
+            <div class="item-photo-wrap" ng-style="{'max-height': layout.itemPhotoHeight}">
               <span class="item-info-btn" ng-click="expandDescription(item.id)" non-swipeable><i class="common-info" non-swipeable></i></span>
               <img ng-if="hasEnteredMorsel && (currentItemIndex >= $index)" class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
             </div>
@@ -56,10 +57,10 @@
                     <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
                   </h5>
                 </div>
-                <div mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
+                <div ng-if="!morsel.draft" mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
               </div>
-              <div mrsl-item-description="item" ng-style="{'height': layout.textDescriptionHeight}"></div>
-              <div mrsl-social-sharing="morsel"></div>
+              <div mrsl-item-description="item" ng-style="{'max-height': layout.textDescriptionHeight}"></div>
+              <div ng-if="!morsel.draft" mrsl-social-sharing="morsel"></div>
             </div>
           </div>
         </li>
@@ -69,8 +70,8 @@
             <div class="cover-title-wrap">
               <h2 class="cover-title" bo-bind="morsel.title"></h2>
             </div>
-            <h5 class="share-this-morsel h2">Share this morsel:</h5>
-            <div mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
+            <h5 ng-if="!morsel.draft" class="share-this-morsel h2">Share this morsel:</h5>
+            <div ng-if="!morsel.draft" mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
             <hr />
             <div class="user-info">
               <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-m"></div>

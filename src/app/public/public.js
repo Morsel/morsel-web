@@ -63,6 +63,7 @@ angular.module( 'Morsel.public', [
   'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.invite',
+  'Morsel.public.notifications',
   'Morsel.public.place',//place comes before morselDetail so /places/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search',//search comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search.people',
@@ -97,7 +98,7 @@ angular.module( 'Morsel.public', [
   'orientation-landscape': 'screen and (orientation:landscape)'
 })
 
-.constant('MORSELPLACEHOLDER', '/assets/images/logos/morsel-placeholder.jpg')
+.constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};
@@ -133,7 +134,8 @@ angular.module( 'Morsel.public', [
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state ) {
   var viewOptions = {
     miniHeader : false,
-    fullWidthHeader : false
+    fullWidthHeader : false,
+    hideLogo: false
   };
 
   //to store things like page title
@@ -202,8 +204,11 @@ angular.module( 'Morsel.public', [
       $scope.currentUser = userData;
     });
 
-    //manually push a GA pageview
-    GA.sendPageview($scope.pageData.pageTitle);
+    //make sure we don't double count page views at the root (see home.js routing)
+    if(toState.url !== '') {
+      //manually push a GA pageview
+      GA.sendPageview($scope.pageData.pageTitle);
+    }
   });
 
   //if there are internal state issues, go to 404

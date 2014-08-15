@@ -38,7 +38,7 @@
         <tab heading="Details" select="loadDetails()">
           <div class="container container-max-sm place-details profile-tab-content">
             <div class="row" bindonce="place">
-              <div class="col-md-6">
+              <div class="col-sm-6">
                 <div class="place-details-section">
                   <a bo-if="place.information.menu_mobile_url" class="visible-xs-block visible-sm-block" bo-href="place.information.menu_mobile_url" target="_blank"><i class="common-menu"></i> View Menu</a>
                   <a bo-if="place.information.menu_url" class="visible-md-block visible-lg-block" bo-href="place.information.menu_url" target="_blank"> <i class="common-menu"></i>View Menu</a>
@@ -46,13 +46,13 @@
                 </div>
                 <div class="place-details-section">
                   <h5 class="h3">Contact</h5>
-                  <a bo-if="place.information.website_url" bo-href="place.information.website_url" target="_blank"><i class="common-website"></i><span bo-text="place.information.website_url"></span></a>
+                  <a bo-if="place.information.website_url" bo-href="place.information.website_url" target="_blank"><i class="common-website"></i><span bo-text="place.information.website_url_text"></span></a>
                   <a bo-if="place.information.formatted_phone" bo-href="'tel:'+place.information.formatted_phone" target="_blank" class="visible-xs-block visible-sm-block"><i class="common-phone"></i><span bo-text="place.information.formatted_phone"></span></a>
                   <p bo-if="place.information.formatted_phone" target="_blank" class="visible-md-block visible-lg-block"><i class="common-phone"></i><span bo-text="place.information.formatted_phone"></span></p>
                   <a bo-if="place.twitter_username" bo-href="'https://twitter.com/' + place.twitter_username" target="_blank"><i class="common-twitter"></i><span bo-text="place.twitter_username"></span></a>
                 </div>
               </div>
-              <div class="col-md-6">
+              <div class="col-sm-6">
                 <div class="place-details-section">
                   <h5 bo-if="place.information.price_tier" class="h3">Dining</h5>
                   <dl bo-if="place.information.price_tier">

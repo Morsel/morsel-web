@@ -1,3 +1,6 @@
+//this is really just based on not wanting to load larger images than this
+$max-morsel-width: 240px;
+
 .profile {
   padding-top: $mini-header-height;
   background-color: $morsel-light-off;
@@ -79,6 +82,7 @@
       margin: 0;
       list-style: none;
       min-height: 100px;
+      max-width: $max-morsel-width;
 
       a {
         display: block;
@@ -96,9 +100,10 @@
     }
 
     .profile-morsel-title {
-      text-transform: uppercase;
-      font-size: 14px;
+      font-size: 13px;
+      line-height: 16px;
       padding: 0 5px;
+      text-transform: none;
     }
   }
 
@@ -110,6 +115,17 @@
 
   .profile-tab-content {
     padding: 20px 15px;
+  }
+}
+
+@media (min-width: $screen-xs-min) {
+  .profile {
+    .profile-morsels {
+      .profile-morsel-title {
+        font-size: 22px;
+        line-height: 24px;
+      }
+    }
   }
 }
 
@@ -132,6 +148,7 @@
       @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
       background-color: $morsel-light-off;
       @include border-radius(3px);
+      max-width: $max-morsel-width * 3;
     }
 
     .profile-container {
@@ -141,10 +158,6 @@
     }
 
     .profile-morsels {
-      .profile-morsel-title {
-        font-size: 22px;
-      }
-
       li {
         min-height: 200px;
         
@@ -162,6 +175,10 @@
 
 @media (min-width: $screen-md-min) {
   .profile {
+    .container {
+      max-width: $max-morsel-width * 4;
+    }
+
     .profile-morsels {
       li {
         width: percentage(1/4);
@@ -172,6 +189,10 @@
 
 @media (min-width: $screen-lg-min) {
   .profile {
+    .container {
+      max-width: $max-morsel-width * 5;
+    }
+
     .profile-morsels {
       li {
         width: percentage(1/5);
@@ -179,6 +200,7 @@
 
       .profile-morsel-title {
         font-size: 24px;
+        line-height: 26px;
       }
     }
   }

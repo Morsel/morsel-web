@@ -18,8 +18,10 @@ angular.module( 'Morsel.public.contact', [])
   });
 })
 
-.controller( 'ContactCtrl', function ContactCtrl( $scope, ApiUtil, HandleErrors, $timeout, currentUser, $location ) {
-  var queryParams = $location.search();
+// .controller( 'ContactCtrl', function ContactCtrl( $scope, ApiUtil, HandleErrors, $timeout, currentUser, $location ) {
+.controller( 'ContactCtrl', function ContactCtrl( ) {
+
+  /*var queryParams = $location.search();
 
   $scope.contactModel = {
     'name': currentUser.first_name ? currentUser.first_name + ' ' + currentUser.last_name : '',
@@ -80,5 +82,5 @@ angular.module( 'Morsel.public.contact', [])
     $scope.contactForm.$setValidity('loading', true);
 
     HandleErrors.onError(resp.data, $scope.contactForm);
-  }
+  }*/
 });

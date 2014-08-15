@@ -35,7 +35,7 @@ angular.module( 'Morsel.static', [
   'screen-lg': 'only screen and (min-width: 1200px)'
 })
 
-.constant('MORSELPLACEHOLDER', '/assets/images/logos/morsel-placeholder.jpg')
+.constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
 .config( function myAppConfig ( $locationProvider, RestangularProvider, APIURL ) {
   var defaultRequestParams = {};

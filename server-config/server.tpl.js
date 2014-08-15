@@ -121,9 +121,6 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     app.set('view engine', 'hbs');
     app.set('views', __dirname + '/views');
 
-    //expose our locals
-    hbs.localsAsTemplateData(app);
-
     //static files
     app.use('/assets', express.static(__dirname + '/assets'));
     app.use('/src', express.static(__dirname + '/src'));
@@ -131,7 +128,8 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     app.use('/launch', express.static(__dirname + '/launch'));
 
     //redirect all URLs (besides static files) to lowercase
-    app.use(require('express-uncapitalize')());
+    //commented out for now because it interferes with password reset tokens
+    //app.use(require('express-uncapitalize')());
 
     //set our initial default metadata
     utilApp.updateMetadata('default');
@@ -235,6 +233,11 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     //PUBLIC
 
+    //RIA
+    app.get('/ria', function(req, res){
+      res.redirect('/');
+    });
+
     //feed
     app.get('/feed', function(req, res){
       var metadata = utilApp.getMetadata('feed');
@@ -251,6 +254,11 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     //activity
     app.get('/activity', function(req, res){
+      publicApp.renderPublicPage(res);
+    });
+
+    //notifications
+    app.get('/notifications', function(req, res){
       publicApp.renderPublicPage(res);
     });
 

@@ -1,6 +1,6 @@
 <header class="main-header" ng-class="{'mini-header': viewOptions.miniHeader, 'full-header': !viewOptions.miniHeader, 'full-width-header': viewOptions.fullWidthHeader}">
   <div class="container">
-    <h1 class="morsel-logo">
+    <h1 class="morsel-logo" ng-class="{'hide-logo':viewOptions.hideLogo}">
       {{#pageType.public}}
       <a href="/">Morsel</a>
       {{/pageType.public}}
