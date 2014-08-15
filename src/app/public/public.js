@@ -39,6 +39,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.handleErrors',
   'Morsel.common.itemActionBar',
   'Morsel.common.itemLike',
+  'Morsel.common.iTunesLink',
   'Morsel.common.landscapeAlert',
   'Morsel.common.likeableFeed',
   'Morsel.common.mixpanel',
