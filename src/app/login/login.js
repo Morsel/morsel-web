@@ -36,7 +36,8 @@ angular.module( 'Morsel.login', [
   'Morsel.login.join',
   'Morsel.login.login',
   'Morsel.login.logout',
-  'Morsel.login.passwordReset'
+  'Morsel.login.passwordReset',
+  'Morsel.login.reservedUsername'
 ])
 
 //define some constants for the app

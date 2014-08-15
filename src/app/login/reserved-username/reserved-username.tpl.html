@@ -1,0 +1,39 @@
+<div class="container container-max-sm morsel-bg container-shadow container-margin-bottom">
+  <h1>Complete Sign Up</h1>
+  <p>Thanks for reserving your username! We just need a bit more information to complete your sign up</p>
+  <form name="completeSignupForm" method="post" ng-submit="completeSignupSubmit()" class="padded-form" novalidate>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div mrsl-base-errors mrsl-val-form="completeSignupForm"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-5 col-md-4 col-md-offset-1">
+        <div class="form-group">
+          <div mrsl-image-upload mrsl-image-to-upload="profilePhoto" mrsl-image-remote-url="remotePhotoUrl" class="avatar-add"></div>
+          <label class="control-label center-block text-center" for="photo">Profile Photo</label>
+        </div>
+      </div>
+      <div class="col-sm-7 col-md-6">
+        <input mrsl-validated-element mrsl-val-form="completeSignupForm" mrsl-val-en-name="First Name" mrsl-val-type="text" mrsl-val-name="first_name" mrsl-val-form-model="completeSignupModel" mrsl-val-placeholder="John" mrsl-val-required="true" />
+
+        <input mrsl-validated-element mrsl-val-form="completeSignupForm" mrsl-val-en-name="Last Name" mrsl-val-type="text" mrsl-val-name="last_name" mrsl-val-form-model="completeSignupModel" mrsl-val-placeholder="Smith" mrsl-val-required="true" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <input mrsl-validated-element mrsl-val-form="completeSignupForm" mrsl-val-en-name="Username" mrsl-val-type="text" mrsl-val-name="username" mrsl-val-form-model="completeSignupModel" mrsl-val-placeholder="johnnyboy" mrsl-val-required="true" mrsl-val-help-text="We've been saving it for you" mrsl-val-disabled="fieldsDisabled" />
+
+        <input mrsl-validated-element mrsl-val-form="completeSignupForm" mrsl-val-en-name="Email" mrsl-val-type="email" mrsl-val-name="email" mrsl-val-form-model="completeSignupModel" mrsl-val-placeholder="johnsmith@example.com" mrsl-val-required="true" mrsl-val-help-text="You'll have a chance to update your email after signup" mrsl-val-disabled="fieldsDisabled" />
+
+        <input mrsl-validated-element mrsl-val-form="completeSignupForm" mrsl-val-en-name="Password" mrsl-val-type="password" mrsl-val-name="password" mrsl-val-form-model="completeSignupModel" mrsl-val-required="true" />
+
+        <input mrsl-validated-element mrsl-val-form="completeSignupForm" mrsl-val-en-name="Confirm Password" mrsl-val-type="password" mrsl-val-name="verification" mrsl-val-form-model="completeSignupModel" mrsl-val-custom="customMatchVer" mrsl-val-required="true" />
+
+        <input mrsl-validated-element mrsl-val-form="completeSignupForm" mrsl-val-en-name="I am a professional chef, sommelier, mixologist, etc." mrsl-val-name="professional" mrsl-val-form-model="completeSignupModel" mrsl-val-tag-type="single-checkbox" />
+
+        <button mrsl-submit-btn mrsl-submit-btn-form="completeSignupForm" mrsl-submit-btn-copy="Sign Up" mrsl-submit-btn-block="true"  mrsl-submit-btn-tooltip-placement="top"></button>
+      </div>
+    </div>
+  </form>
+</div>
