@@ -104,6 +104,7 @@ module.exports = {
         'src/common/user/specialtyUsers.js',
         'src/common/user/userImage.js',
         'src/common/user/userList.js',
+        'src/common/util/itunesLink.js',
         'src/common/util/landscapeAlert.js',
         'src/common/util/transform.js',
         'src/common/util/viewMore.js'
@@ -304,7 +305,8 @@ module.exports = {
         'src/common/api/uploads.js',
         'src/common/api/users.js',
         'src/common/auth/auth.js',
-        'src/common/user/userImage.js'
+        'src/common/user/userImage.js',
+        'src/common/util/itunesLink.js'
       ],
       tpl: [
         'src/common/util/404.tpl.html'

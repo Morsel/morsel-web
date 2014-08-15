@@ -1,10 +1,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!--<meta name="apple-itunes-app" content="app-id=myAppStoreID, affiliate-data=myAffiliateData, app-argument=myURL">-->
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <base href="{{metabase}}">
 <meta name="fragment" content="!" />
 <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon" />
+{{#showAppBanner}}
+<meta name="apple-itunes-app" content="app-id=888118457">
+{{/showAppBanner}}
 <link rel="apple-touch-icon" href="<%= favicon_dir %>/apple-touch-icon.png" />
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -20,6 +22,12 @@
 <meta name="twitter:creator" content="{{metadata.twitter.creator}}">
 <meta name="twitter:image:src" content="{{metadata.image}}">
 <meta name="twitter:url" content="{{metadata.url}}">
+{{#ifCond metadata.twitter.card 'app'}}
+<meta name="twitter:app:country" content="{{metadata.twitter.app.country}}">
+<meta name="twitter:app:name:iphone" content="{{metadata.twitter.app.iphone.name}}">
+<meta name="twitter:app:id:iphone" content="{{metadata.twitter.app.iphone.id}}">
+{{/ifCond}}
+
 <meta property="og:locale" content="{{metadata.og.locale}}"/>
 <meta property="og:title" content="{{metadata.title}}" />
 <meta property="og:type" content="{{metadata.og.type}}" />

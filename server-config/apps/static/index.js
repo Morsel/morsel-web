@@ -7,7 +7,8 @@ module.exports.renderStaticPage = function(res, route) {
         pageType: {
           static: true
         },
-        metabase: '/'
+        metabase: '/',
+        showAppBanner: true
       };
 
   util.updateMetadata(route, res);

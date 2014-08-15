@@ -11,7 +11,8 @@ angular.module( 'Morsel.static', [
   //common
   'Morsel.common.auth',
   'Morsel.common.mixpanel',
-  'Morsel.common.userImage'
+  'Morsel.common.userImage',
+  'Morsel.common.iTunesLink'
   //app
 ])
 
