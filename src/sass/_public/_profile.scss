@@ -1,3 +1,6 @@
+//this is really just based on not wanting to load larger images than this
+$max-morsel-width: 240px;
+
 .profile {
   padding-top: $mini-header-height;
   background-color: $morsel-light-off;
@@ -79,6 +82,7 @@
       margin: 0;
       list-style: none;
       min-height: 100px;
+      max-width: $max-morsel-width;
 
       a {
         display: block;
@@ -144,6 +148,7 @@
       @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
       background-color: $morsel-light-off;
       @include border-radius(3px);
+      max-width: $max-morsel-width * 3;
     }
 
     .profile-container {
@@ -170,6 +175,10 @@
 
 @media (min-width: $screen-md-min) {
   .profile {
+    .container {
+      max-width: $max-morsel-width * 4;
+    }
+
     .profile-morsels {
       li {
         width: percentage(1/4);
@@ -180,6 +189,10 @@
 
 @media (min-width: $screen-lg-min) {
   .profile {
+    .container {
+      max-width: $max-morsel-width * 5;
+    }
+
     .profile-morsels {
       li {
         width: percentage(1/5);

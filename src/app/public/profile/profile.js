@@ -133,7 +133,7 @@ angular.module( 'Morsel.public.profile', [])
       if(primaryItemPhotos) {
         return [
           ['default', primaryItemPhotos._100x100],
-          ['(min-width: 321px)', primaryItemPhotos._240x240]
+          ['(min-width: 301px)', primaryItemPhotos._240x240]
         ];
       } else {
         return [
