@@ -359,6 +359,10 @@ form {
   @include filter(blur(10px));
 }
 
+.itunes-link {
+  display: inline-block;
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .morsel-text {
     background-image: url(images/logos/morsel-text@2x.png);

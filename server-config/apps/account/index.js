@@ -24,6 +24,7 @@ module.exports.renderAccountPage = function(req, res, twitterData) {
     pageType: {
       account: true
     },
-    metabase: '/account'
+    metabase: '/account',
+    showAppBanner: true
   });
 };

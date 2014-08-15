@@ -1,6 +1,6 @@
 {
   "default": {
-    "title": "Food & Drink Inspiration From the Top Chefs, Mixologists, Sommeliers & Restaurants | Morsel",
+    "title": "A culinary community sharing food stories, cooking inspiration and kitchen hacks | Morsel",
     "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
     "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
     "fb_app_id": "1402286360015732",
@@ -17,15 +17,20 @@
     "url": "http://www.eatmorsel.com"
   },
   "home": {
-    "title": "Food & Drink Inspiration From the Top Chefs, Mixologists, Sommeliers & Restaurants | Morsel",
+    "title": "A culinary community sharing food stories, cooking inspiration and kitchen hacks | Morsel",
     "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
     "twitter": {
       "card": "app",
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
       "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app:id:iphone":"",
-      "app:id:ipad":""
+      "app": {
+        "country": "US",
+        "iphone": {
+          "id": "888118457",
+          "name": "Morsel"
+        }
+      }
     }
   },
   "about": {
@@ -41,8 +46,13 @@
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
       "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app:id:iphone":"",
-      "app:id:ipad":""
+      "app": {
+        "country": "US",
+        "iphone": {
+          "id": "888118457",
+          "name": "Morsel"
+        }
+      }
     },
     "url": "http://www.eatmorsel.com/apps"
   },
@@ -52,15 +62,20 @@
     "url": "http://www.eatmorsel.com/contact"
   },
   "feed": {
-    "title": "Food & Drink Inspiration From the Top Chefs, Mixologists, Sommeliers & Restaurants | Morsel",
+    "title": "A culinary community sharing food stories, cooking inspiration and kitchen hacks | Morsel",
     "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
     "twitter": {
       "card": "app",
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
       "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app:id:iphone":"",
-      "app:id:ipad":""
+      "app": {
+        "country": "US",
+        "iphone": {
+          "id": "888118457",
+          "name": "Morsel"
+        }
+      }
     },
     "url": "http://www.eatmorsel.com/feed"
   },

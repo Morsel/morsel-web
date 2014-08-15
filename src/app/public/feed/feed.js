@@ -9,7 +9,7 @@ angular.module( 'Morsel.public.feed', [])
         templateUrl: 'app/public/feed/feed.tpl.html'
       }
     },
-    data:{ pageTitle: 'Food & Drink Inspiration From the Top Chefs, Mixologists, Sommeliers & Restaurants' },
+    data:{ pageTitle: 'A culinary community sharing food stories, cooking inspiration and kitchen hacks' },
     resolve: {
       //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
       currentUser: function(Auth) {

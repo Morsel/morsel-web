@@ -60,7 +60,8 @@ function renderPublicPage(res, customMetadata) {
     pageType: {
       public: true
     },
-    metabase: '/'
+    metabase: '/',
+    showAppBanner: true
   });
 }
 

@@ -116,9 +116,8 @@ $app-demo-delay: 2s;
   }
 
   .app-brand {
-    a {
-      display: inline-block;
-      margin-top: 20px;
+    div {
+      margin-top: 25px;
     }
   }
 }
@@ -192,6 +191,17 @@ $app-demo-delay: 2s;
           animation-duration: $app-demo-duration;
           animation-delay: $app-demo-delay;
           animation-iteration-count: infinite;
+        }
+      }
+    }
+
+    .app-brand {
+      div {
+        display: inline-block;
+        margin-top: 10px;
+
+        & + div {
+          margin-left: 25px;
         }
       }
     }
