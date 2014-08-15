@@ -39,6 +39,7 @@ $item-info-bottom-height: 55px + $hr-height;
       font-size: 14px;
       margin: 0 auto;
       color: $morsel-dark;
+      text-transform: none;
     }
   }
 
@@ -119,7 +120,7 @@ $item-info-bottom-height: 55px + $hr-height;
 
   .user-info {
     h5 {
-      margin: 10px auto 0;
+      margin: 5px auto 0;
       font-size: 15px;
       text-transform: none;
       color: $morsel-primary;
@@ -141,6 +142,7 @@ $item-info-bottom-height: 55px + $hr-height;
 
       span {
         font-size: 13px;
+        display: block;
       }
     }
   }
@@ -179,6 +181,7 @@ $item-info-bottom-height: 55px + $hr-height;
         display: table-cell;
         vertical-align: middle;
         @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+        text-transform: none;
       }
     }
   }
@@ -390,6 +393,10 @@ $item-info-bottom-height: 55px + $hr-height;
   &.banner-featured {
     @include replace-text-with-dimensions('graphics/banner-featured-top.png');
   }
+
+  &.banner-draft {
+    @include replace-text-with-dimensions('graphics/banner-draft-top.png');
+  }
 }
 
 .morsel-control {
@@ -561,6 +568,7 @@ $item-info-bottom-height: 55px + $hr-height;
           span {
             color: white;
             font-size: 14px;
+            display: inline;
           }
         }
 
@@ -764,10 +772,15 @@ $item-info-bottom-height: 55px + $hr-height;
   }
 
   .banner {
+    top: auto;
+    bottom: 0;
+
     &.banner-featured {
-      top: auto;
-      bottom: 0;
       @include replace-text-with-dimensions('graphics/banner-featured-bottom.png');
+    }
+
+    &.banner-draft {
+      @include replace-text-with-dimensions('graphics/banner-draft-bottom.png');
     }
   }
 }

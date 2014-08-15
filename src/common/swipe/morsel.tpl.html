@@ -14,6 +14,7 @@
           <div class="morsel-container">
             <div class="cover-jumbo">
               <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
+              <span bo-if="morsel.draft" class="banner banner-draft">Draft</span>
               <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(morsel, true)}}" ng-style="{'height': layout.coverPhotoHeight}"></div>
               <div class="cover-title-wrap" ng-style="{'height': layout.coverTitleHeight}">
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>
@@ -56,10 +57,10 @@
                     <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
                   </h5>
                 </div>
-                <div mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
+                <div ng-if="!morsel.draft" mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
               </div>
               <div mrsl-item-description="item" ng-style="{'max-height': layout.textDescriptionHeight}"></div>
-              <div mrsl-social-sharing="morsel"></div>
+              <div ng-if="!morsel.draft" mrsl-social-sharing="morsel"></div>
             </div>
           </div>
         </li>
@@ -69,8 +70,8 @@
             <div class="cover-title-wrap">
               <h2 class="cover-title" bo-bind="morsel.title"></h2>
             </div>
-            <h5 class="share-this-morsel h2">Share this morsel:</h5>
-            <div mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
+            <h5 ng-if="!morsel.draft" class="share-this-morsel h2">Share this morsel:</h5>
+            <div ng-if="!morsel.draft" mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
             <hr />
             <div class="user-info">
               <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-m"></div>
