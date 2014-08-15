@@ -24,8 +24,13 @@
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
       "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app:id:iphone":"",
-      "app:id:ipad":""
+      "app": {
+        "country": "US",
+        "iphone": {
+          "id": "888118457",
+          "name": "Morsel"
+        }
+      }
     }
   },
   "about": {
@@ -41,8 +46,13 @@
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
       "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app:id:iphone":"",
-      "app:id:ipad":""
+      "app": {
+        "country": "US",
+        "iphone": {
+          "id": "888118457",
+          "name": "Morsel"
+        }
+      }
     },
     "url": "http://www.eatmorsel.com/apps"
   },
@@ -59,8 +69,13 @@
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
       "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app:id:iphone":"",
-      "app:id:ipad":""
+      "app": {
+        "country": "US",
+        "iphone": {
+          "id": "888118457",
+          "name": "Morsel"
+        }
+      }
     },
     "url": "http://www.eatmorsel.com/feed"
   },

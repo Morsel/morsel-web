@@ -22,6 +22,12 @@
 <meta name="twitter:creator" content="{{metadata.twitter.creator}}">
 <meta name="twitter:image:src" content="{{metadata.image}}">
 <meta name="twitter:url" content="{{metadata.url}}">
+{{#ifCond metadata.twitter.card 'app'}}
+<meta name="twitter:app:country" content="{{metadata.twitter.app.country}}">
+<meta name="twitter:app:name:iphone" content="{{metadata.twitter.app.iphone.name}}">
+<meta name="twitter:app:id:iphone" content="{{metadata.twitter.app.iphone.id}}">
+{{/ifCond}}
+
 <meta property="og:locale" content="{{metadata.og.locale}}"/>
 <meta property="og:title" content="{{metadata.title}}" />
 <meta property="og:type" content="{{metadata.og.type}}" />

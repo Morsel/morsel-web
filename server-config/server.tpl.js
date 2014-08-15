@@ -121,6 +121,14 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     app.set('view engine', 'hbs');
     app.set('views', __dirname + '/views');
 
+    //if/else handlebars helper
+    hbs.registerHelper('ifCond', function(v1, v2, options) {
+      if(v1 === v2) {
+        return options.fn(this);
+      }
+      return options.inverse(this);
+    });
+
     //static files
     app.use('/assets', express.static(__dirname + '/assets'));
     app.use('/src', express.static(__dirname + '/src'));
