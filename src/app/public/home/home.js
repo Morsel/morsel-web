@@ -9,7 +9,7 @@ angular.module( 'Morsel.public.home', [])
         templateUrl: 'app/public/home/home.tpl.html'
       }
     },
-    data:{ pageTitle: 'Food & Drink Inspiration From the Top Chefs, Mixologists, Sommeliers & Restaurants' },
+    data:{ pageTitle: 'A culinary community sharing food stories, cooking inspiration and kitchen hacks' },
     resolve: {
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();
