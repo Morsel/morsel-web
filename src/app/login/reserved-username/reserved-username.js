@@ -2,7 +2,7 @@ angular.module( 'Morsel.login.reservedUsername', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'auth.reserved-username', {
-    url: '/reserved-username?reserved_username_token&email&username',
+    url: '/reserved-username?reserved_username_token&email&username&id',
     parent: 'auth',
     views: {
       "auth-view": {
@@ -10,11 +10,28 @@ angular.module( 'Morsel.login.reservedUsername', [])
         templateUrl: 'app/login/reserved-username/reserved-username.tpl.html'
       }
     },
-    data:{ pageTitle: 'Complete Sign Up' }
+    data:{ pageTitle: 'Complete Sign Up' },
+    resolve: {
+      //make sure we resolve a user before displaying
+      loginUser:  function(Auth, $window, $q){
+        var deferred = $q.defer();
+
+        Auth.getCurrentUserPromise().then(function(userData){
+          //don't let a logged in user to this page
+          if(Auth.isLoggedIn()) {
+            $window.location.href = '/';
+          } else {
+            deferred.resolve(userData);
+          }
+        });
+
+        return deferred.promise;
+      }
+    }
   });
 })
 
-.controller( 'ReservedUsernameCtrl', function ReservedUsernameCtrl( $scope, HandleErrors, Auth, $state, $stateParams, ApiUsers, $cookies, $window ) {
+.controller( 'ReservedUsernameCtrl', function ReservedUsernameCtrl( $scope, HandleErrors, Auth, $state, $stateParams, ApiUsers, $cookies, $window, loginUser ) {
   //model to store our basic info data
   $scope.completeSignupModel = {
     'email': $stateParams.email,
@@ -39,7 +56,8 @@ angular.module( 'Morsel.login.reservedUsername', [])
   $scope.completeSignupSubmit = function() {
     var passwordData = {
       password: $scope.completeSignupModel.password,
-      reset_password_token: $stateParams.reserved_username_token
+      reset_password_token: $stateParams.reserved_username_token,
+      reserved_username: true
     };
 
     //check if everything is valid
@@ -47,7 +65,7 @@ angular.module( 'Morsel.login.reservedUsername', [])
       //disable form while request fires
       $scope.completeSignupForm.$setValidity('loading', false);
 
-      ApiUsers.resetPassword(passwordData).then(onSuccess, onError);
+      ApiUsers.resetPassword(passwordData).then(onPasswordUpdateSuccess, onError);
     }
   };
 
@@ -75,6 +93,9 @@ angular.module( 'Morsel.login.reservedUsername', [])
       userData.__utmz = gaCookie;
     }
 
+    //update with our newly made user
+    Auth.updateUser(user);
+
     ApiUsers.updateUser(user.id, userData).then(onUserInfoSuccess, onError);
   }
 
@@ -83,10 +104,11 @@ angular.module( 'Morsel.login.reservedUsername', [])
     $scope.completeSignupForm.$setValidity('loading', true);
 
     //store our user data for the next step if we need it
-    $scope.userData.registered = resp;
+    $scope.userData.registered = resp.data;
 
     //if successfully joined send to the next step
     if($scope.userData.registered.professional) {
+      //this isn't working
       //pros need more info
       $state.go('auth.join.additionalInfo');
     } else {
