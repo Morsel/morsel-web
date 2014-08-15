@@ -31,6 +31,11 @@ angular.module( 'Morsel.public.place', [])
 .controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth, USER_LIST_NUMBER ) {
   $scope.viewOptions.miniHeader = true;
 
+  //knock off the protocol so it displays nicer
+  if(placeData.information && placeData.information.website_url) {
+    placeData.information.website_url_text = placeData.information.website_url.replace(/^.*?:\/\//,'');
+  }
+
   $scope.place = placeData;
 
   //# of morsels to load at a time
