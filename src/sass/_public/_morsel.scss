@@ -393,6 +393,10 @@ $item-info-bottom-height: 55px + $hr-height;
   &.banner-featured {
     @include replace-text-with-dimensions('graphics/banner-featured-top.png');
   }
+
+  &.banner-draft {
+    @include replace-text-with-dimensions('graphics/banner-draft-top.png');
+  }
 }
 
 .morsel-control {
@@ -768,10 +772,15 @@ $item-info-bottom-height: 55px + $hr-height;
   }
 
   .banner {
+    top: auto;
+    bottom: 0;
+
     &.banner-featured {
-      top: auto;
-      bottom: 0;
       @include replace-text-with-dimensions('graphics/banner-featured-bottom.png');
+    }
+
+    &.banner-draft {
+      @include replace-text-with-dimensions('graphics/banner-draft-bottom.png');
     }
   }
 }
