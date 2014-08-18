@@ -101,7 +101,7 @@ angular.module( 'Morsel.public', [
 
 .constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL, $provide ) {
   var defaultRequestParams = {};
 
   $locationProvider.html5Mode(true).hashPrefix('!');
@@ -126,6 +126,18 @@ angular.module( 'Morsel.public', [
       pageTitle: 'Page Not Found'
     }
   });
+
+  $provide.decorator('$exceptionHandler', ['$delegate', function ($delegate) {
+    return function(exception, cause) {
+      // Calls the original $exceptionHandler.
+      $delegate(exception, cause);
+
+      //submit to rollbar
+      if(Rollbar) {
+        Rollbar.error('Error: '+exception.message, exception);
+      }
+    };
+  }]);
 })
 
 .run( function run ($window) {

@@ -22,6 +22,7 @@ var twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET || '12345';
 var nodeEnv = process.env.NODE_ENV || config.node_env;
 var sessionSecret = 'THESESESSIONSARENOTSECURE';
 //rollbar account key is in server.js as it needs to load earlier
+var rollbarClientToken = process.env.ROLLBAR_CLIENT_TOKEN || config.rollbarClientToken;
 
 //static JSON data
 var staticRoutes = require('./data/static-routes.json');
@@ -32,6 +33,8 @@ app.locals.siteUrl = process.env.SITEURL || config.siteUrl;
 app.locals.apiUrl = process.env.APIURL || config.apiUrl;
 app.locals.mixpanelToken = process.env.MIXPANELTOKEN || config.devMixpanelToken;
 app.locals.isProd = nodeEnv === 'production';
+app.locals.rollbarClientToken = rollbarClientToken;
+app.locals.nodeEnv = nodeEnv;
 
 function updateMetadata(route, res){
   //if this is for a specific route

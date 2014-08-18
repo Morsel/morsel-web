@@ -1336,6 +1336,14 @@ module.exports = function ( grunt ) {
         });
       }
     });
+
+    grunt.file.copy('src/views/partials/rollbar.hbs', this.data.dir + '/views/partials/rollbar.hbs', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {}
+        });
+      }
+    });
   });
 
   /* analogous to app_public */
