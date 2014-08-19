@@ -1,0 +1,17 @@
+<div>
+  <ul class="clearfix morsel-grid">
+    <li ng-repeat="feedItem in feedItems">
+      <a ng-click="goTo(feedItem.subject.creator.username.toLowerCase()+'/'+feedItem.subject.id+'-'+feedItem.subject.slug)" class="centered-white">
+        <div>
+          <span class="morsel-grid-title">{{feedItem.subject.title}}</span>
+        </div>
+        <img mrsl-responsive-images="{{getCoverPhotoArray(feedItem.subject)}}" />
+      </a>
+    </li>
+  </ul>
+  <div ng-if="!feedItems" class="loader"></div>
+  <div mrsl-view-more mrsl-view-more-func="getExploreFeed" mrsl-view-more-data="feedItems" mrsl-view-more-inc="exploreIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-order="last"></div>
+  <div ng-if="feedItems && feedItems.length === 0" class="empty-state">
+    <p>No morsels</p>
+  </div>
+</div>
