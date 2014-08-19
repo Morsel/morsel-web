@@ -1,7 +1,7 @@
 <div>
   <ul class="clearfix morsel-grid">
     <li ng-repeat="feedItem in feedItems | reverse">
-      <a ng-click="goTo(user.username.toLowerCase()+'/'+feedItem.subject.id+'-'+feedItem.subject.slug)" class="centered-white">
+      <a ng-click="goTo(feedItem.subject.creator.username.toLowerCase()+'/'+feedItem.subject.id+'-'+feedItem.subject.slug)" class="centered-white">
         <div>
           <span class="morsel-grid-title">{{feedItem.subject.title}}</span>
         </div>
