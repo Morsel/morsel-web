@@ -73,7 +73,7 @@ angular.module( 'Morsel.public.place', [])
   $scope.getMorsels();
 
   $scope.getPlacePhoto = function() {
-    var mapsBaseUrl = 'http://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&format=jpg&zoom=15',
+    var mapsBaseUrl = 'https://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&format=jpg&zoom=15',
         markersUrl = '&markers=color:green%7C',
         lonOffset= 0.005;
 

@@ -14,7 +14,7 @@ Setup
 
 Environment Vars
 ==========
-APIURL:               http://api-staging.eatmorsel.com
+APIURL:               https://api-staging.eatmorsel.com
 ERROR_PAGE_URL:       https://morsel-dev.s3.amazonaws.com/error-pages/error.html
 MAINTENANCE_PAGE_URL: https://morsel-dev.s3.amazonaws.com/error-pages/maintenance.html
 MIXPANELTOKEN:        
