@@ -1245,19 +1245,6 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/claim.hbs', this.data.dir + '/views/claim.hbs', { 
-      process: function ( contents, path ) {
-        return grunt.template.process( contents, {
-          data: {
-            scripts: jsFiles,
-            styles: cssFiles,
-            version: grunt.config( 'pkg.version' ),
-            favicon_dir: grunt.config('favicon_dir')
-          }
-        });
-      }
-    });
-
     grunt.file.copy('src/views/unsubscribe.hbs', this.data.dir + '/views/unsubscribe.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
