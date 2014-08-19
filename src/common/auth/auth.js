@@ -3,7 +3,7 @@ angular.module( 'Morsel.common.auth', [
 ] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel, $rootScope){
+.factory('Auth', function($window, ApiUsers, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel, $rootScope, RollbarFactory){
   var Auth = {},
       defaultRequestParams = {},
       loadedUser = $q.defer();
@@ -68,12 +68,18 @@ angular.module( 'Morsel.common.auth', [
     _.extend(Auth._currentUser, Restangular.stripRestangular(userData));
     Auth._saveUser();
     Auth._resetApiKey();
+
+    //update any Rollbar events to send user
+    RollbarFactory.configure.person(Auth._currentUser);
   };
 
   //forget the user in our app
   Auth._clearUser = function() {
     Auth._updateUser(Auth._blankUser());
     Auth._forgetUser();
+
+    //update any Rollbar events to not send user
+    RollbarFactory.configure.person(Auth._currentUser);
   };
 
   //adjust the API key for current user

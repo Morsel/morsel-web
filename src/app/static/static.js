@@ -12,7 +12,8 @@ angular.module( 'Morsel.static', [
   'Morsel.common.auth',
   'Morsel.common.mixpanel',
   'Morsel.common.userImage',
-  'Morsel.common.iTunesLink'
+  'Morsel.common.iTunesLink',
+  'Morsel.common.rollbar'
   //app
 ])
 
@@ -50,8 +51,8 @@ angular.module( 'Morsel.static', [
       // Calls the original $exceptionHandler.
       $delegate(exception, cause);
 
-      //submit to rollbar
-      if(Rollbar) {
+      //submit to rollbar - can't use factory during config
+      if(window.Rollbar) {
         Rollbar.error('Error: '+exception.message, exception);
       }
     };

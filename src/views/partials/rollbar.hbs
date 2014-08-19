@@ -2,6 +2,7 @@
 var _rollbarConfig = {
     accessToken: "{{rollbarClientToken}}",
     captureUncaught: true,
+    itemsPerMinute: 10,
     payload: {
         environment: "{{nodeEnv}}"
     }

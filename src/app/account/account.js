@@ -28,6 +28,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
   'Morsel.common.photoHelpers',
+  'Morsel.common.rollbar',
   'Morsel.common.submitBtn',
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
@@ -92,8 +93,8 @@ angular.module( 'Morsel.account', [
       // Calls the original $exceptionHandler.
       $delegate(exception, cause);
 
-      //submit to rollbar
-      if(Rollbar) {
+      //submit to rollbar - can't use factory during config
+      if(window.Rollbar) {
         Rollbar.error('Error: '+exception.message, exception);
       }
     };

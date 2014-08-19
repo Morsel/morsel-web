@@ -48,6 +48,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.photoHelpers',
   'Morsel.common.placeList',
   'Morsel.common.responsiveImages',
+  'Morsel.common.rollbar',
   'Morsel.common.socialSharing',
   'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
@@ -132,8 +133,8 @@ angular.module( 'Morsel.public', [
       // Calls the original $exceptionHandler.
       $delegate(exception, cause);
 
-      //submit to rollbar
-      if(Rollbar) {
+      //submit to rollbar - can't use factory during config
+      if(window.Rollbar) {
         Rollbar.error('Error: '+exception.message, exception);
       }
     };
