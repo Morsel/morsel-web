@@ -10,6 +10,9 @@ angular.module( 'Morsel.public.explore', [])
       }
     },
     data:{ pageTitle: 'A culinary community sharing food stories, cooking inspiration and kitchen hacks' },
+    access: {
+      restricted: true
+    },
     resolve: {
       //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
       currentUser: function(Auth) {
@@ -19,59 +22,67 @@ angular.module( 'Morsel.public.explore', [])
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, PhotoHelpers, MORSELPLACEHOLDER ) {
+.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, PhotoHelpers, MORSELPLACEHOLDER, $location, Auth ) {
 
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.fullWidthHeader = true;
+  //only allow admins here
+  if(!Auth.isStaff()) {
+    $location.go('feed');
+  } else {
+    $scope.viewOptions.miniHeader = true;
+    $scope.viewOptions.fullWidthHeader = true;
 
-  $scope.goHome = function() {
-    $window.open($location.protocol() + '://'+ $location.host(), '_self');
-  };
+    //# of morsels to load at a time
+    $scope.exploreIncrement = 15;
 
-  $scope.getExploreFeed = function(max_id) {
-    var feedParams = {
-          count: $scope.exploreIncrement
-        };
+    $scope.goHome = function() {
+      $window.open($location.protocol() + '://'+ $location.host(), '_self');
+    };
 
-    if(max_id) {
-      feedParams.max_id = parseInt(max_id, 10) - 1;
-    }
+    $scope.getExploreFeed = function(max_id) {
+      var feedParams = {
+            count: $scope.exploreIncrement
+          };
 
-    ApiFeed.getAllFeed(feedParams).then(function(feedItemsData) {
-      if($scope.feedItems) {
-        //concat them with new data after old data, then reverse with a filter
-        $scope.feedItems = feedItemsData.data.concat($scope.feedItems);
-      } else {
-        $scope.feedItems = feedItemsData.data;
+      if(max_id) {
+        feedParams.max_id = parseInt(max_id, 10) - 1;
       }
-    }, function() {
-      //if there's an error retrieving morsels, go to 404
-      $state.go('404');
-    });
-  };
 
-  $scope.getCoverPhotoArray = function(morsel) {
-    var primaryItemPhotos;
+      ApiFeed.getAllFeed(feedParams).then(function(feedItemsData) {
+        if($scope.feedItems) {
+          //concat them with new data after old data, then reverse with a filter
+          $scope.feedItems = $scope.feedItems.concat(feedItemsData.data);
+        } else {
+          $scope.feedItems = feedItemsData.data;
+        }
+      }, function() {
+        //if there's an error retrieving morsels, go to 404
+        $state.go('404');
+      });
+    };
 
-    if(morsel.items) {
-      primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
+    $scope.getCoverPhotoArray = function(morsel) {
+      var primaryItemPhotos;
 
-      if(primaryItemPhotos) {
-        return [
-          ['default', primaryItemPhotos._100x100],
-          ['(min-width: 321px)', primaryItemPhotos._240x240]
-        ];
+      if(morsel.items) {
+        primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
+
+        if(primaryItemPhotos) {
+          return [
+            ['default', primaryItemPhotos._100x100],
+            ['(min-width: 321px)', primaryItemPhotos._240x240]
+          ];
+        } else {
+          return [
+            ['default', MORSELPLACEHOLDER]
+          ];
+        }
       } else {
-        return [
-          ['default', MORSELPLACEHOLDER]
-        ];
+        //return blank
+        return [];
       }
-    } else {
-      //return blank
-      return [];
-    }
-  };
+    };
 
-  //load our morsels immediately
-  $scope.getExploreFeed();
+    //load our morsels immediately
+    $scope.getExploreFeed();
+  }
 });

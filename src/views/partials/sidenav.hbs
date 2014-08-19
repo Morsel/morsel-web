@@ -19,7 +19,7 @@
       <a href="/feed" target="_self"><i class="common-feed"></i>Feed</a>
       {{/pageType.static}}
     </li>
-    <li ui-route="/explore" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+    <li ui-route="/explore" ng-class="{active:$uiRoute}" ng-if="isStaff">
       {{#pageType.public}}
       <a href="/explore" ng-click="menuGoTo('explore')"><i class="common-feed"></i>Explore</a>
       {{/pageType.public}}
