@@ -35,11 +35,11 @@
     <div>
       <tabset bo-class="{'professional-tabs':isProfessional}">
         <tab heading="Morsels">
-          <ul class="clearfix profile-morsels">
+          <ul class="clearfix morsel-grid">
             <li ng-repeat="morsel in morsels | reverse">
               <a ng-click="goTo(user.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug)" class="centered-white">
                 <div>
-                  <span class="profile-morsel-title">{{morsel.title}}</span>
+                  <span class="morsel-grid-title">{{morsel.title}}</span>
                 </div>
                 <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
               </a>

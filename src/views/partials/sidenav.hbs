@@ -19,6 +19,17 @@
       <a href="/feed" target="_self"><i class="common-feed"></i>Feed</a>
       {{/pageType.static}}
     </li>
+    <li ui-route="/explore" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+      {{#pageType.public}}
+      <a href="/explore" ng-click="menuGoTo('explore')"><i class="common-feed"></i>Explore</a>
+      {{/pageType.public}}
+      {{#pageType.account}}
+      <a href="/explore" target="_self"><i class="common-feed"></i>Explore</a>
+      {{/pageType.account}}
+      {{#pageType.static}}
+      <a href="/explore" target="_self"><i class="common-feed"></i>Explore</a>
+      {{/pageType.static}}
+    </li>
     <li ui-route="/search/[\w\/\-]*" ng-class="{active:$uiRoute}">
       {{#pageType.public}}
       <a href="/search/people" ng-click="menuGoTo('search/people')"><i class="common-find-people"></i>Find people</a>
