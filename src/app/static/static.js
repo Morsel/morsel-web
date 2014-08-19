@@ -12,7 +12,8 @@ angular.module( 'Morsel.static', [
   'Morsel.common.auth',
   'Morsel.common.mixpanel',
   'Morsel.common.userImage',
-  'Morsel.common.iTunesLink'
+  'Morsel.common.iTunesLink',
+  'Morsel.common.rollbar'
   //app
 ])
 
@@ -38,13 +39,24 @@ angular.module( 'Morsel.static', [
 
 .constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
-.config( function myAppConfig ( $locationProvider, RestangularProvider, APIURL ) {
+.config( function myAppConfig ( $locationProvider, RestangularProvider, APIURL, $provide ) {
   var defaultRequestParams = {};
 
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
 
+  $provide.decorator('$exceptionHandler', ['$delegate', function ($delegate) {
+    return function(exception, cause) {
+      // Calls the original $exceptionHandler.
+      $delegate(exception, cause);
+
+      //submit to rollbar - can't use factory during config
+      if(window.Rollbar) {
+        Rollbar.error('Error: '+exception.message, exception);
+      }
+    };
+  }]);
 })
 
 .run( function run ($window) {

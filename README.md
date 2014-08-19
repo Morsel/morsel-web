@@ -18,9 +18,10 @@ APIURL:               http://api-staging.eatmorsel.com
 ERROR_PAGE_URL:       https://morsel-dev.s3.amazonaws.com/error-pages/error.html
 MAINTENANCE_PAGE_URL: https://morsel-dev.s3.amazonaws.com/error-pages/maintenance.html
 MIXPANELTOKEN:        
-NODE_ENV:             development
+NODE_ENV:             local
 PRERENDER_TOKEN:      
 ROLLBAR_ACCOUNT_KEY:
+ROLLBAR_CLIENT_TOKEN:
 SITEURL:              http://dev.eatmorsel.com
 FACEBOOK_APP_ID:      
 TWITTER_CONSUMER_KEY:

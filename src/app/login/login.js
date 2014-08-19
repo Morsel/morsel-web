@@ -28,6 +28,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
   'Morsel.common.photoHelpers',
+  'Morsel.common.rollbar',
   'Morsel.common.submitBtn',
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
@@ -62,7 +63,7 @@ angular.module( 'Morsel.login', [
 
 .constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL, $provide ) {
   var defaultRequestParams = {};
 
   $locationProvider.html5Mode(true).hashPrefix('!');
@@ -73,6 +74,18 @@ angular.module( 'Morsel.login', [
   //Restangular configuration
   RestangularProvider.setBaseUrl(APIURL);
   RestangularProvider.setRequestSuffix('.json');
+
+  $provide.decorator('$exceptionHandler', ['$delegate', function ($delegate) {
+    return function(exception, cause) {
+      // Calls the original $exceptionHandler.
+      $delegate(exception, cause);
+
+      //submit to rollbar - can't use factory during config
+      if(window.Rollbar) {
+        Rollbar.error('Error: '+exception.message, exception);
+      }
+    };
+  }]);
 })
 
 .run( function run ($window) {

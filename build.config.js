@@ -65,6 +65,7 @@ module.exports = {
       js: [
         'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
+        'src/common/analytics/rollbar.js',
         'src/common/api/feed.js',
         'src/common/api/items.js',
         'src/common/api/keywords.js',
@@ -169,6 +170,7 @@ module.exports = {
       js: [
         'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
+        'src/common/analytics/rollbar.js',
         'src/common/api/keywords.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
@@ -237,6 +239,7 @@ module.exports = {
       js: [
         'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
+        'src/common/analytics/rollbar.js',
         'src/common/api/keywords.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
@@ -302,6 +305,7 @@ module.exports = {
     common: {
       js: [
         'src/common/analytics/mixpanel.js',
+        'src/common/analytics/rollbar.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
         'src/common/auth/auth.js',
