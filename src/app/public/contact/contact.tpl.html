@@ -2,10 +2,11 @@
   <h1>Contact Morsel</h1>
 </div>
 <div class="container container-shadow morsel-bg container-margin-bottom">
-  <!--<div ng-show="alertMessage" class="alert alert-{{alertType}}">
+  <div ng-show="alertMessage" class="alert alert-{{alertType}}">
     <p ng-bind="alertMessage"></p>
   </div>
-  <form name="contactForm" method="post" ng-submit="contactSubmit()" class="padded-form" novalidate>
+  <p ng-hide="formSubmitted">Please submit the following form or contact Morsel support at <a href="mailto:support@eatmorsel.com" target="_blank">support@eatmorsel.com</a> and we'll get back to you as soon as possible.</p>
+  <form ng-hide="formSubmitted" name="contactForm" method="post" ng-submit="contactSubmit()" class="padded-form" novalidate>
     <div mrsl-base-errors mrsl-val-form="contactForm"></div>
 
     <input mrsl-validated-element mrsl-val-form="contactForm" mrsl-val-en-name="Name" mrsl-val-type="text" mrsl-val-name="name" mrsl-val-form-model="contactModel" mrsl-val-placeholder="John Smith" mrsl-val-required="true" />
@@ -14,9 +15,8 @@
 
     <input mrsl-validated-element mrsl-val-form="contactForm" mrsl-val-en-name="Subject" mrsl-val-type="text" mrsl-val-name="subject" mrsl-val-form-model="contactModel" mrsl-val-placeholder="Hey Morsel!" mrsl-val-required="true" />
 
-    <textarea mrsl-validated-element mrsl-val-form="contactForm" mrsl-val-en-name="Message" mrsl-val-name="message" mrsl-val-form-model="contactModel" mrsl-val-placeholder="What can we help you with?" mrsl-val-required="true" mrsl-val-tag-type="textarea"></textarea>
+    <textarea mrsl-validated-element mrsl-val-form="contactForm" mrsl-val-en-name="Message" mrsl-val-name="description" mrsl-val-form-model="contactModel" mrsl-val-placeholder="What can we help you with?" mrsl-val-required="true" mrsl-val-tag-type="textarea"></textarea>
 
     <button mrsl-submit-btn mrsl-submit-btn-form="contactForm" mrsl-submit-btn-copy="Submit" mrsl-submit-btn-block="true"  mrsl-submit-btn-tooltip-placement="top"></button>
-  </form>-->
-  <p>Please contact Morsel support at <a href="mailto:support@eatmorsel.com" target="_blank">support@eatmorsel.com</a></p>
+  </form>
 </div>

@@ -26,17 +26,13 @@ angular.module( 'Morsel.public.explore', [])
 
   //only allow admins here
   if(!Auth.isStaff()) {
-    $location.go('feed');
+    $location.path('feed');
   } else {
     $scope.viewOptions.miniHeader = true;
     $scope.viewOptions.fullWidthHeader = true;
 
     //# of morsels to load at a time
     $scope.exploreIncrement = 15;
-
-    $scope.goHome = function() {
-      $window.open($location.protocol() + '://'+ $location.host(), '_self');
-    };
 
     $scope.getExploreFeed = function(max_id) {
       var feedParams = {

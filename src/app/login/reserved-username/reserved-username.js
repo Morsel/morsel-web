@@ -94,15 +94,12 @@ angular.module( 'Morsel.login.reservedUsername', [])
     }
 
     //update with our newly made user
-    Auth.updateUser(user);
+    Auth.updateUserWithData(user);
 
     ApiUsers.updateUser(user.id, userData).then(onUserInfoSuccess, onError);
   }
 
   function onUserInfoSuccess(resp) {
-    //make form valid again
-    $scope.completeSignupForm.$setValidity('loading', true);
-
     //store our user data for the next step if we need it
     $scope.userData.registered = resp.data;
 

@@ -54,8 +54,4 @@ angular.module( 'Morsel.public.morselDetail', [])
 
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.fullWidthHeader = true;
-
-  $scope.goHome = function() {
-    $window.open($location.protocol() + '://'+ $location.host(), '_self');
-  };
 });

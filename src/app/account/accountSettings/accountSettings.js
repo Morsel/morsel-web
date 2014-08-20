@@ -56,7 +56,7 @@ angular.module( 'Morsel.account.accountSettings', [])
     $scope.accountSettingsForm.$setValidity('loading', true);
 
     //update our scoped current user
-    Auth.updateUser(resp.data);
+    Auth.updateUserWithData(resp.data);
     $scope.alertMessage = 'Successfully updated your account settings';
     $scope.alertType = 'success';
   }
