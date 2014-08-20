@@ -100,9 +100,6 @@ angular.module( 'Morsel.login.reservedUsername', [])
   }
 
   function onUserInfoSuccess(resp) {
-    //make form valid again
-    $scope.completeSignupForm.$setValidity('loading', true);
-
     //store our user data for the next step if we need it
     $scope.userData.registered = resp.data;
 

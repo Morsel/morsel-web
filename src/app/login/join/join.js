@@ -175,9 +175,6 @@ angular.module( 'Morsel.login.join', [])
   };
 
   function onSuccess(resp) {
-    //make form valid again
-    $scope.basicInfoForm.$setValidity('loading', true);
-
     //store our user data for the next step if we need it
     $scope.userData.registered = resp;
 

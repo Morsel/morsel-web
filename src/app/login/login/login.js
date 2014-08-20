@@ -55,9 +55,6 @@ angular.module( 'Morsel.login.login', [])
     }
 
     function onSuccess(resp) {
-      //make form valid again
-      $scope.loginForm.$setValidity('loading', true);
-
       //if successfully logged in check if we have anything in the to-do queue
       if(AfterLogin.hasCallback()) {
         AfterLogin.goToCallbackPath();

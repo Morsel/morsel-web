@@ -44,9 +44,6 @@ angular.module( 'Morsel.login.passwordReset', [])
     }
     
     function onSuccess(resp) {
-      //make form valid again
-      $scope.emailPasswordForm.$setValidity('loading', true);
-
       //remove the form
       $scope.emailSubmitted = true;
 
@@ -92,8 +89,8 @@ angular.module( 'Morsel.login.passwordReset', [])
     }
     
     function onSuccess(resp) {
-      //make form valid again
-      $scope.newPasswordForm.$setValidity('loading', true);
+      //remove the form
+      $scope.newPasswordChosen = true;
 
       //if password reset, show message
       $scope.alertMessage = $sce.trustAsHtml('Your password has been reset. You can now <a href="/auth/login">login</a> with your new password');
