@@ -26,7 +26,7 @@ angular.module( 'Morsel.public.explore', [])
 
   //only allow admins here
   if(!Auth.isStaff()) {
-    $location.go('feed');
+    $location.path('feed');
   } else {
     $scope.viewOptions.miniHeader = true;
     $scope.viewOptions.fullWidthHeader = true;
