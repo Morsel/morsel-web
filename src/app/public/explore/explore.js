@@ -34,10 +34,6 @@ angular.module( 'Morsel.public.explore', [])
     //# of morsels to load at a time
     $scope.exploreIncrement = 15;
 
-    $scope.goHome = function() {
-      $window.open($location.protocol() + '://'+ $location.host(), '_self');
-    };
-
     $scope.getExploreFeed = function(max_id) {
       var feedParams = {
             count: $scope.exploreIncrement

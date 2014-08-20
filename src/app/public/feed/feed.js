@@ -40,10 +40,6 @@ angular.module( 'Morsel.public.feed', [])
   //feed should be viewed in portrait
   landscapeAlert();
 
-  $scope.goHome = function() {
-    $window.open($location.protocol() + '://'+ $location.host(), '_self');
-  };
-
   //scope vars for individual morsel
   $scope.feedState = {
     inMorsel : false,
