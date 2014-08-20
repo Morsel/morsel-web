@@ -62,6 +62,7 @@ angular.module( 'Morsel.public', [
   //app
   'Morsel.public.activity',
   'Morsel.public.contact',
+  'Morsel.public.explore',
   'Morsel.public.feed',
   'Morsel.public.home',
   'Morsel.public.invite',
@@ -215,6 +216,7 @@ angular.module( 'Morsel.public', [
     //refresh our user data
     Auth.getCurrentUserPromise().then(function(userData){
       $scope.isLoggedIn = Auth.isLoggedIn();
+      $scope.isStaff = Auth.isStaff();
       $scope.currentUser = userData;
     });
 

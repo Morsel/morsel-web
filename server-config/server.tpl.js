@@ -266,6 +266,11 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       publicApp.renderPublicPage(res, metadata);
     });
 
+    //explore
+    app.get('/explore', function(req, res){
+      publicApp.renderPublicPage(res);
+    });
+
     //contact
     app.get('/contact', function(req, res){
       var metadata = utilApp.getMetadata('contact');

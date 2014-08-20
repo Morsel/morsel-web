@@ -73,7 +73,7 @@ angular.module( 'Morsel.public.profile', [])
       morselsParams.max_id = parseInt(max_id, 10) - 1;
     }
 
-    ApiUsers.getMorsels($scope.user.username, morselsParams).then(function(morselsData) {
+    ApiUsers.getMorsels($scope.user.id, morselsParams).then(function(morselsData) {
       if($scope.morsels) {
         //concat them with new data after old data, then reverse with a filter
         $scope.morsels = morselsData.concat($scope.morsels);
