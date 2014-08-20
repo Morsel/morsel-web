@@ -2,7 +2,7 @@
   <div ng-if="socialConnected">
     <div mrsl-user-list="searchResultUsers" mrsl-user-list-empty="search.emptyText" ng-if="hasFriendsOnMorsel" mrsl-user-list-load-func="viewMoreResults"></div>
     <div ng-if="!hasFriendsOnMorsel" class="empty-state">
-      <p ng-if="searchType === 'facebook'">Morsel gets better with friends! <a ng-href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.eatmorsel.com%2Finvite%3Futm_source%3D{{searchType}}%26utm_medium%3Dpost%26campaign%3Dinvite-friends%26uid%3D{{searchUser.id}}" target="_blank">Tell my Facebook friends</a> about Morsel now.</p>
+      <p ng-if="searchType === 'facebook'">Morsel gets better with friends! <a ng-href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.eatmorsel.com%2Finvite%3Futm_source%3D{{searchType}}%26utm_medium%3Dpost%26campaign%3Dinvite-friends%26uid%3D{{searchUser.id}}" target="_blank">Tell my Facebook friends</a> about Morsel now.</p>
     </div>
   </div>
   <p ng-if="!socialConnected" class="empty-state" ng-bind-html="socialNotConnectedMessage"></p>

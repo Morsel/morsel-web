@@ -2,7 +2,7 @@
   "default": {
     "title": "A culinary community sharing food stories, cooking inspiration and kitchen hacks | Morsel",
     "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-    "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+    "image": "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
     "fb_app_id": "1402286360015732",
     "twitter": {
       "card": "summary",
@@ -14,7 +14,7 @@
       "locale": "en_US",
       "site_name": "Morsel"
     },
-    "url": "http://www.eatmorsel.com"
+    "url": "https://www.eatmorsel.com"
   },
   "home": {
     "title": "A culinary community sharing food stories, cooking inspiration and kitchen hacks | Morsel",
@@ -36,7 +36,7 @@
   "about": {
     "title": "About Us | Morsel",
     "description": "Learn more about Morsel and the brilliant people who make up our team.",
-    "url": "http://www.eatmorsel.com/about"
+    "url": "https://www.eatmorsel.com/about"
   },
   "apps": {
     "title": "Take Morsel on the Go With Our Apps | Morsel",
@@ -54,12 +54,12 @@
         }
       }
     },
-    "url": "http://www.eatmorsel.com/apps"
+    "url": "https://www.eatmorsel.com/apps"
   },
   "contact": {
     "title":"Contact Us | Morsel",
     "description":"Please contact us. We'd love to hear from you.",
-    "url": "http://www.eatmorsel.com/contact"
+    "url": "https://www.eatmorsel.com/contact"
   },
   "feed": {
     "title": "A culinary community sharing food stories, cooking inspiration and kitchen hacks | Morsel",
@@ -77,27 +77,27 @@
         }
       }
     },
-    "url": "http://www.eatmorsel.com/feed"
+    "url": "https://www.eatmorsel.com/feed"
   },
   "press": {
     "title": "Press & Media | Morsel",
     "description": "Read the latest news on Morsel and find media-related content including screenshots and high-res logos.",
-    "url": "http://www.eatmorsel.com/press"
+    "url": "https://www.eatmorsel.com/press"
   },
   "privacy": {
     "title": "Privacy Policy | Morsel",
     "description": "Morsel is committed to your privacy and keeping your information secure.",
-    "url": "http://www.eatmorsel.com/privacy"
+    "url": "https://www.eatmorsel.com/privacy"
   },
   "search": {
     "title":"Search for Other Users Including Chefs, Mixologists & Sommeliers | Morsel",
     "description":"Search Morsel for the top chefs, sommeliers and mixologists.",
-    "url": "http://www.eatmorsel.com/search"
+    "url": "https://www.eatmorsel.com/search"
   },
   "terms": {
     "title": "Terms of Use | Morsel",
     "description": "Our terms of use explain your rights as a user of the Morsel properties including our website and mobile app.",
-    "url": "http://www.eatmorsel.com/terms"
+    "url": "https://www.eatmorsel.com/terms"
   },
   "404": {
     "title": "Page Not Found | Morsel",

@@ -80,7 +80,7 @@ angular.module( 'Morsel.public', [
 //define some constants for the app
 
 //the URL to use for our API
-.constant('APIURL', window.MorselConfig.apiUrl || 'http://api-staging.eatmorsel.com')
+.constant('APIURL', window.MorselConfig.apiUrl || 'https://api-staging.eatmorsel.com')
 
 //for any API requests
 .constant('DEVICEKEY', 'client[device]')

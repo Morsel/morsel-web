@@ -105,6 +105,19 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     var staticApp = require('./apps/static');
     var publicApp = require('./apps/public');
 
+    var forceSsl = function (req, res, next) {
+      if (req.headers['x-forwarded-proto'] !== 'https') {
+        return res.redirect(['https://', req.get('Host'), req.url].join(''));
+      } else {
+        next();
+      }
+    };
+    
+    //force HTTPS connections
+    if (utilApp.useSsl) {
+      app.use(forceSsl);
+    }
+
     //enable gzip
     var compress = require('compression');
     app.use(compress());

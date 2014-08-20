@@ -4,7 +4,7 @@ include_once( get_template_directory() . '/lib/init.php' );
 
 //* Child theme (do not remove)
 define( 'CHILD_THEME_NAME', 'ellen' );
-define( 'CHILD_THEME_URL', 'http://www.eatmorsel.com/' );
+define( 'CHILD_THEME_URL', 'https://www.eatmorsel.com/' );
 define( 'CHILD_THEME_VERSION', '1.0' );
 
 //* Add HTML5 markup structure
@@ -33,7 +33,7 @@ if ( !is_page() ) {
 //* Customize the credits 
 add_filter('genesis_footer_creds_text', 'footer_creds_filter');
 function footer_creds_filter( $creds ) {
-    $creds = 'Copyright [footer_copyright]  &middot; <a href="http://eatmorsel.com">Morsel</a>';
+    $creds = 'Copyright [footer_copyright]  &middot; <a href="https://eatmorsel.com">Morsel</a>';
     return $creds;
 }
 

@@ -52,14 +52,14 @@
 {{> rollbar}}
 
 <!--[if IE 9]> 
-<script src="http://jpillora.com/xdomain/dist/0.6/xdomain.min.js"></script>
+<script src="//rawgit.com/jpillora/xdomain/gh-pages/dist/0.6/xdomain.min.js"></script>
 <script>
   //fix trackers
   xhook.addWithCredentials = false;
 
   xdomain.slaves({
-    "http://api-staging.eatmorsel.com": "/proxy.html",
-    "http://api.eatmorsel.com": "/proxy.html"
+    "https://api-staging.eatmorsel.com": "/proxy.html",
+    "https://api.eatmorsel.com": "/proxy.html"
   });
 </script>
 <![endif]-->

@@ -20,6 +20,7 @@ var twitterConsumerKey = process.env.TWITTER_CONSUMER_KEY || '12345';
 var twitterConsumerSecret = process.env.TWITTER_CONSUMER_SECRET || '12345';
 
 var nodeEnv = process.env.NODE_ENV || config.node_env;
+var useSsl = process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'production' || config.useSsl;
 var sessionSecret = 'THESESESSIONSARENOTSECURE';
 //rollbar account key is in server.js as it needs to load earlier
 var rollbarClientToken = process.env.ROLLBAR_CLIENT_TOKEN || config.rollbarClientToken;
@@ -129,3 +130,4 @@ module.exports.apiQuerystring = apiQuerystring;
 module.exports.defaultMetadata = metadata.default;
 module.exports.nodeEnv = nodeEnv;
 module.exports.port = port;
+module.exports.useSsl = useSsl;

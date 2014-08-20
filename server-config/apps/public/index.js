@@ -89,7 +89,7 @@ module.exports.renderMorselPage = function(req, res) {
 
           morselMetadata = {
             "title": _.escape(morsel.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
-            "image": getMetadataImage(morsel) || 'http://www.eatmorsel.com/assets/images/logos/morsel-large.png',
+            "image": getMetadataImage(morsel) || 'https://www.eatmorsel.com/assets/images/logos/morsel-large.png',
             "twitter": {
               "card" : 'summary_large_image',
               "creator": '@'+(user.twitter_username || 'eatmorsel')
@@ -149,7 +149,7 @@ module.exports.renderUserPage = function(res, userIdOrUsername) {
       userMetadata = {
         "title": _.escape(user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel'),
         "description": _.escape(user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : '')),
-        "image": userImage || "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "image": userImage || "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "twitter": {
           "creator": '@'+(user.twitter_username || 'eatmorsel')
         },
@@ -198,7 +198,7 @@ module.exports.renderPlacePage = function(res, placeIdSlug) {
       placeMetadata = {
         "title": _.escape( placeTitle+ ' Inspirations, Dishes & Drinks | Morsel'),
         "description": _.escape(placeDescription+' | Morsel'),
-        "image": "http://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "image": "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "twitter": {
           "creator": '@'+(place.twitter_username || 'eatmorsel')
         },
