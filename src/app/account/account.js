@@ -163,8 +163,6 @@ angular.module( 'Morsel.account', [
     if (topModal) {
       $modalStack.dismiss(topModal.key);
     }
-    
-    resetViewOptions();
   });
 
   //when a user accesses a new route
@@ -181,6 +179,8 @@ angular.module( 'Morsel.account', [
 
     //manually push a GA pageview
     GA.sendPageview($scope.pageData.pageTitle);
+
+    resetViewOptions();
   });
 
   //if there are internal state issues, go to 404
