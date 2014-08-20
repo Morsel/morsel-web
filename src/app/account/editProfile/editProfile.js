@@ -63,7 +63,7 @@ angular.module( 'Morsel.account.editProfile', [])
     $scope.basicInfoForm.$setValidity('loading', true);
 
     //update our scoped current user
-    Auth.updateUser(resp.data);
+    Auth.updateUserWithData(resp.data);
     $scope.alertMessage = 'Successfully updated your basic info';
     $scope.alertType = 'success';
   }

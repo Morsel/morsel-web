@@ -67,7 +67,7 @@ angular.module( 'Morsel.account.socialAccounts', [])
 
   function onSuccess(resp) {
     //update our scoped current user
-    Auth.updateUser(resp.data);
+    Auth.updateUserWithData(resp.data);
   }
 
   function onError(resp) {

@@ -89,6 +89,7 @@ angular.module( 'Morsel.public', [
 .constant('VERSIONVALUE', window.MorselConfig.version)
 .constant('MINIHEADERHEIGHT', '60')
 .constant('USER_LIST_NUMBER', 5)
+.constant('USER_UPDATE_CHECK_TIME', 5000)
 
 // Default queries
 .value('presetMediaQueries', {
@@ -146,7 +147,7 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
   var viewOptions = {
     miniHeader : false,
     fullWidthHeader : false,
@@ -168,9 +169,15 @@ angular.module( 'Morsel.public', [
   angular.element($window).bind('resize', _.debounce(onBrowserResize, 300));
 
   //initial fetching of user data for header
-  Auth.setInitialUserData().then(function(currentUser){
-    $scope.currentUser = currentUser;
+  Auth.setInitialUserData().then(gotUserData, function() {
+    console.log('Trouble initiating user...');
+  });
 
+  function gotUserData(currentUser) {
+    $scope.currentUser = currentUser;
+    $scope.isLoggedIn = Auth.isLoggedIn();
+    $scope.isStaff = Auth.isStaff();
+    
     //get and send some super properties to mixpanel
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
@@ -180,9 +187,14 @@ angular.module( 'Morsel.public', [
     Mixpanel.register({
       is_staff : Auth.isStaff()
     });
-  }, function() {
-    console.log('Trouble initiating user...');
-  });
+
+    //update user until we get their picture
+    if($scope.currentUser.photo_processing) {
+      $timeout(function() {
+        Auth.updateUser().then(gotUserData);
+      }, USER_UPDATE_CHECK_TIME);
+    }
+  }
 
   //when a user starts to access a new route
   $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){

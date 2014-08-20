@@ -225,8 +225,26 @@ angular.module( 'Morsel.common.auth', [
 
   //end logged-in methods
 
-  Auth.updateUser = function(userData) {
+  //pass data and update the user
+  Auth.updateUserWithData = function(userData) {
     Auth._updateUser(userData);
+  };
+
+  //update user with server data
+  Auth.updateUser = function() {
+    //reset our user promise
+    loadedUser = $q.defer();
+
+    ApiUsers.getMyData().then(function(loggedInUserResp) {
+      //update the app's user
+      Auth._updateUser(loggedInUserResp.data);
+      loadedUser.resolve(Auth._currentUser);
+    }, function() {
+      //oops. something went wrong, keep using the current user
+      loadedUser.resolve(Auth._currentUser);
+    });
+
+    return loadedUser.promise;
   };
 
   Auth.showApiError = function(status, errors) {

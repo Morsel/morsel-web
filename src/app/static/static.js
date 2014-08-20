@@ -27,6 +27,7 @@ angular.module( 'Morsel.static', [
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
+.constant('USER_UPDATE_CHECK_TIME', 5000)
 
 // Default queries
 .value('presetMediaQueries', {
@@ -62,7 +63,7 @@ angular.module( 'Morsel.static', [
 .run( function run ($window) {
 })
 
-.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel ) {
+.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $timeout, USER_UPDATE_CHECK_TIME ) {
   var viewOptions = {
     miniHeader : false
   };
@@ -82,7 +83,11 @@ angular.module( 'Morsel.static', [
   angular.element($window).bind('resize', _.debounce(onBrowserResize, 300));
 
   //initial fetching of user data for header
-  Auth.setInitialUserData().then(function(currentUser){
+  Auth.setInitialUserData().then(gotUserData, function() {
+    console.log('Trouble initiating user...');
+  });
+
+  function gotUserData(currentUser) {
     $scope.currentUser = currentUser;
     $scope.isLoggedIn = Auth.isLoggedIn();
     $scope.isStaff = Auth.isStaff();
@@ -96,9 +101,14 @@ angular.module( 'Morsel.static', [
     Mixpanel.register({
       is_staff : Auth.isStaff()
     });
-  }, function() {
-    console.log('Trouble initiating user...');
-  });
+
+    //update user until we get their picture
+    if($scope.currentUser.photo_processing) {
+      $timeout(function() {
+        Auth.updateUser().then(gotUserData);
+      }, USER_UPDATE_CHECK_TIME);
+    }
+  }
 
   //reset our view options
   function resetViewOptions() {

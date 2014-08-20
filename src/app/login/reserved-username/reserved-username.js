@@ -94,7 +94,7 @@ angular.module( 'Morsel.login.reservedUsername', [])
     }
 
     //update with our newly made user
-    Auth.updateUser(user);
+    Auth.updateUserWithData(user);
 
     ApiUsers.updateUser(user.id, userData).then(onUserInfoSuccess, onError);
   }
