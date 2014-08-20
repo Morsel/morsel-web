@@ -18,16 +18,15 @@ angular.module( 'Morsel.public.contact', [])
   });
 })
 
-// .controller( 'ContactCtrl', function ContactCtrl( $scope, ApiUtil, HandleErrors, $timeout, currentUser, $location ) {
-.controller( 'ContactCtrl', function ContactCtrl( ) {
+.controller( 'ContactCtrl', function ContactCtrl( $scope, ApiUtil, HandleErrors, currentUser, $location ) {
 
-  /*var queryParams = $location.search();
+  var queryParams = $location.search();
 
   $scope.contactModel = {
     'name': currentUser.first_name ? currentUser.first_name + ' ' + currentUser.last_name : '',
     'email': currentUser.email || '',
     'subject': '',
-    'message': ''
+    'description': ''
   };
 
   //if there are query params, clear them
@@ -41,17 +40,17 @@ angular.module( 'Morsel.public.contact', [])
           'name': $scope.contactModel.name,
           'email': $scope.contactModel.email,
           'subject': $scope.contactModel.subject,
-          'message': $scope.contactModel.message
+          'description': $scope.contactModel.description
         };
 
     //user is logged in, add additional user data to our message
     if(currentUser.id) {
-      contactData.message += '\n\nUserId: ' + currentUser.id;
+      contactData.description += '\n\nUserId: ' + currentUser.id;
     }
 
     //there are additional parameters (coming from the app)
     if(queryParams) {
-      contactData.message += '\n\nQuery parameters: ' + JSON.stringify(queryParams);
+      contactData.description += '\n\nQuery parameters: ' + JSON.stringify(queryParams);
     }
 
     //check if everything is valid
@@ -59,18 +58,13 @@ angular.module( 'Morsel.public.contact', [])
       //disable form while request fires
       $scope.contactForm.$setValidity('loading', false);
 
-      console.log(contactData);
-      $timeout(function(){
-        onSuccess();
-      }, 5000);
-      
-      //ApiUtil.contact(contactData).then(onSuccess, onError);
+      ApiUtil.contact(contactData).then(onSuccess, onError);
     }
   };
 
   function onSuccess(resp) {
-    //make form valid again
-    $scope.contactForm.$setValidity('loading', true);
+    //hide form
+    $scope.formSubmitted = true;
 
     //if successfully joined show message
     $scope.alertMessage = 'Thanks for contacting us! You\'ll hear from us shortly';
@@ -82,5 +76,5 @@ angular.module( 'Morsel.public.contact', [])
     $scope.contactForm.$setValidity('loading', true);
 
     HandleErrors.onError(resp.data, $scope.contactForm);
-  }*/
+  }
 });
