@@ -153,7 +153,6 @@ module.exports = {
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/ngstorage/ngStorage.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -222,7 +221,6 @@ module.exports = {
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.js',
         'vendor/ng-file-upload/angular-file-upload-shim.js',
-        'vendor/ngstorage/ngStorage.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -289,7 +287,6 @@ module.exports = {
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.js',
         'vendor/ng-file-upload/angular-file-upload-shim.js',
-        'vendor/ngstorage/ngStorage.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -324,7 +321,6 @@ module.exports = {
         'vendor/matchMedia/matchMedia.js',
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/ngstorage/ngStorage.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -382,7 +378,6 @@ module.exports = {
       'vendor/lodash/dist/lodash.js',
       'vendor/ng-file-upload/angular-file-upload.js',
       'vendor/ng-file-upload/angular-file-upload-shim.js',
-      'vendor/ngstorage/ngStorage.js',
       'vendor/restangular/dist/restangular.js'
     ],
     css: [
