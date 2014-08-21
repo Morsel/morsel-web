@@ -22,7 +22,7 @@ angular.module( 'Morsel.public.explore', [])
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, PhotoHelpers, MORSELPLACEHOLDER, $location, Auth ) {
+.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, PhotoHelpers, $location, Auth ) {
 
   //only allow admins here
   if(!Auth.isStaff()) {
@@ -56,27 +56,7 @@ angular.module( 'Morsel.public.explore', [])
       });
     };
 
-    $scope.getCoverPhotoArray = function(morsel) {
-      var primaryItemPhotos;
-
-      if(morsel.items) {
-        primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
-
-        if(primaryItemPhotos) {
-          return [
-            ['default', primaryItemPhotos._100x100],
-            ['(min-width: 321px)', primaryItemPhotos._240x240]
-          ];
-        } else {
-          return [
-            ['default', MORSELPLACEHOLDER]
-          ];
-        }
-      } else {
-        //return blank
-        return [];
-      }
-    };
+    $scope.getCoverPhotoArray = PhotoHelpers.getCoverPhotoArray;
 
     //load our morsels immediately
     $scope.getExploreFeed();
