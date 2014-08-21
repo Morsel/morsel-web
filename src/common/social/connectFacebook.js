@@ -71,7 +71,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         scope.$parent.userData.social.short_lived = true;
 
         //send to main form
-        $state.go('join.basicInfo');
+        $state.go('auth.join.basicInfo');
       }
 
       function getUserInfo() {

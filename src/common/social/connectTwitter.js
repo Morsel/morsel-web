@@ -65,7 +65,7 @@ angular.module( 'Morsel.common.connectTwitter', [] )
             scope.$parent.userData.social.short_lived = false;
 
             //send to main form
-            $state.go('join.basicInfo');
+            $state.go('auth.join.basicInfo');
           }
         }, function(resp) {
           HandleErrors.onError(resp.data, scope.form);
