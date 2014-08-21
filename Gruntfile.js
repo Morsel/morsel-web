@@ -75,6 +75,7 @@ module.exports = function ( grunt ) {
      * The directories to delete when `grunt clean` is executed.
      */
     clean: {
+      options: { force: true },
       preDev: ['<%= build_dir %>'],
       preCompile: ['<%= compile_dir %>'],
       postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css', '<%= compile_dir %>/assets/login.css', '<%= compile_dir %>/assets/static.css'],
