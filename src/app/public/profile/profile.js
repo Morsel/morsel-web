@@ -124,27 +124,7 @@ angular.module( 'Morsel.public.profile', [])
     }
   };
 
-  $scope.getCoverPhotoArray = function(morsel) {
-    var primaryItemPhotos;
-
-    if(morsel.items) {
-      primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
-
-      if(primaryItemPhotos) {
-        return [
-          ['default', primaryItemPhotos._100x100],
-          ['(min-width: 301px)', primaryItemPhotos._240x240]
-        ];
-      } else {
-        return [
-          ['default', MORSELPLACEHOLDER]
-        ];
-      }
-    } else {
-      //return blank
-      return [];
-    }
-  };
+  $scope.getCoverPhotoArray = PhotoHelpers.getCoverPhotoArray;
 
   $scope.loadLikeFeed = function() {
     if(!$scope.likeFeed) {
