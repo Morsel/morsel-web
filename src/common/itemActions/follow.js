@@ -66,11 +66,11 @@ angular.module( 'Morsel.common.follow', [] )
 
       function performToggleFollow() {
         if(scope.followType === 'place') {
-          //trying to follow a place
-          togglePlace();
+          //trying to follow a place - return the promise
+          return togglePlace();
         } else {
-          //trying to follow a user
-          toggleUser();
+          //trying to follow a user - return the promise
+          return toggleUser();
         }
       }
 
