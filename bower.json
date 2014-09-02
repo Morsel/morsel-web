@@ -23,6 +23,7 @@
     "matchMedia": "~0.2.0",
     "angular-sanitize": "~1.2.19",
     "imagesloaded": "~3.1.8",
-    "angular-bindonce": "~0.3.1"
+    "angular-bindonce": "~0.3.1",
+    "angular-scroll": "~0.6.1"
   }
 }

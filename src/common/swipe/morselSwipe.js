@@ -1,15 +1,20 @@
-angular.module('Morsel.common.morselSwipe', [])
+angular.module('Morsel.common.morselSwipe', [
+  'duScroll'
+])
 
-.directive('mrslMorselSwipe', function($window, PhotoHelpers, MORSELPLACEHOLDER) {
+.directive('mrslMorselSwipe', function($window, $document, PhotoHelpers, MORSELPLACEHOLDER) {
   var //debounce on page resize/orientation change
-      orientationChangeTime = 300;
+      orientationChangeTime = 300,
+      moreScrollTime = 500;
 
   return {
     restrict: 'A',
     scope: true,
     link: function(scope, iElement, iAttributes) {
       var onOrientationChange,
-          winEl = angular.element($window);
+          winEl = angular.element($window),
+          pageHeight,
+          $pageWrapper = angular.element(document.getElementById('page-wrapper'));
 
       scope.getCoverPhotoArray = function(morsel, previewSized) {
         var primaryItemPhotos;
@@ -86,7 +91,8 @@ angular.module('Morsel.common.morselSwipe', [])
       });
 
       function updateItemHeight() {
-        scope.layout.pageHeight = window.innerHeight+'px';
+        pageHeight = window.innerHeight;
+        scope.layout.pageHeight = pageHeight+'px';
       }
 
       //resize cover page on resize
@@ -103,6 +109,10 @@ angular.module('Morsel.common.morselSwipe', [])
         winEl.unbind('orientationchange', onOrientationChange);
         winEl.unbind('resize', onOrientationChange);
       });
+
+      scope.moreClick = function() {
+        $pageWrapper.scrollTop(pageHeight, moreScrollTime);
+      };
     }
   };
 });
