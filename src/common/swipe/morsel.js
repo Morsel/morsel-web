@@ -39,52 +39,14 @@ angular.module('Morsel.common.morsel', [])
   };
 })
 
-.directive('mrslItemDescription', function($window, Transform, MINIHEADERHEIGHT, presetMediaQueries) {
+.directive('mrslItemDescription', function() {
   return {
     restrict: 'A',
     replace: true,
     scope: {
-      item: '=mrslItemDescription',
-      nonScrollable: '@mrslNonScrollable'
+      item: '=mrslItemDescription'
     },
     link: function(scope, element) {
-      var origHeight,
-          //amount of photo to show when expanding text
-          photoGap = 30;
-
-      //don't allow scrolling or swiping on this when it's expanded
-      scope.nonScrollable = false;
-      scope.nonSwipeable = false;
-
-      scope.$on('item.expandDescription', function(e, itemId) {
-        scope.expandDescription(itemId);
-      });
-
-      scope.expandDescription = function(itemId){
-        //check for the right item in the morsel
-        if(scope.item.id === itemId) {
-          //make sure we're on a small viewport
-          if(!matchMedia(presetMediaQueries['screen-md']).matches) {
-            element[0].style[Transform.getProperty()] = 'translate3d(0, -' + ($window.innerWidth-photoGap) + 'px, 0)';
-            element[0].style.height = ($window.innerHeight - MINIHEADERHEIGHT - photoGap) + 'px';
-
-            //scope.nonScrollable = true;
-            //scope.nonSwipeable = true;
-
-            scope.$emit('item.toggleDescriptionOpen', true);
-          }
-        }
-      };
-
-      scope.closeDescription = function(){
-        element[0].style[Transform.getProperty()] = 'translate3d(0, 0, 0)';
-
-        scope.nonScrollable = false;
-        scope.nonSwipeable = false;
-
-        scope.$emit('item.toggleDescriptionOpen', false);
-      };
-
       scope.formatDescription = function() {
         if(scope.item && scope.item.description) {
           return scope.item.description.replace(/(\r\n|\n|\r)/g,"<br />");
@@ -93,6 +55,6 @@ angular.module('Morsel.common.morsel', [])
         }
       };
     },
-    template: '<div class="item-description"><button type="button" class="close" ng-click="closeDescription()">&times;</button><hr/><p ng-click="expandDescription(item.id)" ng-bind-html="formatDescription()"></p></div>'
+    template: '<div class="item-description"><p ng-bind-html="formatDescription()"></p></div>'
   };
 });

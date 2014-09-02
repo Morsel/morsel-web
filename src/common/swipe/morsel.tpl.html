@@ -1,28 +1,26 @@
-<div ng-class="{'in-morsel': feedState.inMorsel, 'on-share': feedState.onShare}">
+<div>
   <div ng-if="!morsel" class="loader morsel-loader"></div>
-  <div ng-if="morsel" ng-class="{'current-morsel': $index ? currentMorselIndex === $index : true}">
-    <div bindonce="morsel" mrsl-morsel-swipe="{{morsel.items.length > 0}}" mrsl-morsel-swipe-count="{{morsel.items.length}}" ng-style="{'height': layout.feedHeight}" ng-class="{'item-description-open': layout.descriptionOpen}">
-      <div mrsl-morsel-controls index="currentIndicatorIndex" count="morsel.items.length"></div>
+  <div ng-if="morsel">
+    <div bindonce="morsel" mrsl-morsel-swipe>
       <div class="morsel-title">
         <div class="morsel-container">
           <h1 bo-bind="morsel.title"></h1>
         </div>
       </div>
-      <div mrsl-item-indicators mrsl-index="currentIndicatorIndex" mrsl-count="itemCount"></div>
       <ul class="items">
-        <li class="cover-page extra-page" ng-style="{'height': layout.feedHeight}">
+        <li class="cover-page extra-page" ng-style="{'height': layout.pageHeight}">
           <div class="morsel-container">
             <div class="cover-jumbo">
               <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
               <span bo-if="morsel.draft" class="banner banner-draft">Draft</span>
-              <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(morsel, true)}}" ng-style="{'height': layout.coverPhotoHeight}"></div>
-              <div class="cover-title-wrap" ng-style="{'height': layout.coverTitleHeight}">
+              <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(morsel, true)}}" ng-style="{'height': layout.pageHeight}"></div>
+              <div class="cover-title-wrap">
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>
               </div>
               <div class="cover-bg"></div>
             </div>
             <div class="cover-jumbo-info">
-              <div class="cover-info col-xs-6 col-md-12" ng-style="{'min-height': layout.coverBlockMinHeight}">
+              <div class="cover-info" ng-style="{'min-height': layout.pageHeight}">
                 <div class="user-info">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
                   <h5 class="h2 overflow-ellipsis">
@@ -35,50 +33,32 @@
                 </div>
                 <span am-time-ago="morsel.published_at" class="time-ago"></span>
               </div>
-              <div class="cover-more col-xs-6 col-md-12" ng-style="{'min-height': layout.coverBlockMinHeight}">
-                <a class="cover-more-btn" ng-click="currentIndicatorIndex = 1">More</a>
-                <div class="cover-more-bg" mrsl-responsive-images="{{getItemPhotoArray(morsel.items[0])}}" mrsl-ri-image-type="background"></div>
-              </div>
             </div>
           </div>
         </li>
-        <li bindonce ng-repeat="item in morsel.items" class="item" ng-style="{'height': layout.feedHeight}">
+        <li bindonce ng-repeat="item in morsel.items" class="item">
           <div class="morsel-container loader">
-            <div class="item-photo-wrap" ng-style="{'max-height': layout.itemPhotoHeight}">
-              <span class="item-info-btn" ng-click="expandDescription(item.id)" non-swipeable><i class="common-info" non-swipeable></i></span>
-              <img ng-if="hasEnteredMorsel && (currentItemIndex >= $index)" class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
-            </div>
-            <div class="item-info">
-              <div class="item-info-bottom">
-                <hr />
-                <div class="user-info">
-                  <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
-                  <h5 class="h2 overflow-ellipsis">
-                    <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
-                  </h5>
-                </div>
-                <div ng-if="!morsel.draft" mrsl-item-action-bar mrsl-item="item" mrsl-index="$parent.currentIndicatorIndex" mrsl-items="morsel.items"></div>
+            <div mrsl-item-description="item"></div>
+            <div class="item-wrap">
+              <div class="item-photo-wrap">
+                <img class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
+                <div ng-if="!morsel.draft" mrsl-item-action-bar mrsl-item="item" mrsl-items="morsel.items"></div>
               </div>
-              <div mrsl-item-description="item" ng-style="{'max-height': layout.textDescriptionHeight}"></div>
-              <div ng-if="!morsel.draft" mrsl-social-sharing="morsel"></div>
             </div>
           </div>
         </li>
-        <li class="share-page extra-page" ng-style="{'height': layout.feedHeight}">
-          <div class="morsel-container">
-            <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background"></div>
-            <div class="cover-title-wrap">
-              <h2 class="cover-title" bo-bind="morsel.title"></h2>
-            </div>
-            <h5 ng-if="!morsel.draft" class="share-this-morsel h2">Share this morsel:</h5>
-            <div ng-if="!morsel.draft" mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
+        <li class="share-page extra-page" ng-if="!morsel.draft">
+          <div>
             <hr />
-            <div class="user-info">
+            <h5 class="share-this-morsel h2">Share this morsel:</h5>
+            <div mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
+            <hr />
+            <div>
               <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
               <h4 class="h3">
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
               </h4>
-              <p bo-bind="morsel.creator.bio"></p>
+              <p class="user-bio" ng-if="morsel.creator.bio" bo-bind="morsel.creator.bio"></p>
             </div>
           </div>
         </li>
