@@ -96,7 +96,6 @@ module.exports = {
         'src/common/places/placeList.js',
         'src/common/swipe/feedSwipe.js',
         'src/common/swipe/morsel.js',
-        'src/common/swipe/morselSwipe.js',
         'src/common/text/textLimit.js',
         'src/common/text/truncate.js',
         'src/common/user/activityFeed.js',

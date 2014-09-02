@@ -1,43 +1,9 @@
-$morsel-header-padding: 10px;
-$morsel-header-lg-line-height: 40px;
-$item-actions-width: 90px;
-
 .morsel {
   position: relative;
   white-space: normal;
-  vertical-align: top;
-  display: inline-block;
   width: 100%;
   height: 100%;
-  @include backface-visibility(hidden);
-
-  &:last-child:after {
-    @include replace-text-with-dimensions('icons/loader-030000.gif');
-    display: block;
-    content: ' ';
-    position: absolute;
-    right: -40px;
-    top: 50%;
-  }
-
-  .morsel-title {
-    position: fixed;
-    top: 0;
-    z-index: 2;
-    text-align: center;
-    padding: $morsel-header-padding;
-    @include transition(all .2s ease-out);
-    @include translate(0,-$mini-header-height);
-    width: 100%;
-
-    h1 {
-      width: 50%;
-      font-size: 14px;
-      margin: 0 auto;
-      color: $morsel-dark;
-      text-transform: none;
-    }
-  }
+  background-color: $morsel-light-off;
 
   .morsel-loader {
     height: 250px;
@@ -45,10 +11,9 @@ $item-actions-width: 90px;
   }
 
   .morsel-container {
-    height: 100%;
     position: relative;
     margin: 0 auto;
-    overflow: hidden;
+    height: 100%;
   }
 
   .cover-page {
@@ -63,31 +28,6 @@ $item-actions-width: 90px;
       z-index: 2;
     }
 
-    .cover-info {
-      padding: 25px 5px 0;
-      text-align: center;
-
-      .time-ago {
-        position: absolute;
-        left: 5px;
-        top: 3px;
-      }
-
-      .profile-pic-link {
-        float: none;
-      }
-    }
-
-
-    .cover-more-btn {
-      display: block;
-      @include replace-text-with-dimensions('graphics/more.png');
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      z-index: 6;
-    }
-
     .cover-jumbo-info {
       position: absolute;
       bottom: 0;
@@ -98,9 +38,7 @@ $item-actions-width: 90px;
     }
 
     .cover-info {
-      height: auto;
-      padding-top: 0;
-      min-height: initial !important;
+      text-align: center;
 
       h5 {
         font-size: 22px;
@@ -124,11 +62,8 @@ $item-actions-width: 90px;
       }
 
       .time-ago {
-        position: relative;
         color: white;
         @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-        top: auto;
-        left: auto;
       }
     }
   }
@@ -160,10 +95,13 @@ $item-actions-width: 90px;
         display: block;
       }
     }
+
+    .profile-pic-link {
+      float: none;
+    }
   }
 
   .extra-page {
-    background-color: $morsel-light-off;
     position: relative;
     overflow: hidden;
 
@@ -219,6 +157,10 @@ $item-actions-width: 90px;
       margin-top: 15px;
       margin-bottom: 15px;
     }
+
+    .user-bio {
+      padding: 0 10px;
+    }
   }
 
   .items {
@@ -228,7 +170,6 @@ $item-actions-width: 90px;
     .item {
       display: block;
       position: relative;
-      background-color: $morsel-light-off;
 
       .item-wrap {
         text-align: center;
@@ -244,34 +185,13 @@ $item-actions-width: 90px;
       }
       
       .item-description {
-        z-index: 2;
-        background-color: $morsel-light-off;
-        @include transition(all .2s ease-out);
-        width: 100%;
-        height: 100%;
-        clear: both;
         font-size: 16px;
-
-        hr {
-          margin: 0;
-        }
 
         p {
           padding: 25px 10px;
-          width: 100%;
-          z-index: 3;
           margin: 0;
-          height: 100%;
           font-size: 16px;
           line-height: 20px;
-        }
-
-        .close {
-          position: absolute;
-          top: 0px;
-          right: 10px;
-          display: none;
-          padding: 10px;
         }
       }
 
@@ -310,40 +230,6 @@ $item-actions-width: 90px;
             cursor: pointer;
           }
         }
-      }
-    }
-  }
-
-  .item-indicators {
-    position: absolute;
-    right: 8px;
-    top: $mini-header-height + 15px;
-    z-index: 8;
-  
-    span {
-      width: $indicator-size;
-      height: $indicator-size;
-      background-color: $morsel-dark;
-      border: 1px solid $morsel-light;
-      border-radius: 50%;
-      margin: 2px 0;
-      display: block;
-      @include transition(background-color .2s ease-out);
-
-      &:hover, &:focus {
-        cursor: pointer;
-      }
-
-      &.active {
-        background-color: $morsel-primary;
-      }
-    }
-  }
-
-  .in-morsel {
-    .current-morsel {
-      .morsel-title {
-        @include translate(0,0);
       }
     }
   }
@@ -413,16 +299,10 @@ $item-actions-width: 90px;
       .item {
         .item-description {
           margin: 0 auto;
-          padding-bottom: 0;
           width: 50%;
-
-          hr {
-            display: none;
-          }
 
           p {
             color: $morsel-dark;
-            overflow-y: auto;
             font-size: 22px;
             line-height: 26px;
             padding-top: 35px;
@@ -449,27 +329,16 @@ $item-actions-width: 90px;
 
 @media (min-width: $screen-md-min) {
   .morsel {
-    .morsel-title {
-      h1 {
-        font-size: 22px;
-        color: white;
-      }
-    }
-
     .morsel-container {
       width: $screen-md-min;
     }
 
     .cover-page {
-      padding-top:0;
+      padding-top: 0;
 
       .morsel-container {
         width: 100%;
         margin: 0;
-      }
-
-      .cover-more {
-        display: none;
       }
     }
 
@@ -499,12 +368,6 @@ $item-actions-width: 90px;
     }
     
     .extra-page {
-      background-image: url(images/bg/morsel-detail-noise.png);
-
-      .morsel-container {
-        padding-bottom: 3%;
-      }
-
       .cover-title-wrap {
         h2 {
           font-size: 40px;
@@ -527,26 +390,6 @@ $item-actions-width: 90px;
       .user-bio {
         width: 50%;
         margin: 0 auto;
-      }
-    }
-
-    .in-morsel {
-      .current-morsel {
-        .morsel-title {
-          h2 {
-            font-size: 24px;
-            line-height: $morsel-header-lg-line-height;
-          }
-        }
-      }
-
-      .morsel-control-up {
-        @include opacity(0);
-        @include transition(opacity .1s ease-out);
-
-        &:hover {
-          @include opacity(1);
-        }
       }
     }
 

@@ -1,26 +1,21 @@
-<div>
+<div class="morsel">
   <div ng-if="!morsel" class="loader morsel-loader"></div>
   <div ng-if="morsel">
-    <div bindonce="morsel" mrsl-morsel-swipe>
-      <div class="morsel-title">
-        <div class="morsel-container">
-          <h1 bo-bind="morsel.title"></h1>
-        </div>
-      </div>
+    <div bindonce="morsel">
       <ul class="items">
         <li class="cover-page extra-page" ng-style="{'height': layout.pageHeight}">
           <div class="morsel-container">
             <div class="cover-jumbo">
               <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
               <span bo-if="morsel.draft" class="banner banner-draft">Draft</span>
-              <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(morsel, true)}}" ng-style="{'height': layout.pageHeight}"></div>
+              <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(true)}}" ng-style="{'height': layout.pageHeight}"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>
               </div>
               <div class="cover-bg"></div>
             </div>
             <div class="cover-jumbo-info">
-              <div class="cover-info" ng-style="{'min-height': layout.pageHeight}">
+              <div class="cover-info">
                 <div class="user-info">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
                   <h5 class="h2 overflow-ellipsis">
@@ -51,18 +46,16 @@
           </div>
         </li>
         <li class="share-page extra-page" ng-if="!morsel.draft">
+          <hr />
+          <h5 class="share-this-morsel h2">Share this morsel:</h5>
+          <div mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
+          <hr />
           <div>
-            <hr />
-            <h5 class="share-this-morsel h2">Share this morsel:</h5>
-            <div mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
-            <hr />
-            <div>
-              <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
-              <h4 class="h3">
-                <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
-              </h4>
-              <p class="user-bio" ng-if="morsel.creator.bio" bo-bind="morsel.creator.bio"></p>
-            </div>
+            <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
+            <h4 class="h3">
+              <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
+            </h4>
+            <p class="user-bio" ng-if="morsel.creator.bio" bo-bind="morsel.creator.bio"></p>
           </div>
         </li>
       </ul>

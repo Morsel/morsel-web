@@ -1,6 +1,7 @@
 angular.module( 'Morsel.public', [
   //libs
   'angularMoment',
+  'duScroll',
   'ngSanitize',
   'pasvaz.bindonce',
   'restangular',
@@ -44,7 +45,6 @@ angular.module( 'Morsel.public', [
   'Morsel.common.likeableFeed',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
-  'Morsel.common.morselSwipe',
   'Morsel.common.photoHelpers',
   'Morsel.common.placeList',
   'Morsel.common.responsiveImages',
