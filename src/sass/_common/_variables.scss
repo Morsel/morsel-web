@@ -61,11 +61,15 @@ $link-hover-color: $morsel-primary;
 $morsel-static-header: white;
 
 //images
+$morselPlaceholder480: '/assets/images/utility/placeholders/morsel-placeholder_480x480.jpg';
+$morselPlaceholder640: '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg';
+
 //morsels
 $arrow-height: 60px;
 $indicator-size: 10px;
 //this is really just based on not wanting to load larger images than this
 $max-grid-morsel-width: 240px;
+$max-grid-big-morsel-width: 320px;
 
 //users
 $profile-bic-border-width: 2px;

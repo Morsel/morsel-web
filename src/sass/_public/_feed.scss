@@ -2,28 +2,12 @@ $feed-notification-width: 90px;
 
 .feed {
   background-color: $morsel-background-dark;
-
-  &.feed-data-loading {
-    background: url(images/icons/loader.gif) center center no-repeat;
-    min-height: 300px;
-  }
-
-  &.reached-oldest .morsel:last-child:after {
-    display: none;
-  }
-
-  .morsels-wrap {
-    width: 100%;
-  }
-
-  .morsels {
-    list-style: none;
-    position: relative;
-    @include translate(0,0);
-    white-space: nowrap;
-    overflow: visible;
-    padding: 0;
-    margin: 0;
+  background-image: url(images/bg/morsel-detail-noise.png);
+  padding-bottom: 10px;
+  
+  .feed-container {
+    margin: 0 auto;
+    background-color: white;
   }
 
   .feed-notification {
@@ -54,42 +38,20 @@ $feed-notification-width: 90px;
       left: -$feed-notification-width;
     }
   }
-
-  .feed-control-prev {
-    left: 0;
-    @include rotate(90deg);
-  }
-
-  .feed-control-next {
-    right: 0;
-    @include rotate(-90deg);
-  }
-
-  &.on-share {
-    .feed-control {
-      display: block;
-      bottom: 20px;
-    }
-  }
 }
 
 @media (min-width: $screen-md-min) {
   .feed {
-    .feed-control {
-      display: block;
-      top: 40%;
-      bottom: auto;
+    .feed-container {
+      width: $screen-md-min;
     }
+  }
+}
 
-    &.on-share {
-      .feed-control {
-        top: 40%;
-        bottom: auto;
-      }
-    }
-
-    &.feed-data-loading {
-      min-height: 450px;
+@media (min-width: $max-grid-big-morsel-width*3) {
+  .feed {
+    .feed-container {
+      width: $max-grid-big-morsel-width*3;
     }
   }
 }

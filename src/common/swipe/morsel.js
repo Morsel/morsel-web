@@ -17,22 +17,6 @@ angular.module('Morsel.common.morsel', [])
           pageHeight,
           $pageWrapper = angular.element(document.getElementById('page-wrapper'));
 
-      //scope vars for individual morsel
-      scope.feedState = {
-        inMorsel : false,
-        onShare : false
-      };
-
-      scope.$on('feed.updateState', function(e, feedState){
-        _.extend(scope.feedState, feedState);
-        _.defer(function(){scope.$apply();});
-      });
-
-      scope.$on('item.updateState', function(e, feedState){
-        _.extend(scope.feedState, feedState);
-        _.defer(function(){scope.$apply();});
-      });
-
       //hold all our computed layout measurements
       scope.layout = {};
       updateItemHeight();

@@ -21,9 +21,41 @@
   }
 
   .centered-white {
-    div {
+    .centered-title-wrap {
       background-color: rgba(0,0,0,0);
       @include transition(background-color .1s ease-out);
+    }
+  }
+
+  .user-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    @include text-shadow(rgba(0, 0, 0, 1) 0px 2px 6px);
+    color: white;
+    z-index: 3;
+
+    span {
+      margin: 0 0 5px;
+      width: 100%;
+    }
+
+    .grid-morsel-creator {
+      font-size: 16px;
+      font-weight: 400;
+      color: white;
+    }
+
+    .grid-morsel-place {
+      font-size: 14px;
+      line-height: 20px;
+      margin: 0;
+      font-weight: 400;
+      color: white;
+      width: 100%;
     }
   }
 
@@ -32,6 +64,24 @@
     line-height: 16px;
     padding: 0 5px;
     text-transform: none;
+  }
+
+  &.morsel-grid-big {
+    li {
+      width: 100%;
+      max-width: $max-grid-big-morsel-width;
+    }
+  }
+}
+
+@media (min-width: $max-grid-big-morsel-width) {
+  .morsel-grid {
+    &.morsel-grid-big {
+      li {
+        width: percentage(1/2);
+        max-width: $max-grid-big-morsel-width;
+      }
+    }
   }
 }
 
@@ -51,7 +101,7 @@
       
       a {
         &:hover {
-          div {
+          .centered-title-wrap {
             background-color: rgba(0,0,0,.2);
           }
         }
@@ -64,6 +114,16 @@
   .morsel-grid {
     li {
       width: percentage(1/4);
+    }
+  }
+}
+
+@media (min-width: $max-grid-big-morsel-width*2) {
+  .morsel-grid {
+    &.morsel-grid-big {
+      li {
+        width: percentage(1/3);
+      }
     }
   }
 }

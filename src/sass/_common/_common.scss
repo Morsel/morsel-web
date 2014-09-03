@@ -233,7 +233,7 @@ form {
 .centered-white {
   font-family: $font-family-secondary;
   
-  div {
+  .centered-title-wrap {
     position: absolute;
     top: 0;
     left: 0;
@@ -250,7 +250,7 @@ form {
     }
   }
 
-  span {
+  .morsel-grid-title {
     display: inline-block;
     vertical-align: middle;
     width: 100%;

@@ -1,0 +1,14 @@
+<a bindonce="morsel" class="centered-white">
+  <div class="centered-title-wrap">
+    <span class="morsel-grid-title">{{morsel.title}}</span>
+  </div>
+  <img mrsl-responsive-images="{{getCoverPhotoArray()}}" />
+  <div class="user-info">
+    <div mrsl-user-image mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-xs" mrsl-no-link="true"></div>
+    <h3 class="grid-morsel-creator" bo-text="morsel.creator.first_name+' '+morsel.creator.last_name"></h3>
+    <h6 class="grid-morsel-place h3 overflow-ellipsis" bo-if="morsel.place">
+      <span bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></span>
+      <span bo-text="' - '+(morsel.place.city ? morsel.place.city+', ':'')+morsel.place.state"></span>
+    </h6>
+  </div>
+</a>

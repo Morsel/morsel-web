@@ -12,7 +12,6 @@
     "angular": "~1.2.19",
     "angular-moment": "~0.6.0",
     "angular-swipe": "git@github.com:marmorkuchen-net/angular-swipe.git",
-    "angular-touch": "~1.2.10",
     "angular-ui-utils": "~0.0.3",
     "animationFrame": "~0.1.6",
     "ng-file-upload": "~1.2.7",
