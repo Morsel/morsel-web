@@ -44,13 +44,10 @@ angular.module( 'Morsel.public.morselDetail', [])
   });
 })
 
-.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $window, currentUser, theMorsel, $state, landscapeAlert ) {
+.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $window, currentUser, theMorsel, $state ) {
   $scope.morsel = theMorsel;
   //update page title
   $scope.pageData.pageTitle = $scope.morsel.title+' - '+$scope.morsel.creator.first_name+' '+$scope.morsel.creator.last_name+' | Morsel';
-
-  //these pages should be viewed in portrait
-  landscapeAlert();
 
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.fullWidthHeader = true;
