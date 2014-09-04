@@ -5,7 +5,7 @@
   <div class="feed-container container-shadow">
     <ul class="clearfix morsel-grid morsel-grid-big">
       <li ng-repeat="feedItem in feedItems">
-        <div mrsl-morsel-summary="feedItem.subject"></div>
+        <div mrsl-morsel-summary="feedItem.subject" mrsl-feed-item-id="feedItem.id"></div>
       </li>
     </ul>
     <div ng-if="!feedItems" class="loader"></div>

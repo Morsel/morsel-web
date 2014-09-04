@@ -3,7 +3,7 @@ angular.module( 'Morsel.public.morselDetail', [])
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'morselDetail', {
     //make sure our "username" isn't "users"
-    url: '/:username/{morselDetails:.*}',
+    url: '/:username/{morselDetails:.*}?source&feedId',
     views: {
       "main": {
         controller: 'MorselDetailCtrl',
@@ -44,11 +44,55 @@ angular.module( 'Morsel.public.morselDetail', [])
   });
 })
 
-.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, $location, $window, currentUser, theMorsel, $state ) {
+.controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, ApiFeed, $location, $window, currentUser, theMorsel ) {
   $scope.morsel = theMorsel;
   //update page title
   $scope.pageData.pageTitle = $scope.morsel.title+' - '+$scope.morsel.creator.first_name+' '+$scope.morsel.creator.last_name+' | Morsel';
 
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.fullWidthHeader = true;
+
+  //check if we came from the feed and should display prev/next links
+  if($stateParams.source === 'feed' && $stateParams.feedId) {
+    var prevFeedParams = {
+          count: 1,
+          since_id: $stateParams.feedId
+        },
+        nextFeedParams = {
+          count: 1,
+          max_id: parseInt($stateParams.feedId, 10) - 1
+        };
+
+    //find the previous feedItem in the feed
+    ApiFeed.getFeed(prevFeedParams).then(function(feedResp){
+      var feedData = feedResp.data,
+          prevItem = feedData[0];
+
+      if(prevItem && prevItem.subject_type==='Morsel' && prevItem.subject) {
+        $scope.morsel.prevFeedItem = prevItem;
+      }
+    }, function(resp){
+      if(resp.data && resp.data.errors && resp.data.errors.api) {
+        //resp returned an api issue
+        //report and error back to user
+        Auth.showApiError(resp.status, resp.data.errors);
+      }
+    });
+
+    //find the next feedItem in the feed
+    ApiFeed.getFeed(nextFeedParams).then(function(feedResp){
+      var feedData = feedResp.data,
+          nextItem = feedData[0];
+
+      if(nextItem && nextItem.subject_type==='Morsel' && nextItem.subject) {
+        $scope.morsel.nextFeedItem = nextItem;
+      }
+    }, function(resp){
+      if(resp.data && resp.data.errors && resp.data.errors.api) {
+        //resp returned an api issue
+        //report and error back to user
+        Auth.showApiError(resp.status, resp.data.errors);
+      }
+    });
+  }
 });

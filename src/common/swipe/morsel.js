@@ -137,4 +137,20 @@ angular.module('Morsel.common.morsel', [])
     },
     template: '<div class="item-description"><p ng-bind-html="formatDescription()"></p></div>'
   };
+})
+
+.directive('mrslFeedNav', function(PhotoHelpers) {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      feedItem: '=mrslFeedNav',
+      navDirection: '@mrslFeedNavDirection'
+    },
+    link: function(scope, element) {
+      scope.nextNavigation = scope.navDirection === 'next';
+      scope.getCoverPhotoArray = PhotoHelpers.getCoverPhotoArray;
+    },
+    templateUrl: 'common/swipe/morselFeedNav.tpl.html'
+  };
 });

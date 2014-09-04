@@ -49,13 +49,21 @@
           <hr />
           <h5 class="share-this-morsel h2">Share this morsel:</h5>
           <div mrsl-social-sharing="morsel" mrsl-social-full="true"></div>
-          <hr />
           <div>
             <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
             <h4 class="h3">
               <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
             </h4>
             <p class="user-bio" ng-if="morsel.creator.bio" bo-bind="morsel.creator.bio"></p>
+          </div>
+          <hr />
+          <div class="row" ng-if="morsel.prevFeedItem || morsel.nextFeedItem">
+            <div class="col-xs-6 col-md-4">
+              <a mrsl-feed-nav="morsel.prevFeedItem" mrsl-feed-nav-direction="prev" ng-if="morsel.prevFeedItem" class="morsel-nav morsel-prev"></a>
+            </div>
+            <div class="col-xs-6 col-md-4 col-md-offset-4">
+              <a mrsl-feed-nav="morsel.nextFeedItem" mrsl-feed-nav-direction="next" ng-if="morsel.nextFeedItem" class="morsel-nav morsel-next"></a>
+            </div>
           </div>
         </li>
       </ul>

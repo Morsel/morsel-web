@@ -24,7 +24,7 @@ angular.module( 'Morsel.common.photoHelpers', [])
     getCoverPhotoArray : function(morsel) {
       var primaryItemPhotos;
 
-      if(morsel.items) {
+      if(morsel && morsel.items) {
         primaryItemPhotos = photoHelpers.findPrimaryItemPhotos(morsel);
 
         if(primaryItemPhotos) {

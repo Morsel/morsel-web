@@ -5,7 +5,8 @@ angular.module('Morsel.common.morselSummary', [])
     restrict: 'A',
     replace: true,
     scope: {
-      morsel: '=mrslMorselSummary'
+      morsel: '=mrslMorselSummary',
+      morselFeedItemId: '=mrslFeedItemId'
     },
     link: function(scope) {
       scope.getCoverPhotoArray = function(previewSized) {

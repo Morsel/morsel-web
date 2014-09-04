@@ -124,6 +124,7 @@ module.exports = {
         'src/common/swipe/itemThumbnails.tpl.html',
         'src/common/swipe/morsel.tpl.html',
         'src/common/swipe/morselSummary.tpl.html',
+        'src/common/swipe/morselFeedNav.tpl.html',
         'src/common/text/textLimit.tpl.html',
         'src/common/text/textOverlay.tpl.html',
         'src/common/user/activityFeed.tpl.html',
