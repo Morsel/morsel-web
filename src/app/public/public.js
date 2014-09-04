@@ -148,10 +148,11 @@ angular.module( 'Morsel.public', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
   var viewOptions = {
-    miniHeader : false,
-    fullWidthHeader : false,
-    hideLogo: false
-  };
+        miniHeader : false,
+        fullWidthHeader : false,
+        hideLogo: false
+      },
+      $pageWrapper = angular.element(document.getElementById('page-wrapper'));
 
   //to store things like page title
   $scope.pageData = {
@@ -236,6 +237,8 @@ angular.module( 'Morsel.public', [
     }
 
     resetViewOptions();
+
+    $pageWrapper.scrollTop(0, 0);
   });
 
   //if there are internal state issues, go to 404
