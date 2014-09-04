@@ -93,6 +93,38 @@ img {
   .user-body {
     overflow: hidden;
   }
+
+  &.user-info-stacked {
+    h5 {
+      font-size: 22px;
+      line-height: 30px;
+      margin: 5px auto 0;
+
+      a {
+        color: $morsel-primary;
+        text-transform: none;
+      }
+    }
+
+    h6 {
+      margin: 5px auto 0;
+      line-height: 20px;
+
+      a {
+        font-size: 16px;
+        text-transform: none;
+        color: $morsel-primary;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    .profile-pic-link {
+      float: none;
+    }
+  }
 }
 
 .caption {
@@ -453,6 +485,15 @@ form {
     @include container-shadow();
     @include border-bottom-left-radius(5px);
     @include border-bottom-right-radius(5px);
+  }
+}
+
+@media (max-width: $screen-md) {
+  .user-fino-stacked {
+    .profile-pic-link {
+      width: $profile-pic-xs;
+      height: $profile-pic-xs;
+    }
   }
 }
 

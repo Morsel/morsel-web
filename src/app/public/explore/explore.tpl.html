@@ -2,7 +2,7 @@
   <ul class="clearfix morsel-grid">
     <li ng-repeat="feedItem in feedItems">
       <a ng-click="goTo(feedItem.subject.creator.username.toLowerCase()+'/'+feedItem.subject.id+'-'+feedItem.subject.slug)" class="centered-white">
-        <div>
+        <div class="centered-title-wrap">
           <span class="morsel-grid-title">{{feedItem.subject.title}}</span>
         </div>
         <img mrsl-responsive-images="{{getCoverPhotoArray(feedItem.subject)}}" />

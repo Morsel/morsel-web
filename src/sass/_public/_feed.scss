@@ -4,11 +4,6 @@ $feed-notification-width: 90px;
   background-color: $morsel-background-dark;
   background-image: url(images/bg/morsel-detail-noise.png);
   padding-bottom: 10px;
-  
-  .feed-container {
-    margin: 0 auto;
-    background-color: white;
-  }
 
   .feed-notification {
     position: absolute;
@@ -42,16 +37,5 @@ $feed-notification-width: 90px;
 
 @media (min-width: $screen-md-min) {
   .feed {
-    .feed-container {
-      width: $screen-md-min;
-    }
-  }
-}
-
-@media (min-width: $max-grid-big-morsel-width*3) {
-  .feed {
-    .feed-container {
-      width: $max-grid-big-morsel-width*3;
-    }
   }
 }
