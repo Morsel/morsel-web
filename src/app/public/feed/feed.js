@@ -19,106 +19,59 @@ angular.module( 'Morsel.public.feed', [])
   });
 })
 
-.controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed, $interval, Auth, landscapeAlert ) {
-  var feedFetchCount = 5, //the number of feed items to fetch at a time from the server
+.controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed, $interval, Auth ) {
+  var feedFetchCount = 9, //the number of feed items to fetch at a time from the server
       totalFetchCount = 0, //the total number of feed items that have been fetched from the server
-      oldestId, //the id of the oldest morsel fetched from the server
-      fetchThreshold = 2, //how many feed items away from the last one we have data for before we fetch more
       oldestDisplayFeedItemIndex, //keeping track of the index on the right that is rendered
       newFeedItems = [], //hold any feed item data that comes back from the server after the initial load
-      newFeedItemCheckTime = 180000, //milliseconds to wait between checks of new feed items from server
-      hittingServer = false; //track whether we are currently performing a request to the API
+      newFeedItemCheckTime = 180000; //milliseconds to wait between checks of new feed items from server
 
-  $scope.feedItems = []; //our feed item array
-  $scope.reachedOldest = false; //whether or not we've gotten to the end of the data
+  $scope.feedItemIncrement = feedFetchCount; //expose for View More
   $scope.newFeedItemCount = 0; //how many feed items are newer than what's been loaded so far
-  $scope.initialDataLoading = true; //for loading visuals
 
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.fullWidthHeader = true;
-
-  //feed should be viewed in portrait
-  landscapeAlert();
-
-  //scope vars for individual morsel
-  $scope.feedState = {
-    inMorsel : false,
-    onShare : false
-  };
-
-  $scope.$on('feed.updateState', function(e, feedState){
-    _.extend($scope.feedState, feedState);
-    _.defer(function(){$scope.$apply();});
-  });
-
-  //get our initial feed items
-  grabOldFeed();
-
-  //every newFeedItemCheckTime seconds, check for new feed items
-  $interval(function(){
-    grabNewFeed();
-  }, newFeedItemCheckTime);
-
-  //when user moves to a new feed item
-  $scope.$on('feed.atMorsel', function(e, morselIndex){
-    if(totalFetchCount !== 0) {
-      //make sure we've fetched data already before we start trying to get more
-
-      if(totalFetchCount - (morselIndex + 1) <= fetchThreshold) {
-        //we're within fetchThreshold feed items of the end of the data
-        grabOldFeed();
-      }
-    }
-  });
-
-  function grabOldFeed() {
+  $scope.grabOldFeed = function(max_id) {
     var feedParams = {
       count: feedFetchCount
     };
 
-    //if we've already gotten the oldest items or we're still processing a previous API request, don't keep pinging the API
-    if($scope.reachedOldest || hittingServer) {
-      return;
+    if(max_id) {
+      feedParams.max_id = parseInt(max_id, 10) - 1;
     }
-
-    if(oldestId) {
-      feedParams.max_id = oldestId -1;
-    }
-
-    hittingServer = true;
 
     ApiFeed.getFeed(feedParams).then(function(feedResp){
-      if(feedResp.data && feedResp.data.length > 0) {
-        $scope.initialDataLoading = false;
+      var feedData = feedResp.data;
 
-        _.each(feedResp.data, function(f) {
-          //only allow morsels for now
-          if(f.subject_type==='Morsel') {
-            //persist the featured data to the morsel level so it's available within the morsel directive
-            f.subject.featured = f.featured;
-            $scope.feedItems.push(f);
-            totalFetchCount++;
-          }
-        });
+      _.each(feedData, function(f) {
+        //only allow morsels for now
+        if(f.subject_type==='Morsel' && f.subject) {
+          //persist the featured data to the morsel level so it's available within the morsel directive
+          f.subject.featured = f.featured;
+          totalFetchCount++;
+        }
+      });
 
-        //the oldest id we have fetched from the server so far
-        oldestId = _.last(feedResp.data)['id'];
+      if($scope.feedItems) {
+        $scope.feedItems = $scope.feedItems.concat(feedData);
       } else {
-        //there are no more feed items to get, we've gone all the way back
-        $scope.reachedOldest = true;
+        $scope.feedItems = feedData;
       }
 
-      hittingServer = false;
     }, function(resp){
       if(resp.data && resp.data.errors && resp.data.errors.api) {
         //resp returned an api issue
         //report and error back to user
         Auth.showApiError(resp.status, resp.data.errors);
       }
-
-      hittingServer = false;
     });
-  }
+  };
+
+  //get our initial feed items
+  $scope.grabOldFeed();
+
+  //every newFeedItemCheckTime seconds, check for new feed items
+  $interval(function(){
+    grabNewFeed();
+  }, newFeedItemCheckTime);
 
   function grabNewFeed() {
     var feedParams = {},

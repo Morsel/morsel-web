@@ -1,0 +1,22 @@
+<div bindonce="morsel" class="morsel-summary">
+  <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+'?source=feed&feedId='+morselFeedItemId" class="centered centered-white">
+    <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
+    <div class="centered-wrap">
+      <h1 class="centered-text h2">{{morsel.title}}</h1>
+    </div>
+    <img mrsl-responsive-images="{{getCoverPhotoArray()}}" />
+    <span am-time-ago="morsel.published_at" class="time-ago"></span>
+  </a>
+  <div class="user-info">
+    <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
+    <div class="user-body">
+      <h2 class="overflow-ellipsis h3">
+        <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
+      </h2>
+      <h3 class="overflow-ellipsis h6">
+        <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></a>
+        <span bo-text="(morsel.place.city ? morsel.place.city+', ':'')+morsel.place.state"></span>
+      </h3>
+    </div>
+  </div>
+</div>

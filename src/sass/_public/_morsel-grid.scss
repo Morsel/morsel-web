@@ -2,7 +2,7 @@
   width: 100%;
   margin: 0;
 
-  li {
+  .morsel-grid-item {
     position: relative;
     float: left;
     display: inline-block;
@@ -12,7 +12,7 @@
     min-height: 100px;
     max-width: $max-grid-morsel-width;
 
-    a {
+    > a {
       display: block;
       padding: 1px;
       text-align: center;
@@ -21,39 +21,127 @@
   }
 
   .centered-white {
-    div {
+    font-family: $font-family-secondary;
+
+    .centered-wrap {
       background-color: rgba(0,0,0,0);
       @include transition(background-color .1s ease-out);
     }
+
+    .centered-text {
+      font-weight: bold;
+      color: white;
+      @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+      font-size: 13px;
+      line-height: 16px;
+      padding: 0 5px;
+      text-transform: none;
+    }
   }
 
-  .morsel-grid-title {
-    font-size: 13px;
-    line-height: 16px;
-    padding: 0 5px;
-    text-transform: none;
+  &.morsel-summary-grid {
+    .morsel-summary-grid-item {
+      text-align: center;
+      padding-top: 30px;
+      padding-bottom: 25px;
+      border-bottom: 1px solid $morsel-light;
+      list-style: none;
+
+      > div {
+        display: inline-block;
+      }
+
+      .centered {
+        display: inline-block;
+        min-width: 75%;
+        min-height: 200px;
+      }
+
+      .centered-white {
+        .centered-text {
+          font-size: 24px;
+        }
+
+        img {
+          max-width: 320px;
+        }
+      }
+
+      h2 {
+        font-size: 22px;
+        color: $morsel-dark;
+        margin-top: 10px;
+      }
+
+      h3 {
+        margin: 0;
+        min-height: 19px;
+
+        a {
+          font-weight: bold;
+        }
+      }
+
+      .time-ago {
+        position: absolute;
+        bottom: -20px;
+        right: 0;
+        color: $morsel-medium;
+      }
+
+      .user-info {
+        text-align: left;
+        margin-top: 10px;
+      }
+
+      .profile-pic-link {
+        width: $profile-pic-xs;
+        height: $profile-pic-xs;
+        margin: 0 10px 0 0;
+      }
+    }
   }
 }
 
 @media (min-width: $screen-xs-min) {
   .morsel-grid {
-    .morsel-grid-title {
-      font-size: 22px;
-      line-height: 24px;
+    .centered-white {
+      .centered-text {
+        font-size: 22px;
+        line-height: 24px;
+      }
     }
   }
 }
 
 @media (min-width: $screen-sm-min) {
   .morsel-grid {
-    li {
+    .morsel-grid-item {
       min-height: 200px;
       
       a {
         &:hover {
-          div {
+          .centered-wrap {
             background-color: rgba(0,0,0,.2);
           }
+        }
+      }
+    }
+
+    &.morsel-summary-grid {
+      .morsel-summary-grid-item {
+        border-right: 1px solid $morsel-light;
+
+        a {
+          &:hover {
+            .centered-wrap {
+              background-color: rgba(0,0,0,.2);
+            }
+          }
+        }
+        
+        &:nth-child(2n) {
+          border-right: 0;
         }
       }
     }
@@ -62,21 +150,35 @@
 
 @media (min-width: $screen-md-min) {
   .morsel-grid {
-    li {
+    .morsel-grid-item {
       width: percentage(1/4);
+    }
+
+    &.morsel-summary-grid {
+      .morsel-summary-grid-item {
+        &:nth-child(2n) {
+          border-right: 1px solid $morsel-light;
+        }
+
+        &:nth-child(3n) {
+          border-right: 0;
+        }
+      }
     }
   }
 }
 
 @media (min-width: $screen-lg-min) {
   .morsel-grid {
-    li {
+    .morsel-grid-item {
       width: percentage(1/5);
     }
 
-    .morsel-grid-title {
-      font-size: 24px;
-      line-height: 26px;
+    .centered-white {
+      .centered-text {
+        font-size: 24px;
+        line-height: 26px;
+      }
     }
   }
 }

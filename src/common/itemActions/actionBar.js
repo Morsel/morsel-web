@@ -11,7 +11,6 @@ angular.module( 'Morsel.common.itemActionBar', [] )
       index: '=mrslIndex'
     },
     link: function(scope, element, attrs) {
-      scope.nonSwipeable = true;
     },
     templateUrl: 'common/itemActions/itemActionBar.tpl.html'
   };

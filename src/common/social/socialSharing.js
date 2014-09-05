@@ -15,7 +15,6 @@ angular.module( 'Morsel.common.socialSharing', [] )
           //cURL = encodeURIComponent($location.absUrl());//for testing
 
       scope.socialExpanded = true;
-      scope.nonSwipeable = true;
 
       scope.$watch('mrslMorsel', function(newValue, oldValue) {
         if(newValue) {

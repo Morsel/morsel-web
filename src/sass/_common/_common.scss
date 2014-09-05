@@ -93,6 +93,38 @@ img {
   .user-body {
     overflow: hidden;
   }
+
+  &.user-info-stacked {
+    h5 {
+      font-size: 22px;
+      line-height: 30px;
+      margin: 5px auto 0;
+
+      a {
+        color: $morsel-primary;
+        text-transform: none;
+      }
+    }
+
+    h6 {
+      margin: 5px auto 0;
+      line-height: 20px;
+
+      a {
+        font-size: 16px;
+        text-transform: none;
+        color: $morsel-primary;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    .profile-pic-link {
+      float: none;
+    }
+  }
 }
 
 .caption {
@@ -230,10 +262,10 @@ form {
   display: block;
 }
 
-.centered-white {
-  font-family: $font-family-secondary;
-  
-  div {
+.centered {
+  position: relative;
+
+  .centered-wrap {
     position: absolute;
     top: 0;
     left: 0;
@@ -250,14 +282,10 @@ form {
     }
   }
 
-  span {
+  .centered-text {
     display: inline-block;
     vertical-align: middle;
     width: 100%;
-    font-size: 30px;
-    font-weight: bold;
-    color: white;
-    @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
     word-break: break-word;
   }
 }
@@ -456,10 +484,11 @@ form {
   }
 }
 
-@media (min-width: $screen-md-min) {
-  .centered-white {
-    span {
-      font-size: 40px;
+@media (max-width: $screen-md) {
+  .user-fino-stacked {
+    .profile-pic-link {
+      width: $profile-pic-xs;
+      height: $profile-pic-xs;
     }
   }
 }

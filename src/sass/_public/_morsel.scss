@@ -1,47 +1,9 @@
-$morsel-header-padding: 10px;
-$morsel-header-lg-line-height: 40px;
-$detail-left-col-width: 55%;
-$detail-right-col-width: 42%;
-$cover-block-height: 140px;
-$item-actions-width: 90px;
-$item-info-bottom-height: 55px + $hr-height;
-
 .morsel {
   position: relative;
   white-space: normal;
-  vertical-align: top;
-  display: inline-block;
   width: 100%;
   height: 100%;
-  @include backface-visibility(hidden);
-
-  &:last-child:after {
-    @include replace-text-with-dimensions('icons/loader-030000.gif');
-    display: block;
-    content: ' ';
-    position: absolute;
-    right: -40px;
-    top: 50%;
-  }
-
-  .morsel-title {
-    position: fixed;
-    top: 0;
-    z-index: 2;
-    text-align: center;
-    padding: $morsel-header-padding;
-    @include transition(all .2s ease-out);
-    @include translate(0,-$mini-header-height);
-    width: 100%;
-
-    h1 {
-      width: 50%;
-      font-size: 14px;
-      margin: 0 auto;
-      color: $morsel-dark;
-      text-transform: none;
-    }
-  }
+  background-color: $morsel-light-off;
 
   .morsel-loader {
     height: 250px;
@@ -49,109 +11,55 @@ $item-info-bottom-height: 55px + $hr-height;
   }
 
   .morsel-container {
-    height: 100%;
     position: relative;
     margin: 0 auto;
-    overflow: hidden;
+    height: 100%;
   }
 
   .cover-page {
-    div[class*="col-"] {
-      padding-left: 0;
-      padding-right: 0;
+    .cover-bg {
+      display: block;
+      background-color: rgba(0,0,0,.2);
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
     }
 
-    .cover-bg {
-      display: none;
+    .cover-jumbo-info {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 5;
+      padding-bottom: $arrow-height + 10px;
     }
 
     .cover-info {
-      padding: 25px 5px 0;
       text-align: center;
-      height: $cover-block-height;
 
-      .time-ago {
-        position: absolute;
-        left: 5px;
-        top: 3px;
+      h5, h6 {
+        @include text-shadow(0px 1px 2px rgba(0, 0, 0, .8));
       }
 
-      .profile-pic-link {
-        float: none;
-      }
-    }
-
-    .cover-more {
-      position: relative;
-      height: $cover-block-height;
-      overflow: hidden;
-
-      .cover-more-btn {
-        display: block;
-        @include replace-text('graphics/more.png');
-        background-position: center center;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 2;
-
-        &:hover + .cover-more-bg {
-          @include filter(grayscale(70%) blur(0px));
-          @include opacity(.8);
+      h6 {
+        span {
+          color: white;
         }
       }
 
-      .cover-more-bg {
-        background-position: center center;
-        background-size: cover;
-        @include filter(grayscale(100%) blur(2px));
-        @include opacity(.5);
-        @include transition(all .1s ease-out);
-        width: 110%;
-        height: 110%;
-        position: absolute;
-        top: -3px;
-        left: -3px;
-      }
-    }
-  }
-
-  .user-info {
-    h5 {
-      margin: 5px auto 0;
-      font-size: 15px;
-      text-transform: none;
-      color: $morsel-primary;
-
-      a {
-        color: $morsel-primary;
-      }
-    }
-
-    h6 {
-      margin: 5px auto 0;
-      line-height: 20px;
-
-      a {
-        text-transform: none;
-        font-size: 14px;
-        color: $morsel-primary;
-      }
-
-      span {
-        font-size: 13px;
-        display: block;
+      .time-ago {
+        color: white;
+        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
       }
     }
   }
 
   .extra-page {
-    background-color: $morsel-light-off;
     position: relative;
     overflow: hidden;
-    padding-top: $mini-header-height;
 
     .cover-photo-wrap {
       display: block;
@@ -165,12 +73,13 @@ $item-info-bottom-height: 55px + $hr-height;
     .cover-title-wrap {
       display: table;
       text-align: center;
+      height: 70%;
       width: 100%;
       z-index: 3;
       position: absolute;
       top: 0;
       left: 0;
-      z-index: 2; 
+      z-index: 3; 
 
       .cover-title {
         padding: 0 15px;
@@ -187,19 +96,16 @@ $item-info-bottom-height: 55px + $hr-height;
   }
 
   .share-page {
-    .cover-photo-wrap, .cover-title-wrap {
-      height: 20%;
-    }
+    padding-bottom: 15px;
+    text-align: center;
 
-    .user-info {
-      p {
-        padding: 15px;
-        clear: both;
-      }
+    h4 {
+      margin-top: 0;
     }
 
     .social-sharing {
       padding-bottom: 0;
+      margin-bottom: 25px;
     }
 
     .share-this-morsel {
@@ -212,6 +118,48 @@ $item-info-bottom-height: 55px + $hr-height;
       margin-top: 15px;
       margin-bottom: 15px;
     }
+
+    .user-bio {
+      padding: 0 10px;
+    }
+
+    .morsel-nav {
+      > img {
+        width: 80px;
+      }
+
+      p {
+        color: $morsel-dark;
+      }
+
+      .user-info {
+        padding: 0 5px;
+      }
+
+      &:hover {
+        text-decoration: none;
+
+        .morsel-control {
+          background-color: $morsel-primary;
+          @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
+          background-position: right top;
+        }
+      }
+
+      &.morsel-prev {
+        .morsel-control-left {
+          margin-top: 25px;
+          float: left;
+        }
+      }
+
+      &.morsel-next {        
+        .morsel-control-right {
+          margin-top: 25px;
+          float: right;
+        }
+      }
+    }
   }
 
   .items {
@@ -222,104 +170,38 @@ $item-info-bottom-height: 55px + $hr-height;
       display: block;
       position: relative;
 
-      .morsel-container {
-        background-color: $morsel-light-off;
-      }
-
-      .item-photo-wrap {
-        padding-top: $mini-header-height;
+      .item-wrap {
         text-align: center;
         position: relative;
       }
 
-      .item-info-btn {
-        position: absolute;
-        bottom: 8px;
-        left: 12px;
-        z-index: 1;
-        color: white;
-        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-        padding: 15px;
+      .item-photo-wrap {
+        display: inline-block;
       }
 
       .item-img {
         max-height: 100%;
       }
-
-      .item-info {
-        width: 100%;
-        height: 100%;
-        background-color: $morsel-light-off;
-
-        .item-info-bottom {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          height: $item-info-bottom-height;
-          background-color: $morsel-background;
-          z-index: 2;
-
-          hr {
-            margin: 0;
-          }
-        }
-
-        .user-info {
-          width: 100%;
-          padding-right: $item-actions-width + 5px;
-
-          a {
-            margin-top: 5px;
-          }
-
-          h5 {
-            margin: 0;
-            line-height: 50px;
-          }
-        }
-      }
       
       .item-description {
-        z-index: 2;
-        background-color: $morsel-light-off;
-        @include transition(all .2s ease-out);
-        width: 100%;
-        height: 100%;
-        clear: both;
-        padding-bottom: ($item-info-bottom-height + 5px);
-
-        hr {
-          margin: 0;
-        }
-
         p {
-          padding: 25px 10px 0;
-          width: 100%;
-          z-index: 3;
+          padding: 25px 20px;
           margin: 0;
-          height: 100%;
-        }
-
-        .close {
-          position: absolute;
-          top: 0px;
-          right: 10px;
-          display: none;
-          padding: 10px;
+          font-size: 16px;
+          line-height: 22px;
+          font-family: $font-family-secondary;
         }
       }
 
       .item-actions {
         padding: 0;
         z-index: 10;
-        margin: 0 8px 0 0;
+        margin-top: 10px;
 
         li {
           display: block;
           float: left;
           padding-left: 8px;
-          border-left: 1px solid $morsel-medium;
-          height: $item-info-bottom-height - $hr-height;
           padding-top: 3px;
 
           & + li {
@@ -330,6 +212,7 @@ $item-info-bottom-height: 55px + $hr-height;
         a {
           line-height: 1;
           font-weight: bold;
+          color: $morsel-dark;
         }
 
         div {
@@ -337,47 +220,14 @@ $item-info-bottom-height: 55px + $hr-height;
           text-align: center;
         }
 
-        i:hover {
-          cursor: pointer;
+        i {
+          vertical-align: middle;
+          margin-right: 8px;
+
+          &:hover {
+            cursor: pointer;
+          }
         }
-      }
-
-      .social-sharing {
-        display: none;
-      }
-    }
-  }
-
-  .item-indicators {
-    position: absolute;
-    right: 8px;
-    top: $mini-header-height + 15px;
-    z-index: 8;
-  
-    span {
-      width: $indicator-size;
-      height: $indicator-size;
-      background-color: $morsel-dark;
-      border: 1px solid $morsel-light;
-      border-radius: 50%;
-      margin: 2px 0;
-      display: block;
-      @include transition(background-color .2s ease-out);
-
-      &:hover, &:focus {
-        cursor: pointer;
-      }
-
-      &.active {
-        background-color: $morsel-primary;
-      }
-    }
-  }
-
-  .in-morsel {
-    .current-morsel {
-      .morsel-title {
-        @include translate(0,0);
       }
     }
   }
@@ -400,10 +250,9 @@ $item-info-bottom-height: 55px + $hr-height;
 }
 
 .morsel-control {
-  display: none;
+  display: block;
   width: $arrow-height;
   height: $arrow-height;
-  position: absolute;
   z-index: 10;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -420,6 +269,22 @@ $item-info-bottom-height: 55px + $hr-height;
     @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
     background-position: right top;
   }
+
+  &.morsel-control-down {
+    position: absolute;
+    top: auto;
+    bottom: 0;
+    left: 50%;
+    margin-left: -$arrow-height/2;
+  }
+
+  &.morsel-control-left {
+    @include rotate(90deg);
+  }
+
+  &.morsel-control-right {
+    @include rotate(-90deg);
+  }
 }
 
 @media (min-width: $screen-sm-min) {
@@ -433,61 +298,51 @@ $item-info-bottom-height: 55px + $hr-height;
     }
 
     .share-page {
-      .cover-title-wrap, .cover-photo-wrap {
-        height: 30%;
-      }
+      .morsel-nav {
+        &.morsel-prev {
+          text-align: left;
 
-      .user-info {
-        p {
-          clear: none;
-        }
-      }
-    }
-  }
-}
+          .morsel-control-left {
+            margin-right: 15px;
+          }
 
-@media (max-width: $screen-md) {
-  .morsel {
-    .cover-page {
-      .cover-info {
-        .profile-pic-link {
-          width: $profile-pic-xs;
-          height: $profile-pic-xs;
-        }
-      }
-    }
-
-    .item {
-      .item-actions {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-
-        a {
-          display: block;
-
-          span {
-            display: none;
+          > img {
+            float: left;
+            margin-right: 15px;
           }
         }
+
+        &.morsel-next {
+          text-align: right;
+
+          .morsel-control-right {
+            margin-left: 15px;
+          }
+
+          > img {
+            float: right;
+            margin-left: 15px;
+          }
+        }
+
+        .user-info {
+          padding: 0;
+        }
       }
     }
 
-    .item-description-open {
-      .item-indicators, .item-info-btn {
-        display: none;
-      }
+    .items {
+      .item {
+        .item-description {
+          margin: 0 auto;
+          width: 50%;
 
-      .items {
-        .item {
-          .item-description {
-            p {
-              overflow-y: auto;
-            }
-
-            .close {
-              display: inline-block;
-            }
+          p {
+            color: $morsel-dark;
+            font-size: 22px;
+            line-height: 28px;
+            padding-top: 35px;
+            padding-bottom: 35px;
           }
         }
       }
@@ -497,133 +352,28 @@ $item-info-bottom-height: 55px + $hr-height;
 
 @media (min-width: $screen-md-min) {
   .morsel {
-    .morsel-title {
-      h1 {
-        font-size: 22px;
-        color: white;
-      }
-    }
-
     .morsel-container {
       width: $screen-md-min;
-
-      &.loader {
-        background-position: 25% center;
-      }
     }
 
     .cover-page {
-      padding-top:0;
+      padding-top: 0;
 
       .morsel-container {
         width: 100%;
         margin: 0;
       }
-
-      .cover-jumbo {
-        .cover-bg {
-          display: block;
-          background-color: rgba(0,0,0,.2);
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: 2;
-        }
-
-        .cover-title-wrap {
-          z-index: 3;
-        }
-      }
-
-      .cover-jumbo-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        z-index: 5;
-        padding-bottom: $arrow-height + 10px;
-      }
-
-      .cover-info {
-        height: auto;
-        padding-top: 0;
-        min-height: initial !important;
-
-        h5 {
-          font-size: 22px;
-          @include text-shadow(0px 1px 2px rgba(0, 0, 0, .8));
-          line-height: 30px;
-          margin-bottom: 0;
-        }
-
-        h6 {
-          @include text-shadow(0px 1px 2px rgba(0, 0, 0, .8));
-          
-          a {
-            font-size: 16px;
-          }
-
-          span {
-            color: white;
-            font-size: 14px;
-            display: inline;
-          }
-        }
-
-        .time-ago {
-          position: relative;
-          color: white;
-          @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-          top: auto;
-          left: auto;
-        }
-      }
-
-      .cover-more {
-        display: none;
-      }
     }
 
     .items {
       .item {
-        background-image: url(images/bg/morsel-detail-noise.png);
-        padding: $mini-header-height 0 10px;
-        background-color: $morsel-background-dark;
-
-        .morsel-container {
-          overflow: hidden;
-          @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
-          height: auto;
-          @include border-radius(3px);
-
-          .user-info {
-            h5 {
-              font-size: 20px;
-            }
-
-            span {
-              margin-left: 0;
-            }
-          }
-        }
-
-        .item-info-btn {
-          display: none;
-        }
-
-        .item-description {
-          margin-bottom: 25px;
-          padding-bottom: 0;
-
-          hr {
-            display: none;
+        .user-info {
+          h5 {
+            font-size: 20px;
           }
 
-          p {
-            color: $morsel-dark;
-            overflow-y: auto;
+          span {
+            margin-left: 0;
           }
         }
 
@@ -631,68 +381,16 @@ $item-info-bottom-height: 55px + $hr-height;
           background-position: left top;
         }
 
-        .item-photo-wrap {
-          width: $detail-left-col-width;
-          float: left;
-          padding: 0;
-          text-align: left;
-        }
-
-        .item-info {
-          width: $detail-right-col-width;
-          float: right;
-          position: relative;
-          padding-top: 20px;
-
-          .item-info-bottom {
-            position: relative;
-            background-color: transparent;
-
-            hr {
-              display: none;
-            }
+        .item-description {
+          p {
+            font-size: 26px;
+            line-height: 34px;
           }
-
-          .scrollable-info {
-            overflow-y: auto;
-          }
-        }
-
-        .item-actions {
-          margin-top: 10px;
-
-          li {
-            border: none;
-            height: auto;
-          }
-
-          div {
-            text-align: center;
-          }
-
-          i {
-            vertical-align: middle;
-            margin-right: 8px;
-          }
-          
-          a {
-            color: $morsel-dark;
-          }
-        }
-
-        .social-sharing {
-          display: block;
         }
       }
     }
     
     .extra-page {
-      background-image: url(images/bg/morsel-detail-noise.png);
-
-      .morsel-container {
-        padding-bottom: 3%;
-      }
-
       .cover-title-wrap {
         h2 {
           font-size: 40px;
@@ -701,14 +399,6 @@ $item-info-bottom-height: 55px + $hr-height;
     }
 
     .share-page {
-      .cover-photo-wrap, .cover-title-wrap {
-        height: 40%;
-      }
-
-      .cover-photo-wrap {
-        margin-bottom: 15px;
-      }
-
       .share-this-morsel {
         display: inline-block;
         font-size: 26px;
@@ -720,54 +410,10 @@ $item-info-bottom-height: 55px + $hr-height;
         display: inline-block;
       }
 
-      .user-info {
-        h4 {
-          display: inline-block;
-          margin-right: 10px;
-        }
-
-        h5 {
-          display: inline-block;
-        }
+      .user-bio {
+        width: 50%;
+        margin: 0 auto;
       }
-    }
-
-    .in-morsel {
-      .current-morsel {
-        .morsel-title {
-          h2 {
-            font-size: 24px;
-            line-height: $morsel-header-lg-line-height;
-          }
-        }
-      }
-
-      .morsel-control-up {
-        @include opacity(0);
-        @include transition(opacity .1s ease-out);
-
-        &:hover {
-          @include opacity(1);
-        }
-      }
-    }
-
-    .morsel-control {
-      display: block;
-    }
-
-    .morsel-control-up {
-      top: 0;
-      left: 50%;
-      margin-left: -$arrow-height/2;
-      @include rotate(180deg);
-    }
-
-    .morsel-control-down {
-      top: auto;
-      bottom: 0;
-      left: 50%;
-      margin-left: -$arrow-height/2;
     }
   }
 
@@ -781,16 +427,6 @@ $item-info-bottom-height: 55px + $hr-height;
 
     &.banner-draft {
       @include replace-text-with-dimensions('graphics/banner-draft-bottom.png');
-    }
-  }
-}
-
-@media (min-width: $screen-lg-min) {
-  .morsel {
-    .item {
-      .morsel-container {
-        width: $screen-lg-min;
-      }
     }
   }
 }

@@ -1,10 +1,10 @@
 angular.module( 'Morsel.public', [
   //libs
   'angularMoment',
+  'duScroll',
   'ngSanitize',
   'pasvaz.bindonce',
   'restangular',
-  'swipe',
   'ui.bootstrap',
   'ui.router',
   'ui.route',
@@ -30,7 +30,6 @@ angular.module( 'Morsel.public', [
   'Morsel.common.comments',
   'Morsel.common.cuisineUsers',
   'Morsel.common.facebookApi',
-  'Morsel.common.feedSwipe',
   'Morsel.common.follow',
   'Morsel.common.followedUsers',
   'Morsel.common.followers',
@@ -40,11 +39,10 @@ angular.module( 'Morsel.public', [
   'Morsel.common.itemActionBar',
   'Morsel.common.itemLike',
   'Morsel.common.iTunesLink',
-  'Morsel.common.landscapeAlert',
   'Morsel.common.likeableFeed',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
-  'Morsel.common.morselSwipe',
+  'Morsel.common.morselSummary',
   'Morsel.common.photoHelpers',
   'Morsel.common.placeList',
   'Morsel.common.responsiveImages',
@@ -52,9 +50,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.socialSharing',
   'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
-  'Morsel.common.textLimit',
   'Morsel.common.truncate',
-  'Morsel.common.transform',
   'Morsel.common.userImage',
   'Morsel.common.userList',
   'Morsel.common.validatedElement',
@@ -149,10 +145,11 @@ angular.module( 'Morsel.public', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
   var viewOptions = {
-    miniHeader : false,
-    fullWidthHeader : false,
-    hideLogo: false
-  };
+        miniHeader : false,
+        fullWidthHeader : false,
+        hideLogo: false
+      },
+      $pageWrapper = angular.element(document.getElementById('page-wrapper'));
 
   //to store things like page title
   $scope.pageData = {
@@ -237,6 +234,8 @@ angular.module( 'Morsel.public', [
     }
 
     resetViewOptions();
+
+    $pageWrapper.scrollTop(0, 0);
   });
 
   //if there are internal state issues, go to 404
