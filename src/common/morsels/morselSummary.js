@@ -20,9 +20,7 @@ angular.module('Morsel.common.morselSummary', [])
               return primaryItemPhotos._50x50;
             } else {
               return [
-                ['default', primaryItemPhotos._100x100],
-                ['(min-width: 300px)', primaryItemPhotos._240x240],
-                ['(min-width: 720px)', primaryItemPhotos._320x320]
+                ['default', primaryItemPhotos._320x320]
               ];
             }
           } else {
@@ -33,9 +31,7 @@ angular.module('Morsel.common.morselSummary', [])
                 return lastItemWithPhotos.photos._50x50;
               } else {
                 return [
-                  ['default', lastItemWithPhotos.photos._100x100],
-                  ['(min-width: 300px)', lastItemWithPhotos.photos._240x240],
-                  ['(min-width: 720px)', lastItemWithPhotos.photos._320x320]
+                  ['default', lastItemWithPhotos.photos._320x320]
                 ];
               }
             } else {

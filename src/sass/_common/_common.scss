@@ -264,7 +264,7 @@ form {
 
 .centered {
   position: relative;
-  
+
   .centered-wrap {
     position: absolute;
     top: 0;
@@ -489,14 +489,6 @@ form {
     .profile-pic-link {
       width: $profile-pic-xs;
       height: $profile-pic-xs;
-    }
-  }
-}
-
-@media (min-width: $screen-md-min) {
-  .centered {
-    span {
-      font-size: 40px;
     }
   }
 }

@@ -2,9 +2,9 @@
   <div class="feed-notification" ng-class="{'no-new-items': newFeedItemCount === 0}">
     <a ng-click="showNewFeedItems()">{{newFeedItemCount}} new morsel{{newFeedItemCount === 1? '':'s'}}</a>
   </div>
-  <div class="container morsel-bg container-shadow">
+  <div class="container morsel-bg container-shadow" ng-style="viewOptions.minimumMainHeight()">
     <ul class="clearfix morsel-grid morsel-summary-grid">
-      <li ng-repeat="feedItem in feedItems" class="col-md-3">
+      <li ng-repeat="feedItem in feedItems" class="col-sm-6 col-md-4 morsel-summary-grid-item">
         <div mrsl-morsel-summary="feedItem.subject" mrsl-feed-item-id="feedItem.id"></div>
       </li>
     </ul>

@@ -16,7 +16,7 @@
       <tabset class="places-tabs">
         <tab heading="Morsels">
           <ul class="clearfix morsel-grid">
-            <li ng-repeat="morsel in morsels | reverse">
+            <li ng-repeat="morsel in morsels | reverse" class="morsel-grid-item">
               <a ng-click="goTo(morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug)" class="centered centered-white">
                 <div class="centered-wrap">
                   <span class="centered-text">{{morsel.title}}</span>

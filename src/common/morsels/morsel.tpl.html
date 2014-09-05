@@ -6,7 +6,6 @@
         <li class="cover-page extra-page" ng-style="{'height': layout.pageHeight}">
           <div class="morsel-container">
             <div class="cover-jumbo">
-              <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
               <span bo-if="morsel.draft" class="banner banner-draft">Draft</span>
               <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(true)}}" ng-style="{'height': layout.pageHeight}"></div>
               <div class="cover-title-wrap">
