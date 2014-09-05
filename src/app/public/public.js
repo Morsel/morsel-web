@@ -50,7 +50,6 @@ angular.module( 'Morsel.public', [
   'Morsel.common.socialSharing',
   'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
-  'Morsel.common.textLimit',
   'Morsel.common.truncate',
   'Morsel.common.transform',
   'Morsel.common.userImage',
