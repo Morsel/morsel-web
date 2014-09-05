@@ -51,7 +51,6 @@ angular.module( 'Morsel.public', [
   'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
   'Morsel.common.truncate',
-  'Morsel.common.transform',
   'Morsel.common.userImage',
   'Morsel.common.userList',
   'Morsel.common.validatedElement',

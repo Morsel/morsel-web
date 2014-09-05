@@ -104,7 +104,6 @@ module.exports = {
         'src/common/user/userImage.js',
         'src/common/user/userList.js',
         'src/common/util/itunesLink.js',
-        'src/common/util/transform.js',
         'src/common/util/viewMore.js'
       ],
       tpl: [
