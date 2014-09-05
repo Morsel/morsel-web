@@ -49,6 +49,7 @@
 
       > div {
         display: inline-block;
+        max-width: 100%;
       }
 
       .centered {
@@ -60,10 +61,6 @@
       .centered-white {
         .centered-text {
           font-size: 24px;
-        }
-
-        img {
-          max-width: 320px;
         }
       }
 
