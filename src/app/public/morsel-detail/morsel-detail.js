@@ -55,18 +55,15 @@ angular.module( 'Morsel.public.morselDetail', [])
   //check if we came from the feed and should display prev/next links
   if($stateParams.source === 'feed' && $stateParams.feedId) {
     var prevFeedParams = {
-          count: 1,
-          since_id: $stateParams.feedId
+          previous_for_id: $stateParams.feedId
         },
         nextFeedParams = {
-          count: 1,
-          max_id: parseInt($stateParams.feedId, 10) - 1
+          next_for_id: $stateParams.feedId
         };
 
     //find the previous feedItem in the feed
     ApiFeed.getFeed(prevFeedParams).then(function(feedResp){
-      var feedData = feedResp.data,
-          prevItem = feedData[0];
+      var prevItem = feedResp.data;
 
       if(prevItem && prevItem.subject_type==='Morsel' && prevItem.subject) {
         $scope.morsel.prevFeedItem = prevItem;
@@ -81,8 +78,7 @@ angular.module( 'Morsel.public.morselDetail', [])
 
     //find the next feedItem in the feed
     ApiFeed.getFeed(nextFeedParams).then(function(feedResp){
-      var feedData = feedResp.data,
-          nextItem = feedData[0];
+      var nextItem = feedResp.data;
 
       if(nextItem && nextItem.subject_type==='Morsel' && nextItem.subject) {
         $scope.morsel.nextFeedItem = nextItem;
