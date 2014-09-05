@@ -5,7 +5,6 @@ angular.module( 'Morsel.public', [
   'ngSanitize',
   'pasvaz.bindonce',
   'restangular',
-  'swipe',
   'ui.bootstrap',
   'ui.router',
   'ui.route',

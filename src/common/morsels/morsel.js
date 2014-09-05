@@ -115,7 +115,7 @@ angular.module('Morsel.common.morsel', [])
         $pageWrapper.scrollTop(pageHeight, moreScrollTime);
       };
     },
-    templateUrl: 'common/swipe/morsel.tpl.html'
+    templateUrl: 'common/morsels/morsel.tpl.html'
   };
 })
 
@@ -151,6 +151,6 @@ angular.module('Morsel.common.morsel', [])
       scope.nextNavigation = scope.navDirection === 'next';
       scope.getCoverPhotoArray = PhotoHelpers.getCoverPhotoArray;
     },
-    templateUrl: 'common/swipe/morselFeedNav.tpl.html'
+    templateUrl: 'common/morsels/morselFeedNav.tpl.html'
   };
 });

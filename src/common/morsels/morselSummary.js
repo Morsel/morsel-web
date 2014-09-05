@@ -58,6 +58,6 @@ angular.module('Morsel.common.morselSummary', [])
         }
       };
     },
-    templateUrl: 'common/swipe/morselSummary.tpl.html'
+    templateUrl: 'common/morsels/morselSummary.tpl.html'
   };
 });
