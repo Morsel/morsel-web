@@ -36,9 +36,9 @@
         <tab heading="Morsels">
           <ul class="clearfix morsel-grid">
             <li ng-repeat="morsel in morsels | reverse">
-              <a ng-click="goTo(user.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug)" class="centered-white">
-                <div class="centered-title-wrap">
-                  <span class="morsel-grid-title">{{morsel.title}}</span>
+              <a ng-click="goTo(user.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug)" class="centered centered-white">
+                <div class="centered-wrap">
+                  <span class="centered-text">{{morsel.title}}</span>
                 </div>
                 <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
               </a>

@@ -29,9 +29,6 @@ angular.module( 'Morsel.public.feed', [])
   $scope.feedItemIncrement = feedFetchCount; //expose for View More
   $scope.newFeedItemCount = 0; //how many feed items are newer than what's been loaded so far
 
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.fullWidthHeader = true;
-
   $scope.grabOldFeed = function(max_id) {
     var feedParams = {
       count: feedFetchCount

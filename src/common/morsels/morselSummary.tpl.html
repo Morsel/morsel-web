@@ -1,18 +1,20 @@
 <div bindonce="morsel">
-  <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+'?source=feed&feedId='+morselFeedItemId" class="centered-white">
-    <div class="centered-title-wrap">
-      <span class="morsel-grid-title">{{morsel.title}}</span>
+  <div class="centered">
+    <div class="centered-wrap">
+      <h2 class="centered-text">{{morsel.title}}</h2>
     </div>
-    <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
-    <img class="morsel-image" mrsl-responsive-images="{{getCoverPhotoArray()}}" />
-  </a>
-  <div class="user-info user-info-stacked">
+    <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+'?source=feed&feedId='+morselFeedItemId" class="morsel-image-link">
+      <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
+      <img mrsl-responsive-images="{{getCoverPhotoArray()}}" />
+    </a>
+  </div>
+  <div class="user-info">
     <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
-    <h5 class="h2 overflow-ellipsis">
+    <h5 class="overflow-ellipsis">
       <a bo-href="'/'+morsel.creator.username.toLowerCase()" bo-bind="morsel.creator.first_name + ' ' + morsel.creator.last_name"></a>
     </h5>
     <h6 class="overflow-ellipsis">
-      <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" class="h2" bo-text="morsel.place.name"></a>
+      <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></a>
       <span bo-text="(morsel.place.city ? morsel.place.city+', ':'')+morsel.place.state"></span>
     </h6>
   </div>
