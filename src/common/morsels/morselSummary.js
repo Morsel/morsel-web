@@ -12,7 +12,7 @@ angular.module('Morsel.common.morselSummary', [])
       scope.getCoverPhotoArray = function(previewSized) {
         var primaryItemPhotos;
 
-        if(scope.morsel.items) {
+        if(scope.morsel && scope.morsel.items) {
           primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.morsel);
 
           if(primaryItemPhotos) {
