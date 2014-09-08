@@ -139,7 +139,7 @@ angular.module('Morsel.common.morsel', [])
   };
 })
 
-.directive('mrslFeedNav', function(PhotoHelpers) {
+.directive('mrslFeedNav', function() {
   return {
     restrict: 'A',
     replace: true,
@@ -149,7 +149,6 @@ angular.module('Morsel.common.morsel', [])
     },
     link: function(scope, element) {
       scope.nextNavigation = scope.navDirection === 'next';
-      scope.getCoverPhotoArray = PhotoHelpers.getCoverPhotoArray;
     },
     templateUrl: 'common/morsels/morselFeedNav.tpl.html'
   };
