@@ -7,7 +7,18 @@
     "twitter": {
       "card": "summary",
       "creator": "@eatmorsel",
-      "site": "@eatmorsel"
+      "site": "@eatmorsel",
+      "app": {
+        "country": "US",
+        "iphone": {
+          "id": "888118457",
+          "name": "Morsel"
+        },
+        "ipad": {
+          "id": "888118457",
+          "name": "Morsel"
+        }
+      }
     },
     "og": {
       "type": "website",
@@ -23,14 +34,7 @@
       "card": "app",
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
-      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app": {
-        "country": "US",
-        "iphone": {
-          "id": "888118457",
-          "name": "Morsel"
-        }
-      }
+      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world."
     }
   },
   "about": {
@@ -45,14 +49,7 @@
       "card": "app",
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
-      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app": {
-        "country": "US",
-        "iphone": {
-          "id": "888118457",
-          "name": "Morsel"
-        }
-      }
+      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world."
     },
     "url": "https://www.eatmorsel.com/apps"
   },
@@ -68,14 +65,7 @@
       "card": "app",
       "creator": "@eatmorsel",
       "site": "@eatmorsel",
-      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world.",
-      "app": {
-        "country": "US",
-        "iphone": {
-          "id": "888118457",
-          "name": "Morsel"
-        }
-      }
+      "description": "We're building the largest collection of food and drink ideas on the Internet straight from top chefs, mixologists and sommeliers around the world."
     },
     "url": "https://www.eatmorsel.com/feed"
   },
