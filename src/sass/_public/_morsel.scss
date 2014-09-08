@@ -173,6 +173,21 @@
 
       .item-photo-wrap {
         display: inline-block;
+
+        padding-bottom: 35px;
+        border-bottom: 1px solid $morsel-light;
+
+        &:after {
+          content: ' ';
+          background: $morsel-light-off url(images/icons/morsel/morsel-m-light.png) center center no-repeat;
+          height: image-width('icons/morsel/morsel-m-light.png');
+          width: image-width('icons/morsel/morsel-m-light.png')*2;
+          display: block;
+          position: absolute;
+          bottom: -(image-width('icons/morsel/morsel-m-light.png')/2);
+          left: 50%;
+          margin-left: -(image-width('icons/morsel/morsel-m-light.png'));
+        }
       }
 
       .item-img {
