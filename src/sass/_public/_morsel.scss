@@ -119,6 +119,12 @@
       padding: 0 10px;
     }
 
+    hr {
+      &:after {
+        background-color: $morsel-light-off;
+      }
+    }
+
     .morsel-nav {
 
       &.morsel-prev {
