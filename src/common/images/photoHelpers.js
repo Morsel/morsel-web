@@ -4,12 +4,18 @@ angular.module( 'Morsel.common.photoHelpers', [])
 .factory('PhotoHelpers', function(MORSELPLACEHOLDER) {
   var photoHelpers = {
     findPrimaryItemPhotos : function(morsel) {
-      var primaryItem = _.find(morsel.items, function(i) {
-        return i.id === morsel.primary_item_id;
-      });
+      var primaryItem;
 
-      if(primaryItem && primaryItem.photos) {
-        return primaryItem.photos;
+      if(morsel.items) {
+        primaryItem = _.find(morsel.items, function(i) {
+          return i.id === morsel.primary_item_id;
+        });
+
+        if(primaryItem && primaryItem.photos) {
+          return primaryItem.photos;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
