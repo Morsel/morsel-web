@@ -4,9 +4,13 @@
 <base href="{{metabase}}">
 <meta name="fragment" content="!">
 <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon">
-{{#showAppBanner}}
+{{#if showAppBanner}}
+{{#if metadata.app.url}}
+<meta name="apple-itunes-app" content="app-id=888118457, app-argument={{metadata.app.url}}">
+{{else}}
 <meta name="apple-itunes-app" content="app-id=888118457">
-{{/showAppBanner}}
+{{/if}}
+{{/if}}
 <link rel="apple-touch-icon" href="<%= favicon_dir %>/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="57x57" href="<%= favicon_dir %>/apple-touch-icon-57x57.png" />
 <link rel="apple-touch-icon" sizes="72x72" href="<%= favicon_dir %>/apple-touch-icon-72x72.png" />
@@ -30,11 +34,12 @@
 <meta name="twitter:image:src" content="{{metadata.image}}">
 {{/if}}
 <meta name="twitter:url" content="{{metadata.url}}">
-{{#ifCond metadata.twitter.card 'app'}}
 <meta name="twitter:app:country" content="{{metadata.twitter.app.country}}">
 <meta name="twitter:app:name:iphone" content="{{metadata.twitter.app.iphone.name}}">
 <meta name="twitter:app:id:iphone" content="{{metadata.twitter.app.iphone.id}}">
-{{/ifCond}}
+{{#if metadata.app.url}}
+<meta name="twitter:app:url:iphone" content="{{metadata.app.url}}"/>
+{{/if}}
 
 <meta property="og:locale" content="{{metadata.og.locale}}"/>
 <meta property="og:title" content="{{metadata.title}}">
@@ -57,6 +62,12 @@
 <meta property="article:modified_time" content="{{metadata.og.article_modified_at}}">
 {{/metadata.og.is_article}}
 
+{{#if metadata.app.url}}
+<meta property="al:ios:url" content="{{metadata.app.url}}" />
+<meta property="al:ios:app_store_id" content="888118457" />
+<meta property="al:ios:app_name" content="Morsel" />
+<meta property="al:web:url" content="{{metadata.url}}" />
+{{/if}}
 <!--end social tags-->
 
 <link rel="canonical" href="{{metadata.url}}">

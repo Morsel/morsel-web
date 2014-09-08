@@ -94,6 +94,9 @@ module.exports.renderMorselPage = function(req, res) {
           morselMetadata = {
             "title": _.escape(morsel.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
             "image": getCoverPhoto(morsel),
+            "app": {
+              "url": util.appProtocol+'morsels/'+morsel.id
+            },
             "twitter": {
               "card" : 'summary_large_image',
               "creator": '@'+(user.twitter_username || 'eatmorsel'),
@@ -155,6 +158,9 @@ module.exports.renderUserPage = function(res, userIdOrUsername) {
         "title": _.escape(user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel'),
         "description": _.escape(user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : '')),
         "image": userImage || "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "app": {
+          "url": util.appProtocol+'users/'+user.id
+        },
         "twitter": {
           "creator": '@'+(user.twitter_username || 'eatmorsel')
         },
@@ -204,6 +210,9 @@ module.exports.renderPlacePage = function(res, placeIdSlug) {
         "title": _.escape( placeTitle+ ' Inspirations, Dishes & Drinks | Morsel'),
         "description": _.escape(placeDescription+' | Morsel'),
         "image": "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "app": {
+          "url": util.appProtocol+'places/'+place.id
+        },
         "twitter": {
           "creator": '@'+(place.twitter_username || 'eatmorsel')
         },

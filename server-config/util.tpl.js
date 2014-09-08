@@ -24,6 +24,7 @@ var useSsl = process.env.NODE_ENV === 'staging' || process.env.NODE_ENV === 'pro
 var sessionSecret = 'THESESESSIONSARENOTSECURE';
 //rollbar account key is in server.js as it needs to load earlier
 var rollbarClientToken = process.env.ROLLBAR_CLIENT_TOKEN || config.rollbarClientToken;
+var appProtocol = 'mrsl://';
 
 //static JSON data
 var staticRoutes = require('./data/static-routes.json');
@@ -131,3 +132,4 @@ module.exports.defaultMetadata = metadata.default;
 module.exports.nodeEnv = nodeEnv;
 module.exports.port = port;
 module.exports.useSsl = useSsl;
+module.exports.appProtocol = appProtocol;
