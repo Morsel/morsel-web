@@ -124,40 +124,36 @@
     }
 
     .morsel-nav {
-      > img {
-        width: 80px;
+
+      &.morsel-prev {
+        text-align: left;
+        margin-left: 15px;
+      }
+
+      &.morsel-next {
+        text-align: right;
+        margin-right: 15px;
       }
 
       p {
-        color: $morsel-dark;
+        font-size: 12px;
+        color: $morsel-medium;
       }
 
-      .user-info {
-        padding: 0 5px;
-      }
+      h5 {
+        margin: 0;
 
-      &:hover {
-        text-decoration: none;
+        a {
+          color: $link-color;
 
-        .morsel-control {
-          background-color: $morsel-primary;
-          @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
-          background-position: right top;
+          &:hover {
+            color: $link-hover-color;
+          }
         }
       }
 
-      &.morsel-prev {
-        .morsel-control-left {
-          margin-top: 25px;
-          float: left;
-        }
-      }
-
-      &.morsel-next {        
-        .morsel-control-right {
-          margin-top: 25px;
-          float: right;
-        }
+      h6 {
+        font-size: 16px;
       }
     }
   }
@@ -300,33 +296,11 @@
     .share-page {
       .morsel-nav {
         &.morsel-prev {
-          text-align: left;
-
-          .morsel-control-left {
-            margin-right: 15px;
-          }
-
-          > img {
-            float: left;
-            margin-right: 15px;
-          }
+          margin-left: 30px;
         }
 
         &.morsel-next {
-          text-align: right;
-
-          .morsel-control-right {
-            margin-left: 15px;
-          }
-
-          > img {
-            float: right;
-            margin-left: 15px;
-          }
-        }
-
-        .user-info {
-          padding: 0;
+          margin-right: 30px;
         }
       }
     }

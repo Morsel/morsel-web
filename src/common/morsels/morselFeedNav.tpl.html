@@ -1,9 +1,7 @@
-<a bo-href="'/'+feedItem.subject.creator.username.toLowerCase()+'/'+feedItem.subject.id+'-'+feedItem.subject.slug+'?source=feed&feedId='+feedItem.id" bindonce="feedItem">
-  <span class="morsel-control" ng-class="{'morsel-control-left':!nextNavigation,'morsel-control-right':nextNavigation}"></span>
+<div bindonce="feedItem">
   <p>{{nextNavigation ? 'Next Morsel' : 'Previous Morsel'}}</p>
-  <img mrsl-responsive-images="{{getCoverPhotoArray(feedItem.subject)}}" />
   <div class="user-info">
-    <h5 bo-text="feedItem.subject.title"></h5>
-    <h6 bo-text="feedItem.subject.creator.first_name + ' ' + feedItem.subject.creator.last_name"></h6>
+    <h5><a bo-href="'/'+feedItem.subject.creator.username.toLowerCase()+'/'+feedItem.subject.id+'-'+feedItem.subject.slug+'?source=feed&feedId='+feedItem.id" bo-text="feedItem.subject.title"></a></h5>
+    <h6><a bo-href="'/'+feedItem.subject.creator.username.toLowerCase()" bo-text="feedItem.subject.creator.first_name + ' ' + feedItem.subject.creator.last_name"></a></h6>
   </div>
-</a>
+</div>
