@@ -7,7 +7,8 @@ angular.module( 'Morsel.common.viewMore', [
       viewMoreData: '=mrslViewMoreData',
       viewMoreInc: '=mrslViewMoreInc',
       viewMoreCopy: '@mrslViewMoreCopy',
-      viewMoreOrder: '@mrslViewMoreOrder'
+      viewMoreOrder: '@mrslViewMoreOrder',
+      viewMoreBtn: '@mrslViewMoreBtn'
     },
     link:function (scope, element, attrs) {
       scope.loading = false;

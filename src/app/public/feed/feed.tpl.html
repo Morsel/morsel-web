@@ -9,7 +9,7 @@
       </li>
     </ul>
     <div ng-if="!feedItems" class="loader"></div>
-    <div mrsl-view-more mrsl-view-more-func="grabOldFeed" mrsl-view-more-data="feedItems" mrsl-view-more-inc="feedItemIncrement" mrsl-view-more-order="last" mrsl-view-more-copy="View more morsels"></div>
+    <div mrsl-view-more mrsl-view-more-func="grabOldFeed" mrsl-view-more-data="feedItems" mrsl-view-more-inc="feedItemIncrement" mrsl-view-more-order="last" mrsl-view-more-copy="View more morsels" mrsl-view-more-btn="true"></div>
     <div ng-if="feedItems && feedItems.length === 0" class="empty-state">
       <p>You don't have anything in your feed</p>
     </div>
