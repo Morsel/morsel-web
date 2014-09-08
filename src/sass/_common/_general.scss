@@ -111,7 +111,7 @@ button[type="submit"] {
 }
 
 hr {
-  background-image: url(images/bg/dark-line.png);
-  height: $hr-height;
-  border: 0;
+  @include morsel-border($morsel-background);
+  margin-top: 25px;
+  margin-bottom: 25px;
 }

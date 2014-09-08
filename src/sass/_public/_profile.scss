@@ -11,6 +11,7 @@
     padding: 15px 15px 10px;
     position: relative;
     overflow: hidden;
+    border-bottom: 1px solid $morsel-light;
 
     .follow-btn {
       margin-top: 10px;
@@ -53,12 +54,7 @@
       }
     }
   }
-
-  hr {
-    margin: 0;
-    clear: both;
-  }
-
+  
   .loader {
     height: 250px;
   }
