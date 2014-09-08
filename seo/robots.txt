@@ -1,6 +1,9 @@
 User-agent: Twitterbot
 Disallow:
 
+User-agent: Baiduspider
+Disallow: /
+
 User-agent: *
 Allow: /$
 Disallow: /
