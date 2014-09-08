@@ -37,6 +37,7 @@ app.locals.mixpanelToken = process.env.MIXPANELTOKEN || config.devMixpanelToken;
 app.locals.isProd = nodeEnv === 'production';
 app.locals.rollbarClientToken = rollbarClientToken;
 app.locals.nodeEnv = nodeEnv;
+app.locals.appId = process.env.APPID || config.appId;
 
 function updateMetadata(route, res){
   //if this is for a specific route

@@ -6,9 +6,9 @@
 <link rel="shortcut icon" href="<%= favicon_dir %>/favicon.ico" type="image/x-icon">
 {{#if showAppBanner}}
 {{#if metadata.app.url}}
-<meta name="apple-itunes-app" content="app-id=888118457, app-argument={{metadata.app.url}}">
+<meta name="apple-itunes-app" content="app-id={{appId}}, app-argument={{metadata.app.url}}">
 {{else}}
-<meta name="apple-itunes-app" content="app-id=888118457">
+<meta name="apple-itunes-app" content="app-id={{appId}}">
 {{/if}}
 {{/if}}
 <link rel="apple-touch-icon" href="<%= favicon_dir %>/apple-touch-icon.png">
@@ -64,7 +64,7 @@
 
 {{#if metadata.app.url}}
 <meta property="al:ios:url" content="{{metadata.app.url}}" />
-<meta property="al:ios:app_store_id" content="888118457" />
+<meta property="al:ios:app_store_id" content="{{appId}}" />
 <meta property="al:ios:app_name" content="Morsel" />
 <meta property="al:web:url" content="{{metadata.url}}" />
 {{/if}}
