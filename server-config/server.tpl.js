@@ -190,8 +190,14 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       res.sendfile('seo/bOeAHuseytu27v9K8MznKwOWZFk.html');
     });
 
+    //www.eatmorsel.com
     app.get('/google1739f11000682532.html', function(req, res){
       res.sendfile('seo/google1739f11000682532.html');
+    });
+
+    //https://www.eatmorsel.com
+    app.get('/google644ff905bdb735d2.html', function(req, res){
+      res.sendfile('seo/google644ff905bdb735d2.html');
     });
 
     app.get('/pinterest-98fe2.html', function(req, res){
