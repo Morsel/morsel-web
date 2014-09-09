@@ -1,6 +1,7 @@
 angular.module( 'Morsel.account', [
   //libs
   'angularMoment',
+  'duScroll',
   'pasvaz.bindonce',
   'restangular',
   'ui.bootstrap',
@@ -108,8 +109,9 @@ angular.module( 'Morsel.account', [
 
 .controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack, $timeout, USER_UPDATE_CHECK_TIME ) {
   var viewOptions = {
-    miniHeader : false
-  };
+        miniHeader : false
+      },
+      $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title
   $scope.pageData = {
@@ -191,6 +193,9 @@ angular.module( 'Morsel.account', [
     GA.sendPageview($scope.pageData.pageTitle);
 
     resetViewOptions();
+
+    //make sure we're at the top of the page when we change routes
+    $body.scrollTop(0, 0);
   });
 
   //if there are internal state issues, go to 404

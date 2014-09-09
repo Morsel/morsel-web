@@ -149,7 +149,7 @@ angular.module( 'Morsel.public', [
         fullWidthHeader : false,
         hideLogo: false
       },
-      $pageWrapper = angular.element(document.getElementById('page-wrapper'));
+      $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title
   $scope.pageData = {
@@ -235,7 +235,8 @@ angular.module( 'Morsel.public', [
 
     resetViewOptions();
 
-    $pageWrapper.scrollTop(0, 0);
+    //make sure we're at the top of the page when we change routes
+    $body.scrollTop(0, 0);
   });
 
   //if there are internal state issues, go to 404
