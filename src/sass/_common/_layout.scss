@@ -2,7 +2,6 @@
 .page-wrapper {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
   background: url(images/bg/light-line.png) right top repeat;
   position: absolute;
 }
@@ -237,8 +236,8 @@
 
 .side-nav-trigger {
   position: absolute;
-  top: $side-nav-trigger-vert;
-  right: 20px;
+  top: ($mini-header-height - $side-nav-trigger-height)/2;
+  right: $side-nav-trigger-hor/2;
   @include transition(opacity .2s ease-out);
   padding: $padding-base-vertical 5px;
   color: $morsel-dark;
@@ -246,17 +245,19 @@
   font-size: 16px;
   display: block;
   z-index: 12;
+  height: image-height($side-nav-trigger);
+  width: $side-nav-trigger-width*2;
 
   &:after {
     content: '';
     background-image: url($side-nav-trigger-full);
     background-position: right top;
-    height: image-height($side-nav-trigger)/2;
-    width: 19px;
+    height: $side-nav-trigger-height/2;
+    width: $side-nav-trigger-width;
     display: inline-block;
     position: absolute;
-    top: 0;
-    right: 0;
+    top: $side-nav-trigger-height/4;
+    right: $side-nav-trigger-hor/2;
   }
 
   &:hover {
@@ -325,6 +326,12 @@
     height: image-height($side-nav-trigger)/2;
     @include replace-text($side-nav-trigger);
     background-position: left top;
+    top: ($mini-header-height - $side-nav-trigger-height/2)/2;
+    right: $side-nav-trigger-hor;
+
+    &:after {
+      display: none;
+    }
   }
 }
 

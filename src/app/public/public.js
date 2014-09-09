@@ -84,7 +84,7 @@ angular.module( 'Morsel.public', [
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
 .constant('MINIHEADERHEIGHT', '60')
-.constant('USER_LIST_NUMBER', 5)
+.constant('USER_LIST_NUMBER', 20)
 .constant('USER_UPDATE_CHECK_TIME', 5000)
 
 // Default queries
@@ -149,7 +149,7 @@ angular.module( 'Morsel.public', [
         fullWidthHeader : false,
         hideLogo: false
       },
-      $pageWrapper = angular.element(document.getElementById('page-wrapper'));
+      $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title
   $scope.pageData = {
@@ -235,7 +235,8 @@ angular.module( 'Morsel.public', [
 
     resetViewOptions();
 
-    $pageWrapper.scrollTop(0, 0);
+    //make sure we're at the top of the page when we change routes
+    $body.scrollTop(0, 0);
   });
 
   //if there are internal state issues, go to 404

@@ -17,12 +17,11 @@
       .user-body {
         button {
           float: right;
-          margin-top: 5px;
+          margin: 5px 0 0 5px;
         }
       }
 
       .user-info-main {
-        display: inline-block;
         margin: 0;
         line-height: $profile-pic-xs;
       }

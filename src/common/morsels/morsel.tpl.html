@@ -34,10 +34,10 @@
           </div>
         </li>
         <li bindonce ng-repeat="item in morsel.items" class="item">
-          <div class="morsel-container loader">
+          <div class="morsel-container">
             <div mrsl-item-description="item"></div>
             <div class="item-wrap">
-              <div class="item-photo-wrap">
+              <div class="item-photo-wrap loader">
                 <img class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
                 <div ng-if="!morsel.draft" mrsl-item-action-bar mrsl-item="item" mrsl-items="morsel.items"></div>
               </div>

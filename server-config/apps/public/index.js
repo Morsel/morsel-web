@@ -92,7 +92,7 @@ module.exports.renderMorselPage = function(req, res) {
           morsel = JSON.parse(body).data;
 
           morselMetadata = {
-            "title": _.escape(morsel.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel'),
+            "title": morsel.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel',
             "image": getCoverPhoto(morsel),
             "app": {
               "url": util.appProtocol+'morsels/'+morsel.id
@@ -112,7 +112,7 @@ module.exports.renderMorselPage = function(req, res) {
             "url": app.locals.siteUrl + '/' + user.username.toLowerCase() + '/' + morsel.id + '-' + morsel.slug
           };
 
-          description = _.escape(util.truncateAt(getFirstDescription(morsel.items), 155)) + '...';
+          description = util.truncateAt(getFirstDescription(morsel.items), 155) + '...';
           //there's a change none of the morsels have a description
           if(description) {
             morselMetadata.description = description;
@@ -155,8 +155,8 @@ module.exports.renderUserPage = function(res, userIdOrUsername) {
       userImage = user.photos && user.photos._144x144;
 
       userMetadata = {
-        "title": _.escape(user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel'),
-        "description": _.escape(user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : '')),
+        "title": user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel',
+        "description": user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : ''),
         "image": userImage || "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "app": {
           "url": util.appProtocol+'users/'+user.id
@@ -207,8 +207,8 @@ module.exports.renderPlacePage = function(res, placeIdSlug) {
       }
 
       placeMetadata = {
-        "title": _.escape( placeTitle+ ' Inspirations, Dishes & Drinks | Morsel'),
-        "description": _.escape(placeDescription+' | Morsel'),
+        "title": placeTitle+ ' Inspirations, Dishes & Drinks | Morsel',
+        "description": placeDescription+' | Morsel',
         "image": "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "app": {
           "url": util.appProtocol+'places/'+place.id

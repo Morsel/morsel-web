@@ -1,6 +1,7 @@
 angular.module( 'Morsel.login', [
   //libs
   'angularMoment',
+  'duScroll',
   'ngCookies',
   'restangular',
   'ui.bootstrap',
@@ -94,8 +95,9 @@ angular.module( 'Morsel.login', [
 
 .controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack) {
   var viewOptions = {
-    miniHeader : false
-  };
+        miniHeader : false
+      },
+      $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title
   $scope.pageData = {
@@ -166,6 +168,9 @@ angular.module( 'Morsel.login', [
     GA.sendPageview($scope.pageData.pageTitle);
 
     resetViewOptions();
+
+    //make sure we're at the top of the page when we change routes
+    $body.scrollTop(0, 0);
   });
 
   //if there are internal state issues, go to login
