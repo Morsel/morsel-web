@@ -84,7 +84,7 @@ angular.module( 'Morsel.public', [
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
 .constant('MINIHEADERHEIGHT', '60')
-.constant('USER_LIST_NUMBER', 5)
+.constant('USER_LIST_NUMBER', 20)
 .constant('USER_UPDATE_CHECK_TIME', 5000)
 
 // Default queries
