@@ -87,7 +87,7 @@ img {
   overflow: hidden;
 
   .profile-pic-link {
-    margin: 0 15px;
+    margin: 0 5px;
     float: left;
   }
   .user-body {
@@ -433,6 +433,12 @@ form {
           height: $profile-pic-s;
         }
       }
+    }
+  }
+
+  .user-info {
+    .profile-pic-link {
+      margin: 0 15px;
     }
   }
 
