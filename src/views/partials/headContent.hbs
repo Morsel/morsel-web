@@ -72,20 +72,18 @@
 
 <link rel="canonical" href="{{metadata.url}}">
 
-{{> rollbar}}
-
 <!--[if IE 9]> 
 <script src="//rawgit.com/jpillora/xdomain/gh-pages/dist/0.6/xdomain.min.js"></script>
 <script>
-  //fix trackers
-  xhook.addWithCredentials = false;
-
   xdomain.slaves({
     "https://api-staging.eatmorsel.com": "/proxy.html",
     "https://api.eatmorsel.com": "/proxy.html"
   });
+  //fix trackers
+  xhook.addWithCredentials = false;
 </script>
 <![endif]-->
+{{> rollbar}}
 
 <script type="text/javascript">
   var MorselConfig = {
