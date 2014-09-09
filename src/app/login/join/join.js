@@ -67,7 +67,7 @@ angular.module( 'Morsel.login.join', [])
   //if they're not trying to go to the second step
   if($state.current.name != 'auth.join.basicInfo') {
     //send them to the landing page
-    $state.go('auth.join.landing');
+    $state.go('auth.join.landing', null, {location:'replace'});
   }
 
   $scope.finishedSignup = function() {
