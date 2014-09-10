@@ -29,13 +29,13 @@ angular.module( 'Morsel.public.feed', [])
   $scope.feedItemIncrement = feedFetchCount; //expose for View More
   $scope.newFeedItemCount = 0; //how many feed items are newer than what's been loaded so far
 
-  $scope.grabOldFeed = function(max_id) {
+  $scope.grabOldFeed = function(endFeedItem) {
     var feedParams = {
       count: feedFetchCount
     };
 
-    if(max_id) {
-      feedParams.max_id = parseInt(max_id, 10) - 1;
+    if(endFeedItem) {
+      feedParams.max_id = parseInt(endFeedItem.id, 10) - 1;
     }
 
     ApiFeed.getFeed(feedParams).then(function(feedResp){

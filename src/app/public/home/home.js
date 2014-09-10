@@ -14,12 +14,8 @@ angular.module( 'Morsel.public.home', [])
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();
       },
-      hasSeenSplash: function($window, $location) {
-        if($window.localStorage.passSplash) {
-          $location.path('/feed');
-        } else {
-          return false;
-        }
+      hasSeenSplash: function($window) {
+        return $window.localStorage.passSplash;
       }
     }
   })
@@ -46,7 +42,10 @@ angular.module( 'Morsel.public.home', [])
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $window, $location ) {
+.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $window, hasSeenSplash, $location, $state ) {
+  if(hasSeenSplash) {
+    $state.go('feed', null, {location:'replace'});
+  }
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.hideLogo = true;
 

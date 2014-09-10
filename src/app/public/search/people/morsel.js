@@ -32,14 +32,14 @@ angular.module( 'Morsel.public.search.people.morsel', [])
     $scope.suggestedUsers = searchResp.data;
   });
 
-  $scope.loadSearchResultUsers = function(max_id){
+  $scope.loadSearchResultUsers = function(endUser){
     var userSearchData = {
           count: USER_LIST_NUMBER,
           'user[query]': $scope.search.query
         };
 
-    if(max_id) {
-      userSearchData.max_id = parseInt(max_id, 10) - 1;
+    if(endUser) {
+      userSearchData.max_id = parseInt(endUser.id, 10) - 1;
     }
 
     ApiUsers.search(userSearchData).then(function(searchResp) {

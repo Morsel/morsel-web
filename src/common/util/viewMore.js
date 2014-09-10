@@ -30,10 +30,11 @@ angular.module( 'Morsel.common.viewMore', [
         scope.loading = true;
 
         //which is the "end" of the data, the first or last item?
+        //pass back "end" item to our loading function to determine what to load next
         if(scope.viewMoreOrder === 'last') {
-          scope.viewMoreFunc(_.last(scope.viewMoreData).id);
+          scope.viewMoreFunc(_.last(scope.viewMoreData));
         } else {
-          scope.viewMoreFunc(_.first(scope.viewMoreData).id);
+          scope.viewMoreFunc(_.first(scope.viewMoreData));
         }
       };
     },

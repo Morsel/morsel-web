@@ -6,7 +6,7 @@
         <div class="user-body">
           <button mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>
           <h5 class="user-info-main overflow-ellipsis">
-            <a bo-href="'/'+user.username.toLowerCase()" bo-text="user.first_name+' '+user.last_name"></a>
+            <a bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user"></a>
           </h5>
         </div>
       </div>
