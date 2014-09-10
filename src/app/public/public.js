@@ -53,6 +53,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.truncate',
   'Morsel.common.userImage',
   'Morsel.common.userList',
+  'Morsel.common.usersName',
   'Morsel.common.validatedElement',
   'Morsel.common.viewMore',
   //app

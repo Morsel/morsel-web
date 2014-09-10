@@ -155,8 +155,8 @@ module.exports.renderUserPage = function(res, userIdOrUsername) {
       userImage = user.photos && user.photos._144x144;
 
       userMetadata = {
-        "title": user.first_name + ' ' + user.last_name + ' (' + user.username + ') | Morsel',
-        "description": user.first_name + ' ' + user.last_name + (user.bio ? ' - ' + user.bio : ''),
+        "title": ((user.first_name || user.last_name) ? user.first_name + ' ' + user.last_name : '') + ' (' + user.username + ') | Morsel',
+        "description": ((user.first_name || user.last_name) ? user.first_name + ' ' + user.last_name : '') + (user.bio ? ' - ' + user.bio : ''),
         "image": userImage || "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
         "app": {
           "url": util.appProtocol+'users/'+user.id

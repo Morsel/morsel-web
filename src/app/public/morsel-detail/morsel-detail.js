@@ -45,9 +45,13 @@ angular.module( 'Morsel.public.morselDetail', [])
 })
 
 .controller( 'MorselDetailCtrl', function MorselDetailCtrl( $scope, $stateParams, ApiMorsels, ApiUsers, ApiFeed, $location, $window, currentUser, theMorsel ) {
+  var name;
+
   $scope.morsel = theMorsel;
+
+  name = ($scope.morsel.creator.first_name || $scope.morsel.creator.last_name) ? ' - '+$scope.morsel.creator.first_name+' '+$scope.morsel.creator.last_name : '';
   //update page title
-  $scope.pageData.pageTitle = $scope.morsel.title+' - '+$scope.morsel.creator.first_name+' '+$scope.morsel.creator.last_name+' | Morsel';
+  $scope.pageData.pageTitle = $scope.morsel.title+name+' | Morsel';
 
   $scope.viewOptions.miniHeader = true;
   $scope.viewOptions.fullWidthHeader = true;

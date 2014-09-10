@@ -410,6 +410,11 @@ form {
   padding-right: 0;
 }
 
+.no-name {
+  color: $morsel-medium !important;
+  font-style: italic !important;
+}
+
 @media (min-width: $screen-sm-min) {
   $activity-feed-padding-right: $profile-pic-s + 10px;
 

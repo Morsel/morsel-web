@@ -1,7 +1,7 @@
 <nav class="side-nav" ng-class="{open:menuOpen}" role="navigation" ng-style="viewOptions.minimumMainHeight()">
   <a ng-if="isLoggedIn" ng-click="goToProfile()" class="profile-link">
     <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-no-link="true" mrsl-user-image-size="profile-pic-xs"></div>
-    <h5 ng-bind="currentUser.first_name + ' ' + currentUser.last_name"></h5>
+    <h5 mrsl-users-name="currentUser"></h5>
   </a>
   <div class="prompt-btns" ng-if="!isLoggedIn">
     <a href="/join" target="_self">Sign Up</a>

@@ -2,6 +2,6 @@
   <p>{{nextNavigation ? 'Next Morsel' : 'Previous Morsel'}}</p>
   <div class="user-info">
     <h5><a bo-href="'/'+feedItem.subject.creator.username.toLowerCase()+'/'+feedItem.subject.id+'-'+feedItem.subject.slug+'?source=feed&feedId='+feedItem.id" bo-text="feedItem.subject.title"></a></h5>
-    <h6><a bo-href="'/'+feedItem.subject.creator.username.toLowerCase()" bo-text="feedItem.subject.creator.first_name + ' ' + feedItem.subject.creator.last_name"></a></h6>
+    <h6><a bo-href="'/'+feedItem.subject.creator.username.toLowerCase()" mrsl-users-name="feedItem.subject.creator"></a></h6>
   </div>
 </div>

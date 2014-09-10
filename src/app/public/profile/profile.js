@@ -52,14 +52,18 @@ angular.module( 'Morsel.public.profile', [])
 })
 
 .controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth, MORSEL_LIST_NUMBER ) {
+  var name;
+
   $scope.viewOptions.miniHeader = true;
 
   $scope.user = profileUserData;
   $scope.isProfessional = $scope.user.professional;
   $scope.canEdit = $scope.user.id === currentUser.id;
 
+  name = ($scope.user.first_name || $scope.user.last_name) ? ' - '+$scope.user.first_name+' '+$scope.user.last_name : '';
+
   //update page title
-  $scope.pageData.pageTitle = $scope.user.first_name+' '+$scope.user.last_name+' ('+$scope.user.username+') | Morsel';
+  $scope.pageData.pageTitle = name+' ('+$scope.user.username+') | Morsel';
 
   //# of morsels to load at a time
   $scope.morselIncrement = MORSEL_LIST_NUMBER;
