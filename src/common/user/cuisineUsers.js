@@ -29,13 +29,13 @@ angular.module( 'Morsel.common.cuisineUsers', [] )
           $modalInstance.dismiss('cancel');
         };
 
-        $scope.loadUsers = function(max_id) {
+        $scope.loadUsers = function(endUser) {
           var usersParams = {
                 count: USER_LIST_NUMBER
               };
 
-          if(max_id) {
-            usersParams.max_id = parseInt(max_id, 10) - 1;
+          if(endUser) {
+            usersParams.max_id = parseInt(endUser.id, 10) - 1;
           }
 
           ApiKeywords.getCuisineUsers(cuisine.keyword.id, usersParams).then(function(usersResp){

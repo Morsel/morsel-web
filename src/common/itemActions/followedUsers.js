@@ -29,14 +29,15 @@ angular.module( 'Morsel.common.followedUsers', [] )
           $modalInstance.dismiss('cancel');
         };
 
-        $scope.loadUsers = function(max_id) {
+        $scope.loadUsers = function(endUser) {
           var followablesParams = {
                 count: USER_LIST_NUMBER,
                 type: 'User'
               };
 
-          if(max_id) {
-            followablesParams.max_id = parseInt(max_id, 10) - 1;
+          if(endUser) {
+            followablesParams.before_id = endUser.id;
+            followablesParams.before_date = endUser.followed_at;
           }
 
           ApiUsers.getFollowables(followerId, followablesParams).then(function(followableResp){

@@ -34,13 +34,13 @@ angular.module( 'Morsel.public.explore', [])
     //# of morsels to load at a time
     $scope.exploreIncrement = 15;
 
-    $scope.getExploreFeed = function(max_id) {
+    $scope.getExploreFeed = function(endFeedItem) {
       var feedParams = {
             count: $scope.exploreIncrement
           };
 
-      if(max_id) {
-        feedParams.max_id = parseInt(max_id, 10) - 1;
+      if(endFeedItem) {
+        feedParams.max_id = parseInt(endFeedItem.id, 10) - 1;
       }
 
       ApiFeed.getAllFeed(feedParams).then(function(feedItemsData) {

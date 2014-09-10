@@ -28,7 +28,7 @@ angular.module( 'Morsel.public.place', [])
   });
 })
 
-.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth, USER_LIST_NUMBER ) {
+.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, PhotoHelpers, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth, USER_LIST_NUMBER, MORSEL_LIST_NUMBER ) {
   $scope.viewOptions.miniHeader = true;
 
   //knock off the protocol so it displays nicer
@@ -39,7 +39,7 @@ angular.module( 'Morsel.public.place', [])
   $scope.place = placeData;
 
   //# of morsels to load at a time
-  $scope.morselIncrement = 15;
+  $scope.morselIncrement = MORSEL_LIST_NUMBER;
 
   //update page title
   $scope.pageData.pageTitle = $scope.place.name+($scope.place.city ? ', '+$scope.place.city : '')+($scope.place.state ? ', '+$scope.place.state : '')+' Inspirations, Dishes & Drinks | Morsel';
@@ -47,13 +47,14 @@ angular.module( 'Morsel.public.place', [])
   //for price display
   $scope.priceRange = _.range(0, $scope.place.information.price_tier);
 
-  $scope.getMorsels = function(max_id) {
+  $scope.getMorsels = function(endMorsel) {
     var morselsParams = {
           count: $scope.morselIncrement
         };
 
-    if(max_id) {
-      morselsParams.max_id = parseInt(max_id, 10) - 1;
+    if(endMorsel) {
+      morselsParams.before_id = endMorsel.id;
+      morselsParams.before_date = endMorsel.published_at;
     }
 
     ApiPlaces.getMorsels($scope.place.id, morselsParams).then(function(morselsData) {
@@ -100,7 +101,7 @@ angular.module( 'Morsel.public.place', [])
     $scope.loadPeople(null, true);
   };
 
-  $scope.loadPeople = function(max_id, tabClick) {
+  $scope.loadPeople = function(endUser, tabClick) {
     var usersParams = {
           count: USER_LIST_NUMBER
         };
@@ -116,8 +117,8 @@ angular.module( 'Morsel.public.place', [])
     }
 
 
-    if(max_id) {
-      usersParams.max_id = parseInt(max_id, 10) - 1;
+    if(endUser) {
+      usersParams.max_id = parseInt(endUser.id, 10) - 1;
     }
 
     ApiPlaces.getUsers($scope.place.id, usersParams).then(function(usersResp) {

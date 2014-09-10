@@ -89,10 +89,10 @@ angular.module( 'Morsel.common.comments', [] )
         });
       }
 
-      var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, AfterLogin, item) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, AfterLogin, item, COMMENT_LIST_NUMBER) {
         $scope.item = item;
         //number of comments to load at a time
-        $scope.increment = 5;
+        $scope.increment = COMMENT_LIST_NUMBER;
 
         $scope.isLoggedIn = isLoggedIn;
 
@@ -143,13 +143,13 @@ angular.module( 'Morsel.common.comments', [] )
         };
 
         //fetch comments for the item
-        $scope.getComments = function(max_id) {
+        $scope.getComments = function(endComment) {
           var commentParams = {
                 count: $scope.increment
               };
 
-          if(max_id) {
-            commentParams.max_id = parseInt(max_id, 10) - 1;
+          if(endComment) {
+            commentParams.max_id = parseInt(endComment.id, 10) - 1;
           }
 
           ApiItems.getComments($scope.item.id, commentParams).then(function(commentResp){
@@ -169,7 +169,7 @@ angular.module( 'Morsel.common.comments', [] )
         }
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'AfterLogin', 'item'];
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'AfterLogin', 'item', 'COMMENT_LIST_NUMBER'];
     },
     template: '<div ng-click="openComments()"><i ng-class="{\'common-comment-empty\':item.comment_count===0, \'common-comment-filled\':item.comment_count > 0}"></i><a>{{item.comment_count}}<span> comment{{item.comment_count===1?\'\':\'s\'}}</span></a></div>'
   };

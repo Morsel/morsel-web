@@ -86,6 +86,8 @@ angular.module( 'Morsel.public', [
 .constant('MINIHEADERHEIGHT', '60')
 .constant('USER_LIST_NUMBER', 20)
 .constant('USER_UPDATE_CHECK_TIME', 5000)
+.constant('COMMENT_LIST_NUMBER', 10)
+.constant('MORSEL_LIST_NUMBER', 15)
 
 // Default queries
 .value('presetMediaQueries', {

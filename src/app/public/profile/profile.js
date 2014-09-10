@@ -51,7 +51,7 @@ angular.module( 'Morsel.public.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth, MORSEL_LIST_NUMBER ) {
   $scope.viewOptions.miniHeader = true;
 
   $scope.user = profileUserData;
@@ -62,15 +62,16 @@ angular.module( 'Morsel.public.profile', [])
   $scope.pageData.pageTitle = $scope.user.first_name+' '+$scope.user.last_name+' ('+$scope.user.username+') | Morsel';
 
   //# of morsels to load at a time
-  $scope.morselIncrement = 15;
+  $scope.morselIncrement = MORSEL_LIST_NUMBER;
 
-  $scope.getMorsels = function(max_id) {
+  $scope.getMorsels = function(endMorsel) {
     var morselsParams = {
           count: $scope.morselIncrement
         };
 
-    if(max_id) {
-      morselsParams.max_id = parseInt(max_id, 10) - 1;
+    if(endMorsel) {
+      morselsParams.before_id = endMorsel.id;
+      morselsParams.before_date = endMorsel.published_at;
     }
 
     ApiUsers.getMorsels($scope.user.id, morselsParams).then(function(morselsData) {
