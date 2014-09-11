@@ -23,6 +23,10 @@
           background-color: rgba(0,0,0,.2);
         }
       }
+
+      img {
+        max-width: 100px;
+      }
     }
   }
 
@@ -109,6 +113,18 @@
         width: $profile-pic-xs;
         height: $profile-pic-xs;
         margin: 0 10px 0 0;
+      }
+    }
+  }
+}
+
+@media (min-width: 321px) {
+  .morsel-grid {
+    .morsel-grid-item {
+      > a {
+        img {
+          max-width: 100%;
+        }
       }
     }
   }
