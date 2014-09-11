@@ -60,7 +60,7 @@ angular.module( 'Morsel.public.profile', [])
   $scope.isProfessional = $scope.user.professional;
   $scope.canEdit = $scope.user.id === currentUser.id;
 
-  name = ($scope.user.first_name || $scope.user.last_name) ? ' - '+$scope.user.first_name+' '+$scope.user.last_name : '';
+  name = ($scope.user.first_name || $scope.user.last_name) ? $scope.user.first_name+' '+$scope.user.last_name : '';
 
   //update page title
   $scope.pageData.pageTitle = name+' ('+$scope.user.username+') | Morsel';
