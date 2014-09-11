@@ -11,6 +11,20 @@
     > div {
       z-index: 2;
     }
+
+    .col-sm-6 {
+      padding: 0;
+    }
+
+    .col-sm-2 {
+      text-align: center;
+    }
+
+    .place-map {
+      img {
+        border: 1px solid $morsel-medium;
+      }
+    }
   }
 
   .place-details {

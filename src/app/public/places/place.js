@@ -74,21 +74,16 @@ angular.module( 'Morsel.public.place', [])
   $scope.getMorsels();
 
   $scope.getPlacePhoto = function() {
-    var mapsBaseUrl = 'https://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&format=jpg&zoom=15',
-        markersUrl = '&markers=color:green%7C',
-        lonOffset= 0.005;
+    var mapsBaseUrl = 'https://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&format=jpg&zoom=16',
+        markersUrl = '&markers=color:green%7C';
 
     if($scope.place.lat && $scope.place.lon) {
       return [
-        //offset the map a little to the left for mobile
-        ['default', mapsBaseUrl+'&center='+$scope.place.lat+','+(parseFloat($scope.place.lon, 10)+lonOffset)+'&size=640x180'+markersUrl+$scope.place.lat+','+$scope.place.lon],
-        //640 is biggest size from APi
-        ['screen-sm', mapsBaseUrl+'&center='+$scope.place.lat+','+$scope.place.lon+'&size=640x125'+markersUrl+$scope.place.lat+','+$scope.place.lon]
+        ['default', mapsBaseUrl+'&center='+$scope.place.lat+','+$scope.place.lon+'&size=540x107'+markersUrl+$scope.place.lat+','+$scope.place.lon]
       ];
     } else if($scope.place.address && $scope.place.city && $scope.place.state) {
       return [
-        //640 is biggest size from APi
-        ['default', mapsBaseUrl+'&center='+encodeURIComponent($scope.place.address+', '+$scope.place.city+', '+$scope.place.state)+'&size=640x180'+markersUrl+encodeURIComponent($scope.place.address+', '+$scope.place.city+', '+$scope.place.state)]
+        ['default', mapsBaseUrl+'&center='+encodeURIComponent($scope.place.address+', '+$scope.place.city+', '+$scope.place.state)+'&size=540x107'+markersUrl+encodeURIComponent($scope.place.address+', '+$scope.place.city+', '+$scope.place.state)]
       ];
     } else {
       return [
