@@ -1301,6 +1301,14 @@ module.exports = function ( grunt ) {
       }
     });
 
+    grunt.file.copy('src/views/partials/picHeaderLink.hbs', this.data.dir + '/views/partials/picHeaderLink.hbs', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {}
+        });
+      }
+    });
+
     grunt.file.copy('src/views/partials/sidenav.hbs', this.data.dir + '/views/partials/sidenav.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
