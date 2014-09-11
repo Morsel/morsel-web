@@ -32,6 +32,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.rollbar',
   'Morsel.common.submitBtn',
   'Morsel.common.userImage',
+  'Morsel.common.usersName',
   'Morsel.common.validatedElement',
   //app
   'Morsel.account.accountSettings',

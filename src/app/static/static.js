@@ -13,7 +13,8 @@ angular.module( 'Morsel.static', [
   'Morsel.common.mixpanel',
   'Morsel.common.userImage',
   'Morsel.common.iTunesLink',
-  'Morsel.common.rollbar'
+  'Morsel.common.rollbar',
+  'Morsel.common.usersName'
   //app
 ])
 

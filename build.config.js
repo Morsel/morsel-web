@@ -180,7 +180,8 @@ module.exports = {
         'src/common/social/addTwitter.js',
         'src/common/social/facebookApi.js',
         'src/common/user/cuisinesSpecialties.js',
-        'src/common/user/userImage.js'
+        'src/common/user/userImage.js',
+        'src/common/user/usersName.js'
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
@@ -300,6 +301,7 @@ module.exports = {
         'src/common/api/users.js',
         'src/common/auth/auth.js',
         'src/common/user/userImage.js',
+        'src/common/user/usersName.js',
         'src/common/util/itunesLink.js'
       ],
       tpl: [
