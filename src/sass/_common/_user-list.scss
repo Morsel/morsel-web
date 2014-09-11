@@ -50,7 +50,7 @@
   }
 
   .empty-state {
-    padding-bottom: 10px;
+    padding: 25px 0 15px;
 
     p {
       margin: 0;
@@ -59,10 +59,8 @@
 
   .add-comment {
     padding-top: 15px;
-    border-top: 1px solid white;
     overflow: hidden;
     margin-top: 10px;
-    border-top: 1px solid $morsel-light;
   }
 
   & > p {
