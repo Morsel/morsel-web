@@ -78,8 +78,7 @@ function renderMorsel404(res, user, customMetadata) {
 
   //we only need a couple things from the user obj
   user404.username = user.username;
-  user404.hasName = user.first_name || user.last_name;
-  user404.fullName = user404.hasName ? user.first_name + ' ' + user.last_name : 'Morsel User';
+  user404.fullName = (user.first_name || user.last_name) ? user.first_name + ' ' + user.last_name : 'Morsel User';
   user404.route = user.username.toLowerCase();
 
   if(user.photos && user.photos._80x80) {
