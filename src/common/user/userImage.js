@@ -49,7 +49,7 @@ angular.module('Morsel.common.userImage', [])
                 '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
               '</span>';
       } else {
-        return '<a ng-href="/{{username}}" class="profile-pic-link {{userImageSize}}">' +
+        return '<a ng-href="/{{username.toLowerCase()}}" class="profile-pic-link {{userImageSize}}">' +
                 '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
               '</a>';
       }
