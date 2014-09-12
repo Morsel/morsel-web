@@ -1,28 +1,11 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
-@import "_common/_mixins";
-
-html, body {
-  margin: 0;
-  padding: 0;
-}
+// Import our common config file
+@import "_config";
 
 body {
   background: white url(images/bg/tile.png) center center repeat;
-  color: #394038;
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #e96144;
-  text-decoration: none;
-
-  &:hover {
-    color: #87392b;
-    text-decoration: underline;
-  }
-}
-
-@include error-page();
+@include error-page;
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .error-page {

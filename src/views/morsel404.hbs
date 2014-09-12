@@ -14,7 +14,17 @@
   <body>
     <div class="error-page">
       <h1>Morsel</h1>
-      <p>Oops, that page doesn't exist. Try one of these instead:</p>
+      <p>Oops, that morsel doesn't exist. Check out what else <a href="/{{user.route}}">{{user.username}}</a> has posted:</p>
+      <div class="user-info user-info-stacked">
+        <a href="/{{user.route}}" class="profile-pic-link profile-pic-m">
+          <img src="{{user.photo}}" class="img-circle" />
+        </a>
+        <h5 class="h2 overflow-ellipsis">
+          <a href="/{{user.route}}" class="{{user.hasName ? '' : 'no-name'}}">{{user.fullName}}</a>
+        </h5>
+      </div>
+
+      <p>Or try one of these instead:</p>
       <ul class="links">
         <li>
           <a href="/">Morsel Home</a>

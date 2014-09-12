@@ -69,6 +69,31 @@ function renderPublicPage(res, customMetadata) {
   });
 }
 
+function renderMorsel404(res, user, customMetadata) {
+  var user404 = {};
+
+  if(customMetadata) {
+    res.locals.metadata = customMetadata;
+  }
+
+  //we only need a couple things from the user obj
+  user404.username = user.username;
+  user404.hasName = user.first_name || user.last_name;
+  user404.fullName = user404.hasName ? user.first_name + ' ' + user.last_name : 'Morsel User';
+  user404.route = user.username.toLowerCase();
+
+  if(user.photos && user.photos._80x80) {
+    user404.photo = user.photos._80x80;
+  } else {
+    //placeholder avatar
+    user404.photo = util.placeholderAvatarUrl+'_80x80'+'.jpg';
+  }
+
+  res.status(404).render('morsel404', {
+    user: user404
+  });
+}
+
 module.exports.renderPublicPage = renderPublicPage;
 
 module.exports.renderMorselPage = function(req, res) {
@@ -78,7 +103,8 @@ module.exports.renderMorselPage = function(req, res) {
       request = require('request');
 
   request(app.locals.apiUrl+'/users/'+username+util.apiQuerystring, function (error, response, body) {
-    var user;
+    var user,
+        morsel404Metadata;
 
     if (!error && response.statusCode == 200) {
       user = JSON.parse(body).data;
@@ -92,7 +118,7 @@ module.exports.renderMorselPage = function(req, res) {
           morsel = JSON.parse(body).data;
 
           morselMetadata = {
-            "title": morsel.title + ' - ' + user.first_name + ' ' + user.last_name + ' | Morsel',
+            "title": morsel.title + ' - ' + ((user.first_name || user.last_name) ? user.first_name + ' ' + user.last_name : user.username) + ' | Morsel',
             "image": getCoverPhoto(morsel),
             "app": {
               "url": util.appProtocol+'morsels/'+morsel.id
@@ -129,8 +155,14 @@ module.exports.renderMorselPage = function(req, res) {
 
           renderPublicPage(res, morselMetadata);
         } else {
-          //not a valid morsel id - must be a bad route
-          util.render404(res);
+          //if the morsel slug isn't valid, but it is a valid user, show a morsel not found page
+          morsel404Metadata = {
+            "title": 'Morsel Not Found - ' + ((user.first_name || user.last_name) ? user.first_name + ' ' + user.last_name : '') + ' (' + user.username + ') | Morsel',
+            "description": "Oops, this morsel doesn't exist"
+          };
+
+          //not a valid morsel id - must be a bad route. show a morsel 404
+          renderMorsel404(res, user, morsel404Metadata);
         }
       });
     } else {
