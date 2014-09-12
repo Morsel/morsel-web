@@ -58,9 +58,13 @@
       list-style: none;
 
       .morsel-summary {
-        a:hover {
-          .centered-wrap {
-            background-color: rgba(0,0,0,.2);
+        a {
+          max-width: 100%;
+          
+          &:hover {
+            .centered-wrap {
+              background-color: rgba(0,0,0,.2);
+            }
           }
         }
       }
