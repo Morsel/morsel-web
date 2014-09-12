@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.socialSharing', [] )
 
 //like/unlike a morsel
-.directive('mrslSocialSharing', function($location, Mixpanel, $window, PhotoHelpers, MORSELPLACEHOLDER){
+.directive('mrslSocialSharing', function($location, Mixpanel, $window, PhotoHelpers, MORSELPLACEHOLDER, ApiUsers){
   return {
     restrict: 'A',
     scope: {
@@ -48,8 +48,6 @@ angular.module( 'Morsel.common.socialSharing', [] )
         var url,
             shareText,
             s = scope.morsel,
-            //use their handle if they have one - otherwise use their name
-            twitterUsername = s.creator.twitter_username ? '@'+s.creator.twitter_username : s.creator.first_name+' '+s.creator.last_name,
             //backup
             morselUrl = s.url,
             facebookUrl = s.mrsl && s.mrsl.facebook_mrsl ? s.mrsl.facebook_mrsl : morselUrl,
@@ -64,8 +62,18 @@ angular.module( 'Morsel.common.socialSharing', [] )
         if(socialType === 'facebook') {
           url = 'https://www.facebook.com/sharer/sharer.php?u='+facebookUrl;
         } else if(socialType === 'twitter') {
-          shareText = encodeURIComponent('"'+s.title+'" from '+twitterUsername+' on @eatmorsel '+twitterUrl);
-          url = 'https://twitter.com/home?status='+shareText;
+          //need to make a separate call to get their twitter username
+          ApiUsers.getUser(s.creator.username).then(function(userResp){
+            var user = userResp.data,
+                //use their handle if they have one - otherwise use their name
+                twitterUsername = user.twitter_username ? '@'+user.twitter_username : user.first_name+' '+user.last_name;
+            
+            shareText = encodeURIComponent('"'+s.title+'" from '+twitterUsername+' on @eatmorsel '+twitterUrl);
+            url = 'https://twitter.com/home?status='+shareText;
+            $window.open(url);
+          });
+
+          return;
         } else if(socialType === 'linkedin') {
           url = 'https://www.linkedin.com/shareArticle?mini=true&url='+linkedinUrl;
         } else if(socialType === 'pinterest') {
@@ -74,7 +82,7 @@ angular.module( 'Morsel.common.socialSharing', [] )
         } else if(socialType === 'google-plus') {
           url = 'https://plus.google.com/share?url='+googleplusUrl;
         } else if(socialType === 'clipboard') {
-          window.prompt("Copy the following link to share:", clipboardUrl);
+          $window.prompt("Copy the following link to share:", clipboardUrl);
           return;
         }
 
