@@ -1,23 +1,25 @@
 <div bindonce="place" class="profile place-profile" ng-style="viewOptions.minimumMainHeight()">
   <div class="container">
     <div class="profile-container">
-      <div class="profile-info col-sm-10">
+      <div class="profile-info col-sm-4">
         <div class="profile-body">
           <h1 class="h3" bo-text="place.name"></h1>
           <p bo-html="(place.address ? place.address + '<br/>' : '') + (place.city ? place.city + ', ':'') + place.state + (place.postal_code ? ' ' + place.postal_code : '')"></p>
         </div>
       </div>
+      <div class="place-map col-sm-6">
+        <img mrsl-responsive-images="{{getPlacePhoto()}}" />
+      </div>
       <div class="col-sm-2">
         <button mrsl-follow mrsl-id-to-follow="place.id" mrsl-is-following="place.following" mrsl-follow-type="place"></button>
       </div>
-      <div class="profile-bg" mrsl-responsive-images="{{getPlacePhoto()}}" mrsl-ri-image-type="background"></div>
     </div>
     <div>
       <tabset class="places-tabs">
         <tab heading="Morsels">
           <ul class="clearfix morsel-grid">
-            <li ng-repeat="morsel in morsels | reverse" class="morsel-grid-item">
-              <a ng-click="goTo(morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug)" class="centered centered-white">
+            <li bindonce ng-repeat="morsel in morsels | reverse" class="morsel-grid-item">
+              <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="centered centered-white">
                 <div class="centered-wrap">
                   <span class="centered-text">{{morsel.title}}</span>
                 </div>

@@ -1,4 +1,6 @@
 .modal-header {
+  @include morsel-border($modal-content-bg);
+
   h4 {
     margin: 5px 0 5px 20px !important;
 
@@ -7,6 +9,10 @@
       vertical-align: middle;
       margin-left: 10px;
     }
+  }
+
+  .close {
+    padding: 5px;
   }
 }
 

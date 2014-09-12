@@ -15,7 +15,7 @@ angular.module('Morsel.common.morsel', [])
       var onOrientationChange,
           winEl = angular.element($window),
           pageHeight,
-          $pageWrapper = angular.element(document.getElementById('page-wrapper'));
+          $body = angular.element(document.getElementsByTagName('body'));
 
       //hold all our computed layout measurements
       scope.layout = {};
@@ -112,7 +112,7 @@ angular.module('Morsel.common.morsel', [])
       });
 
       scope.moreClick = function() {
-        $pageWrapper.scrollTop(pageHeight, moreScrollTime);
+        $body.scrollTop(pageHeight, moreScrollTime);
       };
     },
     templateUrl: 'common/morsels/morsel.tpl.html'

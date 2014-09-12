@@ -29,6 +29,7 @@ var appProtocol = 'mrsl://';
 //static JSON data
 var staticRoutes = require('./data/static-routes.json');
 var metadata = require('./data/metadata.json');
+var placeholderAvatarUrl = '/assets/images/utility/avatars/avatar';
 
 //set up some app locals that will be rendered to any templates
 app.locals.siteUrl = process.env.SITEURL || config.siteUrl;
@@ -134,3 +135,4 @@ module.exports.nodeEnv = nodeEnv;
 module.exports.port = port;
 module.exports.useSsl = useSsl;
 module.exports.appProtocol = appProtocol;
+module.exports.placeholderAvatarUrl = placeholderAvatarUrl;

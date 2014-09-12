@@ -17,6 +17,16 @@
       padding: 1px;
       text-align: center;
       min-height: 60px;//so it doesn't look so nasty when they load
+
+      &:hover {
+        .centered-wrap {
+          background-color: rgba(0,0,0,.2);
+        }
+      }
+
+      img {
+        max-width: 100px;
+      }
     }
   }
 
@@ -47,6 +57,14 @@
       border-bottom: 1px solid $morsel-light;
       list-style: none;
 
+      .morsel-summary {
+        a:hover {
+          .centered-wrap {
+            background-color: rgba(0,0,0,.2);
+          }
+        }
+      }
+      
       > div {
         display: inline-block;
         max-width: 100%;
@@ -100,6 +118,18 @@
   }
 }
 
+@media (min-width: 321px) {
+  .morsel-grid {
+    .morsel-grid-item {
+      > a {
+        img {
+          max-width: 100%;
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: $screen-xs-min) {
   .morsel-grid {
     .centered-white {
@@ -115,27 +145,11 @@
   .morsel-grid {
     .morsel-grid-item {
       min-height: 200px;
-      
-      a {
-        &:hover {
-          .centered-wrap {
-            background-color: rgba(0,0,0,.2);
-          }
-        }
-      }
     }
 
     &.morsel-summary-grid {
       .morsel-summary-grid-item {
         border-right: 1px solid $morsel-light;
-
-        a {
-          &:hover {
-            .centered-wrap {
-              background-color: rgba(0,0,0,.2);
-            }
-          }
-        }
         
         &:nth-child(2n) {
           border-right: 0;

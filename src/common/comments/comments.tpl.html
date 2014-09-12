@@ -1,6 +1,6 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()">&times;</button>
-  <h4 class="h2">Comments</h4>
+  <h4 class="h2 overflow-ellipsis">Comments</h4>
 </div>
 <div class="modal-body user-list comment-list">
   <div mrsl-view-more mrsl-view-more-func="getComments" mrsl-view-more-data="item.comments" mrsl-view-more-inc="increment" mrsl-view-more-copy="View previous comments" mrsl-view-more-order="last"></div>
@@ -26,7 +26,7 @@
   <div class="add-comment">
     <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
       <div class="form-group">
-        <textarea class="form-control" rows="3" ng-model="comment.description" placeholder="Write your comment" required></textarea>
+        <textarea class="form-control" rows="3" ng-model="comment.description" ng-attr-placeholder="Write your comment" required></textarea>
       </div>
       <button type="submit" ng-disabled="addCommentForm.$invalid" class="btn btn-primary">Add Comment</button>
     </form>

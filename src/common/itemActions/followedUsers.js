@@ -7,7 +7,7 @@ angular.module( 'Morsel.common.followedUsers', [] )
       followerId: '=mrslFollowerId',
       followingCount: '=mrslFollowingCount'
     },
-    replace: false,
+    replace: true,
     link: function(scope, element, attrs) {
       scope.showFollowed = function() {
         $rootScope.modalInstance = $modal.open({
@@ -54,6 +54,6 @@ angular.module( 'Morsel.common.followedUsers', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'followerId'];
     },
-    template: '<a class="h3" ng-click="showFollowed()">{{followingCount}}<span class="h6">Following</span></a>'
+    template: '<div class="h3" ng-click="showFollowed()">{{followingCount}}<span class="h6">Following</span></div>'
   };
 });

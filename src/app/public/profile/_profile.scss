@@ -17,11 +17,13 @@
       text-align: center;
       padding: 0 10px;
 
-      a {
+      div {
         color: $morsel-primary;
         margin: 0;
 
         &:hover {
+          cursor: pointer;
+
           span {
             color: $morsel-primary;
           }

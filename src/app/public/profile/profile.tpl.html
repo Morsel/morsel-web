@@ -21,10 +21,10 @@
       </div>
       <ul class="user-stats col-sm-6">
         <li>
-          <a mrsl-followers mrsl-follow-id="user.id" mrsl-follower-count="user.follower_count"></a>
+          <div mrsl-followers mrsl-follow-id="user.id" mrsl-follower-count="user.follower_count"></div>
         </li>
         <li>
-          <a mrsl-followed-users mrsl-follower-id="user.id" mrsl-following-count="user.followed_user_count"></a>
+          <div mrsl-followed-users mrsl-follower-id="user.id" mrsl-following-count="user.followed_user_count"></div>
         </li>
       </ul>
       <div class="profile-bg" mrsl-responsive-images="{{getUserPhoto()}}" mrsl-ri-image-type="background"></div>
@@ -33,8 +33,8 @@
       <tabset bo-class="{'professional-tabs':isProfessional}">
         <tab heading="Morsels">
           <ul class="clearfix morsel-grid">
-            <li ng-repeat="morsel in morsels | reverse" class="morsel-grid-item">
-              <a ng-click="goTo(user.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug)" class="centered centered-white">
+            <li bindonce ng-repeat="morsel in morsels | reverse" class="morsel-grid-item">
+              <a bo-href="'/'+user.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="centered centered-white">
                 <div class="centered-wrap">
                   <span class="centered-text">{{morsel.title}}</span>
                 </div>

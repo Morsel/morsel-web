@@ -200,11 +200,7 @@ angular.module( 'Morsel.login.join', [])
   }
 })
 
-.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope, $window ) {
-  $scope.goToCS = function(){
-    $window.location.href = '/account/cuisines-specialties';
-  };
-
+.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope ) {
   //skip cuisines and specialties
   $scope.skipCS = function() {
     //they're done
