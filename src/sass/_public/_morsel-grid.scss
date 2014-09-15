@@ -59,8 +59,6 @@
 
       .morsel-summary {
         a {
-          max-width: 100%;
-          
           &:hover {
             .centered-wrap {
               background-color: rgba(0,0,0,.2);
@@ -78,6 +76,7 @@
         display: inline-block;
         min-width: 75%;
         min-height: 200px;
+        max-width: 100%;
       }
 
       .centered-white {
