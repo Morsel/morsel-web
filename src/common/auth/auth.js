@@ -1,7 +1,9 @@
-angular.module( 'Morsel.common.auth', [] )
+angular.module( 'Morsel.common.auth', [
+  'LocalStorageModule'
+] )
 
 // Auth is used for all user authentication interactions
-.factory('Auth', function($window, ApiUsers, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel, $rootScope, RollbarFactory){
+.factory('Auth', function($window, ApiUsers, Restangular, $q, $timeout, DEVICEKEY, DEVICEVALUE, VERSIONKEY, VERSIONVALUE, $modal, Mixpanel, $rootScope, RollbarFactory, localStorageService){
   var Auth = {},
       defaultRequestParams = {},
       loadedUser = $q.defer();
@@ -37,8 +39,8 @@ angular.module( 'Morsel.common.auth', [] )
 
   //remove user data from storage
   Auth._forgetUser = function() {
-    delete $window.localStorage.userId;
-    delete $window.localStorage.auth_token;
+    localStorageService.remove('userId');
+    localStorageService.remove('auth_token');
 
     Auth._resetApiKey();
   };
@@ -46,19 +48,19 @@ angular.module( 'Morsel.common.auth', [] )
   //add user data to storage
   Auth._saveUser = function() {
     if(Auth._currentUser.id && Auth._currentUser.auth_token) {
-      $window.localStorage.userId = Auth._currentUser.id;
-      $window.localStorage.auth_token = Auth._currentUser.auth_token;
+      localStorageService.set('userId', Auth._currentUser.id);
+      localStorageService.set('auth_token', Auth._currentUser.auth_token);
     }
   };
 
   //get userid from storage
   Auth._getSavedUserId = function() {
-    return $window.localStorage.userId || null;
+    return localStorageService.get('userId') || null;
   };
 
   //get userauthtoken from storage
   Auth._getSavedUserAuthToken = function() {
-    return $window.localStorage.auth_token || null;
+    return localStorageService.get('auth_token') || null;
   };
 
   //update the current user and save her
@@ -166,7 +168,7 @@ angular.module( 'Morsel.common.auth', [] )
 
     //if the current user is blank
     if(_.isEqual(Auth._currentUser, Auth._blankUser())) {
-      //if there's a userId in the cookie
+      //if there's a userId in storage
       if(Auth._getSavedUserId()) {
         //reset our key
         Auth._resetApiKey();
@@ -201,7 +203,7 @@ angular.module( 'Morsel.common.auth', [] )
     return loadedUser.promise;
   };
 
-  //a bit sketchy, but we need this to check for restricted routes without having to wait for the user to resolve. check if userId and authToken are present in the cookie (doesn't account for potentially invalid values)
+  //a bit sketchy, but we need this to check for restricted routes without having to wait for the user to resolve. check if userId and authToken are present in storage (doesn't account for potentially invalid values)
   Auth.potentiallyLoggedIn = function() {
     return Auth._getSavedUserId() && Auth._getSavedUserAuthToken() ? true : false;
   };

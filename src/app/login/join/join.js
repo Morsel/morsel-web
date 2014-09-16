@@ -92,7 +92,7 @@ angular.module( 'Morsel.login.join', [])
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers, $cookies ) {
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers, localStorageService ) {
   //used to differentiate between login types for UI
   $scope.usingEmail = _.isEmpty($scope.userData.social); 
 
@@ -131,7 +131,7 @@ angular.module( 'Morsel.login.join', [])
           }
         },
         socialData,
-        gaCookie = $cookies._ga;
+        gaCookie = localStorageService.cookie.get('_ga', true);
 
     if($scope.profilePhoto) {
       uploadData.user.photo = $scope.profilePhoto;

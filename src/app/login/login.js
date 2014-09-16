@@ -2,7 +2,6 @@ angular.module( 'Morsel.login', [
   //libs
   'angularMoment',
   'duScroll',
-  'ngCookies',
   'restangular',
   'ui.bootstrap',
   'ui.router',
@@ -64,7 +63,7 @@ angular.module( 'Morsel.login', [
 
 .constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL, $provide ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL, $provide, localStorageServiceProvider ) {
   var defaultRequestParams = {};
 
   $locationProvider.html5Mode(true).hashPrefix('!');
@@ -87,6 +86,8 @@ angular.module( 'Morsel.login', [
       }
     };
   }]);
+
+  localStorageServiceProvider.prefix = 'mrsl';
 })
 
 .run( function run ($window) {
