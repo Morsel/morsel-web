@@ -65,7 +65,7 @@ angular.module( 'Morsel.account', [
 
 .constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL, $provide ) {
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider, APIURL, $provide, localStorageServiceProvider ) {
   var defaultRequestParams = {};
 
   $locationProvider.html5Mode(true).hashPrefix('!');
@@ -102,6 +102,8 @@ angular.module( 'Morsel.account', [
       }
     };
   }]);
+
+  localStorageServiceProvider.prefix = 'mrsl';
 })
 
 .run( function run ($window) {

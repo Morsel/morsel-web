@@ -31,7 +31,7 @@ angular.module( 'Morsel.login.reservedUsername', [])
   });
 })
 
-.controller( 'ReservedUsernameCtrl', function ReservedUsernameCtrl( $scope, HandleErrors, Auth, $state, $stateParams, ApiUsers, $cookies, $window, loginUser ) {
+.controller( 'ReservedUsernameCtrl', function ReservedUsernameCtrl( $scope, HandleErrors, Auth, $state, $stateParams, ApiUsers, $window, loginUser, localStorageService ) {
   //model to store our basic info data
   $scope.completeSignupModel = {
     'email': $stateParams.email,
@@ -78,7 +78,7 @@ angular.module( 'Morsel.login.reservedUsername', [])
             'professional': $scope.completeSignupModel.professional
           }
         },
-        gaCookie = $cookies._ga;
+        gaCookie = localStorageService.cookie.get('_ga', true);
 
     if($scope.profilePhoto) {
       userData.user.photo = $scope.profilePhoto;

@@ -41,7 +41,7 @@ angular.module( 'Morsel.static', [
 
 .constant('MORSELPLACEHOLDER', '/assets/images/utility/placeholders/morsel-placeholder_640x640.jpg')
 
-.config( function myAppConfig ( $locationProvider, RestangularProvider, APIURL, $provide ) {
+.config( function myAppConfig ( $locationProvider, RestangularProvider, APIURL, $provide, localStorageServiceProvider ) {
   var defaultRequestParams = {};
 
   //Restangular configuration
@@ -59,6 +59,8 @@ angular.module( 'Morsel.static', [
       }
     };
   }]);
+
+  localStorageServiceProvider.prefix = 'mrsl';
 })
 
 .run( function run ($window) {
