@@ -36,7 +36,8 @@ angular.module( 'Morsel.add', [
   'Morsel.common.viewMore',
 
   //app
-  'Morsel.add.drafts'
+  'Morsel.add.drafts',
+  'Morsel.add.morsel'
 ])
 
 //define some constants for the app
