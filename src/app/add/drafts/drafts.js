@@ -10,6 +10,9 @@ angular.module( 'Morsel.add.drafts', [])
       }
     },
     data:{ pageTitle: 'Your Drafts' },
+    access: {
+      restricted : true
+    },
     resolve: {
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();

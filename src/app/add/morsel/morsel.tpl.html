@@ -1,11 +1,12 @@
 <div class="add-morsel" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-no-padding container-shadow container-margin-bottom morsel-bg">
-    <div class="row" bindonce="morsel">
-      <div class="col-sm-6">
+    <div ng-if="!morsel" class="loader"></div>
+    <div ng-if="morsel" class="row" bindonce="morsel">
+      <div class="col-sm-5">
         <div class="add-morsel-info" style="height:500px">
           <div class="add-morsel-info-wrap">
-            <p>Placeholder Title</p>
-            <p>Placeholder Place</p>
+            <p class="h3">Title: <span bo-text="morsel.title"></p>
+            <p class="h3">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
             <div class="add-morsel-actions">
               <a bo-href="" class="btn">Preview</a>
               <button>Publish</button>
@@ -13,7 +14,7 @@
           </div>
         </div>
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-7">
         <div class="add-morsel-items">
           <div class="add-morsel-items-wrap">
             <ul>

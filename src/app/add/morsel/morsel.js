@@ -10,6 +10,9 @@ angular.module( 'Morsel.add.morsel', [])
       }
     },
     data:{ pageTitle: 'Morsel Checklist' },
+    access: {
+      restricted : true
+    },
     resolve: {
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();
