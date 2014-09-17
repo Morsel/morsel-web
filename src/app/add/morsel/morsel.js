@@ -26,7 +26,6 @@ angular.module( 'Morsel.add.morsel', [])
       allTemplateData;
 
   $scope.viewOptions.miniHeader = true;
-  $scope.MORSELPLACEHOLDER = MORSELPLACEHOLDER;
 
   //saved morsel data
   morselPromises.push(getMorsel());
@@ -78,5 +77,22 @@ angular.module( 'Morsel.add.morsel', [])
       $scope.morsel.displayTitle = $scope.morselTemplate.title;
       $scope.morsel.hasTitle = false;
     }
+
+    //figure out which template each item uses and add it to the morsel
+    _.each($scope.morsel.items, function(item) {
+      item.displayTemplate = _.find($scope.morselTemplate.items, function(templateItem) {
+        return templateItem.template_order === item.template_order;
+      });
+    });
   }
+
+  $scope.findItemThumbnail = function(item) {
+    if(item.photos && item.photos._100x100) {
+      return item.photos._100x100;
+    } else if(item.displayTemplate && item.displayTemplate.placeholder_photos && item.displayTemplate.placeholder_photos.large) {
+      return item.displayTemplate.placeholder_photos.large;
+    } else {
+      return MORSELPLACEHOLDER;
+    }
+  };
 });
