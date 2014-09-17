@@ -335,18 +335,22 @@ module.exports = {
         'src/common/analytics/ga.js',
         'src/common/analytics/mixpanel.js',
         'src/common/analytics/rollbar.js',
+        'src/common/api/morsels.js',
         'src/common/api/uploads.js',
         'src/common/api/users.js',
         'src/common/auth/auth.js',
+        'src/common/filters/reverse.js',
         'src/common/forms/baseErrors.js',
         'src/common/forms/formNameFix.js',
         'src/common/forms/handleErrors.js',
         'src/common/forms/submitBtn.js',
         'src/common/forms/validatedElement.js',
         'src/common/images/photoHelpers.js',
+        'src/common/images/responsiveImages.js',
         'src/common/images/upload.js',
         'src/common/user/userImage.js',
-        'src/common/user/usersName.js'
+        'src/common/user/usersName.js',
+        'src/common/util/viewMore.js'
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
@@ -356,7 +360,8 @@ module.exports = {
         'src/common/forms/validatedRadio.tpl.html',
         'src/common/forms/validatedSingleCheckbox.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
-        'src/common/util/404.tpl.html'
+        'src/common/util/404.tpl.html',
+        'src/common/util/viewMore.tpl.html'
       ]
     },
     vendor_files: {

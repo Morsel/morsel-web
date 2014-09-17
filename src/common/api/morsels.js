@@ -24,6 +24,18 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return deferred.promise;
   };
 
+  Morsels.getDrafts = function(draftsParams) {
+    var deferred = $q.defer();
+
+    RestangularMorsels.one('drafts').get(draftsParams).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp).data);
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   /*Items.addMorsel = function(morselData) {
     var deferred = $q.defer(),
         fd,

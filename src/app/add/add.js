@@ -9,8 +9,10 @@ angular.module( 'Morsel.add', [
   'ui.router',
   'ui.route',
   //filters
+  'Morsel.common.reverse',
 
   //API
+  'Morsel.common.apiMorsels',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
 
@@ -25,11 +27,14 @@ angular.module( 'Morsel.add', [
   'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
   'Morsel.common.photoHelpers',
+  'Morsel.common.responsiveImages',
   'Morsel.common.rollbar',
   'Morsel.common.submitBtn',
   'Morsel.common.userImage',
   'Morsel.common.usersName',
   'Morsel.common.validatedElement',
+  'Morsel.common.viewMore',
+
   //app
   'Morsel.add.drafts'
 ])
