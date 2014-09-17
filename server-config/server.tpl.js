@@ -104,6 +104,7 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     var loginApp = require('./apps/login');
     var staticApp = require('./apps/static');
     var publicApp = require('./apps/public');
+    var addApp = require('./apps/add');
 
     var forceSsl = function (req, res, next) {
       if (req.headers['x-forwarded-proto'] !== 'https') {
@@ -181,6 +182,10 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       res.sendfile('templates-static.js');
     });
 
+    app.get('/templates-add.js', function(req, res){
+      res.sendfile('templates-add.js');
+    });
+
     //SEO
     app.get('/BingSiteAuth.xml', function(req, res){
       res.sendfile('seo/BingSiteAuth.xml');
@@ -256,6 +261,11 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     //ACCOUNT
     app.get('/account*', function(req, res){
       accountApp.renderAccountPage(req, res);
+    });
+
+    //ADD
+    app.get('/add*', function(req, res){
+      addApp.renderAddPage(req, res);
     });
 
     //PUBLIC

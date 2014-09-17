@@ -1,78 +1,36 @@
-angular.module( 'Morsel.public', [
+angular.module( 'Morsel.add', [
   //libs
   'angularMoment',
   'duScroll',
   'LocalStorageModule',
-  'ngSanitize',
   'pasvaz.bindonce',
   'restangular',
   'ui.bootstrap',
   'ui.router',
   'ui.route',
   //filters
-  'Morsel.common.reverse',
-  'Morsel.common.nameMatch',
+
   //API
-  'Morsel.common.apiFeed',
-  'Morsel.common.apiItems',
-  'Morsel.common.apiKeywords',
-  'Morsel.common.apiMorsels',
-  'Morsel.common.apiPlaces',
-  'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
-  'Morsel.common.apiUtil',
+  'Morsel.common.apiUploads',
+
   //templates
-  'templates-public',
+  'templates-add',
   //common
-  'Morsel.common.activityFeed',
-  'Morsel.common.afterLogin',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
-  'Morsel.common.comments',
-  'Morsel.common.cuisineUsers',
-  'Morsel.common.facebookApi',
-  'Morsel.common.follow',
-  'Morsel.common.followedUsers',
-  'Morsel.common.followers',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',
-  'Morsel.common.itemActionBar',
-  'Morsel.common.itemLike',
-  'Morsel.common.iTunesLink',
-  'Morsel.common.likeableFeed',
+  'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
-  'Morsel.common.morsel',
-  'Morsel.common.morselSummary',
   'Morsel.common.photoHelpers',
-  'Morsel.common.placeList',
-  'Morsel.common.responsiveImages',
   'Morsel.common.rollbar',
-  'Morsel.common.socialSharing',
-  'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
-  'Morsel.common.truncate',
   'Morsel.common.userImage',
-  'Morsel.common.userList',
   'Morsel.common.usersName',
-  'Morsel.common.validatedElement',
-  'Morsel.common.viewMore',
+  'Morsel.common.validatedElement'
   //app
-  'Morsel.public.activity',
-  'Morsel.public.contact',
-  'Morsel.public.explore',
-  'Morsel.public.feed',
-  'Morsel.public.home',
-  'Morsel.public.invite',
-  'Morsel.public.notifications',
-  'Morsel.public.place',//place comes before morselDetail so /places/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
-  'Morsel.public.search',//search comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
-  'Morsel.public.search.people',
-  'Morsel.public.search.people.morsel',
-  'Morsel.public.search.people.facebook',
-  'Morsel.public.search.people.twitter',
-  'Morsel.public.profile',//profile comes before morselDetail so /users/:id doesn't get clobbered by '/:username/:morseldetails'...not ideal
-  'Morsel.public.morselDetail'
 ])
 
 //define some constants for the app

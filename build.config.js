@@ -327,6 +327,63 @@ module.exports = {
     }
   },
 
+  /* files just related to our add app */
+  add_files: {
+    atpl: [ 'src/app/add/**/*.tpl.html' ],
+    common: {
+      js: [
+        'src/common/analytics/ga.js',
+        'src/common/analytics/mixpanel.js',
+        'src/common/analytics/rollbar.js',
+        'src/common/api/uploads.js',
+        'src/common/api/users.js',
+        'src/common/auth/auth.js',
+        'src/common/forms/baseErrors.js',
+        'src/common/forms/formNameFix.js',
+        'src/common/forms/handleErrors.js',
+        'src/common/forms/submitBtn.js',
+        'src/common/forms/validatedElement.js',
+        'src/common/images/photoHelpers.js',
+        'src/common/images/upload.js',
+        'src/common/user/userImage.js',
+        'src/common/user/usersName.js'
+      ],
+      tpl: [
+        'src/common/auth/apiError.tpl.html',
+        'src/common/forms/submitBtn.tpl.html',
+        'src/common/forms/validatedCheckbox.tpl.html',
+        'src/common/forms/validatedInput.tpl.html',
+        'src/common/forms/validatedRadio.tpl.html',
+        'src/common/forms/validatedSingleCheckbox.tpl.html',
+        'src/common/forms/validatedTextarea.tpl.html',
+        'src/common/util/404.tpl.html'
+      ]
+    },
+    vendor_files: {
+      js: [
+        'vendor/angular/angular.js',
+        'vendor/angular-bindonce/bindonce.min.js',
+        'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-local-storage/angular-local-storage.js',
+        'vendor/angular-moment/angular-moment.min.js',
+        'vendor/angular-scroll/angular-scroll.min.js',
+        'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/angular-ui-utils/modules/route/route.js',
+        'vendor/matchMedia/matchMedia.js',
+        'vendor/matchMedia/matchMedia.addListener.js',
+        'vendor/moment/moment.js',
+        'vendor/lodash/dist/lodash.js',
+        'vendor/ng-file-upload/angular-file-upload.js',
+        'vendor/ng-file-upload/angular-file-upload-shim.js',
+        'vendor/restangular/dist/restangular.js'
+      ],
+      css: [
+      ],
+      assets: [
+      ]
+    }
+  },
+
   /**
    * This is a collection of files used during testing only.
    */

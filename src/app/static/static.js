@@ -1,5 +1,6 @@
 angular.module( 'Morsel.static', [
   //libs
+  'LocalStorageModule',
   'restangular',
   'ui.bootstrap',
   //filters

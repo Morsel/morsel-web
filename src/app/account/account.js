@@ -2,6 +2,7 @@ angular.module( 'Morsel.account', [
   //libs
   'angularMoment',
   'duScroll',
+  'LocalStorageModule',
   'pasvaz.bindonce',
   'restangular',
   'ui.bootstrap',
