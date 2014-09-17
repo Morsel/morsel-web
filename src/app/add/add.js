@@ -29,8 +29,9 @@ angular.module( 'Morsel.add', [
   'Morsel.common.submitBtn',
   'Morsel.common.userImage',
   'Morsel.common.usersName',
-  'Morsel.common.validatedElement'
+  'Morsel.common.validatedElement',
   //app
+  'Morsel.add.drafts'
 ])
 
 //define some constants for the app
