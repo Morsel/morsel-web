@@ -8,7 +8,7 @@
             <p class="h3">Title: <span bo-text="morsel.title"></p>
             <p class="h3">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
             <div class="add-morsel-actions">
-              <a bo-href="" class="btn">Preview</a>
+              <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank">Preview</a>
               <button>Publish</button>
             </div>
           </div>
