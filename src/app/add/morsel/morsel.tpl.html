@@ -18,11 +18,11 @@
         <div class="add-morsel-items">
           <div class="add-morsel-items-wrap">
             <ul>
-              <li class="add-morsel-item"></li>
-              <li class="add-morsel-item"></li>
-              <li class="add-morsel-item"></li>
-              <li class="add-morsel-item"></li>
-              <li class="add-morsel-item"></li>
+              <li class="add-morsel-item" ng-if="morsel.items" ng-repeat="item in morsel.items">
+                <img bo-src="(item.photos && item.photos._100x100) ? item.photos._100x100 : MORSELPLACEHOLDER" />
+                <textarea></textarea>
+              </li>
+              <li ng-if="!morsel.items"><p class="empty-state">This morsel doesn't have an items</p></li>
             </ul>
           </div>
         </div>

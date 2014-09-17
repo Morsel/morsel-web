@@ -24,6 +24,8 @@ angular.module( 'Morsel.add.morsel', [])
 .controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, MORSELPLACEHOLDER, ApiMorsels, PhotoHelpers ) {
   $scope.viewOptions.miniHeader = true;
 
+  $scope.MORSELPLACEHOLDER = MORSELPLACEHOLDER;
+  
   ApiMorsels.getMorsel($stateParams.morselId).then(function(morselData) {
     $scope.morsel = morselData;
   }, function() {
