@@ -10,6 +10,11 @@
       span {
         font-weight: normal;
         font-family: $font-family-base;
+
+        &.no-title {
+          color: $morsel-medium;
+          font-style: italic;
+        }
       }
     }
 
