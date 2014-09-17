@@ -20,6 +20,4 @@ angular.module( 'Morsel.add.drafts', [])
 
 .controller( 'DraftsCtrl', function DraftsCtrl( $scope, currentUser ) {
   $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.hideLogo = true;
-
 });
