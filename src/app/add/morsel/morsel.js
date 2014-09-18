@@ -62,7 +62,7 @@ angular.module( 'Morsel.add.morsel', [])
 
     if($scope.morsel.title) {
        //due to current bug in the app, we need to manually check the title against the templates to determine if it actually has a title https://www.pivotaltracker.com/story/show/79033104
-      if($scope.morsel.title === ($scope.morselTemplate.title+' morsel')) {
+      if($scope.morselTemplate && $scope.morselTemplate.title && ($scope.morsel.title === ($scope.morselTemplate.title+' morsel'))) {
         //reset the title
         $scope.morsel.title = null;
         //display the placeholder
@@ -73,16 +73,26 @@ angular.module( 'Morsel.add.morsel', [])
         $scope.morsel.hasTitle = true;
       }
     } else {
-      //if there isn't a title, use the placeholder
-      $scope.morsel.displayTitle = $scope.morselTemplate.title;
+      //if there isn't a title
+      if($scope.morselTemplate && $scope.morselTemplate.title) {
+        //use the placeholder if there is one
+        $scope.morsel.displayTitle = $scope.morselTemplate.title;
+      } else {
+        $scope.morsel.displayTitle = 'Untitled';
+      }
+      
       $scope.morsel.hasTitle = false;
     }
 
     //figure out which template each item uses and add it to the morsel
     _.each($scope.morsel.items, function(item) {
-      item.displayTemplate = _.find($scope.morselTemplate.items, function(templateItem) {
-        return templateItem.template_order === item.template_order;
-      });
+      if($scope.morselTemplate && $scope.morselTemplate.items) {
+        item.displayTemplate = _.find($scope.morselTemplate.items, function(templateItem) {
+          return templateItem.template_order === item.template_order;
+        });
+      } else {
+        item.displayTemplate = null;
+      }
     });
   }
 
