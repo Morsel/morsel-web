@@ -49,6 +49,26 @@
   }
 }
 
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  z-index: 10;
+
+  &.banner-featured {
+    @include replace-text-with-dimensions('graphics/banner-featured-top.png');
+  }
+
+  &.banner-draft {
+    @include replace-text-with-dimensions('graphics/banner-draft-top.png');
+  }
+
+  &.banner-cover {
+    @include replace-text-with-dimensions('graphics/banner-cover-top.png');
+  }
+}
+
 //general image styles
 img {
   max-width: 100%;
@@ -496,6 +516,24 @@ form {
     @include container-shadow();
     @include border-bottom-left-radius(5px);
     @include border-bottom-right-radius(5px);
+  }
+
+  .banner {
+    top: auto;
+    bottom: 0;
+
+    &.banner-featured {
+      @include replace-text-with-dimensions('graphics/banner-featured-bottom.png');
+    }
+
+    &.banner-draft {
+      @include replace-text-with-dimensions('graphics/banner-draft-bottom.png');
+    }
+
+    &.banner-cover {
+      top: 0;
+      bottom: auto;
+    }
   }
 }
 

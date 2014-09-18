@@ -54,10 +54,14 @@
       }
 
       .item-photo {
-        width: 100px;
-        height: 100px;
         float: left;
         margin-right: 15px;
+        position: relative;
+
+        img {
+          width: 100px;
+          height: 100px;
+        }
 
         &:hover {
           cursor: pointer;

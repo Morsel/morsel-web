@@ -233,22 +233,6 @@
   }
 }
 
-.banner {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: inline-block;
-  z-index: 10;
-
-  &.banner-featured {
-    @include replace-text-with-dimensions('graphics/banner-featured-top.png');
-  }
-
-  &.banner-draft {
-    @include replace-text-with-dimensions('graphics/banner-draft-top.png');
-  }
-}
-
 .morsel-control {
   display: block;
   width: $arrow-height;
@@ -392,19 +376,6 @@
         width: 50%;
         margin: 0 auto;
       }
-    }
-  }
-
-  .banner {
-    top: auto;
-    bottom: 0;
-
-    &.banner-featured {
-      @include replace-text-with-dimensions('graphics/banner-featured-bottom.png');
-    }
-
-    &.banner-draft {
-      @include replace-text-with-dimensions('graphics/banner-draft-bottom.png');
     }
   }
 }
