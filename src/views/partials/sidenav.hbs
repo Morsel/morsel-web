@@ -1,5 +1,9 @@
 <nav class="side-nav" ng-class="{open:menuOpen}" role="navigation" ng-style="viewOptions.minimumMainHeight()">
-  <a ng-if="isLoggedIn" ng-click="goToProfile()" class="profile-link">
+  {{#if pageType.public}}
+  <a ng-if="isLoggedIn" ng-href="/\{{currentUser.username.toLowerCase()}}" ng-click="closeMenu()" class="profile-link">
+  {{else}}
+  <a ng-if="isLoggedIn" ng-href="/\{{currentUser.username.toLowerCase()}}" class="profile-link" target="_self">
+  {{/if}}
     <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-no-link="true" mrsl-user-image-size="profile-pic-xs"></div>
     <h5 mrsl-users-name="currentUser"></h5>
   </a>
