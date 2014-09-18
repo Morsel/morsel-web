@@ -3,6 +3,7 @@ angular.module( 'Morsel.add', [
   'angularMoment',
   'duScroll',
   'LocalStorageModule',
+  'ngSanitize',
   'pasvaz.bindonce',
   'restangular',
   'ui.bootstrap',
@@ -12,6 +13,7 @@ angular.module( 'Morsel.add', [
   'Morsel.common.reverse',
 
   //API
+  'Morsel.common.apiItems',
   'Morsel.common.apiMorsels',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
@@ -37,6 +39,7 @@ angular.module( 'Morsel.add', [
 
   //app
   'Morsel.add.drafts',
+  'Morsel.add.editItemDescription',
   'Morsel.add.morsel'
 ])
 

@@ -81,5 +81,17 @@ angular.module( 'Morsel.common.apiItems', [] )
     return deferred.promise;
   };
 
+  Items.updateItem = function(itemId, itemParams) {
+    var deferred = $q.defer();
+
+    Restangular.one('items', itemId).customPUT(itemParams).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Items;
 });

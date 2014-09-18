@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSELPLACEHOLDER, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSELPLACEHOLDER, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q, HandleErrors ) {
   var morselPromises = [],
       allTemplateData;
 
@@ -76,9 +76,9 @@ angular.module( 'Morsel.add.morsel', [])
       //if there isn't a title
       if($scope.morselTemplate && $scope.morselTemplate.title) {
         //use the placeholder if there is one
-        $scope.morsel.displayTitle = $scope.morselTemplate.title;
+        $scope.morsel.displayTitle = $scope.morselTemplate.title + ' morsel';
       } else {
-        $scope.morsel.displayTitle = 'Untitled';
+        $scope.morsel.displayTitle = 'Untitled morsel';
       }
       
       $scope.morsel.hasTitle = false;
@@ -105,4 +105,9 @@ angular.module( 'Morsel.add.morsel', [])
       return MORSELPLACEHOLDER;
     }
   };
+
+  //handle form errors
+  $scope.$on('add.error', function(event, resp){
+    HandleErrors.onError(resp.data, $scope.morselEditForm);
+  });
 });

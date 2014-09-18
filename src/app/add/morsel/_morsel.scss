@@ -1,6 +1,10 @@
 .add-morsel {
   padding-top: $mini-header-height;
 
+  .container {
+    padding-top: 15px;
+  }
+
   .add-morsel-info {
     border-right: 1px solid $morsel-light;
 
@@ -43,6 +47,7 @@
       border-bottom: 1px solid $morsel-light;
       list-style: none;
       padding: 10px;
+      overflow: hidden;
 
       &:last-child {
         border: none;
@@ -55,6 +60,12 @@
         margin-right: 15px;
       }
 
+      .item-description {
+        .no-description {
+          color: $morsel-medium;
+          font-style: italic;
+        }
+      }
       textarea {
         height: 100px;
       }
