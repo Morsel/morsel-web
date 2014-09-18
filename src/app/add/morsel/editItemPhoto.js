@@ -61,6 +61,6 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'MORSELPLACEHOLDER', '$window'];
     },
-    template: '<div class="item-photo"><img ng-src="{{findItemThumbnail(item)}}" ng-click="openItemPhotoOverlay()" /><span ng-if="primaryId == item.id" class="banner banner-cover">Cover</span></div>'
+    template: '<div class="item-photo"><img ng-src="{{findItemThumbnail(item)}}" ng-click="openItemPhotoOverlay()" /><span ng-if="primaryId == item.id" class="banner banner-cover" title="This photo is the cover photo">Cover</span></div>'
   };
 });
