@@ -53,11 +53,15 @@
         border: none;
       }
 
-      img {
+      .item-photo {
         width: 100px;
         height: 100px;
         float: left;
         margin-right: 15px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .item-description {
@@ -69,6 +73,42 @@
       textarea {
         height: 100px;
       }
+    }
+  }
+}
+
+.add-item-photo-preview {
+  text-align: center;
+
+  .modal-dialog {
+    height: 90%;
+    display: inline-block;
+    width: auto;
+  }
+
+  .modal-content {
+    background-color: black;
+    display: inline-block;
+  }
+
+  .modal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: none;
+    z-index: 2;
+    text-align: left;
+
+    &:after {
+      display: none;
+    }
+  }
+  .modal-body {
+    padding: 0;
+
+    img {
+      max-height: 100%;
     }
   }
 }

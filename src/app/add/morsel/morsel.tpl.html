@@ -21,7 +21,7 @@
             <div class="add-morsel-items-wrap">
               <ul>
                 <li class="add-morsel-item" ng-if="morsel.items" ng-repeat="item in morsel.items">
-                  <img ng-src="{{findItemThumbnail(item)}}" />
+                  <img mrsl-edit-item-photo="item" />
                   <div mrsl-edit-item-description="item"></div>
                 </li>
                 <li ng-if="!morsel.items"><p class="empty-state">This morsel doesn't have an items</p></li>

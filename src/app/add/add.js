@@ -40,6 +40,7 @@ angular.module( 'Morsel.add', [
   //app
   'Morsel.add.drafts',
   'Morsel.add.editItemDescription',
+  'Morsel.add.editItemPhoto',
   'Morsel.add.morsel'
 ])
 

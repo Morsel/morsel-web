@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSELPLACEHOLDER, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q, HandleErrors ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q, HandleErrors ) {
   var morselPromises = [],
       allTemplateData;
 
@@ -95,16 +95,6 @@ angular.module( 'Morsel.add.morsel', [])
       }
     });
   }
-
-  $scope.findItemThumbnail = function(item) {
-    if(item.photos && item.photos._100x100) {
-      return item.photos._100x100;
-    } else if(item.displayTemplate && item.displayTemplate.placeholder_photos && item.displayTemplate.placeholder_photos.large) {
-      return item.displayTemplate.placeholder_photos.large;
-    } else {
-      return MORSELPLACEHOLDER;
-    }
-  };
 
   //handle form errors
   $scope.$on('add.error', function(event, resp){
