@@ -7,8 +7,8 @@
         <div class="col-sm-5">
           <div class="add-morsel-info" style="height:500px">
             <div class="add-morsel-info-wrap">
-              <p class="h3">Title: <span bo-text="morsel.displayTitle" ng-class="{'no-title': !morsel.hasTitle}"></span></p>
-              <p class="h3">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
+              <p class="h3" title="Use the app to update your morsel's title">Title: <span bo-text="morsel.displayTitle" ng-class="{'no-title': !morsel.hasTitle}"></span></p>
+              <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
               <div class="add-morsel-actions">
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank">Preview</a>
                 <button>Publish</button>
