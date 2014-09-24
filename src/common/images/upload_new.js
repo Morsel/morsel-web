@@ -92,10 +92,8 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
           scope.upload[index] = $upload.upload({
             url: scope.item.presigned_upload.url,
             method: 'POST',
-//            headers: scope.item.presigned_upload,
             data : uploadData,
-            file: scope.selectedFiles[index]/*,
-            fileFormDataName: 'item[photo]'*/
+            file: scope.selectedFiles[index]
           });
           scope.upload[index].then(function(resp) {
             $timeout(function() {
@@ -103,7 +101,7 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
             });
           }, function(response) {
             if (response.status > 0) {
-              scope.errorMsg = response.status + ': ' + response.data;
+              scope.errorMsg = 'There was a problem uploading your image. Please try again.';
             }
           }, function(evt) {
             // Math.min is to fix IE which reports 200% sometimes
@@ -146,9 +144,8 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
           }
         }).then(function(resp){
           increaseProgressTo(70, 400, checkPhotosProcessed);
-          //alert('success');
         }, function() {
-          //alert('fail');
+          scope.errorMsg = 'There was a problem uploading your image. Please try again.';
         });
       }
 

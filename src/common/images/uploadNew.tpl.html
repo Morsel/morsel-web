@@ -1,4 +1,5 @@
 <div class="image-upload">
+  <div class="alert alert-danger" ng-show="errorMsg != null">{{errorMsg}}</div>
   <div class="image-upload-select" ng-show="!selectedFiles || selectedFiles.length === 0">
     <button ng-file-select="onFileSelect($files)" title="select file" onclick="this.value = null" class="btn btn-primary btn-block" data-accept="image/*">Upload an image from your computer</button>
 
@@ -6,8 +7,6 @@
       ng-file-drag-over-class="dragOverClass($event)" ng-file-drag-over-delay="100">or drag and drop image file here</div>
     <div ng-show="!dropSupported">HTML5 Drop File is not supported on this browser</div>
   </div>
-  <div class="err" ng-show="errorMsg != null">{{errorMsg}}</div>
-
   <div ng-show="selectedFiles && selectedFiles.length > 0" class="image-upload-preview">
     <div class="sel-file" ng-repeat="f in selectedFiles">
       <div class="progress image-upload-progress" ng-show="displayProgress >= 0">

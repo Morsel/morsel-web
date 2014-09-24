@@ -67,9 +67,6 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
           ApiItems.getItem(item.id, true).then(function(resp){
             $scope.item.presigned_upload = resp.data.presigned_upload;
             $scope.changingPhoto = true;
-          }, function() {
-            //issue
-            alert('error');
           });
         };
       };
