@@ -10,16 +10,19 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
     replace: true,
     link: function(scope, element, attrs) {
       scope.openItemPhotoOverlay = function () {
-        $rootScope.modalInstance = $modal.open({
-          templateUrl: 'app/add/morsel/editItemPhoto.tpl.html',
-          controller: ModalInstanceCtrl,
-          windowClass: 'add-item-photo-preview',
-          resolve: {
-            item: function () {
-              return scope.item;
+        //if user closed the overlay while still uploading a pic, don't let them open it again until it finishes
+        if(!scope.item.uploading) {
+          $rootScope.modalInstance = $modal.open({
+            templateUrl: 'app/add/morsel/editItemPhoto.tpl.html',
+            controller: ModalInstanceCtrl,
+            windowClass: 'add-item-photo-preview',
+            resolve: {
+              item: function () {
+                return scope.item;
+              }
             }
-          }
-        });
+          });
+        }
       };
 
       scope.findItemThumbnail = function() {
@@ -73,6 +76,6 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'MORSELPLACEHOLDER', '$window', 'ApiItems'];
     },
-    template: '<div class="item-photo"><img ng-src="{{findItemThumbnail(item)}}" ng-click="openItemPhotoOverlay()" /><span ng-if="primaryId == item.id" class="banner banner-cover" title="This photo is the cover photo - use the app to change which photo is used as the cover photo">Cover</span></div>'
+    template: '<div class="item-photo" ng-class="{\'uploading\':item.uploading}" title="{{item.uploading ? \'Your photo is still uploading\':\'Click to see your photo full-size\'}}"><div class="loader" ng-show="item.uploading"></div><img ng-src="{{findItemThumbnail(item)}}" ng-click="openItemPhotoOverlay()" /><span ng-if="primaryId == item.id" class="banner banner-cover" title="This photo is the cover photo - use the app to change which photo is used as the cover photo">Cover</span></div>'
   };
 });

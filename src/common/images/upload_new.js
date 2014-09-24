@@ -79,6 +79,9 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
         //keep a local copy of this to pass to amazon. will need to have already loaded from API
         var uploadData = _.clone(scope.item.presigned_upload);
 
+        //keep track of whether an upload is currently occuring
+        scope.item.uploading = true;
+
         //amazon will complain
         delete uploadData.url;
 
@@ -168,7 +171,9 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
 
               //complete the progress bar
               increaseProgressTo(100, 10, function(){
-                alert('done');
+                //replace the scoped item's photos so the thumbnail updates
+                scope.item.photos = resp.data.photos;
+                scope.item.uploading = false;
               });
             }
           });
