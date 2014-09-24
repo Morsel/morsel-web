@@ -1,5 +1,6 @@
 angular.module( 'Morsel.add', [
   //libs
+  'angularFileUpload',
   'angularMoment',
   'duScroll',
   'LocalStorageModule',
@@ -27,6 +28,7 @@ angular.module( 'Morsel.add', [
   'Morsel.common.ga',
   'Morsel.common.handleErrors',
   'Morsel.common.imageUpload',
+  'Morsel.common.imageUploadNew',
   'Morsel.common.mixpanel',
   'Morsel.common.photoHelpers',
   'Morsel.common.responsiveImages',
@@ -36,6 +38,7 @@ angular.module( 'Morsel.add', [
   'Morsel.common.usersName',
   'Morsel.common.validatedElement',
   'Morsel.common.viewMore',
+  'Morsel.common.xml2json',
 
   //app
   'Morsel.add.drafts',

@@ -558,7 +558,7 @@ module.exports = function ( grunt ) {
      */
     jshint: {
       src: [ 
-        '<%= app_files.js %>'
+        '<%= app_files.js %>', '!src/common/util/xml2json.js'
       ],
       test: [
         '<%= app_files.jsunit %>'

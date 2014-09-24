@@ -203,6 +203,8 @@ module.exports = {
     },
     vendor_files: {
       js: [
+        /*upload shim needs to come before angular*/
+        'vendor/ng-file-upload/angular-file-upload-shim.js',
         'vendor/angular/angular.js',
         'vendor/angular-bindonce/bindonce.min.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
@@ -216,7 +218,6 @@ module.exports = {
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.js',
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -270,6 +271,8 @@ module.exports = {
     },
     vendor_files: {
       js: [
+        /*upload shim needs to come before angular*/
+        'vendor/ng-file-upload/angular-file-upload-shim.js',
         'vendor/angular/angular.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'vendor/angular-local-storage/angular-local-storage.js',
@@ -282,7 +285,6 @@ module.exports = {
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.js',
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -349,9 +351,11 @@ module.exports = {
         'src/common/images/photoHelpers.js',
         'src/common/images/responsiveImages.js',
         'src/common/images/upload.js',
+        'src/common/images/upload_new.js',
         'src/common/user/userImage.js',
         'src/common/user/usersName.js',
-        'src/common/util/viewMore.js'
+        'src/common/util/viewMore.js',
+        'src/common/util/xml2json.js'
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
@@ -361,12 +365,15 @@ module.exports = {
         'src/common/forms/validatedRadio.tpl.html',
         'src/common/forms/validatedSingleCheckbox.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
+        'src/common/images/uploadNew.tpl.html',
         'src/common/util/404.tpl.html',
         'src/common/util/viewMore.tpl.html'
       ]
     },
     vendor_files: {
       js: [
+        /*upload shim needs to come before angular*/
+        'vendor/ng-file-upload/angular-file-upload-shim.js',
         'vendor/angular/angular.js',
         'vendor/angular-bindonce/bindonce.min.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
@@ -381,7 +388,6 @@ module.exports = {
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.js',
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [

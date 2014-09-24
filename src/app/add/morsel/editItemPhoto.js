@@ -1,6 +1,6 @@
 angular.module( 'Morsel.add.editItemPhoto', [] )
 
-.directive('mrslEditItemPhoto', function(MORSELPLACEHOLDER, $rootScope, $modal, $window){
+.directive('mrslEditItemPhoto', function(MORSELPLACEHOLDER, $rootScope, $modal, $window, ApiItems){
   return {
     restrict: 'A',
     scope: {
@@ -32,7 +32,9 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         }
       };
 
-      var ModalInstanceCtrl = function ($scope, $modalInstance, item, MORSELPLACEHOLDER, $window) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, item, MORSELPLACEHOLDER, $window, ApiItems) {
+        $scope.item = item;
+
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
         };
@@ -57,9 +59,19 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
             }
           }
         };
+
+        $scope.changePhoto = function() {
+          ApiItems.getItem(item.id, true).then(function(resp){
+            $scope.item.presigned_upload = resp.data.presigned_upload;
+            $scope.changingPhoto = true;
+          }, function() {
+            //issue
+            alert('error');
+          });
+        };
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'MORSELPLACEHOLDER', '$window'];
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'MORSELPLACEHOLDER', '$window', 'ApiItems'];
     },
     template: '<div class="item-photo"><img ng-src="{{findItemThumbnail(item)}}" ng-click="openItemPhotoOverlay()" /><span ng-if="primaryId == item.id" class="banner banner-cover" title="This photo is the cover photo">Cover</span></div>'
   };
