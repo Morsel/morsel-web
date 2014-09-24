@@ -45,10 +45,11 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         $scope.getBiggestPhoto = function() {
           if(item.photos) {
             return [
+              //since we want the whole photo to show on the screen, check the height also
               ['default', item.photos._320x320],
-              ['(min-width: 320px)', item.photos._480x480],
-              ['(min-width: 480px)', item.photos._640x640],
-              ['(min-width: 640px)', item.photos._992x992]
+              ['(min-width: 320px) and (min-height: 320px)', item.photos._480x480],
+              ['(min-width: 480px) and (min-height: 480px)', item.photos._640x640],
+              ['(min-width: 640px) and (min-height: 640px)', item.photos._992x992]
             ];
           } else {
             if(item.displayTemplate && item.displayTemplate.placeholder_photos && item.displayTemplate.placeholder_photos.large) {
@@ -79,6 +80,6 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'MORSELPLACEHOLDER', '$window', 'ApiItems'];
     },
-    template: '<div class="item-photo" ng-class="{\'uploading\':item.uploading}" title="{{item.uploading ? \'Your photo is still uploading\':\'Click to see your photo full-size\'}}"><div class="loader" ng-show="item.uploading"></div><img ng-src="{{findItemThumbnail(item)}}" ng-click="openItemPhotoOverlay()" /><span ng-if="primaryId == item.id" class="banner banner-cover" title="This photo is the cover photo - use the app to change which photo is used as the cover photo">Cover</span></div>'
+    templateUrl: 'app/add/morsel/editItemPhoto.tpl.html'
   };
 });

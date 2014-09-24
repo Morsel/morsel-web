@@ -59,14 +59,19 @@
       .item-photo {
         position: relative;
 
-        img {
-          width: $add-morsel-item-thumbnail-height-small;
-          height: $add-morsel-item-thumbnail-height-small;
-          border: 1px solid $morsel-light;
+        .item-photo-wrap {
+          display: inline-block;
+          position: relative;
 
           &:hover {
             cursor: pointer;
           }
+        }
+
+        img {
+          width: $add-morsel-item-thumbnail-height;
+          height: $add-morsel-item-thumbnail-height;
+          border: 1px solid $morsel-light;
         }
 
         &.uploading {
@@ -80,18 +85,18 @@
             z-index: 10;
           }
 
-          img {
-            &:hover {
-              cursor: wait;
-            }
+          &:hover {
+            cursor: wait;
           }
         }
       }
 
       .item-description {
-        p {
-          min-height: $add-morsel-item-thumbnail-height-small;
+        margin-top: 15px;
 
+        p {
+          text-align: left;
+          
           &:hover {
             cursor: text;
           }
@@ -101,9 +106,15 @@
           color: $morsel-medium;
           font-style: italic;
         }
-      }
-      textarea {
-        height: 100px;
+
+        .item-description-btns {
+          margin-top: 10px;
+          text-align: right;
+        }
+
+        textarea {
+          min-height: 100px;
+        }
       }
     }
   }
@@ -136,9 +147,10 @@
       display: none;
     }
   }
+
   .modal-body {
     padding: 0;
-    min-width: 300px;
+    min-width: 200px;
     min-height: 300px;
     height: auto;
 
@@ -220,18 +232,34 @@
 
       .add-morsel-actions {
         margin-top: 30px;
+        position: relative;
       }
     }
 
     .add-morsel-items {
       .add-morsel-item {
-        .item-photo {
-          img {
-            width: $add-morsel-item-thumbnail-height-big;
-            height: $add-morsel-item-thumbnail-height-big;
+        padding-left: 0;
+        padding-right: 0;
+
+        .item-description {
+          margin-top: 0;
+
+          p {
+            min-height: $add-morsel-item-thumbnail-height;
+          }
+
+          textarea {
+            min-height: 300px;
           }
         }
       }
+    }
+  }
+
+  .add-item-photo-preview {
+    .modal-body {
+      min-width: 300px;
+      min-height: 300px;
     }
   }
 }
