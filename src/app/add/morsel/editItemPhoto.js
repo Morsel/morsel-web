@@ -69,6 +69,12 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
             $scope.changingPhoto = true;
           });
         };
+
+        $scope.$watch('item.uploading', function(newValue) {
+          if(newValue === false) {
+            $scope.changingPhoto = false;
+          }
+        });
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'MORSELPLACEHOLDER', '$window', 'ApiItems'];
