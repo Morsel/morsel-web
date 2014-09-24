@@ -10,8 +10,8 @@
 
   <div ng-show="selectedFiles && selectedFiles.length > 0" class="image-upload-preview">
     <div class="sel-file" ng-repeat="f in selectedFiles">
-      <div class="image-upload-progress" ng-show="displayProgress >= 0">
-        <span ng-style="{'width':displayProgress+'%'}"></span>
+      <div class="progress image-upload-progress" ng-show="displayProgress >= 0">
+        <progressbar class="progress-striped active" max="100" value="displayProgress" type="success"></progressbar>
       </div>
       <div class="image-upload-preview-img" ng-style="{'background-image':'url('+dataUrls[$index]+')'}"></div>
     </div>

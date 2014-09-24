@@ -142,7 +142,7 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
             photo_key: parsedData.key
           }
         }).then(function(resp){
-          increaseProgressTo(70, 300, checkPhotosProcessed);
+          increaseProgressTo(70, 400, checkPhotosProcessed);
           //alert('success');
         }, function() {
           //alert('fail');
