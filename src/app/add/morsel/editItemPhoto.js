@@ -13,7 +13,7 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         //if user closed the overlay while still uploading a pic, don't let them open it again until it finishes
         if(!scope.item.uploading) {
           $rootScope.modalInstance = $modal.open({
-            templateUrl: 'app/add/morsel/editItemPhoto.tpl.html',
+            templateUrl: 'app/add/morsel/editItemPhotoOverlay.tpl.html',
             controller: ModalInstanceCtrl,
             windowClass: 'add-item-photo-preview',
             resolve: {

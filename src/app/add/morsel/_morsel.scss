@@ -1,13 +1,12 @@
 .add-morsel {
   padding-top: $mini-header-height;
+  padding-bottom: 10px;
 
   .container {
     padding-top: 15px;
   }
 
   .add-morsel-info {
-    border-right: 1px solid $morsel-light;
-
     p {
       font-size: 16px;
 
@@ -23,11 +22,14 @@
     }
 
     .add-morsel-info-wrap {
-      padding: 20px;
+      padding: 40px 20px 20px;
     }
 
     .add-morsel-actions {
-
+      position: absolute;
+      top: 0;
+      right: 20px;
+      text-align: right;
     }
   }
 
@@ -46,26 +48,25 @@
     .add-morsel-item {
       border-bottom: 1px solid $morsel-light;
       list-style: none;
-      padding: 10px;
+      padding: 20px 10px;
       overflow: hidden;
+      text-align: center;
 
       &:last-child {
         border: none;
       }
 
       .item-photo {
-        float: left;
-        margin-right: 15px;
         position: relative;
 
         img {
-          width: 100px;
-          height: 100px;
+          width: $add-morsel-item-thumbnail-height-small;
+          height: $add-morsel-item-thumbnail-height-small;
           border: 1px solid $morsel-light;
-        }
 
-        &:hover {
-          cursor: pointer;
+          &:hover {
+            cursor: pointer;
+          }
         }
 
         &.uploading {
@@ -79,13 +80,23 @@
             z-index: 10;
           }
 
-          &:hover {
-            cursor: wait;
+          img {
+            &:hover {
+              cursor: wait;
+            }
           }
         }
       }
 
       .item-description {
+        p {
+          min-height: $add-morsel-item-thumbnail-height-small;
+
+          &:hover {
+            cursor: text;
+          }
+        }
+
         .no-description {
           color: $morsel-medium;
           font-style: italic;
@@ -199,5 +210,28 @@
   .add-morsel {
     background-color: $morsel-background-dark;
     background-image: url(images/bg/morsel-detail-noise.png);
+
+    .add-morsel-info {
+      border-right: 1px solid $morsel-light;
+
+      .add-morsel-info-wrap {
+        padding-top: 20px;
+      }
+
+      .add-morsel-actions {
+        margin-top: 30px;
+      }
+    }
+
+    .add-morsel-items {
+      .add-morsel-item {
+        .item-photo {
+          img {
+            width: $add-morsel-item-thumbnail-height-big;
+            height: $add-morsel-item-thumbnail-height-big;
+          }
+        }
+      }
+    }
   }
 }

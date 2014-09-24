@@ -126,6 +126,10 @@ $list-group-bg: $morsel-light-off;
 //hr
 $hr-height: 4px;
 
+//add
+$add-morsel-item-thumbnail-height-small: 75px;
+$add-morsel-item-thumbnail-height-big: 100px;
+
 // Core Bootstrap variables and mixins
 @import "../../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
 
