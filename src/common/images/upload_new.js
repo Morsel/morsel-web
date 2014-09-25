@@ -160,12 +160,12 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
       }
 
       function checkPhotosProcessed() {
-        var photoProcessInterval = $interval(function(){
+        //keep checking photos until they're done
+        $timeout(function(){
           ApiItems.getItem(scope.item.id).then(function(resp){
-            if(!resp.data.photo_processing) {
-              //cancel the API check
-              $interval.cancel(photoProcessInterval);
-
+            if(resp.data.photo_processing) {
+              checkPhotosProcessed();
+            } else {
               //complete the progress bar
               increaseProgressTo(100, 10, function(){
                 //replace the scoped item's photos so the thumbnail updates
