@@ -9,10 +9,10 @@
             "id": 1,
             "template_order": 99,
             "placeholder_sort_order": 1,
-            "placeholder_description": "Additional photo",
+            "placeholder_description": "Enter a description here",
             "placeholder_photos": {
-                "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-item-small.png",
-                "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-item-large.png"
+                "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-item-small.jpg",
+                "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-item-large.jpg"
             }
         }]
     }, {

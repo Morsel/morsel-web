@@ -31,8 +31,8 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
       scope.findItemThumbnail = function() {
         if(scope.item.photos && scope.item.photos._100x100) {
           return scope.item.photos._100x100;
-        } else if(scope.item.displayTemplate && scope.item.displayTemplate.placeholder_photos && scope.item.displayTemplate.placeholder_photos.large) {
-          return scope.item.displayTemplate.placeholder_photos.large;
+        } else if(scope.item.displayTemplate && scope.item.displayTemplate.placeholder_photos && scope.item.displayTemplate.placeholder_photos.small) {
+          return scope.item.displayTemplate.placeholder_photos.small;
         } else {
           return MORSELPLACEHOLDER;
         }
