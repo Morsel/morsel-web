@@ -102,6 +102,62 @@ angular.module( 'Morsel.add.morsel', [])
     HandleErrors.onError(resp.data, $scope.morselEditForm);
   });
 
+  //submit our form
+  /*$scope.updateOrPublish = function() {
+    var userData = {
+      user: {
+        'first_name': $scope.basicInfoModel.first_name,
+        'last_name': $scope.basicInfoModel.last_name,
+        'bio': $scope.basicInfoModel.bio
+      }
+    };
+
+    if($scope.profilePhoto) {
+      userData.user.photo = $scope.profilePhoto;
+    }
+
+    //check if everything is valid
+    if($scope.morselEditForm.$valid) {
+      //disable form while request fires
+      $scope.morselEditForm.$setValidity('loading', false);
+
+      //call our updateUser method to take care of the heavy lifting
+      ApiUsers.updateUser($scope.basicInfoModel.id, userData).then(onBasicInfoSuccess, onBasicInfoError);
+    }
+  };
+
+  function onBasicInfoSuccess(resp) {
+    var userData = resp.data ? resp.data : resp;
+    
+    //make form valid again
+    $scope.basicInfoForm.$setValidity('loading', true);
+
+    if(userData.photo_processing) {
+      //don't update the photos on the page yet
+      userData.photos = null;
+
+      $timeout(function() {
+        Auth.updateUser().then(onBasicInfoSuccess);
+      }, USER_UPDATE_CHECK_TIME);
+    }
+
+    //update our scoped current user
+    Auth.updateUserWithData(userData);
+
+    $scope.alertMessage = 'Successfully updated your basic info';
+    $scope.alertType = 'success';
+  }
+
+  function onBasicInfoError(resp) {
+    //make form valid again (until errors show)
+    $scope.basicInfoForm.$setValidity('loading', true);
+    
+    //remove whatever message is there
+    $scope.alertMessage = null;
+
+    HandleErrors.onError(resp.data, $scope.basicInfoForm);
+  }*/
+
   //stop user if they try to leave the page with an invalid form
   function handleOnbeforeUnload() {
     if ($scope.morselEditForm.$invalid) {
