@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You have unsaved data.';
@@ -103,60 +103,40 @@ angular.module( 'Morsel.add.morsel', [])
   });
 
   //submit our form
-  /*$scope.updateOrPublish = function() {
-    var userData = {
-      user: {
-        'first_name': $scope.basicInfoModel.first_name,
-        'last_name': $scope.basicInfoModel.last_name,
-        'bio': $scope.basicInfoModel.bio
-      }
-    };
-
-    if($scope.profilePhoto) {
-      userData.user.photo = $scope.profilePhoto;
-    }
-
+  $scope.publish = function() {
     //check if everything is valid
-    if($scope.morselEditForm.$valid) {
+    if($scope.morselDataLoaded && $scope.morselEditForm.$valid) {
       //disable form while request fires
       $scope.morselEditForm.$setValidity('loading', false);
 
-      //call our updateUser method to take care of the heavy lifting
-      ApiUsers.updateUser($scope.basicInfoModel.id, userData).then(onBasicInfoSuccess, onBasicInfoError);
+      //call our publishMorsel method to take care of the heavy lifting
+      ApiMorsels.publishMorsel($scope.morsel.id).then(onPublishSuccess, onPublishError);
     }
   };
 
-  function onBasicInfoSuccess(resp) {
-    var userData = resp.data ? resp.data : resp;
-    
-    //make form valid again
-    $scope.basicInfoForm.$setValidity('loading', true);
-
-    if(userData.photo_processing) {
-      //don't update the photos on the page yet
-      userData.photos = null;
-
+  function onPublishSuccess(morselData) {
+    //temporary check to determine if a morsel has been published
+    if(_.isEmpty(morselData.mrsl) || _.isEmpty(morselData.photos)) {
       $timeout(function() {
-        Auth.updateUser().then(onBasicInfoSuccess);
-      }, USER_UPDATE_CHECK_TIME);
+        ApiMorsels.getMorsel(morselData.id).then(onPublishSuccess);
+      }, 500);
+    } else {
+      //bring user to morsel detail
+      //remove onbeforeunload so user doesn't get blocked going to morsel detail page
+      $window.onbeforeunload = undefined;
+      $window.location.href = '/'+morselData.creator.username.toLowerCase()+'/'+morselData.id+'-'+morselData.slug;
     }
-
-    //update our scoped current user
-    Auth.updateUserWithData(userData);
-
-    $scope.alertMessage = 'Successfully updated your basic info';
-    $scope.alertType = 'success';
   }
 
-  function onBasicInfoError(resp) {
+  function onPublishError(resp) {
     //make form valid again (until errors show)
-    $scope.basicInfoForm.$setValidity('loading', true);
+    $scope.morselEditForm.$setValidity('loading', true);
     
     //remove whatever message is there
     $scope.alertMessage = null;
 
-    HandleErrors.onError(resp.data, $scope.basicInfoForm);
-  }*/
+    HandleErrors.onError(resp.data, $scope.morselEditForm);
+  }
 
   //stop user if they try to leave the page with an invalid form
   function handleOnbeforeUnload() {
