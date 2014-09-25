@@ -3,8 +3,8 @@
   <ng-form ng-show="editing" name="itemDescriptionForm">
     <textarea ng-attr-placeholder="{{placeholder}}" ng-model="updatedText" name="itemDescription" class="form-control"></textarea>
     <div class="item-description-btns">
-      <button class="btn btn-link" ng-click="cancel()">Cancel</button>
-      <button class="btn btn-primary" ng-click="save()">Save</button>
+      <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
     </div>
   </ng-form>
 </div>

@@ -164,4 +164,18 @@ angular.module( 'Morsel.add.morsel', [])
     }
   });
   */
+
+  //our custom tooltip messaging
+  $scope.customPublishTooltips = [
+    {
+      'errorName': 'itemPhotoDoneUploading',
+      'message': 'Images are still uploading. Please try again shortly'
+    },
+    {
+      'errorName': 'itemDescriptionSaved',
+      'message': 'All descriptions must be saved before continuing'
+    }
+  ];
+
+  $scope.alert = $window.alert;
 });
