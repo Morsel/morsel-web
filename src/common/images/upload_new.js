@@ -170,7 +170,9 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
               increaseProgressTo(100, 10, function(){
                 //replace the scoped item's photos so the thumbnail updates
                 scope.item.photos = resp.data.photos;
-                scope.item.uploading = false;
+                if(scope.item.uploading) {
+                  scope.item.uploading = false;
+                }
               });
             }
           });

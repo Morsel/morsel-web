@@ -19,6 +19,9 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
             resolve: {
               item: function () {
                 return scope.item;
+              },
+              itemPhotoForm: function() {
+                return scope.itemPhotoForm;
               }
             }
           });
@@ -35,7 +38,7 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         }
       };
 
-      var ModalInstanceCtrl = function ($scope, $modalInstance, item, MORSELPLACEHOLDER, $window, ApiItems) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, item, itemPhotoForm, MORSELPLACEHOLDER, $window, ApiItems) {
         $scope.item = item;
 
         $scope.cancel = function () {
@@ -72,13 +75,18 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         };
 
         $scope.$watch('item.uploading', function(newValue) {
-          if(newValue === false) {
+          if(newValue) {
+            //set form invalid
+            itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', false);
+          } else if(newValue === false) {
             $scope.changingPhoto = false;
+            //set form valid
+            itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', true);
           }
         });
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'MORSELPLACEHOLDER', '$window', 'ApiItems'];
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'itemPhotoForm', 'MORSELPLACEHOLDER', '$window', 'ApiItems'];
     },
     templateUrl: 'app/add/morsel/editItemPhoto.tpl.html'
   };

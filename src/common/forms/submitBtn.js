@@ -16,12 +16,14 @@ angular.module('Morsel.common.submitBtn', [])
       scope.toolTipMessage = function(){
         if(scope.form.$error.loading) {
           return 'Your request is loading...';
+        } else if(scope.form.$error.required) {
+          return 'Please complete all required fields';
+        } else if(scope.form.$error.itemDescriptionSaved) {
+          return 'All descriptions must be saved before continuing';
+        } else if(scope.form.$error.itemPhotoDoneUploading) {
+          return 'Images are still uploading. Please try again shortly';
         } else {
-          if(scope.form.$error.required) {
-            return 'Please complete all required fields';
-          } else {
-            return 'Please correct errors in indicated fields';
-          }
+          return 'Please correct errors in indicated fields';
         }
       };
 

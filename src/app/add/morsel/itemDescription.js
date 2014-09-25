@@ -17,13 +17,13 @@ angular.module('Morsel.add.editItemDescription', [])
 
       scope.edit = function(){
         scope.editing = true;
-        scope.itemDescriptionForm.itemDescription.$setValidity('saved', false);
+        scope.itemDescriptionForm.itemDescription.$setValidity('itemDescriptionSaved', false);
       };
 
       scope.cancel = function(){
         scope.updatedText = scope.item.description;
         scope.editing = false;
-        scope.itemDescriptionForm.itemDescription.$setValidity('saved', true);
+        scope.itemDescriptionForm.itemDescription.$setValidity('itemDescriptionSaved', true);
       };
 
       scope.save = function() {
@@ -37,7 +37,7 @@ angular.module('Morsel.add.editItemDescription', [])
           //set our local model
           scope.item.description = scope.updatedText;
           scope.editing = false;
-          scope.itemDescriptionForm.itemDescription.$setValidity('saved', true);
+          scope.itemDescriptionForm.itemDescription.$setValidity('itemDescriptionSaved', true);
         }, function(resp) {
           scope.$emit('add.error', resp);
         });

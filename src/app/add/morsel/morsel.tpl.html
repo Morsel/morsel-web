@@ -11,7 +11,7 @@
               <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
               <div class="add-morsel-actions">
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank">Preview</a>
-                <button class="btn btn-primary">Publish</button>
+                <button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom"></button>
               </div>
             </div>
           </div>
