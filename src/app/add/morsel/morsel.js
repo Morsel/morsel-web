@@ -21,9 +21,10 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q, HandleErrors ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window ) {
   var morselPromises = [],
-      allTemplateData;
+      allTemplateData,
+      unloadText = 'You have unsaved data.';
 
   $scope.viewOptions.miniHeader = true;
 
@@ -100,4 +101,31 @@ angular.module( 'Morsel.add.morsel', [])
   $scope.$on('add.error', function(event, resp){
     HandleErrors.onError(resp.data, $scope.morselEditForm);
   });
+
+  //stop user if they try to leave the page with an invalid form
+  function handleOnbeforeUnload() {
+    if ($scope.morselEditForm.$invalid) {
+      return unloadText;
+    } else {
+      return undefined;
+    }
+  }
+
+  $window.onbeforeunload = handleOnbeforeUnload;
+
+  $scope.$on('$destroy', function() {
+    $window.onbeforeunload = undefined;
+  });
+
+  //need to check for internal routes also
+  //why is this firing twice??
+  /*
+  $scope.$on('$locationChangeStart', function(event, next, current) {
+    if ($scope.morselEditForm.$invalid) {
+      if(!$window.confirm(unloadText+' Your data will not be saved if you continue.')) {
+        event.preventDefault();
+      }
+    }
+  });
+  */
 });

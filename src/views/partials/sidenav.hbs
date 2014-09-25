@@ -28,7 +28,7 @@
     </li>
     <li ui-route="/add/drafts" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
       {{#if pageType.add}}
-      <a href="/add/drafts" ng-click="menuGoTo('drafts')"><i class="common-drafts"></i>Drafts</a>
+      <a href="/add/drafts" ng-click="menuGoTo('add/drafts')"><i class="common-drafts"></i>Drafts</a>
       {{else}}
       <a href="/add/drafts" target="_self"><i class="common-drafts"></i>Drafts</a>
       {{/if}}
