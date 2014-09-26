@@ -67,7 +67,7 @@ angular.module( 'Morsel.add.morsel', [])
         //reset the title
         $scope.morsel.title = null;
         //display the placeholder
-        $scope.morsel.displayTitle = $scope.morselTemplate.title;
+        $scope.morsel.displayTitle = $scope.morselTemplate.title + ' morsel';
         $scope.morsel.hasTitle = false;
       } else {
         $scope.morsel.displayTitle = $scope.morsel.title;
@@ -84,6 +84,15 @@ angular.module( 'Morsel.add.morsel', [])
       
       $scope.morsel.hasTitle = false;
     }
+
+    //have to wait until the next cycle so our form is visible
+    $timeout(function(){
+      if($scope.morsel.hasTitle) {
+        $scope.morselEditForm.itemHiddenTitle.$setValidity('morselHasTitle', true);
+      } else {
+        $scope.morselEditForm.itemHiddenTitle.$setValidity('morselHasTitle', false);
+      }
+    });
 
     //figure out which template each item uses and add it to the morsel
     _.each($scope.morsel.items, function(item) {
@@ -174,8 +183,10 @@ angular.module( 'Morsel.add.morsel', [])
     {
       'errorName': 'itemDescriptionSaved',
       'message': 'All descriptions must be saved before continuing'
+    },
+    {
+      'errorName': 'morselHasTitle',
+      'message': 'Your morsel must have a title. Please add one from the app'
     }
   ];
-
-  $scope.alert = $window.alert;
 });

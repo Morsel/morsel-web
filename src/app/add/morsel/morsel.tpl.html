@@ -12,6 +12,7 @@
             <div class="add-morsel-info-wrap">
               <h2 bo-text="morsel.draft ? 'Morsel Add' : 'Morsel Edit'"></h2>
               <p class="h3" title="Use the app to update your morsel's title">Title: <span bo-text="morsel.displayTitle" ng-class="{'no-title': !morsel.hasTitle}"></span></p>
+              <input name="itemHiddenTitle" class="hidden" ng-model="fake">
               <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
               <div class="add-morsel-actions">
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank" bo-text="morsel.draft ? 'Preview':'Go to morsel'"></a>
