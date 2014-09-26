@@ -32,9 +32,9 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         if(scope.item.photos && scope.item.photos._100x100) {
           scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemHasPhoto', true);
           return scope.item.photos._100x100;
-        } else if(scope.item.displayTemplate && scope.item.displayTemplate.placeholder_photos && scope.item.displayTemplate.placeholder_photos.small) {
+        } else if(scope.item.displayTemplate && scope.item.displayTemplate.placeholder_photos && scope.item.displayTemplate.placeholder_photos.medium) {
           scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemHasPhoto', false);
-          return scope.item.displayTemplate.placeholder_photos.small;
+          return scope.item.displayTemplate.placeholder_photos.medium;
         } else {
           scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemHasPhoto', false);
           return MORSELPLACEHOLDER;

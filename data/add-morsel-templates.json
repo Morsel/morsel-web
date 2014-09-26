@@ -12,6 +12,7 @@
             "placeholder_description": "Enter a description here",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-item-small.jpg",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-item-medium.jpg",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-item-large.jpg"
             }
         }]
@@ -28,6 +29,7 @@
             "placeholder_description": "Share the original inspiration for your dish / drink.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration1-large.png"
             }
         }, {
@@ -37,6 +39,7 @@
             "placeholder_description": "Share the thing you find most interesting about the process.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration2-large.png"
             }
         }, {
@@ -46,6 +49,7 @@
             "placeholder_description": "Share the finished product and how you adapted the inspiration.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-inspiration3-large.png"
             }
         }]
@@ -62,6 +66,7 @@
             "placeholder_description": "Share your insights and ideas about one part of the pairing.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing1-large.png"
             }
         }, {
@@ -71,6 +76,7 @@
             "placeholder_description": "Share your insights and ideas about the other part of the pairing.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing2-large.png"
             }
         }, {
@@ -80,6 +86,7 @@
             "placeholder_description": "Share the final product and why you love the pairing.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-pairing3-large.png"
             }
         }]
@@ -96,6 +103,7 @@
             "placeholder_description": "Share the ingredient and what makes it exciting.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient1-large.png"
             }
         }, {
@@ -105,6 +113,7 @@
             "placeholder_description": "Share the thing you find most interesting about the process.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient2-large.png"
             }
         }, {
@@ -114,6 +123,7 @@
             "placeholder_description": "Share the finished product and how the ingredient makes it sing.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-ingredient3-large.png"
             }
         }]
@@ -130,6 +140,7 @@
             "placeholder_description": "Share the ingredients that make the dish.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday1-large.png"
             }
         }, {
@@ -139,6 +150,7 @@
             "placeholder_description": "Share the key points, tips, or highlights of the preparation of your dish.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday2-large.png"
             }
         }, {
@@ -148,6 +160,7 @@
             "placeholder_description": "Share the final product and tasting, pairing, or make-ahead notes.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-everyday3-large.png"
             }
         }]
@@ -164,6 +177,7 @@
             "placeholder_description": "Share the dish you are reinventing.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct1-large.png"
             }
         }, {
@@ -173,6 +187,7 @@
             "placeholder_description": "Share the most interesting place in the recipe where you change things up.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct2-large.png"
             }
         }, {
@@ -182,6 +197,7 @@
             "placeholder_description": "Share the finished dish and how you adapted the inspiration.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-reconstruct3-large.png"
             }
         }]
@@ -198,6 +214,7 @@
             "placeholder_description": "Get a wide shot of the table and share a bit about what you're celebrating.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event1-large.png"
             }
         }, {
@@ -207,6 +224,7 @@
             "placeholder_description": "You can capture each dish, but the piÃ¨ce de rÃ©sistance is essential!",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event2-large.png"
             }
         }, {
@@ -216,6 +234,7 @@
             "placeholder_description": "Share another dish or drink and what makes it special.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event3-large.png"
             }
         }]
@@ -232,6 +251,7 @@
             "placeholder_description": "Share the trip location to set the stage for the morsel.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel1-large.png"
             }
         }, {
@@ -241,6 +261,7 @@
             "placeholder_description": "Share a dish / drink / ingredient that stood out here.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel2-large.png"
             }
         }, {
@@ -250,6 +271,7 @@
             "placeholder_description": "Share another dish / drink / ingredient that stood out here.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-travel3-large.png"
             }
         }]
@@ -266,6 +288,7 @@
             "placeholder_description": "Share what's important to you about the ingredient, dish, or drink.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days1-large.png"
             }
         }, {
@@ -275,6 +298,7 @@
             "placeholder_description": "Share the thing you find most interesting about the process.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days2-large.png"
             }
         }, {
@@ -284,6 +308,7 @@
             "placeholder_description": "Share how you serve the item, with pairings if you got 'em.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-days3-large.png"
             }
         }]
@@ -300,6 +325,7 @@
             "placeholder_description": "Set the stage and share the starting point for the process.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how1-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how1-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how1-large.png"
             }
         }, {
@@ -309,6 +335,7 @@
             "placeholder_description": "Share a tip for nailing your method and technique.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how2-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how2-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how2-large.png"
             }
         }, {
@@ -318,6 +345,7 @@
             "placeholder_description": "Share the end result or final product of your work.",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how3-small.png",
+                "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how3-medium.png",
                 "large": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-how3-large.png"
             }
         }]
