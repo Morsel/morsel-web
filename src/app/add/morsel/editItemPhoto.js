@@ -41,6 +41,17 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         }
       };
 
+      //set form as invalid while things are uploading
+      scope.$watch('item.uploading', function(newValue) {
+        if(newValue) {
+          //set form invalid
+          scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', false);
+        } else if(newValue === false) {
+          //set form valid
+          scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', true);
+        }
+      });
+
       var ModalInstanceCtrl = function ($scope, $modalInstance, item, itemPhotoForm, MORSELPLACEHOLDER, $window, ApiItems) {
         $scope.item = item;
 
@@ -77,14 +88,10 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
           });
         };
 
+        //update our overlay state when we're done uploading
         $scope.$watch('item.uploading', function(newValue) {
-          if(newValue) {
-            //set form invalid
-            itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', false);
-          } else if(newValue === false) {
+          if(newValue === false) {
             $scope.changingPhoto = false;
-            //set form valid
-            itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', true);
           }
         });
       };
