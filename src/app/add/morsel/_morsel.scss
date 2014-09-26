@@ -7,8 +7,9 @@
   }
 
   .add-morsel-info {
-    p {
+    .h3 {
       font-size: 16px;
+      margin-bottom: 0;
 
       span {
         font-weight: normal;
@@ -21,19 +22,26 @@
       }
     }
 
+    .help-block {
+      font-size: 13px;
+    }
+
     .add-morsel-info-wrap {
-      padding: 40px 20px 20px;
+      padding: 60px 20px 20px;
     }
 
     .add-morsel-actions {
       position: absolute;
       top: 0;
-      right: 20px;
-      text-align: right;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      padding: 0 20px;
 
       .form-group {
-        float: right;
-        margin: 0 0 0 5px;
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
       }
     }
   }
@@ -45,9 +53,6 @@
 
     ul {
       margin: 0;
-    }
-
-    .add-morsel-items-wrap {
     }
 
     .add-morsel-item {
