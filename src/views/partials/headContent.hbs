@@ -77,7 +77,9 @@
 <script>
   xdomain.slaves({
     "https://api-staging.eatmorsel.com": "/proxy.html",
-    "https://api.eatmorsel.com": "/proxy.html"
+    "https://api.eatmorsel.com": "/proxy.html",
+    "https://morsel.s3.amazonaws.com": "/proxy.html",
+    "https://morsel-staging.s3.amazonaws.com": "/proxy.html"
   });
   //fix trackers
   xhook.addWithCredentials = false;
@@ -96,6 +98,13 @@
   } 
 </script> 
 <![endif]-->
+
+<script>
+  FileAPI = {
+    jsUrl: 'https://morsel.s3.amazonaws.com/scripts/FileAPI.min.js',
+    flashUrl: 'https://morsel.s3.amazonaws.com/scripts/FileAPI.flash.swf'
+  };
+</script>
 
 {{> rollbar}}
 

@@ -24,6 +24,7 @@ angular.module( 'Morsel.add', [
   //common
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
+  'Morsel.common.flashDownload',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',

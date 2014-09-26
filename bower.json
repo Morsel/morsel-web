@@ -6,15 +6,14 @@
     "bootstrap-sass-official": "~3.2.0"
   },
   "resolutions": {
-    "angular": "1.2.7",
-    "ng-file-upload": "~1.6.6"
+    "angular": "1.2.7"
   },
   "dependencies": {
     "angular": "~1.2.19",
     "angular-moment": "~0.6.0",
     "angular-ui-utils": "~0.0.3",
     "animationFrame": "~0.1.6",
-    "ng-file-upload": "~1.6.6",
+    "ng-file-upload": "~1.6.12",
     "restangular": "",
     "angular-bootstrap": "~0.11.0",
     "angular-ui-router": "~0.2.10",

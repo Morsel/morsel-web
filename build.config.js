@@ -204,7 +204,7 @@ module.exports = {
     vendor_files: {
       js: [
         /*upload shim needs to come before angular*/
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
+        'vendor/ng-file-upload/angular-file-upload-shim.min.js',
         'vendor/angular/angular.js',
         'vendor/angular-bindonce/bindonce.min.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
@@ -217,7 +217,7 @@ module.exports = {
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/ng-file-upload/angular-file-upload.js',
+        'vendor/ng-file-upload/angular-file-upload.min.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -272,7 +272,7 @@ module.exports = {
     vendor_files: {
       js: [
         /*upload shim needs to come before angular*/
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
+        'vendor/ng-file-upload/angular-file-upload-shim.min.js',
         'vendor/angular/angular.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'vendor/angular-local-storage/angular-local-storage.js',
@@ -284,7 +284,7 @@ module.exports = {
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/ng-file-upload/angular-file-upload.js',
+        'vendor/ng-file-upload/angular-file-upload.min.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -354,6 +354,7 @@ module.exports = {
         'src/common/images/upload_new.js',
         'src/common/user/userImage.js',
         'src/common/user/usersName.js',
+        'src/common/util/flashDownload.js',
         'src/common/util/viewMore.js',
         'src/common/util/xml2json.js'
       ],
@@ -373,7 +374,7 @@ module.exports = {
     vendor_files: {
       js: [
         /*upload shim needs to come before angular*/
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
+        'vendor/ng-file-upload/angular-file-upload-shim.min.js',
         'vendor/angular/angular.js',
         'vendor/angular-bindonce/bindonce.min.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
@@ -387,7 +388,7 @@ module.exports = {
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/ng-file-upload/angular-file-upload.js',
+        'vendor/ng-file-upload/angular-file-upload.min.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -441,8 +442,8 @@ module.exports = {
       'vendor/matchMedia/matchMedia.addListener.js',
       'vendor/moment/moment.js',
       'vendor/lodash/dist/lodash.js',
-      'vendor/ng-file-upload/angular-file-upload.js',
-      'vendor/ng-file-upload/angular-file-upload-shim.js',
+      'vendor/ng-file-upload/angular-file-upload.min.js',
+      'vendor/ng-file-upload/angular-file-upload-shim.min.js',
       'vendor/restangular/dist/restangular.js'
     ],
     css: [

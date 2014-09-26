@@ -1,5 +1,5 @@
 angular.module( 'Morsel.common.apiMorsels', [] )
-.constant('MORSEL_TEMPLATE_DATA_URL', 'https://s3.amazonaws.com/morsel/morsel-templates/data/add-morsel-templates.json')
+.constant('MORSEL_TEMPLATE_DATA_URL', 'https://morsel.s3.amazonaws.com/morsel-templates/data/add-morsel-templates.json')
 
 // ApiMorsels is the middleman for dealing with /morsels requests
 .factory('ApiMorsels', function($http, Restangular, $q, MORSEL_TEMPLATE_DATA_URL) {
@@ -40,10 +40,10 @@ angular.module( 'Morsel.common.apiMorsels', [] )
   Morsels.getTemplates = function() {
     var deferred = $q.defer();
 
-    $http({method: 'GET', url: MORSEL_TEMPLATE_DATA_URL}).success(function(resp) {
-      deferred.resolve(resp.data);
-    }).error(function(resp) {
-      deferred.reject(resp);
+    Restangular.oneUrl('templates', MORSEL_TEMPLATE_DATA_URL).get().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp).data);
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;
@@ -55,7 +55,7 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     Restangular.one('morsels', morselId).one('publish').post(morselParams).then(function(resp){
       deferred.resolve(Restangular.stripRestangular(resp).data);
     }, function(resp) {
-      deferred.reject(resp);
+      deferred.reject(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;

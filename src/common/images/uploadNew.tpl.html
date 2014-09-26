@@ -1,11 +1,17 @@
 <div class="image-upload">
   <div class="alert alert-danger" ng-show="errorMsg != null">{{errorMsg}}</div>
   <div class="image-upload-select" ng-show="!selectedFiles || selectedFiles.length === 0">
-    <button ng-file-select="onFileSelect($files)" title="select file" onclick="this.value = null" class="btn btn-primary btn-block" data-accept="image/*">Upload an image from your computer</button>
-
+    <button ng-file-select="onFileSelect($files)" title="select file" onclick="this.value = null" class="btn btn-primary btn-block" data-accept="image/*" ng-if="!usingFlash">Upload an image from your computer</button>
+    <div ng-if="usingFlash">
+      <p>Uploading images is currently not available in this browser</p>
+    </div>
+    <!--<button ng-file-select="onFileSelect($files)" title="select file" onclick="this.value = null" class="btn btn-primary btn-block" data-accept="image/*" ng-if="!usingFlash || (usingFlash && hasFlashInstalled)">Upload an image from your computer</button>
+    <div ng-if="usingFlash && !hasFlashInstalled">
+      <p>You must have Adobe Flash Player installed to upload images</p>
+      <a mrsl-flash-download></a>
+    </div>-->
     <div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files)" ng-file-drop-available="dropSupported=true"
       ng-file-drag-over-class="dragOverClass($event)" ng-file-drag-over-delay="100">or drag and drop image file here</div>
-    <div ng-show="!dropSupported">HTML5 Drop File is not supported on this browser</div>
   </div>
   <div ng-show="selectedFiles && selectedFiles.length > 0" class="image-upload-preview">
     <div class="sel-file" ng-repeat="f in selectedFiles">

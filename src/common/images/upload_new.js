@@ -11,22 +11,8 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
     link: function(scope, element, attrs) {
       var s3progressMax = 50.0;
 
-      FileAPI = {
-        debug: true
-        //forceLoad: true, html5: false //to debug flash in HTML5 browsers
-        //wrapInsideDiv: true, //experimental for fixing css issues
-        //only one of jsPath or jsUrl.
-          //jsPath: '/js/FileAPI.min.js/folder/', 
-          //jsUrl: 'yourcdn.com/js/FileAPI.min.js',
-
-          //only one of staticPath or flashUrl.
-          //staticPath: '/flash/FileAPI.flash.swf/folder/'
-          //flashUrl: 'yourcdn.com/js/FileAPI.flash.swf'
-      };
-
       scope.usingFlash = FileAPI && FileAPI.upload != null;
-      //for now
-      scope.howToSend = true;
+      scope.hasFlashInstalled = FileAPI && FileAPI.hasFlash;
       scope.fileReaderSupported = window.FileReader != null && (window.FileAPI == null || FileAPI.html5 !== false);
       scope.uploadRightAway = true;
 
@@ -88,27 +74,25 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
         scope.progress[index] = 0;
         scope.errorMsg = null;
 
-        if (scope.howToSend == 1) {
-          scope.upload[index] = $upload.upload({
-            url: scope.item.presigned_upload.url,
-            method: 'POST',
-            data : uploadData,
-            file: scope.selectedFiles[index]
+        scope.upload[index] = $upload.upload({
+          url: scope.item.presigned_upload.url,
+          method: 'POST',
+          data : uploadData,
+          file: scope.selectedFiles[index]
+        });
+        scope.upload[index].then(function(resp) {
+          $timeout(function() {
+            updateAPI(resp);
           });
-          scope.upload[index].then(function(resp) {
-            $timeout(function() {
-              updateAPI(resp);
-            });
-          }, function(response) {
-            if (response.status > 0) {
-              scope.errorMsg = 'There was a problem uploading your image. Please try again.';
-            }
-          }, function(evt) {
-            // Math.min is to fix IE which reports 200% sometimes
-            scope.progress[index] = Math.min(s3progressMax, parseInt(s3progressMax * evt.loaded / evt.total, 10));
-            scope.displayProgress = scope.progress[index];
-          });
-        }
+        }, function(response) {
+          if (response.status > 0) {
+            scope.errorMsg = 'There was a problem uploading your image. Please try again.';
+          }
+        }, function(evt) {
+          // Math.min is to fix IE which reports 200% sometimes
+          scope.progress[index] = Math.min(s3progressMax, parseInt(s3progressMax * evt.loaded / evt.total, 10));
+          scope.displayProgress = scope.progress[index];
+        });
       };
       
       scope.dragOverClass = function($event) {

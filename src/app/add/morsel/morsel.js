@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, MORSEL_TEMPLATE_DATA_URL, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You have unsaved data.';
