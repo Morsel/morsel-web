@@ -186,7 +186,11 @@ angular.module( 'Morsel.add.morsel', [])
     },
     {
       'errorName': 'morselHasTitle',
-      'message': 'Your morsel must have a title. Please add one from the app'
+      'message': 'Your morsel must have a title. Please add one using the app'
+    },
+    {
+      'errorName': 'itemHasPhoto',
+      'message': 'All items must have photos to publish. Please add photos or delete unused items using the app'
     }
   ];
 });

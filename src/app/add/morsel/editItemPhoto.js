@@ -30,10 +30,13 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
 
       scope.findItemThumbnail = function() {
         if(scope.item.photos && scope.item.photos._100x100) {
+          scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemHasPhoto', true);
           return scope.item.photos._100x100;
         } else if(scope.item.displayTemplate && scope.item.displayTemplate.placeholder_photos && scope.item.displayTemplate.placeholder_photos.small) {
+          scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemHasPhoto', false);
           return scope.item.displayTemplate.placeholder_photos.small;
         } else {
+          scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemHasPhoto', false);
           return MORSELPLACEHOLDER;
         }
       };
