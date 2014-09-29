@@ -1,6 +1,6 @@
 angular.module('Morsel.common.morselSummary', [])
 
-.directive('mrslMorselSummary', function($window, PhotoHelpers, MORSELPLACEHOLDER) {
+.directive('mrslMorselSummary', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth) {
   return {
     restrict: 'A',
     replace: true,
@@ -53,6 +53,12 @@ angular.module('Morsel.common.morselSummary', [])
           return [];
         }
       };
+
+      scope.canEdit = false;
+
+      Auth.getCurrentUserPromise().then(function(userData){
+        scope.canEdit = scope.morsel.creator.id === userData.id;
+      });
     },
     templateUrl: 'common/morsels/morselSummary.tpl.html'
   };

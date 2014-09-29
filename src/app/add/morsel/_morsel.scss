@@ -1,0 +1,289 @@
+.add-morsel {
+  padding-top: $mini-header-height;
+  padding-bottom: 10px;
+
+  .container {
+    padding-top: 15px;
+  }
+
+  .add-morsel-info {
+    .h3 {
+      font-size: 16px;
+      margin-bottom: 0;
+
+      span {
+        font-weight: normal;
+        font-family: $font-family-base;
+
+        &.no-title {
+          color: $morsel-medium;
+          font-style: italic;
+        }
+      }
+    }
+
+    .help-block {
+      font-size: 13px;
+    }
+
+    .add-morsel-info-wrap {
+      padding: 60px 20px 20px;
+    }
+
+    .add-morsel-actions {
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-align: center;
+      width: 100%;
+      padding: 0 20px;
+
+      .form-group {
+        display: inline-block;
+        margin: 0;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .add-morsel-items {
+    .empty-state {
+      margin: 50px 0;
+    }
+
+    ul {
+      margin: 0;
+    }
+
+    .add-morsel-item {
+      border-bottom: 1px solid $morsel-light;
+      list-style: none;
+      padding: 20px 10px;
+      overflow: hidden;
+      text-align: center;
+
+      &:last-child {
+        border: none;
+      }
+
+      .item-photo {
+        position: relative;
+
+        .item-photo-wrap {
+          display: inline-block;
+          position: relative;
+
+          &:hover {
+            cursor: pointer;
+          }
+        }
+
+        img {
+          width: $add-morsel-item-thumbnail-height;
+          height: $add-morsel-item-thumbnail-height;
+          border: 1px solid $morsel-light;
+        }
+
+        &.uploading {
+          .loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255,255,255,.7);
+            z-index: 10;
+          }
+
+          .item-photo-wrap {
+            &:hover {
+              cursor: wait;
+            }
+          }
+        }
+      }
+
+      .item-description {
+        margin-top: 15px;
+
+        p {
+          text-align: left;
+
+          &:hover {
+            cursor: text;
+          }
+        }
+
+        .no-description {
+          color: $morsel-medium;
+          font-style: italic;
+        }
+
+        .item-description-btns {
+          margin-top: 10px;
+          text-align: right;
+        }
+
+        textarea {
+          min-height: 100px;
+        }
+      }
+    }
+  }
+}
+
+.add-item-photo-preview {
+  text-align: center;
+
+  .modal-dialog {
+    max-height: 90%;
+    display: inline-block;
+    width: auto;
+  }
+
+  .modal-content {
+    background-color: $morsel-background-dark;
+    display: inline-block;
+  }
+
+  .modal-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    border: none;
+    z-index: 5;
+    text-align: left;
+
+    &:after {
+      display: none;
+    }
+  }
+
+  .modal-body {
+    padding: 0;
+    min-width: 200px;
+    min-height: 300px;
+    height: auto;
+
+    img {
+      max-height: 100%;
+    }
+
+    .image-upload {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,.7);
+      color: white;
+
+      .alert {
+        margin: 50px 20px 20px;
+
+        & + .image-upload-select {
+          padding-top: 0;
+        }
+      }
+
+      .image-upload-select {
+        padding: 60px 20px 20px;
+      }
+
+      .btn-block {
+        margin-bottom: 30px;
+      }
+
+      .drop-box {
+        border: 3px dashed $morsel-primary-light;
+        background-color: rgba(255,255,255,.3);
+        padding: 20% 0;
+
+        &.dragover {
+          border-color: $morsel-primary;
+        }
+      }
+
+      .image-upload-preview-img {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+
+        &:after {
+          content: ' ';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: white;
+          @include opacity(.5);
+          z-index: 3;
+        }
+      }
+
+      .image-upload-progress {
+        z-index: 5;
+        position: absolute;
+        top: 50%;
+        margin-top: -10px;
+        width: 90%;
+        left: 5%;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .add-morsel {
+    background-color: $morsel-background-dark;
+    background-image: url(images/bg/morsel-detail-noise.png);
+
+    .container {
+      @include border-radius(3px);
+    }
+
+    .add-morsel-info {
+      border-right: 1px solid $morsel-light;
+
+      .add-morsel-info-wrap {
+        padding-top: 20px;
+      }
+
+      .add-morsel-actions {
+        margin-top: 30px;
+        position: relative;
+      }
+    }
+
+    .add-morsel-items {
+      .add-morsel-item {
+        padding-left: 0;
+        padding-right: 0;
+
+        .item-description {
+          margin-top: 0;
+
+          p {
+            min-height: $add-morsel-item-thumbnail-height;
+          }
+
+          textarea {
+            min-height: 300px;
+          }
+        }
+      }
+    }
+  }
+
+  .add-item-photo-preview {
+    .modal-body {
+      min-width: 300px;
+      min-height: 300px;
+    }
+  }
+}

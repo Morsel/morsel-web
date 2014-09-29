@@ -1,6 +1,6 @@
 angular.module('Morsel.common.morsel', [])
 
-.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER) {
+.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth) {
   var //debounce on page resize/orientation change
       orientationChangeTime = 300,
       moreScrollTime = 500;
@@ -20,6 +20,12 @@ angular.module('Morsel.common.morsel', [])
       //hold all our computed layout measurements
       scope.layout = {};
       updateItemHeight();
+
+      scope.canEdit = false;
+
+      Auth.getCurrentUserPromise().then(function(userData){
+        scope.canEdit = scope.morsel.creator.id === userData.id;
+      });
 
       scope.getCoverPhotoArray = function(previewSized) {
         var primaryItemPhotos;

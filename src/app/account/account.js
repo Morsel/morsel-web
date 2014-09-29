@@ -2,6 +2,7 @@ angular.module( 'Morsel.account', [
   //libs
   'angularMoment',
   'duScroll',
+  'LocalStorageModule',
   'pasvaz.bindonce',
   'restangular',
   'ui.bootstrap',
@@ -230,13 +231,6 @@ angular.module( 'Morsel.account', [
   $scope.menuGoTo = function(route) {
     $scope.closeMenu();
     $location.path('/'+route);
-  };
-
-  $scope.goToProfile = function() {
-    if($scope.currentUser && $scope.currentUser.username) {
-      $window.location.href= '/'+$scope.currentUser.username.toLowerCase();
-    }
-    $scope.closeMenu();
   };
 
   $scope.closeMenu = function() {

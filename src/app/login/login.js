@@ -2,6 +2,7 @@ angular.module( 'Morsel.login', [
   //libs
   'angularMoment',
   'duScroll',
+  'LocalStorageModule',
   'restangular',
   'ui.bootstrap',
   'ui.router',

@@ -273,6 +273,12 @@
   position: relative;
 }
 
+.centered-list-header {
+  h2 {
+    text-align: center;
+  }
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .main-header {
     .morsel-logo {

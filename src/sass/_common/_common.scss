@@ -7,6 +7,10 @@
   float: right;
   display: inline-block;
 
+  &.disabled {
+    cursor: not-allowed;
+  }
+
   &.btn-submit-block {
     float: none;
     display: block;
@@ -46,6 +50,26 @@
     & + .radio {
       margin-top: 10px;
     }
+  }
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  z-index: 10;
+
+  &.banner-featured {
+    @include replace-text-with-dimensions('graphics/banner-featured-top.png');
+  }
+
+  &.banner-draft {
+    @include replace-text-with-dimensions('graphics/banner-draft-top.png');
+  }
+
+  &.banner-cover {
+    @include replace-text-with-dimensions('graphics/banner-cover-top.png');
   }
 }
 
@@ -155,8 +179,8 @@ img {
   background: url(images/icons/loader.gif) center center no-repeat;
   height: 100px;
 
-  &.loader-white {
-    background-image: url(images/icons/loader-white.gif);
+  &.loader-dark {
+    background-image: url(images/icons/loader-dark.gif);
   }
 }
 
@@ -496,6 +520,24 @@ form {
     @include container-shadow();
     @include border-bottom-left-radius(5px);
     @include border-bottom-right-radius(5px);
+  }
+
+  .banner {
+    top: auto;
+    bottom: 0;
+
+    &.banner-featured {
+      @include replace-text-with-dimensions('graphics/banner-featured-bottom.png');
+    }
+
+    &.banner-draft {
+      @include replace-text-with-dimensions('graphics/banner-draft-bottom.png');
+    }
+
+    &.banner-cover {
+      top: 0;
+      bottom: auto;
+    }
   }
 }
 

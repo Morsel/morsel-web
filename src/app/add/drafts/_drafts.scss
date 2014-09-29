@@ -1,0 +1,52 @@
+.drafts {
+  ul {
+    margin: 0;
+    padding: 20px;
+  }
+
+  .draft {
+    list-style: none;
+    border-bottom: 1px solid $morsel-light;
+    padding: 10px;
+    position: relative;
+
+    a {
+      overflow: hidden;
+      display: block;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      background-color: $morsel-light-off;
+    }
+
+    img {
+      float: left;
+      width: 80px;
+      height: 80px;
+      margin-right: 15px;
+    }
+
+    div {
+      overflow: hidden;
+    }
+
+    p {
+      color: $morsel-medium;
+    }
+
+    .time-ago {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+      color: $morsel-medium;
+    }
+  }
+}

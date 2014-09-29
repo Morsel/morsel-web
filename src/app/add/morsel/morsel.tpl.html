@@ -1,0 +1,45 @@
+<div class="add-morsel" ng-style="viewOptions.minimumMainHeight()">
+  <div class="container container-shadow morsel-bg">
+    <form name="morselEditForm" ng-submit="publish()" novalidate>
+      <div ng-show="alertMessage" class="alert alert-{{alertType}}">
+        <p ng-bind="alertMessage"></p>
+      </div>
+      <div mrsl-base-errors mrsl-val-form="morselEditForm"></div>
+      <div ng-if="!morselDataLoaded" class="loader"></div>
+      <div ng-if="morselDataLoaded" class="row" bindonce="morsel">
+        <div class="col-sm-5">
+          <div class="add-morsel-info">
+            <div class="add-morsel-info-wrap">
+              <h2 bo-text="morsel.draft ? 'Morsel Add' : 'Morsel Edit'"></h2>
+              <p class="h3" title="Use the app to update your morsel's title">Title: <span bo-text="morsel.displayTitle" ng-class="{'no-title': !morsel.hasTitle}"></span></p>
+              <p class="help-block">Please use the app to change your morsel's title</p>
+              <input name="itemHiddenTitle" class="hidden" ng-model="fake">
+              <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
+              <p class="help-block">Please use the app to change your morsel's location</p>
+              <div class="add-morsel-actions">
+                <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank" bo-text="morsel.draft ? 'Preview':'Go to morsel'"></a>
+                <!--<button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" ng-if="morsel.draft && morselDataLoaded"></button>
+                <p class="help-block">Note: to push to social when publishing, please publish using the app</p>-->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-7">
+          <div class="add-morsel-items">
+            <div class="add-morsel-items-wrap">
+              <ul>
+                <li class="add-morsel-item" ng-if="morsel.items" ng-repeat="item in morsel.items">
+                  <div class="row">
+                    <img mrsl-edit-item-photo="item" mrsl-edit-item-photo-cover-id="{{morsel.primary_item_id}}" class="col-sm-4 col-md-3"/>
+                    <div mrsl-edit-item-description="item" class="col-sm-8 col-md-9"></div>
+                  </div>
+                </li>
+                <li ng-if="!morsel.items"><p class="empty-state">This morsel doesn't have an items</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

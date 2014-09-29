@@ -2,6 +2,7 @@ angular.module( 'Morsel.public', [
   //libs
   'angularMoment',
   'duScroll',
+  'LocalStorageModule',
   'ngSanitize',
   'pasvaz.bindonce',
   'restangular',
@@ -269,13 +270,6 @@ angular.module( 'Morsel.public', [
     setMinimumMainHeight();
     $scope.$apply('viewOptions');
   }
-
-  $scope.goToProfile = function() {
-    if($scope.currentUser && $scope.currentUser.username) {
-      $location.path('/'+$scope.currentUser.username.toLowerCase());
-    }
-    $scope.closeMenu();
-  };
 
   $scope.goTo = function(route) {
     $location.path('/'+route);

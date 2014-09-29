@@ -1,0 +1,22 @@
+<div class="drafts centered-list-header" ng-style="viewOptions.minimumMainHeight()">
+  <h2>Drafts</h2>
+  <div class="container container-no-padding container-shadow container-margin-bottom morsel-bg container-max-sm">
+    <ul>
+      <li bindonce ng-repeat="draft in drafts" class="draft">
+        <a bo-href="'/add/morsel/'+draft.id">
+          <img mrsl-responsive-images="{{getCoverPhotoArray(draft)}}" />
+          <div>
+            <h3 bo-text="draft.title" class="overflow-ellipsis h5"></h3>
+            <p bo-text="draft.items.length +' photos'"></p>
+            <span am-time-ago="draft.updated_at" class="time-ago"></span>
+          </div>
+        </a>
+      </li>
+    </ul>
+    <div ng-if="!drafts" class="loader"></div>
+    <div mrsl-view-more mrsl-view-more-func="getDrafts" mrsl-view-more-data="drafts" mrsl-view-more-inc="draftIncrement" mrsl-view-more-copy="View more drafts" mrsl-view-more-order="last"></div>
+    <div ng-if="drafts && drafts.length === 0" class="empty-state">
+      <p>You don't have any drafts. <a href="/apps" target="_self">Download the app</a> to make one!</p>
+    </div>
+  </div>
+</div>

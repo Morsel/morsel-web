@@ -78,7 +78,7 @@ module.exports = function ( grunt ) {
       options: { force: true },
       preDev: ['<%= build_dir %>'],
       preCompile: ['<%= compile_dir %>'],
-      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css', '<%= compile_dir %>/assets/login.css', '<%= compile_dir %>/assets/static.css'],
+      postCompile: ['<%= compile_dir %>/assets/images/spritesheets/*', '!<%= compile_dir %>/assets/images/spritesheets/*.png', '<%= compile_dir %>/assets/public.css', '<%= compile_dir %>/assets/account.css', '<%= compile_dir %>/assets/login.css', '<%= compile_dir %>/assets/static.css', '<%= compile_dir %>/assets/add.css'],
       preDevPush: ['<%= build_deploy_dir %>'],
       preProdPush: ['<%= compile_deploy_dir %>'],
       midDevPush: ['<%= build_dir %>/config.js'],
@@ -346,6 +346,13 @@ module.exports = function ( grunt ) {
         ],
         dest: '<%= build_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
       },
+      build_add_css: {
+        src: [
+          '<%= add_files.vendor_files.css %>',
+          '<%= build_dir %>/assets/add.css'
+        ],
+        dest: '<%= build_dir %>/assets/<%= pkg.name %>_add-<%= pkg.version %>.css'
+      },
       compile_public_css: {
         src: [
           '<%= public_files.vendor_files.css %>',
@@ -373,6 +380,13 @@ module.exports = function ( grunt ) {
           '<%= compile_dir %>/assets/static.css'
         ],
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.css'
+      },
+      compile_add_css: {
+        src: [
+          '<%= add_files.vendor_files.css %>',
+          '<%= compile_dir %>/assets/add.css'
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_add-<%= pkg.version %>.css'
       },
       /**
        * The `compile_<app_name>js` target is the concatenation of our application source
@@ -436,6 +450,20 @@ module.exports = function ( grunt ) {
         ],
 
         dest: '<%= compile_dir %>/assets/<%= pkg.name %>_static-<%= pkg.version %>.js'
+      },
+      compile_add_js: {
+        options: {
+          banner: '<%= meta.banner %>'
+        },
+        src: [ 
+          '<%= add_files.vendor_files.js %>', 
+          'module.prefix', 
+          '<%= build_dir %>/src/app/add/**/*.js',
+          '<%= add_files.common.js %>',
+          '<%= html2js.add.dest %>', 
+          'module.suffix' 
+        ],
+        dest: '<%= compile_dir %>/assets/<%= pkg.name %>_add-<%= pkg.version %>.js'
       }
     },
 
@@ -451,7 +479,8 @@ module.exports = function ( grunt ) {
               'assets/<%= pkg.name %>_public-<%= pkg.version %>.js',
               'assets/<%= pkg.name %>_account-<%= pkg.version %>.js',
               'assets/<%= pkg.name %>_login-<%= pkg.version %>.js',
-              'assets/<%= pkg.name %>_static-<%= pkg.version %>.js'
+              'assets/<%= pkg.name %>_static-<%= pkg.version %>.js',
+              'assets/<%= pkg.name %>_add-<%= pkg.version %>.js'
             ],
             cwd: '<%= compile_dir %>',
             dest: '<%= compile_dir %>',
@@ -481,6 +510,9 @@ module.exports = function ( grunt ) {
           },
           {
           '<%= concat.compile_static_js.dest %>': '<%= concat.compile_static_js.dest %>'
+          },
+          {
+          '<%= concat.compile_add_js.dest %>': '<%= concat.compile_add_js.dest %>'
           }
         ]
       }
@@ -526,7 +558,7 @@ module.exports = function ( grunt ) {
      */
     jshint: {
       src: [ 
-        '<%= app_files.js %>'
+        '<%= app_files.js %>', '!src/common/util/xml2json.js'
       ],
       test: [
         '<%= app_files.jsunit %>'
@@ -609,6 +641,20 @@ module.exports = function ( grunt ) {
           '<%= static_files.common.tpl %>'
         ],
         dest: '<%= build_dir %>/templates-static.js'
+      },
+
+      /**
+       * These are the templates from `src/app/public`.
+       */
+      add: {
+        options: {
+          base: 'src'
+        },
+        src: [
+          '<%= add_files.atpl %>',
+          '<%= add_files.common.tpl %>'
+        ],
+        dest: '<%= build_dir %>/templates-add.js'
       }
     },
 
@@ -736,6 +782,43 @@ module.exports = function ( grunt ) {
     },
 
     /**
+     * The `app_add` task compiles the `add.html` file as a Grunt template. CSS
+     * and JS files co-exist here but they get split apart later.
+     */
+    app_add: {
+
+      /**
+       * During development, we don't want to have wait for compilation,
+       * concatenation, minification, etc. So to avoid these steps, we simply
+       * add all relevant script files directly to the `<head>` of our html template. The
+       * `src` property contains the list of included files.
+       */
+      build: {
+        dir: '<%= build_dir %>',
+        src: [
+          '<%= add_files.vendor_files.js %>',
+          '<%= build_dir %>/src/app/add/**/*.js',
+          '<%= add_files.common.js %>',
+          '<%= html2js.add.dest %>',
+          '<%= build_dir %>/assets/<%= pkg.name %>_add-<%= pkg.version %>.css'
+        ]
+      },
+
+      /**
+       * When it is time to have a completely compiled application, we can
+       * alter the above to include only a single JavaScript and a single CSS
+       * file. Now we're back!
+       */
+      compile: {
+        dir: '<%= compile_dir %>',
+        src: [
+          '<%= concat.compile_add_js.dest %>',
+          '<%= compile_dir %>/assets/<%= pkg.name %>_add-<%= pkg.version %>.css'
+        ]
+      }
+    },
+
+    /**
      * The `appserver` task compiles the `server.js` file as a Grunt template.
      */
     appserver: {
@@ -770,6 +853,7 @@ module.exports = function ( grunt ) {
           '<%= html2js.account.dest %>',
           '<%= html2js.login.dest %>',
           '<%= html2js.static.dest %>',
+          '<%= html2js.add.dest %>',
           '<%= app_files.ctpl %>',
           '<%= test_files.js %>'
         ]
@@ -836,7 +920,7 @@ module.exports = function ( grunt ) {
        */
       html: {
         files: [ '<%= app_files.html %>' ],
-        tasks: [ 'app_public:build', 'app_account:build', 'app_login:build', 'static_pages:build' ]
+        tasks: [ 'app_public:build', 'app_account:build', 'app_login:build', 'static_pages:build', 'app_add:build' ]
       },
 
       /**
@@ -861,6 +945,7 @@ module.exports = function ( grunt ) {
           'concat:build_account_css',
           'concat:build_login_css',
           'concat:build_static_css',
+          'concat:build_add_css',
           'style'
           ]
       },
@@ -1136,8 +1221,8 @@ module.exports = function ( grunt ) {
    */
   grunt.registerTask( 'build-no-style', [
     'clean:preDev', 'html2js', 'jshint', 'copy:build_app_assets', 'compass:build',
-    'concat:build_public_css', 'concat:build_account_css', 'concat:build_login_css', 'concat:build_static_css', 'copy:build_vendor_assets',
-    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'copy:build_static_templates', 'app_public:build', 'app_account:build', 'app_login:build', 'static_pages:build', 'karmaconfig',
+    'concat:build_public_css', 'concat:build_account_css', 'concat:build_login_css', 'concat:build_static_css', 'concat:build_add_css', 'copy:build_vendor_assets',
+    'copy:build_appjs', 'copy:build_vendorjs', 'copy:build_package_json', 'copy:build_static_templates', 'app_public:build', 'app_account:build', 'app_login:build', 'static_pages:build', 'app_add:build', 'karmaconfig',
     'karma:continuous', 'copy:build_server_data', 'copy:build_seo', 'copy:build_static_launch', 'appserver:build'
   ]);
 
@@ -1150,7 +1235,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'concat:compile_static_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'copy:compile_package_json', 'copy:compile_static_templates', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_add_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'concat:compile_static_js', 'concat:compile_add_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'app_add:compile', 'copy:compile_package_json', 'copy:compile_static_templates', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**
@@ -1430,6 +1515,30 @@ module.exports = function ( grunt ) {
     });
   });
 
+  /* analogous to app_public */
+  grunt.registerMultiTask( 'app_add', 'Process add.hbs template', function () {
+    var dirRE = new RegExp( '^('+grunt.config('build_dir')+'|'+grunt.config('compile_dir')+')\/', 'g' );
+    var jsFiles = filterForJS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+    var cssFiles = filterForCSS( this.filesSrc ).map( function ( file ) {
+      return '/'+file.replace( dirRE, '' );
+    });
+
+    grunt.file.copy('src/views/add.hbs', this.data.dir + '/views/add.hbs', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {
+            scripts: jsFiles,
+            styles: cssFiles,
+            version: grunt.config( 'pkg.version' ),
+            favicon_dir: grunt.config('favicon_dir')
+          }
+        });
+      }
+    });
+  });
+
   /**
    * In order to avoid having to specify manually the files needed for karma to
    * run, we use grunt to manage the list for us. The `karma/*` files are
@@ -1501,6 +1610,8 @@ module.exports = function ( grunt ) {
     grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/public/index.js', this.data.dir + '/apps/public/index.js');
 
     grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/static/index.js', this.data.dir + '/apps/static/index.js');
+
+    grunt.file.copy(grunt.config( 'serverconfig_dir' ) + '/apps/add/index.js', this.data.dir + '/apps/add/index.js');
   });
 
   /*

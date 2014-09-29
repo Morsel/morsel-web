@@ -1,0 +1,8 @@
+<div class="modal-header">
+  <button type="button" class="close" ng-click="cancel()">&times;</button>
+  <button type="button" class="btn btn-primary" ng-click="changePhoto()" ng-hide="changingPhoto">Change Photo</button>
+</div>
+<div class="modal-body loader loader-dark">
+  <div ng-if="changingPhoto" mrsl-image-upload-new="item"></div>
+  <img mrsl-responsive-images="{{getBiggestPhoto()}}" />
+</div>

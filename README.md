@@ -41,11 +41,24 @@ All following in Gruntfile.js:
 8. add 'app_<app_name>:compile' to the array of tasks in compile task
 9. register multitask 'app_<app_name>' with proper view template file
 10. add new concat:compile_<app_name>_js subtask pointing to the appropriate files
-11. add js from #10 to array in ngmin:compile task
-12. add js from #11 to array in uglify:compile task
-13. add 'concat:compile_<app_name>_js' to compile task
-14. add new tasks in concat:build_css and update references to these
-15. add <app_name>.css to clean:postCompile array
+11. add new concat:compile_<app_name>_css subtask pointing to the appropriate files
+12. add js from #10 to array in ngmin:compile task
+13. add js from #10 to array in uglify:compile task
+14. add 'concat:compile_<app_name>_js' to compile task
+15. add 'concat:compile_<app_name>_css' to compile task
+16. add 'concat:compile_<app_name>_css' to compass task
+17. add 'concat:compile_<app_name>_css' to build-no-style task
+18. add <app_name>.css to clean:postCompile array
+19. add appropriate line to appserver multitask
 
 in server config:
-16. /server.tpl.js add an express route for the proper template-<app_name>.js file
+20. /server.tpl.js add an express route for the proper template-<app_name>.js file
+21. add <app_name> folder/file to server-config
+
+in src/sass
+22. add <app_name>.scss
+
+in server.tpl.js:
+23. add applicable routes
+24. add require to <app_name>
+

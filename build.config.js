@@ -203,6 +203,8 @@ module.exports = {
     },
     vendor_files: {
       js: [
+        /*upload shim needs to come before angular*/
+        'vendor/ng-file-upload/angular-file-upload-shim.min.js',
         'vendor/angular/angular.js',
         'vendor/angular-bindonce/bindonce.min.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
@@ -215,8 +217,7 @@ module.exports = {
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/ng-file-upload/angular-file-upload.js',
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
+        'vendor/ng-file-upload/angular-file-upload.min.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -270,6 +271,8 @@ module.exports = {
     },
     vendor_files: {
       js: [
+        /*upload shim needs to come before angular*/
+        'vendor/ng-file-upload/angular-file-upload-shim.min.js',
         'vendor/angular/angular.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'vendor/angular-local-storage/angular-local-storage.js',
@@ -281,8 +284,7 @@ module.exports = {
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/ng-file-upload/angular-file-upload.js',
-        'vendor/ng-file-upload/angular-file-upload-shim.js',
+        'vendor/ng-file-upload/angular-file-upload.min.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -318,6 +320,75 @@ module.exports = {
         'vendor/matchMedia/matchMedia.js',
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/lodash/dist/lodash.js',
+        'vendor/restangular/dist/restangular.js'
+      ],
+      css: [
+      ],
+      assets: [
+      ]
+    }
+  },
+
+  /* files just related to our add app */
+  add_files: {
+    atpl: [ 'src/app/add/**/*.tpl.html' ],
+    common: {
+      js: [
+        'src/common/analytics/ga.js',
+        'src/common/analytics/mixpanel.js',
+        'src/common/analytics/rollbar.js',
+        'src/common/api/items.js',
+        'src/common/api/morsels.js',
+        'src/common/api/uploads.js',
+        'src/common/api/users.js',
+        'src/common/auth/auth.js',
+        'src/common/filters/reverse.js',
+        'src/common/forms/baseErrors.js',
+        'src/common/forms/formNameFix.js',
+        'src/common/forms/handleErrors.js',
+        'src/common/forms/submitBtn.js',
+        'src/common/forms/validatedElement.js',
+        'src/common/images/photoHelpers.js',
+        'src/common/images/responsiveImages.js',
+        'src/common/images/upload.js',
+        'src/common/images/upload_new.js',
+        'src/common/user/userImage.js',
+        'src/common/user/usersName.js',
+        'src/common/util/flashDownload.js',
+        'src/common/util/viewMore.js',
+        'src/common/util/xml2json.js'
+      ],
+      tpl: [
+        'src/common/auth/apiError.tpl.html',
+        'src/common/forms/submitBtn.tpl.html',
+        'src/common/forms/validatedCheckbox.tpl.html',
+        'src/common/forms/validatedInput.tpl.html',
+        'src/common/forms/validatedRadio.tpl.html',
+        'src/common/forms/validatedSingleCheckbox.tpl.html',
+        'src/common/forms/validatedTextarea.tpl.html',
+        'src/common/images/uploadNew.tpl.html',
+        'src/common/util/404.tpl.html',
+        'src/common/util/viewMore.tpl.html'
+      ]
+    },
+    vendor_files: {
+      js: [
+        /*upload shim needs to come before angular*/
+        'vendor/ng-file-upload/angular-file-upload-shim.min.js',
+        'vendor/angular/angular.js',
+        'vendor/angular-bindonce/bindonce.min.js',
+        'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
+        'vendor/angular-local-storage/angular-local-storage.js',
+        'vendor/angular-moment/angular-moment.min.js',
+        'vendor/angular-sanitize/angular-sanitize.min.js',
+        'vendor/angular-scroll/angular-scroll.min.js',
+        'vendor/angular-ui-router/release/angular-ui-router.js',
+        'vendor/angular-ui-utils/modules/route/route.js',
+        'vendor/matchMedia/matchMedia.js',
+        'vendor/matchMedia/matchMedia.addListener.js',
+        'vendor/moment/moment.js',
+        'vendor/lodash/dist/lodash.js',
+        'vendor/ng-file-upload/angular-file-upload.min.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -371,8 +442,8 @@ module.exports = {
       'vendor/matchMedia/matchMedia.addListener.js',
       'vendor/moment/moment.js',
       'vendor/lodash/dist/lodash.js',
-      'vendor/ng-file-upload/angular-file-upload.js',
-      'vendor/ng-file-upload/angular-file-upload-shim.js',
+      'vendor/ng-file-upload/angular-file-upload.min.js',
+      'vendor/ng-file-upload/angular-file-upload-shim.min.js',
       'vendor/restangular/dist/restangular.js'
     ],
     css: [

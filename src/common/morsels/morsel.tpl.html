@@ -6,7 +6,8 @@
         <li class="cover-page extra-page" ng-style="{'height': layout.pageHeight}">
           <div class="morsel-container">
             <div class="cover-jumbo">
-              <span bo-if="morsel.draft" class="banner banner-draft">Draft</span>
+              <a bo-href="'/add/morsel/'+morsel.id" bo-if="morsel.draft" class="banner banner-draft" target="_self" title="Edit this morsel">Draft</a>
+              <a bo-href="'/add/morsel/'+morsel.id" ng-if="canEdit" title="Edit this morsel" class="edit-morsel-btn" target="_self"><i class="common-edit-shadow"></i></a>
               <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(true)}}" ng-style="{'height': layout.pageHeight}"></div>
               <div class="cover-title-wrap">
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>

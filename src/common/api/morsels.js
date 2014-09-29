@@ -1,7 +1,8 @@
 angular.module( 'Morsel.common.apiMorsels', [] )
+.constant('MORSEL_TEMPLATE_DATA_URL', 'https://morsel.s3.amazonaws.com/morsel-templates/data/add-morsel-templates.json')
 
 // ApiMorsels is the middleman for dealing with /morsels requests
-.factory('ApiMorsels', function($http, Restangular, $q) {
+.factory('ApiMorsels', function($http, Restangular, $q, MORSEL_TEMPLATE_DATA_URL) {
   var Morsels = {},
       RestangularMorsels = Restangular.all('morsels');
 
@@ -24,40 +25,41 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return deferred.promise;
   };
 
-  /*Items.addMorsel = function(morselData) {
-    var deferred = $q.defer(),
-        fd,
-        k;
+  Morsels.getDrafts = function(draftsParams) {
+    var deferred = $q.defer();
 
-    //if morsel has a photo, need to use a multi-part request
-    if(morselData.morsel.photo) {
-      //create a new formdata object to hold all our data
-      fd = new FormData();
-
-      //loop through our data and append to fd
-      for(k in morselData.morsel) {
-        if(morselData.morsel[k]) {
-          fd.append('morsel['+k+']', morselData.morsel[k]);
-        }
-      }
-
-      //use our restangular multi-part post
-      ApiUploads.upload('morsels', fd).then(function(resp){
-        deferred.resolve(resp);
-      }, function(resp){
-        deferred.reject(resp);
-      });
-    } else {
-      //no photo - use normal restangular post
-      RestangularItems.post(angular.toJson(morselData)).then(function(resp){
-        deferred.resolve(Restangular.stripRestangular(resp));
-      }, function(resp){
-        deferred.reject(Restangular.stripRestangular(resp));
-      });
-    }
+    RestangularMorsels.one('drafts').get(draftsParams).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp).data);
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
 
     return deferred.promise;
-  };*/
+  };
+
+  Morsels.getTemplates = function() {
+    var deferred = $q.defer();
+
+    Restangular.oneUrl('templates', MORSEL_TEMPLATE_DATA_URL).get().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp).data);
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Morsels.publishMorsel = function(morselId, morselParams) {
+    var deferred = $q.defer();
+    
+    Restangular.one('morsels', morselId).one('publish').post(morselParams).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp).data);
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
 
   return Morsels;
 });

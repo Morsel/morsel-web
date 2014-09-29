@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="Morsel.add" ng-controller="AppCtrl">
+  <head>
+    {{> headContent}}
+    <!-- compiled CSS -->
+    <% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" />
+    <% }); %>
+    <!-- compiled JavaScript -->
+    <% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script>
+    <% }); %>
+    {{> mixpanel}}
+  </head>
+  <body>
+    {{> pageWrapper}}
+    {{> ga}}
+  </body>
+</html>

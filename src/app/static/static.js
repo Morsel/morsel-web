@@ -1,5 +1,6 @@
 angular.module( 'Morsel.static', [
   //libs
+  'LocalStorageModule',
   'restangular',
   'ui.bootstrap',
   //filters
@@ -137,13 +138,6 @@ angular.module( 'Morsel.static', [
   $scope.menuGoTo = function(route) {
     $scope.closeMenu();
     $location.path('/'+route);
-  };
-
-  $scope.goToProfile = function() {
-    if($scope.currentUser && $scope.currentUser.username) {
-      $window.location.href= '/'+$scope.currentUser.username;
-    }
-    $scope.closeMenu();
   };
 
   $scope.currentRoute = $window.location.pathname;

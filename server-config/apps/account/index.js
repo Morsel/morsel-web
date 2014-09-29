@@ -1,9 +1,5 @@
 var util = require('./../../util');
 
-module.exports.test = function(req, res){
-  res.send('testing account');
-};
-
 module.exports.renderAccountPage = function(req, res, twitterData) {
   var twitterData;
 

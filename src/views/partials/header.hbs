@@ -1,15 +1,11 @@
 <header class="main-header" ng-class="{'mini-header': viewOptions.miniHeader, 'full-header': !viewOptions.miniHeader, 'full-width-header': viewOptions.fullWidthHeader}">
   <div class="container">
     <h1 class="morsel-logo" ng-class="{'hide-logo':viewOptions.hideLogo}">
-      {{#pageType.public}}
+      {{#if pageType.public}}
       <a href="/">Morsel</a>
-      {{/pageType.public}}
-      {{#pageType.account}}
+      {{else}}
       <a href="/" target="_self">Morsel</a>
-      {{/pageType.account}}
-      {{#pageType.static}}
-      <a href="/" target="_self">Morsel</a>
-      {{/pageType.static}}
+      {{/if}}
     </h1>
   </div>
   <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
