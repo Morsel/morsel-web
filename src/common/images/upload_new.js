@@ -9,7 +9,8 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var s3progressMax = 50.0;
+      var s3progressMax = 50.0, //percent
+          maxFileSize = 6000000; //6MB
 
       scope.usingFlash = FileAPI && FileAPI.upload != null;
       scope.hasFlashInstalled = FileAPI && FileAPI.hasFlash;
@@ -40,6 +41,15 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
         scope.dataUrls = [];
         for (j = 0; j < $files.length; j++) {
           var $file = $files[j];
+
+          //check for a max file size
+          if($file.size >= maxFileSize) {
+            $file = null;
+            scope.selectedFiles = [];
+            scope.errorMsg = 'Please use an image less than 6MB';
+            return;
+          }
+
           if (scope.fileReaderSupported && $file.type.indexOf('image') > -1) {
             var fileReader = new FileReader();
 

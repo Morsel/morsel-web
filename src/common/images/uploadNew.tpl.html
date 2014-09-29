@@ -1,5 +1,5 @@
 <div class="image-upload">
-  <div class="alert alert-danger" ng-show="errorMsg != null">{{errorMsg}}</div>
+  <div class="alert alert-danger" ng-if="errorMsg != null">{{errorMsg}}</div>
   <div class="image-upload-select" ng-show="!selectedFiles || selectedFiles.length === 0">
     <button ng-file-select="onFileSelect($files)" title="select file" onclick="this.value = null" class="btn btn-primary btn-block" data-accept="image/*" ng-if="!usingFlash">Upload an image from your computer</button>
     <div ng-if="usingFlash">

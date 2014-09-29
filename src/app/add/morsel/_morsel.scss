@@ -179,6 +179,14 @@
       background-color: rgba(0,0,0,.7);
       color: white;
 
+      .alert {
+        margin: 50px 20px 20px;
+
+        & + .image-upload-select {
+          padding-top: 0;
+        }
+      }
+
       .image-upload-select {
         padding: 60px 20px 20px;
       }
