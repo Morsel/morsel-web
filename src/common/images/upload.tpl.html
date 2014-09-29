@@ -1,8 +1,8 @@
 <div class="image-add">
   <div class="img-circle" tooltip-placement="bottom" tooltip="Click to select or drag and drop a photo from your computer" tooltip-trigger="{{{true:'mouseenter', false:'never'}[dropSupported]}}">
-    <div ng-show="dropSupported" class="drop-box " ng-file-drop="onFileSelect($files);" ng-file-drop-available="dropSupported=true"></div>
+    <div ng-show="dropSupported" class="drop-box " ng-file-drop-old="onFileSelect($files);" ng-file-drop-available-old="dropSupported=true"></div>
     <span class="h1 plus-sign">+</span>
-    <input type="file" ng-file-select="onFileSelect($files)">
+    <input type="file" ng-file-select-old="onFileSelect($files)">
     <div ng-show="(imageToUpload != null) || remoteImageUrl" class="image-preview" >
       <img class="img-circle" ng-if="imageDataUrl" ng-src="{{imageDataUrl}}">
       <img class="img-circle" ng-if="remoteImageUrl" ng-src="{{remoteImageUrl}}">

@@ -51,9 +51,9 @@ angular.module( 'Morsel.common.apiUploads', [] )
 
 /* taken from https://github.com/danialfarid/angular-file-upload */
 
-.directive('ngFileSelect', function($parse, $http, $timeout) {
+.directive('ngFileSelectOld', function($parse, $http, $timeout) {
   return function(scope, elem, attr) {
-    var fn = $parse(attr['ngFileSelect']);
+    var fn = $parse(attr['ngFileSelectOld']);
     elem.bind('change', function(evt) {
       var files = [], fileList, i;
       fileList = evt.target.files;
@@ -75,10 +75,10 @@ angular.module( 'Morsel.common.apiUploads', [] )
   };
 })
 
-.directive('ngFileDropAvailable', function($parse, $http, $timeout) {
+.directive('ngFileDropAvailableOld', function($parse, $http, $timeout) {
   return function(scope, elem, attr) {
     if ('draggable' in document.createElement('span')) {
-      var fn = $parse(attr['ngFileDropAvailable']);
+      var fn = $parse(attr['ngFileDropAvailableOld']);
       $timeout(function() {
         fn(scope);
       });
@@ -86,10 +86,10 @@ angular.module( 'Morsel.common.apiUploads', [] )
   };
 })
 
-.directive('ngFileDrop', function($parse, $http, $timeout) {
+.directive('ngFileDropOld', function($parse, $http, $timeout) {
   return function(scope, elem, attr) {
     if ('draggable' in document.createElement('span')) {
-      var fn = $parse(attr['ngFileDrop']);
+      var fn = $parse(attr['ngFileDropOld']);
       elem[0].addEventListener("dragover", function(evt) {
         evt.stopPropagation();
         evt.preventDefault();
