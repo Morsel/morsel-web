@@ -1,12 +1,11 @@
 angular.module( 'Morsel.add.item', [])
 
-.directive('mrslEditItem', function(ApiItems, HandleErrors) {
+.directive('mrslEditItem', function(ApiItems) {
   return {
     restrict: 'A',
     replace: false,
     scope: {
-      item: '=mrslEditItem',
-      form: '=mrslEditItemForm'
+      item: '=mrslEditItem'
     },
     link: function(scope, element, attrs) {
       scope.deleteItem = function() {
@@ -20,11 +19,15 @@ angular.module( 'Morsel.add.item', [])
             scope.$emit('add.item.delete', scope.item.id);
           }, function(resp) {
             scope.deletingItem = false;
-            HandleErrors.onError(resp.data, scope.form);
+            scope.$emit('add.error', resp);
           });
         } else {
           scope.deletingItem = false;
         }
+      };
+
+      scope.makeCoverPhoto = function() {
+        scope.$emit('add.item.makeCoverPhoto', scope.item.id);
       };
     },
     templateUrl: 'app/add/morsel/item/item.tpl.html'
