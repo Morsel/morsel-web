@@ -1,6 +1,5 @@
 .profile {
   padding-top: $mini-header-height;
-  background-color: $morsel-light-off;
 
   & > .container {
     position: relative;
@@ -74,6 +73,12 @@
   }
 }
 
+@media (max-width: $screen-sm) {
+  .profile {
+    background-color: $morsel-light-off;
+  }
+}
+
 @media (max-width: $screen-md) {
   .profile {
     & > .container {
@@ -84,10 +89,6 @@
 
 @media (min-width: $screen-sm-min) {
   .profile {
-    background-color: $morsel-background-dark;
-    background-image: url(images/bg/morsel-detail-noise.png);
-    padding-bottom: 10px;
-
     & > .container {
       padding: 0;
       @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));

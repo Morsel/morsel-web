@@ -9,14 +9,14 @@
     width: percentage(1/3);
     margin: 0;
     list-style: none;
-    min-height: 100px;
     max-width: $max-grid-morsel-width;
 
     > a {
       display: block;
       padding: 1px;
       text-align: center;
-      min-height: 60px;//so it doesn't look so nasty when they load
+      min-height: 100px;//so it doesn't look so nasty when they load
+      width: 100%;
 
       &:hover {
         .centered-wrap {
@@ -132,6 +132,11 @@
   }
 }
 
+.morsel-grid-container {
+  @include border-bottom-right-radius(3px);
+  @include border-bottom-left-radius(3px);
+}
+
 @media (min-width: 321px) {
   .morsel-grid {
     .morsel-grid-item {
@@ -171,6 +176,10 @@
       }
     }
   }
+
+  .morsel-grid-container {
+    max-width: $max-grid-morsel-width * 3;
+  }
 }
 
 @media (min-width: $screen-md-min) {
@@ -191,6 +200,10 @@
       }
     }
   }
+
+  .morsel-grid-container {
+    max-width: $max-grid-morsel-width * 4;
+  }
 }
 
 @media (min-width: $screen-lg-min) {
@@ -205,5 +218,9 @@
         line-height: 26px;
       }
     }
+  }
+
+  .morsel-grid-container {
+    max-width: $max-grid-morsel-width * 5;
   }
 }
