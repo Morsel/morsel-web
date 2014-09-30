@@ -419,6 +419,10 @@ form {
   display: inline-block;
 }
 
+.dark-bg {
+  padding-bottom: 10px;
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .morsel-text {
     background-image: url(images/logos/morsel-text@2x.png);
@@ -463,6 +467,11 @@ form {
         }
       }
     }
+  }
+
+  .dark-bg {
+    background-color: $morsel-background-dark;
+    background-image: url(images/bg/morsel-detail-noise.png);
   }
 
   .user-info {

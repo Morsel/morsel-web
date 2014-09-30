@@ -19,11 +19,11 @@
       <a href="/feed" target="_self"><i class="common-feed"></i>Feed</a>
       {{/if}}
     </li>
-    <li ui-route="/explore" ng-class="{active:$uiRoute}" ng-if="isStaff">
+    <li ui-route="/explore" ng-class="{active:$uiRoute}">
       {{#if pageType.public}}
-      <a href="/explore" ng-click="menuGoTo('explore')"><i class="common-feed"></i>Explore</a>
+      <a href="/explore" ng-click="menuGoTo('explore')"><i class="common-explore"></i>Explore</a>
       {{else}}
-      <a href="/explore" target="_self"><i class="common-feed"></i>Explore</a>
+      <a href="/explore" target="_self"><i class="common-explore"></i>Explore</a>
       {{/if}}
     </li>
     <li ui-route="/add/drafts" ng-class="{active:$uiRoute}" ng-if="isLoggedIn && currentUser && currentUser.draft_count > 0">
