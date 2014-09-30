@@ -57,8 +57,7 @@
     .add-morsel-item {
       border-bottom: 1px solid $morsel-light;
       padding: 20px 10px;
-      overflow: hidden;
-      text-align: center;
+      position: relative;
 
       &:last-child {
         border: none;
@@ -106,6 +105,23 @@
 
         textarea {
           min-height: 100px;
+        }
+
+        p {
+          margin: 0;
+        }
+      }
+
+      .item-dropdown {
+        text-align: right;
+        position: absolute;
+        top: 20px;
+        right: 0;
+      }
+
+      .editing-description {
+        .item-dropdown {
+          display: none !important;
         }
       }
     }
@@ -289,6 +305,16 @@
           textarea {
             min-height: 300px;
           }
+        }
+
+        &:hover {
+          .item-dropdown {
+            display: inline-block;
+          }
+        }
+
+        .item-dropdown {
+          display: none;
         }
       }
     }

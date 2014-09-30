@@ -1,0 +1,15 @@
+<div ng-class="{'loader': deletingItem, 'editing-description':editingDescription}">
+  <div class="row">
+    <img mrsl-edit-item-photo="item" mrsl-edit-item-photo-cover-id="{{morsel.primary_item_id}}" class="col-sm-4 col-md-3"/>
+    <div mrsl-edit-item-description class="col-sm-8 col-md-9"></div>
+  </div>
+  <div class="btn-group item-dropdown" dropdown is-open="status.isopen">
+    <button type="button" class="btn btn-primary dropdown-toggle"><span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+      <li><a href="#">Use as cover photo</a></li>
+      <li class="divider"></li>
+      <li><a ng-click="deleteItem()">Delete item</a></li>
+    </ul>
+  </div>
+</div>

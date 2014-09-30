@@ -182,10 +182,9 @@ angular.module( 'Morsel.add.morsel', [])
         $scope.morsel.items = [itemResp.data];
       }
       $scope.addingItem = false;
-    }, function() {
+    }, function(resp) {
       $scope.addingItem = false;
-      //if there's an error retrieving a morsel, go to drafts
-      $scope.alertMessage = 'There was a problem adding a new item. Please try again';
+      HandleErrors.onError(resp.data, $scope.morselEditForm);
     });
   };
 });
