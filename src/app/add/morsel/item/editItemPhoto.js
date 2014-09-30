@@ -5,7 +5,7 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
     restrict: 'A',
     scope: {
       item: '=mrslEditItemPhoto',
-      primaryId: '@mrslEditItemPhotoCoverId'
+      primaryId: '=mrslEditItemPhotoCoverId'
     },
     replace: true,
     link: function(scope, element, attrs) {

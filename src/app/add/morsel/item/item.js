@@ -27,7 +27,10 @@ angular.module( 'Morsel.add.item', [])
       };
 
       scope.makeCoverPhoto = function() {
-        scope.$emit('add.item.makeCoverPhoto', scope.item.id);
+        //don't waste an api call - make sure it's not already the primary
+        if(scope.item.id != scope.item.morsel.primary_item_id) {
+          scope.$emit('add.item.makeCoverPhoto', scope.item.id);
+        }
       };
     },
     templateUrl: 'app/add/morsel/item/item.tpl.html'

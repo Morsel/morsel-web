@@ -204,4 +204,19 @@ angular.module( 'Morsel.add.morsel', [])
       $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
     }
   });
+
+  $scope.$on('add.item.makeCoverPhoto', function(event, itemId) {
+    var morselParams = {
+      morsel: {
+        primary_item_id: itemId
+      }
+    };
+
+    ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
+      //since the morsel.item.morsel is also changing, update the whole morsel object
+      $scope.morsel = morselData;
+    }, function(resp) {
+      HandleErrors.onError(resp.data, $scope.morselEditForm);
+    });
+  });
 });

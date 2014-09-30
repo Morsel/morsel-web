@@ -1,13 +1,13 @@
 <div ng-class="{'loader': deletingItem, 'editing-description':editingDescription}">
   <div class="row" ng-hide="deletingItem">
-    <img mrsl-edit-item-photo="item" mrsl-edit-item-photo-cover-id="{{morsel.primary_item_id}}" class="col-sm-4 col-md-3"/>
+    <img mrsl-edit-item-photo="item" mrsl-edit-item-photo-cover-id="item.morsel.primary_item_id" class="col-sm-4 col-md-3"/>
     <div mrsl-edit-item-description class="col-sm-8 col-md-9"></div>
   </div>
   <div class="btn-group item-dropdown" dropdown is-open="status.isopen" ng-hide="deletingItem">
     <button type="button" class="btn btn-primary dropdown-toggle"><span class="caret"></span>
     </button>
     <ul class="dropdown-menu dropdown-menu-right" role="menu">
-      <li><a ng-click="makeCoverPhoto()">Use as cover photo</a></li>
+      <li ng-class="{disabled: item.morsel.primary_item_id === item.id}"><a ng-click="makeCoverPhoto()">Use as cover photo</a></li>
       <li class="divider"></li>
       <li><a ng-click="deleteItem()">Delete item</a></li>
     </ul>
