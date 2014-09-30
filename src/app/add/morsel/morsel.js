@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You have unsaved data.';
@@ -165,4 +165,27 @@ angular.module( 'Morsel.add.morsel', [])
       'message': 'All items must have photos to publish. Please add photos or delete unused items using the app'
     }
   ];
+
+  $scope.addItem = function() {
+    var itemParams = {
+      item: {
+        morsel_id: $scope.morsel.id
+      }
+    };
+
+    $scope.addingItem = true;
+
+    ApiItems.createItem(itemParams).then(function(itemResp) {
+      if($scope.morsel.items) {
+        $scope.morsel.items.push(itemResp.data);
+      } else {
+        $scope.morsel.items = [itemResp.data];
+      }
+      $scope.addingItem = false;
+    }, function() {
+      $scope.addingItem = false;
+      //if there's an error retrieving a morsel, go to drafts
+      $scope.alertMessage = 'There was a problem adding a new item. Please try again';
+    });
+  };
 });

@@ -47,17 +47,15 @@
   }
 
   .add-morsel-items {
+    margin: 0;
+    list-style: none;
+
     .empty-state {
       margin: 50px 0;
     }
 
-    ul {
-      margin: 0;
-    }
-
     .add-morsel-item {
       border-bottom: 1px solid $morsel-light;
-      list-style: none;
       padding: 20px 10px;
       overflow: hidden;
       text-align: center;
@@ -109,6 +107,16 @@
         textarea {
           min-height: 100px;
         }
+      }
+    }
+
+    .add-item-btn {
+      font-size: 18px;
+      text-align: center;
+      padding: 15px;
+
+      i {
+        font-size: 24px;
       }
     }
   }

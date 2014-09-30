@@ -23,19 +23,20 @@
           </div>
         </div>
         <div class="col-sm-7">
-          <div class="add-morsel-items">
-            <div class="add-morsel-items-wrap">
-              <ul>
-                <li class="add-morsel-item" ng-if="morsel.items" ng-repeat="item in morsel.items">
-                  <div class="row">
-                    <img mrsl-edit-item-photo="item" mrsl-edit-item-photo-cover-id="{{morsel.primary_item_id}}" class="col-sm-4 col-md-3"/>
-                    <div mrsl-edit-item-description="item" class="col-sm-8 col-md-9"></div>
-                  </div>
-                </li>
-                <li ng-if="!morsel.items"><p class="empty-state">This morsel doesn't have an items</p></li>
-              </ul>
-            </div>
-          </div>
+          <ul class="add-morsel-items">
+            <li class="add-morsel-item" ng-if="morsel.items" ng-repeat="item in morsel.items">
+              <div class="row">
+                <img mrsl-edit-item-photo="item" mrsl-edit-item-photo-cover-id="{{morsel.primary_item_id}}" class="col-sm-4 col-md-3"/>
+                <div mrsl-edit-item-description="item" class="col-sm-8 col-md-9"></div>
+              </div>
+            </li>
+            <li ng-if="!morsel.items">
+              <p class="empty-state">This morsel doesn't have an items</p>
+            </li>
+            <li ng-class="{'loader': addingItem}">
+              <p class="btn-link add-item-btn" ng-click="addItem()" ng-hide="addingItem"><span>&#43;</span> Add item</p>
+            </li>
+          </ul>
         </div>
       </div>
     </form>
