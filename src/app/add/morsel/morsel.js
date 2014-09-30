@@ -187,4 +187,21 @@ angular.module( 'Morsel.add.morsel', [])
       HandleErrors.onError(resp.data, $scope.morselEditForm);
     });
   };
+
+  $scope.$on('add.item.delete', function(event, itemId) {
+    var itemIndexToBeDeleted;
+
+    //find which item should be removed
+    _.each($scope.morsel.items, function(el, index) {
+      if(el.id === itemId) {
+        itemIndexToBeDeleted = index;
+        return;
+      }
+    });
+
+    if(itemIndexToBeDeleted) {
+      //remove item from list
+      $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
+    }
+  });
 });

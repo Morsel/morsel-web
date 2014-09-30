@@ -13,7 +13,9 @@ angular.module( 'Morsel.add.item', [])
         scope.deletingItem = true;
 
         ApiItems.deleteItem(scope.item.id).then(function() {
-          delete scope.item;
+          scope.deletingItem = false;
+          //tell morsel to remove item
+          scope.$emit('add.item.delete', scope.item.id);
         }, function() {
           scope.deletingItem = false;
           HandleErrors.onError(resp.data, scope.form);
