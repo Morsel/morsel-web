@@ -1,8 +1,8 @@
-<div class="item-description">
-  <p ng-hide="editing" ng-bind-html="item.description ? formatDescription() : placeholder" ng-class="{'no-description':!item.description}" ng-click="edit()"></p>
+<div class="edit-module item-description">
+  <p ng-hide="editing" ng-bind-html="item.description ? formatDescription() : placeholder" ng-class="{'no-text':!item.description}" ng-click="edit()"></p>
   <ng-form ng-show="editing" name="itemDescriptionForm">
     <textarea ng-attr-placeholder="{{placeholder}}" ng-model="updatedText" name="itemDescription" class="form-control"></textarea>
-    <div class="item-description-btns">
+    <div class="edit-module-btns">
       <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
       <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
     </div>

@@ -11,9 +11,7 @@
           <div class="add-morsel-info">
             <div class="add-morsel-info-wrap">
               <h2 bo-text="morsel.draft ? 'Morsel Add' : 'Morsel Edit'"></h2>
-              <p class="h3" title="Use the app to update your morsel's title">Title: <span bo-text="morsel.displayTitle" ng-class="{'no-title': !morsel.hasTitle}"></span></p>
-              <p class="help-block">Please use the app to change your morsel's title</p>
-              <input name="itemHiddenTitle" class="hidden" ng-model="fake">
+              <div mrsl-edit-morsel-title="morsel" mrsl-edit-morsel-title-template="morselTemplate"></div>
               <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
               <p class="help-block">Please use the app to change your morsel's location</p>
               <div class="add-morsel-actions">

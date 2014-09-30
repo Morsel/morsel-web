@@ -106,28 +106,34 @@
       .item-description {
         margin-top: 15px;
 
-        p {
-          text-align: left;
-
-          &:hover {
-            cursor: text;
-          }
-        }
-
-        .no-description {
-          color: $morsel-medium;
-          font-style: italic;
-        }
-
-        .item-description-btns {
-          margin-top: 10px;
-          text-align: right;
-        }
-
         textarea {
           min-height: 100px;
         }
       }
+    }
+  }
+
+  .edit-module {
+    p {
+      text-align: left;
+
+      &:hover {
+        cursor: text;
+      }
+    }
+
+    .edit-module-btns {
+      margin-top: 10px;
+      text-align: right;
+    }
+
+    .no-text {
+      color: $morsel-medium;
+      font-style: italic;
+    }
+
+    label {
+      font-weight: bold;
     }
   }
 }

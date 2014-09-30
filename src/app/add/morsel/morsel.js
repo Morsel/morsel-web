@@ -54,44 +54,9 @@ angular.module( 'Morsel.add.morsel', [])
   }
 
   function dataLoaded() {
-    $scope.morselDataLoaded = true;
-
     //figure out which template the morsel uses
     $scope.morselTemplate = _.find(allTemplateData, function(t) {
       return t.id === $scope.morsel.template_id;
-    });
-
-    if($scope.morsel.title) {
-       //due to current bug in the app, we need to manually check the title against the templates to determine if it actually has a title https://www.pivotaltracker.com/story/show/79033104
-      if($scope.morselTemplate && $scope.morselTemplate.title && ($scope.morsel.title === ($scope.morselTemplate.title+' morsel'))) {
-        //reset the title
-        $scope.morsel.title = null;
-        //display the placeholder
-        $scope.morsel.displayTitle = $scope.morselTemplate.title + ' morsel';
-        $scope.morsel.hasTitle = false;
-      } else {
-        $scope.morsel.displayTitle = $scope.morsel.title;
-        $scope.morsel.hasTitle = true;
-      }
-    } else {
-      //if there isn't a title
-      if($scope.morselTemplate && $scope.morselTemplate.title) {
-        //use the placeholder if there is one
-        $scope.morsel.displayTitle = $scope.morselTemplate.title + ' morsel';
-      } else {
-        $scope.morsel.displayTitle = 'Untitled morsel';
-      }
-      
-      $scope.morsel.hasTitle = false;
-    }
-
-    //have to wait until the next cycle so our form is visible
-    $timeout(function(){
-      if($scope.morsel.hasTitle) {
-        $scope.morselEditForm.itemHiddenTitle.$setValidity('morselHasTitle', true);
-      } else {
-        $scope.morselEditForm.itemHiddenTitle.$setValidity('morselHasTitle', false);
-      }
     });
 
     //figure out which template each item uses and add it to the morsel
@@ -104,6 +69,9 @@ angular.module( 'Morsel.add.morsel', [])
         item.displayTemplate = null;
       }
     });
+
+    //finally, show any directives with our data
+    $scope.morselDataLoaded = true;
   }
 
   //handle form errors
@@ -186,7 +154,11 @@ angular.module( 'Morsel.add.morsel', [])
     },
     {
       'errorName': 'morselHasTitle',
-      'message': 'Your morsel must have a title. Please add one using the app'
+      'message': 'Your morsel must have a title'
+    },
+    {
+      'errorName': 'morselTitleSaved',
+      'message': 'Your morsel\'s title must be saved before continuing'
     },
     {
       'errorName': 'itemHasPhoto',

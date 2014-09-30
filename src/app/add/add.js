@@ -45,6 +45,7 @@ angular.module( 'Morsel.add', [
   'Morsel.add.drafts',
   'Morsel.add.editItemDescription',
   'Morsel.add.editItemPhoto',
+  'Morsel.add.editMorselTitle',
   'Morsel.add.morsel'
 ])
 
