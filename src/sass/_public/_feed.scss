@@ -1,11 +1,5 @@
 $feed-notification-width: 90px;
 
-.feed {
-  background-color: $morsel-background-dark;
-  background-image: url(images/bg/morsel-detail-noise.png);
-  padding-bottom: 10px;
-}
-
 @media (min-width: $screen-sm-min) {
   .feed {
     .container {
