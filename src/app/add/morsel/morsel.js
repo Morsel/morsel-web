@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You have unsaved data.';
@@ -219,4 +219,21 @@ angular.module( 'Morsel.add.morsel', [])
       HandleErrors.onError(resp.data, $scope.morselEditForm);
     });
   });
+
+  $scope.deleteMorsel = function() {
+    var confirmed = confirm('This will delete your entire morsel and all photos associated with it. Are you sure you want to do this?');
+
+    if(confirmed) {
+      $scope.deletingMorsel = true;
+
+      ApiMorsels.deleteMorsel($scope.morsel.id).then(function() {
+        $scope.morselDeleted = true;
+        $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
+        $scope.alertType = 'success';
+      }, function(resp) {
+        $scope.deletingMorsel = false;
+        HandleErrors.onError(resp.data, $scope.morselEditForm);
+      });
+    }
+  };
 });

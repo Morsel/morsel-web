@@ -2,11 +2,11 @@
   <div class="container container-shadow morsel-bg">
     <form name="morselEditForm" ng-submit="publish()" novalidate>
       <div ng-show="alertMessage" class="alert alert-{{alertType}}">
-        <p ng-bind="alertMessage"></p>
+        <p ng-bind-html="alertMessage"></p>
       </div>
       <div mrsl-base-errors mrsl-val-form="morselEditForm"></div>
-      <div ng-if="!morselDataLoaded" class="loader"></div>
-      <div ng-if="morselDataLoaded" class="row" bindonce="morsel">
+      <div ng-if="!morselDeleted && (!morselDataLoaded || deletingMorsel)" class="loader"></div>
+      <div ng-if="!morselDeleted && (morselDataLoaded && !deletingMorsel)" class="row" bindonce="morsel">
         <div class="col-sm-5">
           <div class="add-morsel-info">
             <div class="add-morsel-info-wrap">
@@ -15,6 +15,7 @@
               <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
               <p class="help-block">Please use the app to change your morsel's location</p>
               <div class="add-morsel-actions">
+                <button class="btn btn-danger pull-left" ng-click="deleteMorsel()" name="deleteMorsel" ng-model="fake">Delete Morsel</button>
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank" bo-text="morsel.draft ? 'Preview':'Go to morsel'"></a>
                 <!--<button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" ng-if="morsel.draft && morselDataLoaded"></button>
                 <p class="help-block">Note: to push to social when publishing, please publish using the app</p>-->
