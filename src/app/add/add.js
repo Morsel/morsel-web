@@ -10,6 +10,8 @@ angular.module( 'Morsel.add', [
   'ui.bootstrap',
   'ui.router',
   'ui.route',
+  'ui.sortable',
+  
   //filters
   'Morsel.common.reverse',
 

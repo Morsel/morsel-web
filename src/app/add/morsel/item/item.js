@@ -3,7 +3,7 @@ angular.module( 'Morsel.add.item', [])
 .directive('mrslEditItem', function(ApiItems) {
   return {
     restrict: 'A',
-    replace: false,
+    replace: true,
     scope: {
       item: '=mrslEditItem'
     },

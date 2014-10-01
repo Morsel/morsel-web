@@ -46,97 +46,6 @@
     }
   }
 
-  .add-morsel-items {
-    margin: 0;
-    list-style: none;
-
-    .empty-state {
-      margin: 50px 0;
-    }
-
-    .add-morsel-item {
-      border-bottom: 1px solid $morsel-light;
-      padding: 20px 10px;
-      position: relative;
-
-      &:last-child {
-        border: none;
-      }
-
-      .item-photo {
-        position: relative;
-
-        .item-photo-wrap {
-          display: inline-block;
-          position: relative;
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
-
-        img {
-          width: $add-morsel-item-thumbnail-height;
-          height: $add-morsel-item-thumbnail-height;
-          border: 1px solid $morsel-light;
-        }
-
-        &.uploading {
-          .loader {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255,255,255,.7);
-            z-index: 10;
-          }
-
-          .item-photo-wrap {
-            &:hover {
-              cursor: wait;
-            }
-          }
-        }
-      }
-
-      .item-description {
-        margin-top: 15px;
-
-        textarea {
-          min-height: 100px;
-        }
-
-        p {
-          margin: 0;
-        }
-      }
-
-      .item-dropdown {
-        text-align: right;
-        position: absolute;
-        top: 20px;
-        right: 0;
-      }
-
-      .editing-description {
-        .item-dropdown {
-          display: none !important;
-        }
-      }
-    }
-
-    .add-item-btn {
-      font-size: 18px;
-      text-align: center;
-      padding: 15px;
-
-      i {
-        font-size: 24px;
-      }
-    }
-  }
-
   .edit-module {
     p {
       text-align: left;
@@ -158,6 +67,98 @@
 
     label {
       font-weight: bold;
+    }
+  }
+}
+
+.add-morsel-items {
+  margin: 0;
+  list-style: none;
+
+  .empty-state {
+    margin: 50px 0;
+  }
+
+  .add-morsel-item {
+    border-bottom: 1px solid $morsel-light;
+    padding: 20px 10px;
+    position: relative;
+    background-color: white;
+
+    &:last-child {
+      border: none;
+    }
+
+    .item-photo {
+      position: relative;
+
+      .item-photo-wrap {
+        display: inline-block;
+        position: relative;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      img {
+        width: $add-morsel-item-thumbnail-height;
+        height: $add-morsel-item-thumbnail-height;
+        border: 1px solid $morsel-light;
+      }
+
+      &.uploading {
+        .loader {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(255,255,255,.7);
+          z-index: 10;
+        }
+
+        .item-photo-wrap {
+          &:hover {
+            cursor: wait;
+          }
+        }
+      }
+    }
+
+    .item-description {
+      margin-top: 15px;
+
+      textarea {
+        min-height: 100px;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .item-dropdown {
+      text-align: right;
+      position: absolute;
+      top: 20px;
+      right: 0;
+    }
+
+    .editing-description {
+      .item-dropdown {
+        display: none !important;
+      }
+    }
+  }
+
+  .add-item-btn {
+    font-size: 18px;
+    text-align: center;
+    padding: 15px;
+
+    i {
+      font-size: 24px;
     }
   }
 }
@@ -268,6 +269,45 @@
   }
 }
 
+.sortable-handle {
+  cursor: move;
+  position: absolute;
+  left: 0;
+  top: 5%;
+  height: 90%;
+  width: image-width('graphics/sortable.png')/2;
+  background: top left url(images/graphics/sortable.png) repeat-y;
+  z-index: 10;
+  
+  &:hover {
+    background-position: top right;
+  }
+}
+
+.sortable-placeholder {
+  border: 1px dashed $morsel-primary;
+  box-sizing: border-box;
+  display: block;
+  min-height: 20px;
+  margin: 5px 0;
+
+  & + .add-morsel-item {
+    border-top: 1px solid $morsel-light;
+  }
+}
+
+.sortable-drag {
+  position: absolute;
+  pointer-events: none;
+  opacity: .8;
+  z-index: 9999;
+  @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
+}
+
+.sortable-hidden {
+  display: none !important;
+}
+
 @media (min-width: $screen-sm-min) {
   .add-morsel {
     background-color: $morsel-background-dark;
@@ -275,6 +315,10 @@
 
     .container {
       @include border-radius(3px);
+    }
+
+    .items-wrap {
+      padding-left: 0;
     }
 
     .add-morsel-info {
@@ -289,33 +333,37 @@
         position: relative;
       }
     }
+  }
 
-    .add-morsel-items {
-      .add-morsel-item {
-        padding-left: 0;
-        padding-right: 0;
+  .add-morsel-items {
+    .add-morsel-item {
+      padding-left: 25px;
+      padding-right: 0;
 
-        .item-description {
-          margin-top: 0;
+      .sortable-handle {
+        display: none;
+      }
 
-          p {
-            min-height: $add-morsel-item-thumbnail-height;
-          }
+      .item-description {
+        margin-top: 0;
 
-          textarea {
-            min-height: 300px;
-          }
+        p {
+          min-height: $add-morsel-item-thumbnail-height;
         }
 
-        &:hover {
-          .item-dropdown {
-            display: inline-block;
-          }
+        textarea {
+          min-height: 300px;
         }
+      }
 
-        .item-dropdown {
-          display: none;
+      &:hover {
+        .item-dropdown, .sortable-handle {
+          display: inline-block;
         }
+      }
+
+      .item-dropdown {
+        display: none;
       }
     }
   }

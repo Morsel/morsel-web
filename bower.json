@@ -22,6 +22,7 @@
     "imagesloaded": "~3.1.8",
     "angular-bindonce": "~0.3.1",
     "angular-scroll": "~0.6.1",
-    "angular-local-storage": "git://github.com/chriszamierowski/angular-local-storage.git#master"
+    "angular-local-storage": "git://github.com/chriszamierowski/angular-local-storage.git#master",
+    "ng-sortable": "~1.1.1"
   }
 }

@@ -261,4 +261,11 @@ angular.module( 'Morsel.add.morsel', [])
       HandleErrors.onError(resp.data, $scope.morselEditForm);
     });
   }
+
+  $scope.itemOrderListeners = {
+    //accept: function (sourceItemHandleScope, destSortableScope) {return true;},//override to determine drag is allowed or not. default is true.
+    itemMoved: function (event) {console.log('moved');},
+    orderChanged: function(event) {console.log('order changed');},
+    containment: '#item-reorder'
+  };
 });
