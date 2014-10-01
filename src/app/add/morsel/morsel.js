@@ -189,19 +189,40 @@ angular.module( 'Morsel.add.morsel', [])
   };
 
   $scope.$on('add.item.delete', function(event, itemId) {
-    var itemIndexToBeDeleted;
+    var confirmed,
+        itemToBeDeleted,
+        itemIndexToBeDeleted;
 
     //find which item should be removed
-    _.each($scope.morsel.items, function(el, index) {
+    itemToBeDeleted = _.find($scope.morsel.items, function(el, index) {
       if(el.id === itemId) {
         itemIndexToBeDeleted = index;
-        return;
+        return true;
       }
     });
 
-    if(itemIndexToBeDeleted) {
-      //remove item from list
-      $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
+    if($scope.morsel.items.length === 1) {
+      confirmed = confirm('Deleting the last item will delete the entire morsel. Are you sure you want to do this?');
+
+      if(confirmed) {
+        deleteMorsel();
+      }
+    } else {
+      confirmed = confirm('Are you sure you want to delete this item?');
+
+      if(confirmed) {
+        //show loader
+        itemToBeDeleted.deleting = true;
+
+        ApiItems.deleteItem(itemId).then(function() {
+          //remove item from local list
+          $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
+        }, function(resp) {
+          //remove loader
+          itemToBeDeleted.deleting = false;
+          HandleErrors.onError(resp.data, $scope.morselEditForm);
+        });
+      }
     }
   });
 
@@ -224,16 +245,20 @@ angular.module( 'Morsel.add.morsel', [])
     var confirmed = confirm('This will delete your entire morsel and all photos associated with it. Are you sure you want to do this?');
 
     if(confirmed) {
-      $scope.deletingMorsel = true;
-
-      ApiMorsels.deleteMorsel($scope.morsel.id).then(function() {
-        $scope.morselDeleted = true;
-        $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
-        $scope.alertType = 'success';
-      }, function(resp) {
-        $scope.deletingMorsel = false;
-        HandleErrors.onError(resp.data, $scope.morselEditForm);
-      });
+      deleteMorsel();
     }
   };
+
+  function deleteMorsel() {
+    $scope.deletingMorsel = true;
+
+    ApiMorsels.deleteMorsel($scope.morsel.id).then(function() {
+      $scope.morselDeleted = true;
+      $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
+      $scope.alertType = 'success';
+    }, function(resp) {
+      $scope.deletingMorsel = false;
+      HandleErrors.onError(resp.data, $scope.morselEditForm);
+    });
+  }
 });
