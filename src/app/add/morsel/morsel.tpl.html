@@ -30,13 +30,13 @@
                 <div data-sortable-item-handle title="Drag to reorder your items" ng-hide="updatingOrder"></div>
                 <div mrsl-edit-item="item"></div>
               </li>
-              <li ng-if="!morsel.items">
+              <li ng-if="!morsel.items || morsel.items.length === 0">
                 <p class="empty-state">This morsel doesn't have an items</p>
               </li>
-              <li ng-class="{'loader': addingItem}">
-                <p class="btn-link add-item-btn" ng-click="addItem()" ng-hide="addingItem"><span>&#43;</span> Add item</p>
-              </li>
             </ul>
+            <div ng-class="{'loader': addingItem}">
+              <p class="btn-link add-item-btn" ng-click="addItem()" ng-hide="addingItem"><span>&#43;</span> Add item</p>
+            </div>
             <input name="itemReorderHidden" class="hidden" ng-model="fake">
           </div>
         </div>

@@ -69,6 +69,16 @@
       font-weight: bold;
     }
   }
+
+  .add-item-btn {
+    font-size: 18px;
+    text-align: center;
+    padding: 15px;
+
+    i {
+      font-size: 24px;
+    }
+  }
 }
 
 .add-morsel-items {
@@ -84,10 +94,6 @@
     padding: 20px 10px;
     position: relative;
     background-color: white;
-
-    &:last-child {
-      border: none;
-    }
 
     .item-photo {
       position: relative;
@@ -149,16 +155,6 @@
       .item-dropdown {
         display: none !important;
       }
-    }
-  }
-
-  .add-item-btn {
-    font-size: 18px;
-    text-align: center;
-    padding: 15px;
-
-    i {
-      font-size: 24px;
     }
   }
 }
@@ -322,8 +318,6 @@
     }
 
     .add-morsel-info {
-      border-right: 1px solid $morsel-light;
-
       .add-morsel-info-wrap {
         padding-top: 20px;
       }
