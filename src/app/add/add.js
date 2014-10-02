@@ -10,6 +10,8 @@ angular.module( 'Morsel.add', [
   'ui.bootstrap',
   'ui.router',
   'ui.route',
+  'ui.sortable',
+  
   //filters
   'Morsel.common.reverse',
 
@@ -45,6 +47,8 @@ angular.module( 'Morsel.add', [
   'Morsel.add.drafts',
   'Morsel.add.editItemDescription',
   'Morsel.add.editItemPhoto',
+  'Morsel.add.editMorselTitle',
+  'Morsel.add.item',
   'Morsel.add.morsel'
 ])
 

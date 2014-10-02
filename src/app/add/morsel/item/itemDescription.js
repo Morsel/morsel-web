@@ -4,39 +4,37 @@ angular.module('Morsel.add.editItemDescription', [])
   return {
     restrict: 'A',
     replace: true,
-    scope: {
-      item: '=mrslEditItemDescription'
-    },
+    scope: false,
     link: function(scope, element, attrs) {
       //determine what to show for the placeholder
-      scope.placeholder = (scope.item.displayTemplate && scope.item.displayTemplate.placeholder_description) ? scope.item.displayTemplate.placeholder_description : 'Enter a description here';
+      scope.placeholderDescription = (scope.item.displayTemplate && scope.item.displayTemplate.placeholder_description) ? scope.item.displayTemplate.placeholder_description : 'Enter a description here';
 
-      scope.editing = false;
+      scope.editingDescription = false;
       //this will be our model
-      scope.updatedText = scope.item.description;
+      scope.updatedDescription = scope.item.description;
 
       scope.edit = function(){
-        scope.editing = true;
+        scope.editingDescription = true;
         scope.itemDescriptionForm.itemDescription.$setValidity('itemDescriptionSaved', false);
       };
 
       scope.cancel = function(){
-        scope.updatedText = scope.item.description;
-        scope.editing = false;
+        scope.updatedDescription = scope.item.description;
+        scope.editingDescription = false;
         scope.itemDescriptionForm.itemDescription.$setValidity('itemDescriptionSaved', true);
       };
 
       scope.save = function() {
         var itemParams = {
           item: {
-            description: scope.updatedText
+            description: scope.updatedDescription
           }
         };
 
         ApiItems.updateItem(scope.item.id, itemParams).then(function() {
           //set our local model
-          scope.item.description = scope.updatedText;
-          scope.editing = false;
+          scope.item.description = scope.updatedDescription;
+          scope.editingDescription = false;
           scope.itemDescriptionForm.itemDescription.$setValidity('itemDescriptionSaved', true);
         }, function(resp) {
           scope.$emit('add.error', resp);
@@ -51,6 +49,6 @@ angular.module('Morsel.add.editItemDescription', [])
         }
       };
     },
-    templateUrl: 'app/add/morsel/itemDescription.tpl.html'
+    templateUrl: 'app/add/morsel/item/itemDescription.tpl.html'
   };
 });

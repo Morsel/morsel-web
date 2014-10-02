@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You have unsaved data.';
@@ -54,44 +54,9 @@ angular.module( 'Morsel.add.morsel', [])
   }
 
   function dataLoaded() {
-    $scope.morselDataLoaded = true;
-
     //figure out which template the morsel uses
     $scope.morselTemplate = _.find(allTemplateData, function(t) {
       return t.id === $scope.morsel.template_id;
-    });
-
-    if($scope.morsel.title) {
-       //due to current bug in the app, we need to manually check the title against the templates to determine if it actually has a title https://www.pivotaltracker.com/story/show/79033104
-      if($scope.morselTemplate && $scope.morselTemplate.title && ($scope.morsel.title === ($scope.morselTemplate.title+' morsel'))) {
-        //reset the title
-        $scope.morsel.title = null;
-        //display the placeholder
-        $scope.morsel.displayTitle = $scope.morselTemplate.title + ' morsel';
-        $scope.morsel.hasTitle = false;
-      } else {
-        $scope.morsel.displayTitle = $scope.morsel.title;
-        $scope.morsel.hasTitle = true;
-      }
-    } else {
-      //if there isn't a title
-      if($scope.morselTemplate && $scope.morselTemplate.title) {
-        //use the placeholder if there is one
-        $scope.morsel.displayTitle = $scope.morselTemplate.title + ' morsel';
-      } else {
-        $scope.morsel.displayTitle = 'Untitled morsel';
-      }
-      
-      $scope.morsel.hasTitle = false;
-    }
-
-    //have to wait until the next cycle so our form is visible
-    $timeout(function(){
-      if($scope.morsel.hasTitle) {
-        $scope.morselEditForm.itemHiddenTitle.$setValidity('morselHasTitle', true);
-      } else {
-        $scope.morselEditForm.itemHiddenTitle.$setValidity('morselHasTitle', false);
-      }
     });
 
     //figure out which template each item uses and add it to the morsel
@@ -104,6 +69,9 @@ angular.module( 'Morsel.add.morsel', [])
         item.displayTemplate = null;
       }
     });
+
+    //finally, show any directives with our data
+    $scope.morselDataLoaded = true;
   }
 
   //handle form errors
@@ -186,11 +154,172 @@ angular.module( 'Morsel.add.morsel', [])
     },
     {
       'errorName': 'morselHasTitle',
-      'message': 'Your morsel must have a title. Please add one using the app'
+      'message': 'Your morsel must have a title'
+    },
+    {
+      'errorName': 'morselTitleSaved',
+      'message': 'Your morsel\'s title must be saved before continuing'
     },
     {
       'errorName': 'itemHasPhoto',
       'message': 'All items must have photos to publish. Please add photos or delete unused items using the app'
     }
   ];
+
+  $scope.addItem = function() {
+    var itemParams = {
+      item: {
+        morsel_id: $scope.morsel.id
+      }
+    };
+
+    $scope.addingItem = true;
+
+    ApiItems.createItem(itemParams).then(function(itemResp) {
+      if($scope.morsel.items) {
+        $scope.morsel.items.push(itemResp.data);
+      } else {
+        $scope.morsel.items = [itemResp.data];
+      }
+      $scope.addingItem = false;
+    }, function(resp) {
+      $scope.addingItem = false;
+      HandleErrors.onError(resp.data, $scope.morselEditForm);
+    });
+  };
+
+  $scope.$on('add.item.delete', function(event, itemId) {
+    var confirmed,
+        itemToBeDeleted,
+        itemIndexToBeDeleted;
+
+    //find which item should be removed
+    itemToBeDeleted = _.find($scope.morsel.items, function(el, index) {
+      if(el.id === itemId) {
+        itemIndexToBeDeleted = index;
+        return true;
+      }
+    });
+
+    if($scope.morsel.items.length === 1) {
+      confirmed = confirm('Deleting the last item will delete the entire morsel. Are you sure you want to do this?');
+
+      if(confirmed) {
+        deleteMorsel();
+      }
+    } else {
+      confirmed = confirm('Are you sure you want to delete this item?');
+
+      if(confirmed) {
+        //show loader
+        itemToBeDeleted.deleting = true;
+
+        ApiItems.deleteItem(itemId).then(function() {
+          //remove item from local list
+          $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
+        }, function(resp) {
+          //remove loader
+          itemToBeDeleted.deleting = false;
+          HandleErrors.onError(resp.data, $scope.morselEditForm);
+        });
+      }
+    }
+  });
+
+  $scope.$on('add.item.makeCoverPhoto', function(event, itemId) {
+    var morselParams = {
+      morsel: {
+        primary_item_id: itemId
+      }
+    };
+
+    ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
+      //since the morsel.item.morsel is also changing, update the whole morsel object
+      $scope.morsel = morselData;
+    }, function(resp) {
+      HandleErrors.onError(resp.data, $scope.morselEditForm);
+    });
+  });
+
+  $scope.deleteMorsel = function() {
+    var confirmed = confirm('This will delete your entire morsel and all photos associated with it. Are you sure you want to do this?');
+
+    if(confirmed) {
+      deleteMorsel();
+    }
+  };
+
+  function deleteMorsel() {
+    $scope.deletingMorsel = true;
+
+    ApiMorsels.deleteMorsel($scope.morsel.id).then(function() {
+      $scope.morselDeleted = true;
+      $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
+      $scope.alertType = 'success';
+    }, function(resp) {
+      $scope.deletingMorsel = false;
+      HandleErrors.onError(resp.data, $scope.morselEditForm);
+    });
+  }
+
+  //config for reordering
+  $scope.itemOrderListeners = {
+    orderChanged: function(event) {
+      //increment one to destination index because API starts at 1 but sortable directive starts at 0
+      computeSortOrder(event.source.itemScope.modelValue.id, event.dest.index);
+    },
+    containment: '#item-reorder'
+  };
+
+  function computeSortOrder(itemId, itemIndex) {
+    //don't allow another reorder until last one was successful
+    $scope.updatingOrder = true;
+    //don't let our form submit
+    $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', false);
+
+    //if it's the first one, send 1
+    if(itemIndex === 0) {
+      updateSortOrder(itemId, itemIndex, 1);
+    } else {
+      //find the sort_order of the previous item and pass 1 higher than it
+      updateSortOrder(itemId, itemIndex, $scope.morsel.items[itemIndex-1].sort_order + 1);
+    }
+  }
+
+  function updateSortOrder(itemId, itemIndex, new_sort_order) {
+    var itemParams = {
+      item: {
+        sort_order: new_sort_order,
+        morsel_id: $scope.morsel.id
+      }
+    };
+
+    ApiItems.updateItem(itemId, itemParams).then(function(resp) {
+      var i;
+
+      //update sort_order of the item
+      $scope.morsel.items[itemIndex].sort_order = new_sort_order;
+
+      //loop through items after the one that moved
+      for(i = itemIndex + 1; i < $scope.morsel.items.length; i++) {
+        //if their sort_order needs to be incremented, do it
+        if($scope.morsel.items[i].sort_order >= new_sort_order) {
+          $scope.morsel.items[i].sort_order++;
+        }
+      }
+      
+      //show reorder handles
+      $scope.updatingOrder = false;
+
+      //set our form valid
+      $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', true);
+    }, function(resp) {
+      //something went wrong, we need to revert the move
+      $scope.morsel.items = $filter('orderBy')($scope.morsel.items, 'sort_order');
+      $scope.updatingOrder = false;
+      //set our form valid, for now
+      $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', true);
+      HandleErrors.onError(resp.data, $scope.morselEditForm);
+    });
+  }
 });

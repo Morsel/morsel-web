@@ -389,6 +389,7 @@ module.exports = {
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.min.js',
+        'vendor/ng-sortable/dist/ng-sortable.min.js',
         'vendor/restangular/dist/restangular.js'
       ],
       css: [
@@ -444,6 +445,7 @@ module.exports = {
       'vendor/lodash/dist/lodash.js',
       'vendor/ng-file-upload/angular-file-upload.min.js',
       'vendor/ng-file-upload/angular-file-upload-shim.min.js',
+      'vendor/ng-sortable/dist/ng-sortable.min.js',
       'vendor/restangular/dist/restangular.js'
     ],
     css: [

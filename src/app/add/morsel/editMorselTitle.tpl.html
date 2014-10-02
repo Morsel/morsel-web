@@ -1,0 +1,15 @@
+<div class="edit-module morsel-title form-horizontal">
+  <div class="form-group">
+    <label class="control-label col-sm-2">Title:</label>
+    <div class="col-sm-10">
+      <p ng-hide="editing" class="form-control-static overflow-ellipsis" ng-bind-html="morsel.title ? morsel.title : placeholder" ng-class="{'no-text':!morsel.title}" ng-click="edit()"></p>
+      <ng-form ng-show="editing" name="morselTitleForm">
+        <input type="text" ng-attr-placeholder="{{placeholder}}" ng-model="updatedTitle" name="morselTitle" class="form-control" maxlength="50"></input>
+        <div class="edit-module-btns">
+          <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
+          <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
+        </div>
+      </ng-form>
+    </div>
+  </div>
+</div>

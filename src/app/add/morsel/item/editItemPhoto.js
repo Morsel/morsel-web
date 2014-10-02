@@ -5,7 +5,7 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
     restrict: 'A',
     scope: {
       item: '=mrslEditItemPhoto',
-      primaryId: '@mrslEditItemPhotoCoverId'
+      primaryId: '=mrslEditItemPhotoCoverId'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -13,7 +13,7 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         //if user closed the overlay while still uploading a pic, don't let them open it again until it finishes
         if(!scope.item.uploading) {
           $rootScope.modalInstance = $modal.open({
-            templateUrl: 'app/add/morsel/editItemPhotoOverlay.tpl.html',
+            templateUrl: 'app/add/morsel/item/editItemPhotoOverlay.tpl.html',
             controller: ModalInstanceCtrl,
             windowClass: 'add-item-photo-preview',
             resolve: {
@@ -98,6 +98,6 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'itemPhotoForm', 'MORSELPLACEHOLDER', '$window', 'ApiItems'];
     },
-    templateUrl: 'app/add/morsel/editItemPhoto.tpl.html'
+    templateUrl: 'app/add/morsel/item/editItemPhoto.tpl.html'
   };
 });

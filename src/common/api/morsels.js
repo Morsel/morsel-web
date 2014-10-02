@@ -6,6 +6,15 @@ angular.module( 'Morsel.common.apiMorsels', [] )
   var Morsels = {},
       RestangularMorsels = Restangular.all('morsels');
 
+  function sortMorselItems(resp) {
+    var morselData = Restangular.stripRestangular(resp).data;
+    
+    //correctly sort morsel items by sort order before we even deal with them
+    morselData.items = _.sortBy(morselData.items, 'sort_order');
+
+    return morselData;
+  }
+
   Morsels.getFeed = function() {
     return Restangular.one('feed').get();
   };
@@ -14,10 +23,7 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     var deferred = $q.defer();
 
     RestangularMorsels.get(morselId).then(function(resp){
-      var morselData = Restangular.stripRestangular(resp).data;
-      //correctly sort morsel items by sort order before we even deal with them
-      morselData.items = _.sortBy(morselData.items, 'sort_order');
-      deferred.resolve(morselData);
+      deferred.resolve(sortMorselItems(resp));
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));
     });
@@ -53,7 +59,31 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     var deferred = $q.defer();
     
     Restangular.one('morsels', morselId).one('publish').post(morselParams).then(function(resp){
-      deferred.resolve(Restangular.stripRestangular(resp).data);
+      deferred.resolve(sortMorselItems(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Morsels.updateMorsel = function(morselId, morselParams) {
+    var deferred = $q.defer();
+
+    Restangular.one('morsels', morselId).customPUT(morselParams).then(function(resp) {
+      deferred.resolve(sortMorselItems(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Morsels.deleteMorsel = function(morselId) {
+    var deferred = $q.defer();
+
+    Restangular.one('morsels', morselId).remove().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));
     });
