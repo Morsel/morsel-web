@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You have unsaved data.';
@@ -262,10 +262,64 @@ angular.module( 'Morsel.add.morsel', [])
     });
   }
 
+  //config for reordering
   $scope.itemOrderListeners = {
-    //accept: function (sourceItemHandleScope, destSortableScope) {return true;},//override to determine drag is allowed or not. default is true.
-    itemMoved: function (event) {console.log('moved');},
-    orderChanged: function(event) {console.log('order changed');},
+    orderChanged: function(event) {
+      //increment one to destination index because API starts at 1 but sortable directive starts at 0
+      computeSortOrder(event.source.itemScope.modelValue.id, event.dest.index);
+    },
     containment: '#item-reorder'
   };
+
+  function computeSortOrder(itemId, itemIndex) {
+    //don't allow another reorder until last one was successful
+    $scope.updatingOrder = true;
+    //don't let our form submit
+    $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', false);
+
+    //if it's the first one, send 1
+    if(itemIndex === 0) {
+      updateSortOrder(itemId, itemIndex, 1);
+    } else {
+      //find the sort_order of the previous item and pass 1 higher than it
+      updateSortOrder(itemId, itemIndex, $scope.morsel.items[itemIndex-1].sort_order + 1);
+    }
+  }
+
+  function updateSortOrder(itemId, itemIndex, new_sort_order) {
+    var itemParams = {
+      item: {
+        sort_order: new_sort_order,
+        morsel_id: $scope.morsel.id
+      }
+    };
+
+    ApiItems.updateItem(itemId, itemParams).then(function(resp) {
+      var i;
+
+      //update sort_order of the item
+      $scope.morsel.items[itemIndex].sort_order = new_sort_order;
+
+      //loop through items after the one that moved
+      for(i = itemIndex + 1; i < $scope.morsel.items.length; i++) {
+        //if their sort_order needs to be incremented, do it
+        if($scope.morsel.items[i].sort_order >= new_sort_order) {
+          $scope.morsel.items[i].sort_order++;
+        }
+      }
+      
+      //show reorder handles
+      $scope.updatingOrder = false;
+
+      //set our form valid
+      $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', true);
+    }, function(resp) {
+      //something went wrong, we need to revert the move
+      $scope.morsel.items = $filter('orderBy')($scope.morsel.items, 'sort_order');
+      $scope.updatingOrder = false;
+      //set our form valid, for now
+      $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', true);
+      HandleErrors.onError(resp.data, $scope.morselEditForm);
+    });
+  }
 });

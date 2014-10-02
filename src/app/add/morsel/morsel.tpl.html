@@ -17,8 +17,8 @@
               <div class="add-morsel-actions">
                 <button class="btn btn-danger pull-left" ng-click="deleteMorsel()" name="deleteMorsel" ng-model="fake">Delete Morsel</button>
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank" bo-text="morsel.draft ? 'Preview':'Go to morsel'"></a>
-                <!--<button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" ng-if="morsel.draft && morselDataLoaded"></button>
-                <p class="help-block">Note: to push to social when publishing, please publish using the app</p>-->
+                <button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" ng-if="morsel.draft && morselDataLoaded"></button>
+                <p class="help-block">Note: to push to social when publishing, please publish using the app</p>
               </div>
             </div>
           </div>
@@ -27,7 +27,7 @@
           <div id="item-reorder">
             <ul class="add-morsel-items" data-sortable="itemOrderListeners" data-ng-model="morsel.items">
               <li class="add-morsel-item" ng-if="morsel.items" ng-repeat="item in morsel.items" data-sortable-item>
-                <div data-sortable-item-handle title="Drag to reorder your items"></div>
+                <div data-sortable-item-handle title="Drag to reorder your items" ng-hide="updatingOrder"></div>
                 <div mrsl-edit-item="item"></div>
               </li>
               <li ng-if="!morsel.items">
@@ -37,6 +37,7 @@
                 <p class="btn-link add-item-btn" ng-click="addItem()" ng-hide="addingItem"><span>&#43;</span> Add item</p>
               </li>
             </ul>
+            <input name="itemReorderHidden" class="hidden" ng-model="fake">
           </div>
         </div>
       </div>
