@@ -7,7 +7,7 @@
           <img mrsl-responsive-images="{{getCoverPhotoArray(draft)}}" />
           <div>
             <h3 bo-text="draft.title" class="overflow-ellipsis h5"></h3>
-            <p bo-text="draft.items.length +' photos'"></p>
+            <p bo-text="draft.items.length +' photo'+(draft.items.length === 1 ? '':'s')"></p>
             <span am-time-ago="draft.updated_at" class="time-ago"></span>
           </div>
         </a>
