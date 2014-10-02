@@ -34,7 +34,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      text-align: center;
+      text-align: right;
       width: 100%;
       padding: 0 20px;
 
@@ -91,7 +91,7 @@
 
   .add-morsel-item {
     border-bottom: 1px solid $morsel-light;
-    padding: 20px 10px;
+    padding: 20px 10px 20px 25px;
     position: relative;
     background-color: white;
 
@@ -331,7 +331,6 @@
 
   .add-morsel-items {
     .add-morsel-item {
-      padding-left: 25px;
       padding-right: 0;
 
       .sortable-handle {

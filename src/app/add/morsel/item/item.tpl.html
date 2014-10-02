@@ -1,7 +1,7 @@
 <div ng-class="{'loader': item.deleting, 'editing-description':editingDescription}">
   <div class="row" ng-hide="item.deleting">
     <img mrsl-edit-item-photo="item" mrsl-edit-item-photo-cover-id="item.morsel.primary_item_id" class="col-sm-4 col-md-3"/>
-    <div mrsl-edit-item-description class="col-sm-8 col-md-9"></div>
+    <div mrsl-edit-item-description class="col-sm-8"></div>
   </div>
   <div class="btn-group item-dropdown" dropdown is-open="status.isopen" ng-hide="item.deleting">
     <button type="button" class="btn btn-primary dropdown-toggle"><span class="caret"></span>
