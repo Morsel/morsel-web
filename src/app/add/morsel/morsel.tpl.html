@@ -27,7 +27,7 @@
           <div id="item-reorder">
             <ul class="add-morsel-items" data-sortable="itemOrderListeners" data-ng-model="morsel.items">
               <li class="add-morsel-item" ng-if="morsel.items" ng-repeat="item in morsel.items" data-sortable-item>
-                <div data-sortable-item-handle title="Drag to reorder your items" ng-hide="updatingOrder"></div>
+                <div data-sortable-item-handle title="Drag to reorder your items" ng-hide="updatingOrder || morsel.items.length === 1"></div>
                 <div mrsl-edit-item="item"></div>
               </li>
               <li ng-if="!morsel.items || morsel.items.length === 0">
