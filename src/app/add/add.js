@@ -49,7 +49,8 @@ angular.module( 'Morsel.add', [
   'Morsel.add.editItemPhoto',
   'Morsel.add.editMorselTitle',
   'Morsel.add.item',
-  'Morsel.add.morsel'
+  'Morsel.add.morsel',
+  'Morsel.add.new'
 ])
 
 //define some constants for the app

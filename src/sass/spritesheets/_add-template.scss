@@ -1,0 +1,8 @@
+.add-template-sprite {
+  display: inline-block;
+}
+
+$add-template-sprite-dimensions: true;
+$add-template-sprite-inline: false;
+@import "spritesheets/add-template/*.png";
+@include all-add-template-sprites;
