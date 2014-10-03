@@ -3,11 +3,8 @@
   <div class="container container-shadow container-margin-bottom morsel-bg">
     <p class="help-block">Choose from one of the following storyboards to get started:</p>
     <ul>
-      <li ng-repeat="t in templates" bindonce>
-        <button class="btn btn-primary btn-block">
-          <i bo-class="t.icon"></i>
-          <p bo-text="t.title"></p>
-        </button>
+      <li ng-repeat="t in templates">
+        <div mrsl-add-template="t"></div>
       </li>
     </ul>
   </div>
