@@ -1,7 +1,7 @@
 {
     "data": [{
         "title": "Quick Add",
-        "icon": "icon-add-white",
+        "icon": "add-template-quick",
         "id": 1,
         "description": "Quick Add jumps right into the creation of a morsel without the additional step or boundaries of a pre-defined storyboard.",
         "tip": null,
@@ -18,7 +18,7 @@
         }]
     }, {
         "title": "Inspiration",
-        "icon": "template-icon-inspiration",
+        "icon": "add-template-inspiration",
         "id": 2,
         "description": "Culinary inspirations can come from anywhere - a place, another dish, an ingredient, or a product on a store shelf to name a few.",
         "tip": "Inspiration stories are some of the most valuable stories you can share to connect with diners - and more importantly for media who are learning about you.",
@@ -55,7 +55,7 @@
         }]
     }, {
         "title": "Great Pairing",
-        "icon": "template-icon-pairing",
+        "icon": "add-template-pairing",
         "id": 4,
         "description": "Whether you're pairing foods or food and drink, playing with ingredients and flavors has the power to create something amazing. Share your great combinations!",
         "tip": null,
@@ -92,7 +92,7 @@
         }]
     }, {
         "title": "Ingredient Spotlight",
-        "icon": "template-icon-ingredient",
+        "icon": "add-template-ingredient",
         "id": 5,
         "description": "Did you discover some new artisanal bitters? Do you want to showcase your haul from the farmer's market? If the ingredient is the focus, tell us more!",
         "tip": "Ingredient spotlight is a chance to share your discoveries with the world. It can be new, new to you, or even a beloved old favorite you think needs some attention. (Hello Old Bay Seasoning!)",
@@ -129,7 +129,7 @@
         }]
     }, {
         "title": "Everyday Goodness",
-        "icon": "template-icon-everyday",
+        "icon": "add-template-everyday",
         "id": 6,
         "description": "The Zuni Cafe chicken. La Super-Rica Taqueria Fish Tacos. Sometimes the best food is every day food, done right.",
         "tip": "Everyday Goodness is a place to share simple dishes that might not arrive with fanfare but worth a pilgrimage.",
@@ -166,7 +166,7 @@
         }]
     }, {
         "title": "Deconstruct / Reinvent",
-        "icon": "template-icon-reconstruct",
+        "icon": "add-template-reconstruct",
         "id": 7,
         "description": "You can take a measure of a cook by seeing how they reinvent a recipe or deconstruct a dish. It's your interpretation of the familiar, serving up your vision on a plate and it can tell more about what you value in food than anything else.",
         "tip": "Deconstruct / Reinvent is for classic dishes you break down and rebuild in your own vision.",
@@ -203,7 +203,7 @@
         }]
     }, {
         "title": "Special Event",
-        "icon": "template-icon-event",
+        "icon": "add-template-event",
         "id": 8,
         "description": "You go all out. You wow your guests. Capture your awesome dinner party or event in just three easy steps (after all, you need to spend time with your guests!)",
         "tip": "Dinner party is a place to tell the story of your party, showcasing the atmosphere as well as the menu.",
@@ -240,7 +240,7 @@
         }]
     }, {
         "title": "Travel Guide",
-        "icon": "template-icon-travel",
+        "icon": "add-template-travel",
         "id": 9,
         "description": "Sometimes the most exciting aspects of food happen while you're exploring places outside your kitchen. Whether you're touring a neighborhood across the country or exploring the local farmer's market, capture the things you find interesting and worth sharing.",
         "tip": "Travel Guide is not just a list of places to go. It's a way to add some back-story to your findings and recommendations.",
@@ -277,7 +277,7 @@
         }]
     }, {
         "title": "Food Days",
-        "icon": "template-icon-days",
+        "icon": "add-template-days",
         "id": 10,
         "description": "Food holidays all seem like silliness until National Bourbon Day comes around. Then Food Days, like holidays, take on a bit of importance. Here's the thing, the world is celebrating these days, so jump in the conversation and see what happens.",
         "tip": "Food Days are easy topics for media to cover, so they'll be on the lookout for at-home tips, clever reconstructions, or spectacular renderings of a classic.",
@@ -314,7 +314,7 @@
         }]
     }, {
         "title": "How To",
-        "icon": "template-icon-how",
+        "icon": "add-template-how",
         "id": 11,
         "description": "Once you've made hollandaise for 200 every weekend for a year or grilled oysters for 500 even once, you learn a thing or two about how to do it right, what to look out for, and how to avoid disaster. Those things, the things you just \"do\", they are the things everyone wants to know..",
         "tip": "How To is the place to share the methods and techniques you've nailed and everyone wants to read (and share!). Be the person who shares something useful and you'll be the person everyone follows! ",
