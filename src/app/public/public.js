@@ -60,6 +60,7 @@ angular.module( 'Morsel.public', [
   //app
   'Morsel.public.activity',
   'Morsel.public.contact',
+  'Morsel.public.eventMorsels',
   'Morsel.public.explore',
   'Morsel.public.feed',
   'Morsel.public.home',
