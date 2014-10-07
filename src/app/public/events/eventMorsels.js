@@ -33,6 +33,12 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventInfo.location = 'Chicago, IL';
     eventInfo.description = $sce.trustAsHtml('Taste Talks is a three-day food festival in Brooklyn and Chicago exploring the culinary cutting edge for a food-obsessed generation. Using the <a href="/apps" target="_self">Morsel iOS app</a>, chefs from the Chicago event captured these stories and inspirations throughout the weekend.');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/taste-talks-2014/taste-talks-2014-logo.jpeg';
+  } else if(eventName === 'dinner-lab-taste-talks-chicago-2014') {
+    eventUrl += 'dinner-lab-taste-talks-chicago-2014/dinner-lab-taste-talks-chicago-2014-morsels.json';
+    eventInfo.title = 'Dinner Lab - Taste Talks 2014';
+    eventInfo.location = 'Chicago, IL';
+    eventInfo.description = $sce.trustAsHtml('Dinner Lab is a social dining experiment that unites undiscovered chefs with adventurous diners who are looking for something different from the conventional restaurant experience. On October 4th, chef Pat Sheerin of Trencherman created a dinner like you\'ve never experienced before as part of the Taste Talks Festival.');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/dinner-lab-taste-talks-chicago-2014/dinner-lab-logo.jpg';
   } else {
     //invalid event
     $location.path('/');
