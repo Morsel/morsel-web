@@ -92,5 +92,25 @@
   "404": {
     "title": "Page Not Found | Morsel",
     "description": "Oops, this page doesn't exist"
+  },
+  "taste-talks-chicago-2014": {
+    "title": "Taste Talks - Chicago 2014 | Morsel",
+    "description": "Taste Talks is a three-day food festival in Brooklyn and Chicago exploring the culinary cutting edge for a food-obsessed generation.",
+    "image": "https://morsel.s3.amazonaws.com/events/taste-talks-chicago-2014/taste-talks-chicago-2014-logo.jpeg",
+    "twitter": {
+      "creator": "@tastetalks",
+      "card": "summary_large_image"
+    },
+    "url": "https://www.eatmorsel.com/events/taste-talks-chicago-2014"
+  },
+  "dinner-lab-taste-talks-chicago-2014": {
+    "title": "Dinner Lab at Taste Talks - Chicago 2014 | Morsel",
+    "description": "Dinner Lab is a social dining experiment that unites undiscovered chefs with adventurous diners who are looking for something different from the conventional restaurant experience. On October 4th, chef Pat Sheerin of Trencherman created a dinner like you've never experienced before as part of the Taste Talks Festival.",
+    "image": "https://morsel.s3.amazonaws.com/events/dinner-lab-taste-talks-chicago-2014/dinner-lab-logo.jpg",
+    "twitter": {
+      "creator": "@dinnerlab",
+      "card": "summary_large_image"
+    },
+    "url": "https://www.eatmorsel.com/events/dinner-lab-taste-talks-chicago-2014"
   }
 }

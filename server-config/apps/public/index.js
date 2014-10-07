@@ -261,3 +261,18 @@ module.exports.renderPlacePage = function(res, placeIdSlug) {
     }
   });
 };
+
+module.exports.renderEventPage = function(res, eventSlug) {
+  var eventMetadata = util.getMetadata(eventSlug);
+
+  if(eventMetadata) {
+    eventMetadata.twitter = _.defaults(eventMetadata.twitter || {}, util.defaultMetadata.twitter);
+    eventMetadata.og = _.defaults(eventMetadata.og || {}, util.defaultMetadata.og);
+    eventMetadata = _.defaults(eventMetadata || {}, util.defaultMetadata);
+
+    renderPublicPage(res, eventMetadata);
+  } else {
+    //not a valid event - must be a bad route
+    util.render404(res);
+  }
+};
