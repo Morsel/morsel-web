@@ -101,6 +101,9 @@
       "creator": "@tastetalks",
       "card": "summary_large_image"
     },
+    "og": {
+      "type": "article"
+    },
     "url": "https://www.eatmorsel.com/events/taste-talks-chicago-2014"
   },
   "dinner-lab-taste-talks-chicago-2014": {
@@ -110,6 +113,9 @@
     "twitter": {
       "creator": "@dinnerlab",
       "card": "summary_large_image"
+    },
+    "og": {
+      "type": "article"
     },
     "url": "https://www.eatmorsel.com/events/dinner-lab-taste-talks-chicago-2014"
   }
