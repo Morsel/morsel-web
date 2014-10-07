@@ -86,13 +86,18 @@ angular.module( 'Morsel.login.join', [])
   };
 })
 
-.controller( 'LandingCtrl', function LandingCtrl( $scope, $state ) {
+.controller( 'LandingCtrl', function LandingCtrl( $scope, $state, Mixpanel ) {
   $scope.joinEmail = function() {
-    $state.go('auth.join.basicInfo');
+    Mixpanel.send('Signs Up', {
+      login_type: 'email',
+      signup_step: 'initial'
+    }, function() {
+      $state.go('auth.join.basicInfo');
+    });
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers, localStorageService ) {
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers, localStorageService, Mixpanel ) {
   //used to differentiate between login types for UI
   $scope.usingEmail = _.isEmpty($scope.userData.social); 
 
@@ -175,17 +180,25 @@ angular.module( 'Morsel.login.join', [])
   };
 
   function onSuccess(resp) {
-    //store our user data for the next step if we need it
-    $scope.userData.registered = resp;
+    var login_type = $scope.userData && $scope.userData.social && $scope.userData.social.type ? $scope.userData.social.type : 'email';
 
-    //if successfully joined send to the next step
-    if($scope.userData.registered.professional) {
-      //pros need more info
-      $state.go('auth.join.additionalInfo');
-    } else {
-      //they're done
-      $scope.finishedSignup();
-    }
+    Mixpanel.send('Signs Up', {
+      login_type: login_type,
+      signup_step: 'basic info',
+      is_pro: $scope.basicInfoModel && $scope.basicInfoModel.professional ? $scope.basicInfoModel.professional : false
+    }, function() {
+      //store our user data for the next step if we need it
+      $scope.userData.registered = resp;
+
+      //if successfully joined send to the next step
+      if($scope.userData.registered.professional) {
+        //pros need more info
+        $state.go('auth.join.additionalInfo');
+      } else {
+        //they're done
+        $scope.finishedSignup();
+      }
+    });
   }
 
   function onError(resp) {
