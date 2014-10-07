@@ -1,7 +1,7 @@
 <div class="feed dark-bg event-morsels">
   <div class="container morsel-bg container-shadow" ng-style="viewOptions.minimumMainHeight()">
     <img class="event-img" ng-src="{{eventInfo.image}}" />
-    <p ng-bind="eventInfo.description"></p>
+    <p ng-bind-html="eventInfo.description" class="event-description"></p>
     <ul class="clearfix morsel-grid morsel-summary-grid">
       <li ng-repeat="morsel in eventInfo.morsels" class="col-sm-6 col-md-4 morsel-summary-grid-item">
         <div mrsl-morsel-summary="morsel"></div>

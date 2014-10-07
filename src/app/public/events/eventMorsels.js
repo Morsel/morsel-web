@@ -20,7 +20,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
   });
 })
 
-.controller( 'EventMorselsCtrl', function EventMorselsCtrl( $scope, $location, $stateParams, $q, Restangular ) {
+.controller( 'EventMorselsCtrl', function EventMorselsCtrl( $scope, $location, $stateParams, $q, Restangular, $sce ) {
   var eventName = $stateParams.eventName.toLowerCase(),
       eventUrl = 'https://morsel.s3.amazonaws.com/events/',
       deferred = $q.defer(),
@@ -31,7 +31,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventUrl += 'taste-talks-2014/taste-talks-2014-morsels.json';
     eventInfo.title = 'Taste Talks 2014';
     eventInfo.location = 'Chicago, IL';
-    eventInfo.description = 'Some placeholder text about what this event is, ya know?';
+    eventInfo.description = $sce.trustAsHtml('Taste Talks is a three-day food festival in Brooklyn and Chicago exploring the culinary cutting edge for a food-obsessed generation. Using the <a href="/apps" target="_self">Morsel iOS app</a>, chefs from the Chicago event captured these stories and inspirations throughout the weekend.');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/taste-talks-2014/taste-talks-2014-logo.jpeg';
   } else {
     //invalid event
