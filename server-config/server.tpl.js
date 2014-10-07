@@ -333,8 +333,8 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     });
 
     //events
-    app.get('/events/:eventname', function(req, res){
-      publicApp.renderPublicPage(res);
+    app.get('/events/:eventslug', function(req, res){
+      publicApp.renderEventPage(res, req.params.eventslug);
     });
 
     //morsel detail with post id/slug
