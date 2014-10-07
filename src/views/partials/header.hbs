@@ -8,5 +8,17 @@
       {{/if}}
     </h1>
   </div>
-  <a ng-click="menuOpen = !menuOpen" class="side-nav-trigger"></a>
+  <nav>
+    <ul>
+      <li>
+        <a ng-click="menuOpen = !menuOpen" href="/join" ng-if="!isLoggedIn" target="_self">
+          <span class="common-signup text-hide">Sign Up</span>
+        </a>
+      </li>
+      <li>
+        <a ng-click="menuOpen = !menuOpen" class="hidden-xs"><span class="common-menu text-hide">Menu</span></a>
+        <a ng-click="menuOpen = !menuOpen" class="visible-xs-inline-block"><span class="common-burger text-hide">Menu</span></a>
+      </li>
+    </ul>
+  </nav>
 </header>
