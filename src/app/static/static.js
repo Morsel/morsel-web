@@ -145,4 +145,11 @@ angular.module( 'Morsel.static', [
   $scope.closeMenu = function() {
     $scope.menuOpen = false;
   };
+
+  $scope.toggleMenu = function() {
+    Mixpanel.send('Tapped Menu Bar Icon', {
+      menu_state: $scope.menuOpen ? 'closing' : 'opening'
+    });
+    $scope.menuOpen = !$scope.menuOpen;
+  };
 });

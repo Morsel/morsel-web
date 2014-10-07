@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectTwitter', [] )
 
 //connect (sign up/login) with twitter Oauth (handled on server)
-.directive('mrslConnectTwitter', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location){
+.directive('mrslConnectTwitter', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location, Mixpanel){
   return {
     restrict: 'A',
     scope: {
@@ -48,6 +48,10 @@ angular.module( 'Morsel.common.connectTwitter', [] )
             //just sign them in
             login();
           } else {
+            Mixpanel.send('Authenticated with Social', {
+              social_type: 'twitter'
+            });
+
             //otherwise fill in some info to start sign up process
             //if they have a profile image, use it
             if(!tData.default_profile_image) {
@@ -88,15 +92,19 @@ angular.module( 'Morsel.common.connectTwitter', [] )
       }
 
       function onLoginSuccess(resp) {
-        //if successfully logged in check if we have anything in the to-do queue
-        if(AfterLogin.hasCallback()) {
-          AfterLogin.goToCallbackPath();
-        } else {
-          //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
+        Mixpanel.send('Tapped Log In', {
+          login_type: 'twitter'
+        }, function() {
+          //if successfully logged in check if we have anything in the to-do queue
+          if(AfterLogin.hasCallback()) {
+            AfterLogin.goToCallbackPath();
+          } else {
+            //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
 
-          //send them to the login page
-          $window.location.href = tData.loginNext ? tData.loginNext : '/';
-        }
+            //send them to the login page
+            $window.location.href = tData.loginNext ? tData.loginNext : '/';
+          }
+        });
       }
 
       function onLoginError(resp) {

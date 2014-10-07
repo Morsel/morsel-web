@@ -10,24 +10,13 @@ angular.module( 'Morsel.common.socialSharing', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var morselId,
-          creatorId;
-          //cURL = encodeURIComponent($location.absUrl());//for testing
-
       scope.socialExpanded = true;
-
-      scope.$watch('mrslMorsel', function(newValue, oldValue) {
-        if(newValue) {
-          morselId = newValue.id;
-          creatorId = newValue.creator.id;
-        }
-      });
 
       function shareMixpanel(socialType) {
         Mixpanel.send('Tapped Share Morsel', {
           social_type : socialType,
-          morsel_id : morselId,
-          creator_id : creatorId
+          morsel_id : scope.morsel.id,
+          creator_id : scope.morsel.creator.id
         });
       }
 

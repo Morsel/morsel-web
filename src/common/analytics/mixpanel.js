@@ -12,11 +12,11 @@ angular.module( 'Morsel.common.mixpanel', [])
     userId;
   
   return {
-    send : function(e, customProps) {
+    send : function(e, customProps, callback) {
       var loggingProps;
       
       if(window.mixpanel) {
-        window.mixpanel.track(e, customProps); 
+        window.mixpanel.track(e, customProps, callback); 
       } else {
         //combine all our mixpanel props (super + regular) for logging
         loggingProps = _.defaults(customProps || {}, superProps);
@@ -24,6 +24,14 @@ angular.module( 'Morsel.common.mixpanel', [])
           userId: userId
         });
         console.log('Mixpanel Event: ', e, loggingProps);
+        callback();
+      }
+    },
+    track_links : function(selector, eventName, customProps) {
+      if(window.mixpanel) {
+        window.mixpanel.track_links(selector, eventName, customProps);
+      } else {
+        console.log('Setting up track_links event: '+eventName+' on: '+ selector);
       }
     },
     register : function(customSuperProps) {
