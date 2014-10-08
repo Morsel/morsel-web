@@ -42,7 +42,7 @@ angular.module( 'Morsel.add.new', [])
       //increase our count to display in the menu
       currentUser.draft_count++;
       //bring user to add page
-      $location.go('/add/morsel/'+morselData.id);
+      $location.path('/add/morsel/'+morselData.id);
     }, function(resp) {
       $scope.creating = false;
       HandleErrors.onError(resp.data, $scope.newMorselForm);
