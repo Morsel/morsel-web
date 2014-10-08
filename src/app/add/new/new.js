@@ -29,7 +29,7 @@ angular.module( 'Morsel.add.new', [])
   });
 })
 
-.controller( 'NewMorselCtrl', function NewMorselCtrl( $scope, templateData, ApiMorsels, HandleErrors, $location ) {
+.controller( 'NewMorselCtrl', function NewMorselCtrl( $scope, currentUser, templateData, ApiMorsels, HandleErrors, $location ) {
   $scope.templates = templateData;
 
   //catch from our template directive
@@ -39,6 +39,9 @@ angular.module( 'Morsel.add.new', [])
 
     ApiMorsels.createMorsel(morselParams).then(function(resp) {
       var morselData = resp.data;
+      //increase our count to display in the menu
+      currentUser.draft_count++;
+      //bring user to add page
       $location.go('/add/morsel/'+morselData.id);
     }, function(resp) {
       $scope.creating = false;

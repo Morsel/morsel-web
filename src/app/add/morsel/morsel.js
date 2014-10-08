@@ -98,6 +98,9 @@ angular.module( 'Morsel.add.morsel', [])
         ApiMorsels.getMorsel(morselData.id).then(onPublishSuccess);
       }, 500);
     } else {
+      //decrease our count to display in the menu
+      currentUser.draft_count--;
+      
       //bring user to morsel detail
       //remove onbeforeunload so user doesn't get blocked going to morsel detail page
       $window.onbeforeunload = undefined;
@@ -256,6 +259,9 @@ angular.module( 'Morsel.add.morsel', [])
       $scope.morselDeleted = true;
       $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
       $scope.alertType = 'success';
+      
+      //decrease our count to display in the menu
+      currentUser.draft_count--;
     }, function(resp) {
       $scope.deletingMorsel = false;
       HandleErrors.onError(resp.data, $scope.morselEditForm);

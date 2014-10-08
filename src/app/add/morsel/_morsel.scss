@@ -100,12 +100,15 @@
     margin: 50px 0;
   }
 
+  li {
+    list-style: none;
+  }
+
   .add-morsel-item {
     border-bottom: 1px solid $morsel-light;
     padding: 20px 10px 20px 25px;
     position: relative;
     background-color: white;
-    list-style: none;
 
     .item-photo {
       position: relative;
