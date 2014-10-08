@@ -2,10 +2,14 @@
   <h2>New Morsel</h2>
   <div class="container container-shadow container-margin-bottom morsel-bg">
     <p class="help-block">Choose from one of the following storyboards to get started:</p>
-    <ul>
-      <li ng-repeat="t in templates">
-        <div mrsl-add-template="t"></div>
-      </li>
-    </ul>
+    <form name="newMorselForm" novalidate>
+      <div mrsl-base-errors mrsl-val-form="newMorselForm"></div>
+      <div class="loader" ng-show="creating"></div>
+      <ul ng-hide="creating">
+        <li ng-repeat="t in templates">
+          <div mrsl-add-template="t"></div>
+        </li>
+      </ul>
+    </form>
   </div>
 </div>

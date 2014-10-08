@@ -4,9 +4,14 @@
 
   .container {
     padding-top: 15px;
+    position: relative;
   }
 
   .add-morsel-info {
+    h2 {
+      margin: 10px 0 20px;
+    }
+
     .h3 {
       font-size: 16px;
       margin-bottom: 0;
@@ -79,11 +84,17 @@
       font-size: 24px;
     }
   }
+
+  .template-help {
+    position: absolute;
+    top: 85px;
+    right: 20px;
+    z-index: 10;
+  }
 }
 
 .add-morsel-items {
-  margin: 0;
-  list-style: none;
+  margin: 10px 0 0;
 
   .empty-state {
     margin: 50px 0;
@@ -94,6 +105,7 @@
     padding: 20px 10px 20px 25px;
     position: relative;
     background-color: white;
+    list-style: none;
 
     .item-photo {
       position: relative;
@@ -326,6 +338,11 @@
         margin-top: 30px;
         position: relative;
       }
+    }
+
+    .template-help {
+      top: 5px;
+      right: 5px;
     }
   }
 

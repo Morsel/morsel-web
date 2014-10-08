@@ -1,5 +1,6 @@
 <div class="add-morsel" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow morsel-bg">
+    <div class="template-help" ng-show="morselDataLoaded" mrsl-add-template="morselTemplate" mrsl-add-template-help="true"></div>
     <form name="morselEditForm" ng-submit="publish()" novalidate>
       <div ng-show="alertMessage" class="alert alert-{{alertType}}">
         <p ng-bind-html="alertMessage"></p>

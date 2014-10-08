@@ -29,6 +29,20 @@ angular.module( 'Morsel.add.new', [])
   });
 })
 
-.controller( 'NewMorselCtrl', function NewMorselCtrl( $scope, templateData ) {
+.controller( 'NewMorselCtrl', function NewMorselCtrl( $scope, templateData, ApiMorsels, HandleErrors, $location ) {
   $scope.templates = templateData;
+
+  //catch from our template directive
+  $scope.$on('add.morsel', function(e, morselParams) {
+    //show a loader
+    $scope.creating = true;
+
+    ApiMorsels.createMorsel(morselParams).then(function(resp) {
+      var morselData = resp.data;
+      $location.go('/add/morsel/'+morselData.id);
+    }, function(resp) {
+      $scope.creating = false;
+      HandleErrors.onError(resp.data, $scope.newMorselForm);
+    });
+  });
 });

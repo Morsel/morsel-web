@@ -91,5 +91,17 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return deferred.promise;
   };
 
+  Morsels.createMorsel = function(morselParams) {
+    var deferred = $q.defer();
+
+    RestangularMorsels.post(morselParams).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Morsels;
 });
