@@ -25,14 +25,14 @@
                   </label>
                   <p class="help-block">You haven't given Morsel permission to post to Facebook. <btn ng-click="addFacebook()" class="btn-link">Click here</btn> to give permission.</p>
                 </div>
-                <!--<div class="checkbox" ng-class="{disabled:!authentications.twitter}">
+                <div class="checkbox" ng-class="{disabled:!social.canPublish.twitter}">
                   <label>
-                    <input type="checkbox" value="" name="socialTwitter" ng-model="socialTwitterModel" ng-disabled="{{!socialModel.twitter}}">
+                    <input type="checkbox" value="" name="socialTwitter" ng-model="social.model.twitter" ng-disabled="!social.canPublish.twitter">
                     <i class="common-twitter"></i>
                     Post to Twitter
                   </label>
-                  <p class="help-block">You haven't connected your Twitter account. <a href="/account/social-accounts" target="_self">Click here</a> to connect.</p>
-                </div>-->
+                  <p class="help-block">You haven't given Morsel permission to post to Twitter. Please go to your <a href="/account/social-accounts" target="_self">Social Accounts Settings</a> to give permission.</p>
+                </div>
               </div>
               <div class="add-morsel-actions">
                 <button class="btn btn-danger pull-left" ng-click="deleteMorsel()" name="deleteMorsel" ng-model="fake">Delete Morsel</button>
