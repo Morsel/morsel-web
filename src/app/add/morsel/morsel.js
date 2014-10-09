@@ -21,7 +21,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You have unsaved data.';
@@ -32,6 +32,8 @@ angular.module( 'Morsel.add.morsel', [])
   morselPromises.push(getMorsel());
   //general morsel template data
   morselPromises.push(getMorselTemplates());
+  //social authentication data
+  morselPromises.push(getAuthentications());
   //once all promises are resolved
   $q.all(morselPromises).then(dataLoaded);
 
@@ -50,6 +52,110 @@ angular.module( 'Morsel.add.morsel', [])
     }, function() {
       //if there's an error retrieving a morsel, go to drafts
       $state.go('drafts');
+    });
+  }
+
+  //store all our social data
+  $scope.social = {
+    //store our social authentications from the API
+    apiAuthentications: {},
+    //model for our forms
+    model:  {
+      facebook : false,
+      twitter : false
+    },
+    //do networks have the ability to publish?
+    canPublish: {
+      facebook: false,
+      twitter: false
+    }
+  };
+
+  //request publish_actions
+  $scope.addFacebook = function() {
+    FacebookApi.init(function(){
+      FacebookApi.login(function(response) {
+        if (response.status === 'connected') {
+          // user is logged into your app and Facebook.
+          if(response.authResponse && response.authResponse.userID) {
+            //check if we already have authentications for user
+            if($scope.social.apiAuthentications.facebook) {
+              //if so, update them to be safe
+              ApiUsers.updateAuthentication($scope.social.apiAuthentications.facebook.id, formatAuthenticationParams(response)).then(function(authenticationResp){
+                $scope.social.apiAuthentications.facebook = authenticationResp.data;
+                //user is authenticated with facebook, but we need to check if they can publish
+                checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
+              });
+            } else {
+              //if not, create new authentication
+              createAuthentication(response);
+            }
+          }
+        }
+      }, 'publish_actions');
+    });
+  };
+
+  function formatAuthenticationParams(response) {
+    return {
+      'authentication': {
+        'provider': 'facebook',
+        'token': response.authResponse.accessToken,
+        //tokens coming from the JS SDK are short-lived
+        'short_lived': true,
+        'uid': response.authResponse.userID
+      }
+    };
+  }
+
+  function createAuthentication(response) {
+    var authenticationData = formatAuthenticationParams(response);
+
+    ApiUsers.createAuthentication(authenticationData).then(function(authenticationResp){
+      $scope.social.apiAuthentications.facebook = authenticationResp.data;
+      //user is authenticated with facebook, but we need to check if they can publish
+      checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
+    }, handleErrors);
+  }
+
+  function getAuthentications() {
+    return ApiUsers.getAuthentications().then(function(authenticationsResp){
+      //go through authentication array and add each as an object with the provider as the key so we know which user has authenticated
+      _.each(authenticationsResp.data, function(auth) {
+        $scope.social.apiAuthentications[auth.provider] = auth;
+      });
+
+      if($scope.social.apiAuthentications.facebook) {
+        //user is authenticated with facebook, but we need to check if they can publish
+        checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
+      }
+    }, function() {
+      //if there's an error retrieving a morsel, go to drafts
+      $state.go('drafts');
+    });
+  }
+
+  function checkFbPublishStatus(fbUserId) {
+    FacebookApi.init(function(){
+      FacebookApi.login(function(response) {
+        if (response.status === 'connected') {
+          FacebookApi.getPermissions(fbUserId, function(userPermissions) {
+            var truePublishPermission;
+
+            //get our permissions and see if fb has publish permission
+            truePublishPermission = _.find(userPermissions.data, function(p) {
+              return p.permission === 'publish_actions' && p.status === 'granted';
+            });
+
+            if(truePublishPermission) {
+              $scope.social.canPublish.facebook = true;
+            }
+
+            //apply our changes that invole the DOM
+            $scope.$apply();
+          });
+        }
+      });
     });
   }
 
@@ -76,18 +182,28 @@ angular.module( 'Morsel.add.morsel', [])
 
   //handle form errors
   $scope.$on('add.error', function(event, resp){
-    HandleErrors.onError(resp.data, $scope.morselEditForm);
+    handleErrors(resp);
   });
 
   //submit our form
   $scope.publish = function() {
+    var morselParams = {};
+
     //check if everything is valid
     if($scope.morselDataLoaded && $scope.morselEditForm.$valid) {
       //disable form while request fires
       $scope.morselEditForm.$setValidity('loading', false);
 
+      if($scope.social.model.facebook) {
+        morselParams.post_to_facebook = true;
+      }
+
+      if($scope.social.model.twitter) {
+        morselParams.post_to_twitter = true;
+      }
+
       //call our publishMorsel method to take care of the heavy lifting
-      ApiMorsels.publishMorsel($scope.morsel.id).then(onPublishSuccess, onPublishError);
+      ApiMorsels.publishMorsel($scope.morsel.id, morselParams).then(onPublishSuccess, onPublishError);
     }
   };
 
@@ -96,11 +212,11 @@ angular.module( 'Morsel.add.morsel', [])
     if(_.isEmpty(morselData.mrsl) || _.isEmpty(morselData.photos)) {
       $timeout(function() {
         ApiMorsels.getMorsel(morselData.id).then(onPublishSuccess);
-      }, 500);
+      }, 1000); //check every second
     } else {
       //decrease our count to display in the menu
       currentUser.draft_count--;
-      
+
       //bring user to morsel detail
       //remove onbeforeunload so user doesn't get blocked going to morsel detail page
       $window.onbeforeunload = undefined;
@@ -115,7 +231,7 @@ angular.module( 'Morsel.add.morsel', [])
     //remove whatever message is there
     $scope.alertMessage = null;
 
-    HandleErrors.onError(resp.data, $scope.morselEditForm);
+    handleErrors(resp);
   }
 
   //stop user if they try to leave the page with an invalid form
@@ -187,7 +303,7 @@ angular.module( 'Morsel.add.morsel', [])
       $scope.addingItem = false;
     }, function(resp) {
       $scope.addingItem = false;
-      HandleErrors.onError(resp.data, $scope.morselEditForm);
+      handleErrors(resp);
     });
   };
 
@@ -223,7 +339,7 @@ angular.module( 'Morsel.add.morsel', [])
         }, function(resp) {
           //remove loader
           itemToBeDeleted.deleting = false;
-          HandleErrors.onError(resp.data, $scope.morselEditForm);
+          handleErrors(resp);
         });
       }
     }
@@ -239,9 +355,7 @@ angular.module( 'Morsel.add.morsel', [])
     ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
       //since the morsel.item.morsel is also changing, update the whole morsel object
       $scope.morsel = morselData;
-    }, function(resp) {
-      HandleErrors.onError(resp.data, $scope.morselEditForm);
-    });
+    }, handleErrors);
   });
 
   $scope.deleteMorsel = function() {
@@ -264,7 +378,7 @@ angular.module( 'Morsel.add.morsel', [])
       currentUser.draft_count--;
     }, function(resp) {
       $scope.deletingMorsel = false;
-      HandleErrors.onError(resp.data, $scope.morselEditForm);
+      handleErrors(resp);
     });
   }
 
@@ -325,7 +439,11 @@ angular.module( 'Morsel.add.morsel', [])
       $scope.updatingOrder = false;
       //set our form valid, for now
       $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', true);
-      HandleErrors.onError(resp.data, $scope.morselEditForm);
+      handleErrors(resp);
     });
+  }
+
+  function handleErrors(resp) {
+    HandleErrors.onError(resp.data, $scope.morselEditForm);
   }
 });

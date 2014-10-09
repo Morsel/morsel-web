@@ -15,11 +15,29 @@
               <div mrsl-edit-morsel-title="morsel" mrsl-edit-morsel-title-template="morselTemplate"></div>
               <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
               <p class="help-block">Please use the app to change your morsel's location</p>
+              <div class="add-morsel-social">
+                <p class="h3">Social Sharing:</p>
+                <div class="checkbox" ng-class="{disabled:!social.canPublish.facebook}">
+                  <label>
+                    <input type="checkbox" value="" name="socialFacebook" ng-model="social.model.facebook" ng-disabled="!social.canPublish.facebook">
+                    <i class="common-facebook"></i>
+                    Post to Facebook
+                  </label>
+                  <p class="help-block">You haven't given Morsel permission to post to Facebook. <btn ng-click="addFacebook()" class="btn-link">Click here</btn> to give permission.</p>
+                </div>
+                <!--<div class="checkbox" ng-class="{disabled:!authentications.twitter}">
+                  <label>
+                    <input type="checkbox" value="" name="socialTwitter" ng-model="socialTwitterModel" ng-disabled="{{!socialModel.twitter}}">
+                    <i class="common-twitter"></i>
+                    Post to Twitter
+                  </label>
+                  <p class="help-block">You haven't connected your Twitter account. <a href="/account/social-accounts" target="_self">Click here</a> to connect.</p>
+                </div>-->
+              </div>
               <div class="add-morsel-actions">
                 <button class="btn btn-danger pull-left" ng-click="deleteMorsel()" name="deleteMorsel" ng-model="fake">Delete Morsel</button>
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank" bo-text="morsel.draft ? 'Preview':'Go to morsel'"></a>
-                <!--<button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" ng-if="morsel.draft && morselDataLoaded"></button>
-                <p class="help-block">Note: to push to social when publishing, please publish using the app</p>-->
+                <button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" ng-if="morsel.draft && morselDataLoaded"></button>
               </div>
             </div>
           </div>

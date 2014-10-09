@@ -58,7 +58,7 @@ angular.module( 'Morsel.common.apiMorsels', [] )
   Morsels.publishMorsel = function(morselId, morselParams) {
     var deferred = $q.defer();
     
-    Restangular.one('morsels', morselId).one('publish').post(morselParams).then(function(resp){
+    Restangular.one('morsels', morselId).post('publish', morselParams).then(function(resp){
       deferred.resolve(sortMorselItems(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

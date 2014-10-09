@@ -35,15 +35,15 @@ angular.module( 'Morsel.common.facebookApi', [] )
     }
   };
 
-  fb.login = function(callback) {
+  fb.login = function(callback, additionalPermissions) {
     FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
+      //if we just want basic permissions and we're already logged in, we can go ahead
+      if (response.status === 'connected' && !additionalPermissions) {
         callback(response);
-      }
-      else {
+      } else {
         FB.login(callback, {
           //grab this stuff from fb
-          scope: 'public_profile,email,user_friends'
+          scope: 'public_profile,email,user_friends' + (additionalPermissions ? ','+additionalPermissions : '')
         });
       }
     });
@@ -83,6 +83,10 @@ angular.module( 'Morsel.common.facebookApi', [] )
 
   fb.getFriends = function(callback) {
     FB.api('/me/friends', callback);
+  };
+
+  fb.getPermissions = function(fbUid, callback) {
+    FB.api('/'+fbUid+'/permissions', callback);
   };
 
   return fb;

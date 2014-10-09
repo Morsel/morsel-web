@@ -352,6 +352,7 @@ module.exports = {
         'src/common/images/responsiveImages.js',
         'src/common/images/upload.js',
         'src/common/images/upload_new.js',
+        'src/common/social/facebookApi.js',
         'src/common/user/userImage.js',
         'src/common/user/usersName.js',
         'src/common/util/flashDownload.js',

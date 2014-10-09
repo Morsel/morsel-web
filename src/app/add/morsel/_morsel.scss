@@ -28,7 +28,7 @@
     }
 
     .help-block {
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .add-morsel-info-wrap {
@@ -47,6 +47,29 @@
         display: inline-block;
         margin: 0;
         vertical-align: middle;
+      }
+    }
+
+    .add-morsel-social {
+      .checkbox {
+        margin-left: 20px;
+      }
+
+      i {
+        vertical-align: middle;
+      }
+
+      .help-block {
+        display: none;
+      }
+
+      .disabled {
+        color: $morsel-medium;
+
+        .help-block {
+          display: block;
+          margin-left: 20px;
+        }
       }
     }
   }
