@@ -1,7 +1,7 @@
 <div class="add-morsel" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow morsel-bg">
     <div class="template-help" ng-show="morselDataLoaded && !morselDeleted" mrsl-add-template="morselTemplate" mrsl-add-template-help="true"></div>
-    <form name="morselEditForm" ng-submit="publish()" novalidate>
+    <form name="morselEditForm" ng-submit="publish()" class="form-horizontal" novalidate>
       <div ng-show="alertMessage" class="alert alert-{{alertType}}">
         <p ng-bind-html="alertMessage"></p>
       </div>
@@ -13,8 +13,15 @@
             <div class="add-morsel-info-wrap">
               <h2 bo-text="morsel.draft ? 'Morsel Add' : 'Morsel Edit'"></h2>
               <div mrsl-edit-morsel-title="morsel" mrsl-edit-morsel-title-template="morselTemplate"></div>
-              <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
-              <p class="help-block">Please use the app to change your morsel's location</p>
+              <div class="form-group edit-module" ng-if="places.placeOptions">
+                <label class="control-label col-sm-3">Location:</label>
+                <div class="col-sm-9">
+                  <select ng-model="places.selectedPlace" ng-options="place.name + ' - ' + place.city + ', ' + place.state for place in places.placeOptions" name="morselPlace" class="form-control" ng-disabled="morselEditForm.morselPlace.$invalid">
+                    <option value="">None/Personal</option>
+                  </select>
+                  <div mrsl-add-place="places.placeOptions"></div>
+                </div>
+              </div>
               <div class="add-morsel-social">
                 <p class="h3">Social Sharing:</p>
                 <div class="checkbox" ng-class="{disabled:!social.canPublish.facebook}">

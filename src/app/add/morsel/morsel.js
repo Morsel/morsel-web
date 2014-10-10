@@ -28,12 +28,61 @@ angular.module( 'Morsel.add.morsel', [])
 
   $scope.viewOptions.miniHeader = true;
 
+  //store all our social data
+  $scope.social = {
+    //store our social authentications from the API
+    apiAuthentications: {},
+    //model for our forms
+    model:  {
+      facebook : false,
+      twitter : false
+    },
+    //do networks have the ability to publish?
+    canPublish: {
+      facebook: false,
+      twitter: false
+    }
+  };
+
+  //to store place options and model
+  $scope.places = {
+    selectedPlace: null,
+    placeOptions: null
+  };
+
+  //set up a watch to update place value
+  $scope.$watch('places.selectedPlace', function(newValue, oldValue) {
+    var morselParams;
+
+    //if we have a new selected place, or new value is none but we used to have a selected place
+    if(newValue || oldValue) {
+      $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', false);
+
+      morselParams = {
+        morsel: {
+          //allow setting location to none/personal
+          place_id: newValue ? newValue.id : null
+        }
+      };
+
+      ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
+        $scope.morsel.place_id = morselData.place_id;
+        $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', true);
+      }, function(resp) {
+        $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', true);
+        handleErrors(resp);
+      });
+    }
+  });
+
   //saved morsel data
   morselPromises.push(getMorsel());
   //general morsel template data
   morselPromises.push(getMorselTemplates());
   //social authentication data
   morselPromises.push(getAuthentications());
+  //places data
+  morselPromises.push(getPlaces());
   //once all promises are resolved
   $q.all(morselPromises).then(dataLoaded);
 
@@ -55,21 +104,11 @@ angular.module( 'Morsel.add.morsel', [])
     });
   }
 
-  //store all our social data
-  $scope.social = {
-    //store our social authentications from the API
-    apiAuthentications: {},
-    //model for our forms
-    model:  {
-      facebook : false,
-      twitter : false
-    },
-    //do networks have the ability to publish?
-    canPublish: {
-      facebook: false,
-      twitter: false
-    }
-  };
+  function getPlaces() {
+    return ApiUsers.getPlaces(currentUser.id).then(function(placesResp){
+      $scope.places.placeOptions = placesResp.data;
+    });
+  }
 
   //request publish_actions
   $scope.addFacebook = function() {
