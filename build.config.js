@@ -177,6 +177,8 @@ module.exports = {
         'src/common/forms/validatedElement.js',
         'src/common/images/photoHelpers.js',
         'src/common/images/upload.js',
+        'src/common/places/addPlace.js',
+        'src/common/places/placeList.js',
         'src/common/social/addFacebook.js',
         'src/common/social/addTwitter.js',
         'src/common/social/facebookApi.js',
@@ -194,6 +196,8 @@ module.exports = {
         'src/common/forms/validatedSingleCheckbox.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/upload.tpl.html',
+        'src/common/places/addPlace.tpl.html',
+        'src/common/places/placeList.tpl.html',
         'src/common/social/addFacebook.tpl.html',
         'src/common/social/addTwitter.tpl.html',
         'src/common/user/duplicateEmailOverlay.tpl.html',
@@ -352,6 +356,7 @@ module.exports = {
         'src/common/images/responsiveImages.js',
         'src/common/images/upload.js',
         'src/common/images/upload_new.js',
+        'src/common/places/addPlace.js',
         'src/common/social/facebookApi.js',
         'src/common/user/userImage.js',
         'src/common/user/usersName.js',
@@ -368,6 +373,7 @@ module.exports = {
         'src/common/forms/validatedSingleCheckbox.tpl.html',
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/uploadNew.tpl.html',
+        'src/common/places/addPlace.tpl.html',
         'src/common/util/404.tpl.html',
         'src/common/util/viewMore.tpl.html'
       ]
