@@ -43,6 +43,14 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/dinner-lab-taste-talks-chicago-2014/dinner-lab-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/events/dinner-lab-taste-talks-chicago-2014';
     eventInfo.twitterUsername = '@dinnerlab';
+  } else if(eventSlug === 'sound-opinions-eat-to-the-beat-velvet-underground-nico') {
+    eventUrl += 'sound-opinions-eat-to-the-beat-velvet-underground-nico/sound-opinions-eat-to-the-beat-velvet-underground-nico-morsels.json';
+    eventInfo.title = 'Sound Opinions - Eat to the Beat at Nico Osteria';
+    eventInfo.location = 'Chicago, IL';
+    eventInfo.description = $sce.trustAsHtml('On Sunday, October 12, 2014, Chefs <strong>Paul Kahan</strong> of <a href="http://www.nicoosteria.com/" target="_blank">Nico Osteria</a>, Blackbird, and the Publican, and <strong>Matthias Merges</strong> of <a href="http://yusho-chicago.com/" target="_blank">Yusho</a>, Billy Sunday and A10 presented a spectacular multi-course dinner inspired by the groundbreaking 1967 album The Velvet Underground & Nico - with special guest Velvet Underground founder <strong>John Cale</strong>.');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/sound-opinions-eat-to-the-beat-velvet-underground-nico/sound-opinions-eat-to-the-beat-velvet-underground-nico-logo.jpg';
+    eventInfo.url = 'https://www.eatmorsel.com/events/sound-opinions-eat-to-the-beat-velvet-underground-nico';
+    eventInfo.twitterUsername = '@soundopinions';
   } else {
     //invalid event
     $location.path('/');
