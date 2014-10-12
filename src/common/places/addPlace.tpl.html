@@ -3,37 +3,32 @@
   <h4 class="h2 overflow-ellipsis">Add Place</h4>
 </div>
 <div class="modal-body">
-  <form name="placeSearchForm" method="post" ng-submit="searchPlaces()" class="padded-form" novalidate>
+  <form name="placeSearchForm" method="post" ng-submit="searchPlaces()" novalidate>
     <div mrsl-base-errors mrsl-val-form="placeSearchForm"></div>
-    <input mrsl-validated-element mrsl-val-form="placeSearchForm" mrsl-val-en-name="Place Name" mrsl-val-type="text" mrsl-val-name="place_name" mrsl-val-form-model="placeSearchModel" mrsl-val-placeholder="City Diner" mrsl-val-required="true" />
-    <input mrsl-validated-element mrsl-val-form="placeSearchForm" mrsl-val-en-name="Zip Code" mrsl-val-type="text" mrsl-val-name="place_zip_code" mrsl-val-form-model="placeSearchModel" mrsl-val-placeholder="60610" mrsl-val-required="true" />
+    <input mrsl-validated-element mrsl-val-form="placeSearchForm" mrsl-val-en-name="Place Name" mrsl-val-type="text" mrsl-val-name="query" mrsl-val-form-model="searchModel" mrsl-val-placeholder="City Diner" mrsl-val-required="true" />
+    <input mrsl-validated-element mrsl-val-form="placeSearchForm" mrsl-val-en-name="Zip Code" mrsl-val-type="text" mrsl-val-name="near" mrsl-val-form-model="searchModel" mrsl-val-placeholder="60610" mrsl-val-required="true" />
 
     <button mrsl-submit-btn mrsl-submit-btn-form="placeSearchForm" mrsl-submit-btn-copy="Search" mrsl-submit-btn-tooltip-placement="left"></button>
   </form>
-</div>
 
-<!--
-<div class="modal-body">
-  <form name="placeSearchForm" method="post" ng-submit="searchPlaces()" class="padded-form form-horizontal" novalidate>
-    <div mrsl-base-errors mrsl-val-form="placeSearchForm"></div>
-
-    <div class="form-group">
-      <label for="place_name" class="col-sm-3 control-label">Place Name</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" name="place_name" id="place_name" ng-model="placeSearchModel.place_name" ng-attr-placeholder="City Diner" ng-required="true" />
+  <div ng-if="hasSearched">
+    <hr />
+    <div class="user-list place-list">
+      <ul ng-if="searchResults.length > 0">
+        <li bindonce ng-repeat="place in searchResults | orderBy:'name'">
+          <div class="user-info">
+            <div class="user-body">
+              <button class="btn btn-default" ng-click="addPlace(place.id)">Add</button>
+              <h5 class="user-info-main" bo-text="place.name"></h5>
+              <p bo-text="place.location.city + ', ' + place.location.state"></p>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div ng-show="!searchResults" class="loader"></div>
+      <div ng-show="searchResults && searchResults.length === 0" class="empty-state">
+        <p>No places match your search.</p>
       </div>
     </div>
-
-    <div class="form-group">
-      <label for="place_zip_code" class="col-sm-3 control-label">Zip Code</label>
-      <div class="col-sm-9">
-        <input type="text" class="form-control" name="place_zip_code" id="zip_code" ng-model="placeSearchModel.zip_code" ng-attr-placeholder="60610" ng-required="true" />
-      </div>
-    </div>
-
-    <div class="form-group">
-      <button mrsl-submit-btn mrsl-submit-btn-form="placeSearchForm" mrsl-submit-btn-copy="Search" mrsl-submit-btn-tooltip-placement="top"></button>
-    </div>
-  </form>
+  </div>
 </div>
--->

@@ -11,6 +11,7 @@ angular.module( 'Morsel.account', [
   //filters
   //API
   'Morsel.common.apiKeywords',
+  'Morsel.common.apiPlaces',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
   //templates

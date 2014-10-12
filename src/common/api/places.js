@@ -68,5 +68,17 @@ angular.module( 'Morsel.common.apiPlaces', [] )
     return deferred.promise;
   };
 
+  Places.suggestPlaces = function(searchParams) {
+    var deferred = $q.defer();
+
+    RestangularPlaces.customGET('suggest', searchParams).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Places;
 });

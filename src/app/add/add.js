@@ -18,6 +18,7 @@ angular.module( 'Morsel.add', [
   //API
   'Morsel.common.apiItems',
   'Morsel.common.apiMorsels',
+  'Morsel.common.apiPlaces',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
 
