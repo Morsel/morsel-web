@@ -224,8 +224,16 @@ angular.module( 'Morsel.add.morsel', [])
       }
     });
 
-    //finally, show any directives with our data
-    $scope.morselDataLoaded = true;
+    //if morsel doesn't have a primary_item_id on load (from older versions of the app), give it one
+    if(!$scope.morsel.primary_item_id) {
+      makeCoverPhoto(_.last($scope.morsel.items).id).then(function(){
+        //finally, show any directives with our data
+        $scope.morselDataLoaded = true;
+      });
+    } else {
+      //finally, show any directives with our data
+      $scope.morselDataLoaded = true;
+    }
   }
 
   //handle form errors
@@ -384,6 +392,11 @@ angular.module( 'Morsel.add.morsel', [])
         ApiItems.deleteItem(itemId).then(function() {
           //remove item from local list
           $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
+
+          //if we just deleted the primary, make sure to update to the last item
+          if(itemId === $scope.morsel.primary_item_id) {
+            makeCoverPhoto(_.last($scope.morsel.items).id);
+          }
         }, function(resp) {
           //remove loader
           itemToBeDeleted.deleting = false;
@@ -394,17 +407,21 @@ angular.module( 'Morsel.add.morsel', [])
   });
 
   $scope.$on('add.item.makeCoverPhoto', function(event, itemId) {
+    makeCoverPhoto(itemId);
+  });
+
+  function makeCoverPhoto(itemId) {
     var morselParams = {
       morsel: {
         primary_item_id: itemId
       }
     };
 
-    ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
+    return ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
       //since the morsel.item.morsel is also changing, update the whole morsel object
       $scope.morsel = morselData;
     }, handleErrors);
-  });
+  }
 
   $scope.deleteMorsel = function() {
     var confirmed = confirm('This will delete your entire morsel and all photos associated with it. Are you sure you want to do this?');

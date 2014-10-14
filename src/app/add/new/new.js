@@ -30,6 +30,9 @@ angular.module( 'Morsel.add.new', [])
 })
 
 .controller( 'NewMorselCtrl', function NewMorselCtrl( $scope, currentUser, templateData, ApiMorsels, ApiItems, HandleErrors, $location, $q ) {
+  var newMorselData,
+      newMorselTemplate;
+
   $scope.templates = templateData;
 
   //catch from our template directive
@@ -38,34 +41,53 @@ angular.module( 'Morsel.add.new', [])
     $scope.creating = true;
 
     ApiMorsels.createMorsel(morselParams).then(function(resp) {
-      var morselData = resp.data,
-          //the template this morsel uses
-          morselTemplate = _.find($scope.templates, function(t) {
-            return t.id === morselData.template_id;
-          }),
-          itemParams,
-          itemPromises = [];
+      var itemPromises = [],
+          //the template order of the last item
+          lastTemplateOrder;
+
+      newMorselData = resp.data;
+      //find the template of the new morsel
+      newMorselTemplate = _.find($scope.templates, function(t) {
+        return t.id === newMorselData.template_id;
+      });
 
       //create the necessary items from the template
-      _.each(morselTemplate.items, function(ti, ind) {
-        itemParams = {
-          item: {
-            morsel_id: morselData.id,
-            template_order: ti.template_order,
-            sort_order: ind + 1 //make sure they're in order since ajax calls might not be
-          }
-        };
+      _.each(newMorselTemplate.items, function(ti, ind) {
+        var itemParams = {
+              item: {
+                morsel_id: newMorselData.id,
+                template_order: ti.template_order,
+                sort_order: ind + 1 //make sure they're in order since ajax calls might not be
+              }
+            };
+
+        if(ind === newMorselTemplate.items.length-1){
+          lastTemplateOrder = ti.template_order;
+        }
 
         itemPromises.push(addItem(itemParams));
       });
 
       //once all items are created
       $q.all(itemPromises).then(function(resp){
-        //increase our count to display in the menu
-        currentUser.draft_count++;
-        //bring user to add page
-        $location.path('/add/morsel/'+morselData.id);
-      }, function(resp){
+        var morselParams = {
+              morsel: {
+                //set the last item as the primary
+                primary_item_id: _.findWhere(newMorselData.items, {template_order:lastTemplateOrder}).id
+              }
+            };
+
+        //set the last item as the primary
+        ApiMorsels.updateMorsel(newMorselData.id, morselParams).then(function(){
+          //increase our count to display in the menu
+          currentUser.draft_count++;
+          //bring user to add page
+          $location.path('/add/morsel/'+newMorselData.id);
+        }, function(resp) {
+          $scope.creating = false;
+          handleErrors(resp);
+        });
+      }, function(resp) {
         $scope.creating = false;
         handleErrors(resp);
       });
@@ -76,7 +98,9 @@ angular.module( 'Morsel.add.new', [])
   });
 
   function addItem(itemParams) {
-    return ApiItems.createItem(itemParams).then(function() {}, handleErrors);
+    return ApiItems.createItem(itemParams).then(function(resp) {
+      newMorselData.items.push(resp.data);
+    }, handleErrors);
   }
 
   function handleErrors(resp) {
