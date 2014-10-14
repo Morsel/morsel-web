@@ -51,10 +51,6 @@
     }
 
     .add-morsel-social {
-      .checkbox {
-        margin-left: 20px;
-      }
-
       i {
         vertical-align: middle;
       }
@@ -79,7 +75,7 @@
     }
   }
 
-  .edit-module {
+  .form-group {
     p {
       text-align: left;
 
@@ -88,7 +84,7 @@
       }
     }
 
-    .edit-module-btns {
+    .form-group-btns {
       margin-top: 10px;
       text-align: right;
     }
@@ -98,9 +94,10 @@
       font-style: italic;
     }
 
-    label {
+    > label {
       font-weight: bold;
       text-align: left;
+      font-size: 15px;
     }
   }
 

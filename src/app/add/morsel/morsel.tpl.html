@@ -13,7 +13,7 @@
             <div class="add-morsel-info-wrap">
               <h2 bo-text="morsel.draft ? 'Morsel Add' : 'Morsel Edit'"></h2>
               <div mrsl-edit-morsel-title="morsel" mrsl-edit-morsel-title-template="morselTemplate"></div>
-              <div class="form-group edit-module" ng-if="places.placeOptions">
+              <div class="form-group" ng-if="places.placeOptions">
                 <label class="control-label col-sm-3">Location:</label>
                 <div class="col-sm-9">
                   <select ng-model="places.selectedPlace" ng-options="place.name + ' - ' + place.city + ', ' + place.state for place in places.placeOptions | orderBy:'name'" name="morselPlace" class="form-control" ng-disabled="morselEditForm.morselPlace.$invalid">
@@ -22,23 +22,25 @@
                   <div mrsl-add-place="places.placeOptions"></div>
                 </div>
               </div>
-              <div class="add-morsel-social">
-                <p class="h3">Social Sharing:</p>
-                <div class="checkbox" ng-class="{disabled:!social.canPublish.facebook}">
-                  <label>
-                    <input type="checkbox" value="" name="socialFacebook" ng-model="social.model.facebook" ng-disabled="!social.canPublish.facebook">
-                    <i class="common-facebook"></i>
-                    Post to Facebook
-                  </label>
-                  <p class="help-block">You haven't given Morsel permission to post to Facebook. <btn ng-click="addFacebook()" class="btn-link">Click here</btn> to give permission.</p>
-                </div>
-                <div class="checkbox" ng-class="{disabled:!social.canPublish.twitter}">
-                  <label>
-                    <input type="checkbox" value="" name="socialTwitter" ng-model="social.model.twitter" ng-disabled="!social.canPublish.twitter">
-                    <i class="common-twitter"></i>
-                    Post to Twitter
-                  </label>
-                  <p class="help-block">You haven't given Morsel permission to post to Twitter. Please go to your <a href="/account/social-accounts" target="_self">Social Accounts Settings</a> to give permission.</p>
+              <div class="add-morsel-social form-group">
+                <label class="control-label col-sm-3">Social Sharing:</label>
+                <div class="col-sm-9">
+                  <div class="checkbox" ng-class="{disabled:!social.canPublish.facebook}">
+                    <label>
+                      <input type="checkbox" value="" name="socialFacebook" ng-model="social.model.facebook" ng-disabled="!social.canPublish.facebook">
+                      <i class="common-facebook"></i>
+                      Post to Facebook
+                    </label>
+                    <p class="help-block">You haven't given Morsel permission to post to Facebook. <btn ng-click="addFacebook()" class="btn-link">Click here</btn> to give permission.</p>
+                  </div>
+                  <div class="checkbox" ng-class="{disabled:!social.canPublish.twitter}">
+                    <label>
+                      <input type="checkbox" value="" name="socialTwitter" ng-model="social.model.twitter" ng-disabled="!social.canPublish.twitter">
+                      <i class="common-twitter"></i>
+                      Post to Twitter
+                    </label>
+                    <p class="help-block">You haven't given Morsel permission to post to Twitter. Please go to your <a href="/account/social-accounts" target="_self">Social Accounts Settings</a> to give permission.</p>
+                  </div>
                 </div>
               </div>
               <div class="add-morsel-actions">
@@ -57,7 +59,7 @@
                 <div mrsl-edit-item="item"></div>
               </li>
               <li ng-if="!morsel.items || morsel.items.length === 0">
-                <p class="empty-state">This morsel doesn't have an items</p>
+                <p class="empty-state">This morsel doesn't have any items</p>
               </li>
             </ul>
             <div ng-class="{'loader': addingItem}">
