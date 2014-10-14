@@ -16,7 +16,7 @@
               <div class="form-group edit-module" ng-if="places.placeOptions">
                 <label class="control-label col-sm-3">Location:</label>
                 <div class="col-sm-9">
-                  <select ng-model="places.selectedPlace" ng-options="place.name + ' - ' + place.city + ', ' + place.state for place in places.placeOptions" name="morselPlace" class="form-control" ng-disabled="morselEditForm.morselPlace.$invalid">
+                  <select ng-model="places.selectedPlace" ng-options="place.name + ' - ' + place.city + ', ' + place.state for place in places.placeOptions | orderBy:'name'" name="morselPlace" class="form-control" ng-disabled="morselEditForm.morselPlace.$invalid">
                     <option value="">None/Personal</option>
                   </select>
                   <div mrsl-add-place="places.placeOptions"></div>

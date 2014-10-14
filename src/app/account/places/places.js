@@ -25,4 +25,9 @@ angular.module( 'Morsel.account.places', [])
   ApiUsers.getPlaces(accountUser.id).then(function(placesResp){
     $scope.places = placesResp.data;
   });
+
+  $scope.$on('places.add.new', function(e, newPlace) {
+    $scope.alertMessage = 'Successfully added '+newPlace.name+' to your profile';
+    $scope.alertType = 'success';
+  });
 });

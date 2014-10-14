@@ -20,12 +20,6 @@ angular.module( 'Morsel.common.addPlace', [] )
         });
       };
 
-      scope.$watch('places', function(newPlaces, oldPlaces) {
-        if(newPlaces && oldPlaces && newPlaces.length === oldPlaces.length + 1) {
-          alert('new place!');
-        }
-      });
-
       var ModalInstanceCtrl = function ($scope, $modalInstance, places, ApiPlaces, HandleErrors) {
         $scope.places = places;
 
@@ -105,6 +99,8 @@ angular.module( 'Morsel.common.addPlace', [] )
           ApiPlaces.employAtPlace($scope.selectedPlace.id, employmentParams).then(function(resp){
             //add it to our list of places
             $scope.places.push(resp.data);
+
+            scope.$emit('places.add.new', resp.data);
 
             //close overlay
             $scope.cancel();

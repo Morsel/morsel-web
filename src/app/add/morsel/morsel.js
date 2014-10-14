@@ -50,6 +50,10 @@ angular.module( 'Morsel.add.morsel', [])
     placeOptions: null
   };
 
+  $scope.$on('places.add.new', function(e, newPlace) {
+    $scope.places.selectedPlace = newPlace;
+  });
+
   //set up a watch to update place value
   $scope.$watch('places.selectedPlace', function(newValue, oldValue) {
     var morselParams;

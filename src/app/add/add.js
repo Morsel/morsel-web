@@ -25,6 +25,7 @@ angular.module( 'Morsel.add', [
   //templates
   'templates-add',
   //common
+  'Morsel.common.addPlace',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
   'Morsel.common.facebookApi',
