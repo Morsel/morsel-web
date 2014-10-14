@@ -3,32 +3,37 @@
   <h4 class="h2 overflow-ellipsis">Add Place</h4>
 </div>
 <div class="modal-body">
-  <form name="placeSearchForm" method="post" ng-submit="searchPlaces()" novalidate>
-    <div mrsl-base-errors mrsl-val-form="placeSearchForm"></div>
-    <input mrsl-validated-element mrsl-val-form="placeSearchForm" mrsl-val-en-name="Place Name" mrsl-val-type="text" mrsl-val-name="query" mrsl-val-form-model="searchModel" mrsl-val-placeholder="City Diner" mrsl-val-required="true" />
-    <input mrsl-validated-element mrsl-val-form="placeSearchForm" mrsl-val-en-name="Zip Code" mrsl-val-type="text" mrsl-val-name="near" mrsl-val-form-model="searchModel" mrsl-val-placeholder="60610" mrsl-val-required="true" />
+  <form name="forms.search" method="post" ng-submit="searchPlaces()" novalidate>
+    <div mrsl-base-errors mrsl-val-form="forms.search"></div>
+    <input mrsl-validated-element mrsl-val-form="forms.search" mrsl-val-en-name="Place Name" mrsl-val-type="text" mrsl-val-name="query" mrsl-val-form-model="searchModel" mrsl-val-placeholder="City Diner" mrsl-val-required="true" />
+    <input mrsl-validated-element mrsl-val-form="forms.search" mrsl-val-en-name="Zip Code" mrsl-val-type="text" mrsl-val-name="near" mrsl-val-form-model="searchModel" mrsl-val-placeholder="60610" mrsl-val-required="true" />
 
-    <button mrsl-submit-btn mrsl-submit-btn-form="placeSearchForm" mrsl-submit-btn-copy="Search" mrsl-submit-btn-tooltip-placement="left"></button>
+    <button mrsl-submit-btn mrsl-submit-btn-form="forms.search" mrsl-submit-btn-copy="Search" mrsl-submit-btn-tooltip-placement="left"></button>
   </form>
 
   <div ng-if="hasSearched">
     <hr />
     <div class="user-list place-list">
-      <ul ng-if="searchResults.length > 0">
+      <ul ng-if="searchResults.length > 0 && !addingPlace">
         <li bindonce ng-repeat="place in searchResults | orderBy:'name'">
           <div class="user-info">
             <div class="user-body">
-              <button class="btn btn-default" ng-click="addPlace(place.id)">Add</button>
+              <button class="btn btn-default" ng-click="selectPlace(place)" ng-hide="selectedPlace">Select</button>
               <h5 class="user-info-main" bo-text="place.name"></h5>
-              <p bo-text="place.location.city + ', ' + place.location.state"></p>
+              <p bo-text="place.location.address + '. ' + place.location.city + ', ' + place.location.state"></p>
             </div>
           </div>
         </li>
       </ul>
-      <div ng-show="!searchResults" class="loader"></div>
+      <div ng-show="!searchResults || addingPlace" class="loader"></div>
       <div ng-show="searchResults && searchResults.length === 0" class="empty-state">
         <p>No places match your search.</p>
       </div>
     </div>
+    <form name="forms.placeAdd" ng-submit="addPlace()" ng-show="selectedPlace && !addingPlace" novalidate>
+      <div mrsl-base-errors mrsl-val-form="forms.placeAdd"></div>
+      <input mrsl-validated-element mrsl-val-form="forms.placeAdd" mrsl-val-en-name="What is your title there?" mrsl-val-type="text" mrsl-val-name="title" mrsl-val-form-model="selectedPlaceModel" mrsl-val-placeholder="Sous-Chef, Mixologist, etc" mrsl-val-required="true" />
+      <button mrsl-submit-btn mrsl-submit-btn-form="forms.placeAdd" mrsl-submit-btn-copy="Add Place" mrsl-submit-btn-tooltip-placement="left"></button>
+    </form>
   </div>
 </div>
