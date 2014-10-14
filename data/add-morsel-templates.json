@@ -221,7 +221,7 @@
             "id": 20,
             "template_order": 20,
             "placeholder_sort_order": 2,
-            "placeholder_description": "You can capture each dish, but the piÃ¨ce de rÃ©sistance is essential!",
+            "placeholder_description": "You can capture each dish, but the pièce de résistance is essential!",
             "placeholder_photos": {
                 "small": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event2-small.png",
                 "medium": "https://morsel.s3.amazonaws.com/morsel-templates/photos/template-event2-medium.png",
