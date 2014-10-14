@@ -54,31 +54,6 @@ angular.module( 'Morsel.add.morsel', [])
     $scope.places.selectedPlace = newPlace;
   });
 
-  //set up a watch to update place value
-  $scope.$watch('places.selectedPlace', function(newValue, oldValue) {
-    var morselParams;
-
-    //if we have a new selected place, or new value is none but we used to have a selected place
-    if(newValue || oldValue) {
-      $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', false);
-
-      morselParams = {
-        morsel: {
-          //allow setting location to none/personal
-          place_id: newValue ? newValue.id : null
-        }
-      };
-
-      ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
-        $scope.morsel.place_id = morselData.place_id;
-        $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', true);
-      }, function(resp) {
-        $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', true);
-        handleErrors(resp);
-      });
-    }
-  });
-
   //saved morsel data
   morselPromises.push(getMorsel());
   //general morsel template data
@@ -221,6 +196,40 @@ angular.module( 'Morsel.add.morsel', [])
         });
       } else {
         item.displayTemplate = null;
+      }
+    });
+
+    //set the place accordingly
+    if($scope.morsel.place) {
+      //ng-options works by reference, so need to find the proper var
+      $scope.places.selectedPlace = _.find($scope.places.placeOptions, function(po){
+        return po.id === $scope.morsel.place.id;
+      });
+    }
+
+    //set up a watch to update place value
+    //this has to be after we initially set the place otherwise we'll try to update API with existing value
+    $scope.$watch('places.selectedPlace', function(newValue, oldValue) {
+      var morselParams;
+
+      //if we have a new selected place, or new value is none but we used to have a selected place
+      if((newValue || oldValue) && (newValue != oldValue)) {
+        $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', false);
+
+        morselParams = {
+          morsel: {
+            //allow setting location to none/personal
+            place_id: newValue ? newValue.id : null
+          }
+        };
+
+        ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
+          $scope.morsel.place_id = morselData.place_id;
+          $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', true);
+        }, function(resp) {
+          $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', true);
+          handleErrors(resp);
+        });
       }
     });
 
