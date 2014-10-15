@@ -188,17 +188,6 @@ angular.module( 'Morsel.add.morsel', [])
       return t.id === $scope.morsel.template_id;
     });
 
-    //figure out which template each item uses and add it to the morsel
-    _.each($scope.morsel.items, function(item) {
-      if($scope.morselTemplate && $scope.morselTemplate.items) {
-        item.displayTemplate = _.find($scope.morselTemplate.items, function(templateItem) {
-          return templateItem.template_order === item.template_order;
-        });
-      } else {
-        item.displayTemplate = null;
-      }
-    });
-
     //set the place accordingly
     if($scope.morsel.place) {
       //ng-options works by reference, so need to find the proper var
@@ -230,6 +219,21 @@ angular.module( 'Morsel.add.morsel', [])
           $scope.morselEditForm.morselPlace.$setValidity('updatingPlace', true);
           handleErrors(resp);
         });
+      }
+    });
+
+    readyMorselForDisplay();
+  }
+
+  function readyMorselForDisplay() {
+    //figure out which template each item uses and add it to the morsel
+    _.each($scope.morsel.items, function(item) {
+      if($scope.morselTemplate && $scope.morselTemplate.items) {
+        item.displayTemplate = _.find($scope.morselTemplate.items, function(templateItem) {
+          return templateItem.template_order === item.template_order;
+        });
+      } else {
+        item.displayTemplate = null;
       }
     });
 
@@ -429,6 +433,8 @@ angular.module( 'Morsel.add.morsel', [])
     return ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
       //since the morsel.item.morsel is also changing, update the whole morsel object
       $scope.morsel = morselData;
+      //need to redo some display stuff
+      readyMorselForDisplay();
     }, handleErrors);
   }
 
