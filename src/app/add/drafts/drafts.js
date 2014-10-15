@@ -45,6 +45,11 @@ angular.module( 'Morsel.add.drafts', [])
       } else {
         $scope.drafts = draftsData;
       }
+
+      //if user views more we need to call this again
+      if(endDraft) {
+        readyDraftsForDisplay();
+      }
     }, function() {
       //if there's an error retrieving drafts, go to 404
       $state.go('404');
@@ -66,14 +71,46 @@ angular.module( 'Morsel.add.drafts', [])
   }
 
   function dataLoaded() {
+    $scope.dataLoaded = true;
+    readyDraftsForDisplay();
+  }
+
+  function readyDraftsForDisplay() {
+    //got some data manipulation to do
     _.each($scope.drafts, function(draft) {
+      //associate the draft
+      if(draft.template_id) {
+        draft.displayTemplate = _.find(allTemplateData, function(t){
+          return t.id === draft.template_id;
+        });
+      }
+
+      if(draft.title) {
+         //due to current bug in the app, we need to manually check the title against the templates to determine if it actually has a title https://www.pivotaltracker.com/story/show/79033104
+        if(draft.displayTemplate && draft.displayTemplate.title && (draft.title === (draft.displayTemplate.title+' morsel'))) {
+          //display the placeholder
+          draft.title = draft.displayTemplate.title + ' morsel';
+          draft.hasTitle = false;
+        } else {
+          draft.hasTitle = true;
+        }
+      } else {
+        draft.hasTitle = false;
+
+        //if there isn't a title
+        if(draft.displayTemplate && draft.displayTemplate.title) {
+          //use the placeholder if there is one
+          draft.title = draft.displayTemplate.title + ' morsel';
+        } else {
+          draft.title = 'Untitled morsel';
+        }
+      }
     });
   }
 
   $scope.getCoverPhotoArray = function(morsel) {
     var primaryItemPhotos,
         primaryItem,
-        morselTemplate,
         primaryItemTemplate;
 
     if(morsel && morsel.items) {
@@ -85,11 +122,7 @@ angular.module( 'Morsel.add.drafts', [])
         ];
       } else {
         //if the morsel has a template, we should use a photo from that
-        if(morsel.template_id) {
-          morselTemplate = _.find(allTemplateData, function(t){
-            return t.id === morsel.template_id;
-          });
-
+        if(morsel.displayTemplate) {
           //use the primary_item's placeholder, if available
           if(morsel.primary_item_id) {
             primaryItem = _.find(morsel.items, function(i){
@@ -97,7 +130,7 @@ angular.module( 'Morsel.add.drafts', [])
             });
 
             if(primaryItem.template_order) {
-              primaryItemTemplate = _.find(morselTemplate.items, function(i){
+              primaryItemTemplate = _.find(morsel.displayTemplate.items, function(i){
                 return primaryItem.template_order === i.template_order;
               });
 
