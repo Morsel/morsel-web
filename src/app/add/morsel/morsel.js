@@ -24,7 +24,7 @@ angular.module( 'Morsel.add.morsel', [])
 .controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi ) {
   var morselPromises = [],
       allTemplateData,
-      unloadText = 'You have unsaved data.',
+      unloadText = 'You will lose unsaved changes if you leave this page.',
       //since we have individual forms submitting within our main form, we don't ever see the big form set back to ng-pristine, even if all the data is saved. so to keep track of "$dirty state" for the big form, we need to do it manually
       morselEditFormDirty = {};
 
