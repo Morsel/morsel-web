@@ -53,20 +53,27 @@ angular.module('Morsel.add.editMorselTitle', [])
       };
 
       scope.save = function() {
-        var morselParams = {
-          morsel: {
-            title: scope.updatedTitle.trim()
-          }
-        };
+        var newTitle = scope.updatedTitle ? scope.updatedTitle.trim() : '',
+            morselParams = {
+              morsel: {
+                title: newTitle
+              }
+            };
 
-        ApiMorsels.updateMorsel(scope.morsel.id, morselParams).then(function() {
-          //set our local model
-          scope.morsel.title = scope.updatedTitle.trim();
+        //check if anything changed before hitting API
+        if(newTitle === scope.morsel.title) {
           scope.editing = false;
           scope.morselTitleForm.morselTitle.$setValidity('morselTitleSaved', true);
-        }, function(resp) {
-          scope.$emit('add.error', resp);
-        });
+        } else {
+          ApiMorsels.updateMorsel(scope.morsel.id, morselParams).then(function() {
+            //set our local model
+            scope.morsel.title = scope.updatedTitle.trim();
+            scope.editing = false;
+            scope.morselTitleForm.morselTitle.$setValidity('morselTitleSaved', true);
+          }, function(resp) {
+            scope.$emit('add.error', resp);
+          });
+        }
       };
     },
     templateUrl: 'app/add/morsel/editMorselTitle.tpl.html'

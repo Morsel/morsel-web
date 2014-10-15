@@ -25,20 +25,27 @@ angular.module('Morsel.add.editItemDescription', [])
       };
 
       scope.save = function() {
-        var itemParams = {
-          item: {
-            description: scope.updatedDescription
-          }
-        };
+        var newDescription = scope.updatedDescription ? scope.updatedDescription.trim() : '',
+            itemParams = {
+              item: {
+                description: newDescription
+              }
+            };
 
-        ApiItems.updateItem(scope.item.id, itemParams).then(function() {
-          //set our local model
-          scope.item.description = scope.updatedDescription;
+        //check if anything changed before hitting API
+        if(newDescription === scope.item.description) {
           scope.editingDescription = false;
           scope.itemDescriptionForm.itemDescription.$setValidity('itemDescriptionSaved', true);
-        }, function(resp) {
-          scope.$emit('add.error', resp);
-        });
+        } else {
+          ApiItems.updateItem(scope.item.id, itemParams).then(function() {
+            //set our local model
+            scope.item.description = newDescription;
+            scope.editingDescription = false;
+            scope.itemDescriptionForm.itemDescription.$setValidity('itemDescriptionSaved', true);
+          }, function(resp) {
+            scope.$emit('add.error', resp);
+          });
+        }
       };
       
       scope.formatDescription = function() {
