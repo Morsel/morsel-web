@@ -24,7 +24,9 @@ angular.module( 'Morsel.add.morsel', [])
 .controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi ) {
   var morselPromises = [],
       allTemplateData,
-      unloadText = 'You have unsaved data.';
+      unloadText = 'You have unsaved data.',
+      //since we have individual forms submitting within our main form, we don't ever see the big form set back to ng-pristine, even if all the data is saved. so to keep track of "$dirty state" for the big form, we need to do it manually
+      morselEditFormDirty = {};
 
   $scope.viewOptions.miniHeader = true;
 
@@ -271,6 +273,12 @@ angular.module( 'Morsel.add.morsel', [])
         morselParams.post_to_twitter = true;
       }
 
+      //set "$dirty" for onbeforeunload
+      $scope.$emit('add.dirty', {
+        key: 'publish',
+        value: true
+      });
+
       //call our publishMorsel method to take care of the heavy lifting
       ApiMorsels.publishMorsel($scope.morsel.id, morselParams).then(onPublishSuccess, onPublishError);
     }
@@ -305,12 +313,20 @@ angular.module( 'Morsel.add.morsel', [])
 
   //stop user if they try to leave the page with an invalid form
   function handleOnbeforeUnload() {
-    if ($scope.morselEditForm.$invalid) {
+    var formDirty = _.find(morselEditFormDirty, function(dirties){
+          return dirties;
+        });
+
+    if (formDirty) {
       return unloadText;
     } else {
       return undefined;
     }
   }
+
+  $scope.$on('add.dirty', function(e, data) {
+    morselEditFormDirty[data.key] = data.value;
+  });
 
   $window.onbeforeunload = handleOnbeforeUnload;
 
@@ -363,6 +379,12 @@ angular.module( 'Morsel.add.morsel', [])
 
     $scope.addingItem = true;
 
+    //set "$dirty" for onbeforeunload
+    $scope.$emit('add.dirty', {
+      key: 'addItem',
+      value: true
+    });
+
     ApiItems.createItem(itemParams).then(function(itemResp) {
       if($scope.morsel.items) {
         $scope.morsel.items.push(itemResp.data);
@@ -370,6 +392,12 @@ angular.module( 'Morsel.add.morsel', [])
         $scope.morsel.items = [itemResp.data];
       }
       $scope.addingItem = false;
+
+      //set "$pristine" for onbeforeunload
+      $scope.$emit('add.dirty', {
+        key: 'addItem',
+        value: false
+      });
     }, function(resp) {
       $scope.addingItem = false;
       handleErrors(resp);
@@ -402,6 +430,12 @@ angular.module( 'Morsel.add.morsel', [])
         //show loader
         itemToBeDeleted.deleting = true;
 
+        //set "$dirty" for onbeforeunload
+        $scope.$emit('add.dirty', {
+          key: 'delete_'+itemId,
+          value: true
+        });
+
         ApiItems.deleteItem(itemId).then(function() {
           //remove item from local list
           $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
@@ -410,6 +444,12 @@ angular.module( 'Morsel.add.morsel', [])
           if(itemId === $scope.morsel.primary_item_id) {
             makeCoverPhoto(_.last($scope.morsel.items).id);
           }
+
+          //set "$dirty" for onbeforeunload
+          $scope.$emit('add.dirty', {
+            key: 'delete_'+itemId,
+            value: false
+          });
         }, function(resp) {
           //remove loader
           itemToBeDeleted.deleting = false;
@@ -430,11 +470,23 @@ angular.module( 'Morsel.add.morsel', [])
       }
     };
 
+    //set "$dirty" for onbeforeunload
+    $scope.$emit('add.dirty', {
+      key: 'coverPhoto_'+itemId,
+      value: true
+    });
+
     return ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
       //since the morsel.item.morsel is also changing, update the whole morsel object
       $scope.morsel = morselData;
       //need to redo some display stuff
       readyMorselForDisplay();
+
+      //set "$dirty" for onbeforeunload
+      $scope.$emit('add.dirty', {
+        key: 'coverPhoto_'+itemId,
+        value: false
+      });
     }, handleErrors);
   }
 
@@ -449,6 +501,12 @@ angular.module( 'Morsel.add.morsel', [])
   function deleteMorsel() {
     $scope.deletingMorsel = true;
 
+    //set "$dirty" for onbeforeunload
+    $scope.$emit('add.dirty', {
+      key: 'deleteMorsel',
+      value: true
+    });
+
     ApiMorsels.deleteMorsel($scope.morsel.id).then(function() {
       $scope.morselDeleted = true;
       $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
@@ -456,6 +514,12 @@ angular.module( 'Morsel.add.morsel', [])
       
       //decrease our count to display in the menu
       currentUser.draft_count--;
+
+      //set "$pristine" for onbeforeunload
+      $scope.$emit('add.dirty', {
+        key: 'deleteMorsel',
+        value: false
+      });
     }, function(resp) {
       $scope.deletingMorsel = false;
       handleErrors(resp);
@@ -476,6 +540,11 @@ angular.module( 'Morsel.add.morsel', [])
     $scope.updatingOrder = true;
     //don't let our form submit
     $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', false);
+    //set "$dirty" for onbeforeunload
+    $scope.$emit('add.dirty', {
+      key: 'sortOrder',
+      value: true
+    });
 
     //if it's the first one, send 1
     if(itemIndex === 0) {
@@ -513,6 +582,11 @@ angular.module( 'Morsel.add.morsel', [])
 
       //set our form valid
       $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', true);
+      //set "$pristine" for onbeforeunload
+      $scope.$emit('add.dirty', {
+        key: 'sortOrder',
+        value: false
+      });
     }, function(resp) {
       //something went wrong, we need to revert the move
       $scope.morsel.items = $filter('orderBy')($scope.morsel.items, 'sort_order');

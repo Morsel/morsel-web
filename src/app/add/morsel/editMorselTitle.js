@@ -44,32 +44,54 @@ angular.module('Morsel.add.editMorselTitle', [])
       scope.edit = function(){
         scope.editing = true;
         scope.morselTitleForm.morselTitle.$setValidity('morselTitleSaved', false);
+        //set "$dirty" for onbeforeunload
+        scope.$emit('add.dirty', {
+          key: 'morselTitle',
+          value: true
+        });
       };
 
       scope.cancel = function(){
         scope.updatedTitle = scope.morsel.title;
         scope.editing = false;
         scope.morselTitleForm.morselTitle.$setValidity('morselTitleSaved', true);
+        //set "$pristine" for onbeforeunload
+        scope.$emit('add.dirty', {
+          key: 'morselTitle',
+          value: false
+        });
       };
 
       scope.save = function() {
+        //treat null titles as empty strings so we don't bother updating null values with blanks
         var newTitle = scope.updatedTitle ? scope.updatedTitle.trim() : '',
+            oldTitle = scope.morsel.title ? scope.morsel.title : '',
             morselParams = {
               morsel: {
                 title: newTitle
               }
             };
 
-        //check if anything changed before hitting API
-        if(newTitle === scope.morsel.title) {
+        //check if anything changed before hitting API 
+        if(newTitle === oldTitle) {
           scope.editing = false;
           scope.morselTitleForm.morselTitle.$setValidity('morselTitleSaved', true);
+          //set "$pristine" for onbeforeunload
+          scope.$emit('add.dirty', {
+            key: 'morselTitle',
+            value: false
+          });
         } else {
           ApiMorsels.updateMorsel(scope.morsel.id, morselParams).then(function() {
             //set our local model
             scope.morsel.title = scope.updatedTitle.trim();
             scope.editing = false;
             scope.morselTitleForm.morselTitle.$setValidity('morselTitleSaved', true);
+            //set "$pristine" for onbeforeunload
+            scope.$emit('add.dirty', {
+              key: 'morselTitle',
+              value: false
+            });
           }, function(resp) {
             scope.$emit('add.error', resp);
           });

@@ -46,9 +46,19 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         if(newValue) {
           //set form invalid
           scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', false);
+          //set "$dirty" for onbeforeunload
+          scope.$emit('add.dirty', {
+            key: 'itemPhoto_'+scope.item.id,
+            value: true
+          });
         } else if(newValue === false) {
           //set form valid
           scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', true);
+          //set "$pristine" for onbeforeunload
+          scope.$emit('add.dirty', {
+            key: 'itemPhoto_'+scope.item.id,
+            value: false
+          });
         }
       });
 
