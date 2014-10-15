@@ -21,7 +21,9 @@ angular.module( 'Morsel.add.drafts', [])
   });
 })
 
-.controller( 'DraftsCtrl', function DraftsCtrl( $scope, currentUser, MORSEL_LIST_NUMBER, MORSELPLACEHOLDER, ApiMorsels, PhotoHelpers ) {
+.controller( 'DraftsCtrl', function DraftsCtrl( $scope, currentUser, MORSEL_LIST_NUMBER, MORSELPLACEHOLDER, ApiMorsels, PhotoHelpers, $q ) {
+  var draftPromises = [],
+      allTemplateData;
 
   //# of drafts to load at a time
   $scope.draftIncrement = MORSEL_LIST_NUMBER;
@@ -36,7 +38,7 @@ angular.module( 'Morsel.add.drafts', [])
       draftsParams.before_date = endDraft.updated_at;
     }
 
-    ApiMorsels.getDrafts(draftsParams).then(function(draftsData) {
+    return ApiMorsels.getDrafts(draftsParams).then(function(draftsData) {
       if($scope.drafts) {
         //concat them with new data after old data, then reverse with a filter
         $scope.drafts = $scope.drafts.concat(draftsData);
@@ -50,22 +52,79 @@ angular.module( 'Morsel.add.drafts', [])
   };
 
   //load drafts
-  $scope.getDrafts();
+  draftPromises.push($scope.getDrafts());
+  //load templates
+  draftPromises.push(getMorselTemplates());
+
+  //once all promises are resolved
+  $q.all(draftPromises).then(dataLoaded);
+
+  function getMorselTemplates() {
+    return ApiMorsels.getTemplates().then(function(templateData) {
+      allTemplateData = templateData;
+    });
+  }
+
+  function dataLoaded() {
+    _.each($scope.drafts, function(draft) {
+    });
+  }
 
   $scope.getCoverPhotoArray = function(morsel) {
-    var primaryItemPhotos;
+    var primaryItemPhotos,
+        primaryItem,
+        morselTemplate,
+        primaryItemTemplate;
 
     if(morsel && morsel.items) {
       primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
 
-      if(primaryItemPhotos) {
+      if(primaryItemPhotos && primaryItemPhotos._80x80) {
         return [
           ['default', primaryItemPhotos._80x80]
         ];
       } else {
-        return [
-          ['default', MORSELPLACEHOLDER]
-        ];
+        //if the morsel has a template, we should use a photo from that
+        if(morsel.template_id) {
+          morselTemplate = _.find(allTemplateData, function(t){
+            return t.id === morsel.template_id;
+          });
+
+          //use the primary_item's placeholder, if available
+          if(morsel.primary_item_id) {
+            primaryItem = _.find(morsel.items, function(i){
+              return i.id === morsel.primary_item_id;
+            });
+
+            if(primaryItem.template_order) {
+              primaryItemTemplate = _.find(morselTemplate.items, function(i){
+                return primaryItem.template_order === i.template_order;
+              });
+
+              if(primaryItemTemplate && primaryItemTemplate.placeholder_photos && primaryItemTemplate.placeholder_photos.medium) {
+                return [
+                  ['default', primaryItemTemplate.placeholder_photos.medium]
+                ];
+              } else {
+                return [
+                  ['default', MORSELPLACEHOLDER]
+                ];
+              }
+            } else {
+              return [
+                ['default', MORSELPLACEHOLDER]
+              ];
+            }
+          } else {
+            return [
+              ['default', MORSELPLACEHOLDER]
+            ];
+          }
+        } else {
+          return [
+            ['default', MORSELPLACEHOLDER]
+          ];
+        }
       }
     } else {
       return ['default', MORSELPLACEHOLDER];
