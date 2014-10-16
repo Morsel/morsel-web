@@ -366,7 +366,7 @@ angular.module( 'Morsel.add.morsel', [])
     },
     {
       'errorName': 'itemHasPhoto',
-      'message': 'All items must have photos to publish. Please add photos or delete unused items using the app'
+      'message': 'All items must have photos to publish. Please add photos or delete unused items'
     }
   ];
 
