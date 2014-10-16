@@ -2,7 +2,6 @@ angular.module( 'Morsel.public.eventMorsels', [])
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'eventMorsels', {
-    //make sure our "username" isn't "users"
     url: '/events/:eventSlug',
     views: {
       "main": {
@@ -11,6 +10,23 @@ angular.module( 'Morsel.public.eventMorsels', [])
       }
     },
     data:{ pageTitle: 'Event' },
+    resolve: {
+      //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
+      currentUser: function(Auth) {
+        return Auth.getCurrentUserPromise();
+      }
+    }
+  })
+  //temporary solution for allows collections
+  .state( 'collectionMorsels', {
+    url: '/collections/:eventSlug',
+    views: {
+      "main": {
+        controller: 'EventMorselsCtrl',
+        templateUrl: 'app/public/events/eventMorsels.tpl.html'
+      }
+    },
+    data:{ pageTitle: 'Collection' },
     resolve: {
       //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
       currentUser: function(Auth) {
@@ -51,6 +67,14 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/sound-opinions-eat-to-the-beat-velvet-underground-nico/sound-opinions-eat-to-the-beat-velvet-underground-nico-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/events/sound-opinions-eat-to-the-beat-velvet-underground-nico';
     eventInfo.twitterUsername = '@soundopinions';
+  } else if(eventSlug === 'michael-ruhlman-charcuterie-book') {
+    eventUrl += 'michael-ruhlman-charcuterie-book/michael-ruhlman-charcuterie-book-morsels.json';
+    eventInfo.title = 'Michael Ruhlman Charcuterie Book';
+    eventInfo.location = null;
+    eventInfo.description = $sce.trustAsHtml('<strong>Charcuterie</strong> exploded onto the scene in 2005 and encouraged an army of home cooks and professional chefs to start curing their own foods. Ruhlman and Polcyn teamed up to share their passion for cured meats with a wider audience. The rest is culinary history.<br/><br/>Check out what the world is creating from <strong>Charcuterie</strong> and submit your creation on Morsel by using hashtag #RuhlmanCharcuterie');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/michael-ruhlman-charcuterie-book/michael-ruhlman-charcuterie-book-logo.jpg';
+    eventInfo.url = 'https://www.eatmorsel.com/collections/michael-ruhlman-charcuterie-book';
+    eventInfo.twitterUsername = '@ruhlman';
   } else {
     //invalid event
     $location.path('/');

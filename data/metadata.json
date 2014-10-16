@@ -131,5 +131,18 @@
       "type": "article"
     },
     "url": "https://www.eatmorsel.com/events/sound-opinions-eat-to-the-beat-velvet-underground-nico"
+  },
+  "michael-ruhlman-charcuterie-book": {
+    "title": "Michael Ruhlman Charcuterie Book",
+    "description": "Charcuterie exploded onto the scene in 2005 and encouraged an army of home cooks and professional chefs to start curing their own foods. Ruhlman and Polcyn teamed up to share their passion for cured meats with a wider audience. The rest is culinary history. Check out what the world is creating from Charcuterie and submit your creation on Morsel by using hashtag #RuhlmanCharcuterie",
+    "image": "https://morsel.s3.amazonaws.com/events/michael-ruhlman-charcuterie-book/michael-ruhlman-charcuterie-book.jpg",
+    "twitter": {
+      "card": "summary_large_image",
+      "creator": "@ruhlman"
+    },
+    "og": {
+      "type": "article"
+    },
+    "url": "https://www.eatmorsel.com/collections/michael-ruhlman-charcuterie-book"
   }
 }
