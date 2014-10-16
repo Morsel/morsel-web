@@ -1,7 +1,7 @@
 <div class="add-morsel" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow morsel-bg">
     <div class="template-help" ng-show="morselDataLoaded && !morselDeleted" mrsl-add-template="morselTemplate" mrsl-add-template-help="true"></div>
-    <form name="morselEditForm" ng-submit="publish()" class="form-horizontal" novalidate>
+    <form name="morselEditForm" ng-submit="publish()" novalidate>
       <div ng-show="alertMessage" class="alert alert-{{alertType}}">
         <p ng-bind-html="alertMessage"></p>
       </div>
@@ -9,7 +9,7 @@
       <div ng-if="!morselDeleted && (!morselDataLoaded || deletingMorsel)" class="loader"></div>
       <div ng-if="!morselDeleted && (morselDataLoaded && !deletingMorsel)" class="row" bindonce="morsel">
         <div class="col-sm-5">
-          <div class="add-morsel-info">
+          <div class="add-morsel-info form-horizontal">
             <div class="add-morsel-info-wrap">
               <h2 bo-text="morsel.draft ? 'Morsel Add' : 'Morsel Edit'"></h2>
               <div mrsl-edit-morsel-title="morsel" mrsl-edit-morsel-title-template="morselTemplate"></div>

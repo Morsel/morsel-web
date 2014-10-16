@@ -3,7 +3,7 @@
   <div class="col-sm-9">
     <p ng-hide="editing" class="form-control-static overflow-ellipsis" ng-bind-html="morsel.title ? morsel.title : placeholder" ng-class="{'no-text':!morsel.title}" ng-click="edit()"></p>
     <ng-form ng-show="editing" name="morselTitleForm">
-      <input type="text" ng-attr-placeholder="{{placeholder}}" ng-model="updatedTitle" name="morselTitle" class="form-control" maxlength="50"></input>
+      <input type="text" ng-attr-placeholder="{{placeholder}}" ng-model="updatedTitle" name="morselTitle" class="form-control" maxlength="50" mrsl-focus-me="editing"></input>
       <div class="form-group-btns">
         <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" ng-click="save()">Save</button>

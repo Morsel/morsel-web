@@ -30,6 +30,7 @@ angular.module( 'Morsel.add', [
   'Morsel.common.baseErrors',
   'Morsel.common.facebookApi',
   'Morsel.common.flashDownload',
+  'Morsel.common.focusMe',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',

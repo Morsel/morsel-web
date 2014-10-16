@@ -350,6 +350,7 @@ module.exports = {
         'src/common/auth/auth.js',
         'src/common/filters/reverse.js',
         'src/common/forms/baseErrors.js',
+        'src/common/forms/focusMe.js',
         'src/common/forms/formNameFix.js',
         'src/common/forms/handleErrors.js',
         'src/common/forms/submitBtn.js',
