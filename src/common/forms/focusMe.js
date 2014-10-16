@@ -5,7 +5,6 @@ angular.module('Morsel.common.focusMe', [])
     link: function(scope, element, attrs) {
       scope.$watch(attrs.mrslFocusMe, function(value) {
         if(value === true) { 
-          console.log('value=',value);
           $timeout(function() {
             element[0].focus();
           });
