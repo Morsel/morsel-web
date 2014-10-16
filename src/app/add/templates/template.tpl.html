@@ -1,7 +1,7 @@
 <div>
-  <button class="btn btn-primary btn-block add-template-btn" bindonce="templateData" ng-click="showOverlay()" ng-show="!justHelp">
+  <button class="btn btn-primary btn-block add-template-btn" bindonce="templateData" ng-click="templateClick()" ng-show="!justHelp">
     <i bo-class="templateData.icon"></i>
     <p bo-text="templateData.title"></p>
   </button>
-  <button ng-show="justHelp" class="btn-link" ng-click="showOverlay()">Help</button>
+  <button ng-show="justHelp" class="btn-link" ng-click="templateClick()">Help</button>
 </div>

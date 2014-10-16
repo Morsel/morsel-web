@@ -9,26 +9,36 @@ angular.module('Morsel.add.templates', [] )
       justHelp: '@mrslAddTemplateHelp'
     },
     link: function(scope, element, attrs) {
-      scope.showOverlay = function () {
-        //if it's quick add, skip the overlay
+      scope.templateClick = function () {
+        //if it's quick add
         if(scope.templateData.id === 1) {
-          createMorsel(1);
+          if(scope.justHelp) {
+            //show overlay if we're on the add/edit page
+            showOverlay();
+          } else {
+            //skip it if we're trying to create
+            createMorsel(1);
+          }
         } else {
-          $rootScope.modalInstance = $modal.open({
-            templateUrl: 'app/add/templates/templateOverlay.tpl.html',
-            controller: ModalInstanceCtrl,
-            size: 'lg',
-            resolve: {
-              templateData : function(){
-                return scope.templateData;
-              },
-              justHelp : function() {
-                return scope.justHelp;
-              }
-            }
-          });
+          showOverlay();
         }
       };
+
+      function showOverlay() {
+        $rootScope.modalInstance = $modal.open({
+          templateUrl: 'app/add/templates/templateOverlay.tpl.html',
+          controller: ModalInstanceCtrl,
+          size: 'lg',
+          resolve: {
+            templateData : function(){
+              return scope.templateData;
+            },
+            justHelp : function() {
+              return scope.justHelp;
+            }
+          }
+        });
+      }
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, templateData, justHelp) {
         $scope.cancel = function () {
