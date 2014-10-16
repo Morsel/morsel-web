@@ -182,6 +182,20 @@ img {
   &.loader-dark {
     background-image: url(images/icons/loader-dark.gif);
   }
+
+  &.saving {
+    background-position: 40% 50%;
+
+    &:after {
+      content: 'Saving';
+      position: absolute;
+      top: 50%;
+      left: 40%;
+      margin-top: -10px;
+      margin-left: 25px;
+      color: $morsel-medium;
+    }
+  }
 }
 
 .view-more-btn {

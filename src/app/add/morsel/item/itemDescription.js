@@ -44,6 +44,8 @@ angular.module('Morsel.add.editItemDescription', [])
               }
             };
 
+        scope.saving = true;
+
         //check if anything changed before hitting API
         if(newDescription === oldDescription) {
           scope.editingDescription = false;
@@ -53,6 +55,7 @@ angular.module('Morsel.add.editItemDescription', [])
             key: 'itemDescription_'+scope.item.id,
             value: false
           });
+          scope.saving = false;
         } else {
           ApiItems.updateItem(scope.item.id, itemParams).then(function() {
             //set our local model
@@ -64,7 +67,9 @@ angular.module('Morsel.add.editItemDescription', [])
               key: 'itemDescription_'+scope.item.id,
               value: false
             });
+            scope.saving = false;
           }, function(resp) {
+            scope.saving = false;
             scope.$emit('add.error', resp);
           });
         }

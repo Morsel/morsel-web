@@ -38,6 +38,8 @@ angular.module('Morsel.add.editMorselTitle', [])
           scope.morselTitleForm.morselTitle.$setValidity('morselHasTitle', true);
         } else {
           scope.morselTitleForm.morselTitle.$setValidity('morselHasTitle', false);
+          //use the placeholder
+          scope.placeholder = scope.morselTemplate.title + ' morsel';
         }
       });
 
@@ -72,6 +74,8 @@ angular.module('Morsel.add.editMorselTitle', [])
               }
             };
 
+        scope.saving = true;
+
         //check if anything changed before hitting API 
         if(newTitle === oldTitle) {
           scope.editing = false;
@@ -81,6 +85,7 @@ angular.module('Morsel.add.editMorselTitle', [])
             key: 'morselTitle',
             value: false
           });
+          scope.saving = false;
         } else {
           ApiMorsels.updateMorsel(scope.morsel.id, morselParams).then(function() {
             //set our local model
@@ -92,7 +97,9 @@ angular.module('Morsel.add.editMorselTitle', [])
               key: 'morselTitle',
               value: false
             });
+            scope.saving = false;
           }, function(resp) {
+            scope.saving = false;
             scope.$emit('add.error', resp);
           });
         }
