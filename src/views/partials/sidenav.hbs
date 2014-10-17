@@ -1,4 +1,4 @@
-<nav class="side-nav" ng-class="{open:menuOpen}" role="navigation" ng-style="viewOptions.minimumMainHeight()">
+<nav id="side-nav" class="side-nav" ng-class="{open:menuOpen}" role="navigation" ng-style="viewOptions.minimumMainHeight()">
   {{#if pageType.public}}
   <a ng-if="isLoggedIn" ng-href="/\{{currentUser.username.toLowerCase()}}" ng-click="closeMenu()" class="profile-link">
   {{else}}

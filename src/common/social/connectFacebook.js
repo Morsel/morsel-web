@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.connectFacebook', [] )
 
 //connect (sign up/login) with facebook SDK
-.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location, FacebookApi){
+.directive('mrslConnectFacebook', function(ApiUsers, $state, $q, HandleErrors, AfterLogin, Auth, $window, $location, FacebookApi, Mixpanel){
   return {
     restrict: 'A',
     scope: {
@@ -40,6 +40,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             //just sign them in
             login();
           } else {
+            Mixpanel.send('Authenticated with Social', {
+              social_type: 'facebook'
+            });
+
             //otherwise get info and pic from FB to start sign up process
             gatherData();
           }
@@ -129,13 +133,17 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function onLoginSuccess(resp) {
-        //if successfully logged in check if we have anything in the to-do queue
-        if(AfterLogin.hasCallback()) {
-          AfterLogin.goToCallbackPath();
-        } else {
-          //send them home (trigger page refresh to switch apps)
-          sendToNextUrl();
-        }
+        Mixpanel.send('Tapped Log In', {
+          login_type: 'facebook'
+        }, function() {
+          //if successfully logged in check if we have anything in the to-do queue
+          if(AfterLogin.hasCallback()) {
+            AfterLogin.goToCallbackPath();
+          } else {
+            //send them home (trigger page refresh to switch apps)
+            sendToNextUrl();
+          }
+        });
       }
 
       function onLoginError(resp) {

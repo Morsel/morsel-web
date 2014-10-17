@@ -1,11 +1,11 @@
 <div class="social-sharing" ng-class="{'full-social-btns':fullBtns}">
-  <a class="btn btn-social btn-facebook" ng-click="shareSocial('facebook')">Share on Facebook</a>
-  <a class="btn btn-social btn-twitter" ng-click="shareSocial('twitter')">Share on Twitter</a>
+  <a class="btn btn-social btn-facebook" ng-click="shareSocial('facebook')" title="Share on Facebook">Share on Facebook</a>
+  <a class="btn btn-social btn-twitter" ng-click="shareSocial('twitter')" title="Share on Twitter">Share on Twitter</a>
   <div class="social-sharing-additional" ng-class="{expanded: socialExpanded}">
-    <a class="btn btn-social btn-linkedin" ng-click="shareSocial('linkedin')"></a>
-    <a class="btn btn-social btn-pinterest" ng-click="shareSocial('pinterest')"></a>
-    <a class="btn btn-social btn-google-plus" ng-click="shareSocial('google-plus')"></a>
-    <a class="btn btn-social btn-clipboard" ng-click="shareSocial('clipboard')"></a>
+    <a class="btn btn-social btn-linkedin" ng-click="shareSocial('linkedin')" title="Share on LinkedIn"></a>
+    <a class="btn btn-social btn-pinterest" ng-click="shareSocial('pinterest')" title="Share on Pinterest"></a>
+    <a class="btn btn-social btn-google-plus" ng-click="shareSocial('google-plus')" title="Share on Google+"></a>
+    <a class="btn btn-social btn-clipboard" ng-click="shareSocial('clipboard')" title="Copy to clipboard"></a>
   </div>
   <a ng-click="socialExpanded = !socialExpanded" class="btn btn-social share-expand"><i class="common-expand"></i></a>
 </div>

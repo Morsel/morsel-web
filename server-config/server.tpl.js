@@ -332,6 +332,16 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       publicApp.renderPlacePage(res, req.params.placeidslug);
     });
 
+    //events
+    app.get('/events/:eventslug', function(req, res){
+      publicApp.renderEventPage(res, req.params.eventslug);
+    });
+
+    //collections (fake events, for now)
+    app.get('/collections/:collectionslug', function(req, res){
+      publicApp.renderEventPage(res, req.params.collectionslug);
+    });
+
     //morsel detail with post id/slug
     app.get('/:username/:postidslug', function(req, res){
       publicApp.renderMorselPage(req, res);

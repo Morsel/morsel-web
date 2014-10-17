@@ -33,7 +33,7 @@ angular.module( 'Morsel.login.login', [])
   });
 })
 
-.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $window, HandleErrors, AfterLogin, loginUser ) {
+.controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $window, HandleErrors, AfterLogin, loginUser, Mixpanel ) {
 
   //model to store our join data
   $scope.loginModel = {};
@@ -55,18 +55,23 @@ angular.module( 'Morsel.login.login', [])
     }
 
     function onSuccess(resp) {
-      //if successfully logged in check if we have anything in the to-do queue
-      if(AfterLogin.hasCallback()) {
-        AfterLogin.goToCallbackPath();
-      } else {
-        //if they were on their way to a certain page
-        if($stateParams.next) {
-          $window.location.href = $stateParams.next;
+      //use a callback so we don't switch windows while the mixpanel event is still firing
+      Mixpanel.send('Tapped Log In', {
+        login_type: 'email'
+      }, function() {
+        //if successfully logged in check if we have anything in the to-do queue
+        if(AfterLogin.hasCallback()) {
+          AfterLogin.goToCallbackPath();
         } else {
-          //send them home
-          $window.location.href = '/';
+          //if they were on their way to a certain page
+          if($stateParams.next) {
+            $window.location.href = $stateParams.next;
+          } else {
+            //send them home
+            $window.location.href = '/';
+          }
         }
-      }
+      });
     }
 
     function onError(resp) {

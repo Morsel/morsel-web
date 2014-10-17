@@ -1,0 +1,47 @@
+.event-morsels {
+  text-align: center;
+
+  h1 {
+    color: $morsel-dark;
+  }
+
+  ul {
+    text-align: left;
+    list-style: none;
+  }
+
+  .empty-state {
+    font-size: 28px;
+    font-family: $font-family-secondary;
+    padding: 75px 0;
+  }
+
+  .event-img {
+    margin: 30px auto;
+  }
+
+  .event-description {
+    font-size: 16px;
+  }
+
+  .social-sharing {
+    text-align: center;
+    margin: 10px 0;
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .event-morsels {
+    .event-img {
+      max-width: 50%;
+    }
+
+    .event-description {
+      padding: 0 20px;
+    }
+
+    .social-sharing {
+      margin: 20px 0;
+    }
+  }
+}

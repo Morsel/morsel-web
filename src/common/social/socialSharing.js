@@ -5,30 +5,30 @@ angular.module( 'Morsel.common.socialSharing', [] )
   return {
     restrict: 'A',
     scope: {
-      morsel : '=mrslSocialSharing',
+      subject : '=mrslSocialSharing',
+      subjectType : '@mrslSocialSharingType',
       fullBtns : '=mrslSocialFull'
     },
     replace: true,
     link: function(scope, element, attrs) {
-      var morselId,
-          creatorId;
-          //cURL = encodeURIComponent($location.absUrl());//for testing
-
       scope.socialExpanded = true;
 
-      scope.$watch('mrslMorsel', function(newValue, oldValue) {
-        if(newValue) {
-          morselId = newValue.id;
-          creatorId = newValue.creator.id;
-        }
-      });
+      scope.subjectType = scope.subjectType || 'morsel-detail';
 
-      function shareMixpanel(socialType) {
-        Mixpanel.send('Tapped Share Morsel', {
-          social_type : socialType,
-          morsel_id : morselId,
-          creator_id : creatorId
-        });
+      function shareMixpanel(socialType, shareSubject) {
+        var props = {
+              social_type : socialType,
+              share_subject : shareSubject
+            };
+
+        if(shareSubject === 'morsel-detail') {
+          props.morsel_id = scope.subject.id;
+          props.creator_id = scope.subject.creator.id;
+        } else if (shareSubject === 'event') {
+          props.event_name = scope.subject.title;
+        }
+
+        Mixpanel.send('Tapped Share', props);
       }
 
       function getMediaImage() {
@@ -45,9 +45,17 @@ angular.module( 'Morsel.common.socialSharing', [] )
       }
 
       scope.shareSocial = function(socialType) {
+        if(scope.subjectType === 'morsel-detail') {
+          shareMorselDetail(socialType);
+        } else if(scope.subjectType === 'event') {
+          shareEvent(socialType);
+        }
+      };
+
+      function shareMorselDetail(socialType) {
         var url,
             shareText,
-            s = scope.morsel,
+            s = scope.subject,
             //backup
             morselUrl = s.url,
             facebookUrl = s.mrsl && s.mrsl.facebook_mrsl ? s.mrsl.facebook_mrsl : morselUrl,
@@ -57,7 +65,7 @@ angular.module( 'Morsel.common.socialSharing', [] )
             googleplusUrl = s.mrsl && s.mrsl.googleplus_mrsl ? s.mrsl.googleplus_mrsl : morselUrl,
             clipboardUrl = s.mrsl && s.mrsl.clipboard_mrsl ? s.mrsl.clipboard_mrsl : morselUrl;
 
-        shareMixpanel(socialType);
+        shareMixpanel(socialType, 'morsel-detail');
 
         if(socialType === 'facebook') {
           url = 'https://www.facebook.com/sharer/sharer.php?u='+facebookUrl;
@@ -87,7 +95,35 @@ angular.module( 'Morsel.common.socialSharing', [] )
         }
 
         $window.open(url);
-      };
+      }
+
+      function shareEvent(socialType) {
+        var url,
+            shareText,
+            s = scope.subject,
+            shareUrl = scope.subject.url;
+
+        shareMixpanel(socialType, 'event');
+
+        if(socialType === 'facebook') {
+          url = 'https://www.facebook.com/sharer/sharer.php?u='+shareUrl;
+        } else if(socialType === 'twitter') {
+          shareText = encodeURIComponent(s.twitterUsername+'\'s '+s.title+' on @eatmorsel: '+shareUrl);
+          url = 'https://twitter.com/home?status='+shareText;
+        } else if(socialType === 'linkedin') {
+          url = 'https://www.linkedin.com/shareArticle?mini=true&url='+shareUrl;
+        } else if(socialType === 'pinterest') {
+          shareText = encodeURIComponent(s.title+' on Morsel');
+          url = 'https://pinterest.com/pin/create/button/?url='+shareUrl+'&media='+encodeURIComponent(s.image)+'&description='+shareText;
+        } else if(socialType === 'google-plus') {
+          url = 'https://plus.google.com/share?url='+shareUrl;
+        } else if(socialType === 'clipboard') {
+          $window.prompt("Copy the following link to share:", shareUrl);
+          return;
+        }
+
+        $window.open(url);
+      }
     },
     templateUrl: 'common/social/socialSharing.tpl.html'
   };

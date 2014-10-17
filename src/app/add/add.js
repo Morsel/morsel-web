@@ -254,10 +254,6 @@ angular.module( 'Morsel.add', [
     $scope.$apply('viewOptions');
   }
 
-  $scope.goTo = function(route) {
-    $location.path('/'+route);
-  };
-
   $scope.menuGoTo = function(route) {
     $scope.closeMenu();
     $location.path('/'+route);
@@ -265,6 +261,13 @@ angular.module( 'Morsel.add', [
 
   $scope.closeMenu = function() {
     $scope.menuOpen = false;
+  };
+
+  $scope.toggleMenu = function() {
+    Mixpanel.send('Tapped Menu Bar Icon', {
+      menu_state: $scope.menuOpen ? 'closing' : 'opening'
+    });
+    $scope.menuOpen = !$scope.menuOpen;
   };
 });
 

@@ -60,6 +60,7 @@ angular.module( 'Morsel.public', [
   //app
   'Morsel.public.activity',
   'Morsel.public.contact',
+  'Morsel.public.eventMorsels',
   'Morsel.public.explore',
   'Morsel.public.feed',
   'Morsel.public.home',
@@ -271,10 +272,6 @@ angular.module( 'Morsel.public', [
     $scope.$apply('viewOptions');
   }
 
-  $scope.goTo = function(route) {
-    $location.path('/'+route);
-  };
-
   $scope.menuGoTo = function(route) {
     $scope.closeMenu();
     $location.path('/'+route);
@@ -282,6 +279,13 @@ angular.module( 'Morsel.public', [
 
   $scope.closeMenu = function() {
     $scope.menuOpen = false;
+  };
+
+  $scope.toggleMenu = function() {
+    Mixpanel.send('Tapped Menu Bar Icon', {
+      menu_state: $scope.menuOpen ? 'closing' : 'opening'
+    });
+    $scope.menuOpen = !$scope.menuOpen;
   };
 });
 
