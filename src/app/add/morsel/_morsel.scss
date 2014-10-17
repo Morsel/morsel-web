@@ -232,6 +232,18 @@
     }
   }
 
+  .alert-success {
+    position: absolute;
+    top: 60px;
+    width: 90%;
+    left: 5%;
+    @include box-shadow(0px 4px 7px 0px rgba(0, 0, 0, 0.1));
+  }
+
+  .btn {
+    @include box-shadow(0px 4px 7px 0px rgba(0, 0, 0, 0.1));
+  }
+
   .modal-body {
     padding: 0;
     min-width: 200px;
@@ -269,6 +281,7 @@
 
       .help-block {
         color: white;
+        font-size: 12px;
       }
 
       .drop-box {
