@@ -9,7 +9,8 @@ angular.module('Morsel.common.submitBtn', [])
       copy: '@mrslSubmitBtnCopy',
       btnBlock: '@mrslSubmitBtnBlock',
       tooltipPlacement: '@mrslSubmitBtnTooltipPlacement',
-      customMessages: '=mrslSubmitBtnCustomMessages'
+      customMessages: '=mrslSubmitBtnCustomMessages',
+      submitCopy: '@mrslSubmitBtnSubmitCopy'
     },
     link: function(scope) {
       var originalCopy = scope.copy;
@@ -27,7 +28,11 @@ angular.module('Morsel.common.submitBtn', [])
 
       scope.copyMessage = function(){
         if(scope.form.$error.loading) {
-          return 'Loading...';
+          if(scope.submitCopy) {
+            return scope.submitCopy;
+          } else {
+            return 'Loading...';
+          }
         } else {
           return originalCopy;
         }
