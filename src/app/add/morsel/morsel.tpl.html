@@ -1,5 +1,6 @@
 <div class="add-morsel" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow morsel-bg">
+    <div class="template-help" ng-show="morselDataLoaded && !morselDeleted" mrsl-add-template="morselTemplate" mrsl-add-template-help="true"></div>
     <form name="morselEditForm" ng-submit="publish()" novalidate>
       <div ng-show="alertMessage" class="alert alert-{{alertType}}">
         <p ng-bind-html="alertMessage"></p>
@@ -8,17 +9,44 @@
       <div ng-if="!morselDeleted && (!morselDataLoaded || deletingMorsel)" class="loader"></div>
       <div ng-if="!morselDeleted && (morselDataLoaded && !deletingMorsel)" class="row" bindonce="morsel">
         <div class="col-sm-5">
-          <div class="add-morsel-info">
+          <div class="add-morsel-info form-horizontal">
             <div class="add-morsel-info-wrap">
               <h2 bo-text="morsel.draft ? 'Morsel Add' : 'Morsel Edit'"></h2>
               <div mrsl-edit-morsel-title="morsel" mrsl-edit-morsel-title-template="morselTemplate"></div>
-              <p class="h3" title="Use the app to update your morsel's location">Where: <span bo-text="morsel.place ? morsel.place.name : 'No Location/Personal'"></span></p>
-              <p class="help-block">Please use the app to change your morsel's location</p>
+              <div class="form-group" ng-if="places.placeOptions">
+                <label class="control-label col-sm-3">Location:</label>
+                <div class="col-sm-9">
+                  <select ng-model="places.selectedPlace" ng-options="place.name + ' - ' + place.city + ', ' + place.state for place in places.placeOptions | orderBy:'name'" name="morselPlace" class="form-control" ng-disabled="morselEditForm.morselPlace.$invalid">
+                    <option value="">None/Personal</option>
+                  </select>
+                  <div mrsl-add-place="places.placeOptions"></div>
+                </div>
+              </div>
+              <div class="add-morsel-social form-group">
+                <label class="control-label col-sm-3">Social Sharing:</label>
+                <div class="col-sm-9">
+                  <div class="checkbox" ng-class="{disabled:!social.canPublish.facebook}">
+                    <label>
+                      <input type="checkbox" value="" name="socialFacebook" ng-model="social.model.facebook" ng-disabled="!social.canPublish.facebook">
+                      <i class="common-facebook"></i>
+                      Post to Facebook
+                    </label>
+                    <p class="help-block">You haven't given Morsel permission to post to Facebook. <btn ng-click="addFacebook()" class="btn-link">Click here</btn> to give permission.</p>
+                  </div>
+                  <div class="checkbox" ng-class="{disabled:!social.canPublish.twitter}">
+                    <label>
+                      <input type="checkbox" value="" name="socialTwitter" ng-model="social.model.twitter" ng-disabled="!social.canPublish.twitter">
+                      <i class="common-twitter"></i>
+                      Post to Twitter
+                    </label>
+                    <p class="help-block">You haven't given Morsel permission to post to Twitter. Please go to your <a href="/account/social-accounts" target="_self">Social Accounts Settings</a> to give permission.</p>
+                  </div>
+                </div>
+              </div>
               <div class="add-morsel-actions">
                 <button class="btn btn-danger pull-left" ng-click="deleteMorsel()" name="deleteMorsel" ng-model="fake">Delete Morsel</button>
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank" bo-text="morsel.draft ? 'Preview':'Go to morsel'"></a>
-                <!--<button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" ng-if="morsel.draft && morselDataLoaded"></button>
-                <p class="help-block">Note: to push to social when publishing, please publish using the app</p>-->
+                <button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" mrsl-submit-btn-submit-copy="Publishing..." ng-if="morsel.draft && morselDataLoaded"></button>
               </div>
             </div>
           </div>
@@ -27,11 +55,11 @@
           <div id="item-reorder">
             <ul class="add-morsel-items" data-sortable="itemOrderListeners" data-ng-model="morsel.items">
               <li class="add-morsel-item" ng-if="morsel.items" ng-repeat="item in morsel.items" data-sortable-item>
-                <div data-sortable-item-handle title="Drag to reorder your items" ng-hide="updatingOrder"></div>
+                <div data-sortable-item-handle title="Drag to reorder your items" ng-hide="updatingOrder || morsel.items.length === 1"></div>
                 <div mrsl-edit-item="item"></div>
               </li>
               <li ng-if="!morsel.items || morsel.items.length === 0">
-                <p class="empty-state">This morsel doesn't have an items</p>
+                <p class="empty-state">This morsel doesn't have any items</p>
               </li>
             </ul>
             <div ng-class="{'loader': addingItem}">

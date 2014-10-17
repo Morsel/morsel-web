@@ -40,6 +40,7 @@ angular.module( 'Morsel.common.handleErrors', [] )
             if(fieldName === 'base') {
               serverErrors[i] = serverErrors[i].charAt(0).toUpperCase() + serverErrors[i].slice(1);
             } else if(fieldName === 'api') {
+              serverErrors[i] = serverErrors[i].charAt(0).toUpperCase() + serverErrors[i].slice(1);
               //something's wrong on the API side, possibly not related to client input
               Auth.showApiError(resp.status, serverErrors[i]);
             } else {

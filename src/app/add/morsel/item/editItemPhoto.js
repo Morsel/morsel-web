@@ -46,14 +46,26 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         if(newValue) {
           //set form invalid
           scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', false);
+          //set "$dirty" for onbeforeunload
+          scope.$emit('add.dirty', {
+            key: 'itemPhoto_'+scope.item.id,
+            value: true
+          });
         } else if(newValue === false) {
           //set form valid
           scope.itemPhotoForm.itemHiddenPhoto.$setValidity('itemPhotoDoneUploading', true);
+          //set "$pristine" for onbeforeunload
+          scope.$emit('add.dirty', {
+            key: 'itemPhoto_'+scope.item.id,
+            value: false
+          });
         }
       });
 
-      var ModalInstanceCtrl = function ($scope, $modalInstance, item, itemPhotoForm, MORSELPLACEHOLDER, $window, ApiItems) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, item, itemPhotoForm, MORSELPLACEHOLDER, $window, ApiItems, $timeout) {
         $scope.item = item;
+
+        $scope.successfulUpload = false;
 
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
@@ -89,14 +101,21 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
         };
 
         //update our overlay state when we're done uploading
-        $scope.$watch('item.uploading', function(newValue) {
-          if(newValue === false) {
+        $scope.$watch('item.uploading', function(newValue, oldValue) {
+          if(newValue === false && oldValue) {
             $scope.changingPhoto = false;
+            //show photo upload success
+            $scope.successfulUpload = true;
+
+            //fade out success
+            $timeout(function(){
+              $scope.successfulUpload = false;
+            }, 5000);
           }
         });
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'itemPhotoForm', 'MORSELPLACEHOLDER', '$window', 'ApiItems'];
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'itemPhotoForm', 'MORSELPLACEHOLDER', '$window', 'ApiItems', '$timeout'];
     },
     templateUrl: 'app/add/morsel/item/editItemPhoto.tpl.html'
   };

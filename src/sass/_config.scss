@@ -1,6 +1,7 @@
 //This file is essentially a copy of '../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/bootstrap.scss' except we only want to include the components that we're using for now.
 
 @import "compass";
+@import "compass/css3/user-interface";
 
 // Import our variables
 @import "_common/_variables.scss";
@@ -32,7 +33,7 @@
 //@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/pagination";
 //@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/pager";
 //@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/labels";
-//@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/badges";
+@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/badges";
 //@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/jumbotron";
 //@import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/thumbnails";
 @import "../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/alerts";

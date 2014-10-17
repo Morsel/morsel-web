@@ -1,0 +1,8 @@
+<div class="">
+  <h1>Manage Places</h1>
+  <div ng-show="alertMessage" class="alert alert-{{alertType}}">
+    <p ng-bind="alertMessage"></p>
+  </div>
+  <div mrsl-place-list="places" mrsl-place-list-empty="'You haven\'t added any places'"></div>
+  <div mrsl-add-place="places"></div>
+</div>

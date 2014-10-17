@@ -11,6 +11,22 @@
     <a href="/join" target="_self">Sign Up</a>
     <a href="/login"  target="_self">Login</a>
   </div>
+  <ul ng-if="isLoggedIn">
+    <li ui-route="/add" ng-class="{active:$uiRoute}">
+      {{#if pageType.add}}
+      <a href="/add" ng-click="menuGoTo('add')"><i class="common-add"></i>New Morsel</a>
+      {{else}}
+      <a href="/add" target="_self"><i class="common-add"></i>New Morsel</a>
+      {{/if}}
+    </li>
+    <li ui-route="/add/drafts" ng-class="{active:$uiRoute}" ng-if="currentUser && currentUser.draft_count > 0">
+      {{#if pageType.add}}
+      <a href="/add/drafts" ng-click="menuGoTo('add/drafts')"><i class="common-drafts"></i>Drafts<span class="badge pull-right" ng-bind="currentUser.draft_count"></span></a>
+      {{else}}
+      <a href="/add/drafts" target="_self"><i class="common-drafts"></i>Drafts<span class="badge pull-right" ng-bind="currentUser.draft_count"></span></a>
+      {{/if}}
+    </li>
+  </ul>
   <ul>
     <li ui-route="/feed" ng-class="{active:$uiRoute}">
       {{#if pageType.public}}
@@ -24,13 +40,6 @@
       <a href="/explore" ng-click="menuGoTo('explore')"><i class="common-explore"></i>Explore</a>
       {{else}}
       <a href="/explore" target="_self"><i class="common-explore"></i>Explore</a>
-      {{/if}}
-    </li>
-    <li ui-route="/add/drafts" ng-class="{active:$uiRoute}" ng-if="isLoggedIn && currentUser && currentUser.draft_count > 0">
-      {{#if pageType.add}}
-      <a href="/add/drafts" ng-click="menuGoTo('add/drafts')"><i class="common-drafts"></i>Drafts</a>
-      {{else}}
-      <a href="/add/drafts" target="_self"><i class="common-drafts"></i>Drafts</a>
       {{/if}}
     </li>
     <li ui-route="/search/[\w\/\-]*" ng-class="{active:$uiRoute}">

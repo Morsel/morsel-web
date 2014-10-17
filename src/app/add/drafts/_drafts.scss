@@ -10,6 +10,11 @@
     padding: 10px;
     position: relative;
 
+    .no-text {
+      color: $morsel-medium;
+      font-style: italic;
+    }
+
     a {
       overflow: hidden;
       display: block;

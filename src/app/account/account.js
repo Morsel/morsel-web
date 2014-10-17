@@ -11,12 +11,14 @@ angular.module( 'Morsel.account', [
   //filters
   //API
   'Morsel.common.apiKeywords',
+  'Morsel.common.apiPlaces',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
   //templates
   'templates-account',
   //common
   'Morsel.common.addFacebook',
+  'Morsel.common.addPlace',
   'Morsel.common.addTwitter',
   'Morsel.common.afterLogin',
   'Morsel.common.auth',
@@ -30,6 +32,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
   'Morsel.common.photoHelpers',
+  'Morsel.common.placeList',
   'Morsel.common.rollbar',
   'Morsel.common.submitBtn',
   'Morsel.common.userImage',
@@ -40,6 +43,7 @@ angular.module( 'Morsel.account', [
   'Morsel.account.body',
   'Morsel.account.cuisinesSpecialties',
   'Morsel.account.editProfile',
+  'Morsel.account.places',
   'Morsel.account.socialAccounts'
 ])
 

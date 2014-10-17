@@ -68,5 +68,29 @@ angular.module( 'Morsel.common.apiPlaces', [] )
     return deferred.promise;
   };
 
+  Places.suggestPlaces = function(searchParams) {
+    var deferred = $q.defer();
+
+    RestangularPlaces.customGET('suggest', searchParams).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Places.employAtPlace = function(foursquarePlaceId, employmentParams) {
+    var deferred = $q.defer();
+
+    Restangular.one('places', foursquarePlaceId).post('employment', employmentParams).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Places;
 });

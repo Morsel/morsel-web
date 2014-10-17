@@ -18,15 +18,19 @@ angular.module( 'Morsel.add', [
   //API
   'Morsel.common.apiItems',
   'Morsel.common.apiMorsels',
+  'Morsel.common.apiPlaces',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
 
   //templates
   'templates-add',
   //common
+  'Morsel.common.addPlace',
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
+  'Morsel.common.facebookApi',
   'Morsel.common.flashDownload',
+  'Morsel.common.focusMe',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',
@@ -49,7 +53,9 @@ angular.module( 'Morsel.add', [
   'Morsel.add.editItemPhoto',
   'Morsel.add.editMorselTitle',
   'Morsel.add.item',
-  'Morsel.add.morsel'
+  'Morsel.add.morsel',
+  'Morsel.add.new',
+  'Morsel.add.templates'
 ])
 
 //define some constants for the app

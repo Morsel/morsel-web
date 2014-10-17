@@ -4,7 +4,10 @@
 @import "_config";
 
 //our general add css
+@import "spritesheets/_add-template";
 
 //our page-specific add css
 @import "../app/add/drafts/_drafts";
 @import "../app/add/morsel/_morsel";
+@import "../app/add/new/_new";
+@import "../app/add/templates/_templates";

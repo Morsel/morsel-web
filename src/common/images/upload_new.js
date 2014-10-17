@@ -10,7 +10,8 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
     replace: true,
     link: function(scope, element, attrs) {
       var s3progressMax = 50.0, //percent
-          maxFileSize = 6000000; //6MB
+          maxFileSize = 6000000, //6MB
+          allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png','image/gif'];
 
       scope.usingFlash = FileAPI && FileAPI.upload != null;
       scope.hasFlashInstalled = FileAPI && FileAPI.hasFlash;
@@ -40,7 +41,18 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
         scope.selectedFiles = $files;
         scope.dataUrls = [];
         for (j = 0; j < $files.length; j++) {
-          var $file = $files[j];
+          var $file = $files[j],
+              validFileType;
+
+          //check that it's an allowed file type
+          validFileType = isValidFileType($file);
+
+          if(!validFileType) {
+            $file = null;
+            scope.selectedFiles = [];
+            scope.errorMsg = 'Only images with extensions .png, .jpg, .jpeg or .gif are allowed';
+            return;
+          }
 
           //check for a max file size
           if($file.size >= maxFileSize) {
@@ -70,6 +82,14 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
           });
         };
       }
+
+      function isValidFileType($file) {
+        return _.find(allowedFileTypes, function(ft){
+          if($file.type === ft) {
+            return true;
+          }
+        });
+      }
       
       scope.uploadToS3 = function(index) {
         //keep a local copy of this to pass to amazon. will need to have already loaded from API
@@ -94,8 +114,9 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
           $timeout(function() {
             updateAPI(resp);
           });
-        }, function(response) {
-          if (response.status > 0) {
+        }, function(resp) {
+          if (resp.status > 0) {
+            scope.item.uploading = false;
             scope.errorMsg = 'There was a problem uploading your image. Please try again.';
           }
         }, function(evt) {
@@ -138,7 +159,8 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
           }
         }).then(function(resp){
           increaseProgressTo(70, 400, checkPhotosProcessed);
-        }, function() {
+        }, function(resp) {
+          scope.item.uploading = false;
           scope.errorMsg = 'There was a problem uploading your image. Please try again.';
         });
       }

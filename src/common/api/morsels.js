@@ -58,7 +58,7 @@ angular.module( 'Morsel.common.apiMorsels', [] )
   Morsels.publishMorsel = function(morselId, morselParams) {
     var deferred = $q.defer();
     
-    Restangular.one('morsels', morselId).one('publish').post(morselParams).then(function(resp){
+    Restangular.one('morsels', morselId).post('publish', morselParams).then(function(resp){
       deferred.resolve(sortMorselItems(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));
@@ -83,6 +83,18 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     var deferred = $q.defer();
 
     Restangular.one('morsels', morselId).remove().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Morsels.createMorsel = function(morselParams) {
+    var deferred = $q.defer();
+
+    RestangularMorsels.post(morselParams).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

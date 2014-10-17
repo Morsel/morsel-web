@@ -4,9 +4,18 @@
 
   .container {
     padding-top: 15px;
+    position: relative;
   }
 
   .add-morsel-info {
+    h2 {
+      margin: 10px 0 20px;
+    }
+
+    .loader {
+      height: 40px;
+    }
+
     .h3 {
       font-size: 16px;
       margin-bottom: 0;
@@ -23,7 +32,7 @@
     }
 
     .help-block {
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .add-morsel-info-wrap {
@@ -44,9 +53,33 @@
         vertical-align: middle;
       }
     }
+
+    .add-morsel-social {
+      i {
+        vertical-align: middle;
+      }
+
+      .help-block {
+        display: none;
+      }
+
+      .disabled {
+        color: $morsel-medium;
+
+        .help-block {
+          display: block;
+          margin-left: 20px;
+        }
+      }
+    }
+
+    .add-place-btn {
+      text-align: right;
+      margin-top: 10px;
+    }
   }
 
-  .edit-module {
+  .form-group {
     p {
       text-align: left;
 
@@ -55,7 +88,7 @@
       }
     }
 
-    .edit-module-btns {
+    .form-group-btns {
       margin-top: 10px;
       text-align: right;
     }
@@ -65,8 +98,10 @@
       font-style: italic;
     }
 
-    label {
+    > label {
       font-weight: bold;
+      text-align: left;
+      font-size: 15px;
     }
   }
 
@@ -79,14 +114,24 @@
       font-size: 24px;
     }
   }
+
+  .template-help {
+    position: absolute;
+    top: 85px;
+    right: 20px;
+    z-index: 10;
+  }
 }
 
 .add-morsel-items {
-  margin: 0;
-  list-style: none;
+  margin: 10px 0 0;
 
   .empty-state {
     margin: 50px 0;
+  }
+
+  li {
+    list-style: none;
   }
 
   .add-morsel-item {
@@ -187,6 +232,18 @@
     }
   }
 
+  .alert-success {
+    position: absolute;
+    top: 60px;
+    width: 90%;
+    left: 5%;
+    @include box-shadow(0px 4px 7px 0px rgba(0, 0, 0, 0.1));
+  }
+
+  .btn {
+    @include box-shadow(0px 4px 7px 0px rgba(0, 0, 0, 0.1));
+  }
+
   .modal-body {
     padding: 0;
     min-width: 200px;
@@ -220,6 +277,11 @@
 
       .btn-block {
         margin-bottom: 30px;
+      }
+
+      .help-block {
+        color: white;
+        font-size: 12px;
       }
 
       .drop-box {
@@ -326,6 +388,11 @@
         margin-top: 30px;
         position: relative;
       }
+    }
+
+    .template-help {
+      top: 5px;
+      right: 5px;
     }
   }
 
