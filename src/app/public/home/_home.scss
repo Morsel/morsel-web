@@ -93,18 +93,6 @@ $app-demo-delay: 2s;
 }
 
 .home-page {
-  text-align: center;
-  padding-top: 60px;
-
-  h1 {
-    margin: 15px 0;
-  }
-
-  h2 {
-    color: $morsel-dark;
-    font-size: 15px;
-  }
-
   .app-demo {
     width: 120%;
     position: absolute;
@@ -115,62 +103,30 @@ $app-demo-delay: 2s;
     }
   }
 
-  .app-brand {
-    div {
-      margin-top: 25px;
-    }
+  .create-section {
+    background-color: $morsel-new-beige;
+  }
+
+  .featured-morsels-section {
+    background-color: $morsel-background;
   }
 }
 
 @media (min-width: $screen-xs-min) {
-  .home-page {
-
-    h1 {
-      margin: 25px 0;
-    }
-
-    h2 {
-      font-size: 16px;
-    }
-  }
 }
 
 @media (min-width: $screen-sm-min) {
   .home-page {
-    background: url(images/bg/home.jpg) center top no-repeat;
-    background-size: 175%;
-
-    h1 {
-      margin: 0;
-    }
-
-    h2 {
-      font-size: 26px;
-      color: $morsel-light-off;
-    }
-
     .app-demo {
       width: 325px;
       height: 614px;
       position: relative;
-    }
-
-    .app-brand {
-      a {
-        color: $morsel-tertiary;
-        font-weight: bold;
-        font-family: $font-family-secondary;
-        font-size: 18px;
-      }
     }
   }
 }
 
 @media (min-width: $screen-md-min) {
   .home-page {
-    padding-top: 30px;
-    background-size: cover;
-
     .app-demo {
       .app-screenshots {
         display: block;
@@ -191,17 +147,6 @@ $app-demo-delay: 2s;
           animation-duration: $app-demo-duration;
           animation-delay: $app-demo-delay;
           animation-iteration-count: infinite;
-        }
-      }
-    }
-
-    .app-brand {
-      div {
-        display: inline-block;
-        margin-top: 10px;
-
-        & + div {
-          margin-left: 25px;
         }
       }
     }
