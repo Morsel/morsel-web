@@ -12,6 +12,7 @@
     </div>-->
     <div ng-show="dropSupported" class="drop-box" ng-file-drop="onFileSelect($files)" ng-file-drop-available="dropSupported=true"
       ng-file-drag-over-class="dragOverClass($event)" ng-file-drag-over-delay="100">or drag and drop image file here</div>
+    <p class="help-block">Note: non-square photos will be auto-cropped into a square upon upload</p>
   </div>
   <div ng-show="selectedFiles && selectedFiles.length > 0" class="image-upload-preview">
     <div class="sel-file" ng-repeat="f in selectedFiles">
