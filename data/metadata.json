@@ -144,5 +144,31 @@
       "type": "article"
     },
     "url": "https://www.eatmorsel.com/collections/michael-ruhlman-charcuterie-book"
+  },
+  "spence-farm-foundation-dinner-2014": {
+    "title": "Spence Farm Foundation Dinner 2014 | Morsel",
+    "description": "On October 20, 2014 the Spence Farm Family Foundation held their annual dinner at the Omni Hotel Chicago.",
+    "image": "https://morsel.s3.amazonaws.com/events/spence-farm-foundation-dinner-2014/spence-farm-foundation-dinner-2014-logo.jpg",
+    "twitter": {
+      "creator": "@SpenceFarmFound",
+      "card": "summary_large_image"
+    },
+    "og": {
+      "type": "article"
+    },
+    "url": "https://www.eatmorsel.com/collections/spence-farm-foundation-dinner-2014"
+  },
+  "slow-food-ark-of-taste": {
+    "title": "Slow Food Ark of Taste | Morsel",
+    "description": "The Ark of Taste travels the world collecting small-scale quality productions that belong to the cultures, history and traditions of the entire planet: an extraordinary heritage of fruits, vegetables, animal breeds, cheeses, breads, sweets and cured meats... The Ark was created to point out the existence of these products, draw attention to the risk of their extinction within a few generations, invite everyone to take action to help protect them. In some cases this might be by buying and consuming them, in some by telling their story and supporting their producers, and in others, such as the case of endangered wild species, this might mean eating less or none of them in order to preserve them and favor their reproduction.",
+    "image": "https://morsel.s3.amazonaws.com/events/slow-food-ark-of-taste/slow-food-ark-of-taste-logo.jpg",
+    "twitter": {
+      "creator": "@SlowFoodUSA",
+      "card": "summary_large_image"
+    },
+    "og": {
+      "type": "article"
+    },
+    "url": "https://www.eatmorsel.com/collections/slow-food-ark-of-taste"
   }
 }

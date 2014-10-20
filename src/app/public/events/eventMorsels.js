@@ -75,6 +75,22 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/michael-ruhlman-charcuterie-book/michael-ruhlman-charcuterie-book-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/collections/michael-ruhlman-charcuterie-book';
     eventInfo.twitterUsername = '@ruhlman';
+  } else if(eventSlug === 'spence-farm-foundation-dinner-2014') {
+    eventUrl += 'spence-farm-foundation-dinner-2014/spence-farm-foundation-dinner-2014-morsels.json';
+    eventInfo.title = 'Spence Farm Foundation Dinner 2014';
+    eventInfo.location = null;
+    eventInfo.description = $sce.trustAsHtml('On October 20, 2014 the Spence Farm Family Foundation held their annual dinner at the Omni Hotel Chicago.');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/spence-farm-foundation-dinner-2014/spence-farm-foundation-dinner-2014-logo.jpg';
+    eventInfo.url = 'https://www.eatmorsel.com/collections/spence-farm-foundation-dinner-2014';
+    eventInfo.twitterUsername = '@SpenceFarmFound';
+  } else if(eventSlug === 'slow-food-ark-of-taste') {
+    eventUrl += 'slow-food-ark-of-taste/slow-food-ark-of-taste-morsels.json';
+    eventInfo.title = 'Slow Food Ark of Taste';
+    eventInfo.location = null;
+    eventInfo.description = $sce.trustAsHtml('The Ark of Taste travels the world collecting small-scale quality productions that belong to the cultures, history and traditions of the entire planet: an extraordinary heritage of fruits, vegetables, animal breeds, cheeses, breads, sweets and cured meats...<br/><br/>The Ark was created to <strong>point out the existence</strong> of these products, <strong>draw attention</strong> to the risk of their extinction within a few generations, <strong>invite everyone to take action</strong> to help protect them. In some cases this might be by buying and consuming them, in some by telling their story and supporting their producers, and in others, such as the case of endangered wild species, this might mean eating less or none of them in order to preserve them and favor their reproduction.');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/slow-food-ark-of-taste/slow-food-ark-of-taste-logo.jpg';
+    eventInfo.url = 'https://www.eatmorsel.com/collections/slow-food-ark-of-taste';
+    eventInfo.twitterUsername = '@SlowFoodUSA';
   } else {
     //invalid event
     $location.path('/');
