@@ -285,6 +285,14 @@
   }
 }
 
+.morsel-app-icon {
+  @include replace-text('logos/morsel-app-icon.png');
+  background-size: image-width('logos/morsel-app-icon.png') image-height('logos/morsel-app-icon.png');
+  height: image-height('logos/morsel-app-icon.png');
+  width: image-width('logos/morsel-app-icon.png');
+  display: inline-block;
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .main-header {
     .morsel-logo {
@@ -292,6 +300,10 @@
         @include replace-text('logos/morsel-m@2x.png');
       }
     }
+  }
+
+  .morsel-app-icon {
+    @include replace-text('logos/morsel-app-icon@2x.png');
   }
 }
 

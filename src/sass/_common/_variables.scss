@@ -87,12 +87,20 @@ $input-bg: $morsel-lightest;
 $input-height-base: 33px;
 
 //buttons
+$border-radius-base: 3px;
+$border-radius-large: 3px;
+
+$btn-default-border: transparent;
+$btn-primary-border: transparent;
+$btn-success-border: transparent;
+$btn-info-border: transparent;
+$btn-warning-border: transparent;
+$btn-danger-border: transparent;
+
 $btn-default-color: white;
 $btn-default-bg: $morsel-secondary;
-$btn-default-border: darken($morsel-secondary, 5%);
 
 $btn-primary-bg: $morsel-primary;
-$btn-primary-border: darken($morsel-primary, 5%);
 
 //social
 $socialPalette: 

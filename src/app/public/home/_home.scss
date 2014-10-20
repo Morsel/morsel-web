@@ -93,8 +93,11 @@ $app-demo-delay: 2s;
 }
 
 .home-page {
+  section {
+    padding: 20px 0;
+  }
+
   .app-demo {
-    width: 120%;
     position: absolute;
     right: 0;
 
@@ -117,6 +120,11 @@ $app-demo-delay: 2s;
 
 @media (min-width: $screen-sm-min) {
   .home-page {
+
+    section {
+      padding: 40px 0;
+    }
+
     .app-demo {
       width: 325px;
       height: 614px;
