@@ -1,9 +1,6 @@
-<div id="page-wrapper" class="page-wrapper">
+<div id="page-wrapper" class="page-wrapper" ng-class="{'menu-open':menuOpen}">
   {{> sidenav}}
-
-  <div id="site" ng-class="{site: true, open:menuOpen}">
-    {{> header}}
-
+  <div id="site" class="site">
     <div ui-view="main" class="main-view" ng-click="closeMenu()">
       {{#staticPartial.about}}
       {{> static/about}}

@@ -96,9 +96,7 @@ angular.module( 'Morsel.login', [
 })
 
 .controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack) {
-  var viewOptions = {
-        miniHeader : false
-      },
+  var viewOptions = {},
       $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title

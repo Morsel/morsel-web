@@ -116,9 +116,7 @@ angular.module( 'Morsel.account', [
 })
 
 .controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack, $timeout, USER_UPDATE_CHECK_TIME ) {
-  var viewOptions = {
-        miniHeader : false
-      },
+  var viewOptions = {},
       $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title

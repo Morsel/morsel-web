@@ -1,7 +1,6 @@
 //page layout
 .page-wrapper {
   width: 100%;
-  height: 100%;
   background: url(images/bg/light-line.png) right top repeat;
   position: absolute;
 }
@@ -17,22 +16,111 @@
 }
 
 //side nav and header
+.site-nav {
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  @include transition(all .2s ease-out);
+  overflow: hidden;
+}
+
+.main-header {
+  z-index: 11;
+  background-color: rgba(256,256,256,.9);
+  @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.1));
+  padding: 10px;
+  position: absolute;
+  width: 100%;
+
+  .morsel-logo {
+    margin: 0;
+    display: inline-block;
+    @include transition(all .2s ease-out);
+    vertical-align: middle;
+
+    a {
+      display: block;
+    }
+  }
+
+  nav {
+    float: right;
+    @include translate(0,0);
+    @include transition(all .2s ease-out);
+
+    .menu-open & {
+      @include translate(-$sidenav-width, 0);
+    }
+
+    ul {
+      margin: 0;
+
+      li {
+        display: inline-block;
+        margin: 0 10px;
+        float: left;
+
+        a {
+          padding: 5px;
+          display: inline-block;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
 .side-nav {
   position: absolute;
-  width: $sidenav-width;
-  z-index: 1;
-  min-height: 100%;
+  top: 0;
   right: 0;
+  width: $sidenav-width;
+  min-height: 100%;
   padding: 0;
-  @include opacity(0);
   @include transition(all .2s ease-out);
-  display: none;
+  @include translate($sidenav-width, 0);
   background-image: url(images/bg/menu.jpg);
   background-size: cover;
+  z-index: 11;
 
-  &.open {
-    display: block;
-    @include opacity(1);
+  .menu-open & {
+    @include translate(0, 0);
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 25px;
+
+    li {
+      display: block;
+      float: none;
+      margin: 0;
+
+      & + li {
+        border-top: 1px solid rgba($morsel-off-white, .7);
+      }
+
+      &:last-child {
+        display: block;
+      }
+
+      &.active {
+        a {
+          background-color: desaturate(rgba($morsel-primary, .1), 50%);
+        }
+      }
+    }
+
+    &.secondary-menu {
+      a {
+        font-size: 14px;
+        padding: 8px 20px;
+      }
+    }
   }
 
   .prompt-btns {
@@ -91,39 +179,6 @@
     }
   }
 
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 25px;
-
-    li {
-      display: block;
-      float: none;
-      margin: 0;
-
-      & + li {
-        border-top: 1px solid rgba($morsel-off-white, .7);
-      }
-
-      &:last-child {
-        display: block;
-      }
-
-      &.active {
-        a {
-          background-color: desaturate(rgba($morsel-primary, .1), 50%);
-        }
-      }
-    }
-
-    &.secondary-menu {
-      a {
-        font-size: 14px;
-        padding: 8px 20px;
-      }
-    }
-  }
-
   .morsel-social-links {
     overflow: hidden;
 
@@ -163,12 +218,8 @@
   @include translate(0, 0);
   overflow: hidden;
 
-  &.open {
+  .menu-open & {
     @include translate(-$sidenav-width, 0);
-
-    .main-header {
-      background-color: rgba(1, 1, 1, 0.5);
-    }
 
     .main-view {
       overflow: hidden;
@@ -176,100 +227,13 @@
       &:after {
         content: ' ';
         position: absolute;
-        background-color: rgba(1,1,1,.5);
+        background-color: rgba(0,0,0,.5);
         width: 100%;
         height: 100%;
         display: block;
         z-index: 10;
         top: 0;
         left: 0;
-      }
-    }
-  }
-}
-
-.main-header {
-  z-index: 11;
-
-  .container {
-    position: relative;
-  }
-
-  .morsel-logo {
-    margin: 0;
-    position: absolute;
-    left: 10px;
-    top: 14px;
-    z-index: 11;
-    @include transition(all .2s ease-out);
-    @include opacity(1);
-
-    a {
-      @extend .morsel-icon;
-      display: block;
-    }
-
-    .open & {
-      @include opacity(0);
-      top: -30px;
-    }
-
-    &.hide-logo {
-      display: none;
-    }
-  }
-
-  nav {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 11;
-
-    ul {
-      margin: 8px 0 0;
-
-      li {
-        display: inline-block;
-        margin: 0 5px;
-        vertical-align: top;
-
-        a {
-          padding: 10px 5px;
-          vertical-align: top;
-          display: inline-block;
-
-          span {
-            vertical-align: middle;
-          }
-        }
-      }
-    }
-
-    .common-menu {
-      &:after {
-        @extend .common-burger;
-        content: '';
-        position: absolute;
-        right: -20px;
-        top: 0;
-      }
-    }
-  }
-
-  &.full-header {
-    height: $mini-header-height;
-  }
-
-  &.mini-header {
-    height: 0;
-  }
-
-  &.full-width-header {
-    > .container {
-      width: 100%;
-
-      .morsel-logo {
-        left: 18px;
       }
     }
   }
@@ -308,68 +272,16 @@
 }
 
 @media (min-width: $screen-xs-min) {
-  .site {
-    &.open {
-      .main-header {
-        .morsel-logo {
-          @include translate($sidenav-width, 0);
-        }
-      }
-    }
-  }
 }
 
 @media (min-width: $screen-sm-min) {
-  .main-header {
-    &.full-header {
-      background-image: url(images/bg/light-line.png);
-
-      .morsel-logo {
-        left: -5px;
-        top: -25px;
-
-        &:hover {
-          top: 0;
-        }
-
-        a {
-          @include replace-text-with-dimensions('logos/morsel-header.png');
-          background-size: auto;
-        }
-
-        .site.open & {
-          top: -45px;
-          @include opacity(1);
-        }
-      }
-    }
-
-    nav {
-      .common-menu {
-        position: relative;
-        margin-right: 20px;
-        display: inline-block;
-      }
-    }
-  }
+  
 }
 
 @media (min-width: $screen-md-min) {
-  .main-header {
-    &.full-header {
-      .morsel-logo {
-        left: 22px;
-      }
-    }
-  }
+
 }
 
 @media (min-width: $screen-lg-min) {
-  .main-header {
-    &.full-header {
-      .morsel-logo {
-        left: 47px;
-      }
-    }
-  }
+
 }

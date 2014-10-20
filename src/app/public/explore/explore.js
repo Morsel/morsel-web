@@ -20,9 +20,6 @@ angular.module( 'Morsel.public.explore', [])
 })
 
 .controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, PhotoHelpers, $location, Auth ) {
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.fullWidthHeader = true;
-
   //# of morsels to load at a time
   $scope.exploreIncrement = 15;
 

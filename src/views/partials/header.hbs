@@ -1,23 +1,32 @@
-<header class="main-header" ng-class="{'mini-header': viewOptions.miniHeader, 'full-header': !viewOptions.miniHeader, 'full-width-header': viewOptions.fullWidthHeader}">
-  <div class="container">
-    <h1 class="morsel-logo" ng-class="{'hide-logo':viewOptions.hideLogo}">
-      {{#if pageType.public}}
-      <a href="/">Morsel</a>
-      {{else}}
-      <a href="/" target="_self">Morsel</a>
-      {{/if}}
-    </h1>
-  </div>
+<header class="main-header">
+  <h1 class="morsel-logo">
+    {{#if pageType.public}}
+    <a href="/" class="morsel-icon">Morsel</a>
+    {{else}}
+    <a href="/" target="_self" class="morsel-icon">Morsel</a>
+    {{/if}}
+  </h1>
   <nav>
     <ul>
       <li>
-        <a href="/join" ng-if="!isLoggedIn" target="_self">
-          <span class="common-signup text-hide">Sign Up</span>
-        </a>
+        {{#if pageType.public}}
+        <a href="/explore">Explore</a>
+        {{else}}
+        <a href="/explore" target="_self">Explore</a>
+        {{/if}}
       </li>
       <li>
-        <a ng-click="toggleMenu()" class="hidden-xs"><span class="common-menu text-hide">Menu</span></a>
-        <a ng-click="toggleMenu()" class="visible-xs-inline-block"><span class="common-burger text-hide">Menu</span></a>
+        {{#if pageType.static}}
+        <a href="/apps">Get the App</a>
+        {{else}}
+        <a href="/apps" target="_self">Get the App</a>
+        {{/if}}
+      </li>
+      <li ng-if="!isLoggedIn">
+        <a href="/join" target="_self" class="btn btn-default">Sign Up</a>
+      </li>
+      <li>
+        <a ng-click="toggleMenu()">Menu <i class="common-burger"></i></a>
       </li>
     </ul>
   </nav>

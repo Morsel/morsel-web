@@ -46,8 +46,6 @@ angular.module( 'Morsel.public.home', [])
   if(hasSeenSplash) {
     $state.go('feed', null, {location:'replace'});
   }
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.hideLogo = true;
 
   $scope.continueToMorsel = function() {
     //user wants to continue on to their feed

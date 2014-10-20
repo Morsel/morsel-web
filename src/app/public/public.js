@@ -86,7 +86,6 @@ angular.module( 'Morsel.public', [
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
-.constant('MINIHEADERHEIGHT', '60')
 .constant('USER_LIST_NUMBER', 20)
 .constant('USER_UPDATE_CHECK_TIME', 5000)
 .constant('COMMENT_LIST_NUMBER', 10)
@@ -151,11 +150,7 @@ angular.module( 'Morsel.public', [
 })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
-  var viewOptions = {
-        miniHeader : false,
-        fullWidthHeader : false,
-        hideLogo: false
-      },
+  var viewOptions = {},
       $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title
@@ -285,6 +280,7 @@ angular.module( 'Morsel.public', [
     Mixpanel.send('Tapped Menu Bar Icon', {
       menu_state: $scope.menuOpen ? 'closing' : 'opening'
     });
+    $body.scrollTop(0, 0);
     $scope.menuOpen = !$scope.menuOpen;
   };
 });

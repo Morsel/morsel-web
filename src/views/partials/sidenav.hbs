@@ -1,114 +1,117 @@
-<nav id="side-nav" class="side-nav" ng-class="{open:menuOpen}" role="navigation" ng-style="viewOptions.minimumMainHeight()">
-  {{#if pageType.public}}
-  <a ng-if="isLoggedIn" ng-href="/\{{currentUser.username.toLowerCase()}}" ng-click="closeMenu()" class="profile-link">
-  {{else}}
-  <a ng-if="isLoggedIn" ng-href="/\{{currentUser.username.toLowerCase()}}" class="profile-link" target="_self">
-  {{/if}}
-    <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-no-link="true" mrsl-user-image-size="profile-pic-xs"></div>
-    <h5 mrsl-users-name="currentUser"></h5>
-  </a>
-  <div class="prompt-btns" ng-if="!isLoggedIn">
-    <a href="/join" target="_self">Sign Up</a>
-    <a href="/login"  target="_self">Login</a>
-  </div>
-  <ul ng-if="isLoggedIn">
-    <li ui-route="/add" ng-class="{active:$uiRoute}">
-      {{#if pageType.add}}
-      <a href="/add" ng-click="menuGoTo('add')"><i class="common-add"></i>New Morsel</a>
-      {{else}}
-      <a href="/add" target="_self"><i class="common-add"></i>New Morsel</a>
-      {{/if}}
-    </li>
-    <li ui-route="/add/drafts" ng-class="{active:$uiRoute}" ng-if="currentUser && currentUser.draft_count > 0">
-      {{#if pageType.add}}
-      <a href="/add/drafts" ng-click="menuGoTo('add/drafts')"><i class="common-drafts"></i>Drafts<span class="badge pull-right" ng-bind="currentUser.draft_count"></span></a>
-      {{else}}
-      <a href="/add/drafts" target="_self"><i class="common-drafts"></i>Drafts<span class="badge pull-right" ng-bind="currentUser.draft_count"></span></a>
-      {{/if}}
-    </li>
-  </ul>
-  <ul>
-    <li ui-route="/feed" ng-class="{active:$uiRoute}">
-      {{#if pageType.public}}
-      <a href="/feed" ng-click="menuGoTo('feed')"><i class="common-feed"></i>Feed</a>
-      {{else}}
-      <a href="/feed" target="_self"><i class="common-feed"></i>Feed</a>
-      {{/if}}
-    </li>
-    <li ui-route="/explore" ng-class="{active:$uiRoute}">
-      {{#if pageType.public}}
-      <a href="/explore" ng-click="menuGoTo('explore')"><i class="common-explore"></i>Explore</a>
-      {{else}}
-      <a href="/explore" target="_self"><i class="common-explore"></i>Explore</a>
-      {{/if}}
-    </li>
-    <li ui-route="/search/[\w\/\-]*" ng-class="{active:$uiRoute}">
-      {{#if pageType.public}}
-      <a href="/search/people" ng-click="menuGoTo('search/people')"><i class="common-find-people"></i>Find people</a>
-      {{else}}
-      <a href="/search/people" target="_self"><i class="common-find-people"></i>Find people</a>
-      {{/if}}
-    </li>
-    <li ui-route="/notifications" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
-      {{#if pageType.public}}
-      <a href="/notifications" ng-click="menuGoTo('notifications')"><i class="common-notifications"></i>Notifications</a>
-      {{else}}
-      <a href="/notifications" target="_self"><i class="common-notifications"></i>Notifications</a>
-      {{/if}}
-    </li>
-    <li ui-route="/activity" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
-      {{#if pageType.public}}
-      <a href="/activity" ng-click="menuGoTo('activity')"><i class="common-activity"></i>Activity</a>
-      {{else}}
-      <a href="/activity" target="_self"><i class="common-activity"></i>Activity</a>
-      {{/if}}
-    </li>
-    <li ui-route="/account/[\w\/\-]*" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
-      {{#if pageType.account}}
-      <a href="/account/edit-profile" ng-click="menuGoTo('account/edit-profile')"><i class="common-gear"></i>Settings</a>
-      {{else}}
-      <a href="/account/edit-profile" target="_self"><i class="common-gear"></i>Settings</a>
-      {{/if}}
-    </li>
-    <li ng-if="isLoggedIn">
-      <a href="/logout" target="_self"><i class="common-logout"></i>Logout</a>
-    </li>
-  </ul>
-  <ul class="secondary-menu">
-    <li ng-class="{active : currentRoute === '/about'}">
-      <a href="/about" target="_self">About Morsel</a>
-    </li>
-    <li ng-class="{active : currentRoute === '/press'}">
-      <a href="/press" target="_self">Press &amp; Media</a>
-    </li>
-    <li ui-route="/contact" ng-class="{active:$uiRoute}">
-      {{#if pageType.public}}
-      <a href="/contact" ng-click="menuGoTo('contact')">Contact Us</a>
-      {{else}}
-      <a href="/contact" target="_self">Contact Us</a>
-      {{/if}}
-    </li>
-    <li ng-class="{active : currentRoute === '/apps'}">
-      <a href="/apps" target="_self">Get the App</a>
-    </li>
-    <li>
-      <a href="http://insights.eatmorsel.com" target="_blank">Insights Blog</a>
-    </li>
-    <li ng-class="{active : currentRoute === '/terms'}">
-      <a href="/terms" target="_self">Terms of Use</a>
-    </li>
-    <li ng-class="{active : currentRoute === '/privacy'}">
-      <a href="/privacy" target="_self">Privacy Policy</a>
-    </li>
-  </ul>
-  <div class="morsel-social-links">
-    <a href="https://facebook.com/eatmorsel" target="_blank"><i class="common-facebook"></i></a>
-    <a href="https://twitter.com/eatmorsel" target="_blank"><i class="common-twitter"></i></a>
-  </div>
-  <p class="menu-copyright">&copy; Morsel Labs, Inc. 2014</p>
-  <div class="text-center">
-    <a href="https://mixpanel.com/f/partner">
-      <img src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" />
+<div class="site-nav">
+  {{> header}}
+  <nav id="side-nav" class="side-nav" role="navigation" ng-style="viewOptions.minimumMainHeight()">
+    {{#if pageType.public}}
+    <a ng-if="isLoggedIn" ng-href="/\{{currentUser.username.toLowerCase()}}" ng-click="closeMenu()" class="profile-link">
+    {{else}}
+    <a ng-if="isLoggedIn" ng-href="/\{{currentUser.username.toLowerCase()}}" class="profile-link" target="_self">
+    {{/if}}
+      <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-no-link="true" mrsl-user-image-size="profile-pic-xs"></div>
+      <h5 mrsl-users-name="currentUser"></h5>
     </a>
-  </div>
-</nav>
+    <div class="prompt-btns" ng-if="!isLoggedIn">
+      <a href="/join" target="_self">Sign Up</a>
+      <a href="/login"  target="_self">Login</a>
+    </div>
+    <ul ng-if="isLoggedIn">
+      <li ui-route="/add" ng-class="{active:$uiRoute}">
+        {{#if pageType.add}}
+        <a href="/add" ng-click="menuGoTo('add')"><i class="common-add"></i>New Morsel</a>
+        {{else}}
+        <a href="/add" target="_self"><i class="common-add"></i>New Morsel</a>
+        {{/if}}
+      </li>
+      <li ui-route="/add/drafts" ng-class="{active:$uiRoute}" ng-if="currentUser && currentUser.draft_count > 0">
+        {{#if pageType.add}}
+        <a href="/add/drafts" ng-click="menuGoTo('add/drafts')"><i class="common-drafts"></i>Drafts<span class="badge pull-right" ng-bind="currentUser.draft_count"></span></a>
+        {{else}}
+        <a href="/add/drafts" target="_self"><i class="common-drafts"></i>Drafts<span class="badge pull-right" ng-bind="currentUser.draft_count"></span></a>
+        {{/if}}
+      </li>
+    </ul>
+    <ul>
+      <li ui-route="/feed" ng-class="{active:$uiRoute}">
+        {{#if pageType.public}}
+        <a href="/feed" ng-click="menuGoTo('feed')"><i class="common-feed"></i>Feed</a>
+        {{else}}
+        <a href="/feed" target="_self"><i class="common-feed"></i>Feed</a>
+        {{/if}}
+      </li>
+      <li ui-route="/explore" ng-class="{active:$uiRoute}">
+        {{#if pageType.public}}
+        <a href="/explore" ng-click="menuGoTo('explore')"><i class="common-explore"></i>Explore</a>
+        {{else}}
+        <a href="/explore" target="_self"><i class="common-explore"></i>Explore</a>
+        {{/if}}
+      </li>
+      <li ui-route="/search/[\w\/\-]*" ng-class="{active:$uiRoute}">
+        {{#if pageType.public}}
+        <a href="/search/people" ng-click="menuGoTo('search/people')"><i class="common-find-people"></i>Find people</a>
+        {{else}}
+        <a href="/search/people" target="_self"><i class="common-find-people"></i>Find people</a>
+        {{/if}}
+      </li>
+      <li ui-route="/notifications" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+        {{#if pageType.public}}
+        <a href="/notifications" ng-click="menuGoTo('notifications')"><i class="common-notifications"></i>Notifications</a>
+        {{else}}
+        <a href="/notifications" target="_self"><i class="common-notifications"></i>Notifications</a>
+        {{/if}}
+      </li>
+      <li ui-route="/activity" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+        {{#if pageType.public}}
+        <a href="/activity" ng-click="menuGoTo('activity')"><i class="common-activity"></i>Activity</a>
+        {{else}}
+        <a href="/activity" target="_self"><i class="common-activity"></i>Activity</a>
+        {{/if}}
+      </li>
+      <li ui-route="/account/[\w\/\-]*" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+        {{#if pageType.account}}
+        <a href="/account/edit-profile" ng-click="menuGoTo('account/edit-profile')"><i class="common-gear"></i>Settings</a>
+        {{else}}
+        <a href="/account/edit-profile" target="_self"><i class="common-gear"></i>Settings</a>
+        {{/if}}
+      </li>
+      <li ng-if="isLoggedIn">
+        <a href="/logout" target="_self"><i class="common-logout"></i>Logout</a>
+      </li>
+    </ul>
+    <ul class="secondary-menu">
+      <li ng-class="{active : currentRoute === '/about'}">
+        <a href="/about" target="_self">About Morsel</a>
+      </li>
+      <li ng-class="{active : currentRoute === '/press'}">
+        <a href="/press" target="_self">Press &amp; Media</a>
+      </li>
+      <li ui-route="/contact" ng-class="{active:$uiRoute}">
+        {{#if pageType.public}}
+        <a href="/contact" ng-click="menuGoTo('contact')">Contact Us</a>
+        {{else}}
+        <a href="/contact" target="_self">Contact Us</a>
+        {{/if}}
+      </li>
+      <li ng-class="{active : currentRoute === '/apps'}">
+        <a href="/apps" target="_self">Get the App</a>
+      </li>
+      <li>
+        <a href="http://insights.eatmorsel.com" target="_blank">Insights Blog</a>
+      </li>
+      <li ng-class="{active : currentRoute === '/terms'}">
+        <a href="/terms" target="_self">Terms of Use</a>
+      </li>
+      <li ng-class="{active : currentRoute === '/privacy'}">
+        <a href="/privacy" target="_self">Privacy Policy</a>
+      </li>
+    </ul>
+    <div class="morsel-social-links">
+      <a href="https://facebook.com/eatmorsel" target="_blank"><i class="common-facebook"></i></a>
+      <a href="https://twitter.com/eatmorsel" target="_blank"><i class="common-twitter"></i></a>
+    </div>
+    <p class="menu-copyright">&copy; Morsel Labs, Inc. 2014</p>
+    <div class="text-center">
+      <a href="https://mixpanel.com/f/partner">
+        <img src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" />
+      </a>
+    </div>
+  </nav>
+</div>

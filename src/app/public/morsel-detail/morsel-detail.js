@@ -53,9 +53,6 @@ angular.module( 'Morsel.public.morselDetail', [])
   //update page title
   $scope.pageData.pageTitle = $scope.morsel.title+name+' | Morsel';
 
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.fullWidthHeader = true;
-
   //check if we came from the feed and should display prev/next links
   if($stateParams.source === 'feed' && $stateParams.feedId) {
     var prevFeedParams = {

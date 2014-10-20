@@ -68,9 +68,7 @@ angular.module( 'Morsel.static', [
 })
 
 .controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $timeout, USER_UPDATE_CHECK_TIME ) {
-  var viewOptions = {
-    miniHeader : false
-  };
+  var viewOptions = {};
 
   //to store things like page title
   $scope.pageData = {
