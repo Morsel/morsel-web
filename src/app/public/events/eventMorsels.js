@@ -99,7 +99,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
   Restangular.oneUrl('eventMorsels', eventUrl).get().then(function(resp) {
     eventInfo.morsels = Restangular.stripRestangular(resp);
     $scope.eventInfo = eventInfo;
-    $scope.pageData.pageTitle = $scope.eventInfo.title + ' | ' + $scope.eventInfo.location;
+    $scope.pageData.pageTitle = $scope.eventInfo.title + ($scope.eventInfo.location ? ' | ' + $scope.eventInfo.location : '');
   }, function() {
     //if not, send to homepage
     $location.path('/');
