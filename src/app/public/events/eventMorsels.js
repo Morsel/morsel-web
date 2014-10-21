@@ -79,7 +79,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventUrl += 'spence-farm-foundation-dinner-2014/spence-farm-foundation-dinner-2014-morsels.json';
     eventInfo.title = 'Spence Farm Foundation Dinner 2014';
     eventInfo.location = null;
-    eventInfo.description = $sce.trustAsHtml('On October 20, 2014 the Spence Farm Family Foundation held their annual dinner at the Omni Hotel Chicago.');
+    eventInfo.description = $sce.trustAsHtml('On October 20, 2014, the Spence Farm Family Foundation held a special celebration of local Fall food with chefs from Green Zebra, Browntrout, Limelight Catering and 676 Restaurant & Bar at the Omni Hotel Chicago.');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/spence-farm-foundation-dinner-2014/spence-farm-foundation-dinner-2014-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/collections/spence-farm-foundation-dinner-2014';
     eventInfo.twitterUsername = '@SpenceFarmFound';
