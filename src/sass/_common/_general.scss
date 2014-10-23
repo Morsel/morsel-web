@@ -111,7 +111,6 @@ button[type="submit"] {
 }
 
 hr {
-  @include morsel-border($morsel-background);
-  margin-top: 25px;
-  margin-bottom: 25px;
+  @include morsel-border();
+  margin: 20px 0;
 }

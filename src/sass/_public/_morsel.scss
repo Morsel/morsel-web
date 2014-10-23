@@ -178,6 +178,7 @@
       .item-wrap {
         text-align: center;
         position: relative;
+        @include morsel-border();
       }
 
       .item-photo-wrap {
@@ -185,9 +186,7 @@
         height: auto;
         width: auto;
         min-height: 100px;
-
         padding-bottom: 35px;
-        @include morsel-border($morsel-light-off);
       }
 
       .item-img {

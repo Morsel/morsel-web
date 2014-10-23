@@ -54,19 +54,29 @@
   } 
 }
 
-@mixin morsel-border($morselBorderBgColor) {
-  border-bottom: 1px solid $morsel-light;
+@mixin morsel-border() {
   position: relative;
+  background: url(images/icons/morsel/morsel-m-light.png) center bottom no-repeat;
+  min-height: image-width('icons/morsel/morsel-m-light.png');
+  overflow: hidden;
+  border: 0;
 
-  &:after {
+  &:before, &:after {
     content: ' ';
-    background: $morselBorderBgColor url(images/icons/morsel/morsel-m-light.png) center center no-repeat;
-    height: image-width('icons/morsel/morsel-m-light.png');
-    width: image-width('icons/morsel/morsel-m-light.png')*2;
+    width: 50%;
     display: block;
     position: absolute;
-    bottom: -(image-width('icons/morsel/morsel-m-light.png')/2);
+    border-bottom: 1px solid $morsel-light;
+    bottom: image-width('icons/morsel/morsel-m-light.png')/2;
+  }
+
+  &:before {
     left: 50%;
-    margin-left: -(image-width('icons/morsel/morsel-m-light.png'));
+    margin-left: (image-width('icons/morsel/morsel-m-light.png')/2) + 5px;
+  }
+
+  &:after {
+    right: 50%;
+    margin-right: (image-width('icons/morsel/morsel-m-light.png')/2) + 5px;
   }
 }
