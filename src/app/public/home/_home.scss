@@ -97,6 +97,12 @@ $app-demo-delay: 2s;
     padding: 35px 0;
   }
 
+  .home-masthead {
+    background: url(images/bg/home.jpg) center no-repeat;
+    background-size: cover;
+    height: 560px;
+  }
+
   .app-demo {
     .app-screenshots {
       display: none;
