@@ -55,10 +55,15 @@
 }
 
 @mixin morsel-border() {
-  position: relative;
   background: url(images/icons/morsel/morsel-m-light.png) center bottom no-repeat;
   min-height: image-width('icons/morsel/morsel-m-light.png');
+
+  @include center-border((image-width('icons/morsel/morsel-m-light.png')/2) + 5px, image-width('icons/morsel/morsel-m-light.png')/2);
+}
+
+@mixin center-border($borderMargin, $bottom) {
   overflow: hidden;
+  position: relative;
   border: 0;
 
   &:before, &:after {
@@ -67,16 +72,16 @@
     display: block;
     position: absolute;
     border-bottom: 1px solid $morsel-light;
-    bottom: image-width('icons/morsel/morsel-m-light.png')/2;
+    bottom: $bottom;
   }
 
   &:before {
     left: 50%;
-    margin-left: (image-width('icons/morsel/morsel-m-light.png')/2) + 5px;
+    margin-left: $borderMargin;
   }
 
   &:after {
     right: 50%;
-    margin-right: (image-width('icons/morsel/morsel-m-light.png')/2) + 5px;
+    margin-right: $borderMargin;
   }
 }

@@ -472,6 +472,14 @@ form {
   font-style: italic !important;
 }
 
+.morsel-or {
+  @include center-border(25px, 12px);
+  background-image: none;
+  text-align: center;
+  
+  @extend .h2;
+}
+
 @media (min-width: $screen-sm-min) {
   $activity-feed-padding-right: $profile-pic-s + 10px;
 
