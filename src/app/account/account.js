@@ -29,6 +29,7 @@ angular.module( 'Morsel.account', [
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',
+  'Morsel.common.headerScroll',
   'Morsel.common.imageUpload',
   'Morsel.common.mixpanel',
   'Morsel.common.photoHelpers',
@@ -229,20 +230,4 @@ angular.module( 'Morsel.account', [
     setMinimumMainHeight();
     $scope.$apply('viewOptions');
   }
-
-  $scope.menuGoTo = function(route) {
-    $scope.closeMenu();
-    $location.path('/'+route);
-  };
-
-  $scope.closeMenu = function() {
-    $scope.menuOpen = false;
-  };
-
-  $scope.toggleMenu = function() {
-    Mixpanel.send('Tapped Menu Bar Icon', {
-      menu_state: $scope.menuOpen ? 'closing' : 'opening'
-    });
-    $scope.menuOpen = !$scope.menuOpen;
-  };
 });

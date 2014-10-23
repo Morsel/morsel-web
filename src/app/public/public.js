@@ -37,6 +37,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',
+  'Morsel.common.headerScroll',
   'Morsel.common.itemActionBar',
   'Morsel.common.itemLike',
   'Morsel.common.iTunesLink',
@@ -150,7 +151,10 @@ angular.module( 'Morsel.public', [
 })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
-  var viewOptions = {},
+  var viewOptions = {
+        hideHeader: false,
+        headerDropdownOpen: false
+      },
       $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title
@@ -266,22 +270,4 @@ angular.module( 'Morsel.public', [
     setMinimumMainHeight();
     $scope.$apply('viewOptions');
   }
-
-  $scope.menuGoTo = function(route) {
-    $scope.closeMenu();
-    $location.path('/'+route);
-  };
-
-  $scope.closeMenu = function() {
-    $scope.menuOpen = false;
-  };
-
-  $scope.toggleMenu = function() {
-    Mixpanel.send('Tapped Menu Bar Icon', {
-      menu_state: $scope.menuOpen ? 'closing' : 'opening'
-    });
-    $body.scrollTop(0, 0);
-    $scope.menuOpen = !$scope.menuOpen;
-  };
 });
-

@@ -79,8 +79,7 @@ $profile-pic-m: 80px + $profile-bic-border-width*2;
 $profile-pic-l: 144px + $profile-bic-border-width*2;
 
 //layout
-$sidenav-width: 250px;
-$mini-header-height: 60px;
+$header-height: 54px;
 
 //forms
 $input-bg: $morsel-lightest;
@@ -134,6 +133,12 @@ $add-morsel-item-thumbnail-height: 100px;
 
 //badges
 $badge-bg: $morsel-primary-light;
+
+$dropdown-link-color: $link-color;
+$dropdown-link-hover-color: $link-hover-color;
+$dropdown-link-hover-bg: $morsel-light;
+$dropdown-link-active-color: white;
+$dropdown-link-active-bg: $morsel-primary;
 
 // Core Bootstrap variables and mixins
 @import "../../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";

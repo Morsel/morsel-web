@@ -11,10 +11,11 @@ angular.module( 'Morsel.static', [
   'templates-static',
   //common
   'Morsel.common.auth',
-  'Morsel.common.mixpanel',
-  'Morsel.common.userImage',
+  'Morsel.common.headerScroll',
   'Morsel.common.iTunesLink',
+  'Morsel.common.mixpanel',
   'Morsel.common.rollbar',
+  'Morsel.common.userImage',
   'Morsel.common.usersName'
   //app
 ])
@@ -133,21 +134,5 @@ angular.module( 'Morsel.static', [
     $scope.$apply('viewOptions');
   }
 
-  $scope.menuGoTo = function(route) {
-    $scope.closeMenu();
-    $location.path('/'+route);
-  };
-
   $scope.currentRoute = $window.location.pathname;
-
-  $scope.closeMenu = function() {
-    $scope.menuOpen = false;
-  };
-
-  $scope.toggleMenu = function() {
-    Mixpanel.send('Tapped Menu Bar Icon', {
-      menu_state: $scope.menuOpen ? 'closing' : 'opening'
-    });
-    $scope.menuOpen = !$scope.menuOpen;
-  };
 });

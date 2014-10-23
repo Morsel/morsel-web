@@ -399,12 +399,19 @@ form {
 
 .morsel-text {
   background: url(images/logos/morsel-text.png) center top no-repeat;
-  background-size: 130px 59px;
-  width: 130px;
-  height: 59px;
+  background-size: image-width('logos/morsel-text.png') image-height('logos/morsel-text.png');
+  width: image-width('logos/morsel-text.png');
+  height: image-height('logos/morsel-text.png');
   display: inline-block;
   text-indent: -9999px;
   overflow: hidden;
+
+  &.morsel-text-sm {
+    background-image: url(images/logos/morsel-text_sm.png);
+    background-size: image-width('logos/morsel-text_sm.png') image-height('logos/morsel-text_sm.png');
+    width: image-width('logos/morsel-text_sm.png');
+    height: image-height('logos/morsel-text_sm.png');
+  }
 }
 
 @include error-page();
@@ -499,15 +506,6 @@ form {
   .user-info {
     .profile-pic-link {
       margin: 0 15px;
-    }
-  }
-
-  .morsel-text {
-    &.morsel-text-300 {
-      width: 300px;
-      height: 158px;
-      background-size: 300px 158px;
-      background-image: url(images/logos/morsel-text_300.png);
     }
   }
 }

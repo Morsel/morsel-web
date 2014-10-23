@@ -104,6 +104,7 @@ module.exports = {
         'src/common/user/userImage.js',
         'src/common/user/userList.js',
         'src/common/user/usersName.js',
+        'src/common/util/headerScroll.js',
         'src/common/util/itunesLink.js',
         'src/common/util/viewMore.js'
       ],
@@ -185,7 +186,8 @@ module.exports = {
         'src/common/social/facebookApi.js',
         'src/common/user/cuisinesSpecialties.js',
         'src/common/user/userImage.js',
-        'src/common/user/usersName.js'
+        'src/common/user/usersName.js',
+        'src/common/util/headerScroll.js'
       ],
       tpl: [
         'src/common/auth/apiError.tpl.html',
@@ -311,6 +313,7 @@ module.exports = {
         'src/common/auth/auth.js',
         'src/common/user/userImage.js',
         'src/common/user/usersName.js',
+        'src/common/util/headerScroll.js',
         'src/common/util/itunesLink.js'
       ],
       tpl: [
@@ -364,6 +367,7 @@ module.exports = {
         'src/common/user/userImage.js',
         'src/common/user/usersName.js',
         'src/common/util/flashDownload.js',
+        'src/common/util/headerScroll.js',
         'src/common/util/viewMore.js',
         'src/common/util/xml2json.js'
       ],
