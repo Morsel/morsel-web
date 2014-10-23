@@ -133,7 +133,10 @@ angular.module( 'Morsel.add', [
 })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
-  var viewOptions = {},
+  var viewOptions = {
+        hideHeader: false,
+        headerDropdownOpen: false
+      },
       $body = angular.element(document.getElementsByTagName('body'));
 
   //to store things like page title

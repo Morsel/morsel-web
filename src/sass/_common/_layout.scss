@@ -28,6 +28,10 @@
     padding: 5px 10px;
   }
 
+  .main-nav {
+    float: right;
+  }
+
   &:hover {
     .header-wrap {
       @include translateY(0);
@@ -41,33 +45,6 @@
 
     a {
       display: block;
-    }
-  }
-
-  nav {
-    float: right;
-
-    > ul {
-      margin: 0;
-
-      > li {
-        display: inline-block;
-        margin: 0 5px;
-        float: left;
-
-        &:last-child {
-          margin-right: 0;
-        }
-
-        > a {
-          padding: 11px 5px;
-          display: block;
-        }
-      }
-    }
-
-    a {
-      font-weight: 400;
     }
   }
 
@@ -96,6 +73,30 @@
   }
 }
 
+.main-nav {
+  > ul {
+    margin: 0;
+
+    > li {
+      display: inline-block;
+      margin: 0 5px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      > a {
+        padding: 11px 5px;
+        display: block;
+      }
+    }
+  }
+
+  a {
+    font-weight: 400;
+  }
+}
+
 .site {
   background: $morsel-background url(images/bg/tile.png) left top repeat;
   width: 100%;
@@ -121,6 +122,26 @@
   height: image-height('logos/morsel-app-icon.png');
   width: image-width('logos/morsel-app-icon.png');
   display: inline-block;
+}
+
+.main-footer {
+  text-align: center;
+  padding: 20px 0;
+  background-image: url(images/bg/footer.jpg);
+
+  .morsel-social-links {
+    list-style: none;
+    margin: 20px 0;
+    
+    li {
+      display: inline-block;
+      margin: 0 5px;
+    }
+  }
+
+  a, p {
+    color: white;
+  }
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
@@ -154,7 +175,13 @@
 }
 
 @media (min-width: $screen-md-min) {
-
+  .main-footer {
+    .mixpanel-logo {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+    }
+  }
 }
 
 @media (min-width: $screen-lg-min) {

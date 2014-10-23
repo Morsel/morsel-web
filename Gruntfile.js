@@ -1423,6 +1423,14 @@ module.exports = function ( grunt ) {
       }
     });
 
+    grunt.file.copy('src/views/partials/footer.hbs', this.data.dir + '/views/partials/footer.hbs', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {}
+        });
+      }
+    });
+
     grunt.file.copy('src/views/partials/headContent.hbs', this.data.dir + '/views/partials/headContent.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {

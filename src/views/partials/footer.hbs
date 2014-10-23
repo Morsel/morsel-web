@@ -1,0 +1,57 @@
+<footer class="main-footer">
+  <div class="container">
+    <nav class="main-nav">
+      <ul>
+        <li ng-if="!isLoggedIn">
+          <a href="/join" target="_self">Sign Up/Log In</a>
+        </li>
+        <li ng-class="{active : currentRoute === '/about'}">
+          <a href="/about" target="_self">About Morsel</a>
+        </li>
+        <li ng-class="{active : currentRoute === '/press'}">
+          <a href="/press" target="_self">Press &amp; Media</a>
+        </li>
+        <li ui-route="/contact" ng-class="{active:$uiRoute}">
+          {{#if pageType.public}}
+          <a href="/contact">Contact Us</a>
+          {{else}}
+          <a href="/contact" target="_self">Contact Us</a>
+          {{/if}}
+        </li>
+        <li ng-class="{active : currentRoute === '/apps'}">
+          <a href="/apps" target="_self">Get the App</a>
+        </li>
+        <li>
+          <a href="http://insights.eatmorsel.com" target="_blank">Insights Blog</a>
+        </li>
+      </ul>
+    </nav>
+    <hr />
+    <div>
+      <ul class="morsel-social-links">
+        <li>
+          <a href="https://facebook.com/eatmorsel" target="_blank" class="btn btn-facebook btn-social text-hide" title="Connect with Morsel on Facebook">Morsel on Facebook</a>
+        </li>
+        <li>
+          <a href="https://twitter.com/eatmorsel" target="_blank" class="btn btn-twitter btn-social text-hide" title="Follow Morsel on Twitter">Morsel on Twitter</a>
+        </li>
+      </ul>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li>
+          <p>&copy; Morsel Labs, Inc. 2014</p>
+        </li>
+        <li ng-class="{active : currentRoute === '/privacy'}">
+          <a href="/privacy" target="_self">Privacy Policy</a>
+        </li>
+        <li ng-class="{active : currentRoute === '/terms'}">
+          <a href="/terms" target="_self">Terms of Use</a>
+        </li>
+      </ul>
+    </nav>
+    <a href="https://mixpanel.com/f/partner" target="_blank" class="mixpanel-logo">
+      <img src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" />
+    </a>
+  </div>
+</footer>
