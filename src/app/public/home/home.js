@@ -42,7 +42,7 @@ angular.module( 'Morsel.public.home', [])
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $window, hasSeenSplash, $location, $state ) {
+.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $window, hasSeenSplash, $location, $state, Restangular ) {
   if(hasSeenSplash) {
     $state.go('feed', null, {location:'replace'});
   }
@@ -54,4 +54,12 @@ angular.module( 'Morsel.public.home', [])
     //send them to their feed
     $location.path('/feed');
   };
+
+  //let's get some fake data for now
+  Restangular.oneUrl('eventMorsels', 'https://morsel.s3.amazonaws.com/events/slow-food-ark-of-taste/slow-food-ark-of-taste-morsels.json').get().then(function(resp) {
+    $scope.featuredMorsels = Restangular.stripRestangular(resp).splice(0,6);
+  }, function() {
+    //if not, send to homepage
+    $location.path('/');
+  });
 });

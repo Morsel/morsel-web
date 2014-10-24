@@ -271,14 +271,6 @@
     left: 50%;
     margin-left: -$arrow-height/2;
   }
-
-  &.morsel-control-left {
-    @include rotate(90deg);
-  }
-
-  &.morsel-control-right {
-    @include rotate(-90deg);
-  }
 }
 
 @media (min-width: $screen-sm-min) {

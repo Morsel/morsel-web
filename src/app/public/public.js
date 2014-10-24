@@ -44,6 +44,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.likeableFeed',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
+  'Morsel.common.morselBlock',
   'Morsel.common.morselSummary',
   'Morsel.common.photoHelpers',
   'Morsel.common.placeList',

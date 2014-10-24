@@ -44,9 +44,6 @@ angular.module('Morsel.common.morselSummary', [])
                 ];
               }
             }
-            return [
-              ['default', MORSELPLACEHOLDER]
-            ];
           }
         } else {
           //return blank

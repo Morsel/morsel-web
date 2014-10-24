@@ -148,6 +148,16 @@
   }
 }
 
+.row.no-gutter {
+  margin: 0;
+  padding: 0;
+
+  [class*="col-"] {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .main-header {
     .morsel-logo {

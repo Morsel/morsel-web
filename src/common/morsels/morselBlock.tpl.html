@@ -1,0 +1,31 @@
+<div bindonce="morsel" class="morsel-block centered-morsel">
+  <div class="centered-wrap">
+    <h1 class="centered-text h2">{{morsel.title}}</h1>
+  </div>
+  <div class="user-info">
+    <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
+    <div class="user-body">
+      <h2 class="overflow-ellipsis h3">
+        <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator"></a>
+      </h2>
+      <h3 class="overflow-ellipsis h6">
+        <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></a>
+      </h3>
+    </div>
+  </div>
+  <div clas="morsel-stats">
+    <p>like count<span bo-text="morsel.like_count"></span></p>
+  </div>
+  <div mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" class="morsel-bg"></div>
+  <!--
+<a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug + (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" class="centered centered-white">
+    <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
+
+    <img mrsl-responsive-images="{{getCoverPhotoArray()}}" />
+    <span am-time-ago="morsel.published_at" class="time-ago"></span>
+  </a>
+  
+  <a bo-href="'/add/morsel/'+morsel.id" ng-if="canEdit" title="Edit this morsel" class="edit-morsel-btn" target="_self"><i class="common-edit"></i></a>
+
+-->
+</div>

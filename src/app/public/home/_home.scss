@@ -115,6 +115,11 @@ $app-demo-delay: 2s;
 
   .featured-morsels-section {
     background-color: $morsel-background;
+
+    ul {
+      margin: 0;
+      list-style: none;
+    }
   }
 
   .create-info {

@@ -16,6 +16,12 @@
     </div>
   </div>
 </div>-->
+<!--
+A community of food
+____
+____
+Create a morsel now and share the story of your food
+ -->
 <div class="home-page" ng-style="viewOptions.minimumMainHeight()">
   <section class="home-masthead">
     <div class="container">
@@ -23,20 +29,32 @@
     </div>
   </section>
   <section class="featured-morsels-section">
-    <div class="container">
+    <div class="container container-max-mrsl-feed">
       <div class="featured-morsels">
         this is the featured morsels section
-        <div class="row">
-          <div class="col-xs-4"></div>
-          <div class="col-xs-8"></div>
+        <div class="row no-gutter">
+          <div class="col-xs-4">
+            <div mrsl-morsel-block="featuredMorsels[0]"></div>
+          </div>
+          <div class="col-xs-8">
+            <div mrsl-morsel-block="featuredMorsels[1]"></div>
+          </div>
         </div>
-        <div class="row">
-          <div class="col-xs-8"></div>
-          <div class="col-xs-4"></div>
+        <div class="row no-gutter">
+          <div class="col-xs-8">
+            <div mrsl-morsel-block="featuredMorsels[2]"></div>
+          </div>
+          <div class="col-xs-4">
+            <div mrsl-morsel-block="featuredMorsels[3]"></div>
+          </div>
         </div>
-        <div class="row">
-          <div class="col-xs-4"></div>
-          <div class="col-xs-8"></div>
+        <div class="row no-gutter">
+          <div class="col-xs-4">
+            <div mrsl-morsel-block="featuredMorsels[4]"></div>
+          </div>
+          <div class="col-xs-8">
+            <div mrsl-morsel-block="featuredMorsels[5]"></div>
+          </div>
         </div>
       </div>
     </div>

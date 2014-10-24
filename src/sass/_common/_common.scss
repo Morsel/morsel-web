@@ -312,8 +312,20 @@ form {
   display: block;
 }
 
-.centered {
+.centered-morsel {
   position: relative;
+  font-family: $font-family-secondary;
+
+  &:hover {
+    .centered-wrap {
+      @include background-image(radial-gradient(rgba(0,0,0,0), rgba(0,0,0,.55) 100%));
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#a6000000',GradientType=1 );
+    }
+
+    .centered-text {
+      @include transform(scale(1.1));
+    }
+  }
 
   .centered-wrap {
     position: absolute;
@@ -323,6 +335,8 @@ form {
     height: 100%;
     font-size: 0;
     text-align: center;
+    background-color: rgba(0,0,0,0);
+    @include transition(all .1s ease-out);
 
     &:before {
       content: '';
@@ -337,6 +351,15 @@ form {
     vertical-align: middle;
     width: 100%;
     word-break: break-word;
+    font-weight: bold;
+    color: white;
+    @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+    font-size: 13px;
+    line-height: 16px;
+    padding: 0 5px;
+    text-transform: none;
+    @include transition(all .1s ease-out);
+    @include transform(scale(1));
   }
 }
 
@@ -465,6 +488,10 @@ form {
 .container-no-padding {
   padding-left: 0;
   padding-right: 0;
+}
+
+.container-max-mrsl-feed {
+  width: 640px+320px; //so we don't have to load 992x992 images
 }
 
 .no-name {
