@@ -122,7 +122,7 @@ $app-demo-delay: 2s;
     }
 
     .morsel-block {
-      height: 320px;
+      height: 250px;
 
       .centered-text {
         font-size: 24px;
@@ -143,9 +143,14 @@ $app-demo-delay: 2s;
 
 @media (min-width: $screen-sm-min) {
   .home-page {
-
     section {
       padding: 50px 0;
+    }
+
+    .featured-morsels-section {
+      .morsel-block {
+        height: 320px;
+      }
     }
 
     .app-demo {

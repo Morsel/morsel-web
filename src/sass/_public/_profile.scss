@@ -5,7 +5,9 @@
 
   .profile-container {
     min-width: 100%;
-    padding: 15px 15px 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid $morsel-light;
@@ -78,7 +80,7 @@
 
 @media (max-width: $screen-sm) {
   .profile {
-    background-color: $morsel-light-off;
+    padding-top: 0;
   }
 }
 
@@ -97,6 +99,8 @@
     }
 
     .profile-container {
+      padding-top: 15px;
+      
       .profile-info {
         margin-bottom: 0;
       }

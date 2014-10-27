@@ -1,7 +1,7 @@
 //page layout
 .page-wrapper {
   width: 100%;
-  background-color: $morsel-new-beige;
+  background-color: $morsel-background;
   position: absolute;
 }
 
@@ -107,7 +107,11 @@
 
 .main-view {
   position: relative;
-  padding-bottom: 35px;
+  padding-bottom: $main-padding-s;
+}
+
+.main-view-offset {
+  margin-bottom: -$main-padding-s;
 }
 
 .header-padding {
@@ -121,6 +125,7 @@
 .centered-list-header {
   h2 {
     text-align: center;
+    margin-top: 5px;
   }
 }
 
@@ -181,6 +186,18 @@
 }
 
 @media (min-width: $screen-sm-min) {
+  .page-wrapper {
+    background-color: $morsel-new-beige;
+  }
+
+  .main-view {
+    padding-bottom: $main-padding-l;
+  }
+
+  .main-view-offset {
+    margin-bottom: -$main-padding-l;
+  }
+
   .main-header {
     .morsel-logo {
       margin: 2px 0;
