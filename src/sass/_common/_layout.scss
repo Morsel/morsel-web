@@ -19,6 +19,7 @@
   z-index: 11;
   position: fixed;
   width: 100%;
+  border-bottom: 1px solid $morsel-light;
 
   .header-wrap {
     @include translateY(0);
@@ -157,7 +158,8 @@
   }
 
   a, p {
-    color: white;
+    color: $morsel-light;
+    font-weight: 300;
   }
 }
 
