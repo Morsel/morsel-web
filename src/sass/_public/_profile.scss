@@ -1,6 +1,4 @@
 .profile {
-  padding-top: $header-height;
-
   & > .container {
     position: relative;
   }
@@ -11,6 +9,7 @@
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid $morsel-light;
+    background-color: $morsel-light;
 
     .follow-btn {
       margin-top: 10px;
@@ -94,10 +93,6 @@
 @media (min-width: $screen-sm-min) {
   .profile {
     & > .container {
-      padding: 0;
-      @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
-      background-color: $morsel-light-off;
-      @include border-radius(3px);
       max-width: $max-grid-morsel-width * 3;
     }
 

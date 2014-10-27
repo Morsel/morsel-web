@@ -1,6 +1,6 @@
-<div class="drafts centered-list-header" ng-style="viewOptions.minimumMainHeight()">
+<div class="drafts centered-list-header header-padding" ng-style="viewOptions.minimumMainHeight()">
   <h2>Drafts</h2>
-  <div class="container container-no-padding container-shadow container-margin-bottom morsel-bg container-max-sm">
+  <div class="container container-no-padding container-shadow morsel-bg container-max-sm">
     <ul ng-if="dataLoaded">
       <li bindonce ng-repeat="draft in drafts" class="draft">
         <a bo-href="'/add/morsel/'+draft.id">

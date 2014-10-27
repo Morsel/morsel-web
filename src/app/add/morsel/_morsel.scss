@@ -1,7 +1,4 @@
 .add-morsel {
-  padding-top: $header-height;
-  padding-bottom: 10px;
-
   .container {
     padding-top: 15px;
     position: relative;
@@ -368,9 +365,6 @@
 
 @media (min-width: $screen-sm-min) {
   .add-morsel {
-    background-color: $morsel-background-dark;
-    background-image: url(images/bg/morsel-detail-noise.png);
-
     .container {
       @include border-radius(3px);
     }

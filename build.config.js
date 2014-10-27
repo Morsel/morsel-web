@@ -327,6 +327,7 @@ module.exports = {
         'vendor/angular/angular.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'vendor/angular-local-storage/angular-local-storage.js',
+        'vendor/angular-scroll/angular-scroll.min.js',
         'vendor/matchMedia/matchMedia.js',
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/lodash/dist/lodash.js',

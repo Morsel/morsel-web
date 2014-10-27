@@ -1,5 +1,6 @@
 angular.module( 'Morsel.static', [
   //libs
+  'duScroll',
   'LocalStorageModule',
   'restangular',
   'ui.bootstrap',
