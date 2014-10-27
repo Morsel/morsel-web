@@ -120,6 +120,15 @@ $app-demo-delay: 2s;
       margin: 0;
       list-style: none;
     }
+
+    .morsel-block {
+      height: 320px;
+
+      .centered-text {
+        font-size: 24px;
+        line-height: 30px;
+      }
+    }
   }
 
   .create-info {
@@ -130,9 +139,6 @@ $app-demo-delay: 2s;
       margin: 15px 0;
     }
   }
-}
-
-@media (min-width: $screen-xs-min) {
 }
 
 @media (min-width: $screen-sm-min) {
@@ -179,11 +185,5 @@ $app-demo-delay: 2s;
         text-align: center;
       }
     }
-  }
-}
-
-@media (min-width: $screen-md-min) {
-  .home-page {
-    
   }
 }

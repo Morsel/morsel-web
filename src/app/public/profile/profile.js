@@ -51,7 +51,7 @@ angular.module( 'Morsel.public.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, PhotoHelpers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth, MORSEL_LIST_NUMBER ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth, MORSEL_LIST_NUMBER ) {
   var name;
 
   $scope.user = profileUserData;
@@ -126,8 +126,6 @@ angular.module( 'Morsel.public.profile', [])
       });
     }
   };
-
-  $scope.getCoverPhotoArray = PhotoHelpers.getCoverPhotoArray;
 
   $scope.loadLikeFeed = function() {
     if(!$scope.likeFeed) {

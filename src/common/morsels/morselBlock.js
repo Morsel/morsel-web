@@ -5,7 +5,10 @@ angular.module('Morsel.common.morselBlock', [])
     restrict: 'A',
     replace: true,
     scope: {
-      morsel: '=mrslMorselBlock'
+      morsel: '=mrslMorselBlock',
+      noUser: '@mrslMorselBlockNoUser',
+      noStats: '@mrslMorselBlockNoStats',
+      spacer: '@mrslMorselBlockSpacer'
     },
     link: function(scope, element) {
       scope.getCoverPhotoArray = function() {

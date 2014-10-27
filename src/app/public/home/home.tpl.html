@@ -32,28 +32,30 @@ Create a morsel now and share the story of your food
     <div class="container container-max-mrsl-feed">
       <div class="featured-morsels">
         this is the featured morsels section
-        <div class="row no-gutter">
-          <div class="col-xs-4">
-            <div mrsl-morsel-block="featuredMorsels[0]"></div>
+        <div ng-if="featuredMorsels">
+          <div class="row no-gutter">
+            <div class="col-sm-4">
+              <div mrsl-morsel-block="featuredMorsels[0]"></div>
+            </div>
+            <div class="col-sm-8">
+              <div mrsl-morsel-block="featuredMorsels[1]"></div>
+            </div>
           </div>
-          <div class="col-xs-8">
-            <div mrsl-morsel-block="featuredMorsels[1]"></div>
+          <div class="row no-gutter">
+            <div class="col-sm-8">
+              <div mrsl-morsel-block="featuredMorsels[2]"></div>
+            </div>
+            <div class="col-sm-4">
+              <div mrsl-morsel-block="featuredMorsels[3]"></div>
+            </div>
           </div>
-        </div>
-        <div class="row no-gutter">
-          <div class="col-xs-8">
-            <div mrsl-morsel-block="featuredMorsels[2]"></div>
-          </div>
-          <div class="col-xs-4">
-            <div mrsl-morsel-block="featuredMorsels[3]"></div>
-          </div>
-        </div>
-        <div class="row no-gutter">
-          <div class="col-xs-4">
-            <div mrsl-morsel-block="featuredMorsels[4]"></div>
-          </div>
-          <div class="col-xs-8">
-            <div mrsl-morsel-block="featuredMorsels[5]"></div>
+          <div class="row no-gutter">
+            <div class="col-sm-4">
+              <div mrsl-morsel-block="featuredMorsels[4]"></div>
+            </div>
+            <div class="col-sm-8">
+              <div mrsl-morsel-block="featuredMorsels[5]"></div>
+            </div>
           </div>
         </div>
       </div>

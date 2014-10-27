@@ -19,7 +19,7 @@ angular.module( 'Morsel.public.explore', [])
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, PhotoHelpers, $location, Auth ) {
+.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, $location, Auth ) {
   //# of morsels to load at a time
   $scope.exploreIncrement = 15;
 
@@ -44,8 +44,6 @@ angular.module( 'Morsel.public.explore', [])
       $state.go('404');
     });
   };
-
-  $scope.getCoverPhotoArray = PhotoHelpers.getCoverPhotoArray;
 
   //load our morsels immediately
   $scope.getExploreFeed();

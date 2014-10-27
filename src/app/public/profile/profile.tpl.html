@@ -34,12 +34,7 @@
         <tab heading="Morsels">
           <ul class="clearfix morsel-grid">
             <li bindonce ng-repeat="morsel in morsels | reverse" class="morsel-grid-item">
-              <a bo-href="'/'+user.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="centered centered-white">
-                <div class="centered-wrap">
-                  <span class="centered-text">{{morsel.title}}</span>
-                </div>
-                <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
-              </a>
+              <div mrsl-morsel-block="morsel" mrsl-morsel-block-no-user="true" mrsl-morsel-block-no-stats="true" mrsl-morsel-block-spacer="true"></div>
             </li>
           </ul>
           <div ng-if="!morsels" class="loader"></div>

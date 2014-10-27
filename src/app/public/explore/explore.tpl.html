@@ -2,12 +2,7 @@
   <div class="container morsel-bg container-shadow container-no-padding morsel-grid-container" ng-style="viewOptions.minimumMainHeight()">
     <ul class="clearfix morsel-grid">
       <li bindonce ng-repeat="feedItem in feedItems" class="morsel-grid-item">
-        <a bo-href="'/'+feedItem.subject.creator.username.toLowerCase()+'/'+feedItem.subject.id+'-'+feedItem.subject.slug" class="centered centered-white" ng-if="feedItem.subject">
-          <div class="centered-wrap">
-            <span class="centered-text">{{feedItem.subject.title}}</span>
-          </div>
-          <img mrsl-responsive-images="{{getCoverPhotoArray(feedItem.subject)}}" />
-        </a>
+        <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-no-user="true" mrsl-morsel-block-no-stats="true" mrsl-morsel-block-spacer="true"></div>
       </li>
     </ul>
     <div ng-if="!feedItems" class="loader"></div>

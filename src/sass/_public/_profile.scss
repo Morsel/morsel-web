@@ -56,6 +56,10 @@
   
   .loader {
     height: 250px;
+
+    &.spacer {
+      height: auto;
+    }
   }
 
   .empty-state {
