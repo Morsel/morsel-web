@@ -26,32 +26,46 @@
         </li>
       </ul>
     </nav>
-    <hr />
-    <div>
-      <ul class="morsel-social-links">
-        <li>
-          <a href="https://facebook.com/eatmorsel" target="_blank" class="btn btn-facebook btn-social text-hide" title="Connect with Morsel on Facebook">Morsel on Facebook</a>
-        </li>
-        <li>
-          <a href="https://twitter.com/eatmorsel" target="_blank" class="btn btn-twitter btn-social text-hide" title="Follow Morsel on Twitter">Morsel on Twitter</a>
-        </li>
-      </ul>
+    <ul class="morsel-social-links">
+      <li>
+        <a href="https://facebook.com/eatmorsel" target="_blank" title="Connect with Morsel on Facebook"><i class="common-facebook"></i></a>
+      </li>
+      <li>
+        <a href="https://twitter.com/eatmorsel" target="_blank" title="Follow Morsel on Twitter"><i class="common-twitter"></i></a>
+      </li>
+      <li>
+        <a href="http://instagram.com/eatmorsel" target="_blank" title="Follow Morsel on Instagram"><i class="common-instagram"></i></a>
+      </li>
+      <li>
+        <a href="https://www.pinterest.com/eatmorsel" target="_blank" title="Follow Morsel on Pinterest"><i class="common-pinterest"></i></a>
+      </li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <nav class="main-nav">
+        <ul>
+          <li>
+            {{#if pageType.public}}
+            <a href="/" class="morsel-text morsel-text-sm">Morsel</a>
+            {{else}}
+            <a href="/" target="_self" class="morsel-text morsel-text-sm">Morsel</a>
+            {{/if}}
+          </li>
+          <li>
+            <p>&copy; Morsel Labs, Inc. 2014</p>
+          </li>
+          <li ng-class="{active : currentRoute === '/privacy'}">
+            <a href="/privacy" target="_self">Privacy Policy</a>
+          </li>
+          <li ng-class="{active : currentRoute === '/terms'}">
+            <a href="/terms" target="_self">Terms of Use</a>
+          </li>
+        </ul>
+      </nav>
+      <a href="https://mixpanel.com/f/partner" target="_blank" class="mixpanel-logo">
+        <img src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" />
+      </a>
     </div>
-    <nav class="main-nav">
-      <ul>
-        <li>
-          <p>&copy; Morsel Labs, Inc. 2014</p>
-        </li>
-        <li ng-class="{active : currentRoute === '/privacy'}">
-          <a href="/privacy" target="_self">Privacy Policy</a>
-        </li>
-        <li ng-class="{active : currentRoute === '/terms'}">
-          <a href="/terms" target="_self">Terms of Use</a>
-        </li>
-      </ul>
-    </nav>
-    <a href="https://mixpanel.com/f/partner" target="_blank" class="mixpanel-logo">
-      <img src="//cdn.mxpnl.com/site_media/images/partner/badge_light.png" alt="Mobile Analytics" />
-    </a>
   </div>
 </footer>

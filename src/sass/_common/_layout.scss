@@ -19,7 +19,6 @@
   z-index: 11;
   position: fixed;
   width: 100%;
-  border-bottom: 1px solid $morsel-light;
 
   .header-wrap {
     @include translateY(0);
@@ -27,6 +26,7 @@
     background-color: rgba(256,256,256,.9);
     @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.1));
     padding: 5px 10px;
+    border-bottom: 1px solid $morsel-light;
   }
 
   .main-nav {
@@ -87,7 +87,7 @@
       }
 
       > a {
-        padding: 11px 5px;
+        padding: $main-nav-padding-topbottom $main-nav-padding-sides;
         display: block;
       }
     }
@@ -140,26 +140,80 @@
 
 .main-footer {
   text-align: center;
-  padding: 20px 0;
-  background-image: url(images/bg/footer.jpg);
+  background-color: $morsel-off-white;
 
-  hr {
-    margin-top: 10px;
+  .container {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .main-nav {
+    display: inline-block;
+  }
+
+  li {
+    vertical-align: middle;
+  }
+
+  .footer-bottom {
+    background-image: url(images/bg/footer.jpg);
+
+    .container {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    a, p {
+      color: $morsel-light;
+      font-size: 12px;
+    }
+
+    li {
+      text-align: center;
+
+      a {
+        display: inline-block;
+      }
+
+      &:first-child {
+        display: block;
+      }
+    }
   }
   
   .morsel-social-links {
+    display: inline-block;
     list-style: none;
-    margin: 20px 0;
-    
+    margin: 0 15px;
+
     li {
       display: inline-block;
       margin: 0 5px;
+
+      a {
+        display: block;
+      }
+    }
+
+    i {
+      margin: 0;
     }
   }
 
   a, p {
-    color: $morsel-light;
-    font-weight: 300;
+    color: $morsel-dark;
+    line-height: 24px;
+    font-size: 13px;
+    text-transform: uppercase;
+    vertical-align: middle;
+    padding: $main-nav-padding-topbottom $main-nav-padding-sides;
+    margin: 0;
+  }
+
+  .mixpanel-logo { 
+    display: inline-block;
+    margin-top: 10px;
+    padding: 0;
   }
 }
 
@@ -184,6 +238,27 @@
 
   .morsel-app-icon {
     @include replace-text('logos/morsel-app-icon@2x.png');
+  }
+}
+
+@media (min-width: $screen-xs-min) {
+  .main-footer {
+    .footer-bottom {
+      li {
+        display: inline-block;
+
+        &:first-child {
+          margin-right: 20px;
+          padding-right: 20px;
+          border-right: 1px solid $morsel-light;
+          display: inline-block;
+        }
+
+        a, p {
+          line-height: 40px;
+        }
+      }
+    }
   }
 }
 
@@ -220,11 +295,7 @@
     .mixpanel-logo {
       position: absolute;
       bottom: 20px;
-      left: 20px;
+      right: 20px;
     }
   }
-}
-
-@media (min-width: $screen-lg-min) {
-
 }

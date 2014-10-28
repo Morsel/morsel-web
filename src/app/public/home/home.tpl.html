@@ -31,7 +31,8 @@ Create a morsel now and share the story of your food
   <section class="featured-morsels-section">
     <div class="container container-max-mrsl-feed">
       <div class="featured-morsels">
-        this is the featured morsels section
+        <h2>Here's 8 words explaining absolutely everything about us!</h2>
+        <h5 class="text-center">Morsel Picks</h5>
         <div ng-if="featuredMorsels">
           <div class="row no-gutter">
             <div class="col-sm-4">
@@ -58,11 +59,14 @@ Create a morsel now and share the story of your food
             </div>
           </div>
         </div>
+        <div class="text-center">
+          <a class="btn btn-primary btn-lg" href="/explore">Explore more morsels</a>
+        </div>
       </div>
     </div>
   </section>
   <section class="create-section">
-    <div class="container">
+    <div class="container container-max-sm">
       <div class="app-demo">
         <div class="app-screenshots">
           <img src="/assets/images/media/app-demo.jpg" title="Morsel app available now for iOS" />
@@ -76,7 +80,9 @@ Create a morsel now and share the story of your food
           <a mrsl-itunes-link></a>
         </div>
         <p class="morsel-or">Or</p>
-        <a href="/add" target="_self" class="btn btn-primary btn-lg btn-block">Create a morsel from the web</a>
+        <div class="text-center">
+          <a href="/add" target="_self" class="btn btn-primary btn-lg">Create a morsel from the web</a>
+        </div>
       </div>
     </div>
   </section>
