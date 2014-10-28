@@ -21,26 +21,42 @@
     position: absolute;
     bottom: 10px;
     left: 10px;
+    right: 10px;
     z-index: 2;
     @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
+    color: white;
 
     h2 {
-      margin-top: 10px;
+      line-height: $profile-pic-xs;
     }
 
-    .user-info .profile-pic-link {
-      margin-left: 8px;
+    .overflow-ellipsis {
+      color: white;
+      margin: 0;
+    }
+
+    .profile-pic-link {
+      margin-left: 0;
+    }
+
+    &.has-place {
+      h2 {
+        line-height: 26px;
+      }
+
+      h3 {
+        line-height: 18px;
+      }
     }
   }
 
   .morsel-stats {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    z-index: 2;
+    float: right;
     color: white;
-    @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-    margin: 0;
+
+    p {
+      margin: 0;
+    }
 
     i {
       margin-right: 5px;
@@ -48,8 +64,8 @@
 
     span {
       font-size: 20px;
-      line-height: 24px;
-      vertical-align: top;
+      vertical-align: middle;
+      line-height: $profile-pic-xs;
     }
   }
 

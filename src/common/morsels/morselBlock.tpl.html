@@ -2,20 +2,20 @@
   <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="centered-wrap">
     <h1 class="centered-text h2">{{morsel.title}}</h1>
   </a>
-  <div class="user-info" ng-if="!noUser">
+  <div class="user-info" ng-if="!noUser" ng-class="{'has-place':morsel.place}">
     <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-xs"></div>
     <div class="user-body">
+      <div class="morsel-stats" ng-if="!noStats">
+        <p><i class="common-like-filled_shadow"></i><span bo-text="morsel.like_count"></span></p>
+        <!--<p><i class="common-comment-filled_shadow"></i><span bo-text="morsel.like_count"></span></p>-->
+      </div>
       <h2 class="overflow-ellipsis h3">
         <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator"></a>
       </h2>
-      <h3 class="overflow-ellipsis h6">
+      <h3 class="overflow-ellipsis h6" ng-if="morsel.place">
         <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></a>
       </h3>
     </div>
-  </div>
-  <div class="morsel-stats" ng-if="!noStats">
-    <p><i class="common-like-filled_shadow"></i><span bo-text="morsel.like_count"></span></p>
-    <!--<p><i class="common-comment-filled_shadow"></i><span bo-text="morsel.like_count"></span></p>-->
   </div>
   <div mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" class="morsel-img"></div>
   <img src="/assets/images/utility/spacer.png" class="spacer loader" ng-if="spacer" />

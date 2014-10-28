@@ -1,6 +1,6 @@
 <header class="main-header" ng-class="{'hide-header':viewOptions.hideHeader}" mrsl-header-scroll>
   <div class="header-wrap">
-    <h1 class="morsel-logo">
+    <div class="morsel-logo">
       {{#if pageType.public}}
       <a href="/" class="morsel-icon visible-xs">Morsel</a>
       <a href="/" class="morsel-text morsel-text-sm hidden-xs">Morsel</a>
@@ -8,7 +8,7 @@
       <a href="/" target="_self" class="morsel-icon visible-xs">Morsel</a>
       <a href="/" target="_self" class="morsel-text morsel-text-sm hidden-xs">Morsel</a>
       {{/if}}
-    </h1>
+    </div>
     <nav class="main-nav">
       <ul>
         <li ui-route="/feed" ng-class="{active:$uiRoute}">

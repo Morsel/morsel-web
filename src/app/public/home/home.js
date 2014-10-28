@@ -13,9 +13,6 @@ angular.module( 'Morsel.public.home', [])
     resolve: {
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();
-      },
-      hasSeenSplash: function($window) {
-        return $window.localStorage.passSplash;
       }
     }
   })
@@ -34,27 +31,12 @@ angular.module( 'Morsel.public.home', [])
       },
       currentUser: function(){
         return {};
-      },
-      hasSeenSplash: function(){
-        return {};
       }
     }
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $window, hasSeenSplash, $location, $state, Restangular ) {
-  if(hasSeenSplash) {
-    $state.go('feed', null, {location:'replace'});
-  }
-
-  $scope.continueToMorsel = function() {
-    //user wants to continue on to their feed
-    //set localstorage to remember this
-    $window.localStorage.passSplash = true;
-    //send them to their feed
-    $location.path('/feed');
-  };
-
+.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $location, Restangular ) {
   //let's get some fake data for now
   Restangular.oneUrl('eventMorsels', 'https://morsel.s3.amazonaws.com/events/slow-food-ark-of-taste/slow-food-ark-of-taste-morsels.json').get().then(function(resp) {
     $scope.featuredMorsels = Restangular.stripRestangular(resp).splice(0,6);
