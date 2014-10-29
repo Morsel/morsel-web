@@ -30,61 +30,48 @@ ul {
 
 //type
 h1, .h1 {
-  margin: 25px 0;
-  text-transform: uppercase;
-
   a {
     color: $headings-color;
   }
 }
 
 h2, .h2 {
-  margin: 25px 0;
-  text-transform: uppercase;
-
   a {
     color: $headings-color;
   }
 }
 
 h3, .h3 {
-  color: $morsel-dark;
-  text-transform: none;
-
   a {
-    color: $morsel-dark;
+    color: $headings-color;
   }
 }
 
 h4, .h4 {
-  color: $morsel-dark;
   font-family: $font-family-base;
-  text-transform: uppercase;
 
   a {
-    color: $morsel-dark;
+    color: $headings-color;
   }
 }
 
 h5, .h5 {
-  color: $morsel-dark;
-  font-family: $font-family-base;
-  font-weight: 400;
-  text-transform: none;
-
   a {
-    color: $morsel-dark;
+    color: $headings-color;
   }
 }
 
 h6, .h6 {
-  color: $morsel-dark;
-  font-family: $font-family-base;
-  font-weight: 300;
-  text-transform: none;
-
   a {
-    color: $morsel-dark;
+    color: $headings-color;
+  }
+}
+
+.small-caps {
+  font-variant: small-caps;
+
+  .btn {
+    font-variant: normal;
   }
 }
 
@@ -111,6 +98,6 @@ button[type="submit"] {
 }
 
 hr {
+  clear: both;
   @include morsel-border();
-  margin: 20px 0;
 }

@@ -1,5 +1,5 @@
 <div class="container login-page">
-  <h1>Log In to Morsel</h1>
+  <h1 class="small-caps">Log In to Morsel</h1>
   <form name="loginForm" method="post" ng-submit="login()" class="padded-form" novalidate>
     <div mrsl-base-errors mrsl-val-form="loginForm"></div>
     <div class="row">
@@ -11,7 +11,7 @@
         <button mrsl-submit-btn mrsl-submit-btn-form="loginForm" mrsl-submit-btn-copy="Login" mrsl-submit-btn-block="true" mrsl-submit-btn-tooltip-placement="top"></button>
         <p><a href="/auth/password-reset">Forgot your password?</a></p>
       </div>
-      <p class="col-md-2 morsel-or">Or</p>
+      <p class="col-md-2 morsel-or small-caps">Or</p>
       <div class="col-md-5">
         <a mrsl-connect-facebook mrsl-connect-facebook-text="Log in with Facebook" mrsl-connect-facebook-form="loginForm"></a>
         <a mrsl-connect-twitter mrsl-connect-twitter-text="Log in with Twitter" mrsl-connect-twitter-form="landingForm"></a>

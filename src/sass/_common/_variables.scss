@@ -6,6 +6,7 @@ $morsel-background: #FFFFFF; //white
 $morsel-background-dark: #030000;
 $morsel-light: #e2ddd7; //light gray
 $morsel-medium: #93a491; //medium gray
+$morsel-medium-dark: #768474; //f'ing in between
 $morsel-dark: #394038; //dark gray
 $morsel-light-off: #f3f1ef;
 $morsel-primary-light: lighten($morsel-primary, 10%);
@@ -58,7 +59,7 @@ font-family: 'Signika Negative', sans-serif;
 $body-bg: white;
 
 //typography
-$headings-color: $morsel-medium;
+$headings-color: $morsel-dark;
 $headings-font-family: $font-family-secondary;
 $headings-font-weight: 400;
 
