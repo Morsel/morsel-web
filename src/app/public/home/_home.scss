@@ -101,6 +101,7 @@ $app-demo-delay: 2s;
     background: url(images/bg/home.jpg) center no-repeat;
     background-size: cover;
     padding: $header-height 0 0;
+    min-height: 275px;
 
     h1 {
       text-align: center;
@@ -111,20 +112,9 @@ $app-demo-delay: 2s;
     }
   }
 
-  .app-demo {
-    text-align: center;
-
-    .app-screenshots {
-      display: none;
-    }
-  }
-
-  .create-section {
-    background-color: $morsel-new-beige;
-  }
-
   .featured-morsels-section {
     background-color: $morsel-background;
+    padding-top: 20px;
 
     ul {
       margin: 0;
@@ -149,18 +139,30 @@ $app-demo-delay: 2s;
     }
   }
 
+  .create-section {
+    background-color: $morsel-new-beige;
+  }
+
+  .app-demo {
+    text-align: center;
+
+    .app-screenshots {
+      display: none;
+    }
+  }
+
   .create-info {
     text-align: center;
     padding-top: 30px;
 
     h3 {
       margin: 30px 0;
-      font-size: 24px;
+      font-size: 18px;
       color: $morsel-medium-dark;
 
       span {
         color: $morsel-secondary;
-        font-size: 36px;
+        font-size: 26px;
         line-height: 50px;
         display: block;
       }
@@ -179,6 +181,7 @@ $app-demo-delay: 2s;
     h2 {
       color: $morsel-medium-dark;
       text-align: center;
+      font-size: 22px;
     }
 
     .btn {
@@ -217,6 +220,8 @@ $app-demo-delay: 2s;
     }
 
     .featured-morsels-section {
+      padding-top: 25px;
+
       .morsel-block {
         height: 320px;
       }
@@ -231,6 +236,7 @@ $app-demo-delay: 2s;
         width: 75%;
         text-align: left;
         float: left;
+        font-size: 26px;
       }
 
       .btn {
@@ -271,6 +277,14 @@ $app-demo-delay: 2s;
     .create-info {
       text-align: left;
       padding: 60px 0 0 375px;
+
+      h3 {
+        font-size: 24px;
+
+        span {
+          font-size: 36px;
+        }
+      }
     }
   }
 }
@@ -279,7 +293,7 @@ $app-demo-delay: 2s;
   .home-page {
     .home-masthead {
       h1 {
-        font-style: 62px;
+        font-size: 62px;
         margin: 8% 0;
       }
     }

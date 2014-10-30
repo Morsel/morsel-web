@@ -82,9 +82,9 @@ $morselPlaceholder640: '/assets/images/utility/placeholders/morsel-placeholder_6
 
 //morsels
 $arrow-height: 60px;
-$indicator-size: 10px;
 //this is really just based on not wanting to load larger images than this
 $max-grid-morsel-width: 240px;
+$morsel-hover-time: .3s;
 
 //users
 $profile-bic-border-width: 2px;
@@ -157,7 +157,7 @@ $dropdown-link-color: $link-color;
 $dropdown-link-hover-color: $link-hover-color;
 $dropdown-link-hover-bg: $morsel-light;
 $dropdown-link-active-color: white;
-$dropdown-link-active-bg: $morsel-primary;
+$dropdown-link-active-bg: $morsel-primary-light;
 
 // Core Bootstrap variables and mixins
 @import "../../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";

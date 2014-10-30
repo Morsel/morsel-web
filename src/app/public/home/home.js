@@ -36,10 +36,10 @@ angular.module( 'Morsel.public.home', [])
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $location, Restangular ) {
-  //let's get some fake data for now
-  Restangular.oneUrl('eventMorsels', 'https://morsel.s3.amazonaws.com/events/slow-food-ark-of-taste/slow-food-ark-of-taste-morsels.json').get().then(function(resp) {
-    $scope.featuredMorsels = Restangular.stripRestangular(resp).splice(0,6);
+.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $location, Restangular, $filter ) {
+  //pull our data from static data on s3
+  Restangular.oneUrl('featuredMorsels', 'https://morsel.s3.amazonaws.com/static-morsels/homepage-morsels.json').get().then(function(resp) {
+    $scope.featuredMorsels = $filter('orderBy')(Restangular.stripRestangular(resp), 'displayOrder');
   }, function() {
     //if not, send to homepage
     $location.path('/');

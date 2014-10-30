@@ -318,7 +318,7 @@ form {
   display: block;
 
   &:after {
-    @include transition(opacity .3s ease-in-out);
+    @include transition(opacity $morsel-hover-time ease-in-out);
     @include opacity(0);
     content: '';
       @include background-image(radial-gradient(rgba(49,35,9,1), rgba(0,0,0,1) 320px));
@@ -384,7 +384,7 @@ form {
   .morsel-img {
     @include filter(grayscale(0%));
     @include opacity(1);
-    @include transition(all .3s ease-in-out);
+    @include transition(all $morsel-hover-time ease-in-out);
     z-index: 1;
     position: relative;
   }
