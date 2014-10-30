@@ -41,7 +41,7 @@
           <div mrsl-view-more mrsl-view-more-func="getMorsels" mrsl-view-more-data="morsels" mrsl-view-more-inc="morselIncrement" mrsl-view-more-copy="View more morsels"></div>
           <div ng-if="morsels && morsels.length === 0" class="empty-state">
             <p bo-if="!canEdit">This user hasn't made any morsels yet</p>
-            <p bo-if="canEdit">You haven't made any morsels yet. <a href="/apps" target="_self">Download the app</a> to make one!</p>
+            <p bo-if="canEdit">You haven't made any morsels yet. <a href="/add" target="_self">Create one now</a>.</p>
           </div>
         </tab>
         <tab heading="Places" select="loadPlaces()" bo-show="isProfessional">
