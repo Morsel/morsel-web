@@ -100,12 +100,8 @@ angular.module( 'Morsel.add.morsel', [])
           if(response.authResponse && response.authResponse.userID) {
             //check if we already have authentications for user
             if($scope.social.apiAuthentications.facebook) {
-              //if so, update them to be safe
-              ApiUsers.updateAuthentication($scope.social.apiAuthentications.facebook.id, formatAuthenticationParams(response)).then(function(authenticationResp){
-                $scope.social.apiAuthentications.facebook = authenticationResp.data;
-                //user is authenticated with facebook, but we need to check if they can publish
-                checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
-              });
+              //user is authenticated with facebook, but we need to check if they can publish
+              checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
             } else {
               //if not, create new authentication
               createAuthentication(response);
@@ -172,12 +168,19 @@ angular.module( 'Morsel.add.morsel', [])
               return p.permission === 'publish_actions' && p.status === 'granted';
             });
 
-            if(truePublishPermission) {
-              $scope.social.canPublish.facebook = true;
-            }
+            //make sure our API has a current valid token, regardless of whether they allowed publish
+            ApiUsers.updateAuthentication($scope.social.apiAuthentications.facebook.id, formatAuthenticationParams(response)).then(function(authenticationResp){
+              //reset our local auth
+              $scope.social.apiAuthentications.facebook = authenticationResp.data;
 
-            //apply our changes that invole the DOM
-            $scope.$apply();
+              if(truePublishPermission) {
+                //allow them to publish
+                $scope.social.canPublish.facebook = true;
+              }
+              
+              //apply our changes that invole the DOM
+              //$scope.$apply();
+            });
           });
         }
       });

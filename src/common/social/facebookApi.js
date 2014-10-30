@@ -53,6 +53,8 @@ angular.module( 'Morsel.common.facebookApi', [] )
   fb.updateToken = function(token, callback) {
     var authenticationData = {
       'authentication': {
+        //tokens coming from the JS SDK are short-lived
+        'short_lived': true,
         'token': token
       }
     };
