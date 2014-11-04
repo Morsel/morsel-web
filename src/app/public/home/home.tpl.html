@@ -7,7 +7,7 @@
   </section>
   <section class="featured-morsels-section">
     <div class="container container-max-mrsl-feed">
-      <h2>Share the stories, inspirations and techniques that make your food your own. Here are some good ones:</h2>
+      <h2>Share the stories, inspirations and techniques that make your food your own. Here are a few from our community:</h2>
       <div class="featured-morsels" ng-if="featuredMorsels">
         <div class="row no-gutter">
           <div class="col-sm-4">
@@ -36,7 +36,7 @@
         <a href="/explore" class="btn btn-primary btn-lg">Explore more morsels</a>
       </div>
       <div class="loader" ng-if="!featuredMorsels"></div>
-      <h2>Share what you're making. <a href="/add" target="_self">Create your first morsel now</a>.</h2>
+      <h2>Share what you're making. <a href="/add" target="_self" ng-if="isLoggedIn">Create a morsel now</a><a href="/join" target="_self" ng-if="!isLoggedIn">Sign up and create your first morsel now</a>.</h2>
     </div>
   </section>
   <section class="create-section">
