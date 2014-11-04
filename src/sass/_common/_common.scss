@@ -3,6 +3,16 @@
   padding-bottom: 25px;
 }
 
+input, textarea, select {
+  font-family: $font-family-secondary;
+}
+
+.radio, .checkbox {
+  label {
+    font-family: $font-family-secondary;
+  }
+}
+
 .btn-submit-wrap {
   float: right;
   display: inline-block;
@@ -220,7 +230,7 @@ img {
 
 .view-more-list {
   @include opacity(1);
-  @include transition(all linear .5s);
+  @include transition(all .5s linear);
 
   &.ng-move, &.ng-enter {
     position: relative;
@@ -312,34 +322,6 @@ form {
   display: block;
 }
 
-.centered {
-  position: relative;
-
-  .centered-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 0;
-    text-align: center;
-
-    &:before {
-      content: '';
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
-    }
-  }
-
-  .centered-text {
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-    word-break: break-word;
-  }
-}
-
 .activity-feed {
   $activity-feed-padding-right: $profile-pic-xs + 10px;
 
@@ -399,12 +381,23 @@ form {
 
 .morsel-text {
   background: url(images/logos/morsel-text.png) center top no-repeat;
-  background-size: 130px 59px;
-  width: 130px;
-  height: 59px;
+  background-size: image-width('logos/morsel-text.png') image-height('logos/morsel-text.png');
+  width: image-width('logos/morsel-text.png');
+  height: image-height('logos/morsel-text.png');
   display: inline-block;
   text-indent: -9999px;
   overflow: hidden;
+
+  &.morsel-text-sm {
+    background-image: url(images/logos/morsel-text_sm.png);
+    background-size: image-width('logos/morsel-text_sm.png') image-height('logos/morsel-text_sm.png');
+    width: image-width('logos/morsel-text_sm.png');
+    height: image-height('logos/morsel-text_sm.png');
+
+    &.morsel-text-white {
+      background-image: url(images/logos/morsel-text_sm_white.png);
+    }
+  }
 }
 
 @include error-page();
@@ -430,7 +423,7 @@ form {
 }
 
 .preloaded-image {
-  @include transition(all .3s ease-out);
+  @include transition(all .3s ease-in-out);
 }
 
 .image-loading {
@@ -441,18 +434,18 @@ form {
   display: inline-block;
 }
 
-.dark-bg {
-  padding-bottom: 10px;
-}
-
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .morsel-text {
     background-image: url(images/logos/morsel-text@2x.png);
-  }
-}
 
-.container-margin-bottom {
-  margin-bottom: 25px;
+    &.morsel-text-sm {
+      background-image: url(images/logos/morsel-text_sm@2x.png);
+
+      &.morsel-text-white {
+        background-image: url(images/logos/morsel-text_sm_white@2x.png);
+      }
+    }
+  }
 }
 
 .container-no-padding {
@@ -460,55 +453,36 @@ form {
   padding-right: 0;
 }
 
+.container-max-mrsl-feed {
+  max-width: 640px+320px; //so we don't have to load 992x992 images
+}
+
 .no-name {
   color: $morsel-medium !important;
   font-style: italic !important;
 }
 
-@media (min-width: $screen-sm-min) {
-  $activity-feed-padding-right: $profile-pic-s + 10px;
+.morsel-or {
+  @include center-border(25px, 15px);
+  background-image: none;
+  text-align: center;
+  
+  @extend .h2;
+}
 
-  .activity-feed {
-    li {
-      .profile-pic-link {
-        width: $profile-pic-s;
-        height: $profile-pic-s;
-      }
-      .user-body {
-        p {
-          padding-right: $activity-feed-padding-right;
-        }
+.spacer {
+  display: block;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+}
 
-        .time-ago {
-          right: $activity-feed-padding-right;
-        }
+a.white-link {
+  color: white !important;
 
-        .activity-subject {
-          width: $profile-pic-s;
-          height: $profile-pic-s;
-        }
-      }
-    }
-  }
-
-  .dark-bg {
-    background-color: $morsel-background-dark;
-    background-image: url(images/bg/morsel-detail-noise.png);
-  }
-
-  .user-info {
-    .profile-pic-link {
-      margin: 0 15px;
-    }
-  }
-
-  .morsel-text {
-    &.morsel-text-300 {
-      width: 300px;
-      height: 158px;
-      background-size: 300px 158px;
-      background-image: url(images/logos/morsel-text_300.png);
-    }
+  &:hover, &:active {
+    color: $link-hover-color !important;;
+    text-decoration: none;
   }
 }
 
@@ -542,6 +516,37 @@ form {
 }
 
 @media (min-width: $screen-sm-min) {
+  $activity-feed-padding-right: $profile-pic-s + 10px;
+
+  .activity-feed {
+    li {
+      .profile-pic-link {
+        width: $profile-pic-s;
+        height: $profile-pic-s;
+      }
+      .user-body {
+        p {
+          padding-right: $activity-feed-padding-right;
+        }
+
+        .time-ago {
+          right: $activity-feed-padding-right;
+        }
+
+        .activity-subject {
+          width: $profile-pic-s;
+          height: $profile-pic-s;
+        }
+      }
+    }
+  }
+  
+  .user-info {
+    .profile-pic-link {
+      margin: 0 15px;
+    }
+  }
+
   .container-max-sm {
     width: $screen-sm;
   }

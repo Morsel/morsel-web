@@ -1,5 +1,6 @@
 .modal-header {
-  @include morsel-border($modal-content-bg);
+  @include morsel-border();
+  padding-bottom: 25px;
 
   h4 {
     margin: 5px 0 5px 20px !important;

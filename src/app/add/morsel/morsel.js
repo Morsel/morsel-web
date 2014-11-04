@@ -28,8 +28,6 @@ angular.module( 'Morsel.add.morsel', [])
       //since we have individual forms submitting within our main form, we don't ever see the big form set back to ng-pristine, even if all the data is saved. so to keep track of "$dirty state" for the big form, we need to do it manually
       morselEditFormDirty = {};
 
-  $scope.viewOptions.miniHeader = true;
-
   //store all our social data
   $scope.social = {
     //store our social authentications from the API

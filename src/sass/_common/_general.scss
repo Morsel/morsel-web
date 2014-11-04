@@ -10,6 +10,11 @@ a {
 }
 
 p {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 300;
+  font-family: $font-family-secondary;
+
   > i {
     vertical-align: middle;
     margin-right: 10px;
@@ -30,74 +35,46 @@ ul {
 
 //type
 h1, .h1 {
-  margin: 25px 0;
-  text-transform: uppercase;
-
   a {
     color: $headings-color;
   }
 }
 
 h2, .h2 {
-  margin: 25px 0;
-  text-transform: uppercase;
-
   a {
     color: $headings-color;
   }
 }
 
 h3, .h3 {
-  color: $morsel-dark;
-  text-transform: none;
-
   a {
-    color: $morsel-dark;
+    color: $headings-color;
   }
 }
 
 h4, .h4 {
-  color: $morsel-dark;
   font-family: $font-family-base;
-  text-transform: uppercase;
 
   a {
-    color: $morsel-dark;
+    color: $headings-color;
   }
 }
 
 h5, .h5 {
-  color: $morsel-dark;
-  font-family: $font-family-base;
-  font-weight: 400;
-  text-transform: none;
-
   a {
-    color: $morsel-dark;
+    color: $headings-color;
   }
 }
 
 h6, .h6 {
-  color: $morsel-dark;
-  font-family: $font-family-base;
-  font-weight: 300;
-  text-transform: none;
-
   a {
-    color: $morsel-dark;
+    color: $headings-color;
   }
 }
 
-p {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 300;
-}
-
 label {
-  font-family: $font-family-secondary;
   font-weight: normal;
-
+  
   &.required {
     &:after {
       content: '*';
@@ -111,7 +88,6 @@ button[type="submit"] {
 }
 
 hr {
-  @include morsel-border($morsel-background);
-  margin-top: 25px;
-  margin-bottom: 25px;
+  clear: both;
+  @include morsel-border();
 }

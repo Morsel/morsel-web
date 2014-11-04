@@ -1,13 +1,14 @@
-<div class="feed dark-bg">
+<div class="feed header-padding">
+  <h2 class="text-center">Your Feed</h2>
   <div class="container morsel-bg container-shadow" ng-style="viewOptions.minimumMainHeight()">
     <div class="view-more-btn" ng-if="newFeedItemCount != 0">
-      <a ng-click="showNewFeedItems()">{{newFeedItemCount}} new morsel{{newFeedItemCount === 1? '':'s'}}</a>
+      <a ng-click="showNewFeedItems()" ng-text="newFeedItemCount+' new morsel'+(newFeedItemCount === 1 ? '':'s'"></a>
     </div>
-    <ul class="clearfix morsel-grid morsel-summary-grid">
-      <li ng-repeat="feedItem in feedItems" class="col-sm-6 col-md-4 morsel-summary-grid-item">
+    <div class="row morsel-summary-grid">
+      <div ng-repeat="feedItem in feedItems" class="col-sm-6 col-md-4 morsel-summary">
         <div mrsl-morsel-summary="feedItem.subject" mrsl-feed-item-id="feedItem.id"></div>
-      </li>
-    </ul>
+      </div>
+    </div>
     <div ng-if="!feedItems" class="loader"></div>
     <div mrsl-view-more mrsl-view-more-func="grabOldFeed" mrsl-view-more-data="feedItems" mrsl-view-more-inc="feedItemIncrement" mrsl-view-more-order="last" mrsl-view-more-copy="View more morsels" mrsl-view-more-btn="true"></div>
     <div ng-if="feedItems && feedItems.length === 0" class="empty-state">

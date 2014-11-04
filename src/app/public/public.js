@@ -37,12 +37,14 @@ angular.module( 'Morsel.public', [
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',
+  'Morsel.common.headerScroll',
   'Morsel.common.itemActionBar',
   'Morsel.common.itemLike',
   'Morsel.common.iTunesLink',
   'Morsel.common.likeableFeed',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
+  'Morsel.common.morselBlock',
   'Morsel.common.morselSummary',
   'Morsel.common.photoHelpers',
   'Morsel.common.placeList',
@@ -86,11 +88,10 @@ angular.module( 'Morsel.public', [
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
-.constant('MINIHEADERHEIGHT', '60')
 .constant('USER_LIST_NUMBER', 20)
 .constant('USER_UPDATE_CHECK_TIME', 5000)
 .constant('COMMENT_LIST_NUMBER', 10)
-.constant('MORSEL_LIST_NUMBER', 15)
+.constant('MORSEL_LIST_NUMBER', 12)
 
 // Default queries
 .value('presetMediaQueries', {
@@ -152,9 +153,8 @@ angular.module( 'Morsel.public', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
   var viewOptions = {
-        miniHeader : false,
-        fullWidthHeader : false,
-        hideLogo: false
+        hideHeader: false,
+        headerDropdownOpen: false
       },
       $body = angular.element(document.getElementsByTagName('body'));
 
@@ -271,21 +271,4 @@ angular.module( 'Morsel.public', [
     setMinimumMainHeight();
     $scope.$apply('viewOptions');
   }
-
-  $scope.menuGoTo = function(route) {
-    $scope.closeMenu();
-    $location.path('/'+route);
-  };
-
-  $scope.closeMenu = function() {
-    $scope.menuOpen = false;
-  };
-
-  $scope.toggleMenu = function() {
-    Mixpanel.send('Tapped Menu Bar Icon', {
-      menu_state: $scope.menuOpen ? 'closing' : 'opening'
-    });
-    $scope.menuOpen = !$scope.menuOpen;
-  };
 });
-

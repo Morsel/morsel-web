@@ -54,19 +54,34 @@
   } 
 }
 
-@mixin morsel-border($morselBorderBgColor) {
-  border-bottom: 1px solid $morsel-light;
-  position: relative;
+@mixin morsel-border() {
+  background: url(images/icons/morsel/morsel-m-light.png) center bottom no-repeat;
+  min-height: image-width('icons/morsel/morsel-m-light.png');
 
-  &:after {
+  @include center-border((image-width('icons/morsel/morsel-m-light.png')/2) + 5px, image-width('icons/morsel/morsel-m-light.png')/2);
+}
+
+@mixin center-border($borderMargin, $bottom) {
+  overflow: hidden;
+  position: relative;
+  border: 0;
+
+  &:before, &:after {
     content: ' ';
-    background: $morselBorderBgColor url(images/icons/morsel/morsel-m-light.png) center center no-repeat;
-    height: image-width('icons/morsel/morsel-m-light.png');
-    width: image-width('icons/morsel/morsel-m-light.png')*2;
+    width: 50%;
     display: block;
     position: absolute;
-    bottom: -(image-width('icons/morsel/morsel-m-light.png')/2);
+    border-bottom: 1px solid $morsel-light;
+    bottom: $bottom;
+  }
+
+  &:before {
     left: 50%;
-    margin-left: -(image-width('icons/morsel/morsel-m-light.png'));
+    margin-left: $borderMargin;
+  }
+
+  &:after {
+    right: 50%;
+    margin-right: $borderMargin;
   }
 }

@@ -1,24 +1,57 @@
-<div class="home-page" ng-style="viewOptions.minimumMainHeight()">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-6 col-md-4">
-        <div class="app-demo">
-          <div class="app-screenshots">
-            <img src="/assets/images/media/app-demo.jpg" title="Morsel app available now for iOS" />
+<div class="home-page main-view-offset" ng-style="viewOptions.minimumMainHeight()">
+  <section class="home-masthead">
+    <div class="container">
+      <h1>Express your passion for food</h1>
+      <a href="/add" target="_self" class="btn btn-primary btn-lg">Create a morsel</a>
+    </div>
+  </section>
+  <section class="featured-morsels-section">
+    <div class="container container-max-mrsl-feed">
+      <h2>Share the stories, inspirations and techniques that make your food your own. Here are a few from our community:</h2>
+      <div class="featured-morsels" ng-if="featuredMorsels">
+        <div class="row no-gutter">
+          <div class="col-sm-4">
+            <div mrsl-morsel-block="featuredMorsels[0]"></div>
           </div>
-          <img src="/assets/images/media/iphone-ode-to-trotter.png" />
+          <div class="col-sm-8">
+            <div mrsl-morsel-block="featuredMorsels[1]"></div>
+          </div>
         </div>
+        <div class="row no-gutter">
+          <div class="col-sm-8">
+            <div mrsl-morsel-block="featuredMorsels[2]"></div>
+          </div>
+          <div class="col-sm-4">
+            <div mrsl-morsel-block="featuredMorsels[3]"></div>
+          </div>
+        </div>
+        <div class="row no-gutter">
+          <div class="col-sm-4">
+            <div mrsl-morsel-block="featuredMorsels[4]"></div>
+          </div>
+          <div class="col-sm-8">
+            <div mrsl-morsel-block="featuredMorsels[5]"></div>
+          </div>
+        </div>
+        <a href="/explore" class="btn btn-primary btn-lg">Explore more morsels</a>
       </div>
-      <div class="col-xs-6 col-md-8 app-brand">
-        <h1 class="morsel-text morsel-text-300">Morsel</h1>
-        <h2>A culinary community sharing food stories, cooking inspiration and kitchen hacks</h2>
-        <div>
-          <a mrsl-itunes-link></a>
+      <div class="loader" ng-if="!featuredMorsels"></div>
+      <h2>Share what you're making. <a href="/add" target="_self" ng-if="isLoggedIn">Create a morsel now</a><a href="/join" target="_self" ng-if="!isLoggedIn">Sign up and create your first morsel now</a>.</h2>
+    </div>
+  </section>
+  <section class="create-section">
+    <div class="container container-max-sm">
+      <div class="app-demo">
+        <div class="app-screenshots">
+          <img src="/assets/images/media/app-demo.jpg" title="Morsel app available now for iOS" />
         </div>
-        <div>
-          <a ng-click="continueToMorsel()">Continue to Morsel feed</a>
-        </div>
+        <img src="/assets/images/media/iphone-ode-to-trotter.png" />
+      </div>
+      <div class="create-info">
+        <i class="morsel-app-icon">Morsel</i>
+        <h3><span>Get the Morsel app</span>Explore and create on the go</h3>
+        <a mrsl-itunes-link></a>
       </div>
     </div>
-  </div>
+  </section>
 </div>

@@ -3,11 +3,10 @@
   white-space: normal;
   width: 100%;
   height: 100%;
-  background-color: $morsel-light-off;
 
   .morsel-loader {
     height: 250px;
-    margin-top: $mini-header-height;
+    margin-top: $header-height;
   }
 
   .morsel-container {
@@ -178,6 +177,7 @@
       .item-wrap {
         text-align: center;
         position: relative;
+        @include morsel-border();
       }
 
       .item-photo-wrap {
@@ -185,9 +185,7 @@
         height: auto;
         width: auto;
         min-height: 100px;
-
         padding-bottom: 35px;
-        @include morsel-border($morsel-light-off);
       }
 
       .item-img {
@@ -222,7 +220,6 @@
 
         a {
           line-height: 1;
-          font-weight: bold;
           color: $morsel-dark;
         }
 
@@ -271,14 +268,6 @@
     bottom: 0;
     left: 50%;
     margin-left: -$arrow-height/2;
-  }
-
-  &.morsel-control-left {
-    @include rotate(90deg);
-  }
-
-  &.morsel-control-right {
-    @include rotate(-90deg);
   }
 }
 

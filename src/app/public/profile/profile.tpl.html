@@ -1,7 +1,7 @@
-<div bindonce="user" class="profile user-profile dark-bg" ng-style="viewOptions.minimumMainHeight()">
-  <div class="container">
+<div bindonce="user" class="profile user-profile header-padding" ng-style="viewOptions.minimumMainHeight()">
+  <div class="container container-shadow container-no-padding morsel-bg">
     <a href="/account/edit-profile" bo-if="canEdit" class="edit-profile-btn" target="_self"><i class="common-settings"></i></a>
-    <div class="profile-container">
+    <div class="profile-container header-padding">
       <div class="profile-info col-sm-6">
         <div class="row">
           <div class="col-xs-4">
@@ -32,18 +32,13 @@
     <div>
       <tabset bo-class="{'professional-tabs':isProfessional}">
         <tab heading="Morsels">
-          <ul class="clearfix morsel-grid">
-            <li bindonce ng-repeat="morsel in morsels | reverse" class="morsel-grid-item">
-              <a bo-href="'/'+user.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="centered centered-white">
-                <div class="centered-wrap">
-                  <span class="centered-text">{{morsel.title}}</span>
-                </div>
-                <img mrsl-responsive-images="{{getCoverPhotoArray(morsel)}}" />
-              </a>
-            </li>
-          </ul>
+          <div class="row no-gutter">
+            <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in morsels | reverse">
+              <div mrsl-morsel-block="morsel" mrsl-morsel-block-no-user="true" mrsl-morsel-block-no-stats="true" mrsl-morsel-block-spacer="true"></div>
+            </div>
+          </div>
           <div ng-if="!morsels" class="loader"></div>
-          <div mrsl-view-more mrsl-view-more-func="getMorsels" mrsl-view-more-data="morsels" mrsl-view-more-inc="morselIncrement" mrsl-view-more-copy="View more morsels"></div>
+          <div mrsl-view-more mrsl-view-more-func="getMorsels" mrsl-view-more-data="morsels" mrsl-view-more-inc="morselIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-btn="true"></div>
           <div ng-if="morsels && morsels.length === 0" class="empty-state">
             <p bo-if="!canEdit">This user hasn't made any morsels yet</p>
             <p bo-if="canEdit">You haven't made any morsels yet. <a href="/add" target="_self">Create one now</a>.</p>

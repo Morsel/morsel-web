@@ -1,16 +1,16 @@
-<div class="feed dark-bg event-morsels">
+<div class="feed event-morsels header-padding">
   <div class="container morsel-bg container-shadow" ng-style="viewOptions.minimumMainHeight()">
     <img class="event-img" ng-src="{{eventInfo.image}}" />
     <p ng-bind-html="eventInfo.description" class="event-description"></p>
     <div ng-show="eventInfo" mrsl-social-sharing="eventInfo" mrsl-social-full="true" mrsl-social-sharing-type="event"></div>
-    <ul class="clearfix morsel-grid morsel-summary-grid">
-      <li ng-repeat="morsel in eventInfo.morsels | orderBy:'-published_at'" class="col-sm-6 col-md-4 morsel-summary-grid-item">
-        <div mrsl-morsel-summary="morsel"></div>
-      </li>
-      <li ng-if="eventInfo && eventInfo.morsels && eventInfo.morsels.length === 0">
-        <p class="empty-state">Coming soon!</p>
-      </li>
-    </ul>
+    <div class="row no-gutter" ng-if="eventInfo && eventInfo.morsels && eventInfo.morsels.length > 0">
+      <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in eventInfo.morsels | orderBy:'-published_at'">
+        <div mrsl-morsel-block="morsel" mrsl-morsel-block-no-stats="true" mrsl-morsel-block-spacer="true"></div>
+      </div>
+    </div>
+    <div ng-if="eventInfo && eventInfo.morsels && eventInfo.morsels.length === 0">
+      <p class="empty-state">Coming soon!</p>
+    </div>
     <div ng-if="!eventInfo" class="loader"></div>
   </div>
 </div>

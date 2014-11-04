@@ -1,7 +1,15 @@
 @media (min-width: $screen-md-min) {
   .login-page {
-    .login-or {
+    .morsel-or {
       padding-top: 40px;
+
+      &:before, &:after {
+        display: none;
+      }
+    }
+
+    .col-md-2 + .col-md-5 {
+      margin-top: 25px;
     }
   }
 }

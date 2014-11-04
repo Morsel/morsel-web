@@ -13,9 +13,6 @@ angular.module( 'Morsel.public.home', [])
     resolve: {
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();
-      },
-      hasSeenSplash: function($window) {
-        return $window.localStorage.passSplash;
       }
     }
   })
@@ -34,26 +31,17 @@ angular.module( 'Morsel.public.home', [])
       },
       currentUser: function(){
         return {};
-      },
-      hasSeenSplash: function(){
-        return {};
       }
     }
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $window, hasSeenSplash, $location, $state ) {
-  if(hasSeenSplash) {
-    $state.go('feed', null, {location:'replace'});
-  }
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.hideLogo = true;
-
-  $scope.continueToMorsel = function() {
-    //user wants to continue on to their feed
-    //set localstorage to remember this
-    $window.localStorage.passSplash = true;
-    //send them to their feed
-    $location.path('/feed');
-  };
+.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $location, Restangular, $filter ) {
+  //pull our data from static data on s3
+  Restangular.oneUrl('featuredMorsels', 'https://morsel.s3.amazonaws.com/static-morsels/homepage-morsels.json').get().then(function(resp) {
+    $scope.featuredMorsels = $filter('orderBy')(Restangular.stripRestangular(resp), 'displayOrder');
+  }, function() {
+    //if not, send to homepage
+    $location.path('/');
+  });
 });

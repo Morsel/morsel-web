@@ -34,6 +34,7 @@ angular.module( 'Morsel.add', [
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
   'Morsel.common.handleErrors',
+  'Morsel.common.headerScroll',
   'Morsel.common.imageUpload',
   'Morsel.common.imageUploadNew',
   'Morsel.common.mixpanel',
@@ -68,7 +69,6 @@ angular.module( 'Morsel.add', [
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
-.constant('MINIHEADERHEIGHT', '60')
 .constant('USER_LIST_NUMBER', 20)
 .constant('USER_UPDATE_CHECK_TIME', 5000)
 .constant('COMMENT_LIST_NUMBER', 10)
@@ -134,9 +134,8 @@ angular.module( 'Morsel.add', [
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
   var viewOptions = {
-        miniHeader : false,
-        fullWidthHeader : false,
-        hideLogo: false
+        hideHeader: false,
+        headerDropdownOpen: false
       },
       $body = angular.element(document.getElementsByTagName('body'));
 
@@ -253,21 +252,5 @@ angular.module( 'Morsel.add', [
     setMinimumMainHeight();
     $scope.$apply('viewOptions');
   }
-
-  $scope.menuGoTo = function(route) {
-    $scope.closeMenu();
-    $location.path('/'+route);
-  };
-
-  $scope.closeMenu = function() {
-    $scope.menuOpen = false;
-  };
-
-  $scope.toggleMenu = function() {
-    Mixpanel.send('Tapped Menu Bar Icon', {
-      menu_state: $scope.menuOpen ? 'closing' : 'opening'
-    });
-    $scope.menuOpen = !$scope.menuOpen;
-  };
 });
 

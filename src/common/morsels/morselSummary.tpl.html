@@ -1,23 +1,7 @@
-<div bindonce="morsel" class="morsel-summary">
-  <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug + (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" class="centered centered-white">
-    <span bo-if="morsel.featured" class="banner banner-featured">Featured</span>
-    <div class="centered-wrap">
-      <h1 class="centered-text h2">{{morsel.title}}</h1>
-    </div>
-    <img mrsl-responsive-images="{{getCoverPhotoArray()}}" />
+<div bindonce="morsel">
+  <div mrsl-morsel-block="morsel" mrsl-morsel-block-no-stats="true" mrsl-morsel-block-feed-item-id="morselFeedItemId" mrsl-morsel-block-spacer="true"></div>
+  <div class="morsel-summary-info">
+    <span bo-if="morsel.featured"><i class="common-featured"></i> Featured</span>
     <span am-time-ago="morsel.published_at" class="time-ago"></span>
-  </a>
-  <div class="user-info">
-    <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
-    <div class="user-body">
-      <h2 class="overflow-ellipsis h3">
-        <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator"></a>
-      </h2>
-      <h3 class="overflow-ellipsis h6">
-        <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></a>
-        <span bo-text="(morsel.place.city ? morsel.place.city+', ':'')+morsel.place.state"></span>
-      </h3>
-    </div>
   </div>
-  <a bo-href="'/add/morsel/'+morsel.id" ng-if="canEdit" title="Edit this morsel" class="edit-morsel-btn" target="_self"><i class="common-edit"></i></a>
 </div>

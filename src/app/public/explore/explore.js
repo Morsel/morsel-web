@@ -19,12 +19,9 @@ angular.module( 'Morsel.public.explore', [])
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, PhotoHelpers, $location, Auth ) {
-  $scope.viewOptions.miniHeader = true;
-  $scope.viewOptions.fullWidthHeader = true;
-
+.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, $location, Auth, MORSEL_LIST_NUMBER ) {
   //# of morsels to load at a time
-  $scope.exploreIncrement = 15;
+  $scope.exploreIncrement = MORSEL_LIST_NUMBER;
 
   $scope.getExploreFeed = function(endFeedItem) {
     var feedParams = {
@@ -47,8 +44,6 @@ angular.module( 'Morsel.public.explore', [])
       $state.go('404');
     });
   };
-
-  $scope.getCoverPhotoArray = PhotoHelpers.getCoverPhotoArray;
 
   //load our morsels immediately
   $scope.getExploreFeed();

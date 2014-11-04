@@ -1407,7 +1407,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/partials/sidenav.hbs', this.data.dir + '/views/partials/sidenav.hbs', { 
+    grunt.file.copy('src/views/partials/header.hbs', this.data.dir + '/views/partials/header.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {}
@@ -1415,7 +1415,7 @@ module.exports = function ( grunt ) {
       }
     });
 
-    grunt.file.copy('src/views/partials/header.hbs', this.data.dir + '/views/partials/header.hbs', { 
+    grunt.file.copy('src/views/partials/footer.hbs', this.data.dir + '/views/partials/footer.hbs', { 
       process: function ( contents, path ) {
         return grunt.template.process( contents, {
           data: {}

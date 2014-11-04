@@ -1,24 +1,100 @@
-<header class="main-header" ng-class="{'mini-header': viewOptions.miniHeader, 'full-header': !viewOptions.miniHeader, 'full-width-header': viewOptions.fullWidthHeader}">
-  <div class="container">
-    <h1 class="morsel-logo" ng-class="{'hide-logo':viewOptions.hideLogo}">
-      {{#if pageType.public}}
-      <a href="/">Morsel</a>
-      {{else}}
-      <a href="/" target="_self">Morsel</a>
-      {{/if}}
-    </h1>
+<header class="main-header" ng-class="{'hide-header':viewOptions.hideHeader}" mrsl-header-scroll>
+  <div class="header-wrap">
+    <div class="container">
+      <div class="morsel-logo">
+        {{#if pageType.public}}
+        <a href="/" class="morsel-icon visible-xs">Morsel</a>
+        <a href="/" class="morsel-text morsel-text-sm hidden-xs">Morsel</a>
+        {{else}}
+        <a href="/" target="_self" class="morsel-icon visible-xs">Morsel</a>
+        <a href="/" target="_self" class="morsel-text morsel-text-sm hidden-xs">Morsel</a>
+        {{/if}}
+      </div>
+      <nav class="main-nav">
+        <ul>
+          <li ui-route="/feed" ng-class="{active:$uiRoute}">
+            {{#if pageType.public}}
+            <a href="/feed">Feed</a>
+            {{else}}
+            <a href="/feed" target="_self">Feed</a>
+            {{/if}}
+          </li>
+          <li ui-route="/explore" ng-class="{active:$uiRoute}">
+            {{#if pageType.public}}
+            <a href="/explore">Explore</a>
+            {{else}}
+            <a href="/explore" target="_self">Explore</a>
+            {{/if}}
+          </li>
+          <li ui-route="/add" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
+            {{#if pageType.add}}
+            <a href="/add">Create<span class="hidden-xs"> morsel</span></a>
+            {{else}}
+            <a href="/add" target="_self">Create<span class="hidden-xs"> a morsel</span></a>
+            {{/if}}
+          </li>
+          <li ng-if="!isLoggedIn">
+            <a href="/join" target="_self">Sign Up/Log In</a>
+          </li>
+          <li ng-if="isLoggedIn">
+            <div class="header-dropdown" dropdown is-open="viewOptions.headerDropdownOpen">
+              <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-user-image-size="profile-pic-xs" class="dropdown-toggle"></div>
+              <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                  {{#if pageType.public}}
+                  <a ng-href="/\{{currentUser.username.toLowerCase()}}">
+                  {{else}}
+                  <a ng-href="/\{{currentUser.username.toLowerCase()}}" target="_self">
+                  {{/if}}
+                    <h6 mrsl-users-name="currentUser"></h6>
+                    <span>View Profile</span>
+                  </a>
+                </li>
+                <li class="divider"></li>
+                <li ui-route="/add/drafts" ng-class="{active:$uiRoute}">
+                  {{#if pageType.add}}
+                  <a href="/add/drafts">Drafts</a>
+                  {{else}}
+                  <a href="/add/drafts" target="_self">Drafts</a>
+                  {{/if}}
+                </li>
+                <li ui-route="/notifications" ng-class="{active:$uiRoute}">
+                  {{#if pageType.public}}
+                  <a href="/notifications">Notifications</a>
+                  {{else}}
+                  <a href="/notifications" target="_self">Notifications</a>
+                  {{/if}}
+                </li>
+                <li ui-route="/activity" ng-class="{active:$uiRoute}">
+                  {{#if pageType.public}}
+                  <a href="/activity">Activity</a>
+                  {{else}}
+                  <a href="/activity" target="_self">Activity</a>
+                  {{/if}}
+                </li>
+                <li ui-route="/search/[\w\/\-]*" ng-class="{active:$uiRoute}">
+                  {{#if pageType.public}}
+                  <a href="/search/people">Find people</a>
+                  {{else}}
+                  <a href="/search/people" target="_self">Find people</a>
+                  {{/if}}
+                </li>
+                <li class="divider"></li>
+                <li ui-route="/account/[\w\/\-]*" ng-class="{active:$uiRoute}">
+                  {{#if pageType.account}}
+                  <a href="/account/edit-profile">Settings</a>
+                  {{else}}
+                  <a href="/account/edit-profile" target="_self">Settings</a>
+                  {{/if}}
+                </li>
+                <li>
+                  <a href="/logout" target="_self">Log Out</a>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
-  <nav>
-    <ul>
-      <li>
-        <a href="/join" ng-if="!isLoggedIn" target="_self">
-          <span class="common-signup text-hide">Sign Up</span>
-        </a>
-      </li>
-      <li>
-        <a ng-click="toggleMenu()" class="hidden-xs"><span class="common-menu text-hide">Menu</span></a>
-        <a ng-click="toggleMenu()" class="visible-xs-inline-block"><span class="common-burger text-hide">Menu</span></a>
-      </li>
-    </ul>
-  </nav>
 </header>
