@@ -1,137 +1,56 @@
-.morsel-grid {
-  width: 100%;
-  padding: 0 1px 0 0;//to give 1px padding to compensate for no right-margin on .morsel-block
-  margin: 0;
-  list-style: none;
+.morsel-summary-grid {
+  .morsel-summary {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid $morsel-light;
+    list-style: none;
 
-  .morsel-grid-item {
-    position: relative;
-    float: left;
-    width: percentage(1/3);
-    margin: 0;
-  }
+    .morsel-summary-info {
+      text-align: left;
+      padding-top: 5px;
+      position: relative;
+      overflow: hidden;
+      min-height: 29px;
 
-  &.morsel-summary-grid {
-    .morsel-summary-grid-item {
-      text-align: center;
-      padding-top: 30px;
-      padding-bottom: 25px;
-      border-bottom: 1px solid $morsel-light;
-      list-style: none;
-      
-      > div {
-        display: inline-block;
-        width: 100%;
-        max-width: 320px;
-      }
-
-      .centered-text {
-        font-size: 24px;
-        line-height: 28px;
-      }
-
-      h2 {
-        font-size: 22px;
-        color: $morsel-dark;
-        margin-top: 10px;
-      }
-
-      h3 {
-        margin: 0;
-        min-height: 19px;
-
-        a {
-          font-weight: bold;
+      span {
+        float: left;
+        
+        i {
+          vertical-align: bottom;
         }
       }
 
       .time-ago {
-        position: absolute;
-        bottom: -20px;
-        right: 0;
+        float: right;
         color: $morsel-medium;
-      }
-
-      .user-info {
-        text-align: left;
-        margin-top: 10px;
-      }
-
-      .profile-pic-link {
-        width: $profile-pic-xs;
-        height: $profile-pic-xs;
-        margin: 0 10px 0 0;
-      }
-
-      .edit-morsel-btn {
-        position: absolute;
-        right: 5px;
-        bottom: 5px;
-        z-index: 10;
-
-        i {
-          margin-right: 0;
-        }
       }
     }
   }
-}
-
-.morsel-grid-container {
-  @include border-bottom-right-radius(3px);
-  @include border-bottom-left-radius(3px);
 }
 
 @media (min-width: $screen-sm-min) {
-  .morsel-grid {
-    &.morsel-summary-grid {
-      .morsel-summary-grid-item {
-        border-right: 1px solid $morsel-light;
-        
-        &:nth-child(2n) {
-          border-right: 0;
-        }
+  .morsel-summary-grid {
+    .morsel-summary {
+      border-right: 1px solid $morsel-light;
+      
+      &:nth-child(2n) {
+        border-right-color: transparent;
       }
     }
-  }
-
-  .morsel-grid-container {
-    max-width: $max-grid-morsel-width * 3;
   }
 }
 
 @media (min-width: $screen-md-min) {
-  .morsel-grid {
-    .morsel-grid-item {
-      width: percentage(1/4);
-    }
+  .morsel-summary-grid {
+    .morsel-summary {
+      &:nth-child(2n) {
+        border-right-color: $morsel-light;
+      }
 
-    &.morsel-summary-grid {
-      .morsel-summary-grid-item {
-        &:nth-child(2n) {
-          border-right: 1px solid $morsel-light;
-        }
-
-        &:nth-child(3n) {
-          border-right: 0;
-        }
+      &:nth-child(3n) {
+        border-right-color: transparent;
       }
     }
-  }
-
-  .morsel-grid-container {
-    max-width: $max-grid-morsel-width * 4;
-  }
-}
-
-@media (min-width: $screen-lg-min) {
-  .morsel-grid {
-    .morsel-grid-item {
-      width: percentage(1/5);
-    }
-  }
-
-  .morsel-grid-container {
-    max-width: $max-grid-morsel-width * 5;
   }
 }

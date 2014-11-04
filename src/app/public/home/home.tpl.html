@@ -1,18 +1,14 @@
 <div class="home-page main-view-offset" ng-style="viewOptions.minimumMainHeight()">
   <section class="home-masthead">
     <div class="container">
-      <h1>Discover and express<br/>your passion for food</h1>
+      <h1>Express your passion for food</h1>
+      <a href="/add" target="_self" class="btn btn-primary btn-lg">Create a morsel</a>
     </div>
   </section>
   <section class="featured-morsels-section">
     <div class="container container-max-mrsl-feed">
-      <div class="headline-button">
-        <h2 class="small-caps">Explore the stories, inspirations and techniques that make every cook's food their own</h2>
-        <a href="/explore" class="btn btn-primary btn-lg">Explore morsels</a>
-      </div>
-      <hr />
+      <h2>Share the stories, inspirations and techniques that make your food your own. Here are some good ones:</h2>
       <div class="featured-morsels" ng-if="featuredMorsels">
-        <h5 class="text-center">Featured morsels</h5>
         <div class="row no-gutter">
           <div class="col-sm-4">
             <div mrsl-morsel-block="featuredMorsels[0]"></div>
@@ -37,13 +33,10 @@
             <div mrsl-morsel-block="featuredMorsels[5]"></div>
           </div>
         </div>
+        <a href="/explore" class="btn btn-primary btn-lg">Explore more morsels</a>
       </div>
       <div class="loader" ng-if="!featuredMorsels"></div>
-      <div class="headline-button">
-        <h2 ng-bind="'Share what you\'re doing in the kitchen. '+ (isLoggedIn ? 'C' : 'Sign up and c') + 'reate your first morsel now!'"></h2>
-        <a href="/join" target="_self" class="btn btn-primary btn-lg" ng-if="!isLoggedIn">Sign up</a>
-        <a href="/add" target="_self" class="btn btn-primary btn-lg" ng-if="isLoggedIn">Create a morsel</a>
-      </div>
+      <h2>Share what you're making. <a href="/add" target="_self">Create your first morsel now</a>.</h2>
     </div>
   </section>
   <section class="create-section">

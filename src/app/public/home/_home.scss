@@ -102,32 +102,29 @@ $app-demo-delay: 2s;
     background-size: cover;
     padding: $header-height 0 0;
     min-height: 275px;
+    text-align: center;
 
     h1 {
-      text-align: center;
       color: white;
       @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-      font-size: 25px;
-      margin: 25% 0;
+      font-size: 30px;
+      margin-top: 20%;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      margin-bottom: 15%;
     }
   }
 
   .featured-morsels-section {
     background-color: $morsel-background;
     padding-top: 20px;
+    text-align: center;
 
     ul {
       margin: 0;
       list-style: none;
-    }
-
-    .morsel-block {
-      height: 250px;
-
-      .centered-text {
-        font-size: 24px;
-        line-height: 30px;
-      }
     }
 
     .featured-morsels {
@@ -136,6 +133,10 @@ $app-demo-delay: 2s;
       h5 {
         margin-bottom: 30px;
       }
+    }
+
+    .btn {
+      margin-top: 30px;
     }
   }
 
@@ -161,7 +162,7 @@ $app-demo-delay: 2s;
       color: $morsel-medium-dark;
 
       span {
-        color: $morsel-secondary;
+        color: $morsel-dark;
         font-size: 26px;
         line-height: 50px;
         display: block;
@@ -175,23 +176,23 @@ $app-demo-delay: 2s;
     }
   }
 
-  .headline-button {
-    overflow: hidden;
+  .container > h2 {
+    color: $morsel-medium-dark;
+    text-align: center;
+    font-size: 22px;
 
-    h2 {
-      color: $morsel-medium-dark;
-      text-align: center;
-      font-size: 22px;
-    }
-
-    .btn {
-      margin-top: $line-height-computed;
-      display: block;
+    a {
+      color: $morsel-primary-light;
     }
   }
 
   hr {
     margin: 35px 0;
+  }
+
+  .btn {
+    display: block;
+    min-width: 40%;
   }
 }
 
@@ -199,9 +200,17 @@ $app-demo-delay: 2s;
   .home-page {
     .home-masthead {
       h1 {
-        font-size: 36px;
-        margin: 20% 0;
+        font-size: 42px;
+        margin-top: 15%;
       }
+
+      .btn {
+        margin-bottom: 10%;
+      }
+    }
+
+    .btn {
+      display: inline-block;
     }
   }
 }
@@ -214,34 +223,26 @@ $app-demo-delay: 2s;
 
     .home-masthead {
       h1 {
-        font-size: 58px;
-        margin: 15% 0;
+        font-size: 48px;
+        margin-top: 12%;
+      }
+
+      .btn {
+        margin-bottom: 8%;
       }
     }
 
     .featured-morsels-section {
       padding-top: 25px;
 
-      .morsel-block {
-        height: 320px;
-      }
-
       .featured-morsels {
         margin-bottom: 50px;
       }
     }
 
-    .headline-button {
-      h2 {
-        width: 75%;
-        text-align: left;
-        float: left;
+    .container {
+      > h2 {
         font-size: 26px;
-      }
-
-      .btn {
-        float: right;
-        display: inline-block;
       }
     }
 
@@ -293,8 +294,12 @@ $app-demo-delay: 2s;
   .home-page {
     .home-masthead {
       h1 {
-        font-size: 62px;
-        margin: 8% 0;
+        font-size: 60px;
+        margin-top: 8%;
+      }
+
+      .btn {
+        margin-bottom: 7%;
       }
     }
   }

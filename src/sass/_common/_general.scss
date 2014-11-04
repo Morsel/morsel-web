@@ -10,6 +10,11 @@ a {
 }
 
 p {
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 300;
+  font-family: $font-family-secondary;
+
   > i {
     vertical-align: middle;
     margin-right: 10px;
@@ -67,24 +72,9 @@ h6, .h6 {
   }
 }
 
-.small-caps {
-  font-variant: small-caps;
-
-  .btn {
-    font-variant: normal;
-  }
-}
-
-p {
-  font-size: 14px;
-  line-height: 22px;
-  font-weight: 300;
-}
-
 label {
-  font-family: $font-family-secondary;
   font-weight: normal;
-
+  
   &.required {
     &:after {
       content: '*';

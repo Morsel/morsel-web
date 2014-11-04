@@ -41,7 +41,7 @@
               <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-user-image-size="profile-pic-xs" class="dropdown-toggle"></div>
               <ul class="dropdown-menu pull-right" role="menu">
                 <li>
-                  {{#if pageType.add}}
+                  {{#if pageType.public}}
                   <a ng-href="/\{{currentUser.username.toLowerCase()}}">
                   {{else}}
                   <a ng-href="/\{{currentUser.username.toLowerCase()}}" target="_self">

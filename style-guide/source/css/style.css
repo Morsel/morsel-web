@@ -1,8 +1,8 @@
 /*
 These are styles related to the styleguide implementation of Morsel. any actual styles should be updated in /src/sass
 */
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400);
-@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400);
 /*
 //font options:
 font-family: 'Signika Negative', sans-serif;
@@ -25,11 +25,11 @@ body > .container {
 
 /* line 18, style.scss */
 .font-primary {
-  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", "Helvetica Neue Light", "Helvetica Neue", "Arial", sans-serif;
 }
 /* line 21, style.scss */
 .font-primary:after {
-  content: "Roboto, Helvetica, Arial, sans-serif";
+  content: "Montserrat, Helvetica Neue Light, Helvetica Neue, Arial, sans-serif";
 }
 /* line 26, style.scss */
 .font-primary.italic:after {
@@ -42,11 +42,11 @@ body > .container {
 
 /* line 38, style.scss */
 .font-secondary {
-  font-family: "Montserrat", "Helvetica Neue Light", "Helvetica Neue", "Arial", sans-serif;
+  font-family: "Roboto Slab", "Helvetica Neue Light", "Helvetica Neue", "Arial", sans-serif;
 }
 /* line 41, style.scss */
 .font-secondary:after {
-  content: "Montserrat, Helvetica Neue Light, Helvetica Neue, Arial, sans-serif";
+  content: "Roboto Slab, Helvetica Neue Light, Helvetica Neue, Arial, sans-serif";
 }
 /* line 46, style.scss */
 .font-secondary.italic:after {

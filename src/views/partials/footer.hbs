@@ -47,19 +47,19 @@
         <ul>
           <li>
             {{#if pageType.public}}
-            <a href="/" class="morsel-text morsel-text-sm">Morsel</a>
+            <a href="/" class="morsel-text morsel-text-sm morsel-text-white">Morsel</a>
             {{else}}
-            <a href="/" target="_self" class="morsel-text morsel-text-sm">Morsel</a>
+            <a href="/" target="_self" class="morsel-text morsel-text-sm morsel-text-white">Morsel</a>
             {{/if}}
           </li>
           <li>
             <p>&copy; Morsel Labs, Inc. 2014</p>
           </li>
           <li ng-class="{active : currentRoute === '/privacy'}">
-            <a href="/privacy" target="_self">Privacy Policy</a>
+            <a href="/privacy" target="_self" class="white-link">Privacy Policy</a>
           </li>
           <li ng-class="{active : currentRoute === '/terms'}">
-            <a href="/terms" target="_self">Terms of Use</a>
+            <a href="/terms" target="_self" class="white-link">Terms of Use</a>
           </li>
         </ul>
       </nav>

@@ -8,6 +8,8 @@ angular.module('Morsel.common.morselBlock', [])
       morsel: '=mrslMorselBlock',
       noUser: '@mrslMorselBlockNoUser',
       noStats: '@mrslMorselBlockNoStats',
+      noPlace: '@mrslMorselBlockNoPlace',
+      morselFeedItemId: '@mrslMorselBlockFeedItemId',
       spacer: '@mrslMorselBlockSpacer'
     },
     link: function(scope, element) {
@@ -35,7 +37,7 @@ angular.module('Morsel.common.morselBlock', [])
             if(lastItemWithPhotos) {
               if(needsBigPicture) {
                 return [
-                  ['default', primaryItemPhotos._640x640]
+                  ['default', lastItemWithPhotos.photos._640x640]
                 ];
               } else {
                 return [

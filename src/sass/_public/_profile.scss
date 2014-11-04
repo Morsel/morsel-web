@@ -84,42 +84,14 @@
   }
 }
 
-@media (max-width: $screen-md) {
-  .profile {
-    & > .container {
-      padding: 0;
-    }
-  }
-}
-
 @media (min-width: $screen-sm-min) {
   .profile {
-    & > .container {
-      max-width: $max-grid-morsel-width * 3;
-    }
-
     .profile-container {
       padding-top: 15px;
       
       .profile-info {
         margin-bottom: 0;
       }
-    }
-  }
-}
-
-@media (min-width: $screen-md-min) {
-  .profile {
-    .container {
-      max-width: $max-grid-morsel-width * 4;
-    }
-  }
-}
-
-@media (min-width: $screen-lg-min) {
-  .profile {
-    .container {
-      max-width: $max-grid-morsel-width * 5;
     }
   }
 }

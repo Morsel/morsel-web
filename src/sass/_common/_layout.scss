@@ -90,6 +90,11 @@
       > a {
         padding: $main-nav-padding-topbottom $main-nav-padding-sides;
         display: block;
+
+        &:hover, &:active {
+          text-decoration: none;
+          color: $link-hover-color;
+        }
       }
     }
   }
@@ -124,11 +129,9 @@
   margin-top: $header-height + 25px;
 }
 
-.centered-list-header {
-  h2 {
-    text-align: center;
+.header-padding {
+  > .text-center {
     margin-top: 5px;
-    font-variant: small-caps;
   }
 }
 
@@ -166,8 +169,12 @@
     }
 
     a, p {
-      color: $morsel-light;
+      color: white;
       font-size: 12px;
+    }
+
+    p {
+      font-family: $font-family-base;
     }
 
     li {
@@ -251,8 +258,6 @@
 
         &:first-child {
           margin-right: 20px;
-          padding-right: 20px;
-          border-right: 1px solid $morsel-light;
           display: inline-block;
         }
 

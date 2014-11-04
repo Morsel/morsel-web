@@ -3,6 +3,16 @@
   padding-bottom: 25px;
 }
 
+input, textarea, select {
+  font-family: $font-family-secondary;
+}
+
+.radio, .checkbox {
+  label {
+    font-family: $font-family-secondary;
+  }
+}
+
 .btn-submit-wrap {
   float: right;
   display: inline-block;
@@ -312,84 +322,6 @@ form {
   display: block;
 }
 
-.centered-morsel {
-  position: relative;
-  font-family: $font-family-secondary;
-  display: block;
-
-  &:after {
-    @include transition(opacity $morsel-hover-time ease-in-out);
-    @include opacity(0);
-    content: '';
-      @include background-image(radial-gradient(rgba(49,35,9,1), rgba(0,0,0,1) 320px));
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#312309', endColorstr='#000000',GradientType=1 );
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-  }
-
-  &:hover {
-    .centered-text {
-      @include transform(scale(1.04));
-    }
-
-    .morsel-img {
-      @include filter(grayscale(60%));
-      @include opacity(.45);
-    }
-
-    &:after {
-      @include opacity(1);
-    }
-  }
-
-  .centered-wrap {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    font-size: 0;
-    text-align: center;
-    background-color: rgba(0,0,0,0);
-    z-index: 2;
-
-    &:before {
-      content: '';
-      display: inline-block;
-      height: 100%;
-      vertical-align: middle;
-    }
-  }
-
-  .centered-text {
-    display: inline-block;
-    vertical-align: middle;
-    width: 100%;
-    word-break: break-word;
-    color: white;
-    @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-    font-size: 13px;
-    line-height: 16px;
-    padding: 0 5%;
-    margin: 0;
-    text-transform: none;
-    @include transition(transform .1s ease-in-out);
-    @include transform(scale(1));
-  }
-
-  .morsel-img {
-    @include filter(grayscale(0%));
-    @include opacity(1);
-    @include transition(all $morsel-hover-time ease-in-out);
-    z-index: 1;
-    position: relative;
-  }
-}
-
 .activity-feed {
   $activity-feed-padding-right: $profile-pic-xs + 10px;
 
@@ -461,6 +393,10 @@ form {
     background-size: image-width('logos/morsel-text_sm.png') image-height('logos/morsel-text_sm.png');
     width: image-width('logos/morsel-text_sm.png');
     height: image-height('logos/morsel-text_sm.png');
+
+    &.morsel-text-white {
+      background-image: url(images/logos/morsel-text_sm_white.png);
+    }
   }
 }
 
@@ -501,6 +437,14 @@ form {
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
   .morsel-text {
     background-image: url(images/logos/morsel-text@2x.png);
+
+    &.morsel-text-sm {
+      background-image: url(images/logos/morsel-text_sm@2x.png);
+
+      &.morsel-text-white {
+        background-image: url(images/logos/morsel-text_sm_white@2x.png);
+      }
+    }
   }
 }
 
@@ -533,6 +477,15 @@ form {
   z-index: -1;
 }
 
+a.white-link {
+  color: white !important;
+
+  &:hover, &:active {
+    color: $link-hover-color !important;;
+    text-decoration: none;
+  }
+}
+
 @media (min-width: $screen-xs-min) {
   form {
     .image-add {
@@ -558,13 +511,6 @@ form {
 
     &.container-shadow {
       @include container-shadow();
-    }
-  }
-
-  .centered-morsel {
-    .centered-text {
-      font-size: 16px;
-      line-height: 20px;
     }
   }
 }
@@ -598,13 +544,6 @@ form {
   .user-info {
     .profile-pic-link {
       margin: 0 15px;
-    }
-  }
-
-  .centered-morsel {
-    .centered-text {
-      font-size: 24px;
-      line-height: 30px;
     }
   }
 
