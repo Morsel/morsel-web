@@ -22,7 +22,7 @@
     "cookie-parser": "~1.1.0",
     "express-session": "~1.2.1",
     "cluster": "~0.7.7",
-    "domain": "~0.2.8",
+    "domain": "0.0.0",
     "nodetime": "~0.8.15",
     "rollbar": "~0.3.8",
     "express-uncapitalize": "~1.0.0"
