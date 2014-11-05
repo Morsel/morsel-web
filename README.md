@@ -10,7 +10,8 @@ Setup
 2. Clone repo
 3. $ npm install
 4. $ bower install
-5. See Gruntfile for tasks
+5. update server-config/config.js with template
+6. See Gruntfile for tasks
 
 Environment Vars
 ==========

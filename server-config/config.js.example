@@ -1,0 +1,18 @@
+//store all tokens, etc
+var config = {};
+
+config.devMixpanelToken = 'supersecrettoken';//replace
+
+config.facebookAppId = 'supersecrettoken';//replace
+
+config.rollbarAccountKey = 'supersecrettoken';//replace
+config.rollbarClientToken = 'supersecrettoken';//replace
+
+config.node_env = 'local';
+
+config.apiUrl = 'https://api-staging.eatmorsel.com';
+config.siteUrl = 'localhost:5000';//replace, if needed
+config.useSsl = false;
+config.appId = 00000000;//replace
+
+module.exports = config;
