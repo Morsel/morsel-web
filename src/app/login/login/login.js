@@ -56,7 +56,7 @@ angular.module( 'Morsel.login.login', [])
 
     function onSuccess(resp) {
       //use a callback so we don't switch windows while the mixpanel event is still firing
-      Mixpanel.send('Tapped Log In', {
+      Mixpanel.send('Clicked Log In', {
         login_type: 'email'
       }, function() {
         //if successfully logged in check if we have anything in the to-do queue

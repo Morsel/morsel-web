@@ -58,7 +58,7 @@ angular.module( 'Morsel.common.handleErrors', [] )
         }
 
         Mixpanel.send('Displayed Alert to User', {
-          error_message : serverErrors
+          message : serverErrors
         });
       }
     }
