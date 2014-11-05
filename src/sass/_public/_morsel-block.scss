@@ -16,6 +16,10 @@
     .loader {
       background-image: none;
     }
+
+    h1 a {
+      color: $link-hover-color;
+    }
   }
 
   &:after {
@@ -61,6 +65,12 @@
 
     h3 {
       font-size: 14px;
+    }
+
+    &:hover {
+      a {
+        color: white;
+      }
     }
   }
 

@@ -34,39 +34,11 @@ ul {
 }
 
 //type
-h1, .h1 {
-  a {
-    color: $headings-color;
-  }
-}
-
-h2, .h2 {
-  a {
-    color: $headings-color;
-  }
-}
-
-h3, .h3 {
-  a {
-    color: $headings-color;
-  }
-}
-
 h4, .h4 {
   font-family: $font-family-base;
-
-  a {
-    color: $headings-color;
-  }
 }
 
-h5, .h5 {
-  a {
-    color: $headings-color;
-  }
-}
-
-h6, .h6 {
+.link-heading {
   a {
     color: $headings-color;
   }

@@ -478,10 +478,10 @@ form {
 }
 
 a.white-link {
-  color: white !important;
+  color: white;
 
   &:hover, &:active {
-    color: $link-hover-color !important;;
+    color: $link-hover-color !important;
     text-decoration: none;
   }
 }
