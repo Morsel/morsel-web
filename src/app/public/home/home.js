@@ -36,7 +36,11 @@ angular.module( 'Morsel.public.home', [])
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $location, Restangular, $filter ) {
+.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $location, Restangular, $filter, Mixpanel ) {
+  Mixpanel.track_links('#masthead-btn', 'Clicked Masthead Button', {
+    button_text: 'Create Morsel'
+  });
+
   //pull our data from static data on s3
   Restangular.oneUrl('featuredMorsels', 'https://morsel.s3.amazonaws.com/static-morsels/homepage-morsels.json').get().then(function(resp) {
     $scope.featuredMorsels = $filter('orderBy')(Restangular.stripRestangular(resp), 'displayOrder');

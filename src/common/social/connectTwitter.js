@@ -92,7 +92,7 @@ angular.module( 'Morsel.common.connectTwitter', [] )
       }
 
       function onLoginSuccess(resp) {
-        Mixpanel.send('Clicked Log In', {
+        Mixpanel.send('Logged in', {
           login_type: 'twitter'
         }, function() {
           //if successfully logged in check if we have anything in the to-do queue

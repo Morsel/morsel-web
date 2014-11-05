@@ -133,7 +133,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function onLoginSuccess(resp) {
-        Mixpanel.send('Clicked Log In', {
+        Mixpanel.send('Logged in', {
           login_type: 'facebook'
         }, function() {
           //if successfully logged in check if we have anything in the to-do queue

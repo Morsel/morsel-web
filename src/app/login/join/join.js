@@ -182,10 +182,14 @@ angular.module( 'Morsel.login.join', [])
   function onSuccess(resp) {
     var login_type = $scope.userData && $scope.userData.social && $scope.userData.social.type ? $scope.userData.social.type : 'email';
 
+    //associate user with mixpanel person
+    Mixpanel.alias(resp.id);
+
     //register user as pro in mixpanel
     Mixpanel.register({
-      is_pro: $scope.basicInfoModel && $scope.basicInfoModel.professional ? $scope.basicInfoModel.professional : false
+      is_pro: $scope.basicInfoModel && $scope.basicInfoModel.professional ? true : false
     });
+    
     //send signup event
     Mixpanel.send('Signs Up', {
       login_type: login_type,
