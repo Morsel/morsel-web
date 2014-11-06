@@ -19,7 +19,7 @@ This is a table of all event names, properties and descriptions that are being t
 | Clicked iTunes Link | User clicks the link to go to iTunes | | 11/6/2014 |
 | Authenticated with Social | User authenticates with social | social_type | 11/6/2014 |
 | Signup - Completed Step | User completes a part of the signup flow | signup_step | 11/6/2014 |
-| $signup | User completed final part of signup flow, used for retention. Synonymous with Signup - Completed Step:signup_step-final | | 11/6/2014 |
+| $signup | User completed final part of signup flow, used for retention. Synonymous with Signup - Completed Step:signup_step=final | | 11/6/2014 |
 | Clicked Masthead Button | User clicked the big button in the masthead | 11/6/2014 |
 
 ### Super Property List
