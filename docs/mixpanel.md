@@ -31,6 +31,7 @@ This is a table of all super properties (properties that are sent with every eve
 | client_version      | Version of client's code | "1.0.1" | 11/6/2014 |
 | $screen_width       | Width of user's screen   | numeric | 11/6/2014 |
 | $screen_height      | Height of user's screen  | numeric | 11/6/2014 |
+| morsel_user_id      | User's id (if logged in) | numeric | 4/9/2014 |
 | is_staff            | Is user a staff member   | boolean | 11/6/2014 |
 | is_pro              | Does user have pro account | boolean | 11/6/2014 |
 

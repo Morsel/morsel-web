@@ -185,12 +185,14 @@ angular.module( 'Morsel.login.join', [])
     //associate user with mixpanel person
     Mixpanel.alias(resp.id);
 
-    //register user as pro in mixpanel
+    //register some super properties
     Mixpanel.register({
+      morsel_user_id: resp.id,
       is_staff: resp.staff,
       is_pro: resp.professional
     });
 
+    //set up mixpanel people profile
     Mixpanel.people.set({
       $email: resp.email,
       $created: resp.created_at,
