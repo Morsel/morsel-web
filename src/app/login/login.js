@@ -123,10 +123,6 @@ angular.module( 'Morsel.login', [
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
       Mixpanel.identify(currentUser.id);
     }
-
-    Mixpanel.register({
-      is_staff : Auth.isStaff()
-    });
   }, function() {
     console.log('Trouble initiating user...');
   });

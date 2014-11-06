@@ -105,10 +105,6 @@ angular.module( 'Morsel.static', [
       Mixpanel.identify(currentUser.id);
     }
 
-    Mixpanel.register({
-      is_staff : Auth.isStaff()
-    });
-
     //update user until we get their picture
     if($scope.currentUser.photo_processing) {
       $timeout(function() {

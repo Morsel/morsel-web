@@ -18,7 +18,8 @@ angular.module( 'Morsel.common.mixpanel', [])
   if(usingMixpanel) {
     window.mixpanel.set_config({
       cookie_name: 'mrsl_mixpanel',
-      secure_cookie: true
+      secure_cookie: true,
+      cookie_expiration: 3650
     });
   }
 

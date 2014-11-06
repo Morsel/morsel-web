@@ -88,7 +88,7 @@ angular.module( 'Morsel.login.join', [])
 
 .controller( 'LandingCtrl', function LandingCtrl( $scope, $state, Mixpanel ) {
   $scope.joinEmail = function() {
-    Mixpanel.track('Signed Up', {
+    Mixpanel.track('Signup - Completed Step', {
       login_type: 'email',
       signup_step: 'initial'
     }, function() {
@@ -187,6 +187,7 @@ angular.module( 'Morsel.login.join', [])
 
     //register user as pro in mixpanel
     Mixpanel.register({
+      is_staff: resp.staff,
       is_pro: resp.professional
     });
 
@@ -201,7 +202,7 @@ angular.module( 'Morsel.login.join', [])
     }, function() {
       //nest these so we make sure they both happen before we leave the page
       //send signup event
-      Mixpanel.track('Signed Up', {
+      Mixpanel.track('Signup - Completed Step', {
         login_type: login_type,
         signup_step: 'final'
       }, function() {
