@@ -151,10 +151,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function sendToNextUrl() {
-        //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
+        //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go to feed
 
         //send them to the login page
-        $window.location.href = loginNext ? loginNext : '/';
+        $window.location.href = loginNext ? loginNext : '/feed';
       }
     },
     template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg">{{btnText}}</a>'

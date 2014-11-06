@@ -19,7 +19,7 @@ angular.module( 'Morsel.login.reservedUsername', [])
         Auth.getCurrentUserPromise().then(function(userData){
           //don't let a logged in user to this page
           if(Auth.isLoggedIn()) {
-            $window.location.href = '/';
+            $window.location.href = '/feed';
           } else {
             deferred.resolve(userData);
           }
@@ -109,8 +109,8 @@ angular.module( 'Morsel.login.reservedUsername', [])
       //pros need more info
       $state.go('auth.join.additionalInfo');
     } else {
-      //they're done - send um home
-      $window.location.href = '/';
+      //they're done - send um to feed
+      $window.location.href = '/feed';
     }
   }
 

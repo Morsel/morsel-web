@@ -21,7 +21,7 @@ angular.module( 'Morsel.login.join', [])
         Auth.getCurrentUserPromise().then(function(userData){
           //don't let a logged in user to this page
           if(Auth.isLoggedIn()) {
-            $window.location.href = '/';
+            $window.location.href = '/feed';
           } else {
             deferred.resolve(userData);
           }
@@ -79,8 +79,8 @@ angular.module( 'Morsel.login.join', [])
       if($stateParams.next) {
         $window.location.href = $stateParams.next;
       } else {
-        //send them home
-        $window.location.href = '/';
+        //send them to the feed
+        $window.location.href = '/feed';
       }
     }
   };

@@ -99,10 +99,10 @@ angular.module( 'Morsel.common.connectTwitter', [] )
           if(AfterLogin.hasCallback()) {
             AfterLogin.goToCallbackPath();
           } else {
-            //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
+            //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go to feed
 
             //send them to the login page
-            $window.location.href = tData.loginNext ? tData.loginNext : '/';
+            $window.location.href = tData.loginNext ? tData.loginNext : '/feed';
           }
         });
       }
