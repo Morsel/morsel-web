@@ -18,7 +18,7 @@ angular.module( 'Morsel.common.mixpanel', [])
       secure_cookie: true
     });
   }
-  
+
   return {
     send : function(e, customProps, callback) {
       var loggingProps;
