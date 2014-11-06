@@ -69,6 +69,13 @@ angular.module( 'Morsel.common.auth', [] )
 
     //update any Rollbar events to send user
     RollbarFactory.configure.person(Auth._currentUser);
+
+    //register some mixpanel super properties
+    Mixpanel.register({
+      morsel_user_id: userData.id,
+      is_staff: userData.staff,
+      is_pro: userData.professional
+    });
   };
 
   //forget the user in our app
@@ -118,6 +125,7 @@ angular.module( 'Morsel.common.auth', [] )
 
     ApiUsers.loginUser(userData).then(function(loggedInUserResp) {
       Auth._updateUser(loggedInUserResp.data);
+
       deferred.resolve(loggedInUserResp.data);
     }, function(resp){
       Auth._clearUser();

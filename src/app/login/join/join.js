@@ -193,13 +193,6 @@ angular.module( 'Morsel.login.join', [])
     //associate user with mixpanel person
     Mixpanel.alias(resp.id);
 
-    //register some super properties
-    Mixpanel.register({
-      morsel_user_id: resp.id,
-      is_staff: resp.staff,
-      is_pro: resp.professional
-    });
-
     $q.all(mixpanelPromises).then(function(){
       //cancel the timeout
       $timeout.cancel(mixpanelTimeout);
