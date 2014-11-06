@@ -28,7 +28,7 @@ angular.module( 'Morsel.common.socialSharing', [] )
           props.scheduled_event_name = scope.subject.title;
         }
 
-        Mixpanel.send('Clicked Share', props);
+        Mixpanel.track('Clicked Share', props);
       }
 
       function getMediaImage() {

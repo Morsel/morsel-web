@@ -48,7 +48,7 @@ angular.module( 'Morsel.common.connectTwitter', [] )
             //just sign them in
             login();
           } else {
-            Mixpanel.send('Authenticated with Social', {
+            Mixpanel.track('Authenticated with Social', {
               social_type: 'twitter'
             });
 
@@ -92,7 +92,7 @@ angular.module( 'Morsel.common.connectTwitter', [] )
       }
 
       function onLoginSuccess(resp) {
-        Mixpanel.send('Logged in', {
+        Mixpanel.track('Logged in', {
           login_type: 'twitter'
         }, function() {
           //if successfully logged in check if we have anything in the to-do queue

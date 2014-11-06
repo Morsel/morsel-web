@@ -88,7 +88,7 @@ angular.module( 'Morsel.login.join', [])
 
 .controller( 'LandingCtrl', function LandingCtrl( $scope, $state, Mixpanel ) {
   $scope.joinEmail = function() {
-    Mixpanel.send('Signs Up', {
+    Mixpanel.track('Signed Up', {
       login_type: 'email',
       signup_step: 'initial'
     }, function() {
@@ -180,32 +180,43 @@ angular.module( 'Morsel.login.join', [])
   };
 
   function onSuccess(resp) {
-    var login_type = $scope.userData && $scope.userData.social && $scope.userData.social.type ? $scope.userData.social.type : 'email';
+    var login_type = ($scope.userData && $scope.userData.social && $scope.userData.social.type) ? $scope.userData.social.type : 'email';
 
     //associate user with mixpanel person
     Mixpanel.alias(resp.id);
 
     //register user as pro in mixpanel
     Mixpanel.register({
-      is_pro: $scope.basicInfoModel && $scope.basicInfoModel.professional ? true : false
+      is_pro: resp.professional
     });
-    
-    //send signup event
-    Mixpanel.send('Signs Up', {
-      login_type: login_type,
-      signup_step: 'basic info'
-    }, function() {
-      //store our user data for the next step if we need it
-      $scope.userData.registered = resp;
 
-      //if successfully joined send to the next step
-      if($scope.userData.registered.professional) {
-        //pros need more info
-        $state.go('auth.join.additionalInfo');
-      } else {
-        //they're done
-        $scope.finishedSignup();
-      }
+    Mixpanel.people.set({
+      $email: resp.email,
+      $created: resp.created_at,
+      $first_name: resp.first_name,
+      $last_name: resp.last_name,
+      $username: resp.username,
+      is_staff: resp.staff,
+      is_pro: resp.professional
+    }, function() {
+      //nest these so we make sure they both happen before we leave the page
+      //send signup event
+      Mixpanel.track('Signed Up', {
+        login_type: login_type,
+        signup_step: 'final'
+      }, function() {
+        //store our user data for the next step if we need it
+        $scope.userData.registered = resp;
+
+        //if successfully joined send to the next step
+        if(resp.professional) {
+          //pros need more info
+          $state.go('auth.join.additionalInfo');
+        } else {
+          //they're done
+          $scope.finishedSignup();
+        }
+      });
     });
   }
 

@@ -1,7 +1,9 @@
 angular.module( 'Morsel.common.mixpanel', [])
 
+.constant('MIXPANEL_ENABLED', true)
+
 //handle sending mixpanel events
-.factory('Mixpanel', function() {
+.factory('Mixpanel', function(MIXPANEL_ENABLED) {
   var baseSuperProps = {
       client_device: 'web',
       client_version: MorselConfig.version,
@@ -9,10 +11,11 @@ angular.module( 'Morsel.common.mixpanel', [])
       $screen_height: window.innerHeight
     },
     superProps = {},
-    userId;
+    userId,
+    usingMixpanel = window.mixpanel && MIXPANEL_ENABLED;
 
   //update some configs
-  if(window.mixpanel) {
+  if(usingMixpanel) {
     window.mixpanel.set_config({
       cookie_name: 'mrsl_mixpanel',
       secure_cookie: true
@@ -20,10 +23,10 @@ angular.module( 'Morsel.common.mixpanel', [])
   }
 
   return {
-    send : function(e, customProps, callback) {
+    track : function(e, customProps, callback) {
       var loggingProps;
       
-      if(window.mixpanel) {
+      if(usingMixpanel) {
         window.mixpanel.track(e, customProps, callback); 
       } else {
         //combine all our mixpanel props (super + regular) for logging
@@ -36,7 +39,7 @@ angular.module( 'Morsel.common.mixpanel', [])
       }
     },
     track_links : function(selector, eventName, customProps) {
-      if(window.mixpanel) {
+      if(usingMixpanel) {
         window.mixpanel.track_links(selector, eventName, customProps);
       } else {
         console.log('Setting up track_links event: '+eventName+' on: '+ selector);
@@ -48,7 +51,7 @@ angular.module( 'Morsel.common.mixpanel', [])
       //fill in any base props
       superProps = _.defaults(superProps, baseSuperProps);
 
-      if(window.mixpanel) {
+      if(usingMixpanel) {
         window.mixpanel.register(superProps);
       } else {
         console.log('Mixpanel Register: ', superProps);
@@ -57,7 +60,7 @@ angular.module( 'Morsel.common.mixpanel', [])
     identify : function(id) {
       userId = id;
 
-      if(window.mixpanel) {
+      if(usingMixpanel) {
         window.mixpanel.identify(userId);
       } else {
         console.log('Mixpanel Identify: ', userId);
@@ -66,10 +69,19 @@ angular.module( 'Morsel.common.mixpanel', [])
     alias : function(id) {
       userId = id;
 
-      if(window.mixpanel) {
+      if(usingMixpanel) {
         window.mixpanel.alias(userId);
       } else {
         console.log('Mixpanel Alias: ', userId);
+      }
+    },
+    people : {
+      set : function(props, callback) {
+        if(usingMixpanel) {
+          window.mixpanel.people.set(props, callback);
+        } else {
+          console.log('Mixpanel Set people: ', props);
+        }
       }
     }
   };
