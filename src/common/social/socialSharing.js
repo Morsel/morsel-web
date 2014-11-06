@@ -24,11 +24,11 @@ angular.module( 'Morsel.common.socialSharing', [] )
         if(shareSubject === 'morsel-detail') {
           props.morsel_id = scope.subject.id;
           props.creator_id = scope.subject.creator.id;
-        } else if (shareSubject === 'event') {
-          props.event_name = scope.subject.title;
+        } else if (shareSubject === 'scheduled-event') {
+          props.scheduled_event_name = scope.subject.title;
         }
 
-        Mixpanel.send('Tapped Share', props);
+        Mixpanel.track('Clicked Share', props);
       }
 
       function getMediaImage() {
@@ -47,7 +47,7 @@ angular.module( 'Morsel.common.socialSharing', [] )
       scope.shareSocial = function(socialType) {
         if(scope.subjectType === 'morsel-detail') {
           shareMorselDetail(socialType);
-        } else if(scope.subjectType === 'event') {
+        } else if(scope.subjectType === 'scheduled-event') {
           shareEvent(socialType);
         }
       };
@@ -103,7 +103,7 @@ angular.module( 'Morsel.common.socialSharing', [] )
             s = scope.subject,
             shareUrl = scope.subject.url;
 
-        shareMixpanel(socialType, 'event');
+        shareMixpanel(socialType, 'scheduled-event');
 
         if(socialType === 'facebook') {
           url = 'https://www.facebook.com/sharer/sharer.php?u='+shareUrl;

@@ -44,8 +44,8 @@ angular.module( 'Morsel.common.afterLogin', [])
       if(callback.path) {
         $window.location.href = callback.path;
       } else {
-        //oops, missing a path, just go home
-        $window.location.href = '/';
+        //oops, missing a path, just go to feed
+        $window.location.href = '/feed';
       }
     },
     removeCallback: function() {

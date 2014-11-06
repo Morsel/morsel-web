@@ -21,7 +21,7 @@ angular.module( 'Morsel.login.join', [])
         Auth.getCurrentUserPromise().then(function(userData){
           //don't let a logged in user to this page
           if(Auth.isLoggedIn()) {
-            $window.location.href = '/';
+            $window.location.href = '/feed';
           } else {
             deferred.resolve(userData);
           }
@@ -79,8 +79,8 @@ angular.module( 'Morsel.login.join', [])
       if($stateParams.next) {
         $window.location.href = $stateParams.next;
       } else {
-        //send them home
-        $window.location.href = '/';
+        //send them to the feed
+        $window.location.href = '/feed';
       }
     }
   };
@@ -88,7 +88,7 @@ angular.module( 'Morsel.login.join', [])
 
 .controller( 'LandingCtrl', function LandingCtrl( $scope, $state, Mixpanel ) {
   $scope.joinEmail = function() {
-    Mixpanel.send('Signs Up', {
+    Mixpanel.track('Signup - Completed Step', {
       login_type: 'email',
       signup_step: 'initial'
     }, function() {
@@ -97,7 +97,7 @@ angular.module( 'Morsel.login.join', [])
   };
 })
 
-.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers, localStorageService, Mixpanel ) {
+.controller( 'BasicInfoCtrl', function BasicInfoCtrl( $scope, Auth, HandleErrors, $state, AfterLogin, ApiUsers, localStorageService, Mixpanel, $q, $timeout ) {
   //used to differentiate between login types for UI
   $scope.usingEmail = _.isEmpty($scope.userData.social); 
 
@@ -180,24 +180,63 @@ angular.module( 'Morsel.login.join', [])
   };
 
   function onSuccess(resp) {
-    var login_type = $scope.userData && $scope.userData.social && $scope.userData.social.type ? $scope.userData.social.type : 'email';
+    var login_type = ($scope.userData && $scope.userData.social && $scope.userData.social.type) ? $scope.userData.social.type : 'email',
+        signupDeferredA = $q.defer(),
+        signupDeferredB = $q.defer(),
+        signupDeferredC = $q.defer(),
+        mixpanelPromises = [signupDeferredA.promise, signupDeferredB.promise, signupDeferredC.promise],
+        mixpanelTimeout;
 
-    Mixpanel.send('Signs Up', {
-      login_type: login_type,
-      signup_step: 'basic info',
-      is_pro: $scope.basicInfoModel && $scope.basicInfoModel.professional ? $scope.basicInfoModel.professional : false
+    //store our user data for the next step if we need it
+    $scope.userData.registered = resp;
+
+    //associate user with mixpanel person
+    Mixpanel.alias(resp.id);
+
+    //register some super properties
+    Mixpanel.register({
+      morsel_user_id: resp.id,
+      is_staff: resp.staff,
+      is_pro: resp.professional
+    });
+
+    $q.all(mixpanelPromises).then(function(){
+      //cancel the timeout
+      $timeout.cancel(mixpanelTimeout);
+      //proceed signup
+      leaveSignup(resp.professional);
+    });
+
+    //set a timeout in case mixpanel calls don't all resolve, don't want to block user signup because of mixpanel
+    mixpanelTimeout = $timeout(function() {
+      //proceed signup
+      leaveSignup(resp.professional);
+    }, 5000);
+
+    //set up mixpanel people profile
+    Mixpanel.people.set({
+      $email: resp.email,
+      $created: resp.created_at,
+      $first_name: resp.first_name,
+      $last_name: resp.last_name,
+      $username: resp.username,
+      is_staff: resp.staff,
+      is_pro: resp.professional
     }, function() {
-      //store our user data for the next step if we need it
-      $scope.userData.registered = resp;
+      signupDeferredA.resolve();
+    });
 
-      //if successfully joined send to the next step
-      if($scope.userData.registered.professional) {
-        //pros need more info
-        $state.go('auth.join.additionalInfo');
-      } else {
-        //they're done
-        $scope.finishedSignup();
-      }
+    //send signup flow event
+    Mixpanel.track('Signup - Completed Step', {
+      login_type: login_type,
+      signup_step: 'final'
+    }, function() {
+      signupDeferredB.resolve();
+    });
+
+    //send $signup event
+    Mixpanel.track('$signup', null, function() {
+      signupDeferredC.resolve();
     });
   }
 
@@ -210,6 +249,17 @@ angular.module( 'Morsel.login.join', [])
 
   function setRemotePhotoUrl(url) {
     $scope.remotePhotoUrl = url;
+  }
+
+  function leaveSignup(isPro) {
+    //if successfully joined send to the next step
+    if(isPro) {
+      //pros need more info
+      $state.go('auth.join.additionalInfo');
+    } else {
+      //they're done
+      $scope.finishedSignup();
+    }
   }
 })
 

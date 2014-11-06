@@ -40,7 +40,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             //just sign them in
             login();
           } else {
-            Mixpanel.send('Authenticated with Social', {
+            Mixpanel.track('Authenticated with Social', {
               social_type: 'facebook'
             });
 
@@ -133,7 +133,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function onLoginSuccess(resp) {
-        Mixpanel.send('Tapped Log In', {
+        Mixpanel.track('Logged in', {
           login_type: 'facebook'
         }, function() {
           //if successfully logged in check if we have anything in the to-do queue
@@ -151,10 +151,10 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       }
 
       function sendToNextUrl() {
-        //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
+        //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go to feed
 
         //send them to the login page
-        $window.location.href = loginNext ? loginNext : '/';
+        $window.location.href = loginNext ? loginNext : '/feed';
       }
     },
     template: '<a ng-click="connectFacebook()" class="btn btn-social btn-facebook btn-lg">{{btnText}}</a>'

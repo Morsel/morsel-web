@@ -57,8 +57,8 @@ angular.module( 'Morsel.common.handleErrors', [] )
           //don't set our form as invalid on a server error - user could have perfectly valid inputs
         }
 
-        Mixpanel.send('Displayed Alert to User', {
-          error_message : serverErrors
+        Mixpanel.track('Error in form', {
+          message : serverErrors
         });
       }
     }

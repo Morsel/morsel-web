@@ -250,7 +250,7 @@ angular.module( 'Morsel.common.auth', [] )
         errorList = errors || 'No error message';
 
     //send error report to mixpanel
-    Mixpanel.send('Error - API', {
+    Mixpanel.track('Error - API', {
       http_status: status,
       error_message : JSON.stringify(errorList)
     });

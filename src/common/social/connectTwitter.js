@@ -48,7 +48,7 @@ angular.module( 'Morsel.common.connectTwitter', [] )
             //just sign them in
             login();
           } else {
-            Mixpanel.send('Authenticated with Social', {
+            Mixpanel.track('Authenticated with Social', {
               social_type: 'twitter'
             });
 
@@ -92,17 +92,17 @@ angular.module( 'Morsel.common.connectTwitter', [] )
       }
 
       function onLoginSuccess(resp) {
-        Mixpanel.send('Tapped Log In', {
+        Mixpanel.track('Logged in', {
           login_type: 'twitter'
         }, function() {
           //if successfully logged in check if we have anything in the to-do queue
           if(AfterLogin.hasCallback()) {
             AfterLogin.goToCallbackPath();
           } else {
-            //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go home
+            //if the user was trying to get somewhere that's not able to be accessed until logging in, go there now, else go to feed
 
             //send them to the login page
-            $window.location.href = tData.loginNext ? tData.loginNext : '/';
+            $window.location.href = tData.loginNext ? tData.loginNext : '/feed';
           }
         });
       }

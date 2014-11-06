@@ -4,7 +4,7 @@ angular.module( 'Morsel.common.iTunesLink', [] )
   return {
     replace: true,
     link:function (scope, element, attrs) {
-      Mixpanel.track_links('#itunes-link', 'Tapped iTunes Link');
+      Mixpanel.track_links('#itunes-link', 'Clicked iTunes Link');
     },
     template: '<a href="http://mrsl.co/app_download_site" target="_blank" class="itunes-link" id="itunes-link"><img src="/assets/images/utility/Download_on_the_App_Store_Badge_US-UK_135x40.svg" /></a>'
   };
