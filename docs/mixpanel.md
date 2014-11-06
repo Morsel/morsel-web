@@ -12,7 +12,7 @@ This is a table of all event names, properties and descriptions that are being t
 
 | Event Name (case sensitive) | Description                  | Properties      | Date Started |
 | ------------------ | ---------------------------- | ------------ | ------------ |
-| Logged in    | User clicked a button to log in |   | 11/6/2014    |
+| Logged in    | User completed log in |   | 11/6/2014    |
 | Error - API  | An error was received with key="api" | error_message, http_status | 11/6/2014 |
 | Error in form | User encountered a form error | message | 11/6/2014 |
 | Clicked Share | User clicks to share something | morsel_id, social_type, creator_id, share_type, event_name | 11/6/2014 |
