@@ -9,7 +9,7 @@ angular.module('Morsel.common.morselBlock', [])
       noUser: '@mrslMorselBlockNoUser',
       noStats: '@mrslMorselBlockNoStats',
       noPlace: '@mrslMorselBlockNoPlace',
-      morselFeedItemId: '@mrslMorselBlockFeedItemId',
+      morselFeedItemId: '=mrslMorselBlockFeedItemId',
       spacer: '@mrslMorselBlockSpacer'
     },
     link: function(scope, element) {

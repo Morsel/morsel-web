@@ -24,6 +24,10 @@
       .user-info-main {
         margin: 0;
         line-height: $profile-pic-xs;
+
+        a {
+          color: $morsel-dark;
+        }
       }
 
       .profile-pic-link {

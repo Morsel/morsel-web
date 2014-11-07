@@ -8,6 +8,6 @@
       <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name" class="white-link"></a>
     </h3>
   </div>
-  <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" class="morsel-img"></a>
+  <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+ (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" class="morsel-img"></a>
   <img src="/assets/images/utility/spacer.png" class="spacer loader" ng-if="spacer" />
 </div>

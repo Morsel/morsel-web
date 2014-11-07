@@ -17,8 +17,12 @@
       background-image: none;
     }
 
-    h1 a {
-      color: $link-hover-color;
+    h1 {
+      color: $link-hover-color;//for overflow ellipsis
+
+      a {
+        color: $link-hover-color;
+      }
     }
   }
 
@@ -77,6 +81,10 @@
   .overflow-ellipsis {
     color: white;
     margin: 0;
+
+    &:hover {
+      color: $link-hover-color;
+    }
   }
 
   .morsel-img {

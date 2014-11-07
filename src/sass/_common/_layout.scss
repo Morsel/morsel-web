@@ -10,12 +10,6 @@
   background-color: $morsel-background;
 }
 
-.morsel-icon {
-  @include replace-text-with-dimensions('logos/morsel-m.png');
-  background-size: image-width('logos/morsel-m.png') image-height('logos/morsel-m.png');
-  display: inline-block;
-}
-
 .main-header {
   z-index: 11;
   position: fixed;
@@ -42,8 +36,8 @@
 
   .morsel-logo {
     margin: 6px 0;
-    display: inline-block;
     vertical-align: middle;
+    display: inline-block;
 
     a {
       display: block;
@@ -133,14 +127,6 @@
   > .text-center {
     margin-top: 5px;
   }
-}
-
-.morsel-app-icon {
-  @include replace-text('logos/morsel-app-icon.png');
-  background-size: image-width('logos/morsel-app-icon.png') image-height('logos/morsel-app-icon.png');
-  height: image-height('logos/morsel-app-icon.png');
-  width: image-width('logos/morsel-app-icon.png');
-  display: inline-block;
 }
 
 .main-footer {
@@ -234,20 +220,6 @@
   [class*="col-"] {
     padding-left: 0;
     padding-right: 0;
-  }
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2) {
-  .main-header {
-    .morsel-logo {
-      a {
-        @include replace-text('logos/morsel-m@2x.png');
-      }
-    }
-  }
-
-  .morsel-app-icon {
-    @include replace-text('logos/morsel-app-icon@2x.png');
   }
 }
 
