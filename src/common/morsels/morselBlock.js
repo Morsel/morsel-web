@@ -1,6 +1,6 @@
 angular.module('Morsel.common.morselBlock', [])
 
-.directive('mrslMorselBlock', function(PhotoHelpers, MORSELPLACEHOLDER) {
+.directive('mrslMorselBlock', function(PhotoHelpers, MORSELPLACEHOLDER, $location) {
   return {
     restrict: 'A',
     replace: true,
@@ -13,6 +13,8 @@ angular.module('Morsel.common.morselBlock', [])
       spacer: '@mrslMorselBlockSpacer'
     },
     link: function(scope, element) {
+      scope.morselUrl = '/'+scope.morsel.creator.username.toLowerCase()+'/'+scope.morsel.id+'-'+scope.morsel.slug+ (scope.morselFeedItemId ? +'?source=feed&feedId='+scope.morselFeedItemId : '');
+
       scope.getCoverPhotoArray = function() {
         var primaryItemPhotos,
             $el = element[0],
