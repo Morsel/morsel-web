@@ -258,6 +258,12 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       loginApp.renderLoginPage(res);
     });
 
+    //admin requests - right now just shadow users. break out into
+    //separate angular project eventually
+    app.get('/admin*', function(req, res){
+      loginApp.renderLoginPage(res);
+    });
+
     //ACCOUNT
     app.get('/account*', function(req, res){
       accountApp.renderAccountPage(req, res);

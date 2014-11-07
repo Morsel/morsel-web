@@ -34,6 +34,7 @@ This is a table of all super properties (properties that are sent with every eve
 | morsel_user_id      | User's id (if logged in) | numeric | 4/9/2014 |
 | is_staff            | Is user a staff member   | boolean | 11/6/2014 |
 | is_pro              | Does user have pro account | boolean | 11/6/2014 |
+| is_shadow_user      | User logged in as someone else | boolean | 11/6/2014 |
 
 ### Property List
 This is a table of all property names and descriptions that are being tracked. It should be kept up to date whenever properties are added/altered
