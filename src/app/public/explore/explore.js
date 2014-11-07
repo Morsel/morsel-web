@@ -19,7 +19,7 @@ angular.module( 'Morsel.public.explore', [])
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, $location, Auth, MORSEL_LIST_NUMBER ) {
+.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, $location, Auth, MORSEL_LIST_NUMBER, $state ) {
   //# of morsels to load at a time
   $scope.exploreIncrement = MORSEL_LIST_NUMBER;
 
