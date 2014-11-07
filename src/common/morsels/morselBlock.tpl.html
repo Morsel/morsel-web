@@ -1,13 +1,13 @@
 <div bindonce="morsel" class="morsel-block morsel-bg" ng-class="{'using-spacer':spacer}">
   <div class="morsel-info">
     <h1 class="h2 morsel-block-title">
-      <a bo-href="morselUrl" bo-text="morsel.title" class="white-link overflow-ellipsis"></a>
+      <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+ (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" bo-text="morsel.title" class="white-link overflow-ellipsis"></a>
     </h1>
     <h2 class="h3 morsel-block-creator" ng-if="!noUser"><a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="white-link overflow-ellipsis"></a></h2>
     <h3 class="h6 morsel-block-place" ng-if="morsel.place && !noPlace">
       <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name" class="white-link overflow-ellipsis"></a>
     </h3>
   </div>
-  <a bo-href="morselUrl" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" class="morsel-img"></a>
+  <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+ (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" class="morsel-img"></a>
   <img src="/assets/images/utility/spacer.png" class="spacer loader" ng-if="spacer" />
 </div>
