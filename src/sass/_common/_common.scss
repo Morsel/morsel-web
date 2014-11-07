@@ -174,14 +174,6 @@ img {
   font-style: italic;
 }
 
-.morsel-icon {
-  background-image: url(images/icons/morsel-icon.png);
-  background-size: cover;
-  height: 14px;
-  width: 14px;
-  display: inline-block;
-}
-
 .time-ago {
   font-size: 12px;
   margin: 0;
@@ -380,13 +372,9 @@ form {
 }
 
 .morsel-text {
-  background: url(images/logos/morsel-text.png) center top no-repeat;
+  @include replace-text-with-dimensions('logos/morsel-text.png');
   background-size: image-width('logos/morsel-text.png') image-height('logos/morsel-text.png');
-  width: image-width('logos/morsel-text.png');
-  height: image-height('logos/morsel-text.png');
   display: inline-block;
-  text-indent: -9999px;
-  overflow: hidden;
 
   &.morsel-text-sm {
     background-image: url(images/logos/morsel-text_sm.png);
@@ -398,6 +386,18 @@ form {
       background-image: url(images/logos/morsel-text_sm_white.png);
     }
   }
+}
+
+.morsel-icon {
+  @include replace-text-with-dimensions('logos/morsel-m.png');
+  background-size: image-width('logos/morsel-m.png') image-height('logos/morsel-m.png');
+  display: inline-block;
+}
+
+.morsel-app-icon {
+  @include replace-text-with-dimensions('logos/morsel-app-icon.png');
+  background-size: image-width('logos/morsel-app-icon.png') image-height('logos/morsel-app-icon.png');
+  display: inline-block;
 }
 
 @include error-page();
@@ -445,6 +445,14 @@ form {
         background-image: url(images/logos/morsel-text_sm_white@2x.png);
       }
     }
+  }
+
+  .morsel-icon {
+    background-image: url(images/logos/morsel-m@2x.png);
+  }
+
+  .morsel-app-icon {
+    background-image: url(images/logos/morsel-app-icon@2x.png);
   }
 }
 
