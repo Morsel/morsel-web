@@ -34,6 +34,7 @@ angular.module( 'Morsel.login', [
   'Morsel.common.userImage',
   'Morsel.common.validatedElement',
   //app
+  'Morsel.login.admin',
   'Morsel.login.auth',
   'Morsel.login.join',
   'Morsel.login.login',

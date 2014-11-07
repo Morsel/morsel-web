@@ -169,6 +169,15 @@ angular.module( 'Morsel.add', [
       Mixpanel.identify(currentUser.id);
     }
 
+    if(Auth.isShadowUser()) {
+      //show messaging if user is a shadow user
+      $scope.shadowUser = true;
+      //track in mixpanel so we know actions are "real"
+      Mixpanel.register({
+        is_shadow_user: true
+      });
+    }
+
     //update user until we get their picture
     if($scope.currentUser.photo_processing) {
       $timeout(function() {

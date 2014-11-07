@@ -136,9 +136,21 @@ angular.module( 'Morsel.common.auth', [] )
   };
 
   //log out a user
-  Auth.logout = function(userData) {
+  Auth.logout = function(doNotRedirect) {
     Auth._clearUser();
-    $window.location.href = '/';
+
+    //we're no longer a shadow user
+    localStorageService.remove('shadowUser');
+
+    //stop tracking as one
+    Mixpanel.register({
+      is_shadow_user: false
+    });
+
+    //allow logging out without going anywhere. will be handled on the side of wherever calls this
+    if(!doNotRedirect) {
+      $window.location.href = '/';
+    }
   };
 
   //intercept our API calls
@@ -277,6 +289,16 @@ angular.module( 'Morsel.common.auth', [] )
       controller: ModalInstanceCtrl,
       resolve: {}
     });
+  };
+
+  //set someone as a shadow user
+  Auth.setShadowUser = function() {
+    localStorageService.set('shadowUser', true);
+  };
+
+  //get shadow user status from storage
+  Auth.isShadowUser = function() {
+    return localStorageService.get('shadowUser') || false;
   };
 
   //to start, reset our user

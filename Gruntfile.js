@@ -1441,6 +1441,14 @@ module.exports = function ( grunt ) {
         });
       }
     });
+
+    grunt.file.copy('src/views/partials/shadowUser.hbs', this.data.dir + '/views/partials/shadowUser.hbs', { 
+      process: function ( contents, path ) {
+        return grunt.template.process( contents, {
+          data: {}
+        });
+      }
+    });
   });
 
   /* analogous to app_public */
