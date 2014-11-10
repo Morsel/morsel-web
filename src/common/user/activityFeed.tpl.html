@@ -27,7 +27,7 @@
             <a class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.id+'-'+activity.subject.slug">
               <img bo-src="getMorselPhoto(activity.subject)" />
             </a>
-            <p><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-text="activity.creator.username"></a> tagged you in <a bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.morsel.id+'-'+activity.morsel.slug">"{{activity.subject.title | truncate:80}}"</a></p>
+            <p><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-text="activity.creator.username"></a> tagged you in "{{activity.subject.title | truncate:80}}"</p>
             <span am-time-ago="activity.action.created_at" class="time-ago"></span>
           </div>
         </div>
