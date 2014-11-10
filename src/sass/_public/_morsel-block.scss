@@ -66,16 +66,8 @@
       font-size: 14px;
       margin: 0;
 
-      span {
-        color: white;
-        vertical-align: middle;
-      }
-
-      a {
-        vertical-align: middle;
-
+      .user-by {
         &:before {
-          content: 'By ';
           color: white;
         }
       }

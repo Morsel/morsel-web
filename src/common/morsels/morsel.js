@@ -1,6 +1,8 @@
 angular.module('Morsel.common.morsel', [])
 
-.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth) {
+.constant('COVER_PHOTO_PERCENTAGE', 0.6)
+
+.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE) {
   var //debounce on page resize/orientation change
       orientationChangeTime = 300,
       moreScrollTime = 500;
@@ -14,7 +16,7 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope) {
       var onOrientationChange,
           winEl = angular.element($window),
-          pageHeight,
+          coverHeight,
           $body = angular.element(document.getElementsByTagName('body'));
 
       //hold all our computed layout measurements
@@ -98,8 +100,8 @@ angular.module('Morsel.common.morsel', [])
       };
 
       function updateItemHeight() {
-        pageHeight = window.innerHeight;
-        scope.layout.pageHeight = pageHeight+'px';
+        coverHeight = window.innerHeight*COVER_PHOTO_PERCENTAGE;
+        scope.layout.coverHeight = coverHeight+'px';
       }
 
       //resize cover page on resize
@@ -118,7 +120,7 @@ angular.module('Morsel.common.morsel', [])
       });
 
       scope.moreClick = function() {
-        $body.scrollTop(pageHeight, moreScrollTime);
+        $body.scrollTop(coverHeight, moreScrollTime);
       };
     },
     templateUrl: 'common/morsels/morsel.tpl.html'
@@ -141,7 +143,7 @@ angular.module('Morsel.common.morsel', [])
         }
       };
     },
-    template: '<div class="item-description"><p ng-bind-html="formatDescription()"></p></div>'
+    template: '<div class="item-description" ng-if="item.description"><p ng-bind-html="formatDescription()"></p></div>'
   };
 })
 

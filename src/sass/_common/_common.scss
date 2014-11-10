@@ -141,11 +141,6 @@ img {
       font-size: 22px;
       line-height: 30px;
       margin: 5px auto 0;
-
-      a {
-        color: $morsel-primary;
-        text-transform: none;
-      }
     }
 
     h6 {
@@ -155,7 +150,6 @@ img {
       a {
         font-size: 16px;
         text-transform: none;
-        color: $morsel-primary;
       }
 
       span {
@@ -166,6 +160,18 @@ img {
     .profile-pic-link {
       float: none;
     }
+  }
+}
+
+.user-by {
+  vertical-align: middle;
+
+  &:before {
+    content: 'By ';
+  }
+
+  &:hover {
+    text-decoration: none;
   }
 }
 

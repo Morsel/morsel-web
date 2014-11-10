@@ -3,7 +3,7 @@
     <h1 class="h2 morsel-block-title">
       <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+ (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" bo-text="morsel.title" class="white-link overflow-ellipsis"></a>
     </h1>
-    <h2 class="h3 morsel-block-creator" ng-if="!noUser"><a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="white-link overflow-ellipsis"></a></h2>
+    <h2 class="h3 morsel-block-creator" ng-if="!noUser"><a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="white-link overflow-ellipsis user-by"></a></h2>
     <h3 class="h6 morsel-block-place" ng-if="morsel.place && !noPlace">
       <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name" class="white-link overflow-ellipsis"></a>
     </h3>
