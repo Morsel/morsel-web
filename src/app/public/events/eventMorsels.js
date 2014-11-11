@@ -109,7 +109,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventInfo.twitterUsername = '@RARETEACELLAR';
   } else if(eventSlug === 'ideas-in-food-our-community-in-action') {
     eventUrl += 'ideas-in-food-our-community-in-action/ideas-in-food-our-community-in-action-morsels.json';
-    eventInfo.title = 'Rare Tea Cellar Clients';
+    eventInfo.title = 'Ideas in Food - Our Community in Action';
     eventInfo.location = null;
     eventInfo.description = $sce.trustAsHtml('Aki Kamozawa and H. Alexander Talbot published <b>Ideas in Food, Great Recipes and Why They Work</b> in December 2010. The book shares the knowledge gleaned from numerous cooking adventures, from why tapioca flour makes a silkier chocolate pudding than the traditional cornstarch or flour to how to cold smoke just about any ingredient you can think of to impart a new savory dimension to everyday dishes. Perfect for anyone who loves food, Ideas in Food is the ideal handbook for unleashing creativity, intensifying flavors, and pushing one’s cooking to new heights.<br/><br/>This collection is a showcase of the amazing things our community is doing with this book.');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/ideas-in-food-our-community-in-action/ideas-in-food-our-community-in-action-logo.png';
