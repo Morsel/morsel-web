@@ -59,8 +59,7 @@ angular.module( 'Morsel.add.tagPeople', [] )
               };
 
           if(endUser) {
-            userParams.before_id = endUser.id;
-            userParams.before_date = endUser.followed_at;
+            userParams.max_id = endUser.id-1;
           }
 
           ApiMorsels.getEligibleTaggedUsers(morsel.id, userParams).then(function(userResp){
