@@ -1,6 +1,9 @@
-<div>
+<div class="add-tagged-users">
   <div ng-if="!taggedUsers" class="loader"></div>
-  <ul ng-if="taggedUsers" class="add-tagged-users">
+  <div ng-if="taggedUsers && taggedUsers.length === 0" class="text-left">
+    <span class="empty-state">No users tagged</span>
+  </div>
+  <ul ng-if="taggedUsers">
     <li ng-repeat="user in taggedUsers">
       <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-xs" mrsl-blank-target></div>
     </li>
