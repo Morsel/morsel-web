@@ -91,6 +91,30 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/slow-food-ark-of-taste/slow-food-ark-of-taste-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/collections/slow-food-ark-of-taste';
     eventInfo.twitterUsername = '@SlowFoodUSA';
+  } else if(eventSlug === 'meals-on-wheels-chicago-celebrity-chef-ball-2014') {
+    eventUrl += 'meals-on-wheels-chicago-celebrity-chef-ball-2014/meals-on-wheels-chicago-celebrity-chef-ball-2014-morsels.json';
+    eventInfo.title = 'Meals on Wheels Chicago Celebrity Chef Ball 2014';
+    eventInfo.location = null;
+    eventInfo.description = $sce.trustAsHtml('The Meals on Wheels Chicago Celebrity Chef Ball is one of Chicago\'s longest-running culinary fundraisers, raising more than $200,000 each year in support of the organization\'s mission to ensure that both homebound seniors and individuals with disabilities benefit from programs that improve their quality of life and maximize independence.<br/><br/>Here\'s a peak at 2014\'s amazing event!');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/meals-on-wheels-chicago-celebrity-chef-ball-2014/meals-on-wheels-chicago-celebrity-chef-ball-2014-logo.jpg';
+    eventInfo.url = 'https://www.eatmorsel.com/collections/meals-on-wheels-chicago-celebrity-chef-ball-2014';
+    eventInfo.twitterUsername = '@MOWChicago';
+  } else if(eventSlug === 'rare-tea-cellar-clients') {
+    eventUrl += 'rare-tea-cellar-clients/rare-tea-cellar-clients-morsels.json';
+    eventInfo.title = 'Rare Tea Cellar Clients';
+    eventInfo.location = null;
+    eventInfo.description = $sce.trustAsHtml('Rare Tea Cellar specialize in the finest and rarest teas and ingredients available on planet earth. For over 15 years we have supplied top chefs, hotels, restaurants and mixologists with unique ingredients.<br/><br/>Take a look at what our amazing clients are doing with our teas!');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/rare-tea-cellar-clients/rare-tea-cellar-clients-logo.jpg';
+    eventInfo.url = 'https://www.eatmorsel.com/collections/rare-tea-cellar-clients';
+    eventInfo.twitterUsername = '@RARETEACELLAR';
+  } else if(eventSlug === 'ideas-in-food-our-community-in-action') {
+    eventUrl += 'ideas-in-food-our-community-in-action/ideas-in-food-our-community-in-action-morsels.json';
+    eventInfo.title = 'Rare Tea Cellar Clients';
+    eventInfo.location = null;
+    eventInfo.description = $sce.trustAsHtml('Aki Kamozawa and H. Alexander Talbot published <b>Ideas in Food, Great Recipes and Why They Work</b> in December 2010. The book shares the knowledge gleaned from numerous cooking adventures, from why tapioca flour makes a silkier chocolate pudding than the traditional cornstarch or flour to how to cold smoke just about any ingredient you can think of to impart a new savory dimension to everyday dishes. Perfect for anyone who loves food, Ideas in Food is the ideal handbook for unleashing creativity, intensifying flavors, and pushing one’s cooking to new heights.<br/><br/>This collection is a showcase of the amazing things our community is doing with this book.');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/ideas-in-food-our-community-in-action/ideas-in-food-our-community-in-action-logo.png';
+    eventInfo.url = 'https://www.eatmorsel.com/collections/ideas-in-food-our-community-in-action';
+    eventInfo.twitterUsername = '@ideasinfood';
   } else {
     //invalid event
     $location.path('/');
