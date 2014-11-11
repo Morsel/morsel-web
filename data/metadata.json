@@ -170,5 +170,44 @@
       "type": "article"
     },
     "url": "https://www.eatmorsel.com/collections/slow-food-ark-of-taste"
+  },
+  "meals-on-wheels-chicago-celebrity-chef-ball-2014": {
+    "title": "Meals on Wheels Chicago Celebrity Chef Ball 2014 | Morsel",
+    "description": "The Meals on Wheels Chicago Celebrity Chef Ball is one of Chicago's longest-running culinary fundraisers, raising more than $200,000 each year in support of the organization's mission to ensure that both homebound seniors and individuals with disabilities benefit from programs that improve their quality of life and maximize independence.",
+    "image": "https://morsel.s3.amazonaws.com/events/meals-on-wheels-chicago-celebrity-chef-ball-2014/meals-on-wheels-chicago-celebrity-chef-ball-2014-logo.jpg",
+    "twitter": {
+      "creator": "@MOWChicago",
+      "card": "summary_large_image"
+    },
+    "og": {
+      "type": "article"
+    },
+    "url": "https://www.eatmorsel.com/collections/meals-on-wheels-chicago-celebrity-chef-ball-2014"
+  },
+  "rare-tea-cellar-clients": {
+    "title": "Rare Tea Cellar Clients | Morsel",
+    "description": "Rare Tea Cellar specialize in the finest and rarest teas and ingredients available on planet earth. For over 15 years we have supplied top chefs, hotels, restaurants and mixologists with unique ingredients.",
+    "image": "https://morsel.s3.amazonaws.com/events/rare-tea-cellar-clients/rare-tea-cellar-clients-logo.jpg",
+    "twitter": {
+      "creator": "@RARETEACELLAR",
+      "card": "summary_large_image"
+    },
+    "og": {
+      "type": "article"
+    },
+    "url": "https://www.eatmorsel.com/collections/rare-tea-cellar-clients"
+  },
+  "ideas-in-food-our-community-in-action": {
+    "title": "Ideas in Food - Our Community in Action | Morsel",
+    "description": "Aki Kamozawa and H. Alexander Talbot published Ideas in Food, Great Recipes and Why They Work in December 2010. The book shares the knowledge gleaned from numerous cooking adventures, from why tapioca flour makes a silkier chocolate pudding than the traditional cornstarch or flour to how to cold smoke just about any ingredient you can think of to impart a new savory dimension to everyday dishes. Perfect for anyone who loves food, Ideas in Food is the ideal handbook for unleashing creativity, intensifying flavors, and pushing one’s cooking to new heights.",
+    "image": "https://morsel.s3.amazonaws.com/events/ideas-in-food-our-community-in-action/ideas-in-food-our-community-in-action-logo.png",
+    "twitter": {
+      "creator": "@ideasinfood",
+      "card": "summary_large_image"
+    },
+    "og": {
+      "type": "article"
+    },
+    "url": "https://www.eatmorsel.com/collections/ideas-in-food-our-community-in-action"
   }
 }
