@@ -368,6 +368,7 @@ module.exports = {
         'src/common/places/addPlace.js',
         'src/common/social/facebookApi.js',
         'src/common/user/userImage.js',
+        'src/common/user/userList.js',
         'src/common/user/usersName.js',
         'src/common/util/flashDownload.js',
         'src/common/util/headerScroll.js',
@@ -384,6 +385,8 @@ module.exports = {
         'src/common/forms/validatedTextarea.tpl.html',
         'src/common/images/uploadNew.tpl.html',
         'src/common/places/addPlace.tpl.html',
+        'src/common/user/userList.tpl.html',
+        'src/common/user/userListOverlay.tpl.html',
         'src/common/util/404.tpl.html',
         'src/common/util/viewMore.tpl.html'
       ]

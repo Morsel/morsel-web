@@ -43,6 +43,7 @@ angular.module( 'Morsel.add', [
   'Morsel.common.rollbar',
   'Morsel.common.submitBtn',
   'Morsel.common.userImage',
+  'Morsel.common.userList',
   'Morsel.common.usersName',
   'Morsel.common.validatedElement',
   'Morsel.common.viewMore',
@@ -56,6 +57,8 @@ angular.module( 'Morsel.add', [
   'Morsel.add.item',
   'Morsel.add.morsel',
   'Morsel.add.new',
+  'Morsel.add.tagPeople',
+  'Morsel.add.tagPersonButton',
   'Morsel.add.templates'
 ])
 

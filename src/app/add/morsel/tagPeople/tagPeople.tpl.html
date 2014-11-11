@@ -1,0 +1,11 @@
+<div>
+  <div ng-if="!taggedUsers" class="loader"></div>
+  <ul ng-if="taggedUsers" class="add-tagged-users">
+    <li ng-repeat="user in taggedUsers">
+      <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-xs" mrsl-blank-target></div>
+    </li>
+  </ul>
+  <div class="text-right">
+    <button ng-click="popOverlay()" class="btn-link" ng-class="" ng-bind="taggedUsers.length === 0 ? '&#43; Tag People' : 'Edit Tagged People'"></button>
+  </div>
+</div>
