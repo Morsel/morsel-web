@@ -23,6 +23,8 @@ angular.module( 'Morsel.common.viewMore', [
 
         if(newValue && (nothingNew || lessThanIncrement)) {
           scope.allDataLoaded = true;
+        } else {
+          scope.allDataLoaded = false;
         }
       });
 
