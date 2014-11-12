@@ -89,7 +89,7 @@ module.exports = {
         'src/common/itemActions/follow.js',
         'src/common/itemActions/followedUsers.js',
         'src/common/itemActions/followers.js',
-        'src/common/itemActions/like.js',
+        'src/common/morsels/like.js',
         'src/common/social/facebookApi.js',
         'src/common/social/socialSharing.js',
         'src/common/filters/nameMatch.js',
