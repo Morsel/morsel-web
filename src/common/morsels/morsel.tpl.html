@@ -21,8 +21,15 @@
                   <h5 class="h2 overflow-ellipsis">
                     <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="user-by"></a>
                   </h5>
+                  <h5 ng-if="morsel.taggedUsers" class="morsel-tagged-users">
+                    <ul>
+                      <li ng-repeat="user in morsel.taggedUsers">
+                        <a bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user"></a>
+                      </li>
+                    </ul>
+                  </h5>
                   <h6 class="overflow-ellipsis" bo-if="morsel.place">
-                    <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" class="h2" bo-text="morsel.place.name"></a>
+                    <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></a>
                     <span bo-text="(morsel.place.city ? morsel.place.city+', ':'')+morsel.place.state"></span>
                   </h6>
                 </div>
