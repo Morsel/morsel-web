@@ -114,6 +114,13 @@
         display: inline-block;
         float: right;
         margin-left: 5px;
+
+        span {
+          &:hover {
+            color: $link-hover-color;
+            cursor: pointer;
+          }
+        }
       }
     }
   }
