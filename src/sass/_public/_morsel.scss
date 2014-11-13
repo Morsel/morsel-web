@@ -269,36 +269,6 @@
   }
 }
 
-.morsel-control {
-  display: block;
-  width: $arrow-height;
-  height: $arrow-height;
-  z-index: 10;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  @include transition(background-color .1s ease-out, box-shadow .1s ease-out);
-  @include box-shadow(0px 0px 0px 0px rgba(0, 0, 0, 0));
-  @include border-top-right-radius(5px);
-  @include border-top-left-radius(5px);
-
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAA8CAYAAACtrX6oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAipJREFUeNrsnE1LAlEYRlUkIkJalPQLWkaLiHAVZWhfRKuIiKBo1f9pU7RoZ18SEUH9h4gWIq3CRYsWEa0iAnuHbjDIXJ3yjnOvnAMv4kyKj2d87thEyXq9noDuJcVbgGBAMCAYEAwIBgQDghEMCAYEA4IBwYBgQDCCAcGAYEAwIBgQDOFIt/Pgl63ZE7kZ9m1alXk2/BrH/Adi9vD2Lsb3q+N5hbvYBAujMiO++xcyMzLvhsIuypz57nvPOxSjYOfymq7ocfUC+w08V059Ynp8YxvW541iDc7LXDZU2V+ZVp+OXgeWOavztit4RaYWsH1Khc78s6auZAYD9t3ELNO5vO0KrsgU1K2J+vJqqqQ5ko9ktmMW7FxeExVdlZmTedLUVzlk6AlVU30B+/ZkNmU+LKhkp/KaWoO92lrQ1Fc+RH0Vm9TUscyuZeuuM3lNnmRV1JGtW6N09ZVTR31Q2HOZDUtPrpzIm4ogdKFFfWUaaqqsWYMOZNZkPi0+g7Y+bxRfk6ot6qukvuNNqprKampqx3K5TuRNRXhk6+qrqI7iawdr2bm8qYhDL8m8BuyblxkI2H7qQC07lTfqq0kPiZ/f1dZC/KzLcq3N24nLhfdN6stfU+syXwn3sSpvp64H/9bXmyas659ca/OmOxjaq69lmX3ftsculGtV3iT/Rqm74U92EAwIBgQDggHBgGBAMIIBwYBgQDAgGBAMCEYwIBgQDAgGBIM5vgUYAJXHm7NaPs02AAAAAElFTkSuQmCC);
-
-  &:hover {
-    cursor: pointer;
-    background-color: $morsel-primary;
-    @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
-    background-position: right top;
-  }
-
-  &.morsel-control-down {
-    position: absolute;
-    top: auto;
-    bottom: 0;
-    left: 10%;
-    margin-left: -$arrow-height/2;
-  }
-}
-
 @media (min-width: $screen-sm-min) {
   .morsel {
     .extra-page {
