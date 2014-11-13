@@ -58,13 +58,14 @@
 
     .morsel-block-title {
       font-size: 16px;
-      margin: 0;
+      line-height: 1.2;
+      margin: 0 0 3px;
     }
 
     .morsel-block-creator {
-      font-style: italic;
       font-size: 14px;
       margin: 0;
+      font-weight: 400;
 
       .user-by {
         &:before {
@@ -76,6 +77,7 @@
     .morsel-block-place {
       font-size: 14px;
       margin: 0;
+      font-weight: 400;
     }
 
     &:hover {
@@ -114,16 +116,16 @@
 
     .morsel-info {
       .morsel-block-title {
-        font-size: 22px;
+        //font-size: 22px;
       }
 
       .morsel-block-creator {
-        font-size: 18px;
+        //font-size: 18px;
         margin-bottom: 3px;
       }
 
       .morsel-block-place {
-        font-size: 18px;
+        //font-size: 18px;
       }
     }
   }
@@ -133,15 +135,15 @@
   .morsel-block {
     .morsel-info {
       .morsel-block-title {
-        font-size: 18px;
+        //font-size: 18px;
       }
 
       .morsel-block-creator {
-        font-size: 14px;
+        //font-size: 14px;
       }
 
       .morsel-block-place {
-        font-size: 14px;
+        //font-size: 14px;
       }
     }
   }
@@ -151,16 +153,16 @@
   .morsel-block {
     .morsel-info {
       .morsel-block-title {
-        font-size: 20px;
+        //font-size: 20px;
       }
 
       .morsel-block-creator {
-        font-size: 16px;
+        //font-size: 16px;
         margin-bottom: 3px;
       }
 
       .morsel-block-place {
-        font-size: 16px;
+        //font-size: 16px;
       }
     }
   }

@@ -167,7 +167,8 @@ img {
   vertical-align: middle;
 
   &:before {
-    content: 'By ';
+    content: 'by ';
+    font-style: normal;
   }
 
   &:hover {
