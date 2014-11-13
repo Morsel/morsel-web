@@ -235,6 +235,38 @@
       }
     }
   }
+
+  .morsel-tagged-users {
+    ul {
+      list-style: none;
+      color: $morsel-medium;
+
+      &:before {
+        content: 'With ';
+        font-size: 14px;
+        line-height: 22px;
+        display: inline-block;
+        vertical-align: top;
+      }
+
+      li {
+        display: inline-block;
+        vertical-align: top;
+
+        &:after {
+          content: ', ';
+          float: right;
+          margin-right: 3px;
+        }
+
+        &:last-child {
+          &:after {
+            content: '';
+          }
+        }
+      }
+    }
+  }
 }
 
 .morsel-control {
@@ -262,7 +294,7 @@
     position: absolute;
     top: auto;
     bottom: 0;
-    left: 50%;
+    left: 10%;
     margin-left: -$arrow-height/2;
   }
 }

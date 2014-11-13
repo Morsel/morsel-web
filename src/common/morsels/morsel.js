@@ -2,7 +2,7 @@ angular.module('Morsel.common.morsel', [])
 
 .constant('COVER_PHOTO_PERCENTAGE', 0.6)
 
-.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE) {
+.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels) {
   var //debounce on page resize/orientation change
       orientationChangeTime = 300,
       moreScrollTime = 500;
@@ -28,6 +28,12 @@ angular.module('Morsel.common.morsel', [])
       Auth.getCurrentUserPromise().then(function(userData){
         scope.canEdit = scope.morsel.creator.id === userData.id;
       });
+
+      if(scope.morsel.has_tagged_users) {
+        ApiMorsels.getTaggedUsers(scope.morsel.id).then(function(usersResp){
+          scope.morsel.taggedUsers = usersResp.data;
+        });
+      }
 
       scope.getCoverPhotoArray = function(previewSized) {
         var primaryItemPhotos;
