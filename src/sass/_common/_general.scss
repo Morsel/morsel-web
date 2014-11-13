@@ -1,6 +1,7 @@
 a {
   &:hover {
     cursor: pointer;
+    text-decoration: none;
   }
 
   > i {
@@ -16,6 +17,12 @@ p {
   > i {
     vertical-align: middle;
     margin-right: 10px;
+  }
+
+  a {
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 

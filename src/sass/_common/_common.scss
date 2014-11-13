@@ -171,10 +171,6 @@ img {
     content: 'by ';
     font-style: normal;
   }
-
-  &:hover {
-    text-decoration: none;
-  }
 }
 
 .caption {
@@ -498,7 +494,6 @@ a.white-link {
 
   &:hover, &:active {
     color: $link-hover-color !important;
-    text-decoration: none;
   }
 }
 
