@@ -6,9 +6,6 @@ angular.module('Morsel.common.morselBlock', [])
     replace: true,
     scope: {
       morsel: '=mrslMorselBlock',
-      noUser: '@mrslMorselBlockNoUser',
-      noStats: '@mrslMorselBlockNoStats',
-      noPlace: '@mrslMorselBlockNoPlace',
       morselFeedItemId: '=mrslMorselBlockFeedItemId',
       spacer: '@mrslMorselBlockSpacer'
     },

@@ -3,10 +3,18 @@
     <h1 class="h2 morsel-block-title">
       <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+ (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" bo-text="morsel.title" class="white-link"></a>
     </h1>
-    <h2 class="h3 morsel-block-creator" ng-if="!noUser"><a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="white-link overflow-ellipsis user-by"></a></h2>
-    <h3 class="h6 morsel-block-place" ng-if="morsel.place && !noPlace">
-      <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name" class="white-link overflow-ellipsis"></a>
-    </h3>
+    <h2 class="h3 morsel-block-creator">
+      <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="white-link overflow-ellipsis user-by"></a>
+    </h2>
+    <div class="morsel-info-bottom">
+      <span bo-if="morsel.featured" class="morsel-featured"><i class="common-featured_shadow"></i> Featured</span>
+      <div bo-if="morsel.tagged_users_count" class="morsel-tagged-count">
+        <i class="common-users-filled_shadow"></i><span bo-text="'+ '+morsel.tagged_users_count"></span>
+      </div>
+      <h3 class="h6 morsel-block-place" ng-if="morsel.place">
+        <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name" class="white-link overflow-ellipsis"></a>
+      </h3>
+    </div>
   </div>
   <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+ (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" class="morsel-img"></a>
   <img src="/assets/images/utility/spacer.png" class="spacer loader" ng-if="spacer" />

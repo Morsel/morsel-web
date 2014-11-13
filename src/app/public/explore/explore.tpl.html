@@ -3,7 +3,7 @@
   <div class="container morsel-bg container-shadow container-no-padding" ng-style="viewOptions.minimumMainHeight()">
     <div class="row no-gutter">
       <div class="col-sm-4 col-md-3" bindonce ng-repeat="feedItem in feedItems">
-        <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-no-stats="true" mrsl-morsel-block-spacer="true"></div>
+        <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
       </div>
     </div>
     <div ng-if="!feedItems" class="loader"></div>
