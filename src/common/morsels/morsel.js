@@ -29,7 +29,7 @@ angular.module('Morsel.common.morsel', [])
         scope.canEdit = scope.morsel.creator.id === userData.id;
       });
 
-      if(scope.morsel.has_tagged_users) {
+      if(scope.morsel.tagged_users_count > 0) {
         ApiMorsels.getTaggedUsers(scope.morsel.id).then(function(usersResp){
           scope.morsel.taggedUsers = usersResp.data;
         });
