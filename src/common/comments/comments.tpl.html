@@ -11,7 +11,7 @@
         <span ng-click="deleteComment(comment.id)" class="close" ng-show="(item.creator_id === currentUser.id) || (comment.creator.id === currentUser.id)">&times;</span>
         <div class="user-body user-extra-info">
           <h5 class="user-info-main">
-            <a bo-href="'/'+comment.creator.username.toLowerCase()" bo-text="comment.creator.username"></a>
+            <a bo-href="'/'+comment.creator.username.toLowerCase()" mrsl-users-name="comment.creator" class="overflow-ellipsis"></a>
           </h5>
           <span am-time-ago="comment.created_at" class="time-ago"></span>
           <p class="user-list-text" bo-html="formatComment(comment.description)"></p>
@@ -24,7 +24,7 @@
     <p>There are no comments</p>
   </div>
   <div class="add-comment">
-    <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
+    <form role="form" ng-submit="addComment()" name="$parent.addCommentForm" novalidate>
       <div class="form-group">
         <textarea class="form-control" rows="3" ng-model="comment.description" ng-attr-placeholder="Write your comment" required></textarea>
       </div>

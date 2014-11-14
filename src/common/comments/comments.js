@@ -112,10 +112,16 @@ angular.module( 'Morsel.common.comments', [] )
         };
 
         $scope.addComment = function() {
+          //disable button
+          $scope.addCommentForm.$setValidity('addingComment', false);
+
           if(isLoggedIn) {
             postComment($scope.comment.description).then(function(){
               //clear comment textarea
               $scope.comment.description = '';
+
+              //enable add button
+              $scope.addCommentForm.$setValidity('addingComment', true);
             });
           } else {
             var currentUrl = $location.url();
