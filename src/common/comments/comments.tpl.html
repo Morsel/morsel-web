@@ -24,7 +24,7 @@
     <p>There are no comments</p>
   </div>
   <div class="add-comment">
-    <form role="form" ng-submit="addComment()" name="addCommentForm" novalidate>
+    <form role="form" ng-submit="addComment()" name="$parent.addCommentForm" novalidate>
       <div class="form-group">
         <textarea class="form-control" rows="3" ng-model="comment.description" ng-attr-placeholder="Write your comment" required></textarea>
       </div>
