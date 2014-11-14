@@ -10,6 +10,7 @@ input, textarea, select {
 .radio, .checkbox {
   label {
     font-family: $font-family-secondary;
+    font-size: $font-size-base;
   }
 }
 
@@ -141,11 +142,6 @@ img {
       font-size: 22px;
       line-height: 30px;
       margin: 5px auto 0;
-
-      a {
-        color: $morsel-primary;
-        text-transform: none;
-      }
     }
 
     h6 {
@@ -155,7 +151,6 @@ img {
       a {
         font-size: 16px;
         text-transform: none;
-        color: $morsel-primary;
       }
 
       span {
@@ -166,6 +161,15 @@ img {
     .profile-pic-link {
       float: none;
     }
+  }
+}
+
+.user-by {
+  vertical-align: middle;
+
+  &:before {
+    content: 'by ';
+    font-style: normal;
   }
 }
 
@@ -490,7 +494,6 @@ a.white-link {
 
   &:hover, &:active {
     color: $link-hover-color !important;
-    text-decoration: none;
   }
 }
 

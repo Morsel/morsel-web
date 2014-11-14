@@ -8,7 +8,7 @@
             <a class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.morsel.id+'-'+activity.subject.morsel.slug">
               <img bo-src="activity.subject.photos ? activity.subject.photos._80x80 : morselPlaceholder" />
             </a>
-            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.username"></a> {{activity.action_type === 'Like' ? 'liked':''}}{{activity.action_type === 'Comment' ? 'commented on':''}} <span bo-if="activity.subject.creator.id === user.id">your</span><a bo-if="activity.subject.creator.id !== user.id" bo-href="'/'+activity.subject.creator.username.toLowerCase()" bo-text="activity.subject.creator.username+'\'s'"></a> "{{activity.subject.morsel.title+(activity.subject.description ? ': '+activity.subject.description : '') | truncate:80}}"</p>
+            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.username"></a> {{activity.action_type === 'Like' ? 'liked':''}}{{activity.action_type === 'Comment' ? 'commented on':''}} <a bo-if="activity.subject.creator.id !== user.id" bo-href="'/'+activity.subject.creator.username.toLowerCase()" bo-text="activity.subject.creator.username+'\'s'"></a> "{{activity.subject.morsel.title+(activity.subject.description ? ': '+activity.subject.description : '') | truncate:80}}"</p>
             <span am-time-ago="activity.action.created_at" class="time-ago"></span>
           </div>
           <div ng-if="activity.subject_type === 'User' && activity.action_type === 'Follow'">
@@ -21,6 +21,20 @@
               <img src="/assets/images/icons/place-icon_large.png" />
             </a>
             <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.username"></a> followed <a bo-href="'/places/'+activity.subject.id+'-'+activity.subject.slug" bo-text="activity.subject.name"></a></p>
+            <span am-time-ago="activity.action.created_at" class="time-ago"></span>
+          </div>
+          <div bo-if="activity.action_type === 'MorselUserTag'">
+            <a class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.id+'-'+activity.subject.slug">
+              <img bo-src="getMorselPhoto(activity.subject)" />
+            </a>
+            <p><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-text="activity.creator.username"></a> tagged you in "{{activity.subject.title | truncate:80}}"</p>
+            <span am-time-ago="activity.action.created_at" class="time-ago"></span>
+          </div>
+          <div bo-if="activity.subject_type === 'Morsel' && activity.action_type === 'Like'">
+            <a class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.id+'-'+activity.subject.slug">
+              <img bo-src="getMorselPhoto(activity.subject)" />
+            </a>
+            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.username"></a> liked <a bo-if="activity.subject.creator.id !== user.id" bo-href="'/'+activity.subject.creator.username.toLowerCase()" bo-text="activity.subject.creator.username+'\'s'"></a> "{{activity.subject.title | truncate:80}}"</p>
             <span am-time-ago="activity.action.created_at" class="time-ago"></span>
           </div>
         </div>

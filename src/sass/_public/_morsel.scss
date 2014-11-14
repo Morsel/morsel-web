@@ -16,6 +16,10 @@
   }
 
   .cover-page {
+    .cover-jumbo {
+      position: relative;
+    }
+
     .cover-bg {
       display: block;
       background-color: rgba(0,0,0,.2);
@@ -28,31 +32,14 @@
     }
 
     .cover-jumbo-info {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      position: relative;
+      top: -($profile-pic-s/2);
       z-index: 5;
-      padding-bottom: $arrow-height + 10px;
+      padding: 0 10px;
     }
 
     .cover-info {
       text-align: center;
-
-      h5, h6 {
-        @include text-shadow(0px 1px 2px rgba(0, 0, 0, .8));
-      }
-
-      h6 {
-        span {
-          color: white;
-        }
-      }
-
-      .time-ago {
-        color: white;
-        @include text-shadow(0px 1px 2px rgba(0, 0, 0, 1));
-      }
     }
 
     .edit-morsel-btn {
@@ -63,6 +50,12 @@
 
       i {
         margin-right: 0;
+      }
+    }
+
+    .user-by {
+      &:before {
+        color: $morsel-medium;
       }
     }
   }
@@ -129,6 +122,10 @@
       padding: 0 10px;
     }
 
+    .follow-btn {
+      margin: 5px 0;
+    }
+
     hr {
       &:after {
         background-color: $morsel-light-off;
@@ -174,10 +171,15 @@
       display: block;
       position: relative;
 
+      .morsel-container {
+        @include morsel-border();
+        margin-bottom: 35px;
+        padding-bottom: 30px;
+      }
+
       .item-wrap {
         text-align: center;
         position: relative;
-        @include morsel-border();
       }
 
       .item-photo-wrap {
@@ -185,7 +187,6 @@
         height: auto;
         width: auto;
         min-height: 100px;
-        padding-bottom: 35px;
       }
 
       .item-img {
@@ -194,7 +195,7 @@
       
       .item-description {
         p {
-          padding: 25px 20px;
+          padding: 15px 20px 25px;
           margin: 0;
           font-size: 16px;
           line-height: 22px;
@@ -239,35 +240,37 @@
       }
     }
   }
-}
 
-.morsel-control {
-  display: block;
-  width: $arrow-height;
-  height: $arrow-height;
-  z-index: 10;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  @include transition(background-color .1s ease-out, box-shadow .1s ease-out);
-  @include box-shadow(0px 0px 0px 0px rgba(0, 0, 0, 0));
-  @include border-top-right-radius(5px);
-  @include border-top-left-radius(5px);
+  .morsel-tagged-users {
+    ul {
+      list-style: none;
+      color: $morsel-medium;
 
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAA8CAYAAACtrX6oAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAipJREFUeNrsnE1LAlEYRlUkIkJalPQLWkaLiHAVZWhfRKuIiKBo1f9pU7RoZ18SEUH9h4gWIq3CRYsWEa0iAnuHbjDIXJ3yjnOvnAMv4kyKj2d87thEyXq9noDuJcVbgGBAMCAYEAwIBgQDghEMCAYEA4IBwYBgQDCCAcGAYEAwIBgQDOFIt/Pgl63ZE7kZ9m1alXk2/BrH/Adi9vD2Lsb3q+N5hbvYBAujMiO++xcyMzLvhsIuypz57nvPOxSjYOfymq7ocfUC+w08V059Ynp8YxvW541iDc7LXDZU2V+ZVp+OXgeWOavztit4RaYWsH1Khc78s6auZAYD9t3ELNO5vO0KrsgU1K2J+vJqqqQ5ko9ktmMW7FxeExVdlZmTedLUVzlk6AlVU30B+/ZkNmU+LKhkp/KaWoO92lrQ1Fc+RH0Vm9TUscyuZeuuM3lNnmRV1JGtW6N09ZVTR31Q2HOZDUtPrpzIm4ogdKFFfWUaaqqsWYMOZNZkPi0+g7Y+bxRfk6ot6qukvuNNqprKampqx3K5TuRNRXhk6+qrqI7iawdr2bm8qYhDL8m8BuyblxkI2H7qQC07lTfqq0kPiZ/f1dZC/KzLcq3N24nLhfdN6stfU+syXwn3sSpvp64H/9bXmyas659ca/OmOxjaq69lmX3ftsculGtV3iT/Rqm74U92EAwIBgQDggHBgGBAMIIBwYBgQDAgGBAMCEYwIBgQDAgGBIM5vgUYAJXHm7NaPs02AAAAAElFTkSuQmCC);
+      &:before {
+        content: 'With ';
+        font-size: 14px;
+        line-height: 22px;
+        display: inline-block;
+        vertical-align: top;
+      }
 
-  &:hover {
-    cursor: pointer;
-    background-color: $morsel-primary;
-    @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.5));
-    background-position: right top;
-  }
+      li {
+        display: inline-block;
+        vertical-align: top;
 
-  &.morsel-control-down {
-    position: absolute;
-    top: auto;
-    bottom: 0;
-    left: 50%;
-    margin-left: -$arrow-height/2;
+        &:after {
+          content: ', ';
+          float: right;
+          margin-right: 3px;
+        }
+
+        &:last-child {
+          &:after {
+            content: '';
+          }
+        }
+      }
+    }
   }
 }
 
@@ -301,10 +304,10 @@
 
           p {
             color: $morsel-dark;
-            font-size: 22px;
-            line-height: 28px;
-            padding-top: 35px;
-            padding-bottom: 35px;
+            font-size: 20px;
+            line-height: 26px;
+            padding-top: 25px;
+            padding-bottom: 25px;
           }
         }
       }
@@ -345,8 +348,8 @@
 
         .item-description {
           p {
-            font-size: 26px;
-            line-height: 34px;
+            font-size: 22px;
+            line-height: 32px;
           }
         }
       }

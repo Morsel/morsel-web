@@ -7,7 +7,9 @@ angular.module('Morsel.common.userList', [])
     scope: {
       users: '=mrslUserList',
       emptyText: '=mrslUserListEmpty',
-      userLoadFunc: '=mrslUserListLoadFunc'
+      userLoadFunc: '=mrslUserListLoadFunc',
+      morselTagged: '=mrslUserListTagMorsel',
+      blankLinks: '=mrslUserListBlankLinks'
     },
     link: function(scope, element, attrs) {
       scope.userIncrement = USER_LIST_NUMBER;

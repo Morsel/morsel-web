@@ -45,13 +45,19 @@ angular.module('Morsel.common.userImage', [])
     },
     template: function(tElement, tAttrs) {
       if(tAttrs.mrslNoLink) {
-        return '<span class="profile-pic-link {{userImageSize}}">' +
+        return '<span class="profile-pic-link {{userImageSize}}" ng-attr-title="{{username}}">' +
                 '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
               '</span>';
       } else {
-        return '<a ng-href="/{{username.toLowerCase()}}" class="profile-pic-link {{userImageSize}}">' +
+        if(tAttrs.mrslBlankTarget) {
+          return '<a ng-href="/{{username.toLowerCase()}}" class="profile-pic-link {{userImageSize}}" target="_blank" ng-attr-title="{{username}}">' +
                 '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
               '</a>';
+        } else {
+          return '<a ng-href="/{{username.toLowerCase()}}" class="profile-pic-link {{userImageSize}}" ng-attr-title="{{username}}">' +
+                '<img ng-src="{{returnPhoto()}}" class="img-circle" />' +
+              '</a>';
+          }
       }
     }
   };

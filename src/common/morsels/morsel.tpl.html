@@ -3,13 +3,13 @@
   <div ng-if="morsel">
     <div bindonce="morsel">
       <ul class="items">
-        <li class="cover-page extra-page" ng-style="{'height': layout.pageHeight}">
+        <li class="cover-page extra-page">
           <div class="morsel-container">
             <div class="cover-jumbo">
               <a bo-href="'/add/morsel/'+morsel.id" bo-if="morsel.draft" class="banner banner-draft" target="_self" title="Edit this morsel">Draft</a>
               <a bo-href="'/add/morsel/'+morsel.id" ng-if="canEdit" title="Edit this morsel" class="edit-morsel-btn" target="_self"><i class="common-edit-shadow"></i></a>
-              <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(true)}}" ng-style="{'height': layout.pageHeight}"></div>
-              <div class="cover-title-wrap">
+              <div bo-if="morsel.items" class="cover-photo-wrap" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" mrsl-ri-preload="{{getCoverPhotoArray(true)}}" ng-style="{'height': layout.coverHeight}"></div>
+              <div class="cover-title-wrap" ng-style="{'height': layout.coverHeight}">
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>
               </div>
               <div class="cover-bg"></div>
@@ -18,31 +18,35 @@
               <div class="cover-info">
                 <div class="user-info user-info-stacked">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
-                  <h5 class="h2 overflow-ellipsis">
-                    <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator"></a>
+                  <h5 class="h2">
+                    <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="user-by overflow-ellipsis"></a>
+                  </h5>
+                  <h5 ng-if="morsel.taggedUsers" class="morsel-tagged-users">
+                    <ul>
+                      <li ng-repeat="user in morsel.taggedUsers">
+                        <a bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user"></a>
+                      </li>
+                    </ul>
                   </h5>
                   <h6 class="overflow-ellipsis" bo-if="morsel.place">
-                    <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" class="h2" bo-text="morsel.place.name"></a>
+                    <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></a>
                     <span bo-text="(morsel.place.city ? morsel.place.city+', ':'')+morsel.place.state"></span>
                   </h6>
                 </div>
                 <span am-time-ago="morsel.published_at" class="time-ago"></span>
-              </div>
-              <div>
-                <span class="morsel-control morsel-control-down" ng-click="moreClick()"></span>
               </div>
             </div>
           </div>
         </li>
         <li bindonce ng-repeat="item in morsel.items" class="item">
           <div class="morsel-container">
-            <div mrsl-item-description="item"></div>
             <div class="item-wrap">
               <div class="item-photo-wrap loader">
                 <img class="item-img" mrsl-responsive-images="{{getItemPhotoArray(item)}}" />
                 <div ng-if="!morsel.draft" mrsl-item-action-bar mrsl-item="item" mrsl-items="morsel.items"></div>
               </div>
             </div>
+            <div mrsl-item-description="item"></div>
           </div>
         </li>
         <li class="share-page extra-page" ng-if="!morsel.draft">
@@ -51,6 +55,9 @@
           <div>
             <div class="user-info user-info-stacked">
               <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
+              <div>
+                <button mrsl-follow mrsl-id-to-follow="morsel.creator.id" mrsl-is-following="morsel.creator.following" mrsl-hide-if-following="true"></button>
+              </div>
               <h5 class="h2 overflow-ellipsis">
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator"></a>
               </h5>

@@ -51,6 +51,13 @@
       }
     }
 
+    .add-tagged-users {
+      li {
+        list-style: none;
+        display: inline-block;
+      }
+    }
+
     .add-morsel-social {
       i {
         vertical-align: middle;
@@ -97,7 +104,6 @@
 
     > label {
       text-align: left;
-      font-size: 15px;
     }
   }
 
@@ -373,6 +379,10 @@
     }
 
     .add-morsel-info {
+      .add-tagged-users {
+        margin-top: 7px;
+      }
+
       .add-morsel-info-wrap {
         padding-top: 20px;
       }

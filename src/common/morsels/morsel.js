@@ -1,9 +1,10 @@
 angular.module('Morsel.common.morsel', [])
 
-.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth) {
+.constant('COVER_PHOTO_PERCENTAGE', 0.6)
+
+.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels, ApiUsers) {
   var //debounce on page resize/orientation change
-      orientationChangeTime = 300,
-      moreScrollTime = 500;
+      orientationChangeTime = 300;
 
   return {
     restrict: 'A',
@@ -14,17 +15,28 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope) {
       var onOrientationChange,
           winEl = angular.element($window),
-          pageHeight,
-          $body = angular.element(document.getElementsByTagName('body'));
+          windowOldWidth = window.innerWidth,
+          coverHeight;
 
       //hold all our computed layout measurements
       scope.layout = {};
-      updateItemHeight();
+      updateCoverHeight();
 
       scope.canEdit = false;
 
       Auth.getCurrentUserPromise().then(function(userData){
         scope.canEdit = scope.morsel.creator.id === userData.id;
+      });
+
+      if(scope.morsel.tagged_users_count > 0) {
+        ApiMorsels.getTaggedUsers(scope.morsel.id).then(function(usersResp){
+          scope.morsel.taggedUsers = usersResp.data;
+        });
+      }
+
+      //get user info for following button
+      ApiUsers.getUser(scope.morsel.creator.id).then(function(userResp){
+        scope.morsel.creator = userResp.data;
       });
 
       scope.getCoverPhotoArray = function(previewSized) {
@@ -97,15 +109,19 @@ angular.module('Morsel.common.morsel', [])
         }
       };
 
-      function updateItemHeight() {
-        pageHeight = window.innerHeight;
-        scope.layout.pageHeight = pageHeight+'px';
+      function updateCoverHeight() {
+        coverHeight = window.innerHeight*COVER_PHOTO_PERCENTAGE;
+        scope.layout.coverHeight = coverHeight+'px';
       }
 
       //resize cover page on resize
       onOrientationChange = _.debounce(function(){
-        updateItemHeight();
-        scope.$apply();
+        //make sure the width changed and it's not just the address bar moving on mobile
+        if(window.innerWidth != windowOldWidth) {
+          windowOldWidth = window.innerWidth;
+          updateCoverHeight();
+          scope.$apply();
+        }
       }, orientationChangeTime);
 
       // handle orientation change
@@ -116,10 +132,6 @@ angular.module('Morsel.common.morsel', [])
         winEl.unbind('orientationchange', onOrientationChange);
         winEl.unbind('resize', onOrientationChange);
       });
-
-      scope.moreClick = function() {
-        $body.scrollTop(pageHeight, moreScrollTime);
-      };
     },
     templateUrl: 'common/morsels/morsel.tpl.html'
   };
@@ -141,7 +153,7 @@ angular.module('Morsel.common.morsel', [])
         }
       };
     },
-    template: '<div class="item-description"><p ng-bind-html="formatDescription()"></p></div>'
+    template: '<div class="item-description" ng-if="item.description"><p ng-bind-html="formatDescription()"></p></div>'
   };
 })
 

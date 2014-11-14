@@ -5,10 +5,10 @@ angular.module( 'Morsel.common.apiUsers', [] )
   var Users = {},
       RestangularUsers = Restangular.all('users');
 
-  Users.getUser = function(username) {
+  Users.getUser = function(usernameOrId) {
     var deferred = $q.defer();
 
-    RestangularUsers.get(username).then(function(resp) {
+    RestangularUsers.get(usernameOrId).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

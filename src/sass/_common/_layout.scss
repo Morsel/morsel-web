@@ -86,7 +86,6 @@
         display: block;
 
         &:hover, &:active {
-          text-decoration: none;
           color: $link-hover-color;
         }
       }
@@ -158,6 +157,10 @@
     a, p {
       color: white;
       font-size: 12px;
+    }
+
+    .morsel-text {
+      font-size: 0;
     }
 
     p {
