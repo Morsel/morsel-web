@@ -6,7 +6,7 @@
     <h2 class="h3 morsel-block-creator">
       <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="white-link overflow-ellipsis user-by"></a>
     </h2>
-    <div class="morsel-info-bottom">
+    <div class="morsel-info-bottom" ng-class="{'featured-or-tagged':morsel.featured || morsel.tagged_users_count}">
       <span bo-if="morsel.featured" class="morsel-featured"><i class="common-featured_shadow"></i> Featured</span>
       <span bo-if="morsel.tagged_users_count" class="morsel-tagged-count">
         <i class="common-users-filled_shadow"></i><span bo-text="'+ '+morsel.tagged_users_count" ng-click="showTaggedUsers()"></span>

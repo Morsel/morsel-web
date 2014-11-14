@@ -1,12 +1,12 @@
 <div class="feed header-padding">
   <h2 class="text-center">Your Feed</h2>
-  <div class="container morsel-bg container-shadow" ng-style="viewOptions.minimumMainHeight()">
+  <div class="container morsel-bg container-shadow container-no-padding" ng-style="viewOptions.minimumMainHeight()">
     <div class="view-more-btn" ng-if="newFeedItemCount != 0">
       <a ng-click="showNewFeedItems()" ng-text="newFeedItemCount+' new morsel'+(newFeedItemCount === 1 ? '':'s'"></a>
     </div>
-    <div class="row morsel-summary-grid">
-      <div ng-repeat="feedItem in feedItems" class="col-sm-6 col-md-4 morsel-summary">
-        <div mrsl-morsel-summary="feedItem.subject" mrsl-feed-item-id="feedItem.id"></div>
+    <div class="row no-gutter">
+      <div ng-repeat="feedItem in feedItems" class="col-sm-6 col-md-4">
+        <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-feed-item-id="feedItem.id" mrsl-morsel-block-spacer="true"></div>
       </div>
     </div>
     <div ng-if="!feedItems" class="loader"></div>

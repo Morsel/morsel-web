@@ -1,6 +1,5 @@
 a {
-  &:hover {
-    cursor: pointer;
+  &:hover, &:active {
     text-decoration: none;
   }
 
