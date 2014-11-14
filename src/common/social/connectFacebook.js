@@ -110,8 +110,11 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         var deferred = $q.defer();
 
         FacebookApi.getPicture(function(myPicture) {
-          //store our picture info so we can prepopulate form
-          scope.$parent.userData.social.picture = myPicture;
+          if(myPicture.data && !myPicture.data.is_silhouette) {
+            //store our picture info so we can prepopulate form
+            scope.$parent.userData.social.pictureUrl = myPicture.data.url;
+          }
+          
           deferred.resolve();
         });
 

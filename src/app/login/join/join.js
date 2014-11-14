@@ -111,8 +111,8 @@ angular.module( 'Morsel.login.join', [])
   //to store the picture a user might upload
   $scope.profilePhoto = null;
 
-  if($scope.userData.social.picture) {
-    setRemotePhotoUrl($scope.userData.social.picture.data.url);
+  if($scope.userData.social.pictureUrl) {
+    setRemotePhotoUrl($scope.userData.social.pictureUrl);
   }
 
   //custom validation configs for password verification

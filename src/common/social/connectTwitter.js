@@ -55,7 +55,7 @@ angular.module( 'Morsel.common.connectTwitter', [] )
             //otherwise fill in some info to start sign up process
             //if they have a profile image, use it
             if(!tData.default_profile_image) {
-              scope.$parent.userData.social.picture = tData.profile_image_url;
+              scope.$parent.userData.social.pictureUrl = tData.profile_image_url;
             }
 
             firstNameSpace = tData.name.indexOf(' ');
