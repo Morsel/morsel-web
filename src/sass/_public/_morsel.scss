@@ -35,6 +35,7 @@
       position: relative;
       top: -($profile-pic-s/2);
       z-index: 5;
+      padding: 0 10px;
     }
 
     .cover-info {
@@ -119,6 +120,10 @@
 
     .user-bio {
       padding: 0 10px;
+    }
+
+    .follow-btn {
+      margin: 5px 0;
     }
 
     hr {

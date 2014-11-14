@@ -18,8 +18,8 @@
               <div class="cover-info">
                 <div class="user-info user-info-stacked">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
-                  <h5 class="h2 overflow-ellipsis">
-                    <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="user-by"></a>
+                  <h5 class="h2">
+                    <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="user-by overflow-ellipsis"></a>
                   </h5>
                   <h5 ng-if="morsel.taggedUsers" class="morsel-tagged-users">
                     <ul>
@@ -55,6 +55,9 @@
           <div>
             <div class="user-info user-info-stacked">
               <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
+              <div>
+                <button mrsl-follow mrsl-id-to-follow="morsel.creator.id" mrsl-is-following="morsel.creator.following" mrsl-hide-if-following="true"></button>
+              </div>
               <h5 class="h2 overflow-ellipsis">
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator"></a>
               </h5>

@@ -6,7 +6,8 @@ angular.module( 'Morsel.common.follow', [] )
     scope: {
       idToFollow: '=mrslIdToFollow',
       isFollowing: '=mrslIsFollowing',
-      followType: '@mrslFollowType'
+      followType: '@mrslFollowType',
+      hideIfFollowing: '@mrslHideIfFollowing'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -120,7 +121,7 @@ angular.module( 'Morsel.common.follow', [] )
         return deferred.promise;
       }
     },
-    template: '<button ng-hide="isSelf" ng-click="toggleFollow()" class="btn follow-btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
+    template: '<button ng-hide="isSelf || (hideIfFollowing && isFollowing)" ng-click="toggleFollow()" class="btn follow-btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
               '{{isFollowing ? \'Following\' : \'Follow\'}}'+
               '</button>'
   };

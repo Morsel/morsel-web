@@ -2,7 +2,7 @@ angular.module('Morsel.common.morsel', [])
 
 .constant('COVER_PHOTO_PERCENTAGE', 0.6)
 
-.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels) {
+.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels, ApiUsers) {
   var //debounce on page resize/orientation change
       orientationChangeTime = 300;
 
@@ -15,6 +15,7 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope) {
       var onOrientationChange,
           winEl = angular.element($window),
+          windowOldWidth = window.innerWidth,
           coverHeight;
 
       //hold all our computed layout measurements
@@ -32,6 +33,11 @@ angular.module('Morsel.common.morsel', [])
           scope.morsel.taggedUsers = usersResp.data;
         });
       }
+
+      //get user info for following button
+      ApiUsers.getUser(scope.morsel.creator.id).then(function(userResp){
+        scope.morsel.creator = userResp.data;
+      });
 
       scope.getCoverPhotoArray = function(previewSized) {
         var primaryItemPhotos;
@@ -110,8 +116,12 @@ angular.module('Morsel.common.morsel', [])
 
       //resize cover page on resize
       onOrientationChange = _.debounce(function(){
-        updateCoverHeight();
-        scope.$apply();
+        //make sure the width changed and it's not just the address bar moving on mobile
+        if(window.innerWidth != windowOldWidth) {
+          windowOldWidth = window.innerWidth;
+          updateCoverHeight();
+          scope.$apply();
+        }
       }, orientationChangeTime);
 
       // handle orientation change
