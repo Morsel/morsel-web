@@ -12,7 +12,7 @@ This is a table of all event names, properties and descriptions that are being t
 
 | Event Name (case sensitive) | Description                  | Properties      | Date Started |
 | ------------------ | ---------------------------- | ------------ | ------------ |
-| Logged in    | User completed log in |   | 11/6/2014    |
+| Logged in    | User completed log in | login_type | 11/6/2014 |
 | Error - API  | An error was received with key="api" | error_message, http_status | 11/6/2014 |
 | Error in form | User encountered a form error | message | 11/6/2014 |
 | Clicked Share | User clicks to share something | morsel_id, social_type, creator_id, share_type, event_name | 11/6/2014 |
@@ -20,7 +20,8 @@ This is a table of all event names, properties and descriptions that are being t
 | Authenticated with Social | User authenticates with social | social_type | 11/6/2014 |
 | Signup - Completed Step | User completes a part of the signup flow | signup_step | 11/6/2014 |
 | $signup | User completed final part of signup flow, used for retention. Synonymous with Signup - Completed Step:signup_step=final | | 11/6/2014 |
-| Clicked Masthead Button | User clicked the big button in the masthead | 11/6/2014 |
+| Clicked Masthead Button | User clicked the big button in the masthead | | 11/6/2014 |
+| Published Morsel | User successfully published a morsel |item_count, tagged_users_count, template_id, morsel_id, place_id, minutes_to_publish | 11/14/2014 |
 
 ### Super Property List
 This is a table of all super properties (properties that are sent with every event) names and descriptions that are being tracked. It should be kept up to date whenever super properties are added/altered
@@ -51,3 +52,8 @@ This is a table of all property names and descriptions that are being tracked. I
 | share_subject | What type of subject was shared | "event", "morsel-detail" | 11/6/2014 |
 | scheduled_event_name | The title of a morsel event | string | 11/6/2014 |
 | button_text | The text of a button (that was clicked) | string | 11/6/2014 |
+| item_count | Number of items in a morsel | numeric | 11/14/2014 |
+| tagged_users_count | Number of users tagged on a morsel | numeric | 11/14/2014 |
+| template_id | Which template was used to make a morsel | numeric | 11/14/2014 |
+| place_id | The ID of a Morsel Place | numeric | 11/14/2014 |
+| minutes_to_publish | The time (in minutes) it took a morsel between creation and publish | numeric | 11/14/2014 |

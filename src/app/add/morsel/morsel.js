@@ -29,7 +29,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, theMorsel, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, theMorsel, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi, Mixpanel ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You will lose unsaved changes if you leave this page.',
@@ -37,7 +37,7 @@ angular.module( 'Morsel.add.morsel', [])
       morselEditFormDirty = {};
 
   //make sure this is my morsel to edit
-  if(theMorsel.creator.id === currentUser.id) {
+  if(theMorsel.creator_id === currentUser.id) {
     $scope.morsel = theMorsel;
 
     //store all our social data
@@ -464,10 +464,19 @@ angular.module( 'Morsel.add.morsel', [])
       //decrease our count to display in the menu
       currentUser.draft_count--;
 
-      //bring user to morsel detail
-      //remove onbeforeunload so user doesn't get blocked going to morsel detail page
-      $window.onbeforeunload = undefined;
-      $window.location.href = '/'+morselData.creator.username.toLowerCase()+'/'+morselData.id+'-'+morselData.slug;
+      Mixpanel.track('Published Morsel', {
+        item_count: morselData.items.length,
+        tagged_users_count: morselData.tagged_users_count,
+        template_id: morselData.template_id,
+        morsel_id: morselData.id,
+        place_id : morselData.place_id,
+        minutes_to_publish : (new Date(morselData.published_at) - new Date(morselData.created_at))/60000
+      }, function() {
+        //bring user to morsel detail
+        //remove onbeforeunload so user doesn't get blocked going to morsel detail page
+        $window.onbeforeunload = undefined;
+        $window.location.href = '/'+morselData.creator.username.toLowerCase()+'/'+morselData.id+'-'+morselData.slug;
+      });
     }
   }
 
