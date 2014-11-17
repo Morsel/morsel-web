@@ -64,7 +64,7 @@ angular.module('Morsel.add.editMorselTitle', [])
         });
       };
 
-      scope.save = function() {
+      scope.save = function(e) {
         //treat null titles as empty strings so we don't bother updating null values with blanks
         var newTitle = scope.updatedTitle ? scope.updatedTitle.trim() : '',
             oldTitle = scope.morsel.title ? scope.morsel.title : '',
@@ -73,6 +73,9 @@ angular.module('Morsel.add.editMorselTitle', [])
                 title: newTitle
               }
             };
+
+        //need to prevent this from bubbling up and submitting our main form
+        e.preventDefault();
 
         scope.saving = true;
 
