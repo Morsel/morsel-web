@@ -95,7 +95,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventUrl += 'meals-on-wheels-chicago-celebrity-chef-ball-2014/meals-on-wheels-chicago-celebrity-chef-ball-2014-morsels.json';
     eventInfo.title = 'Meals on Wheels Chicago Celebrity Chef Ball 2014';
     eventInfo.location = null;
-    eventInfo.description = $sce.trustAsHtml('The Meals on Wheels Chicago Celebrity Chef Ball is one of Chicago\'s longest-running culinary fundraisers, raising more than $200,000 each year in support of the organization\'s mission to ensure that both homebound seniors and individuals with disabilities benefit from programs that improve their quality of life and maximize independence.<br/><br/>Here\'s a peak at 2014\'s amazing event!');
+    eventInfo.description = $sce.trustAsHtml('The Meals on Wheels Chicago Celebrity Chef Ball is one of Chicago\'s longest-running culinary fundraisers, raising more than $200,000 each year in support of the organization\'s mission to ensure that both homebound seniors and individuals with disabilities benefit from programs that improve their quality of life and maximize independence.<br/><br/>Here\'s a peek at 2014\'s amazing event!');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/meals-on-wheels-chicago-celebrity-chef-ball-2014/meals-on-wheels-chicago-celebrity-chef-ball-2014-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/collections/meals-on-wheels-chicago-celebrity-chef-ball-2014';
     eventInfo.twitterUsername = '@MOWChicago';
