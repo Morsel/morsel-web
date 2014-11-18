@@ -23,7 +23,7 @@ angular.module( 'Morsel.public.search', [])
   });
 })
 
-.controller( 'SearchCtrl', function SearchCtrl ($scope, searchUser, Auth){
+.controller( 'SearchCtrl', function SearchCtrl ($scope, searchUser, Auth, $state){
   //our model for search
   $scope.search = {
     query: '',
@@ -31,9 +31,11 @@ angular.module( 'Morsel.public.search', [])
     customSearch: angular.noop,
     //time to debounce keystrokes
     waitTime: 300,
-    searchPlaceholder: 'Search for people on Morsel'
+    searchPlaceholder: 'Search for friends on Morsel'
   };
 
   $scope.searchUser = searchUser;
   $scope.isLoggedIn = Auth.isLoggedIn();
+
+  $state.go('search.people', null, {location:'replace'});
 });

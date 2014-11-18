@@ -2,19 +2,13 @@
   <div class="row">
     <div class="col-sm-3">
       <ul class="search-menu">
-        <li>
-          <a href="/search/people" class="btn btn-social btn-morsel" ui-route="/search/people" ng-class="{active:$uiRoute}">Morsel</a>
-        </li>
         <li ng-show="isLoggedIn">
           <a href="/search/people/facebook" class="btn btn-social btn-facebook" ui-route="/search/people/facebook" ng-class="{active:$uiRoute}">Facebook</a>
         </li>
-        <!--<li ng-show="isLoggedIn">
-          <a href="/search/people/twitter" class="btn btn-social btn-twitter" ui-route="/search/people/twitter" ng-class="{active:$uiRoute}">Twitter</a>
-        </li>-->
       </ul>
     </div>
     <div class="col-sm-9 search-main">
-      <h2>Find people on Morsel</h2>
+      <h2>Find friends on Morsel</h2>
 
       <input type="text" ng-attr-placeholder="{{search.searchPlaceholder}}" class="form-control" ng-model="search.query" ng-change="search.customSearch()" />
       <div ui-view></div>
