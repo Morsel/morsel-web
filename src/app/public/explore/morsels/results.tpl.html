@@ -1,1 +1,21 @@
-<p>morsel results</p>
+<div ng-if="feedItems">
+  <div class="row no-gutter">
+    <div class="col-sm-4 col-md-3" bindonce ng-repeat="feedItem in feedItems">
+      <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
+    </div>
+  </div>
+  <div ng-if="!feedItems" class="loader"></div>
+  <div mrsl-view-more mrsl-view-more-func="loadSearchResultMorsels" mrsl-view-more-data="feedItems" mrsl-view-more-inc="exploreIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+  <div ng-if="feedItems && feedItems.length === 0" class="empty-state">
+      <p>No morsels. Try a different search</p>
+    </div>
+</div>
+<div ng-if="!feedItems && defaultFeedItems">
+  <div class="row no-gutter">
+    <div class="col-sm-4 col-md-3" bindonce ng-repeat="feedItem in defaultFeedItems">
+      <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
+    </div>
+  </div>
+  <div mrsl-view-more mrsl-view-more-func="loadDefaultMorsels" mrsl-view-more-data="defaultFeedItems" mrsl-view-more-inc="exploreIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+</div>
+<div ng-if="!defaultFeedItems" class="loader"></div>
