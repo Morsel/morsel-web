@@ -7,7 +7,7 @@
       <input type="text" ng-attr-placeholder="{{placeholder}}" ng-model="updatedTitle" name="morselTitle" class="form-control" maxlength="50" mrsl-focus-me="editing"></input>
       <div class="form-group-btns">
         <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
-        <button type="submit" class="btn btn-primary" ng-click="save()">Save</button>
+        <button type="submit" class="btn btn-primary" ng-click="save($event)">Save</button>
       </div>
     </ng-form>
   </div>
