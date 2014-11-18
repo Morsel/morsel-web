@@ -24,8 +24,8 @@ angular.module( 'Morsel.public.explore', [])
     searchPlaceholder: 'Search Morsel'
   };
 
-  $state.go('explore.morsels');
-  
+  $state.go('explore.morsels', null, {location:'replace'});
+
   //old explore
   
 
