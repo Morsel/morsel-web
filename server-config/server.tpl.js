@@ -290,6 +290,10 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     //explore
     app.get('/explore', function(req, res){
+      res.redirect('/explore/morsels');
+    });
+
+    app.get('/explore*', function(req, res){
       publicApp.renderPublicPage(res);
     });
 

@@ -9,19 +9,28 @@ angular.module( 'Morsel.public.explore', [])
         templateUrl: 'app/public/explore/explore.tpl.html'
       }
     },
-    data:{ pageTitle: 'A culinary community sharing food stories, cooking inspiration and kitchen hacks' },
-    resolve: {
-      //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
-      currentUser: function(Auth) {
-        return Auth.getCurrentUserPromise();
-      }
-    }
+    data:{ pageTitle: 'A culinary community sharing food stories, cooking inspiration and kitchen hacks' }
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl( $scope, currentUser, ApiFeed, $location, Auth, MORSEL_LIST_NUMBER, $state ) {
+.controller( 'ExploreCtrl', function ExploreCtrl( $scope, ApiFeed, $location, Auth, MORSEL_LIST_NUMBER, $state){
+  //our model for search
+  $scope.search = {
+    query: '',
+    //placeholder for children to overwrite
+    customSearch: angular.noop,
+    //time to debounce keystrokes
+    waitTime: 300,
+    searchPlaceholder: 'Search Morsel'
+  };
+
+  $state.go('explore.morsels');
+  
+  //old explore
+  
+
   //# of morsels to load at a time
-  $scope.exploreIncrement = MORSEL_LIST_NUMBER;
+  /*$scope.exploreIncrement = MORSEL_LIST_NUMBER;
 
   $scope.getExploreFeed = function(endFeedItem) {
     var feedParams = {
@@ -46,5 +55,5 @@ angular.module( 'Morsel.public.explore', [])
   };
 
   //load our morsels immediately
-  $scope.getExploreFeed();
+  $scope.getExploreFeed();*/
 });
