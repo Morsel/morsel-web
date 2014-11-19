@@ -1,18 +1,42 @@
 .search-page {
+  .search-menu {
+    .list-group-item {
+      margin: 0;
+    }
+  }
+  
   .empty-state {
     padding-top: 60px;
     padding-bottom: 60px;
   }
 
   .search-main {
-    padding-bottom: 25px;
+    padding: 15px 15px 25px;
     
     h3 {
       text-align: center;
     }
     
     .form-control {
-      margin: 20px 0;
+      margin-bottom: 20px;
+    }
+  }
+
+  .suggested-users {
+    display: none;
+
+    .suggested-users-links {
+      text-align: center;
+      padding: 10px;
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .search-page {
+    .suggested-users {
+      display: block;
+      margin-top: 60px;
     }
   }
 }

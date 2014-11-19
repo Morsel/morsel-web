@@ -65,6 +65,7 @@ angular.module( 'Morsel.public', [
   'Morsel.public.eventMorsels',
   'Morsel.public.explore',
   'Morsel.public.explore.morsels',
+  'Morsel.public.explore.suggestedUsers',
   'Morsel.public.explore.users',
   'Morsel.public.feed',
   'Morsel.public.home',

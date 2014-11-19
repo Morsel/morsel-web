@@ -13,7 +13,7 @@ angular.module( 'Morsel.public.explore', [])
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl( $scope, $state){
+.controller( 'ExploreCtrl', function ExploreCtrl($scope, $state, ApiUsers){
   //our model for search
   $scope.search = {
     query: '',
@@ -21,7 +21,10 @@ angular.module( 'Morsel.public.explore', [])
     customSearch: angular.noop,
     //time to debounce keystrokes
     waitTime: 300,
-    searchPlaceholder: 'Search Morsel'
+    searchPlaceholder: 'Search Morsel',
+    defaultSuggestedUsers: null,
+    suggestedUsers: null,
+    hideSuggestedUsers: false
   };
 
   $state.go('explore.morsels', null, {location:'replace'});

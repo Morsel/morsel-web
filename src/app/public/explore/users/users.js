@@ -25,10 +25,8 @@ angular.module( 'Morsel.public.explore.users', [])
   $scope.searchResultUsers = [];
   $scope.hasSearched = false;
 
-  //get our promoted folks
-  ApiUsers.search({'user[promoted]': true}).then(function(searchResp) {
-    $scope.suggestedUsers = searchResp.data;
-  });
+  //hide suggested users since they'll be the main content
+  $scope.search.hideSuggestedUsers = true;
 
   $scope.loadSearchResultUsers = function(endUser){
     var userSearchData = {

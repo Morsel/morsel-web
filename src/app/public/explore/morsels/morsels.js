@@ -12,7 +12,9 @@ angular.module( 'Morsel.public.explore.morsels', [])
   });
 })
 
-.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, $state){
+.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiUsers, $state){
+  var suggestedUserNumber = 3;
+  
   //override the parent scope function
   $scope.search.customSearch = _.debounce(searchMorsels, $scope.search.waitTime);
   $scope.search.searchPlaceholder = 'Search for morsels';
@@ -24,6 +26,18 @@ angular.module( 'Morsel.public.explore.morsels', [])
   //our initial state should be empty
   $scope.searchResultMorsels = [];
   $scope.hasSearched = false;
+
+  //show suggested users
+  $scope.search.hideSuggestedUsers = false;
+
+  //get our promoted folks
+  ApiUsers.search({'user[promoted]': true}).then(function(searchResp) {
+    $scope.search.defaultSuggestedUsers = _.filter(searchResp.data, function(u) {
+      return !u.following;
+    }).splice(0, suggestedUserNumber);
+
+    $scope.search.suggestedUsers = $scope.search.defaultSuggestedUsers;
+  });
 
   $scope.exploreIncrement = MORSEL_LIST_NUMBER;
 
