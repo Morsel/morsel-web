@@ -1,6 +1,6 @@
 <div ng-if="feedItems">
   <div class="row no-gutter">
-    <div class="col-sm-4 col-md-3" bindonce ng-repeat="feedItem in feedItems">
+    <div class="col-sm-6 col-md-4" bindonce ng-repeat="feedItem in feedItems">
       <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
     </div>
   </div>
@@ -12,7 +12,7 @@
 </div>
 <div ng-if="!feedItems && defaultFeedItems">
   <div class="row no-gutter">
-    <div class="col-sm-4 col-md-3" bindonce ng-repeat="feedItem in defaultFeedItems">
+    <div class="col-sm-6 col-md-4" bindonce ng-repeat="feedItem in defaultFeedItems">
       <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
     </div>
   </div>

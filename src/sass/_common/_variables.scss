@@ -154,7 +154,9 @@ $nav-tabs-active-link-hover-color: white;
 $nav-link-padding: 15px;
 
 //list-groups
-$list-group-bg: $morsel-light-off;
+$list-group-bg: $morsel-background;
+$list-group-border: $morsel-light;
+$list-group-active-bg: $morsel-primary;
 
 //hr
 $hr-height: 4px;

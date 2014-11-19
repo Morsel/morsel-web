@@ -1,28 +1,4 @@
 .search-page {
-  .search-menu {
-    margin-top: 60px;
-    list-style: none;
-
-    li {
-      margin: 10px 0;
-    }
-
-    .btn {
-      text-align: left;
-      display: block;
-    }
-
-    .btn-social {
-      &:before {
-        margin-right: 10px;
-      }
-    }
-  }
-
-  h2 {
-    text-align: center;
-  }
-
   .empty-state {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -35,8 +11,8 @@
       text-align: center;
     }
     
-    .user-list {
-      margin-top: 15px;
+    .form-control {
+      margin: 20px 0;
     }
   }
 }

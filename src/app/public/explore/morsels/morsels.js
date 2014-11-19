@@ -27,9 +27,6 @@ angular.module( 'Morsel.public.explore.morsels', [])
 
   $scope.exploreIncrement = MORSEL_LIST_NUMBER;
 
-  //get our full explore feed
-  $scope.loadDefaultMorsels();
-
   $scope.loadDefaultMorsels = function(endFeedItem){
     var feedParams = {
           count: $scope.exploreIncrement
@@ -51,6 +48,9 @@ angular.module( 'Morsel.public.explore.morsels', [])
       $state.go('404');
     });
   };
+
+  //get our full explore feed
+  $scope.loadDefaultMorsels();
 
   $scope.loadSearchResultMorsels = function(endFeedItem){
     var feedParams = {

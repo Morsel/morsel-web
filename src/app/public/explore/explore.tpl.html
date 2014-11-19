@@ -1,18 +1,13 @@
-<div class="container container-shadow morsel-bg search-page header-padding">
+<div class="container search-page header-padding">
+  <h2 class="text-center col-sm-9 col-sm-offset-3">Explore</h2>
   <div class="row">
     <div class="col-sm-3">
-      <ul class="search-menu">
-        <li>
-          <a href="/explore/morsels" class="btn" ui-route="/explore/morsels" ng-class="{active:$uiRoute}">Morsels</a>
-        </li>
-        <li>
-          <a href="/explore/users" class="btn" ui-route="/explore/users" ng-class="{active:$uiRoute}">Users</a>
-        </li>
-      </ul>
+      <div class="list-group search-menu container-shadow">
+        <a href="/explore/morsels" class="list-group-item" ui-route="/explore/morsels" ng-class="{active:$uiRoute}">Morsels</a>
+        <a href="/explore/users" class="list-group-item" ui-route="/explore/users" ng-class="{active:$uiRoute}">Users</a>
+      </div>
     </div>
-    <div class="col-sm-9 search-main">
-      <h2>Explore Morsel</h2>
-
+    <div class="col-sm-9 search-main container-shadow container-round morsel-bg">
       <input type="text" ng-attr-placeholder="{{search.searchPlaceholder}}" class="form-control" ng-model="search.query" ng-change="search.customSearch()" />
       <div ui-view="explore-results"></div>
     </div>

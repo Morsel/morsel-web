@@ -590,6 +590,10 @@ a.white-link {
     @include border-bottom-right-radius(5px);
   }
 
+  .container-round {
+    @include border-radius(5px);
+  }
+
   .banner {
     top: auto;
     bottom: 0;
