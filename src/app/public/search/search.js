@@ -37,5 +37,5 @@ angular.module( 'Morsel.public.search', [])
   $scope.searchUser = searchUser;
   $scope.isLoggedIn = Auth.isLoggedIn();
 
-  $state.go('search.people', null, {location:'replace'});
+  $state.go('search.users', null, {location:'replace'});
 });

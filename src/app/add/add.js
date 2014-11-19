@@ -57,8 +57,8 @@ angular.module( 'Morsel.add', [
   'Morsel.add.item',
   'Morsel.add.morsel',
   'Morsel.add.new',
-  'Morsel.add.tagPeople',
-  'Morsel.add.tagPersonButton',
+  'Morsel.add.tagUsers',
+  'Morsel.add.tagUserButton',
   'Morsel.add.templates'
 ])
 

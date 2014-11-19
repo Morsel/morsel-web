@@ -73,8 +73,8 @@ angular.module( 'Morsel.public', [
   'Morsel.public.notifications',
   'Morsel.public.place',//place comes before morselDetail so /places/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search',//search comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
-  'Morsel.public.search.people',
-  'Morsel.public.search.people.facebook',
+  'Morsel.public.search.users',
+  'Morsel.public.search.users.facebook',
   'Morsel.public.profile',//profile comes before morselDetail so /users/:id doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.morselDetail'
 ])

@@ -29,8 +29,8 @@
             <p bo-if="!place.twitter_username">Eek! There are no morsels yet.</p>
           </div>
         </tab>
-        <tab heading="People" select="initialLoadPeople()">
-          <div class="profile-tab-content" mrsl-user-list="placeUsers" mrsl-user-list-empty="'There are no users associated with this place'" mrsl-user-list-load-func="loadPeople"></div>
+        <tab heading="Users" select="initialLoadUsers()">
+          <div class="profile-tab-content" mrsl-user-list="placeUsers" mrsl-user-list-empty="'There are no users associated with this place'" mrsl-user-list-load-func="loadUsers"></div>
         </tab>
         <tab heading="Details" select="loadDetails()">
           <div class="place-details profile-tab-content">

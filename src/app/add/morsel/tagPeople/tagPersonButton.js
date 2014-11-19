@@ -1,31 +1,31 @@
-angular.module( 'Morsel.add.tagPersonButton', [] )
+angular.module( 'Morsel.add.tagUserButton', [] )
 
-.directive('mrslTagPersonBtn', function(ApiMorsels, $q){
+.directive('mrslTagUserBtn', function(ApiMorsels, $q){
   return {
     scope: {
-      morselTagged: '=mrslTagPersonBtn',
-      personToTag: '=mrslTagPersonBtnUser'
+      morselTagged: '=mrslTagUserBtn',
+      userToTag: '=mrslTagUserBtnUser'
     },
     replace: true,
     link: function(scope, element, attrs) {
       scope.toggleTagUser = function() {
         var deferred = $q.defer();
 
-        if(scope.personToTag.tagged) {
-          ApiMorsels.untagUser(scope.morselTagged.id, scope.personToTag.id).then(function(resp) {
-            scope.personToTag.tagged = false;
+        if(scope.userToTag.tagged) {
+          ApiMorsels.untagUser(scope.morselTagged.id, scope.userToTag.id).then(function(resp) {
+            scope.userToTag.tagged = false;
 
-            //emit this so we can update the tagged people list
-            scope.$emit('add.tagPeople.changed');
+            //emit this so we can update the tagged users list
+            scope.$emit('add.tagUsers.changed');
 
             deferred.resolve();
           });
         } else {
-          ApiMorsels.tagUser(scope.morselTagged.id, scope.personToTag.id).then(function(resp) {
-            scope.personToTag.tagged = true;
+          ApiMorsels.tagUser(scope.morselTagged.id, scope.userToTag.id).then(function(resp) {
+            scope.userToTag.tagged = true;
 
-            //emit this so we can update the tagged people list
-            scope.$emit('add.tagPeople.changed');
+            //emit this so we can update the tagged users list
+            scope.$emit('add.tagUsers.changed');
 
             deferred.resolve();
           });
@@ -34,6 +34,6 @@ angular.module( 'Morsel.add.tagPersonButton', [] )
         return deferred.promise;
       };
     },
-    template: '<button ng-click="toggleTagUser()" class="btn" ng-class="{\'btn-default\' : personToTag.tagged, \'btn-info\' : !personToTag.tagged}" ng-bind="personToTag.tagged ? \'Untag User\' : \'Tag User\'"></button>'
+    template: '<button ng-click="toggleTagUser()" class="btn" ng-class="{\'btn-default\' : userToTag.tagged, \'btn-info\' : !userToTag.tagged}" ng-bind="userToTag.tagged ? \'Untag User\' : \'Tag User\'"></button>'
   };
 });

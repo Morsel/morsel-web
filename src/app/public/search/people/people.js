@@ -1,15 +1,15 @@
-angular.module( 'Morsel.public.search.people', [])
+angular.module( 'Morsel.public.search.users', [])
 
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'search.people', {
-    url: '/people',
-    controller: 'SearchPeopleCtrl',
+  $stateProvider.state( 'search.users', {
+    url: '/users',
+    controller: 'SearchUsersCtrl',
     template: '<div ui-view="search-results"></div>'
   });
 })
 
-.controller( 'SearchPeopleCtrl', function SearchPeopleCtrl ($scope, searchUser, ApiUsers, $state){
+.controller( 'SearchUsersCtrl', function SearchUsersCtrl ($scope, searchUser, ApiUsers, $state){
   $scope.search.emptyText = 'No users match your search';
 
-  $state.go('search.people.facebook', null, {location:'replace'});
+  $state.go('search.users.facebook', null, {location:'replace'});
 });
