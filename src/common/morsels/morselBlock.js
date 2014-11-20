@@ -1,14 +1,11 @@
 angular.module('Morsel.common.morselBlock', [])
 
-.directive('mrslMorselBlock', function(PhotoHelpers, MORSELPLACEHOLDER, $location) {
+.directive('mrslMorselBlock', function(PhotoHelpers, MORSELPLACEHOLDER, $location, $modal, $rootScope, ApiMorsels, USER_LIST_NUMBER) {
   return {
     restrict: 'A',
     replace: true,
     scope: {
       morsel: '=mrslMorselBlock',
-      noUser: '@mrslMorselBlockNoUser',
-      noStats: '@mrslMorselBlockNoStats',
-      noPlace: '@mrslMorselBlockNoPlace',
       morselFeedItemId: '=mrslMorselBlockFeedItemId',
       spacer: '@mrslMorselBlockSpacer'
     },
@@ -57,6 +54,49 @@ angular.module('Morsel.common.morselBlock', [])
           return [];
         }
       };
+
+      scope.showTaggedUsers = function() {
+        $rootScope.modalInstance = $modal.open({
+          templateUrl: 'common/user/userListOverlay.tpl.html',
+          controller: ModalInstanceCtrl,
+          resolve: {
+            morsel: function () {
+              return scope.morsel;
+            }
+          }
+        });
+      };
+
+      var ModalInstanceCtrl = function ($scope, $modalInstance, morsel) {
+        $scope.heading = 'Tagged Users';
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+
+        $scope.loadUsers = function(endUser) {
+          var userParams = {
+                count: USER_LIST_NUMBER,
+                type: 'User'
+              };
+
+          if(endUser) {
+            userParams.max_id = endUser.id;
+          }
+
+          ApiMorsels.getTaggedUsers(morsel.id, userParams).then(function(usersResp){
+            if($scope.users) {
+              $scope.users = $scope.users.concat(usersResp.data);
+            } else {
+              $scope.users = usersResp.data;
+            }
+          });
+        };
+
+        $scope.loadUsers();
+      };
+      //we need to implicitly inject dependencies here, otherwise minification will botch them
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
     templateUrl: 'common/morsels/morselBlock.tpl.html'
   };

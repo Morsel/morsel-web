@@ -10,6 +10,7 @@ input, textarea, select {
 .radio, .checkbox {
   label {
     font-family: $font-family-secondary;
+    font-size: $font-size-base;
   }
 }
 
@@ -167,11 +168,8 @@ img {
   vertical-align: middle;
 
   &:before {
-    content: 'By ';
-  }
-
-  &:hover {
-    text-decoration: none;
+    content: 'by ';
+    font-style: normal;
   }
 }
 
@@ -496,7 +494,6 @@ a.white-link {
 
   &:hover, &:active {
     color: $link-hover-color !important;
-    text-decoration: none;
   }
 }
 

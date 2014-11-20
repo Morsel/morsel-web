@@ -16,54 +16,277 @@ angular.module( 'Morsel.add.morsel', [])
     resolve: {
       currentUser: function(Auth) {
         return Auth.getCurrentUserPromise();
+      },
+      theMorsel : function(ApiMorsels, $stateParams, $state) {
+        return ApiMorsels.getMorsel($stateParams.morselId).then(function(morselData) {
+          return morselData;
+        }, function() {
+          //if there's an error retrieving a morsel, go to drafts
+          $state.go('drafts');
+        });
       }
     }
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, theMorsel, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi, Mixpanel ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You will lose unsaved changes if you leave this page.',
       //since we have individual forms submitting within our main form, we don't ever see the big form set back to ng-pristine, even if all the data is saved. so to keep track of "$dirty state" for the big form, we need to do it manually
       morselEditFormDirty = {};
 
-  //store all our social data
-  $scope.social = {
-    //store our social authentications from the API
-    apiAuthentications: {},
-    //model for our forms
-    model:  {
-      facebook : false,
-      twitter : false
-    },
-    //do networks have the ability to publish?
-    canPublish: {
-      facebook: false,
-      twitter: false
-    }
-  };
+  //make sure this is my morsel to edit
+  if(theMorsel.creator_id === currentUser.id) {
+    $scope.morsel = theMorsel;
 
-  //to store place options and model
-  $scope.places = {
-    selectedPlace: null,
-    placeOptions: null
-  };
+    //store all our social data
+    $scope.social = {
+      //store our social authentications from the API
+      apiAuthentications: {},
+      //model for our forms
+      model:  {
+        facebook : false,
+        twitter : false
+      },
+      //do networks have the ability to publish?
+      canPublish: {
+        facebook: false,
+        twitter: false
+      }
+    };
 
-  $scope.$on('places.add.new', function(e, newPlace) {
-    $scope.places.selectedPlace = newPlace;
-  });
+    //to store place options and model
+    $scope.places = {
+      selectedPlace: null,
+      placeOptions: null
+    };
 
-  //saved morsel data
-  morselPromises.push(getMorsel());
-  //general morsel template data
-  morselPromises.push(getMorselTemplates());
-  //social authentication data
-  morselPromises.push(getAuthentications());
-  //places data
-  morselPromises.push(getPlaces());
-  //once all promises are resolved
-  $q.all(morselPromises).then(dataLoaded);
+    $scope.$on('places.add.new', function(e, newPlace) {
+      $scope.places.selectedPlace = newPlace;
+    });
+
+    //general morsel template data
+    morselPromises.push(getMorselTemplates());
+    //social authentication data
+    morselPromises.push(getAuthentications());
+    //places data
+    morselPromises.push(getPlaces());
+    //once all promises are resolved
+    $q.all(morselPromises).then(dataLoaded);
+
+    //request publish_actions
+    $scope.addFacebook = function() {
+      FacebookApi.init(function(){
+        FacebookApi.login(function(response) {
+          if (response.status === 'connected') {
+            // user is logged into your app and Facebook.
+            if(response.authResponse && response.authResponse.userID) {
+              //check if we already have authentications for user
+              if($scope.social.apiAuthentications.facebook) {
+                //user is authenticated with facebook, but we need to check if they can publish
+                checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
+              } else {
+                //if not, create new authentication
+                createAuthentication(response);
+              }
+            }
+          }
+        }, 'publish_actions');
+      });
+    };
+
+    //handle form errors
+    $scope.$on('add.error', function(event, resp){
+      handleErrors(resp);
+    });
+
+    //submit our form
+    $scope.publish = function() {
+      var morselParams = {};
+
+      //check if everything is valid
+      if($scope.morselDataLoaded && $scope.morselEditForm.$valid) {
+        //disable form while request fires
+        $scope.morselEditForm.$setValidity('loading', false);
+
+        if($scope.social.model.facebook) {
+          morselParams.post_to_facebook = true;
+        }
+
+        if($scope.social.model.twitter) {
+          morselParams.post_to_twitter = true;
+        }
+
+        //set "$dirty" for onbeforeunload
+        $scope.$emit('add.dirty', {
+          key: 'publish',
+          value: true
+        });
+
+        //call our publishMorsel method to take care of the heavy lifting
+        ApiMorsels.publishMorsel($scope.morsel.id, morselParams).then(onPublishSuccess, onPublishError);
+      }
+    };
+
+    $scope.$on('add.dirty', function(e, data) {
+      morselEditFormDirty[data.key] = data.value;
+    });
+
+    $window.onbeforeunload = handleOnbeforeUnload;
+
+    $scope.$on('$destroy', function() {
+      $window.onbeforeunload = undefined;
+    });
+
+    //need to check for internal routes also
+    //why is this firing twice??
+    /*
+    $scope.$on('$locationChangeStart', function(event, next, current) {
+      if ($scope.morselEditForm.$invalid) {
+        if(!$window.confirm(unloadText+' Your data will not be saved if you continue.')) {
+          event.preventDefault();
+        }
+      }
+    });
+    */
+
+    //our custom tooltip messaging
+    $scope.customPublishTooltips = [
+      {
+        'errorName': 'itemPhotoDoneUploading',
+        'message': 'Images are still uploading. Please try again shortly'
+      },
+      {
+        'errorName': 'itemDescriptionSaved',
+        'message': 'All descriptions must be saved before continuing'
+      },
+      {
+        'errorName': 'morselHasTitle',
+        'message': 'Your morsel must have a title'
+      },
+      {
+        'errorName': 'morselTitleSaved',
+        'message': 'Your morsel\'s title must be saved before continuing'
+      },
+      {
+        'errorName': 'itemHasPhoto',
+        'message': 'All items must have photos to publish. Please add photos or delete unused items'
+      }
+    ];
+
+    $scope.addItem = function() {
+      var itemParams = {
+        item: {
+          morsel_id: $scope.morsel.id
+        }
+      };
+
+      $scope.addingItem = true;
+
+      //set "$dirty" for onbeforeunload
+      $scope.$emit('add.dirty', {
+        key: 'addItem',
+        value: true
+      });
+
+      ApiItems.createItem(itemParams).then(function(itemResp) {
+        if($scope.morsel.items) {
+          $scope.morsel.items.push(itemResp.data);
+        } else {
+          $scope.morsel.items = [itemResp.data];
+        }
+        $scope.addingItem = false;
+
+        //set "$pristine" for onbeforeunload
+        $scope.$emit('add.dirty', {
+          key: 'addItem',
+          value: false
+        });
+      }, function(resp) {
+        $scope.addingItem = false;
+        handleErrors(resp);
+      });
+    };
+
+    $scope.$on('add.item.delete', function(event, itemId) {
+      var confirmed,
+          itemToBeDeleted,
+          itemIndexToBeDeleted;
+
+      //find which item should be removed
+      itemToBeDeleted = _.find($scope.morsel.items, function(el, index) {
+        if(el.id === itemId) {
+          itemIndexToBeDeleted = index;
+          return true;
+        }
+      });
+
+      if($scope.morsel.items.length === 1) {
+        confirmed = confirm('Deleting the last item will delete the entire morsel. Are you sure you want to do this?');
+
+        if(confirmed) {
+          deleteMorsel();
+        }
+      } else {
+        confirmed = confirm('Are you sure you want to delete this item?');
+
+        if(confirmed) {
+          //show loader
+          itemToBeDeleted.deleting = true;
+
+          //set "$dirty" for onbeforeunload
+          $scope.$emit('add.dirty', {
+            key: 'delete_'+itemId,
+            value: true
+          });
+
+          ApiItems.deleteItem(itemId).then(function() {
+            //remove item from local list
+            $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
+
+            //if we just deleted the primary, make sure to update to the last item
+            if(itemId === $scope.morsel.primary_item_id) {
+              makeCoverPhoto(_.last($scope.morsel.items).id);
+            }
+
+            //set "$dirty" for onbeforeunload
+            $scope.$emit('add.dirty', {
+              key: 'delete_'+itemId,
+              value: false
+            });
+          }, function(resp) {
+            //remove loader
+            itemToBeDeleted.deleting = false;
+            handleErrors(resp);
+          });
+        }
+      }
+    });
+
+    $scope.$on('add.item.makeCoverPhoto', function(event, itemId) {
+      makeCoverPhoto(itemId);
+    });
+
+    $scope.deleteMorsel = function() {
+      var confirmed = confirm('This will delete your entire morsel and all photos associated with it. Are you sure you want to do this?');
+
+      if(confirmed) {
+        deleteMorsel();
+      }
+    };
+
+    //config for reordering
+    $scope.itemOrderListeners = {
+      orderChanged: function(event) {
+        //increment one to destination index because API starts at 1 but sortable directive starts at 0
+        computeSortOrder(event.source.itemScope.modelValue.id, event.dest.index);
+      },
+      containment: '#item-reorder'
+    };
+  } else {
+    $state.go('drafts');
+  }
 
   function getMorsel() {
     return ApiMorsels.getMorsel($stateParams.morselId).then(function(morselData) {
@@ -88,27 +311,6 @@ angular.module( 'Morsel.add.morsel', [])
       $scope.places.placeOptions = placesResp.data;
     });
   }
-
-  //request publish_actions
-  $scope.addFacebook = function() {
-    FacebookApi.init(function(){
-      FacebookApi.login(function(response) {
-        if (response.status === 'connected') {
-          // user is logged into your app and Facebook.
-          if(response.authResponse && response.authResponse.userID) {
-            //check if we already have authentications for user
-            if($scope.social.apiAuthentications.facebook) {
-              //user is authenticated with facebook, but we need to check if they can publish
-              checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
-            } else {
-              //if not, create new authentication
-              createAuthentication(response);
-            }
-          }
-        }
-      }, 'publish_actions');
-    });
-  };
 
   function formatAuthenticationParams(response) {
     return {
@@ -252,39 +454,6 @@ angular.module( 'Morsel.add.morsel', [])
     }
   }
 
-  //handle form errors
-  $scope.$on('add.error', function(event, resp){
-    handleErrors(resp);
-  });
-
-  //submit our form
-  $scope.publish = function() {
-    var morselParams = {};
-
-    //check if everything is valid
-    if($scope.morselDataLoaded && $scope.morselEditForm.$valid) {
-      //disable form while request fires
-      $scope.morselEditForm.$setValidity('loading', false);
-
-      if($scope.social.model.facebook) {
-        morselParams.post_to_facebook = true;
-      }
-
-      if($scope.social.model.twitter) {
-        morselParams.post_to_twitter = true;
-      }
-
-      //set "$dirty" for onbeforeunload
-      $scope.$emit('add.dirty', {
-        key: 'publish',
-        value: true
-      });
-
-      //call our publishMorsel method to take care of the heavy lifting
-      ApiMorsels.publishMorsel($scope.morsel.id, morselParams).then(onPublishSuccess, onPublishError);
-    }
-  };
-
   function onPublishSuccess(morselData) {
     //temporary check to determine if a morsel has been published
     if(_.isEmpty(morselData.mrsl) || _.isEmpty(morselData.photos)) {
@@ -295,10 +464,19 @@ angular.module( 'Morsel.add.morsel', [])
       //decrease our count to display in the menu
       currentUser.draft_count--;
 
-      //bring user to morsel detail
-      //remove onbeforeunload so user doesn't get blocked going to morsel detail page
-      $window.onbeforeunload = undefined;
-      $window.location.href = '/'+morselData.creator.username.toLowerCase()+'/'+morselData.id+'-'+morselData.slug;
+      Mixpanel.track('Published Morsel', {
+        item_count: morselData.items.length,
+        tagged_users_count: morselData.tagged_users_count,
+        template_id: morselData.template_id,
+        morsel_id: morselData.id,
+        place_id : morselData.place_id,
+        minutes_to_publish : (new Date(morselData.published_at) - new Date(morselData.created_at))/60000
+      }, function() {
+        //bring user to morsel detail
+        //remove onbeforeunload so user doesn't get blocked going to morsel detail page
+        $window.onbeforeunload = undefined;
+        $window.location.href = '/'+morselData.creator.username.toLowerCase()+'/'+morselData.id+'-'+morselData.slug;
+      });
     }
   }
 
@@ -324,145 +502,6 @@ angular.module( 'Morsel.add.morsel', [])
       return undefined;
     }
   }
-
-  $scope.$on('add.dirty', function(e, data) {
-    morselEditFormDirty[data.key] = data.value;
-  });
-
-  $window.onbeforeunload = handleOnbeforeUnload;
-
-  $scope.$on('$destroy', function() {
-    $window.onbeforeunload = undefined;
-  });
-
-  //need to check for internal routes also
-  //why is this firing twice??
-  /*
-  $scope.$on('$locationChangeStart', function(event, next, current) {
-    if ($scope.morselEditForm.$invalid) {
-      if(!$window.confirm(unloadText+' Your data will not be saved if you continue.')) {
-        event.preventDefault();
-      }
-    }
-  });
-  */
-
-  //our custom tooltip messaging
-  $scope.customPublishTooltips = [
-    {
-      'errorName': 'itemPhotoDoneUploading',
-      'message': 'Images are still uploading. Please try again shortly'
-    },
-    {
-      'errorName': 'itemDescriptionSaved',
-      'message': 'All descriptions must be saved before continuing'
-    },
-    {
-      'errorName': 'morselHasTitle',
-      'message': 'Your morsel must have a title'
-    },
-    {
-      'errorName': 'morselTitleSaved',
-      'message': 'Your morsel\'s title must be saved before continuing'
-    },
-    {
-      'errorName': 'itemHasPhoto',
-      'message': 'All items must have photos to publish. Please add photos or delete unused items'
-    }
-  ];
-
-  $scope.addItem = function() {
-    var itemParams = {
-      item: {
-        morsel_id: $scope.morsel.id
-      }
-    };
-
-    $scope.addingItem = true;
-
-    //set "$dirty" for onbeforeunload
-    $scope.$emit('add.dirty', {
-      key: 'addItem',
-      value: true
-    });
-
-    ApiItems.createItem(itemParams).then(function(itemResp) {
-      if($scope.morsel.items) {
-        $scope.morsel.items.push(itemResp.data);
-      } else {
-        $scope.morsel.items = [itemResp.data];
-      }
-      $scope.addingItem = false;
-
-      //set "$pristine" for onbeforeunload
-      $scope.$emit('add.dirty', {
-        key: 'addItem',
-        value: false
-      });
-    }, function(resp) {
-      $scope.addingItem = false;
-      handleErrors(resp);
-    });
-  };
-
-  $scope.$on('add.item.delete', function(event, itemId) {
-    var confirmed,
-        itemToBeDeleted,
-        itemIndexToBeDeleted;
-
-    //find which item should be removed
-    itemToBeDeleted = _.find($scope.morsel.items, function(el, index) {
-      if(el.id === itemId) {
-        itemIndexToBeDeleted = index;
-        return true;
-      }
-    });
-
-    if($scope.morsel.items.length === 1) {
-      confirmed = confirm('Deleting the last item will delete the entire morsel. Are you sure you want to do this?');
-
-      if(confirmed) {
-        deleteMorsel();
-      }
-    } else {
-      confirmed = confirm('Are you sure you want to delete this item?');
-
-      if(confirmed) {
-        //show loader
-        itemToBeDeleted.deleting = true;
-
-        //set "$dirty" for onbeforeunload
-        $scope.$emit('add.dirty', {
-          key: 'delete_'+itemId,
-          value: true
-        });
-
-        ApiItems.deleteItem(itemId).then(function() {
-          //remove item from local list
-          $scope.morsel.items.splice(itemIndexToBeDeleted, 1);
-
-          //if we just deleted the primary, make sure to update to the last item
-          if(itemId === $scope.morsel.primary_item_id) {
-            makeCoverPhoto(_.last($scope.morsel.items).id);
-          }
-
-          //set "$dirty" for onbeforeunload
-          $scope.$emit('add.dirty', {
-            key: 'delete_'+itemId,
-            value: false
-          });
-        }, function(resp) {
-          //remove loader
-          itemToBeDeleted.deleting = false;
-          handleErrors(resp);
-        });
-      }
-    }
-  });
-
-  $scope.$on('add.item.makeCoverPhoto', function(event, itemId) {
-    makeCoverPhoto(itemId);
-  });
 
   function makeCoverPhoto(itemId) {
     var morselParams = {
@@ -490,51 +529,6 @@ angular.module( 'Morsel.add.morsel', [])
       });
     }, handleErrors);
   }
-
-  $scope.deleteMorsel = function() {
-    var confirmed = confirm('This will delete your entire morsel and all photos associated with it. Are you sure you want to do this?');
-
-    if(confirmed) {
-      deleteMorsel();
-    }
-  };
-
-  function deleteMorsel() {
-    $scope.deletingMorsel = true;
-
-    //set "$dirty" for onbeforeunload
-    $scope.$emit('add.dirty', {
-      key: 'deleteMorsel',
-      value: true
-    });
-
-    ApiMorsels.deleteMorsel($scope.morsel.id).then(function() {
-      $scope.morselDeleted = true;
-      $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
-      $scope.alertType = 'success';
-      
-      //decrease our count to display in the menu
-      currentUser.draft_count--;
-
-      //set "$pristine" for onbeforeunload
-      $scope.$emit('add.dirty', {
-        key: 'deleteMorsel',
-        value: false
-      });
-    }, function(resp) {
-      $scope.deletingMorsel = false;
-      handleErrors(resp);
-    });
-  }
-
-  //config for reordering
-  $scope.itemOrderListeners = {
-    orderChanged: function(event) {
-      //increment one to destination index because API starts at 1 but sortable directive starts at 0
-      computeSortOrder(event.source.itemScope.modelValue.id, event.dest.index);
-    },
-    containment: '#item-reorder'
-  };
 
   function computeSortOrder(itemId, itemIndex) {
     //don't allow another reorder until last one was successful
@@ -594,6 +588,34 @@ angular.module( 'Morsel.add.morsel', [])
       $scope.updatingOrder = false;
       //set our form valid, for now
       $scope.morselEditForm.itemReorderHidden.$setValidity('reorderingItemsFinished', true);
+      handleErrors(resp);
+    });
+  }
+
+  function deleteMorsel() {
+    $scope.deletingMorsel = true;
+
+    //set "$dirty" for onbeforeunload
+    $scope.$emit('add.dirty', {
+      key: 'deleteMorsel',
+      value: true
+    });
+
+    ApiMorsels.deleteMorsel($scope.morsel.id).then(function() {
+      $scope.morselDeleted = true;
+      $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
+      $scope.alertType = 'success';
+      
+      //decrease our count to display in the menu
+      currentUser.draft_count--;
+
+      //set "$pristine" for onbeforeunload
+      $scope.$emit('add.dirty', {
+        key: 'deleteMorsel',
+        value: false
+      });
+    }, function(resp) {
+      $scope.deletingMorsel = false;
       handleErrors(resp);
     });
   }

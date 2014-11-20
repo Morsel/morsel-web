@@ -52,19 +52,22 @@
     left: 1px;
     right: 1px;
     z-index: 2;
-    padding: 10px;
+    padding: 15px 5px 8px;
     @include background-image(linear-gradient(rgba(23, 20, 17,0) 0%, rgba(23, 20, 17,0) 1%, rgba(23, 20, 17,0.05) 8%, rgba(23, 20, 17,0.5) 64%, rgba(23, 20, 17, 0.7) 86%, rgba(23, 20, 17, 0.8) 100%));
     text-align: center;
 
     .morsel-block-title {
       font-size: 16px;
-      margin: 0;
+      line-height: 1.2;
+      margin: 0 0 3px;
+      padding: 0 5px;
     }
 
     .morsel-block-creator {
-      font-style: italic;
       font-size: 14px;
       margin: 0;
+      font-weight: 400;
+      padding: 0 5px;
 
       .user-by {
         &:before {
@@ -75,12 +78,55 @@
 
     .morsel-block-place {
       font-size: 14px;
+      line-height: 24px;
       margin: 0;
+      font-weight: 400;
     }
 
     &:hover {
       a {
         color: white;
+      }
+    }
+
+    .morsel-info-bottom {
+      text-align: center;
+
+      &.featured-or-tagged {
+        .morsel-block-place {
+          padding: 0 70px;
+        }
+      }
+
+      i {
+        float: left;
+        vertical-align: middle;
+      }
+
+      .morsel-featured, .morsel-tagged-count {
+        vertical-align: middle;
+        line-height: 24px;
+        color: white;
+      }
+
+      .morsel-featured {
+        float: left;
+        margin-right: 5px;
+        font-size: 10px;
+      }
+
+      .morsel-tagged-count {
+        display: inline-block;
+        float: right;
+        margin-left: 5px;
+        font-size: 12px;
+
+        span {
+          &:hover {
+            color: $link-hover-color;
+            cursor: pointer;
+          }
+        }
       }
     }
   }
@@ -100,7 +146,7 @@
   }
 }
 
-@media (min-width: $screen-xs-min) {
+@media (min-width: $screen-sm-min) {
   .morsel-block {
     height: $morsel-max-height-sm;
 
@@ -108,59 +154,7 @@
       height: auto;
 
       .spacer {
-        max-height: $morsel-max-height-sm;
-      }
-    }
-
-    .morsel-info {
-      .morsel-block-title {
-        font-size: 22px;
-      }
-
-      .morsel-block-creator {
-        font-size: 18px;
-        margin-bottom: 3px;
-      }
-
-      .morsel-block-place {
-        font-size: 18px;
-      }
-    }
-  }
-}
-
-@media (min-width: $screen-sm-min) {
-  .morsel-block {
-    .morsel-info {
-      .morsel-block-title {
-        font-size: 18px;
-      }
-
-      .morsel-block-creator {
-        font-size: 14px;
-      }
-
-      .morsel-block-place {
-        font-size: 14px;
-      }
-    }
-  }
-}
-
-@media (min-width: $screen-md-min) {
-  .morsel-block {
-    .morsel-info {
-      .morsel-block-title {
-        font-size: 20px;
-      }
-
-      .morsel-block-creator {
-        font-size: 16px;
-        margin-bottom: 3px;
-      }
-
-      .morsel-block-place {
-        font-size: 16px;
+        max-height: none;
       }
     }
   }

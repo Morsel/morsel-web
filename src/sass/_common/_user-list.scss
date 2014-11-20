@@ -31,6 +31,10 @@
 
         a {
           color: $morsel-dark;
+
+          &:hover {
+            color: $link-hover-color;
+          }
         }
       }
 

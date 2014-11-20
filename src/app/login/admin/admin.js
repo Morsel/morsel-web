@@ -12,7 +12,7 @@ angular.module( 'Morsel.login.admin', [])
   });
 })
 
-.controller( 'AdminCtrl', function ReservedUsernameCtrl( $scope, $stateParams, Auth, $window, localStorageService ) {
+.controller( 'AdminCtrl', function ReservedUsernameCtrl( $scope, $stateParams, Auth, $window, localStorageService, Mixpanel ) {
   if($stateParams.user_id && $stateParams.shadow_token) {
     //log out existing user
     Auth.logout(true);
@@ -32,7 +32,12 @@ angular.module( 'Morsel.login.admin', [])
     //store that we're a shadow user until we log out
     Auth.setShadowUser();
 
-    $window.location.href='/add/drafts';
+    //track that we logged in as a shadow user
+    Mixpanel.track('Logged in', {
+      login_type: 'shadow'
+    }, function() {
+      $window.location.href='/add/drafts';
+    });
   }
 
   function onError() {
