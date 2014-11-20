@@ -1,7 +1,7 @@
 <div class="add-morsel header-padding" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow morsel-bg">
     <div class="template-help" ng-show="morselDataLoaded && !morselDeleted" mrsl-add-template="morselTemplate" mrsl-add-template-help="true"></div>
-    <form name="morselEditForm" ng-submit="publish()" novalidate>
+    <form name="morselEditForm" ng-submit="popSummaryOverlay()" novalidate>
       <div ng-show="alertMessage" class="alert alert-{{alertType}}">
         <p ng-bind-html="alertMessage"></p>
       </div>
@@ -13,6 +13,7 @@
             <div class="add-morsel-info-wrap">
               <h2 bo-text="morsel.draft ? 'Morsel Add' : 'Morsel Edit'"></h2>
               <div mrsl-edit-morsel-title="morsel" mrsl-edit-morsel-title-template="morselTemplate"></div>
+              <div mrsl-edit-morsel-summary="morsel" ng-if="!morsel.draft"></div>
               <div class="form-group" ng-if="places.placeOptions">
                 <label class="control-label col-sm-3">Location:</label>
                 <div class="col-sm-9">
@@ -52,7 +53,7 @@
               <div class="add-morsel-actions">
                 <button class="btn btn-danger pull-left" ng-click="deleteMorsel()" name="deleteMorsel" ng-model="fake">Delete Morsel</button>
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank" bo-text="morsel.draft ? 'Preview':'Go to morsel'"></a>
-                <button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" mrsl-submit-btn-submit-copy="Publishing..." ng-if="morsel.draft && morselDataLoaded"></button>
+                <button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Next" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" mrsl-submit-btn-submit-copy="Publishing..." ng-if="morsel.draft && morselDataLoaded"></button>
               </div>
             </div>
           </div>

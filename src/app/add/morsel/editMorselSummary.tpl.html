@@ -1,0 +1,14 @@
+<div class="form-group">
+  <label class="control-label col-sm-3">Summary:</label>
+  <div class="col-sm-9">
+    <div class="loader saving" ng-show="saving"></div>
+    <p ng-hide="editing || saving" class="form-control-static" ng-bind-html="morsel.summary ? morsel.summary : placeholder" ng-class="{'no-text':!morsel.summary}" ng-click="edit()"></p>
+    <ng-form ng-show="editing && !saving" name="morselSummaryForm">
+      <textarea ng-attr-placeholder="{{placeholder}}" ng-model="updatedSummary" name="morselSummary" class="form-control" mrsl-focus-me="editing"></textarea>
+      <div class="form-group-btns">
+        <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-click="save($event)">Save</button>
+      </div>
+    </ng-form>
+  </div>
+</div>

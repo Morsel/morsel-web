@@ -29,7 +29,7 @@ angular.module( 'Morsel.add.morsel', [])
   });
 })
 
-.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, theMorsel, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi, Mixpanel ) {
+.controller( 'AddMorselCtrl', function AddMorselCtrl( $scope, currentUser, theMorsel, $stateParams, $state, ApiMorsels, ApiUsers, PhotoHelpers, $q, HandleErrors, $window, $timeout, ApiItems, $sce, $filter, FacebookApi, Mixpanel, $rootScope, $modal ) {
   var morselPromises = [],
       allTemplateData,
       unloadText = 'You will lose unsaved changes if you leave this page.',
@@ -101,32 +101,60 @@ angular.module( 'Morsel.add.morsel', [])
       handleErrors(resp);
     });
 
-    //submit our form
-    $scope.publish = function() {
-      var morselParams = {};
+    //form completed. pop overlay for summary
+    $scope.popSummaryOverlay = function() {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, HandleErrors, ApiMorsels, morsel) {
+        $scope.morsel = morsel;
+        
+        //model for our summary
+        $scope.morselSummary = {
+          text: null
+        };
 
-      //check if everything is valid
-      if($scope.morselDataLoaded && $scope.morselEditForm.$valid) {
-        //disable form while request fires
-        $scope.morselEditForm.$setValidity('loading', false);
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
 
-        if($scope.social.model.facebook) {
-          morselParams.post_to_facebook = true;
+        $scope.publish = function() {
+          var summary = $scope.morselSummary.text ? $scope.morselSummary.text.trim() : null,
+              morselParams;
+
+          if(summary) {
+            $scope.morselSummaryForm.summary.$setValidity('updatingSummary', false);
+
+            morselParams = {
+              morsel: {
+                summary: summary
+              }
+            };
+
+            ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function() {
+              //summary updated, go ahead and publish
+              publish();
+              $modalInstance.dismiss('publish');
+            }, function(resp) {
+              $scope.morselSummaryForm.summary.$setValidity('updatingSummary', true);
+              HandleErrors.onError(resp.data, $scope.morselSummaryForm);
+            });
+          } else {
+            //no summary, go ahead and publish
+            publish();
+            $modalInstance.dismiss('publish');
+          }
+        };
+      };
+      //we need to implicitly inject dependencies here, otherwise minification will botch them
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'HandleErrors', 'ApiMorsels', 'morsel'];
+
+      $rootScope.modalInstance = $modal.open({
+        templateUrl: 'app/add/morsel/morselSummaryOverlay.tpl.html',
+        controller: ModalInstanceCtrl,
+        resolve: {
+          morsel: function () {
+            return $scope.morsel;
+          }
         }
-
-        if($scope.social.model.twitter) {
-          morselParams.post_to_twitter = true;
-        }
-
-        //set "$dirty" for onbeforeunload
-        $scope.$emit('add.dirty', {
-          key: 'publish',
-          value: true
-        });
-
-        //call our publishMorsel method to take care of the heavy lifting
-        ApiMorsels.publishMorsel($scope.morsel.id, morselParams).then(onPublishSuccess, onPublishError);
-      }
+      });
     };
 
     $scope.$on('add.dirty', function(e, data) {
@@ -622,5 +650,32 @@ angular.module( 'Morsel.add.morsel', [])
 
   function handleErrors(resp) {
     HandleErrors.onError(resp.data, $scope.morselEditForm);
+  }
+
+  function publish() {
+    var morselParams = {};
+
+    //check if everything is valid
+    if($scope.morselDataLoaded && $scope.morselEditForm.$valid) {
+      //disable form while request fires
+      $scope.morselEditForm.$setValidity('loading', false);
+
+      if($scope.social.model.facebook) {
+        morselParams.post_to_facebook = true;
+      }
+
+      if($scope.social.model.twitter) {
+        morselParams.post_to_twitter = true;
+      }
+
+      //set "$dirty" for onbeforeunload
+      $scope.$emit('add.dirty', {
+        key: 'publish',
+        value: true
+      });
+
+      //call our publishMorsel method to take care of the heavy lifting
+      ApiMorsels.publishMorsel($scope.morsel.id, morselParams).then(onPublishSuccess, onPublishError);
+    }
   }
 });
