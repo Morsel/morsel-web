@@ -63,13 +63,13 @@ label {
   }
 }
 
-button {
+.btn {
   &[type="submit"] {
     float: right;
   }
 
   &.btn-link {
-    &:focus {
+    &:focus, &:active {
       outline: none;
     }
   }

@@ -5,7 +5,8 @@ angular.module('Morsel.common.morselActions', [])
     restrict: 'A',
     replace: true,
     scope: {
-      morsel: '=mrslMorselActions'
+      morsel: '=mrslMorselActions',
+      layout: '=mrslMorselActionsLayout'
     },
     link: function(scope, element) {
       var scrollYPosition = 0,
@@ -15,21 +16,14 @@ angular.module('Morsel.common.morselActions', [])
 
       scope.element = element;
 
-      scope.scrollToShare = function() {
-        $location.hash('share-morsel');
-
-        $anchorScroll();
-      };
-
-      scope.windowHeight = $window.innerHeight;
+      /*scope.windowHeight = $window.innerHeight;
 
       //check if menu has passed spot where it should stay fixed
       menuFixed = _.throttle(function(e) {
         var newScrollYPosition = $document.scrollTop(),
-            elementWrapTop = scope.element.parent().prop('offsetTop'),
-            windowHeight = $window.innerHeight;
+            elementWrapTop = scope.element.parent().prop('offsetTop');
 
-        if(elementWrapTop > newScrollYPosition+windowHeight) {
+        if(elementWrapTop > newScrollYPosition+scope.windowHeight) {
           scope.element.addClass('fixed');
         } else {
           scope.element.removeClass('fixed');
@@ -49,6 +43,7 @@ angular.module('Morsel.common.morselActions', [])
         $document.off('scroll', menuFixed);
         winEl.unbind('resize', onBrowserResize);
       });
+      */
     },
     templateUrl: 'common/morsels/morselActions.tpl.html'
   };

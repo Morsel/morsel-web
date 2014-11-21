@@ -1,10 +1,10 @@
-<div class="morsel-actions fixed" du-scrollspy="share-morsel" offset="{{windowHeight}}">
+<div class="morsel-actions fixed" ng-style="{'top': layout.coverHeight+10+'px'}">
   <div class="row">
     <div class="col-xs-6 col-sm-12">
       <div mrsl-morsel-like="morsel"></div>
     </div>
     <div class="col-xs-6 col-sm-12">
-      <button ng-click="scrollToShare()" title="Share morsel" class="btn btn-xs btn-link"><i class="common-share"></i></button>
+      <a href="#share-morsel" du-smooth-scroll title="Share morsel" class="btn btn-xs btn-link"><i class="common-share"></i></a>
     </div>
   </ul>
 </div>
