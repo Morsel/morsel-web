@@ -115,6 +115,14 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/ideas-in-food-our-community-in-action/ideas-in-food-our-community-in-action-logo.png';
     eventInfo.url = 'https://www.eatmorsel.com/collections/ideas-in-food-our-community-in-action';
     eventInfo.twitterUsername = '@ideasinfood';
+  } else if(eventSlug === 'wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014') {
+    eventUrl += 'wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014-morsels.json';
+    eventInfo.title = 'Wirtz Beverage - Meals on Wheels Chicago Celebrity Chef Ball 2014';
+    eventInfo.location = null;
+    eventInfo.description = $sce.trustAsHtml('Wirtz Beverage Group is a proud sponsor of the Meals on Wheels Chicago 2014 Celebrity Chef Ball. Each year, this event brings together some of Chicago\'s brightest culinary stars to create one-of-a-kind dishes paired with exclusive cocktails prepared by celebrated mixologists.<br/><br/>Here\'s a look back at some of the delicious cocktails served this year.');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014-logo.jpg';
+    eventInfo.url = 'https://www.eatmorsel.com/collections/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014';
+    eventInfo.twitterUsername = '@wirtzbevil';
   } else {
     //invalid event
     $location.path('/');

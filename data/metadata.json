@@ -209,5 +209,18 @@
       "type": "article"
     },
     "url": "https://www.eatmorsel.com/collections/ideas-in-food-our-community-in-action"
+  },
+  "wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014": {
+    "title": "Wirtz Beverage - Meals on Wheels Chicago Celebrity Chef Ball 2014 | Morsel",
+    "description": "Wirtz Beverage Group is a proud sponsor of the Meals on Wheels Chicago 2014 Celebrity Chef Ball. Each year, this event brings together some of Chicago's brightest culinary stars to create one-of-a-kind dishes paired with exclusive cocktails prepared by celebrated mixologists.",
+    "image": "https://morsel.s3.amazonaws.com/events/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014-logo.jpg",
+    "twitter": {
+      "creator": "@wirtzbevil",
+      "card": "summary_large_image"
+    },
+    "og": {
+      "type": "article"
+    },
+    "url": "https://www.eatmorsel.com/collections/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014"
   }
 }
