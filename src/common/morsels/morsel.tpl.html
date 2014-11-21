@@ -13,9 +13,9 @@
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>
               </div>
               <div class="cover-bg"></div>
+              <div mrsl-morsel-like-count="morsel"></div>
             </div>
             <div class="cover-jumbo-info">
-              <div mrsl-morsel-like="morsel"></div>
               <div class="cover-info">
                 <div class="user-info user-info-stacked">
                   <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
@@ -50,9 +50,12 @@
             <div mrsl-item-description="item"></div>
           </div>
         </li>
-        <li class="share-page extra-page" ng-if="!morsel.draft">
+        <li id="share-morsel" class="share-page extra-page" ng-if="!morsel.draft">
           <h5 class="share-this-morsel h2">Share this morsel:</h5>
           <div mrsl-social-sharing="morsel" mrsl-social-full="true" mrsl-social-sharing-type="morsel-detail"></div>
+          <div class="morsel-action-wrap" du-scrollspy>
+            <div mrsl-morsel-actions="morsel"></div>
+          </div>
           <div>
             <div class="user-info user-info-stacked">
               <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>

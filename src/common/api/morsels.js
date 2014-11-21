@@ -178,7 +178,7 @@ angular.module( 'Morsel.common.apiMorsels', [] )
   Morsels.getLikers = function(morselId, usersParams) {
     var deferred = $q.defer();
 
-    Restangular.one('morsels', itemId).one('likers', 1, true).get(usersParams).then(function(resp){
+    Restangular.one('morsels', morselId).one('likers', 1, true).get(usersParams).then(function(resp){
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));

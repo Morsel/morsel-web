@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.morselLike', [] )
 
 //like/unlike a morsel
-.directive('mrslMorselLike', function(ApiMorsels, AfterLogin, $location, Auth, $q, $modal, $rootScope, $window, USER_LIST_NUMBER){
+.directive('mrslMorselLike', function(ApiMorsels, AfterLogin, $location, Auth, $q, $window){
   return {
     scope: {
       morsel: '=mrslMorselLike'
@@ -78,7 +78,18 @@ angular.module( 'Morsel.common.morselLike', [] )
 
         return deferred.promise;
       }
+    },
+    template: '<button ng-click="toggleMorselLike()" class="btn btn-xs btn-link" title="Like morsel"><i ng-class="{\'common-like-filled\': morsel.liked, \'common-like-empty\' : !morsel.liked}"></i></button>'
+  };
+})
 
+.directive('mrslMorselLikeCount', function(ApiMorsels, $modal, $rootScope, USER_LIST_NUMBER){
+  return {
+    scope: {
+      morsel: '=mrslMorselLikeCount'
+    },
+    replace: true,
+    link: function(scope, element, attrs) {
       scope.openLikes = function () {
         $rootScope.modalInstance = $modal.open({
           templateUrl: 'common/user/userListOverlay.tpl.html',
@@ -109,7 +120,7 @@ angular.module( 'Morsel.common.morselLike', [] )
             usersParams.max_id = parseInt(endUser.id, 10) - 1;
           }
 
-          ApiMorsels.getLikers(item.id, usersParams).then(function(likerResp){
+          ApiMorsels.getLikers(morsel.id, usersParams).then(function(likerResp){
             if($scope.users) {
               $scope.users = $scope.users.concat(likerResp.data);
             } else {
@@ -123,6 +134,6 @@ angular.module( 'Morsel.common.morselLike', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
-    template: '<div><i ng-click="toggleMorselLike()" ng-class="{\'common-like-filled\': morsel.liked, \'common-like-empty\' : !morsel.liked}"></i><a ng-show="morsel.like_count > 0" ng-click="openLikes()">{{morsel.like_count}}<span> like{{morsel.like_count===1?\'\':\'s\'}}</span></a></div>'
+    template: '<button ng-show="morsel.like_count > 0" ng-click="openLikes()" class="btn btn-link morsel-like-count">{{morsel.like_count}}<span> like{{morsel.like_count===1?\'\':\'s\'}}</span></button>'
   };
 });

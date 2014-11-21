@@ -63,8 +63,16 @@ label {
   }
 }
 
-button[type="submit"] {
-  float: right;
+button {
+  &[type="submit"] {
+    float: right;
+  }
+
+  &.btn-link {
+    &:focus {
+      outline: none;
+    }
+  }
 }
 
 hr {

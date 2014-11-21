@@ -43,6 +43,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.likeableFeed',
   'Morsel.common.mixpanel',
   'Morsel.common.morsel',
+  'Morsel.common.morselActions',
   'Morsel.common.morselBlock',
   'Morsel.common.morselLike',
   'Morsel.common.morselSummary',
