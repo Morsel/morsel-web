@@ -1,10 +1,10 @@
-angular.module( 'Morsel.common.itemLike', [] )
+angular.module( 'Morsel.common.morselLike', [] )
 
-//like/unlike an item
-.directive('mrslItemLike', function(ApiItems, AfterLogin, $location, Auth, $q, $modal, $rootScope, $window, USER_LIST_NUMBER){
+//like/unlike a morsel
+.directive('mrslMorselLike', function(ApiMorsels, AfterLogin, $location, Auth, $q, $window){
   return {
     scope: {
-      item: '=mrslItemLike'
+      morsel: '=mrslMorselLike'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -21,7 +21,7 @@ angular.module( 'Morsel.common.itemLike', [] )
           afterLoginCallback = AfterLogin.getCallback();
 
           //make sure it's the right item
-          if(afterLoginCallback.data && (afterLoginCallback.data.itemId === scope.item.id)) {
+          if(afterLoginCallback.data && (afterLoginCallback.data.morselId === scope.morsel.id)) {
             //make sure we're actually loggeed in just in case
             if(isLoggedIn) {
               toggleLike().then(function(){
@@ -33,7 +33,7 @@ angular.module( 'Morsel.common.itemLike', [] )
         }
       });
 
-      scope.toggleItemLike = function() {
+      scope.toggleMorselLike = function() {
         //check if we're logged in
         if(isLoggedIn) {
           toggleLike();
@@ -45,7 +45,7 @@ angular.module( 'Morsel.common.itemLike', [] )
             type: 'like',
             path: currentUrl,
             data: {
-              itemId: scope.item.id
+              morselId: scope.morsel.id
             }
           });
 
@@ -56,21 +56,21 @@ angular.module( 'Morsel.common.itemLike', [] )
       function toggleLike() {
         var deferred = $q.defer();
 
-        if(scope.item.liked) {
-          ApiItems.unlikeItem(scope.item.id).then(function(resp) {
-            scope.item.liked = resp;
+        if(scope.morsel.liked) {
+          ApiMorsels.unlikeMorsel(scope.morsel.id).then(function(resp) {
+            scope.morsel.liked = resp;
             
             //decrement count for display
-            scope.item.like_count--;
+            scope.morsel.like_count--;
 
             deferred.resolve();
           });
         } else {
-          ApiItems.likeItem(scope.item.id).then(function(resp) {
-            scope.item.liked = resp;
+          ApiMorsels.likeMorsel(scope.morsel.id).then(function(resp) {
+            scope.morsel.liked = resp;
 
             //increment count for display
-            scope.item.like_count++;
+            scope.morsel.like_count++;
 
             deferred.resolve();
           });
@@ -79,20 +79,35 @@ angular.module( 'Morsel.common.itemLike', [] )
         return deferred.promise;
       }
 
+      scope.getLikeTitle = function() {
+        return scope.morsel.liked ? 'You\'ve already liked this morsel':'Like morsel';
+      };
+    },
+    template: '<button ng-click="toggleMorselLike()" class="btn btn-xs btn-link" ng-attr-title="{{getLikeTitle()}}"><i ng-class="{\'common-like-filled\': morsel.liked, \'common-like-empty\' : !morsel.liked}"></i></button>'
+  };
+})
+
+.directive('mrslMorselLikeCount', function(ApiMorsels, $modal, $rootScope, USER_LIST_NUMBER){
+  return {
+    scope: {
+      morsel: '=mrslMorselLikeCount'
+    },
+    replace: true,
+    link: function(scope, element, attrs) {
       scope.openLikes = function () {
         $rootScope.modalInstance = $modal.open({
           templateUrl: 'common/user/userListOverlay.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
-            item: function () {
-              return scope.item;
+            morsel: function () {
+              return scope.morsel;
             }
           }
         });
       };
 
-      var ModalInstanceCtrl = function ($scope, $modalInstance, item) {
-        $scope.users = item.likers;
+      var ModalInstanceCtrl = function ($scope, $modalInstance, morsel) {
+        $scope.users = morsel.likers;
         $scope.heading = 'Likers';
         $scope.emptyText = 'No one has liked this yet';
 
@@ -109,7 +124,7 @@ angular.module( 'Morsel.common.itemLike', [] )
             usersParams.max_id = parseInt(endUser.id, 10) - 1;
           }
 
-          ApiItems.getLikers(item.id, usersParams).then(function(likerResp){
+          ApiMorsels.getLikers(morsel.id, usersParams).then(function(likerResp){
             if($scope.users) {
               $scope.users = $scope.users.concat(likerResp.data);
             } else {
@@ -121,8 +136,8 @@ angular.module( 'Morsel.common.itemLike', [] )
         $scope.loadUsers();
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item'];
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
-    template: '<div><i ng-click="toggleItemLike()" ng-class="{\'common-like-filled\': item.liked, \'common-like-empty\' : !item.liked}"></i><a ng-show="item.like_count > 0" ng-click="openLikes()">{{item.like_count}}<span> like{{item.like_count===1?\'\':\'s\'}}</span></a></div>'
+    template: '<button ng-show="morsel.like_count > 0" ng-click="openLikes()" class="btn btn-link btn-xs morsel-like-count">{{morsel.like_count}}<span> like{{morsel.like_count===1?\'\':\'s\'}}</span></button>'
   };
 });

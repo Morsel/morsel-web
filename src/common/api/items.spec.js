@@ -20,55 +20,5 @@ describe( 'ApiItems factory', function() {
   it( 'should contain an ApiItems factory', inject(function(ApiItems) {
     expect(ApiItems).not.toEqual(null);
   }));
-
-  it( 'should contain a likeItem function', inject(function(ApiItems) {
-    expect(ApiItems.likeItem).toBeDefined();
-  }));
-
-  it( 'should contain an unlikeItem function', inject(function(ApiItems) {
-    expect(ApiItems.unlikeItem).toBeDefined();
-  }));
-
-  describe('function likeItem', function() {
-    beforeEach(inject(function (_$httpBackend_, APIURL) {
-      httpBackend = _$httpBackend_;
-      httpBackend.expectPOST(APIURL+'/items/1/like.json').respond('OK');
-    }));
-
-    afterEach(function () {
-      httpBackend.verifyNoOutstandingExpectation();
-      httpBackend.verifyNoOutstandingRequest();
-    });
-
-    it( 'should return a blank object', inject(function(ApiItems) {
-      var resolvedValue;
-      ApiItems.likeItem(1).then(function (data) {
-        resolvedValue = data;
-      });
-      httpBackend.flush();
-      expect(sanitizeRestangularAll(resolvedValue)).toEqual({});
-    }));
-  });
-
-  describe('function unlikeItem', function() {
-    beforeEach(inject(function (_$httpBackend_, APIURL) {
-      httpBackend = _$httpBackend_;
-      httpBackend.expectDELETE(APIURL+'/items/1/like.json').respond('OK');
-    }));
-
-    afterEach(function () {
-      httpBackend.verifyNoOutstandingExpectation();
-      httpBackend.verifyNoOutstandingRequest();
-    });
-
-    it( 'should return a blank object', inject(function(ApiItems) {
-      var resolvedValue;
-      ApiItems.unlikeItem(1).then(function (data) {
-        resolvedValue = data;
-      });
-      httpBackend.flush();
-      expect(sanitizeRestangularAll(resolvedValue)).toEqual({});
-    }));
-  });
 });
 

@@ -151,5 +151,41 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return deferred.promise;
   };
 
+  Morsels.likeMorsel = function(morselId) {
+    var deferred = $q.defer();
+    
+    Restangular.one('morsels', morselId).one('like').post().then(function(resp){
+      deferred.resolve(true);
+    }, function(resp) {
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  };
+
+  Morsels.unlikeMorsel = function(morselId) {
+    var deferred = $q.defer();
+
+    Restangular.one('morsels', morselId).one('like').remove().then(function(resp){
+      deferred.resolve(false);
+    }, function(resp) {
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  };
+
+  Morsels.getLikers = function(morselId, usersParams) {
+    var deferred = $q.defer();
+
+    Restangular.one('morsels', morselId).one('likers', 1, true).get(usersParams).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp){
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Morsels;
 });

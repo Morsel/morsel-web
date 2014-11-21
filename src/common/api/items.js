@@ -19,30 +19,6 @@ angular.module( 'Morsel.common.apiItems', [] )
     return deferred.promise;
   };
 
-  Items.likeItem = function(itemId) {
-    var deferred = $q.defer();
-    
-    Restangular.one('items', itemId).one('like').post().then(function(resp){
-      deferred.resolve(true);
-    }, function(resp) {
-      deferred.reject();
-    });
-
-    return deferred.promise;
-  };
-
-  Items.unlikeItem = function(itemId) {
-    var deferred = $q.defer();
-
-    Restangular.one('items', itemId).one('like').remove().then(function(resp){
-      deferred.resolve(false);
-    }, function(resp) {
-      deferred.reject();
-    });
-
-    return deferred.promise;
-  };
-
   Items.getComments = function(itemId, commentParams) {
     var deferred = $q.defer();
 
@@ -75,18 +51,6 @@ angular.module( 'Morsel.common.apiItems', [] )
     var deferred = $q.defer();
 
     Restangular.one('items', itemId).one('comments', commentId).remove().then(function(resp){
-      deferred.resolve(Restangular.stripRestangular(resp));
-    }, function(resp){
-      deferred.reject(Restangular.stripRestangular(resp));
-    });
-
-    return deferred.promise;
-  };
-
-  Items.getLikers = function(itemId, usersParams) {
-    var deferred = $q.defer();
-
-    Restangular.one('items', itemId).one('likers', 1, true).get(usersParams).then(function(resp){
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));
