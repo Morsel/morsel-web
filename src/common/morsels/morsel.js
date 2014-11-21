@@ -15,8 +15,7 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope) {
       var onOrientationChange,
           winEl = angular.element($window),
-          windowOldWidth = window.innerWidth,
-          coverHeight;
+          windowOldWidth = window.innerWidth;
 
       //hold all our computed layout measurements
       scope.layout = {};
@@ -110,8 +109,7 @@ angular.module('Morsel.common.morsel', [])
       };
 
       function updateCoverHeight() {
-        coverHeight = window.innerHeight*COVER_PHOTO_PERCENTAGE;
-        scope.layout.coverHeight = coverHeight+'px';
+        scope.layout.coverHeight = window.innerHeight*COVER_PHOTO_PERCENTAGE;
       }
 
       //resize cover page on resize

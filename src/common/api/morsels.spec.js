@@ -70,5 +70,56 @@ describe( 'ApiMorsels factory', function() {
       expect(sanitizeRestangularAll(resolvedValue)).toEqual(jasmine.any(Object));
     }));
   });
+
+
+  it( 'should contain a likeMorsel function', inject(function(ApiMorsels) {
+    expect(ApiMorsels.likeMorsel).toBeDefined();
+  }));
+
+  it( 'should contain an unlikeMorsel function', inject(function(ApiMorsels) {
+    expect(ApiMorsels.unlikeMorsel).toBeDefined();
+  }));
+
+  describe('function likeMorsel', function() {
+    beforeEach(inject(function (_$httpBackend_, APIURL) {
+      httpBackend = _$httpBackend_;
+      httpBackend.expectPOST(APIURL+'/morsels/1/like.json').respond('OK');
+    }));
+
+    afterEach(function () {
+      httpBackend.verifyNoOutstandingExpectation();
+      httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it( 'should return a blank object', inject(function(ApiMorsels) {
+      var resolvedValue;
+      ApiMorsels.likeMorsel(1).then(function (data) {
+        resolvedValue = data;
+      });
+      httpBackend.flush();
+      expect(sanitizeRestangularAll(resolvedValue)).toEqual({});
+    }));
+  });
+
+  describe('function unlikeMorsel', function() {
+    beforeEach(inject(function (_$httpBackend_, APIURL) {
+      httpBackend = _$httpBackend_;
+      httpBackend.expectDELETE(APIURL+'/morsels/1/like.json').respond('OK');
+    }));
+
+    afterEach(function () {
+      httpBackend.verifyNoOutstandingExpectation();
+      httpBackend.verifyNoOutstandingRequest();
+    });
+
+    it( 'should return a blank object', inject(function(ApiMorsels) {
+      var resolvedValue;
+      ApiMorsels.unlikeMorsel(1).then(function (data) {
+        resolvedValue = data;
+      });
+      httpBackend.flush();
+      expect(sanitizeRestangularAll(resolvedValue)).toEqual({});
+    }));
+  });
 });
 
