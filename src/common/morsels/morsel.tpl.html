@@ -13,7 +13,6 @@
                 <h2 class="cover-title" bo-bind="morsel.title"></h2>
               </div>
               <div class="cover-bg"></div>
-              <div mrsl-morsel-like-count="morsel"></div>
             </div>
             <div class="cover-jumbo-info">
               <div class="cover-info">
@@ -53,17 +52,15 @@
         <li id="share-morsel" class="share-page extra-page" ng-if="!morsel.draft">
           <h5 class="share-this-morsel h2">Share this morsel:</h5>
           <div mrsl-social-sharing="morsel" mrsl-social-full="true" mrsl-social-sharing-type="morsel-detail"></div>
-          <div class="morsel-action-wrap" du-scrollspy>
-            <div mrsl-morsel-actions="morsel" mrsl-morsel-actions-layout="layout"></div>
-          </div>
+          <div mrsl-morsel-actions="morsel" mrsl-morsel-actions-layout="layout"></div>
           <div>
             <div class="user-info user-info-stacked">
               <div mrsl-user-image mrsl-username="morsel.creator.username" mrsl-user-photos="morsel.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
               <div>
                 <button mrsl-follow mrsl-id-to-follow="morsel.creator.id" mrsl-is-following="morsel.creator.following" mrsl-hide-if-following="true"></button>
               </div>
-              <h5 class="h2 overflow-ellipsis">
-                <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator"></a>
+              <h5 class="h2">
+                <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="overflow-ellipsis"></a>
               </h5>
             </div>
             <p class="user-bio" ng-if="morsel.creator.bio" bo-bind="morsel.creator.bio"></p>

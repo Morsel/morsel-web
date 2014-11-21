@@ -1,6 +1,6 @@
 angular.module('Morsel.common.morselActions', [])
 
-.directive('mrslMorselActions', function($anchorScroll, $location, $document, $window) {
+.directive('mrslMorselActions', function($document, $window) {
   return {
     restrict: 'A',
     replace: true,
@@ -9,41 +9,37 @@ angular.module('Morsel.common.morselActions', [])
       layout: '=mrslMorselActionsLayout'
     },
     link: function(scope, element) {
-      var scrollYPosition = 0,
-          menuFixed;
-
-      winEl = angular.element($window);
+      var menuFixed,
+          menuHeight = element.children()[0].offsetHeight,
+          relativeWrapMarginBottom = 20;
 
       scope.element = element;
-
-      /*scope.windowHeight = $window.innerHeight;
+      scope.menuHeightCoverOffset = 10;
 
       //check if menu has passed spot where it should stay fixed
       menuFixed = _.throttle(function(e) {
-        var newScrollYPosition = $document.scrollTop(),
-            elementWrapTop = scope.element.parent().prop('offsetTop');
+        var offsetWrapTop = scope.element[0].getBoundingClientRect().top;
 
-        if(elementWrapTop > newScrollYPosition+scope.windowHeight) {
+        //mobile
+        if($window.innerHeight < offsetWrapTop + menuHeight) {
+          //fix the menu to the bottom of the screen (mobile)
           scope.element.addClass('fixed');
+          scope.wrapHeight = menuHeight+'px';
         } else {
+          //menu is position=relative
           scope.element.removeClass('fixed');
+          scope.wrapHeight = 'auto';
         }
-      }, 250);
+
+        scope.$apply();
+      }, 50);
 
       $document.on('scroll', menuFixed);
-
-      onBrowserResize = _.debounce(function(){
-        scope.windowHeight = $window.innerHeight;
-      }, 300);
-
-      winEl.bind('resize', onBrowserResize);
 
       //unbind
       scope.$on('$destroy', function() {
         $document.off('scroll', menuFixed);
-        winEl.unbind('resize', onBrowserResize);
       });
-      */
     },
     templateUrl: 'common/morsels/morselActions.tpl.html'
   };

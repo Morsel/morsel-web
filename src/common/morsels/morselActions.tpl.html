@@ -1,10 +1,13 @@
-<div class="morsel-actions fixed" ng-style="{'top': layout.coverHeight+10+'px'}">
-  <div class="row">
-    <div class="col-xs-6 col-sm-12">
-      <div mrsl-morsel-like="morsel"></div>
-    </div>
-    <div class="col-xs-6 col-sm-12">
-      <a href="#share-morsel" du-smooth-scroll title="Share morsel" class="btn btn-xs btn-link"><i class="common-share"></i></a>
-    </div>
-  </ul>
+<div class="morsel-actions-wrap fixed" ng-style="{'height':wrapHeight}">
+  <div class="morsel-actions" ng-style="{'top': layout.coverHeight+menuHeightCoverOffset+'px'}">
+    <div class="row">
+      <div class="col-xs-6 col-sm-12">
+        <div mrsl-morsel-like="morsel"></div>
+        <div mrsl-morsel-like-count="morsel"></div>
+      </div>
+      <div class="col-xs-6 col-sm-12">
+        <a href="#share-morsel" du-smooth-scroll title="Share morsel" class="btn btn-xs btn-link"><i class="common-share"></i></a>
+      </div>
+    </ul>
+  </div>
 </div>

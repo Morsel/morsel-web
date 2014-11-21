@@ -78,8 +78,12 @@ angular.module( 'Morsel.common.morselLike', [] )
 
         return deferred.promise;
       }
+
+      scope.getLikeTitle = function() {
+        return scope.morsel.liked ? 'You\'ve already liked this morsel':'Like morsel';
+      };
     },
-    template: '<button ng-click="toggleMorselLike()" class="btn btn-xs btn-link" title="Like morsel"><i ng-class="{\'common-like-filled\': morsel.liked, \'common-like-empty\' : !morsel.liked}"></i></button>'
+    template: '<button ng-click="toggleMorselLike()" class="btn btn-xs btn-link" ng-attr-title="{{getLikeTitle()}}"><i ng-class="{\'common-like-filled\': morsel.liked, \'common-like-empty\' : !morsel.liked}"></i></button>'
   };
 })
 
@@ -134,6 +138,6 @@ angular.module( 'Morsel.common.morselLike', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
-    template: '<button ng-show="morsel.like_count > 0" ng-click="openLikes()" class="btn btn-link morsel-like-count">{{morsel.like_count}}<span> like{{morsel.like_count===1?\'\':\'s\'}}</span></button>'
+    template: '<button ng-show="morsel.like_count > 0" ng-click="openLikes()" class="btn btn-link btn-xs morsel-like-count">{{morsel.like_count}}<span> like{{morsel.like_count===1?\'\':\'s\'}}</span></button>'
   };
 });
