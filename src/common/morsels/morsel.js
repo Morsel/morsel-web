@@ -2,7 +2,7 @@ angular.module('Morsel.common.morsel', [])
 
 .constant('COVER_PHOTO_PERCENTAGE', 0.6)
 
-.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels, ApiUsers) {
+.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels, ApiUsers, ParseUserText) {
   var //debounce on page resize/orientation change
       orientationChangeTime = 300;
 
@@ -108,6 +108,12 @@ angular.module('Morsel.common.morsel', [])
         }
       };
 
+      scope.formatSummary = function() {
+        if(scope.morsel && scope.morsel.summary) {
+          return ParseUserText.hashtags(ParseUserText.addBreakTags(scope.morsel.summary));
+        }
+      };
+
       function updateCoverHeight() {
         scope.layout.coverHeight = window.innerHeight*COVER_PHOTO_PERCENTAGE;
       }
@@ -135,7 +141,7 @@ angular.module('Morsel.common.morsel', [])
   };
 })
 
-.directive('mrslItemDescription', function() {
+.directive('mrslItemDescription', function(ParseUserText) {
   return {
     restrict: 'A',
     replace: true,
@@ -145,9 +151,7 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope, element) {
       scope.formatDescription = function() {
         if(scope.item && scope.item.description) {
-          return scope.item.description.replace(/(\r\n|\n|\r)/g,"<br />");
-        } else {
-          return '';
+          return ParseUserText.addBreakTags(scope.item.description);
         }
       };
     },
