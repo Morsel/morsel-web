@@ -26,6 +26,4 @@ angular.module( 'Morsel.public.explore', [])
     suggestedUsers: null,
     hideSuggestedUsers: false
   };
-
-  $state.go('explore.morsels', null, {location:'replace'});
 });

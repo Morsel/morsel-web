@@ -21,9 +21,9 @@
           </li>
           <li ui-route="/explore" ng-class="{active:$uiRoute}">
             {{#if pageType.public}}
-            <a href="/explore">Explore</a>
+            <a href="/explore/morsels">Explore</a>
             {{else}}
-            <a href="/explore" target="_self">Explore</a>
+            <a href="/explore/morsels" target="_self">Explore</a>
             {{/if}}
           </li>
           <li ui-route="/add" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">

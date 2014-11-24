@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.explore.morsels', [])
   });
 })
 
-.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiUsers, $state){
+.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiUsers, $state, $stateParams){
   var suggestedUserNumber = 3;
   
   //override the parent scope function
