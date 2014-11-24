@@ -34,7 +34,8 @@ angular.module( 'Morsel.add.morsel', [])
       allTemplateData,
       unloadText = 'You will lose unsaved changes if you leave this page.',
       //since we have individual forms submitting within our main form, we don't ever see the big form set back to ng-pristine, even if all the data is saved. so to keep track of "$dirty state" for the big form, we need to do it manually
-      morselEditFormDirty = {};
+      morselEditFormDirty = {},
+      $body = angular.element(document.getElementsByTagName('body'));
 
   //make sure this is my morsel to edit
   if(theMorsel.creator_id === currentUser.id) {
@@ -492,6 +493,9 @@ angular.module( 'Morsel.add.morsel', [])
       //decrease our count to display in the menu
       currentUser.draft_count--;
 
+      //scroll to the top
+      $body.scrollTop(0, 0);
+
       Mixpanel.track('Published Morsel', {
         item_count: morselData.items.length,
         tagged_users_count: morselData.tagged_users_count,
@@ -514,6 +518,9 @@ angular.module( 'Morsel.add.morsel', [])
     
     //remove whatever message is there
     $scope.alertMessage = null;
+
+    //scroll to the top
+    $body.scrollTop(0, 0);
 
     handleErrors(resp);
   }
@@ -642,6 +649,9 @@ angular.module( 'Morsel.add.morsel', [])
         key: 'deleteMorsel',
         value: false
       });
+
+      //scroll to the top
+      $body.scrollTop(0, 0);
     }, function(resp) {
       $scope.deletingMorsel = false;
       handleErrors(resp);
@@ -673,6 +683,9 @@ angular.module( 'Morsel.add.morsel', [])
         key: 'publish',
         value: true
       });
+
+      //scroll to the top
+      $body.scrollTop(0, 0);
 
       //call our publishMorsel method to take care of the heavy lifting
       ApiMorsels.publishMorsel($scope.morsel.id, morselParams).then(onPublishSuccess, onPublishError);

@@ -1,13 +1,17 @@
 <div class="add-morsel header-padding" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow morsel-bg">
-    <div class="template-help" ng-show="morselDataLoaded && !morselDeleted" mrsl-add-template="morselTemplate" mrsl-add-template-help="true"></div>
+    <div class="template-help" ng-show="morselDataLoaded && !morselDeleted" mrsl-add-template="morselTemplate" mrsl-add-template-help="true" ng-hide="!morselEditForm.$error.loading"></div>
     <form name="morselEditForm" ng-submit="popSummaryOverlay()" novalidate>
       <div ng-show="alertMessage" class="alert alert-{{alertType}}">
         <p ng-bind-html="alertMessage"></p>
       </div>
       <div mrsl-base-errors mrsl-val-form="morselEditForm"></div>
-      <div ng-if="!morselDeleted && (!morselDataLoaded || deletingMorsel)" class="loader"></div>
-      <div ng-if="!morselDeleted && (morselDataLoaded && !deletingMorsel)" class="row" bindonce="morsel">
+      <div ng-if="(!morselDeleted && (!morselDataLoaded || deletingMorsel))" class="loader"></div>
+      <div ng-if="morselEditForm.$error.loading" class="publishing-state">
+        <p class="empty-state">Your morsel is publishing...</p>
+        <div class="loader"></div>
+      </div>
+      <div ng-if="!morselDeleted && (morselDataLoaded && !deletingMorsel) && !morselEditForm.$error.loading" class="row" bindonce="morsel">
         <div class="col-sm-5">
           <div class="add-morsel-info form-horizontal">
             <div class="add-morsel-info-wrap">
