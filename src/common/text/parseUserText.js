@@ -4,7 +4,7 @@ angular.module( 'Morsel.common.parseUserText', [] )
 
   ParseUserText.hashtags = function(text, self) {
     if(text) {
-      return text.replace(/(^|\s)(#[a-z_\d-]+)/ig, function($0,$1,$2,$3,$4,$5) {
+      return text.replace(/(^|\s)(#[a-z_\d]+)/ig, function($0,$1,$2,$3,$4,$5) {
         return $1+'<a href="/explore/morsels?q='+encodeURIComponent($2)+(self ? 'target="_self"':'')+'">'+$2+'</a>';
       });
     } else {
