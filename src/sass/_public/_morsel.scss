@@ -249,6 +249,7 @@
     ul {
       list-style: none;
       color: $morsel-medium;
+      display: inline-block;
 
       &:before {
         content: 'With ';
@@ -261,7 +262,7 @@
       li {
         display: inline-block;
         vertical-align: top;
-
+      
         &:after {
           content: ', ';
           float: right;
@@ -273,6 +274,25 @@
             content: '';
           }
         }
+      }
+    }
+
+    .morsel-hidden-tagged-user-count {
+      display: inline-block;
+
+      &:before {
+        content: 'and ';
+        font-size: 14px;
+        line-height: 22px;
+        display: inline-block;
+        vertical-align: top;
+        color: $morsel-medium;
+      }
+
+      a {
+        font-size: 14px;
+        line-height: 22px;
+        vertical-align: top;
       }
     }
   }

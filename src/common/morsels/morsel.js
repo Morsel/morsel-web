@@ -15,7 +15,8 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope) {
       var onOrientationChange,
           winEl = angular.element($window),
-          windowOldWidth = window.innerWidth;
+          windowOldWidth = window.innerWidth,
+          taggedUserShownCount = 2;
 
       //hold all our computed layout measurements
       scope.layout = {};
@@ -29,7 +30,11 @@ angular.module('Morsel.common.morsel', [])
 
       if(scope.morsel.tagged_users_count > 0) {
         ApiMorsels.getTaggedUsers(scope.morsel.id).then(function(usersResp){
-          scope.morsel.taggedUsers = usersResp.data;
+          var taggedUsers = usersResp.data,
+              shownTaggedUsers = taggedUsers.slice(0, taggedUserShownCount);
+
+          scope.morsel.shownTaggedUsers = shownTaggedUsers;
+          scope.morsel.hiddenTaggedUserCount = scope.morsel.tagged_users_count - shownTaggedUsers.length;
         });
       }
 
@@ -152,6 +157,60 @@ angular.module('Morsel.common.morsel', [])
       };
     },
     template: '<div class="item-description" ng-if="item.description"><p ng-bind-html="formatDescription()"></p></div>'
+  };
+})
+
+.directive('mrslTaggedUserList', function($modal, $rootScope, USER_LIST_NUMBER, ApiMorsels) {
+  return {
+    restrict: 'A',
+    scope: {
+      morsel: '=mrslTaggedUserList'
+    },
+    link: function(scope, element) {
+      scope.showTaggedUsers = function(){
+        $rootScope.modalInstance = $modal.open({
+          templateUrl: 'common/user/userListOverlay.tpl.html',
+          controller: ModalInstanceCtrl,
+          resolve: {
+            morsel: function () {
+              return scope.morsel;
+            }
+          }
+        });
+      };
+
+      var ModalInstanceCtrl = function ($scope, $modalInstance, morsel) {
+        $scope.heading = 'Tagged Users';
+        $scope.emptyText = 'There are no users tagged';
+
+        $scope.cancel = function () {
+          $modalInstance.dismiss('cancel');
+        };
+
+        $scope.loadUsers = function(endUser) {
+          var usersParams = {
+                count: USER_LIST_NUMBER
+              };
+
+          if(endUser) {
+            usersParams.max_id = parseInt(endUser.id, 10) - 1;
+          }
+
+          ApiMorsels.getTaggedUsers(morsel.id, usersParams).then(function(usersResp){
+            if($scope.users) {
+              $scope.users = $scope.users.concat(usersResp.data);
+            } else {
+              $scope.users = usersResp.data;
+            }
+          });
+        };
+
+        $scope.loadUsers();
+      };
+      //we need to implicitly inject dependencies here, otherwise minification will botch them
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
+    },
+    template: '<a ng-bind="morsel.hiddenTaggedUserCount + \' other\'+ (morsel.hiddenTaggedUserCount === 1 ? \'\': \'s\')" ng-click="showTaggedUsers()"></a>'
   };
 })
 
