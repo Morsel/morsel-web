@@ -114,6 +114,6 @@ angular.module( 'Morsel.common.addPlace', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'places', 'ApiPlaces', 'HandleErrors'];
     },
-    template: '<div class="add-place-btn"><button ng-click="openAddPlaceOverlay()" class="btn-link"><span>&#43;</span> Add Place</button></div>'
+    template: '<div class="add-place-btn"><button type="button" ng-click="openAddPlaceOverlay()" class="btn-link"><span>&#43;</span> Add Place</button></div>'
   };
 });

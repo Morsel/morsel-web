@@ -34,6 +34,6 @@ angular.module( 'Morsel.add.tagPersonButton', [] )
         return deferred.promise;
       };
     },
-    template: '<button ng-click="toggleTagUser()" class="btn" ng-class="{\'btn-default\' : personToTag.tagged, \'btn-info\' : !personToTag.tagged}" ng-bind="personToTag.tagged ? \'Untag User\' : \'Tag User\'"></button>'
+    template: '<button type="button" ng-click="toggleTagUser()" class="btn" ng-class="{\'btn-default\' : personToTag.tagged, \'btn-info\' : !personToTag.tagged}" ng-bind="personToTag.tagged ? \'Untag User\' : \'Tag User\'"></button>'
   };
 });
