@@ -18,7 +18,7 @@
         <li bindonce ng-repeat="place in searchResults | orderBy:'name'">
           <div class="user-info">
             <div class="user-body">
-              <button class="btn btn-default" ng-click="selectPlace(place)" ng-hide="selectedPlace">Select</button>
+              <button type="button" class="btn btn-default" ng-click="selectPlace(place)" ng-hide="selectedPlace">Select</button>
               <h5 class="user-info-main" bo-text="place.name"></h5>
               <p bo-text="place.location.address + '. ' + place.location.city + ', ' + place.location.state"></p>
             </div>

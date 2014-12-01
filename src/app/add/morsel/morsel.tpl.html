@@ -50,7 +50,7 @@
                 </div>
               </div>
               <div class="add-morsel-actions">
-                <button class="btn btn-danger pull-left" ng-click="deleteMorsel()" name="deleteMorsel" ng-model="fake">Delete Morsel</button>
+                <button type="button" class="btn btn-danger pull-left" ng-click="deleteMorsel()" name="deleteMorsel" ng-model="fake">Delete Morsel</button>
                 <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug" class="btn btn-info" target="_blank" bo-text="morsel.draft ? 'Preview':'Go to morsel'"></a>
                 <button mrsl-submit-btn mrsl-submit-btn-form="morselEditForm" mrsl-submit-btn-copy="Publish" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-custom-messages="customPublishTooltips" mrsl-submit-btn-submit-copy="Publishing..." ng-if="morsel.draft && morselDataLoaded"></button>
               </div>
@@ -69,7 +69,7 @@
               </li>
             </ul>
             <div ng-class="{'loader': addingItem}" class="text-center">
-              <button class="btn-link add-item-btn" ng-click="addItem()" ng-hide="addingItem"><span>&#43;</span> Add item</button>
+              <button type="button" class="btn-link add-item-btn" ng-click="addItem()" ng-hide="addingItem"><span>&#43;</span> Add item</button>
             </div>
             <input name="itemReorderHidden" class="hidden" ng-model="fake">
           </div>

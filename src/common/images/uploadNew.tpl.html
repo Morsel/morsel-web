@@ -1,7 +1,7 @@
 <div class="image-upload">
   <div class="alert alert-danger" ng-if="errorMsg != null">{{errorMsg}}</div>
   <div class="image-upload-select" ng-show="!selectedFiles || selectedFiles.length === 0">
-    <button ng-file-select="onFileSelect($files)" title="select file" onclick="this.value = null" class="btn btn-primary btn-block" data-accept="image/jpeg, image/jpg, image/png, image/gif" ng-if="!usingFlash">Upload an image from your computer</button>
+    <button type="button" ng-file-select="onFileSelect($files)" title="select file" onclick="this.value = null" class="btn btn-primary btn-block" data-accept="image/jpeg, image/jpg, image/png, image/gif" ng-if="!usingFlash">Upload an image from your computer</button>
     <div ng-if="usingFlash">
       <p>Uploading images is currently not available in this browser</p>
     </div>
