@@ -76,8 +76,7 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
             return [
               //since we want the whole photo to show on the screen, check the height also
               ['default', item.photos._320x320],
-              ['(min-width: 320px) and (min-height: 320px)', item.photos._480x480],
-              ['(min-width: 480px) and (min-height: 480px)', item.photos._640x640],
+              ['(min-width: 320px) and (min-height: 320px)', item.photos._640x640],
               ['(min-width: 640px) and (min-height: 640px)', item.photos._992x992]
             ];
           } else {

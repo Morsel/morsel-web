@@ -36,7 +36,7 @@ angular.module( 'Morsel.common.photoHelpers', [])
         if(primaryItemPhotos) {
           return [
             ['default', primaryItemPhotos._100x100],
-            ['(min-width: 321px)', primaryItemPhotos._240x240]
+            ['(min-width: 321px)', primaryItemPhotos._320x320]
           ];
         } else {
           return [
