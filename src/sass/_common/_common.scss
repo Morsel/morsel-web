@@ -497,6 +497,14 @@ a.white-link {
   }
 }
 
+a.dark-link {
+  color: $morsel-dark;
+
+  &:hover, &:active {
+    color: $link-hover-color !important;
+  }
+}
+
 .shadow-user {
   position: fixed;
   bottom: 0;
