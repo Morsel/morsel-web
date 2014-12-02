@@ -4,11 +4,11 @@
       <div class="user-info">
         <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s"></div>
         <div class="user-body">
-          <a class="activity-subject" bo-href="'/'+likeable.creator.username.toLowerCase()+'/'+likeable.morsel.id+'-'+likeable.morsel.slug">
-            <img bo-src="likeable.photos ? likeable.photos._80x80 : morselPlaceholder" />
+          <a class="activity-subject" bo-href="'/'+likeable.creator.username.toLowerCase()+'/'+likeable.id+'-'+likeable.slug">
+            <img bo-src="getMorselPhoto(likeable)" />
           </a>
-          <p>{{user.username}} liked <span bo-if="likeable.subject.creator.id === likeable.creator.id">your</span><a bo-href="'/'+likeable.creator.username.toLowerCase()" bo-if="likeable.subject.creator.id != likeable.creator.id" bo-text="likeable.creator.username+'\'s'"></a> "{{likeable.morsel.title+(likeable.description ? ': '+likeable.description : '') | truncate:80}}"</p>
-          <span am-time-ago="likeable.liked_at" class="time-ago"></span>
+          <p><span bo-text="user.username + ' liked '"></span><a bo-href="'/'+likeable.creator.username.toLowerCase()" bo-if="likeable.creator.id != user.id" bo-text="likeable.creator.username+'\'s'"></a> "{{likeable.title}}"</p>
+          <span am-time-ago="likeable.created_at" class="time-ago"></span>
         </div>
       </div>
     </li>

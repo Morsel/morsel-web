@@ -103,10 +103,10 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return deferred.promise;
   };
 
-  Morsels.getTaggedUsers = function(morselId) {
+  Morsels.getTaggedUsers = function(morselId, userParams) {
     var deferred = $q.defer();
 
-    Restangular.one('morsels', morselId).one('tagged_users').get().then(function(resp) {
+    Restangular.one('morsels', morselId).one('tagged_users').get(userParams).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

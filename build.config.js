@@ -98,6 +98,7 @@ module.exports = {
         'src/common/morsels/morselActions.js',
         'src/common/morsels/morselBlock.js',
         'src/common/morsels/morselSummary.js',
+        'src/common/morsels/morselTaggedUserList.js',
         'src/common/text/parseUserText.js',
         'src/common/text/truncate.js',
         'src/common/user/activityFeed.js',

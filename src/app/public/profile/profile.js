@@ -129,7 +129,7 @@ angular.module( 'Morsel.public.profile', [])
 
   $scope.loadLikeFeed = function() {
     if(!$scope.likeFeed) {
-      ApiUsers.getLikeables($scope.user.id, 'Item').then(function(likeableResp){
+      ApiUsers.getLikeables($scope.user.id, 'Morsel').then(function(likeableResp){
         $scope.likeFeed = likeableResp.data;
       });
     }

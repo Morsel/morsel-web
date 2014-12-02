@@ -15,7 +15,8 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope) {
       var onOrientationChange,
           winEl = angular.element($window),
-          windowOldWidth = window.innerWidth;
+          windowOldWidth = window.innerWidth,
+          taggedUserShownCount = 2;
 
       //hold all our computed layout measurements
       scope.layout = {};
@@ -29,7 +30,11 @@ angular.module('Morsel.common.morsel', [])
 
       if(scope.morsel.tagged_users_count > 0) {
         ApiMorsels.getTaggedUsers(scope.morsel.id).then(function(usersResp){
-          scope.morsel.taggedUsers = usersResp.data;
+          var taggedUsers = usersResp.data,
+              shownTaggedUsers = taggedUsers.slice(0, taggedUserShownCount);
+
+          scope.morsel.shownTaggedUsers = shownTaggedUsers;
+          scope.morsel.hiddenTaggedUserCount = scope.morsel.tagged_users_count - shownTaggedUsers.length;
         });
       }
 

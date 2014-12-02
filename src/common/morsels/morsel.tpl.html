@@ -21,12 +21,15 @@
                   <h5 class="h2">
                     <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="user-by overflow-ellipsis"></a>
                   </h5>
-                  <h5 ng-if="morsel.taggedUsers" class="morsel-tagged-users">
+                  <h5 ng-if="morsel.shownTaggedUsers" class="morsel-tagged-users">
                     <ul>
-                      <li ng-repeat="user in morsel.taggedUsers">
+                      <li ng-repeat="user in morsel.shownTaggedUsers">
                         <a bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user"></a>
                       </li>
                     </ul>
+                    <div ng-if="morsel.hiddenTaggedUserCount > 0" class="morsel-hidden-tagged-user-count">
+                      <a mrsl-tagged-user-list="morsel" mrsl-tagged-user-list-full="true"></a>
+                    </div>
                   </h5>
                   <h6 class="overflow-ellipsis" bo-if="morsel.place">
                     <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name"></a>
