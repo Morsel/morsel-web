@@ -1,6 +1,6 @@
 angular.module('Morsel.common.morselActions', [])
 
-.directive('mrslMorselActions', function($document, $window) {
+.directive('mrslMorselActions', function($document, $window, ApiMorsels) {
   return {
     restrict: 'A',
     replace: true,
@@ -40,6 +40,14 @@ angular.module('Morsel.common.morselActions', [])
       scope.$on('$destroy', function() {
         $document.off('scroll', menuFixed);
       });
+
+      scope.reportInappropriate = function() {
+        ApiMorsels.reportInappropriate(scope.morsel.id).then(function(){
+          $window.alert('Your report was successful. Thanks for the feedback!');
+        }, function(){
+          $window.alert('There was a problem reporting this morsel. Please try again.');
+        });
+      };
     },
     templateUrl: 'common/morsels/morselActions.tpl.html'
   };
