@@ -9,7 +9,7 @@ angular.module( 'Morsel.add.new', [])
         templateUrl: 'app/add/new/new.tpl.html'
       }
     },
-    data:{ pageTitle: 'New Morsel' },
+    data:{ pageTitle: 'New morsel' },
     access: {
       restricted : true
     },
