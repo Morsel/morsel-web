@@ -32,14 +32,15 @@ angular.module( 'Morsel.common.socialSharing', [] )
       }
 
       function getMediaImage() {
-        var primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.morsel),
+        //assumed we know subject is a morsel if we're here
+        var primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.subject),
             lastItemWithPhotos;
 
         //use their cover photo if there is one
         if(primaryItemPhotos) {
           return primaryItemPhotos._992x992;
         } else {
-          lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(scope.morsel.items);
+          lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(scope.subject.items);
           return lastItemWithPhotos ? lastItemWithPhotos.photos._992x992 : MORSELPLACEHOLDER;
         }
       }
