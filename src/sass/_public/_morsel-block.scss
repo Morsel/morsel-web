@@ -106,7 +106,14 @@
       .morsel-featured, .morsel-tagged-count {
         vertical-align: middle;
         line-height: 24px;
-        color: white;
+
+        a {
+          color: white;
+
+          &:hover {
+            color: $link-hover-color;
+          }
+        }
       }
 
       .morsel-featured {

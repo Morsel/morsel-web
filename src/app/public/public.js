@@ -47,6 +47,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.morselBlock',
   'Morsel.common.morselLike',
   'Morsel.common.morselSummary',
+  'Morsel.common.morselTaggedUserList',
   'Morsel.common.photoHelpers',
   'Morsel.common.placeList',
   'Morsel.common.responsiveImages',
