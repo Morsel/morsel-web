@@ -71,6 +71,7 @@ angular.module( 'Morsel.public', [
   'Morsel.public.explore.suggestedUsers',
   'Morsel.public.explore.users',
   'Morsel.public.feed',
+  'Morsel.public.hashtags',
   'Morsel.public.home',
   'Morsel.public.invite',
   'Morsel.public.notifications',

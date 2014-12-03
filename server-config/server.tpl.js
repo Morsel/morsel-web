@@ -297,6 +297,15 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       publicApp.renderPublicPage(res);
     });
 
+    //hashtags
+    app.get('/hashtags', function(req, res){
+      res.redirect('/explore/morsels');
+    });
+
+    app.get('/hashtags*', function(req, res){
+      publicApp.renderPublicPage(res);
+    });
+
     //contact
     app.get('/contact', function(req, res){
       var metadata = utilApp.getMetadata('contact');
