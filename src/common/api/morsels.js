@@ -187,5 +187,17 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return deferred.promise;
   };
 
+  Morsels.reportInappropriate = function(morselId) {
+    var deferred = $q.defer();
+    
+    Restangular.one('morsels', morselId).one('report').post().then(function(resp){
+      deferred.resolve(true);
+    }, function(resp) {
+      deferred.reject();
+    });
+
+    return deferred.promise;
+  };
+
   return Morsels;
 });

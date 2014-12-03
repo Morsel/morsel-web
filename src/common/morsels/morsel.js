@@ -30,12 +30,28 @@ angular.module('Morsel.common.morsel', [])
 
       if(scope.morsel.tagged_users_count > 0) {
         ApiMorsels.getTaggedUsers(scope.morsel.id).then(function(usersResp){
-          var taggedUsers = usersResp.data,
-              shownTaggedUsers = taggedUsers.slice(0, taggedUserShownCount);
-
-          scope.morsel.shownTaggedUsers = shownTaggedUsers;
-          scope.morsel.hiddenTaggedUserCount = scope.morsel.tagged_users_count - shownTaggedUsers.length;
+          scope.taggedUsers = usersResp.data;
+          updateTaggedUserList();
         });
+      }
+
+      scope.$on('morsel.untag', function(e, userId) {
+        scope.taggedUsers = _.reject(scope.taggedUsers, function(user){
+          return user.id === userId;
+        });
+
+        scope.morsel.tagged_users_count--;
+
+        updateTaggedUserList();
+      });
+
+      function updateTaggedUserList() {
+        var shownTaggedUsers;
+
+        shownTaggedUsers = scope.taggedUsers.slice(0, taggedUserShownCount);
+
+        scope.morsel.shownTaggedUsers = shownTaggedUsers;
+        scope.morsel.hiddenTaggedUserCount = scope.morsel.tagged_users_count - shownTaggedUsers.length;
       }
 
       //get user info for following button
