@@ -1,6 +1,6 @@
 angular.module('Morsel.common.morselActions', [])
 
-.directive('mrslMorselActions', function($document, $window) {
+.directive('mrslMorselActions', function($document, $window, ApiMorsels, Auth) {
   return {
     restrict: 'A',
     replace: true,
@@ -15,6 +15,11 @@ angular.module('Morsel.common.morselActions', [])
 
       scope.element = element;
       scope.menuHeightCoverOffset = 10;
+
+      Auth.getCurrentUserPromise().then(function(userData){
+        scope.currentUser = userData;
+      });
+
 
       //check if menu has passed spot where it should stay fixed
       menuFixed = _.throttle(function(e) {
@@ -40,6 +45,26 @@ angular.module('Morsel.common.morselActions', [])
       scope.$on('$destroy', function() {
         $document.off('scroll', menuFixed);
       });
+
+      scope.reportInappropriate = function() {
+        ApiMorsels.reportInappropriate(scope.morsel.id).then(function(){
+          $window.alert('Your report was successful. Thanks for the feedback!');
+        }, function(){
+          $window.alert('There was a problem reporting this morsel. Please try again.');
+        });
+      };
+
+      scope.untagMorsel = function() {
+        ApiMorsels.untagUser(scope.morsel.id, scope.currentUser.id).then(function(){
+          scope.morsel.tagged = false;
+
+          scope.$emit('morsel.untag', scope.currentUser.id);
+
+          $window.alert('You have been untagged from this morsel');
+        }, function(){
+          $window.alert('There was a problem untagging you from this morsel. Please try again.');
+        });
+      };
     },
     templateUrl: 'common/morsels/morselActions.tpl.html'
   };

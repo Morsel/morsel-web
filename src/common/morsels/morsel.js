@@ -30,12 +30,28 @@ angular.module('Morsel.common.morsel', [])
 
       if(scope.morsel.tagged_users_count > 0) {
         ApiMorsels.getTaggedUsers(scope.morsel.id).then(function(usersResp){
-          var taggedUsers = usersResp.data,
-              shownTaggedUsers = taggedUsers.slice(0, taggedUserShownCount);
-
-          scope.morsel.shownTaggedUsers = shownTaggedUsers;
-          scope.morsel.hiddenTaggedUserCount = scope.morsel.tagged_users_count - shownTaggedUsers.length;
+          scope.taggedUsers = usersResp.data;
+          updateTaggedUserList();
         });
+      }
+
+      scope.$on('morsel.untag', function(e, userId) {
+        scope.taggedUsers = _.reject(scope.taggedUsers, function(user){
+          return user.id === userId;
+        });
+
+        scope.morsel.tagged_users_count--;
+
+        updateTaggedUserList();
+      });
+
+      function updateTaggedUserList() {
+        var shownTaggedUsers;
+
+        shownTaggedUsers = scope.taggedUsers.slice(0, taggedUserShownCount);
+
+        scope.morsel.shownTaggedUsers = shownTaggedUsers;
+        scope.morsel.hiddenTaggedUserCount = scope.morsel.tagged_users_count - shownTaggedUsers.length;
       }
 
       //get user info for following button
@@ -55,8 +71,7 @@ angular.module('Morsel.common.morsel', [])
             } else {
               return [
                 ['default', primaryItemPhotos._320x320],
-                ['(min-width: 321px)', primaryItemPhotos._480x480],
-                ['screen-xs', primaryItemPhotos._640x640],
+                ['(min-width: 321px)', primaryItemPhotos._640x640],
                 ['screen-md', primaryItemPhotos._992x992]
               ];
             }
@@ -69,8 +84,7 @@ angular.module('Morsel.common.morsel', [])
               } else {
                 return [
                   ['default', lastItemWithPhotos.photos._320x320],
-                  ['(min-width: 321px)', lastItemWithPhotos.photos._480x480],
-                  ['screen-xs', lastItemWithPhotos.photos._640x640],
+                  ['(min-width: 321px)', lastItemWithPhotos.photos._640x640],
                   ['screen-md', lastItemWithPhotos.photos._992x992]
                 ];
               }
@@ -99,8 +113,7 @@ angular.module('Morsel.common.morsel', [])
           if(item.photos) {
             return [
               ['default', item.photos._320x320],
-              ['(min-width: 321px)', item.photos._480x480],
-              ['screen-xs', item.photos._640x640]
+              ['(min-width: 321px)', item.photos._640x640]
             ];
           } else {
             return [

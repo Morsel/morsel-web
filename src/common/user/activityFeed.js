@@ -14,12 +14,12 @@ angular.module( 'Morsel.common.activityFeed', [] )
         var primaryPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
 
         if(primaryPhotos) {
-          return primaryPhotos._80x80;
+          return primaryPhotos._100x100;
         } else {
           primaryPhotos = PhotoHelpers.findLastItemWithPhotos(morsel.items);
 
           if(primaryPhotos) {
-            return primaryPhotos._80x80;
+            return primaryPhotos._100x100;
           } else {
             return MORSELPLACEHOLDER;
           }

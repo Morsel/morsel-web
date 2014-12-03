@@ -230,7 +230,6 @@
 
         a {
           line-height: 1;
-          color: $morsel-dark;
         }
 
         div {
@@ -310,15 +309,6 @@
     padding: 2px 10px;
     text-align: center;
     z-index: 15;
-
-    ul {
-      margin: 0;
-      list-style: none;
-
-      li {
-        display: inline-block;
-      }
-    }
 
     .btn {
       line-height: 1;
@@ -429,6 +419,14 @@
       .btn {
         display: block;
         width: 100%;
+      }
+
+      .dropup {
+        .dropdown-menu {
+          bottom: 0;
+          left: 100%;
+          right: auto;
+        }
       }
     }
   }

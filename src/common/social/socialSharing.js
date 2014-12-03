@@ -1,7 +1,7 @@
 angular.module( 'Morsel.common.socialSharing', [] )
 
 //like/unlike a morsel
-.directive('mrslSocialSharing', function($location, Mixpanel, $window, PhotoHelpers, MORSELPLACEHOLDER, ApiUsers){
+.directive('mrslSocialSharing', function(Mixpanel, $window, PhotoHelpers, MORSELPLACEHOLDER){
   return {
     restrict: 'A',
     scope: {
@@ -32,14 +32,15 @@ angular.module( 'Morsel.common.socialSharing', [] )
       }
 
       function getMediaImage() {
-        var primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.morsel),
+        //assumed we know subject is a morsel if we're here
+        var primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.subject),
             lastItemWithPhotos;
 
         //use their cover photo if there is one
         if(primaryItemPhotos) {
           return primaryItemPhotos._992x992;
         } else {
-          lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(scope.morsel.items);
+          lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(scope.subject.items);
           return lastItemWithPhotos ? lastItemWithPhotos.photos._992x992 : MORSELPLACEHOLDER;
         }
       }
@@ -70,18 +71,10 @@ angular.module( 'Morsel.common.socialSharing', [] )
         if(socialType === 'facebook') {
           url = 'https://www.facebook.com/sharer/sharer.php?u='+facebookUrl;
         } else if(socialType === 'twitter') {
-          //need to make a separate call to get their twitter username
-          ApiUsers.getUser(s.creator.username).then(function(userResp){
-            var user = userResp.data,
-                //use their handle if they have one - otherwise use their name
-                twitterUsername = user.twitter_username ? '@'+user.twitter_username : user.first_name+' '+user.last_name;
+          var twitterUsername = s.creator.twitter_username ? '@'+s.creator.twitter_username : s.creator.first_name+' '+s.creator.last_name;
             
-            shareText = encodeURIComponent('"'+s.title+'" from '+twitterUsername+' on @eatmorsel '+twitterUrl);
-            url = 'https://twitter.com/home?status='+shareText;
-            $window.open(url);
-          });
-
-          return;
+          shareText = encodeURIComponent('"'+s.title+'" from '+twitterUsername+' on @eatmorsel '+twitterUrl);
+          url = 'https://twitter.com/home?status='+shareText;
         } else if(socialType === 'linkedin') {
           url = 'https://www.linkedin.com/shareArticle?mini=true&url='+linkedinUrl;
         } else if(socialType === 'pinterest') {

@@ -116,9 +116,9 @@ angular.module( 'Morsel.add.drafts', [])
     if(morsel && morsel.items) {
       primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
 
-      if(primaryItemPhotos && primaryItemPhotos._80x80) {
+      if(primaryItemPhotos && primaryItemPhotos._100x100) {
         return [
-          ['default', primaryItemPhotos._80x80]
+          ['default', primaryItemPhotos._100x100]
         ];
       } else {
         //if the morsel has a template, we should use a photo from that
