@@ -123,6 +123,14 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/collections/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014';
     eventInfo.twitterUsername = '@wirtzbevgroup';
+  } else if(eventSlug === 'tasting-table-community') {
+    eventUrl += 'tasting-table-community/tasting-table-community-morsels.json';
+    eventInfo.title = 'Tasting Table - Our Community';
+    eventInfo.location = null;
+    eventInfo.description = $sce.trustAsHtml('We eat high and low to bring you the discerning dining advice, recipes you can trust and news you can use from the world of food and drink. Here\'s a peak at what our community is doing with our recipes.');
+    eventInfo.image = 'https://morsel.s3.amazonaws.com/events/tasting-table-community/tasting-table-community-logo.gif';
+    eventInfo.url = 'https://www.eatmorsel.com/collections/tasting-table-community';
+    eventInfo.twitterUsername = '@tastingtable';
   } else {
     //invalid event
     $location.path('/');

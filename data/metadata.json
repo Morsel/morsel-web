@@ -222,5 +222,18 @@
       "type": "article"
     },
     "url": "https://www.eatmorsel.com/collections/wirtz-beverage-meals-on-wheels-celebrity-chef-ball-2014"
+  },
+  "tasting-table-community": {
+    "title": "Tasting Table - Our Community | Morsel",
+    "description": "We eat high and low to bring you the discerning dining advice, recipes you can trust and news you can use from the world of food and drink.",
+    "image": "https://morsel.s3.amazonaws.com/events/tasting-table-community/tasting-table-community-logo.gif",
+    "twitter": {
+      "creator": "@tastingtable",
+      "card": "summary_large_image"
+    },
+    "og": {
+      "type": "article"
+    },
+    "url": "https://www.eatmorsel.com/collections/tasting-table-community"
   }
 }
