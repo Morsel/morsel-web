@@ -21,7 +21,7 @@
       <p>No hashtags match your query</p>
     </div>
 </div>
-<div ng-if="!hashtagResults && defaultFeedItems">
+<div ng-show="!hashtagResults && defaultFeedItems">
   <div class="row no-gutter">
     <div class="col-sm-6 col-md-4" bindonce ng-repeat="feedItem in defaultFeedItems">
       <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
