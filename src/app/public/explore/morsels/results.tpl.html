@@ -1,4 +1,4 @@
-<div ng-if="feedItems">
+<!--<div ng-if="feedItems">
   <div class="row no-gutter">
     <div class="col-sm-6 col-md-4" bindonce ng-repeat="feedItem in feedItems">
       <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
@@ -9,8 +9,19 @@
   <div ng-if="feedItems && feedItems.length === 0" class="empty-state">
       <p>No morsels. Try a different search</p>
     </div>
+</div>-->
+<div ng-show="hashtagResults">
+  <div class="list-group">
+    <a ng-href="" ng-bind="'Search morsels for &quot;'+search.query+'&quot;'" class="list-group-item"></a>
+    <a bo-href="'/hashtags/'+hashtagResult.name" bo-text="'#'+hashtagResult.name" class="list-group-item" bindonce ng-repeat="hashtagResult in hashtagResults"></a>
+  </div>
+  <div ng-if="!hashtagResults" class="loader"></div>
+  <div mrsl-view-more mrsl-view-more-func="loadHashtagResults" mrsl-view-more-data="hashtagResults" mrsl-view-more-inc="exploreIncrement" mrsl-view-more-copy="View more hashtags" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+  <div ng-if="hashtagResults && hashtagResults.length === 0" class="empty-state">
+      <p>No hashtags match your query</p>
+    </div>
 </div>
-<div ng-if="!feedItems && defaultFeedItems">
+<div ng-if="!hashtagResults && defaultFeedItems">
   <div class="row no-gutter">
     <div class="col-sm-6 col-md-4" bindonce ng-repeat="feedItem in defaultFeedItems">
       <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>

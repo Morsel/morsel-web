@@ -12,12 +12,12 @@ angular.module( 'Morsel.public.explore.morsels', [])
   });
 })
 
-.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiUsers, $state, $stateParams){
+.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiUsers, ApiKeywords, $state, $stateParams){
   var suggestedUserNumber = 3;
   
   //override the parent scope function
-  $scope.search.customSearch = _.debounce(searchMorsels, $scope.search.waitTime);
-  $scope.search.searchPlaceholder = 'Search for morsels';
+  $scope.search.customSearch = _.debounce(searchHashtags, $scope.search.waitTime);
+  $scope.search.searchPlaceholder = 'Search morsels';
   $scope.searchType = 'morsels';
 
   //clear query when switching
@@ -100,6 +100,48 @@ angular.module( 'Morsel.public.explore.morsels', [])
       //don't show anybody if we haven't searched 3 characters
       $scope.hasSearched = false;
       $scope.feedItems = [];
+      _.defer(function(){$scope.$apply();});
+    }
+  }
+
+  $scope.loadHashtagResults = function(){
+    var hashtagParams = {
+          count: $scope.exploreIncrement,
+          'keyword[query]': $scope.search.query
+        };
+
+    //get the next page number
+    $scope.hashtagResultsPageNumber = $scope.hashtagResultsPageNumber ? $scope.hashtagResultsPageNumber+1 : 1;
+    hashtagParams.page = $scope.hashtagResultsPageNumber;
+
+    ApiKeywords.hashtagSearch(hashtagParams).then(function(hashtagsResp) {
+      if($scope.hashtagResults) {
+        //concat them with new data after old data
+        $scope.hashtagResults = $scope.hashtagResults.concat(hashtagsResp.data);
+      } else {
+        $scope.hashtagResults = hashtagsResp.data;
+      }
+    }, function() {
+      //if there's an error retrieving hashtags, go to 404
+      $state.go('404');
+    });
+  };
+
+  function searchHashtags() {
+    if($scope.search.query.length >= 3) {
+      //remove current hashtags to show loader
+      $scope.hashtagResults = null;
+      //reset our page count
+      $scope.hashtagResultsPageNumber = null;
+      $scope.hasSearched = true;
+
+      $scope.loadHashtagResults();
+    } else {
+      //don't show any hashtags if we haven't searched 3 characters
+      $scope.hasSearched = false;
+      $scope.hashtagResults = null;
+      //reset our page count
+      $scope.hashtagResultsPageNumber = null;
       _.defer(function(){$scope.$apply();});
     }
   }

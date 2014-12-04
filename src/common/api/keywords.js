@@ -93,5 +93,17 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     return deferred.promise;
   };
 
+  Keywords.hashtagSearch = function(hashtagParams) {
+    var deferred = $q.defer();
+
+   Restangular.one('hashtags').one('search').get(hashtagParams).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Keywords;
 });
