@@ -1,15 +1,6 @@
 <div class="header-padding">
   <h2 class="text-center" ng-bind="'#'+hashtag"></h2>
   <div class="container morsel-bg container-shadow container-no-padding" ng-style="viewOptions.minimumMainHeight()">
-    <div class="row no-gutter">
-      <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in morsels">
-        <div mrsl-morsel-block="morsel" mrsl-morsel-block-spacer="true"></div>
-      </div>
-    </div>
-    <div ng-if="!morsels" class="loader"></div>
-    <div mrsl-view-more mrsl-view-more-func="getMorsels" mrsl-view-more-data="morsels" mrsl-view-more-inc="morselIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-btn="true"></div>
-    <div ng-if="morsels && morsels.length === 0" class="empty-state">
-      <p>This hashtag doesn't have any morsels yet. <a href="/add" target="_self">Create one now</a>.</p>
-    </div>
+    <div mrsl-morsel-grid="morsels" mrsl-morsel-grid-view-more-func="getMorsels" mrsl-morsel-grid-empty-text="emptyText"></div>
   </div>
 </div>

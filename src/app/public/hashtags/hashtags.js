@@ -18,12 +18,11 @@ angular.module( 'Morsel.public.hashtags', [])
 .controller( 'HashtagsCtrl', function HashtagsCtrl( $scope, $state, $stateParams, MORSEL_LIST_NUMBER, ApiKeywords) {
   $scope.hashtag = $stateParams.hashtag;
 
-  //# of morsels to load at a time
-  $scope.morselIncrement = MORSEL_LIST_NUMBER;
+  $scope.emptyText = 'There are no morsels tagged #'+$stateParams.hashtag+'. <a href="/add" target="_self">Create one now</a>.';
 
   $scope.getMorsels = function() {
     var morselsParams = {
-          count: $scope.morselIncrement
+          count: MORSEL_LIST_NUMBER
         };
 
     //get the next page number

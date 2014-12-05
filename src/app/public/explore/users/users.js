@@ -17,7 +17,8 @@ angular.module( 'Morsel.public.explore.users', [])
   $scope.search.customSearch = _.debounce(searchMorselUsers, $scope.search.waitTime);
   $scope.search.searchPlaceholder = 'Search for Morsel users';
   $scope.searchType = 'users';
-
+  $scope.search.alertMessage = null;
+  
   //clear query when switching
   $scope.search.query = '';
 

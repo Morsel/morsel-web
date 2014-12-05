@@ -10,7 +10,10 @@
     </div>
     <div class="col-sm-9">
       <div class="search-main container-shadow container-round morsel-bg">
-        <input type="text" ng-attr-placeholder="{{search.searchPlaceholder}}" class="form-control" ng-model="search.query" ng-change="search.customSearch()" />
+        <div ng-if="search.alertMessage" class="alert alert-{{search.alertType}}">
+          <p ng-bind="search.alertMessage"></p>
+        </div>
+        <input type="text" ng-attr-placeholder="{{search.searchPlaceholder}}" class="form-control" ng-model="search.query" ng-change="search.customSearch()" ng-focus="search.customFocus()" />
         <div ui-view="explore-results"></div>
       </div>
     </div>

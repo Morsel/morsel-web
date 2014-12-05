@@ -17,13 +17,16 @@ angular.module( 'Morsel.public.explore', [])
   //our model for search
   $scope.search = {
     query: '',
-    //placeholder for children to overwrite
+    //placeholders for children to overwrite
     customSearch: angular.noop,
+    customFocus: angular.noop,
     //time to debounce keystrokes
     waitTime: 300,
     searchPlaceholder: 'Search Morsel',
     defaultSuggestedUsers: null,
     suggestedUsers: null,
-    hideSuggestedUsers: false
+    hideSuggestedUsers: false,
+    alertMessage: null,
+    alertType: null
   };
 });
