@@ -214,7 +214,8 @@ angular.module( 'Morsel.login.join', [])
       $last_name: resp.last_name,
       $username: resp.username,
       is_staff: resp.staff,
-      is_pro: resp.professional
+      is_pro: resp.professional,
+      user_id: resp.id
     }, function() {
       signupDeferredA.resolve();
     });
