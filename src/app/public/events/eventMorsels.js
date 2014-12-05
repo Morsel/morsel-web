@@ -127,7 +127,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventUrl += 'tasting-table-community/tasting-table-community-morsels.json';
     eventInfo.title = 'Tasting Table - Our Community';
     eventInfo.location = null;
-    eventInfo.description = $sce.trustAsHtml('Tasting Table is a website and newsletter for culinary enthusiasts. The Tasting Table team eats high and low to bring you the discerning dining advice, recipes you can trust and news you can use from the world of food and drink. Here\'s a peak at what the Morsel community is doing with Tasting Table recipes.');
+    eventInfo.description = $sce.trustAsHtml('Tasting Table is a website and newsletter for culinary enthusiasts. The Tasting Table team eats high and low to bring you the discerning dining advice, recipes you can trust and news you can use from the world of food and drink.<br/><br/>Here\'s a peak at what the Morsel community is doing with Tasting Table recipes.');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/tasting-table-community/tasting-table-community-logo.gif';
     eventInfo.url = 'https://www.eatmorsel.com/collections/tasting-table-community';
     eventInfo.twitterUsername = '@tastingtable';
