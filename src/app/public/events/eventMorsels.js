@@ -103,7 +103,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventUrl += 'rare-tea-cellar-clients/rare-tea-cellar-clients-morsels.json';
     eventInfo.title = 'Rare Tea Cellar Clients';
     eventInfo.location = null;
-    eventInfo.description = $sce.trustAsHtml('Rare Tea Cellar specialize in the finest and rarest teas and ingredients available on planet earth. For over 15 years we have supplied top chefs, hotels, restaurants and mixologists with unique ingredients.<br/><br/>Take a look at what our amazing clients are doing with our teas!');
+    eventInfo.description = $sce.trustAsHtml('Rare Tea Cellar specializes in the finest and rarest teas and ingredients available on planet earth. For over 15 years RTC has supplied top chefs, hotels, restaurants and mixologists with unique ingredients.<br/><br/>Take a look at what our amazing clients are doing with our teas!');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/rare-tea-cellar-clients/rare-tea-cellar-clients-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/collections/rare-tea-cellar-clients';
     eventInfo.twitterUsername = '@RARETEACELLAR';
@@ -127,7 +127,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventUrl += 'tasting-table-community/tasting-table-community-morsels.json';
     eventInfo.title = 'Tasting Table - Our Community';
     eventInfo.location = null;
-    eventInfo.description = $sce.trustAsHtml('We eat high and low to bring you the discerning dining advice, recipes you can trust and news you can use from the world of food and drink. Here\'s a peak at what our community is doing with our recipes.');
+    eventInfo.description = $sce.trustAsHtml('Tasting Table is a website and newsletter for culinary enthusiasts. The Tasting Table team eats high and low to bring you the discerning dining advice, recipes you can trust and news you can use from the world of food and drink. Here\'s a peak at what the Morsel community is doing with Tasting Table recipes.');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/tasting-table-community/tasting-table-community-logo.gif';
     eventInfo.url = 'https://www.eatmorsel.com/collections/tasting-table-community';
     eventInfo.twitterUsername = '@tastingtable';
