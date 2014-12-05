@@ -103,7 +103,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     eventUrl += 'rare-tea-cellar-clients/rare-tea-cellar-clients-morsels.json';
     eventInfo.title = 'Rare Tea Cellar Clients';
     eventInfo.location = null;
-    eventInfo.description = $sce.trustAsHtml('Rare Tea Cellar specializes in the finest and rarest teas and ingredients available on planet earth. For over 15 years RTC has supplied top chefs, hotels, restaurants and mixologists with unique ingredients.<br/><br/>Take a look at what our amazing clients are doing with our teas!');
+    eventInfo.description = $sce.trustAsHtml('Rare Tea Cellar specializes in the finest and rarest teas and ingredients available on planet earth. For over 15 years RTC has supplied top chefs, hotels, restaurants and mixologists with unique ingredients.<br/><br/>Take a look at what our amazing clients are doing with RTC teas!');
     eventInfo.image = 'https://morsel.s3.amazonaws.com/events/rare-tea-cellar-clients/rare-tea-cellar-clients-logo.jpg';
     eventInfo.url = 'https://www.eatmorsel.com/collections/rare-tea-cellar-clients';
     eventInfo.twitterUsername = '@RARETEACELLAR';
