@@ -20,6 +20,7 @@ angular.module( 'Morsel.public.explore', [])
     //placeholders for children to overwrite
     customSearch: angular.noop,
     customFocus: angular.noop,
+    customCancel: cancelSearch,
     //time to debounce keystrokes
     waitTime: 300,
     searchPlaceholder: 'Search Morsel',
@@ -29,4 +30,8 @@ angular.module( 'Morsel.public.explore', [])
     alertMessage: null,
     alertType: null
   };
+
+  function cancelSearch() {
+    $scope.search.query = '';
+  }
 });

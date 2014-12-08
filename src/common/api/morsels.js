@@ -199,5 +199,18 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return deferred.promise;
   };
 
+  Morsels.search = function(morselParams) {
+    var deferred = $q.defer();
+
+   RestangularMorsels.one('search').get(morselParams).then(function(resp) {
+      //return resp.data to be consistent with View More functionality. might change eventually
+      deferred.resolve(Restangular.stripRestangular(resp).data);
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Morsels;
 });

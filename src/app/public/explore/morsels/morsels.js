@@ -8,18 +8,21 @@ angular.module( 'Morsel.public.explore.morsels', [])
         controller: 'ExploreMorselsCtrl',
         templateUrl: 'app/public/explore/morsels/results.tpl.html'
       }
-    }
+    },
+    reloadOnSearch: false
   });
 })
 
-.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiUsers, ApiKeywords, $state, $stateParams, $rootScope, $modal){
+.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiMorsels, ApiUsers, ApiKeywords, $state, $stateParams, $rootScope, $modal, $location){
   var suggestedUserNumber = 3,
       //used to check if we need to do anything
       oldSearchQuery = '',
-      HashtagModalInstanceCtrl;
+      HashtagModalInstanceCtrl,
+      SearchResultModalInstanceCtrl;
   
+  $scope.$watch('search.query', _.debounce(searchHashtags, $scope.search.waitTime));
   //override the parent scope function
-  $scope.search.customSearch = _.debounce(searchHashtags, $scope.search.waitTime);
+  //$scope.search.customSearch = _.debounce(searchHashtags, $scope.search.waitTime);
   $scope.search.searchPlaceholder = 'Search morsels';
   $scope.searchType = 'morsels';
   $scope.search.alertMessage = null;
@@ -48,11 +51,10 @@ angular.module( 'Morsel.public.explore.morsels', [])
     $scope.search.suggestedUsers = $scope.search.defaultSuggestedUsers;
   });
 
-
   //on focus of search, show promoted hashtags
   $scope.search.customFocus = function() {
     $scope.showDefaultMorsels = false;
-    searchHashtags();
+    $scope.search.query = $scope.search.query;
   };
 
   $scope.loadDefaultMorsels = function(endFeedItem){
@@ -79,44 +81,6 @@ angular.module( 'Morsel.public.explore.morsels', [])
 
   //get our full explore feed
   $scope.loadDefaultMorsels();
-
-  /*$scope.loadSearchResultMorsels = function(endFeedItem){
-    var feedParams = {
-          count: $scope.exploreIncrement
-        };
-
-    if(endFeedItem) {
-      feedParams.max_id = parseInt(endFeedItem.id, 10) - 1;
-    }
-
-    //REPLACE THIS WITH MORSEL SEARCH
-    ApiFeed.getAllFeed(feedParams).then(function(feedItemsResp) {
-      if($scope.feedItems) {
-        //concat them with new data after old data, then reverse with a filter
-        $scope.feedItems = $scope.feedItems.concat(feedItemsResp.data);
-      } else {
-        $scope.feedItems = feedItemsResp.data;
-      }
-    }, function() {
-      //if there's an error retrieving morsels, go to 404
-      $state.go('404');
-    });
-  };
-
-  function searchMorsels() {
-    if($scope.search.query.length >= 3) {
-      //remove current users to show loader
-      $scope.feedItems = null;
-      $scope.hasSearched = true;
-
-      $scope.loadSearchResultMorsels();
-    } else {
-      //don't show anybody if we haven't searched 3 characters
-      $scope.hasSearched = false;
-      $scope.feedItems = [];
-      _.defer(function(){$scope.$apply();});
-    }
-  }*/
 
   //don't use first param, which is for viewMore
   $scope.loadHashtagResults = function(dontUse, promoted){
@@ -152,21 +116,26 @@ angular.module( 'Morsel.public.explore.morsels', [])
     });
   };
 
-  function searchHashtags() {
+  function searchHashtags(newValue, oldValue) {
+    //if this is happening on a form submission, skip the hashtags and go straight to the text search
+    /*if(formSubmitted) {
+      $scope.openSearchResultOverlay();
+    }*/
+
     //remove current hashtags to show loader
     $scope.hashtagResults = null;
     //reset our page count
     $scope.hashtagResultsPageNumber = null;
     $scope.hasSearched = true;
 
-    if($scope.search.query.length >= 3) {
+    if(newValue && newValue.length >= 3) {
       $scope.loadHashtagResults();
-    } else if(oldSearchQuery.length >= 3 || $scope.search.query.length === 0){
+    } else if(newValue && (oldValue && (oldValue.length >= 3 || newValue.length === 0))){
       //show promoted hashtags if we haven't searched 3 characters (don't re-search if we don't need to)
       $scope.loadHashtagResults(null, true);
     }
 
-    oldSearchQuery = $scope.search.query;
+    //$location.search('q', $scope.search.query);
   }
 
   $scope.openHashtagOverlay = function(hashtag) {
@@ -218,4 +187,55 @@ angular.module( 'Morsel.public.explore.morsels', [])
   };
   //we need to implicitly inject dependencies here, otherwise minification will botch them
   HashtagModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'MORSEL_LIST_NUMBER', 'hashtag'];
+
+  $scope.openSearchResultOverlay = function() {
+    $rootScope.modalInstance = $modal.open({
+      templateUrl: 'common/morsels/morselGridOverlay.tpl.html',
+      controller: SearchResultModalInstanceCtrl,
+      size: 'lg',
+      resolve: {
+        query: function () {
+          return $scope.search.query;
+        }
+      }
+    });
+  };
+
+  SearchResultModalInstanceCtrl = function ($scope, $modalInstance, ApiMorsels, MORSEL_LIST_NUMBER, query) {
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
+
+    $scope.heading = 'Results for "'+query+'"';
+
+    $scope.emptyText = 'There are no morsels matching "'+query+'". <a href="/add" target="_self">Create one now</a>.';
+
+    $scope.viewMoreFunc = function() {
+      var morselsParams = {
+            count: MORSEL_LIST_NUMBER,
+            'morsel[query]': query
+          };
+
+      //get the next page number
+      $scope.morselPageNumber = $scope.morselPageNumber ? $scope.morselPageNumber+1 : 1;
+      morselsParams.page = $scope.morselPageNumber;
+
+      ApiMorsels.search(morselsParams).then(function(morselsData) {
+        if($scope.morsels) {
+          //concat them with new data after old data
+          $scope.morsels = $scope.morsels.concat(morselsData);
+        } else {
+          $scope.morsels = morselsData;
+        }
+      }, function() {
+        //if there's an error retrieving morsel data, go to 404
+        $state.go('404');
+      });
+    };
+
+    //load our morsels immediately
+    $scope.viewMoreFunc();
+  };
+  //we need to implicitly inject dependencies here, otherwise minification will botch them
+  SearchResultModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'ApiMorsels','MORSEL_LIST_NUMBER', 'query'];
 });

@@ -10,9 +10,9 @@
       <p>No morsels. Try a different search</p>
     </div>
 </div>-->
-<div ng-show="hashtagResults">
+<div ng-hide="showDefaultMorsels">
   <div class="list-group">
-    <a ng-href="" ng-bind="'Search morsels for &quot;'+search.query+'&quot;'" class="list-group-item" ng-hide="showPromotedHashtags"></a>
+    <a ng-click="openSearchResultOverlay()" ng-bind="'Search morsels for &quot;'+search.query+'&quot;'" class="list-group-item" ng-hide="showPromotedHashtags"></a>
     <a class="list-group-item" bindonce ng-repeat="hashtagResult in hashtagResults" ng-click="openHashtagOverlay(hashtagResult)"><span bo-text="'#'+hashtagResult.name"></span><span class="badge" bo-text="hashtagResult.tags_count">14</span></a>
   </div>
   <div ng-if="!hashtagResults" class="loader"></div>

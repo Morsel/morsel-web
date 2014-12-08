@@ -13,7 +13,14 @@
         <div ng-if="search.alertMessage" class="alert alert-{{search.alertType}}">
           <p ng-bind="search.alertMessage"></p>
         </div>
-        <input type="text" ng-attr-placeholder="{{search.searchPlaceholder}}" class="form-control" ng-model="search.query" ng-change="search.customSearch()" ng-focus="search.customFocus()" />
+        <form name="search.form" ng-submit="search.customSearch(true)" class="clearfix" novalidate>
+          <div class="form-group col-xs-7 col-sm-8 col-md-9 col-lg-10">
+            <label class="sr-only">Search</label>
+            <input type="text" ng-attr-placeholder="{{search.searchPlaceholder}}" class="form-control" ng-model="search.query" ng-focus="search.customFocus()" />
+          </div>
+          <button type="submit" class="btn btn-default pull-left">Search</button>
+          <button type="button" class="btn btn-link" ng-click="search.customCancel()">Cancel</button>
+        </form>
         <div ui-view="explore-results"></div>
       </div>
     </div>
