@@ -17,7 +17,9 @@ angular.module('Morsel.common.validatedElement', [])
       multipleVals: '=mrslValMultipleVals',
       helpText: '@mrslValHelpText',
       labelBtns: '@mrslValLabelBtns',//display checkboxes, radios as buttons,
-      isDisabled: '=mrslValDisabled'
+      isDisabled: '=mrslValDisabled',
+      focus: '=mrslValFocus',
+      hideLabel: '=mrslValHideLabel'
     },
     link: function(scope, element, attrs) {
       var customValType;
@@ -65,7 +67,12 @@ angular.module('Morsel.common.validatedElement', [])
               setupLengthWatch(lengthSettings);
 
               if(lengthSettings.message) {
-                scope.builtInErrorMessages['length'] = lengthSettings.message;
+                if(lengthSettings.min) {
+                  scope.builtInErrorMessages['lengthMin'] = lengthSettings.message;
+                }
+                if(lengthSettings.max) {
+                  scope.builtInErrorMessages['lengthMax'] = lengthSettings.message;
+                }
               }
           }
         }
@@ -80,17 +87,28 @@ angular.module('Morsel.common.validatedElement', [])
 
       function setupLengthWatch(lengthSettings) {
         scope.$watch('formModel[inputName]', function(value){
-          handleLength(value, lengthSettings.limit);
+          handleLength(value, lengthSettings);
         }, true);
       }
 
       //handle values from custom length validation
-      function handleLength(value, limit) {
-        if(value) {
-          scope.inForm[scope.inputName].$setValidity('length', value.length <= limit );
-        } else {
-          //if there isn't a value, it clearly isn't too long
-          scope.inForm[scope.inputName].$setValidity('length', true);
+      function handleLength(value, lengthSettings) {
+        if(lengthSettings.min) {
+          if(value) {
+            scope.inForm[scope.inputName].$setValidity('lengthMin', value.length >= lengthSettings.min );
+          } else {
+            //if there isn't a value, it's too short
+            scope.inForm[scope.inputName].$setValidity('lengthMin', true);
+          }
+        }
+
+        if(lengthSettings.max) {
+          if(value) {
+            scope.inForm[scope.inputName].$setValidity('lengthMax', value.length <= lengthSettings.max );
+          } else {
+            //if there isn't a value, it isn't too long
+            scope.inForm[scope.inputName].$setValidity('lengthMax', true);
+          }
         }
       }
     },

@@ -3,25 +3,23 @@
   <div class="row">
     <div class="col-sm-3">
       <div class="list-group search-menu container-shadow">
-        <a href="/explore/morsels" class="list-group-item h6" ui-route="/explore/morsels" ng-class="{active:$uiRoute}">Morsels</a>
+        <a href="/explore/morsels" class="list-group-item h6" ui-route="/explore/morsels[\w\/\-]*" ng-class="{active:$uiRoute}">Morsels</a>
         <a href="/explore/users" class="list-group-item h6" ui-route="/explore/users" ng-class="{active:$uiRoute}">Users</a>
       </div>
       <div ng-if="!search.hideSuggestedUsers" mrsl-suggested-users="search.suggestedUsers"></div>
     </div>
     <div class="col-sm-9">
       <div class="search-main container-shadow container-round morsel-bg">
-        <div ng-if="search.alertMessage" class="alert alert-{{search.alertType}}">
-          <p ng-bind="search.alertMessage"></p>
+        <div>
+          <form name="search.form" ng-submit="search.customSearch()" class="clearfix" novalidate>
+            <div mrsl-base-errors mrsl-val-form="search.form"></div>
+            <input class="col-xs-7 col-sm-8 col-md-9 col-lg-10" mrsl-validated-element mrsl-val-form="search.form" mrsl-val-en-name="Search query" mrsl-val-type="text" mrsl-val-name="query" mrsl-val-form-model="search" mrsl-val-placeholder="{{search.searchPlaceholder}}" mrsl-val-focus="search.customFocus" mrsl-val-hide-label="true" mrsl-val-required="true" mrsl-val-custom="queryLengthValidation"/>
+            <button mrsl-submit-btn mrsl-submit-btn-form="search.form" mrsl-submit-btn-copy="Search" mrsl-submit-btn-tooltip-placement="top" class="pull-left"></button>
+            <button type="button" class="btn btn-link" ng-click="search.customClear()">Clear</button>
+          </form>
         </div>
-        <form name="search.form" ng-submit="search.customSearch(true)" class="clearfix" novalidate>
-          <div class="form-group col-xs-7 col-sm-8 col-md-9 col-lg-10">
-            <label class="sr-only">Search</label>
-            <input type="text" ng-attr-placeholder="{{search.searchPlaceholder}}" class="form-control" ng-model="search.query" ng-focus="search.customFocus()" />
-          </div>
-          <button type="submit" class="btn btn-default pull-left">Search</button>
-          <button type="button" class="btn btn-link" ng-click="search.customCancel()">Cancel</button>
-        </form>
-        <div ui-view="explore-results"></div>
+        <div ui-view="explore-morsels" ng-show="$state.includes('explore.morsels')"></div>
+        <div ui-view="explore-users" ng-show="$state.includes('explore.users')"></div>
       </div>
     </div>
   </div>

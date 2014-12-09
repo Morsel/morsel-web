@@ -1,7 +1,7 @@
 <div class="form-group" ng-class="{'has-error': (inForm[inputName].$dirty && hasClientError()) || inForm[inputName].$error.server}">
-  <label class="control-label" ng-class="{'required':required === 'true'}" for="{{inputName}}">{{enName}}</label>
+  <label class="control-label" ng-class="{'required':required === 'true'}" for="{{inputName}}" ng-hide="hideLabel">{{enName}}</label>
   
-  <input class="form-control" ng-model="formModel[inputName]" id="{{inputName}}" ng-attr-placeholder="{{placeholder}}" name="{{inputName}}" ng-change="removeServerError()" ng-attr="customValAttrs" ng-required="{{required}}" type="{{type}}" ng-disabled="{{isDisabled}}" />
+  <input class="form-control" ng-model="formModel[inputName]" id="{{inputName}}" ng-attr-placeholder="{{placeholder}}" name="{{inputName}}" ng-change="removeServerError()" ng-attr="customValAttrs" ng-required="{{required}}" type="{{type}}" ng-disabled="{{isDisabled}}" ng-focus="focus()"/>
 
   <p class="help-block">{{helpText}}</p>
 

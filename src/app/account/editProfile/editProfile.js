@@ -29,7 +29,7 @@ angular.module( 'Morsel.account.editProfile', [])
   //bio length validation
   $scope.bioLengthVer = {
     'length': {
-      'limit': '160',
+      'max': '160',
       'message': 'Must be 160 characters or less'
     }
   };

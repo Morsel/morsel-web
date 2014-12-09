@@ -1,6 +1,7 @@
 angular.module( 'Morsel.public', [
   //libs
   'angularMoment',
+  'ct.ui.router.extras',
   'duScroll',
   'LocalStorageModule',
   'ngSanitize',
@@ -69,6 +70,9 @@ angular.module( 'Morsel.public', [
   'Morsel.public.eventMorsels',
   'Morsel.public.explore',
   'Morsel.public.explore.morsels',
+  //'Morsel.public.explore.morsels.default',
+  'Morsel.public.explore.morsels.matchingHashtags',
+  'Morsel.public.explore.morsels.searchResults',
   'Morsel.public.explore.suggestedUsers',
   'Morsel.public.explore.users',
   'Morsel.public.feed',
@@ -153,7 +157,8 @@ angular.module( 'Morsel.public', [
   localStorageServiceProvider.prefix = 'mrsl';
 })
 
-.run( function run ($window) {
+.run( function run ($window, $rootScope, $state) {
+  $rootScope.$state = $state;
   $window.moment.lang('en');
 })
 

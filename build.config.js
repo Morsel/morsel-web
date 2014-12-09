@@ -157,7 +157,8 @@ module.exports = {
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/restangular/dist/restangular.js'
+        'vendor/restangular/dist/restangular.js',
+        'vendor/ui-router-extras/release/ct-ui-router-extras.min.js'
       ],
       css: [
       ],
@@ -473,7 +474,8 @@ module.exports = {
       'vendor/ng-file-upload/angular-file-upload.min.js',
       'vendor/ng-file-upload/angular-file-upload-shim.min.js',
       'vendor/ng-sortable/dist/ng-sortable.min.js',
-      'vendor/restangular/dist/restangular.js'
+      'vendor/restangular/dist/restangular.js',
+      'vendor/ui-router-extras/release/ct-ui-router-extras.min.js'
     ],
     css: [
     ],
