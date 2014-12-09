@@ -1,3 +1,4 @@
+<div mrsl-explore-search-bar="morselSearch.form" mrsl-explore-search-bar-model="morselSearch.model" mrsl-explore-search-bar-placeholder="Search morsels" mrsl-explore-search-bar-search="morselSearch.customSearch" mrsl-explore-search-bar-focus="morselSearch.customFocus" mrsl-explore-search-bar-clear="morselSearch.customClear"></div>
 <div ng-show="$state.is('explore.morsels')">
   <div ng-show="defaultFeedItems">
     <div class="row no-gutter">
@@ -5,7 +6,7 @@
         <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
       </div>
     </div>
-    <div mrsl-view-more mrsl-view-more-func="loadDefaultMorsels" mrsl-view-more-data="defaultFeedItems" mrsl-view-more-inc="exploreIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+    <div mrsl-view-more mrsl-view-more-func="loadDefaultMorsels" mrsl-view-more-data="defaultFeedItems" mrsl-view-more-inc="morselSearch.exploreIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
   </div>
   <div ng-if="!defaultFeedItems" class="loader"></div>
 </div>

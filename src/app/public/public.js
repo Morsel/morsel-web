@@ -73,6 +73,7 @@ angular.module( 'Morsel.public', [
   //'Morsel.public.explore.morsels.default',
   'Morsel.public.explore.morsels.matchingHashtags',
   'Morsel.public.explore.morsels.searchResults',
+  'Morsel.public.explore.searchBar',
   'Morsel.public.explore.suggestedUsers',
   'Morsel.public.explore.users',
   'Morsel.public.feed',

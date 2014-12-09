@@ -1,5 +1,6 @@
-<div mrsl-user-list="searchResultUsers" mrsl-user-list-empty="search.emptyText" ng-if="hasSearched" mrsl-user-list-load-func="loadSearchResultUsers"></div>
-<div ng-if="searchResultUsers && (searchResultUsers.length === 0)">
+<div mrsl-explore-search-bar="userSearch.form" mrsl-explore-search-bar-model="userSearch.model" mrsl-explore-search-bar-placeholder="Search Morsel users" mrsl-explore-search-bar-search="userSearch.customSearch"></div>
+<div mrsl-user-list="userSearch.searchResultUsers" mrsl-user-list-empty="'No users match your query'" ng-if="userSearch.hasSearched" mrsl-user-list-load-func="userSearch.loadSearchResultUsers"></div>
+<div ng-hide="userSearch.hasSearched">
   <hr/>
   <h3>Suggested Users</h3>
   <div mrsl-user-list="search.defaultSuggestedUsers"></div>

@@ -13,22 +13,26 @@ angular.module( 'Morsel.public.explore.morsels', [])
 })
 
 .controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiMorsels, ApiKeywords, $state, $stateParams, $rootScope, $modal, $location){
-  //override the parent scope function
-  $scope.search.searchPlaceholder = 'Search morsels';
-  $scope.searchType = 'morsels';
-
-  //clear query when switching
-  $scope.search.query = '';
-  $scope.search.form.$setPristine();
+  $scope.morselSearch = {
+    exploreIncrement: MORSEL_LIST_NUMBER,
+    customFocus: function() {
+      $state.transitionTo('explore.morsels.matchingHashtags', null, {location:'replace'});
+    },
+    customClear: function() {
+      $state.go('explore.morsels');
+    },
+    form: 'morselSearchForm',
+    model: {
+      query: ''
+    }
+  };
 
   //show suggested users
   $scope.search.hideSuggestedUsers = false;
 
-  $scope.exploreIncrement = MORSEL_LIST_NUMBER;
-
   $scope.loadDefaultMorsels = function(endFeedItem){
     var feedParams = {
-          count: $scope.exploreIncrement
+          count: $scope.morselSearch.exploreIncrement
         };
 
     if(endFeedItem) {
@@ -50,11 +54,6 @@ angular.module( 'Morsel.public.explore.morsels', [])
 
   //get our full explore feed
   $scope.loadDefaultMorsels();
-
-  //on focus of search, show hashtag search
-  $scope.search.customFocus = function() {
-    $state.transitionTo('explore.morsels.matchingHashtags', null, {location:'replace'});
-  };
 });
 
 /*

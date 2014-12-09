@@ -1,0 +1,33 @@
+angular.module( 'Morsel.public.explore.searchBar', [] )
+.directive('mrslExploreSearchBar', function(ApiUsers, SEARCH_CHAR_MINIMUM){
+  return {
+    scope: {
+      exploreSearchForm: '=mrslExploreSearchBar',
+      searchModel: '=mrslExploreSearchBarModel',
+      placeholder: '@mrslExploreSearchBarPlaceholder',
+      customClear: '=mrslExploreSearchBarClear',
+      customFocus: '=mrslExploreSearchBarFocus',
+      customSearch: '=mrslExploreSearchBarSearch'
+    },
+    replace: true,
+    link: function(scope, element, attrs) {
+      //search length validation
+      scope.queryLengthValidation = {
+        'length': {
+          'min': SEARCH_CHAR_MINIMUM,
+          'message': 'Search must be at least 3 characters'
+        }
+      };
+
+      scope.clear = function() {
+        scope.searchModel.query = '';
+        scope.exploreSearchForm.$setPristine();
+        //callback if we want to switch state
+        if(scope.customClear) {
+          scope.customClear();
+        }
+      };
+    },
+    templateUrl: 'app/public/explore/search-bar/search-bar.tpl.html'
+  };
+});

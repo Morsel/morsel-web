@@ -12,33 +12,27 @@ angular.module( 'Morsel.public.explore.users', [])
   });
 })
 
-.controller( 'ExploreUsersCtrl', function ExploreUsersCtrl ($scope, ApiUsers, USER_LIST_NUMBER){
-  $scope.$watch('search.query', _.debounce(searchMorselUsers, $scope.search.waitTime));
+.controller( 'ExploreUsersCtrl', function ExploreUsersCtrl ($scope, ApiUsers, USER_LIST_NUMBER, SEARCH_CHAR_MINIMUM){
+  $scope.userSearch = {
+    customSearch: searchMorselUsers,
+    form: 'userSearchForm',
+    hasSearched: false,
+    model: {
+      query: ''
+    },
+    //our initial state should be empty
+    searchResultUsers: []
+  };
 
-  //override the parent scope function
-  $scope.search.customSearch = searchMorselUsers;
-  $scope.search.searchPlaceholder = 'Search for Morsel users';
-  $scope.searchType = 'users';
-  $scope.search.alertMessage = null;
-  $scope.hasSearched = false;
-  
-  //clear query when switching
-  $scope.search.query = '';
-  $scope.search.form.$setPristine();
-
-  //our initial state should be empty
-  $scope.searchResultUsers = [];
+  $scope.$watch('userSearch.model.query', _.debounce(searchMorselUsers, $scope.search.waitTime));
 
   //hide suggested users since they'll be the main content
   $scope.search.hideSuggestedUsers = true;
 
-  //reset this
-  $scope.search.customFocus = angular.noop();
-
-  $scope.loadSearchResultUsers = function(endUser){
+  $scope.userSearch.loadSearchResultUsers = function(endUser){
     var userSearchData = {
           count: USER_LIST_NUMBER,
-          'user[query]': $scope.search.query
+          'user[query]': $scope.userSearch.model.query
         };
 
     if(endUser) {
@@ -46,32 +40,26 @@ angular.module( 'Morsel.public.explore.users', [])
     }
 
     ApiUsers.search(userSearchData).then(function(searchResp) {
-      if($scope.searchResultUsers) {
-        $scope.searchResultUsers = $scope.searchResultUsers.concat(searchResp.data);
+      if($scope.userSearch.searchResultUsers) {
+        $scope.userSearch.searchResultUsers = $scope.userSearch.searchResultUsers.concat(searchResp.data);
       } else {
-        $scope.searchResultUsers = searchResp.data;
+        $scope.userSearch.searchResultUsers = searchResp.data;
       }
 
       _.defer(function(){$scope.$apply();});
     });
   };
 
-  $scope.search.customClear = function() {
-    $scope.search.query = '';
-    $scope.search.form.$setPristine();
-    $state.go('explore.morsels');
-  };
-
   function searchMorselUsers() {
-    if($scope.search.query.length >= 3) {
+    if($scope.userSearch.model.query && $scope.userSearch.model.query.length >= SEARCH_CHAR_MINIMUM) {
       //remove current users to show loader
-      $scope.searchResultUsers = null;
-      $scope.hasSearched = true;
-      $scope.loadSearchResultUsers();
+      $scope.userSearch.searchResultUsers = null;
+      $scope.userSearch.hasSearched = true;
+      $scope.userSearch.loadSearchResultUsers();
     } else {
-      $scope.hasSearched = false;
+      $scope.userSearch.hasSearched = false;
       //don't show anybody if we haven't searched 3 characters
-      $scope.searchResultUsers = [];
+      $scope.userSearch.searchResultUsers = [];
       _.defer(function(){$scope.$apply();});
     }
   }

@@ -1,4 +1,5 @@
 angular.module( 'Morsel.public.explore', [])
+.constant('SEARCH_CHAR_MINIMUM', 3)
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'explore', {
@@ -16,36 +17,12 @@ angular.module( 'Morsel.public.explore', [])
 })
 
 .controller( 'ExploreCtrl', function ExploreCtrl($scope, $state, ApiUsers){
-  //our model for search
+  //some search options
   $scope.search = {
-    query: '',
-    //placeholders for children to overwrite
-    customSearch: angular.noop,
-    customFocus: angular.noop,
-    customClear: angular.noop,
-
     //time to debounce keystrokes
     waitTime: 300,
-    searchPlaceholder: 'Search Morsel',
-    defaultSuggestedUsers: null,
-    suggestedUsers: null,
     suggestedUserCount: 3,
-    hideSuggestedUsers: false,
-    queryMinimumLength: 3
-  };
-
-  //search length validation
-  $scope.queryLengthValidation = {
-    'length': {
-      'min': $scope.search.queryMinimumLength,
-      'message': 'Search must be at least 3 characters'
-    }
-  };
-
-  $scope.search.customClear = function() {
-    $scope.search.query = '';
-    $scope.search.form.$setPristine();
-    $state.go('explore.morsels');
+    hideSuggestedUsers: false
   };
 
   //get our promoted folks

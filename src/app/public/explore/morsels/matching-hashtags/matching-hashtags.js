@@ -13,17 +13,15 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
   });
 })
 
-.controller( 'ExploreMorselsMatchingHashtagsCtrl', function ExploreMorselsMatchingHashtagsCtrl ($scope, ApiKeywords, $state, HandleErrors, $previousState){
-  $scope.$watch('search.query', _.debounce(searchHashtags, $scope.search.waitTime));
+.controller( 'ExploreMorselsMatchingHashtagsCtrl', function ExploreMorselsMatchingHashtagsCtrl ($scope, ApiKeywords, $state, HandleErrors, $previousState, SEARCH_CHAR_MINIMUM){
+  $scope.$watch('morselSearch.model.query', _.debounce(searchHashtags, $scope.search.waitTime));
 
   //go to text results immediately upon submitting
-  $scope.showTextResults = function() {
+  $scope.morselSearch.customSearch = function() {
     $state.go('explore.morsels.searchResults', {
-      q: $scope.search.query
+      q: $scope.morselSearch.model.query
     });
   };
-
-  $scope.search.customSearch = $scope.showTextResults;
 
   //start this as true
   $scope.showPromotedHashtags = true;
@@ -33,8 +31,8 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
 
   $scope.loadHashtagResults = function(){
     var hashtagParams = {
-          count: $scope.exploreIncrement,
-          'keyword[query]': $scope.search.query
+          count: $scope.morselSearch.exploreIncrement,
+          'keyword[query]': $scope.morselSearch.model.query
         };
 
     $scope.showPromotedHashtags = false;
@@ -52,13 +50,13 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
         $scope.hashtagResults = hashtagsResp.data;
       }
     }, function(resp) {
-      HandleErrors.onError(resp.data, $scope.search.form);
+      HandleErrors.onError(resp.data, $scope.morselSearch.form);
     });
   };
 
   $scope.loadPromotedHashtags = function(){
     var hashtagParams = {
-          count: $scope.exploreIncrement,
+          count: $scope.morselSearch.exploreIncrement,
           'keyword[promoted]': true
         };
 
@@ -76,7 +74,7 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
         $scope.promotedHashtags = hashtagsResp.data;
       }
     }, function(resp) {
-      HandleErrors.onError(resp.data, $scope.search.form);
+      HandleErrors.onError(resp.data, $scope.morselSearch.form);
     });
   };
 
@@ -88,7 +86,7 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
 
     //if user has searched 3 chars, do search. if not, show promoted
     if(newValue) {
-      if(newValue.length >= $scope.search.queryMinimumLength) {
+      if(newValue.length >= SEARCH_CHAR_MINIMUM) {
         $scope.loadHashtagResults();
       } else {
         //if they're not already shown

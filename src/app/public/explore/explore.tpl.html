@@ -10,14 +10,6 @@
     </div>
     <div class="col-sm-9">
       <div class="search-main container-shadow container-round morsel-bg">
-        <div>
-          <form name="search.form" ng-submit="search.customSearch()" class="clearfix" novalidate>
-            <div mrsl-base-errors mrsl-val-form="search.form"></div>
-            <input class="col-xs-7 col-sm-8 col-md-9 col-lg-10" mrsl-validated-element mrsl-val-form="search.form" mrsl-val-en-name="Search query" mrsl-val-type="text" mrsl-val-name="query" mrsl-val-form-model="search" mrsl-val-placeholder="{{search.searchPlaceholder}}" mrsl-val-focus="search.customFocus" mrsl-val-hide-label="true" mrsl-val-required="true" mrsl-val-custom="queryLengthValidation"/>
-            <button mrsl-submit-btn mrsl-submit-btn-form="search.form" mrsl-submit-btn-copy="Search" mrsl-submit-btn-tooltip-placement="top" class="pull-left"></button>
-            <button type="button" class="btn btn-link" ng-click="search.customClear()">Clear</button>
-          </form>
-        </div>
         <div ui-view="explore-morsels" ng-show="$state.includes('explore.morsels')"></div>
         <div ui-view="explore-users" ng-show="$state.includes('explore.users')"></div>
       </div>
