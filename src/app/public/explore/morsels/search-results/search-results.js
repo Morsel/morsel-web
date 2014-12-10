@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
   });
 })
 
-.controller( 'ExploreMorselsSearchResultsCtrl', function ExploreMorselsSearchResultsCtrl ($scope, $state, $stateParams, ApiMorsels, MORSEL_LIST_NUMBER, $previousState, ApiKeywords){
+.controller( 'ExploreMorselsSearchResultsCtrl', function ExploreMorselsSearchResultsCtrl ($scope, $state, $stateParams, ApiMorsels, MORSEL_LIST_NUMBER, $previousState, ApiKeywords, Auth){
   var query;
 
   if($stateParams && $stateParams.q) {
@@ -39,6 +39,8 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
             } else {
               $scope.morsels = morselsData;
             }
+
+            updateSuggestedUsers();
           }, function() {
             //if there's an error retrieving morsel data, go to explore
             $state.go('explore.morsels');
@@ -65,6 +67,8 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
             } else {
               $scope.morsels = morselsData;
             }
+
+            updateSuggestedUsers();
           }, function() {
             //if there's an error retrieving morsel data, go to explore
             $state.go('explore.morsels');
@@ -88,5 +92,24 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
     }
   } else {
     $state.transitionTo('explore.morsels', null, {location:'replace'});
+  }
+
+  function updateSuggestedUsers() {
+    var morselCreators = [];
+
+    Auth.getCurrentUserPromise().then(function(userData){
+      morselCreators = _.pluck($scope.morsels, 'creator');
+      morselCreators = _.filter(morselCreators, function(u) {
+        return !u.following && (u.id != userData.id);
+      });
+      morselCreators = _.uniq(morselCreators, null, 'id').splice(0, $scope.search.suggestedUserCount);
+
+      //if nobody is left, show defaults
+      if(morselCreators.length > 0) {
+        $scope.search.suggestedUsers = morselCreators;
+      } else {
+        $scope.search.suggestedUsers = $scope.search.defaultSuggestedUsers;
+      }
+    });
   }
 });

@@ -10,13 +10,11 @@ angular.module( 'Morsel.public.explore', [])
         templateUrl: 'app/public/explore/explore.tpl.html'
       }
     },
-    data:{ pageTitle: 'A culinary community sharing food stories, cooking inspiration and kitchen hacks' },
-    deepStateRedirect: true,
-    sticky: true
+    data:{ pageTitle: 'A culinary community sharing food stories, cooking inspiration and kitchen hacks' }
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl($scope, $state, ApiUsers){
+.controller( 'ExploreCtrl', function ExploreCtrl($scope, $state, ApiUsers, Auth){
   //some search options
   $scope.search = {
     //time to debounce keystrokes
@@ -25,12 +23,14 @@ angular.module( 'Morsel.public.explore', [])
     hideSuggestedUsers: false
   };
 
-  //get our promoted folks
-  ApiUsers.search({'user[promoted]': true}).then(function(searchResp) {
-    $scope.search.defaultSuggestedUsers = _.filter(searchResp.data, function(u) {
-      return !u.following;
-    }).splice(0, $scope.search.suggestedUserCount);
+  Auth.getCurrentUserPromise().then(function(userData){
+    //get our promoted folks
+    ApiUsers.search({'user[promoted]': true}).then(function(searchResp) {
+      $scope.search.defaultSuggestedUsers = _.filter(searchResp.data, function(u) {
+        return !u.following && (u.id != userData.id);
+      }).splice(0, $scope.search.suggestedUserCount);
 
-    $scope.search.suggestedUsers = $scope.search.defaultSuggestedUsers;
+      $scope.search.suggestedUsers = $scope.search.defaultSuggestedUsers;
+    });
   });
 });
