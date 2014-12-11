@@ -13,7 +13,7 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
   });
 })
 
-.controller( 'ExploreMorselsMatchingHashtagsCtrl', function ExploreMorselsMatchingHashtagsCtrl ($scope, ApiKeywords, $state, HandleErrors, $previousState, SEARCH_CHAR_MINIMUM){
+.controller( 'ExploreMorselsMatchingHashtagsCtrl', function ExploreMorselsMatchingHashtagsCtrl ($scope, ApiKeywords, $state, HandleErrors, SEARCH_CHAR_MINIMUM){
   $scope.$watch('morselSearch.model.query', _.debounce(searchHashtags, $scope.search.waitTime));
 
   //go to text results immediately upon submitting
@@ -25,9 +25,6 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
 
   //start this as true
   $scope.showPromotedHashtags = true;
-
-  //set this as a previous state if we need to come back
-  $previousState.memo('hashtag-results');
 
   $scope.loadHashtagResults = function(){
     var hashtagParams = {

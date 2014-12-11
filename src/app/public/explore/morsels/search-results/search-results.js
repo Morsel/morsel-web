@@ -13,12 +13,20 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
 })
 
 .controller( 'ExploreMorselsSearchResultsCtrl', function ExploreMorselsSearchResultsCtrl ($scope, $state, $stateParams, ApiMorsels, MORSEL_LIST_NUMBER, $previousState, ApiKeywords, Auth){
-  var query;
+  var query,
+      prevState;
 
   if($stateParams && $stateParams.q) {
     query = decodeURIComponent($stateParams.q);
 
     if(query.length >=3) {
+      prevState = $previousState.get();
+      //check if we came from hashtags
+      if(prevState && prevState.state.name === 'explore.morsels.matchingHashtags') {
+        //set this as a previous state if we need to come back
+        $previousState.memo('hashtag-results');
+      }
+
       if($stateParams.type && $stateParams.type==='hashtag') {
         $scope.resultText = 'morsels tagged "#'+$stateParams.q+'"';
         $scope.emptyText = 'There are no morsels tagged "#'+$stateParams.q+'". <a href="/add" target="_self">Create one now</a>.';
@@ -80,9 +88,9 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
       $scope.viewMoreFunc();
 
       $scope.goBack = function() {
-        //if we came from search results, go back. otherwise, go to explore
+        //if we came from search results, go back. otherwise (direct URL), go to explore
         if($previousState.get('hashtag-results')) {
-          $previousState.go();
+          $previousState.go('hashtag-results');
         } else {
           $state.go('explore.morsels');
         }
