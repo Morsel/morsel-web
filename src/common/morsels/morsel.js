@@ -62,7 +62,7 @@ angular.module('Morsel.common.morsel', [])
       scope.getCoverPhotoArray = function(previewSized) {
         var primaryItemPhotos;
 
-        if(scope.morsel && scope.morsel.items) {
+        if(scope.morsel) {
           primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.morsel);
 
           if(primaryItemPhotos) {
@@ -76,31 +76,14 @@ angular.module('Morsel.common.morsel', [])
               ];
             }
           } else {
-            var lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(scope.morsel.items);
-
-            if(lastItemWithPhotos) {
-              if(previewSized) {
-                return lastItemWithPhotos.photos._50x50;
-              } else {
-                return [
-                  ['default', lastItemWithPhotos.photos._320x320],
-                  ['(min-width: 321px)', lastItemWithPhotos.photos._640x640],
-                  ['screen-md', lastItemWithPhotos.photos._992x992]
-                ];
-              }
+            //no items have photos
+            if(previewSized) {
+              return MORSELPLACEHOLDER;
             } else {
-              //no items have photos
-              if(previewSized) {
-                return MORSELPLACEHOLDER;
-              } else {
-                return [
-                  ['default', MORSELPLACEHOLDER]
-                ];
-              }
+              return [
+                ['default', MORSELPLACEHOLDER]
+              ];
             }
-            return [
-              ['default', MORSELPLACEHOLDER]
-            ];
           }
         } else {
           //return blank

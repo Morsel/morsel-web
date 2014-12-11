@@ -16,13 +16,7 @@ angular.module( 'Morsel.common.activityFeed', [] )
         if(primaryPhotos) {
           return primaryPhotos._100x100;
         } else {
-          primaryPhotos = PhotoHelpers.findLastItemWithPhotos(morsel.items);
-
-          if(primaryPhotos) {
-            return primaryPhotos._100x100;
-          } else {
-            return MORSELPLACEHOLDER;
-          }
+          return MORSELPLACEHOLDER;
         }
       };
     },

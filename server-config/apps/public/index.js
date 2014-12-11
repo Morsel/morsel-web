@@ -2,16 +2,10 @@ var util = require('./../../util');
 var _ = require('underscore');
 
 function getCoverPhoto(morsel) {
-  var primaryItemPhotos = findPrimaryItemPhotos(morsel),
-      lastItemWithPhotos;
+  var primaryItemPhotos = findPrimaryItemPhotos(morsel);
 
   //use their cover photo if there is one
-  if(primaryItemPhotos) {
-    return primaryItemPhotos._992x992;
-  } else {
-    lastItemWithPhotos = findLastItemWithPhotos(morsel.items);
-    return lastItemWithPhotos ? lastItemWithPhotos._992x992 : 'https://www.eatmorsel.com/assets/images/logos/morsel-large.png';
-  }
+  return primaryItemPhotos ? primaryItemPhotos._992x992 : 'https://www.eatmorsel.com/assets/images/logos/morsel-large.png';
 }
 
 function getCollage(morsel) {
@@ -19,23 +13,7 @@ function getCollage(morsel) {
 }
 
 function findPrimaryItemPhotos(morsel) {
-  var primaryItem = _.find(morsel.items, function(i) {
-    return i.id === morsel.primary_item_id;
-  });
-
-  if(primaryItem && primaryItem.photos) {
-    return primaryItem.photos;
-  } else {
-    return null;
-  }
-}
-
-function findLastItemWithPhotos(items) {
-  var reverseItems = items.slice(0);
-
-  return _.find(reverseItems, function(i) {
-    return i.photos;
-  });
+  return (morsel && morsel.primary_item_photos) ? morsel.primary_item_photos : null;
 }
 
 function getFirstDescription(items) {
