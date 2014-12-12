@@ -23,7 +23,10 @@ angular.module( 'Morsel.public.explore.searchBar', [] )
 
       scope.focus = function() {
         scope.showClear = true;
-        scope.customFocus();
+
+        if(scope.customFocus) {
+          scope.customFocus();
+        }
       };
 
       scope.$watch('searchModel.query', function(newValue) {

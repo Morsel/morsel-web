@@ -1,6 +1,8 @@
 <form name="exploreSearchForm" ng-submit="customSearch()" class="clearfix" novalidate>
   <div mrsl-base-errors mrsl-val-form="exploreSearchForm"></div>
-  <input class="col-xs-7 col-sm-8 col-md-9 col-lg-10" mrsl-validated-element mrsl-val-form="exploreSearchForm" mrsl-val-en-name="Search query" mrsl-val-type="text" mrsl-val-name="query" mrsl-val-form-model="searchModel" mrsl-val-placeholder="{{placeholder}}" mrsl-val-focus="focus" mrsl-val-hide-label="true" mrsl-val-required="true" mrsl-val-custom="queryLengthValidation"/>
-  <button mrsl-submit-btn mrsl-submit-btn-form="exploreSearchForm" mrsl-submit-btn-copy="Search" mrsl-submit-btn-tooltip-placement="top" class="pull-left"></button>
-  <button type="button" class="btn btn-link" ng-click="clear()" ng-bind="clearText" ng-show="showClear">Cancel</button>
+  <div class="row">
+    <input class="col-xs-7 col-sm-8 col-md-9 col-lg-10" mrsl-validated-element mrsl-val-form="exploreSearchForm" mrsl-val-en-name="Search query" mrsl-val-type="text" mrsl-val-name="query" mrsl-val-form-model="searchModel" mrsl-val-placeholder="{{placeholder}}" mrsl-val-focus="focus" mrsl-val-hide-label="true" mrsl-val-required="true" mrsl-val-custom="queryLengthValidation"/>
+    <button mrsl-submit-btn mrsl-submit-btn-form="exploreSearchForm" mrsl-submit-btn-copy="Search" mrsl-submit-btn-tooltip-placement="top" class="pull-left"></button>
+    <button type="button" class="btn btn-link btn-sm" ng-click="clear()" ng-bind="clearText" ng-show="showClear">Cancel</button>
+  </div>
 </form>
