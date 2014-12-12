@@ -19,6 +19,7 @@ angular.module('Morsel.common.validatedElement', [])
       labelBtns: '@mrslValLabelBtns',//display checkboxes, radios as buttons,
       isDisabled: '=mrslValDisabled',
       focus: '=mrslValFocus',
+      blur: '=mrslValBlur',
       hideLabel: '=mrslValHideLabel'
     },
     link: function(scope, element, attrs) {

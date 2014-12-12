@@ -1,5 +1,5 @@
 angular.module( 'Morsel.public.explore.searchBar', [] )
-.directive('mrslExploreSearchBar', function(ApiUsers, SEARCH_CHAR_MINIMUM){
+.directive('mrslExploreSearchBar', function(ApiUsers, SEARCH_CHAR_MINIMUM, $state){
   return {
     scope: {
       exploreSearchForm: '=mrslExploreSearchBar',
@@ -18,6 +18,14 @@ angular.module( 'Morsel.public.explore.searchBar', [] )
           'message': 'Search must be at least 3 characters'
         }
       };
+
+      scope.$watch('searchModel.query', function(newValue) {
+        if(newValue && newValue.length>0) {
+          scope.clearText = 'Clear';
+        } else {
+          scope.clearText = 'Cancel';
+        }
+      });
 
       scope.clear = function() {
         scope.searchModel.query = '';
