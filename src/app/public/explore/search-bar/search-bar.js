@@ -11,12 +11,19 @@ angular.module( 'Morsel.public.explore.searchBar', [] )
     },
     replace: true,
     link: function(scope, element, attrs) {
+      scope.showClear = false;
+
       //search length validation
       scope.queryLengthValidation = {
         'length': {
           'min': SEARCH_CHAR_MINIMUM,
           'message': 'Search must be at least 3 characters'
         }
+      };
+
+      scope.focus = function() {
+        scope.showClear = true;
+        scope.customFocus();
       };
 
       scope.$watch('searchModel.query', function(newValue) {
