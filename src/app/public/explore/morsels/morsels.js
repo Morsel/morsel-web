@@ -12,11 +12,15 @@ angular.module( 'Morsel.public.explore.morsels', [])
   });
 })
 
-.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, $state){
+.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, $state, Mixpanel){
   $scope.morselSearch = {
     exploreIncrement: MORSEL_LIST_NUMBER,
     customFocus: function() {
-      $state.transitionTo('explore.morsels.matchingHashtags', null, {location:'replace'});
+      Mixpanel.track('Focused on Explore Search', {
+        view: 'explore_morsels'
+      }, function() {
+        $state.transitionTo('explore.morsels.matchingHashtags', null, {location:'replace'});
+      });
     },
     customClear: function() {
       $state.go('explore.morsels');
@@ -24,6 +28,13 @@ angular.module( 'Morsel.public.explore.morsels', [])
     form: 'morselSearchForm',
     model: {
       query: ''
+    },
+    mixpanelSearch: function(callback) {
+      Mixpanel.track('Explore searched', {
+        view: 'explore_morsels',
+        explore_search_trigger: 'Form Submit',
+        search_term: $scope.morselSearch.model.query
+      }, callback);
     }
   };
 
@@ -54,4 +65,10 @@ angular.module( 'Morsel.public.explore.morsels', [])
 
   //get our full explore feed
   $scope.loadDefaultMorsels();
+
+  $scope.$on('explore.user.follow', function(event, details){
+    Mixpanel.track('Followed User', {
+      view: 'explore_morsels'
+    });
+  });
 });

@@ -12,8 +12,13 @@ angular.module( 'Morsel.public.explore.users', [])
   });
 })
 
-.controller( 'ExploreUsersCtrl', function ExploreUsersCtrl ($scope, ApiUsers, USER_LIST_NUMBER, SEARCH_CHAR_MINIMUM){
+.controller( 'ExploreUsersCtrl', function ExploreUsersCtrl ($scope, ApiUsers, USER_LIST_NUMBER, SEARCH_CHAR_MINIMUM, Mixpanel){
   $scope.userSearch = {
+    customFocus: function() {
+      Mixpanel.track('Focused on Explore Search', {
+        view: 'explore_users'
+      });
+    },
     customSearch: searchMorselUsers,
     form: 'userSearchForm',
     hasSearched: false,
@@ -63,4 +68,10 @@ angular.module( 'Morsel.public.explore.users', [])
       _.defer(function(){$scope.$apply();});
     }
   }
+
+  $scope.$on('explore.user.follow', function(event, details){
+    Mixpanel.track('Followed User', {
+      view: 'explore_users'
+    });
+  });
 });

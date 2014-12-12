@@ -13,13 +13,15 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
   });
 })
 
-.controller( 'ExploreMorselsMatchingHashtagsCtrl', function ExploreMorselsMatchingHashtagsCtrl ($scope, ApiKeywords, $state, HandleErrors, SEARCH_CHAR_MINIMUM){
+.controller( 'ExploreMorselsMatchingHashtagsCtrl', function ExploreMorselsMatchingHashtagsCtrl ($scope, ApiKeywords, $state, HandleErrors, SEARCH_CHAR_MINIMUM, $location, Mixpanel){
   $scope.$watch('morselSearch.model.query', _.debounce(searchHashtags, $scope.search.waitTime));
 
   //go to text results immediately upon submitting
-  $scope.morselSearch.customSearch = function() {
-    $state.go('explore.morsels.searchResults', {
-      q: $scope.morselSearch.model.query
+  $scope.morselSearch.customSearch = function(e) {
+    $scope.morselSearch.mixpanelSearch(function(){
+      $state.go('explore.morsels.searchResults', {
+        q: $scope.morselSearch.model.query
+      });
     });
   };
 
@@ -101,5 +103,23 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
 
   $scope.formatQuery = function(q) {
     return encodeURIComponent(q);
+  };
+
+  $scope.clickHashtag = function(hashtag, promoted) {
+    //send this off, let event continue
+    Mixpanel.track('Clicked Hashtag', {
+      hashtag: '#'+hashtag,
+      view: 'explore_morsels',
+      //explicitly set false to avoid 'undefined' in mixpanel
+      promoted: promoted ? true : false
+    });
+  };
+
+  $scope.clickSearchResult = function() {
+    Mixpanel.track('Explore searched', {
+      view: 'explore_morsels',
+      explore_search_trigger: 'Clicked result',
+      search_term: $scope.morselSearch.model.query
+    });
   };
 });

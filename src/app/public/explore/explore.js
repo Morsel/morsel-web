@@ -14,7 +14,7 @@ angular.module( 'Morsel.public.explore', [])
   });
 })
 
-.controller( 'ExploreCtrl', function ExploreCtrl($scope, $state, ApiUsers, Auth){
+.controller( 'ExploreCtrl', function ExploreCtrl($scope, $state, ApiUsers, Auth, Mixpanel){
   //some search options
   $scope.search = {
     //time to debounce keystrokes
