@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.explore.morsels', [])
   });
 })
 
-.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, ApiMorsels, ApiKeywords, $state, $stateParams, $rootScope, $modal, $location){
+.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, $state){
   $scope.morselSearch = {
     exploreIncrement: MORSEL_LIST_NUMBER,
     customFocus: function() {
@@ -55,83 +55,3 @@ angular.module( 'Morsel.public.explore.morsels', [])
   //get our full explore feed
   $scope.loadDefaultMorsels();
 });
-
-/*
-  $scope.openHashtagOverlay = function(hashtag) {
-    $rootScope.modalInstance = $modal.open({
-      templateUrl: 'common/morsels/morselGridOverlay.tpl.html',
-      controller: HashtagModalInstanceCtrl,
-      size: 'lg',
-      resolve: {
-        hashtag: function () {
-          return hashtag;
-        }
-      }
-    });
-  };
-
-  HashtagModalInstanceCtrl = function ($scope, $modalInstance, MORSEL_LIST_NUMBER, hashtag) {
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
-
-    $scope.heading = '#'+hashtag.name;
-
-    $scope.emptyText = 'There are no morsels tagged #'+hashtag.name+'. <a href="/add" target="_self">Create one now</a>.';
-
-    $scope.viewMoreFunc = function() {
-      var morselsParams = {
-            count: MORSEL_LIST_NUMBER
-          };
-
-      //get the next page number
-      $scope.morselPageNumber = $scope.morselPageNumber ? $scope.morselPageNumber+1 : 1;
-      morselsParams.page = $scope.morselPageNumber;
-
-      ApiKeywords.getHashtagMorsels(hashtag.name, morselsParams).then(function(morselsData) {
-        if($scope.morsels) {
-          //concat them with new data after old data
-          $scope.morsels = $scope.morsels.concat(morselsData);
-        } else {
-          $scope.morsels = morselsData;
-        }
-      }, function() {
-        //if there's an error retrieving morsel data, go to 404
-        $state.go('404');
-      });
-    };
-
-    //load our morsels immediately
-    $scope.viewMoreFunc();
-  };
-  //we need to implicitly inject dependencies here, otherwise minification will botch them
-  HashtagModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'MORSEL_LIST_NUMBER', 'hashtag'];
-
-  $scope.openSearchResultOverlay = function() {
-    $rootScope.modalInstance = $modal.open({
-      templateUrl: 'common/morsels/morselGridOverlay.tpl.html',
-      controller: SearchResultModalInstanceCtrl,
-      size: 'lg',
-      resolve: {
-        query: function () {
-          return $scope.search.query;
-        }
-      }
-    });
-  };
-
-  SearchResultModalInstanceCtrl = function ($scope, $modalInstance, ApiMorsels, MORSEL_LIST_NUMBER, query) {
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
-    };
-
-    $scope.heading = 'Results for "'+query+'"';
-
-    $scope.emptyText = 'There are no morsels matching "'+query+'". <a href="/add" target="_self">Create one now</a>.';
-
-    
-  //we need to implicitly inject dependencies here, otherwise minification will botch them
-  SearchResultModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'ApiMorsels','MORSEL_LIST_NUMBER', 'query'];
-
-  
-*/
