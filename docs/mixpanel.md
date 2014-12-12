@@ -21,7 +21,7 @@ This is a table of all event names, properties and descriptions that are being t
 | Signup - Completed Step | User completes a part of the signup flow | signup_step | 11/6/2014 |
 | $signup | User completed final part of signup flow, used for retention. Synonymous with Signup - Completed Step:signup_step=final | | 11/6/2014 |
 | Clicked Masthead Button | User clicked the big button in the masthead | | 11/6/2014 |
-| Published Morsel | User successfully published a morsel |item_count, tagged_users_count, template_id, morsel_id, place_id, minutes_to_publish | 11/14/2014 |
+| Published Morsel | User successfully published a morsel |item_count, tagged_users_count, template_id, morsel_id, place_id, minutes_to_publish, has_summary | 11/14/2014 |
 
 ### Super Property List
 This is a table of all super properties (properties that are sent with every event) names and descriptions that are being tracked. It should be kept up to date whenever super properties are added/altered
@@ -57,3 +57,12 @@ This is a table of all property names and descriptions that are being tracked. I
 | template_id | Which template was used to make a morsel | numeric | 11/14/2014 |
 | place_id | The ID of a Morsel Place | numeric | 11/14/2014 |
 | minutes_to_publish | The time (in minutes) it took a morsel between creation and publish | numeric | 11/14/2014 |
+| has_summary | Whether a morsel has a summary | boolean | 12/12/2014 |
+
+### View List
+This is a table of all "views" that appear on the website. The "property name" column is what will appear in Mixpanel under the "view" property, on events that it is worthwhile to measure the view in which they occurred. Note that these are abstract "views" and don't necessarily correspond to states or URLs. It should be kept up to date whenever new "views" are added/altered
+
+| Property Name      | Description                  | Date Started |
+| ------------------ | ---------------------------- | ------------ |
+| morsel_details | The details page of a single morsel | 12/12/2014 |
+

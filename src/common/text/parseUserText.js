@@ -2,10 +2,10 @@ angular.module( 'Morsel.common.parseUserText', [] )
 .factory('ParseUserText', function() {
   var ParseUserText = {};
 
-  ParseUserText.hashtags = function(text, self) {
+  ParseUserText.hashtags = function(text) {
     if(text) {
-      return text.replace(/(^|\s)(#[a-z_\d]+)/ig, function($0,$1,$2,$3,$4,$5) {
-        return $1+'<a href="/hashtags/'+encodeURIComponent($2.slice(1))+(self ? 'target="_self"':'')+'">'+$2+'</a>';
+      return text.replace(/(^|\s)(#[a-z_\d]+)/ig, function($0,$1,$2) {
+        return $1+'<a href="/hashtags/'+encodeURIComponent($2.slice(1))+'">'+$2+'</a>';
       });
     } else {
       return null;

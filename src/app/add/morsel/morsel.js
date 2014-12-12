@@ -502,7 +502,8 @@ angular.module( 'Morsel.add.morsel', [])
         template_id: morselData.template_id,
         morsel_id: morselData.id,
         place_id : morselData.place_id,
-        minutes_to_publish : (new Date(morselData.published_at) - new Date(morselData.created_at))/60000
+        minutes_to_publish : (new Date(morselData.published_at) - new Date(morselData.created_at))/60000,
+        has_summary : morselData.summary ? true : false
       }, function() {
         //bring user to morsel detail
         //remove onbeforeunload so user doesn't get blocked going to morsel detail page

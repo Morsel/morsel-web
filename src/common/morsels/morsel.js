@@ -2,7 +2,7 @@ angular.module('Morsel.common.morsel', [])
 
 .constant('COVER_PHOTO_PERCENTAGE', 0.6)
 
-.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels, ApiUsers, ParseUserText) {
+.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels, ApiUsers, ParseUserText, $timeout, Mixpanel) {
   var //debounce on page resize/orientation change
       orientationChangeTime = 300;
 
@@ -137,6 +137,16 @@ angular.module('Morsel.common.morsel', [])
         winEl.unbind('orientationchange', onOrientationChange);
         winEl.unbind('resize', onOrientationChange);
       });
+
+      //delay this until directives render
+      $timeout(function(){
+        Mixpanel.track_links('#morsel-summary a', 'Clicked Hashtag', function(el){
+          return {
+            hashtag: el.innerHTML,
+            view: 'morsel_details'
+          };
+        });
+      },0);
     },
     templateUrl: 'common/morsels/morsel.tpl.html'
   };
