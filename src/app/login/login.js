@@ -21,7 +21,6 @@ angular.module( 'Morsel.login', [
   'Morsel.common.checklist',
   'Morsel.common.connectFacebook',
   'Morsel.common.connectTwitter',
-  'Morsel.common.cuisinesSpecialties',
   'Morsel.common.facebookApi',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',

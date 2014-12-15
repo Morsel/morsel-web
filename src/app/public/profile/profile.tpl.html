@@ -47,33 +47,6 @@
         <tab heading="Places" select="loadPlaces()" bo-show="isProfessional">
           <div class="profile-tab-content" mrsl-place-list="userPlaces" mrsl-place-list-empty="'This user isn\'t associated with any places'"></div>
         </tab>
-        <tab heading="Tags" select="loadTags()" bo-show="isProfessional">
-          <div class="user-tags col-sm-6">
-            <span class="h5">Cuisines:</span>
-            <ul>
-              <li ng-if="cuisines.length === 0">
-                <span bo-if="!canEdit" class="user-tags-empty">None selected</span>
-                <a bo-if="canEdit" href="/account/edit-profile" target="_self"><span>&#43;</span> Add</a>
-              </li>
-              <li ng-repeat="cuisine in cuisines" >
-                <a mrsl-cuisine-users mrsl-cuisine="cuisine"></a>{{$last ? '':','}}
-              </li>
-            </ul>
-          </div>
-          <div class="user-tags col-sm-6">
-            <span class="h5">Specialties:</span>
-            <ul>
-              <li ng-if="specialties.length === 0">
-                <span bo-if="!canEdit" class="user-tags-empty">None selected</span>
-                <a bo-if="canEdit" href="/account/edit-profile" target="_self"><span>&#43;</span> Add</a>
-              </li>
-              <li ng-repeat="specialty in specialties">
-                <a mrsl-specialty-users mrsl-specialty="specialty"></a>{{$last ? '':','}}
-              </li>
-            </ul>
-          </div>
-          <div ng-if="!specialties && !cuisines" class="loader"></div>
-        </tab>
         <tab heading="Likes" select="loadLikeFeed()">
           <div class="profile-tab-content" mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>
         </tab>

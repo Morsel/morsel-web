@@ -113,20 +113,6 @@ angular.module( 'Morsel.public.profile', [])
     }
   };
 
-  $scope.loadTags = function() {
-    if(!$scope.cuisines) {
-      ApiUsers.getCuisines($scope.user.id).then(function(cuisineResp) {
-        $scope.cuisines = cuisineResp.data;
-      });
-    }
-    
-    if(!$scope.specialties) {
-      ApiUsers.getSpecialties($scope.user.id).then(function(specialtyResp) {
-        $scope.specialties = specialtyResp.data;
-      });
-    }
-  };
-
   $scope.loadLikeFeed = function() {
     if(!$scope.likeFeed) {
       ApiUsers.getLikeables($scope.user.id, 'Morsel').then(function(likeableResp){
