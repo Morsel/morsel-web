@@ -407,5 +407,17 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
+  Users.getCollections = function(userId) {
+    var deferred = $q.defer();
+
+    Restangular.one('users', userId).one('collections').get().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Users;
 });

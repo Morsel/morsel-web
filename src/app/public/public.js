@@ -13,6 +13,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.reverse',
   'Morsel.common.nameMatch',
   //API
+  'Morsel.common.apiCollections',
   'Morsel.common.apiFeed',
   'Morsel.common.apiItems',
   'Morsel.common.apiKeywords',
@@ -31,6 +32,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.comments',
   'Morsel.common.cuisineUsers',
   'Morsel.common.facebookApi',
+  'Morsel.common.focusMe',
   'Morsel.common.follow',
   'Morsel.common.followedUsers',
   'Morsel.common.followers',
