@@ -20,7 +20,7 @@ angular.module( 'Morsel.common.morselLike', [] )
         if(AfterLogin.hasCallback('like')) {
           afterLoginCallback = AfterLogin.getCallback();
 
-          //make sure it's the right item
+          //make sure it's the right morsel
           if(afterLoginCallback.data && (afterLoginCallback.data.morselId === scope.morsel.id)) {
             //make sure we're actually loggeed in just in case
             if(isLoggedIn) {
