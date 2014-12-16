@@ -131,13 +131,26 @@ angular.module( 'Morsel.public.profile', [])
   $scope.getMorsels();
 })
 
-.controller( 'ProfileCollectionsCtrl', function ProfileCollectionsCtrl( $scope, ApiUsers) {
+.controller( 'ProfileCollectionsCtrl', function ProfileCollectionsCtrl( $scope, ApiUsers, MORSEL_LIST_NUMBER) {
+  $scope.collectionsIncrement = MORSEL_LIST_NUMBER;
+
   $scope.loadCollections = function() {
-    if(!$scope.userCollections) {
-      ApiUsers.getCollections($scope.user.id).then(function(collectionsResp){
+    var collectionsParams = {
+          count: $scope.collectionsIncrement
+        };
+
+    //get the next page number
+    $scope.collectionsPageNumber = $scope.collectionsPageNumber ? $scope.collectionsPageNumber+1 : 1;
+    collectionsParams.page = $scope.collectionsPageNumber;
+
+    ApiUsers.getCollections($scope.user.id, collectionsParams).then(function(collectionsResp){
+      if($scope.userCollections) {
+        //concat them with new data after old data
+        $scope.userCollections = $scope.userCollections.concat(collectionsResp.data);
+      } else {
         $scope.userCollections = collectionsResp.data;
-      });
-    }
+      }
+    });
   };
 
   $scope.loadCollections();

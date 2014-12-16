@@ -363,6 +363,11 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       publicApp.renderPublicPage(res);
     });
 
+    //collection details
+    app.get('/:username/collections/:collectionIdSlug', function(req, res) {
+      publicApp.renderPublicPage(res);
+    });
+
     //morsel detail with post id/slug
     app.get('/:username/:postidslug', function(req, res){
       publicApp.renderMorselPage(req, res);

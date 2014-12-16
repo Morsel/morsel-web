@@ -1,0 +1,26 @@
+<div bindonce="user" class="profile user-profile header-padding collection-detail" ng-style="viewOptions.minimumMainHeight()">
+  <div class="container container-shadow container-no-padding morsel-bg">
+    <div class="profile-container header-padding">
+      <div class="user-info">
+        <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-xs" ng-if="!blankLinks"></div>
+        <div class="user-body">
+          <h5 class="user-info-main overflow-ellipsis">
+            <a bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user"></a>
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="row no-gutter">
+        <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in morsels">
+          <div mrsl-morsel-block="morsel" mrsl-morsel-block-spacer="true"></div>
+        </div>
+      </div>
+      <div ng-if="!morsels" class="loader"></div>
+      <div mrsl-view-more mrsl-view-more-func="loadCollectionMorsels" mrsl-view-more-data="morsels" mrsl-view-more-inc="collectionsIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+      <div ng-if="morsels && morsels.length === 0" class="empty-state">
+        <p>This collection has no morsels</p>
+      </div>
+    </div>
+  </div>
+</div>
