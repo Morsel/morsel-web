@@ -32,10 +32,12 @@
     <div>
       <tabset bo-class="{'professional-tabs':isProfessional}">
         <tab heading="Morsels" ui-sref="profile.morsels" ui-sref-active="active"></tab>
+        <tab heading="Collections" ui-sref="profile.collections" ui-sref-active="active"></tab>
         <tab heading="Places" ui-sref="profile.places" ui-sref-active="active" bo-show="isProfessional"></tab>
         <tab heading="Likes" ui-sref="profile.likes" ui-sref-active="active"></tab>
       </tabset>
       <div ui-view="morsels-tab" class="tab-content" ng-show="$state.is('profile.morsels')"></div>
+      <div ui-view="collections-tab" class="tab-content" ng-show="$state.is('profile.collections')"></div>
       <div ui-view="places-tab" class="tab-content" ng-show="$state.is('profile.places')"></div>
       <div ui-view="likes-tab" class="tab-content" ng-show="$state.is('profile.likes')"></div>
     </div>

@@ -35,6 +35,15 @@ angular.module( 'Morsel.public.profile', [])
       }
     },
     sticky: true
+  }).state('profile.collections', {
+    url: '/collections',
+    views: {
+      "collections-tab": {
+        controller: 'ProfileCollectionsCtrl',
+        templateUrl: 'app/public/profile/collections.tpl.html'
+      }
+    },
+    sticky: true
   }).state('profile.places', {
     url: '/places',
     views: {
@@ -120,6 +129,18 @@ angular.module( 'Morsel.public.profile', [])
 
   //load our morsels
   $scope.getMorsels();
+})
+
+.controller( 'ProfileCollectionsCtrl', function ProfileCollectionsCtrl( $scope, ApiUsers) {
+  $scope.loadCollections = function() {
+    if(!$scope.userCollections) {
+      ApiUsers.getCollections($scope.user.id).then(function(collectionsResp){
+        $scope.userCollections = collectionsResp.data;
+      });
+    }
+  };
+
+  $scope.loadCollections();
 })
 
 .controller( 'ProfilePlacesCtrl', function ProfilePlacesCtrl( $scope, ApiUsers) {
