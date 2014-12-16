@@ -1,6 +1,7 @@
 angular.module( 'Morsel.public', [
   //libs
   'angularMoment',
+  'ct.ui.router.extras',
   'duScroll',
   'LocalStorageModule',
   'ngSanitize',

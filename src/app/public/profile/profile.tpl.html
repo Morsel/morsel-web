@@ -31,26 +31,13 @@
     </div>
     <div>
       <tabset bo-class="{'professional-tabs':isProfessional}">
-        <tab heading="Morsels">
-          <div class="row no-gutter">
-            <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in morsels | reverse">
-              <div mrsl-morsel-block="morsel" mrsl-morsel-block-spacer="true"></div>
-            </div>
-          </div>
-          <div ng-if="!morsels" class="loader"></div>
-          <div mrsl-view-more mrsl-view-more-func="getMorsels" mrsl-view-more-data="morsels" mrsl-view-more-inc="morselIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-btn="true"></div>
-          <div ng-if="morsels && morsels.length === 0" class="empty-state">
-            <p bo-if="!canEdit">This user hasn't made any morsels yet</p>
-            <p bo-if="canEdit">You haven't made any morsels yet. <a href="/add" target="_self">Create one now</a>.</p>
-          </div>
-        </tab>
-        <tab heading="Places" select="loadPlaces()" bo-show="isProfessional">
-          <div class="profile-tab-content" mrsl-place-list="userPlaces" mrsl-place-list-empty="'This user isn\'t associated with any places'"></div>
-        </tab>
-        <tab heading="Likes" select="loadLikeFeed()">
-          <div class="profile-tab-content" mrsl-likeable-feed="likeFeed" mrsl-likeable-feed-user="user"></div>
-        </tab>
+        <tab heading="Morsels" ui-sref="profile.morsels" ui-sref-active="active"></tab>
+        <tab heading="Places" ui-sref="profile.places" ui-sref-active="active" bo-show="isProfessional"></tab>
+        <tab heading="Likes" ui-sref="profile.likes" ui-sref-active="active"></tab>
       </tabset>
+      <div ui-view="morsels-tab" class="tab-content" ng-show="$state.is('profile.morsels')"></div>
+      <div ui-view="places-tab" class="tab-content" ng-show="$state.is('profile.places')"></div>
+      <div ui-view="likes-tab" class="tab-content" ng-show="$state.is('profile.likes')"></div>
     </div>
   </div>
 </div>
