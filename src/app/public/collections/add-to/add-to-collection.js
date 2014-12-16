@@ -67,8 +67,11 @@ angular.module( 'Morsel.public.collections.addToCollection', [] )
       };
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, ApiUsers, currentUser, morsel) {
-        //model
+        //select model
         $scope.collections = {};
+
+        //new collection model
+        $scope.newCollection = {};
 
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
@@ -96,10 +99,11 @@ angular.module( 'Morsel.public.collections.addToCollection', [] )
           var collectionParams;
 
           if($scope.addingNewCollection) {
-            if($scope.collections.newCollectionTitle && $scope.collections.newCollectionTitle.length > 0) {
+            if($scope.newCollection.title && $scope.newCollection.title.length > 0) {
               collectionParams = {
                 collection: {
-                  title: $scope.collections.newCollectionTitle
+                  title: $scope.newCollection.title,
+                  description: $scope.newCollection.description
                 }
               };
 
