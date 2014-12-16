@@ -58,6 +58,13 @@
                   <a href="/add/drafts" target="_self">Drafts</a>
                   {{/if}}
                 </li>
+                <li ng-class="{active:$uiRoute}">
+                  {{#if pageType.public}}
+                  <a ng-href="/\{{currentUser.username.toLowerCase()}}/collections">Collections</a>
+                  {{else}}
+                  <a ng-href="/\{{currentUser.username.toLowerCase()}}/collections" target="_self">Collections</a>
+                  {{/if}}
+                </li>
                 <li ui-route="/notifications" ng-class="{active:$uiRoute}">
                   {{#if pageType.public}}
                   <a href="/notifications">Notifications</a>
