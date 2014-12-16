@@ -1,17 +1,22 @@
-<div class="profile user-profile header-padding collection-detail" ng-style="viewOptions.minimumMainHeight()">
+<div class="profile user-profile collection-detail header-padding" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow container-no-padding morsel-bg">
-    <div class="profile-container header-padding" bindonce="collection">
-      <h1 class="h2" bo-text="collection.title"></h1>
-      <div class="user-info" bindonce="user">
-        <h5 class="user-info-main overflow-ellipsis">
-          <a bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user" class="user-by"></a>
-        </h5>
+    <div class="profile-container header-padding" >
+      <div ng-show="alertMessage" class="alert alert-{{alertType}}">
+        <p ng-bind-html="alertMessage"></p>
       </div>
-      <div>
-        <button ng-if="canEdit" title="Edit this collection" class="btn btn-link btn-xs">Edit this collection</button>
+      <div class="profile-info" ng-hide="collectionDeleted">
+        <h1 class="h2" ng-bind="collection.title"></h1>
+        <div class="user-info">
+          <h5 class="user-info-main overflow-ellipsis">
+            <a ng-href="/{{collection.creator.username.toLowerCase()}}" mrsl-users-name="collection.creator" class="user-by"></a>
+          </h5>
+        </div>
+        <div>
+          <button ng-if="canEdit" mrsl-edit-collection="collection"></button>
+        </div>
       </div>
     </div>
-    <div>
+    <div ng-hide="collectionDeleted">
       <div class="row no-gutter">
         <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in morsels">
           <div mrsl-morsel-block="morsel" mrsl-morsel-block-spacer="true"></div>

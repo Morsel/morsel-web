@@ -29,6 +29,30 @@ angular.module( 'Morsel.common.apiCollections', [] )
     return deferred.promise;
   };
 
+  Collections.updateCollection = function(collectionId, collectionData) {
+    var deferred = $q.defer();
+
+    Restangular.one('collections', collectionId).customPUT(collectionData).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Collections.deleteCollection = function(collectionId) {
+    var deferred = $q.defer();
+
+    Restangular.one('collections', collectionId).remove().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   Collections.getCollectionMorsels = function(collectionId, collectionMorselsParams) {
     var deferred = $q.defer();
 

@@ -10,14 +10,9 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
       }
     },
     resolve: {
-      //get the user data of the profile before we try to render the page
-      profileUserData: function(ApiUsers, $stateParams, $state) {
-        return ApiUsers.getUser($stateParams.username).then(function(userResp) {
-          return userResp.data;
-        }, function() {
-          //if there's an error retrieving user data (bad username?), send to 404
-          $state.go('404');
-        });
+      //get current user data before displaying so we don't run into odd situations of trying to perform user actions before user is loaded
+      currentUser: function(Auth) {
+        return Auth.getCurrentUserPromise();
       },
       collection: function($location, $stateParams, ApiCollections) {
         var username = $stateParams.username.toLowerCase(),
@@ -27,11 +22,13 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
         //check and make sure we pulled an idslug from the URL
         if(collectionIdSlug && username) {
           return ApiCollections.getCollection(collectionIdSlug).then(function(collectionResp){
-            if (collectionResp) {
-              return collectionResp.data;
-            } else {
+            var collectionData = collectionResp.data;
+
+            if (username != collectionData.creator.username.toLowerCase()) {
               //this isn't a valid collection for this user
               $location.path('/'+username+'/collections');
+            } else {
+              return collectionData;
             }
           }, function() {
             //if there's an error retrieving collection data (bad id?), go to collections for now
@@ -46,14 +43,12 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
   });
 })
 
-.controller( 'CollectionDetailCtrl', function CollectionDetailCtrl( $scope, profileUserData, collection, ApiCollections, $location, MORSEL_LIST_NUMBER ) {
-  $scope.user = profileUserData;
+.controller( 'CollectionDetailCtrl', function CollectionDetailCtrl( $scope, collection, ApiCollections, $location, MORSEL_LIST_NUMBER, currentUser, $sce ) {
   $scope.collection = collection;
+  $scope.currentUser = currentUser;
 
-  //make sure the collection belongs to the right user
-  if($scope.user.id != $scope.collection.user_id) {
-    $location.path('/'+$scope.user.username+'/collections');
-  } else {
+  //see if this is our collection
+  if($scope.collection.creator.id === $scope.currentUser.id) {
     $scope.canEdit = true;
   }
 
@@ -77,6 +72,15 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
       }
     });
   };
+
+  $scope.$on('collection.delete', function(e, collectionId) {
+    //double check
+    if(collectionId === $scope.collection.id) {
+      $scope.collectionDeleted = true;
+      $scope.alertMessage = $sce.trustAsHtml('Your collection has been successfully deleted. Click <a href="/'+$scope.currentUser.username+'/collections">here</a> to return to your collections.');
+      $scope.alertType = 'success';
+    }
+  });
 
   $scope.loadCollectionMorsels();
 });
