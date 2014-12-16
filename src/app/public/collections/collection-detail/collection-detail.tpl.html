@@ -1,13 +1,14 @@
-<div bindonce="user" class="profile user-profile header-padding collection-detail" ng-style="viewOptions.minimumMainHeight()">
+<div class="profile user-profile header-padding collection-detail" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow container-no-padding morsel-bg">
-    <div class="profile-container header-padding">
-      <div class="user-info">
-        <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-xs" ng-if="!blankLinks"></div>
-        <div class="user-body">
-          <h5 class="user-info-main overflow-ellipsis">
-            <a bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user"></a>
-          </h5>
-        </div>
+    <div class="profile-container header-padding" bindonce="collection">
+      <h1 class="h2" bo-text="collection.title"></h1>
+      <div class="user-info" bindonce="user">
+        <h5 class="user-info-main overflow-ellipsis">
+          <a bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user" class="user-by"></a>
+        </h5>
+      </div>
+      <div>
+        <button ng-if="canEdit" title="Edit this collection" class="btn btn-link btn-xs">Edit this collection</button>
       </div>
     </div>
     <div>
