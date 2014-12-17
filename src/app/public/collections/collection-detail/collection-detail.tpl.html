@@ -1,10 +1,7 @@
 <div class="profile user-profile collection-detail header-padding" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow container-no-padding morsel-bg">
-    <div class="profile-container header-padding" >
-      <div ng-show="alertMessage" class="alert alert-{{alertType}}">
-        <p ng-bind-html="alertMessage"></p>
-      </div>
-      <div class="profile-info" ng-hide="collectionDeleted">
+    <div class="profile-container header-padding" ng-hide="collectionDeleted">
+      <div class="profile-info">
         <h1 class="h2" ng-bind="collection.title"></h1>
         <h2 class="h6" ng-bind="collection.description" ng-if="collection.description"></h2>
         <div class="user-info">
@@ -17,10 +14,17 @@
         </div>
       </div>
     </div>
-    <div ng-hide="collectionDeleted">
+    <div ng-show="alertMessage" class="alert alert-{{alertType}}">
+      <p ng-bind-html="alertMessage"></p>
+    </div>
+    <div ng-hide="collectionDeleted" class="collection-morsels" ng-class="{'owns-collection':canEdit}">
       <div class="row no-gutter">
         <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in morsels">
-          <div mrsl-morsel-block="morsel" mrsl-morsel-block-spacer="true"></div>
+          <div ng-if="canEdit" class="morsel-block-wrap" ng-class="{'removed':morsel.removed}">
+            <button type="button" class="btn btn-link btn-block remove-from-collection-btn" ng-click="removeFromCollection(morsel.id)">Remove from collection</button>
+            <div mrsl-morsel-block="morsel" mrsl-morsel-block-spacer="true"></div>
+          </div>
+          <div ng-if="!canEdit" mrsl-morsel-block="morsel" mrsl-morsel-block-spacer="true"></div>
         </div>
       </div>
       <div ng-if="!morsels" class="loader"></div>

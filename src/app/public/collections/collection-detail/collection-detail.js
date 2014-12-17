@@ -43,7 +43,7 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
   });
 })
 
-.controller( 'CollectionDetailCtrl', function CollectionDetailCtrl( $scope, collection, ApiCollections, $location, MORSEL_LIST_NUMBER, currentUser, $sce ) {
+.controller( 'CollectionDetailCtrl', function CollectionDetailCtrl( $scope, collection, ApiCollections, $location, MORSEL_LIST_NUMBER, currentUser, $sce, ApiMorsels, $timeout ) {
   $scope.collection = collection;
   $scope.currentUser = currentUser;
 
@@ -83,4 +83,34 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
   });
 
   $scope.loadCollectionMorsels();
+
+  $scope.removeFromCollection = function(morselId){
+    var confirmed = confirm('Are you sure you want to remove this morsel from this collection?');
+
+    if(confirmed) {
+      ApiMorsels.removeFromCollection(morselId, $scope.collection.id).then(function(resp){
+        //don't actually remove it from the model because it'll mess up pagination
+        var removedMorsel = _.find($scope.morsels, function(m){
+              return m.id === morselId;
+            });
+
+        //set a flag to display in view
+        removedMorsel.removed = true;
+
+        //alert users
+        showMorselRemovalAlert('success', 'Morsel successfully removed from collection');
+      }, function(resp) {
+        showMorselRemovalAlert('danger', 'There was a problem removing the morsel from this collection');
+      });
+    }
+  };
+
+  function showMorselRemovalAlert(type, message) {
+    $scope.alertMessage = $sce.trustAsHtml(message);
+    $scope.alertType = type;
+    //remove error alert after a bit
+    $timeout(function(){
+      $scope.alertMessage = false;
+    }, 8000);
+  }
 });

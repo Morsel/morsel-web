@@ -213,5 +213,19 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return deferred.promise;
   };
 
+  Morsels.removeFromCollection = function(morselId, collectionId) {
+    var deferred = $q.defer();
+    
+    Restangular.one('morsels', morselId).one('collect').remove({
+      collection_id: collectionId
+    }).then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
   return Morsels;
 });

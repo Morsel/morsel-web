@@ -6,4 +6,84 @@
       display: inline-block;
     }
   }
+
+  .alert {
+    margin: 15px;
+  }
+
+  .collection-morsels {
+    padding-bottom: 15px;
+
+    &.owns-collection {
+      .morsel-block-wrap {
+        padding-bottom: 15px;
+        border-bottom: 1px solid $morsel-light;
+      }
+    }
+  }
+
+  .morsel-block-wrap {
+    &.removed {
+      .morsel-block {
+        @include opacity(.2);
+      }
+
+      .remove-from-collection-btn {
+        visibility: hidden;
+      }
+
+      &:after {
+        content: 'This morsel has been removed from the collection';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        color: $morsel-medium;
+        padding: 150px 30px 0;
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-sm-min) {
+  .collection-detail {
+    .collection-morsels {
+      &.owns-collection {
+        .morsel-block-wrap {
+          padding-bottom: 0;
+          border-bottom: none;
+
+          &.removed {
+            &:after {
+              padding-top: 130px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $screen-md-min) {
+  .collection-detail {
+    .collection-morsels {
+      &.owns-collection {
+        .morsel-block-wrap {
+          .remove-from-collection-btn {
+            @include transition(opacity .1s ease-in-out);
+            @include opacity(0);
+          }
+
+          &:hover {
+            .remove-from-collection-btn {
+              @include opacity(1);
+            }
+          }
+        }
+      }
+    }
+  }
 }
