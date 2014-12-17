@@ -145,6 +145,6 @@ angular.module( 'Morsel.public.collections.addToCollection', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'ApiUsers', 'currentUser', 'morsel'];
     },
-    template: '<button type="button" ng-click="beginAddToCollection()" class="btn btn-xs btn-link" ng-attr-title="Add to Collection"><i class="common-like-filled"></i></button>'
+    template: '<button type="button" ng-click="beginAddToCollection()" class="btn btn-xs btn-link" title="Add to Collection"><i class="common-add-to-collection"></i></button>'
   };
 });
