@@ -68,6 +68,7 @@ angular.module( 'Morsel.public', [
   'Morsel.public.collections.collectionBlock',
   'Morsel.public.collections.collectionDetail',
   'Morsel.public.collections.editCollection',
+  'Morsel.public.collections.newCollection',
   'Morsel.public.contact',
   'Morsel.public.eventMorsels',
   'Morsel.public.explore',

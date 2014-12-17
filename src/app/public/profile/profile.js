@@ -70,6 +70,7 @@ angular.module( 'Morsel.public.profile', [])
 
   $scope.user = profileUserData;
   $scope.isProfessional = $scope.user.professional;
+  $scope.currentUser = currentUser;
   $scope.canEdit = $scope.user.id === currentUser.id;
   $scope.$state = $state;
 
