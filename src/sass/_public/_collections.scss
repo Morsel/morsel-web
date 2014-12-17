@@ -1,3 +1,6 @@
+$collection-block-cover-photo-margin: 1px;
+$collection-block-border-radius: 5px;
+
 .collection-detail {
   .profile-container {
     text-align: center;
@@ -48,6 +51,65 @@
   }
 }
 
+.collection-block {
+  border-bottom: 1px solid $morsel-light;
+  overflow: auto;
+
+  & > a {
+    margin: 15px auto;
+    background-color: $morsel-new-beige;
+    text-align: center;
+    @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.2));
+    display: block;
+    width: $item-photo-sm*2+$collection-block-cover-photo-margin*4;
+    @include border-radius($collection-block-border-radius);
+
+    .collection-info {
+      padding: 10px;
+    }
+
+    .collection-title {
+      font-size: 16px;
+    }
+
+    &:hover {
+      background-color: $morsel-light-off;
+      @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.4));
+
+      .collection-title {
+        color: $link-hover-color;
+      }
+    }
+  }
+
+  .cover-photos {
+    height: $item-photo-sm*2+$collection-block-cover-photo-margin*4;
+    width: $item-photo-sm*2+$collection-block-cover-photo-margin*4;
+    list-style: none;
+    margin: 0 auto;
+    text-align: left;
+
+    li {
+      float: left;
+      height: $item-photo-sm+px;
+      width: $item-photo-sm+px;
+      margin: $collection-block-cover-photo-margin;
+
+      &:first-child {
+        img {
+          @include border-top-left-radius($collection-block-border-radius);
+        }
+      }
+
+      &:nth-child(2) {
+        img {
+          @include border-top-right-radius($collection-block-border-radius);
+        }
+      }
+    }
+  }
+}
+
 @media (min-width: $screen-sm-min) {
   .collection-detail {
     .collection-morsels {
@@ -64,6 +126,10 @@
         }
       }
     }
+  }
+
+  .collection-block {
+    border-bottom: none;
   }
 }
 

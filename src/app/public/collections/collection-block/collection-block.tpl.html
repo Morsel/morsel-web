@@ -1,22 +1,16 @@
 <div bindonce="collection" class="collection-block morsel-bg using-spacer">
-  <p bo-text="collection.title"></p>
-  <!--<div class="morsel-info">
-    <h1 class="h2 morsel-block-title">
-      <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+ (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" bo-text="morsel.title" class="white-link"></a>
-    </h1>
-    <h2 class="h3 morsel-block-creator">
-      <a bo-href="'/'+morsel.creator.username.toLowerCase()" mrsl-users-name="morsel.creator" class="white-link overflow-ellipsis user-by"></a>
-    </h2>
-    <div class="morsel-info-bottom" ng-class="{'featured-or-tagged':morsel.featured || morsel.tagged_users_count}">
-      <span bo-if="morsel.featured" class="morsel-featured"><i class="common-featured_shadow"></i> Featured</span>
-      <span bo-if="morsel.tagged_users_count" class="morsel-tagged-count">
-        <i class="common-users-filled_shadow"></i><a mrsl-tagged-user-list="morsel"></a>
-      </span>
-      <h3 class="h6 morsel-block-place" ng-if="morsel.place">
-        <a bo-href="'/places/'+morsel.place.id+'-'+morsel.place.slug" bo-text="morsel.place.name" class="white-link overflow-ellipsis"></a>
-      </h3>
+  <a bo-href="'/'+collection.creator.username.toLowerCase()+'/collections/'+collection.id+'-'+collection.slug">
+    <ul class="cover-photos">
+      <li ng-repeat="morsel in collection.primary_morsels" class="loader">
+        <img ng-src="{{morsel.primary_item_photos._100x100}}"/>
+      </li>
+      <li ng-repeat="i in getFillerCoverPhotos(collection.primary_morsels.length) track by $index" class="loader">
+        <img ng-src="{{MORSELPLACEHOLDER}}"/>
+      </li>
+    </ul>
+    <div class="collection-info">
+      <h2 bo-text="collection.title" class="h5 collection-title overflow-ellipsis"></h2>
+      <p></p>
     </div>
-  </div>
-  <a bo-href="'/'+morsel.creator.username.toLowerCase()+'/'+morsel.id+'-'+morsel.slug+ (morselFeedItemId ? +'?source=feed&feedId='+morselFeedItemId : '')" mrsl-responsive-images="{{getCoverPhotoArray()}}" mrsl-ri-image-type="background" class="morsel-img"></a>
-  <img src="/assets/images/utility/spacer.png" class="spacer loader" ng-if="spacer" />-->
+  </a>
 </div>
