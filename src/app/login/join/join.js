@@ -197,13 +197,13 @@ angular.module( 'Morsel.login.join', [])
       //cancel the timeout
       $timeout.cancel(mixpanelTimeout);
       //proceed signup
-      leaveSignup(resp.professional);
+      $scope.finishedSignup();
     });
 
     //set a timeout in case mixpanel calls don't all resolve, don't want to block user signup because of mixpanel
     mixpanelTimeout = $timeout(function() {
       //proceed signup
-      leaveSignup(resp.professional);
+      $scope.finishedSignup();
     }, 5000);
 
     //set up mixpanel people profile
@@ -244,23 +244,4 @@ angular.module( 'Morsel.login.join', [])
   function setRemotePhotoUrl(url) {
     $scope.remotePhotoUrl = url;
   }
-
-  function leaveSignup(isPro) {
-    //if successfully joined send to the next step
-    if(isPro) {
-      //pros need more info
-      $state.go('auth.join.additionalInfo');
-    } else {
-      //they're done
-      $scope.finishedSignup();
-    }
-  }
-})
-
-.controller( 'AdditionalInfoCtrl', function AdditionalInfoCtrl( $scope ) {
-  //skip cuisines and specialties
-  $scope.skipCS = function() {
-    //they're done
-    $scope.finishedSignup();
-  };
 });

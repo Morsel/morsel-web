@@ -361,6 +361,26 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       publicApp.renderEventPage(res, req.params.collectionslug);
     });
 
+    //profile page likes
+    app.get('/:username/likes', function(req, res) {
+      publicApp.renderPublicPage(res);
+    });
+
+    //profile page places
+    app.get('/:username/places', function(req, res) {
+      publicApp.renderPublicPage(res);
+    });
+
+    //profile page collections
+    app.get('/:username/collections', function(req, res) {
+      publicApp.renderPublicPage(res);
+    });
+
+    //collection details
+    app.get('/:username/collections/:collectionIdSlug', function(req, res) {
+      publicApp.renderCollectionPage(req, res);
+    });
+
     //morsel detail with post id/slug
     app.get('/:username/:postidslug', function(req, res){
       publicApp.renderMorselPage(req, res);

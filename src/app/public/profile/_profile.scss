@@ -18,14 +18,15 @@
       padding: 0 10px;
 
       div {
-        color: $morsel-primary;
+        color: $link-color;
         margin: 0;
 
         &:hover {
           cursor: pointer;
+          color: $link-hover-color;
 
           span {
-            color: $morsel-primary;
+            color: $link-hover-color;
           }
         }
       }

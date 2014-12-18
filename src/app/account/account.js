@@ -24,7 +24,6 @@ angular.module( 'Morsel.account', [
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
   'Morsel.common.checklist',
-  'Morsel.common.cuisinesSpecialties',
   'Morsel.common.facebookApi',
   'Morsel.common.formNameFix',
   'Morsel.common.ga',
@@ -42,7 +41,6 @@ angular.module( 'Morsel.account', [
   //app
   'Morsel.account.accountSettings',
   'Morsel.account.body',
-  'Morsel.account.cuisinesSpecialties',
   'Morsel.account.editProfile',
   'Morsel.account.places',
   'Morsel.account.socialAccounts'

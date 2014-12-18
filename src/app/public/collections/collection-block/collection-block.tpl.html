@@ -1,0 +1,16 @@
+<div bindonce="collection" class="collection-block morsel-bg using-spacer">
+  <a bo-href="'/'+collection.creator.username.toLowerCase()+'/collections/'+collection.id+'-'+collection.slug">
+    <ul class="cover-photos">
+      <li ng-repeat="morsel in collection.primary_morsels" class="loader">
+        <img ng-src="{{morsel.primary_item_photos._100x100}}"/>
+      </li>
+      <li ng-repeat="i in getFillerCoverPhotos(collection.primary_morsels.length) track by $index" class="loader">
+        <img ng-src="{{MORSELPLACEHOLDER}}"/>
+      </li>
+    </ul>
+    <div class="collection-info">
+      <h2 bo-text="collection.title" class="h5 collection-title overflow-ellipsis"></h2>
+      <p></p>
+    </div>
+  </a>
+</div>

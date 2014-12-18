@@ -14,6 +14,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.reverse',
   'Morsel.common.nameMatch',
   //API
+  'Morsel.common.apiCollections',
   'Morsel.common.apiFeed',
   'Morsel.common.apiItems',
   'Morsel.common.apiKeywords',
@@ -30,8 +31,8 @@ angular.module( 'Morsel.public', [
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
   'Morsel.common.comments',
-  'Morsel.common.cuisineUsers',
   'Morsel.common.facebookApi',
+  'Morsel.common.focusMe',
   'Morsel.common.follow',
   'Morsel.common.followedUsers',
   'Morsel.common.followers',
@@ -56,7 +57,6 @@ angular.module( 'Morsel.public', [
   'Morsel.common.responsiveImages',
   'Morsel.common.rollbar',
   'Morsel.common.socialSharing',
-  'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
   'Morsel.common.truncate',
   'Morsel.common.userImage',
@@ -66,6 +66,11 @@ angular.module( 'Morsel.public', [
   'Morsel.common.viewMore',
   //app
   'Morsel.public.activity',
+  'Morsel.public.collections.addToCollection',
+  'Morsel.public.collections.collectionBlock',
+  'Morsel.public.collections.collectionDetail',
+  'Morsel.public.collections.editCollection',
+  'Morsel.public.collections.newCollection',
   'Morsel.public.contact',
   'Morsel.public.eventMorsels',
   'Morsel.public.explore',
@@ -101,7 +106,7 @@ angular.module( 'Morsel.public', [
 .constant('USER_LIST_NUMBER', 20)
 .constant('USER_UPDATE_CHECK_TIME', 5000)
 .constant('COMMENT_LIST_NUMBER', 10)
-.constant('MORSEL_LIST_NUMBER', 12)
+.constant('MORSEL_LIST_NUMBER', 2)
 
 // Default queries
 .value('presetMediaQueries', {

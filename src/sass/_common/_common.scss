@@ -170,6 +170,23 @@ img {
   &:before {
     content: 'by ';
     font-style: normal;
+    color: $morsel-medium;
+  }
+
+  &.white-link {
+    &:after {
+      &:before {
+        color: white;
+      }
+    }
+  }
+
+  &.dark-link {
+    &:after {
+      &:before {
+        color: $morsel-dark;
+      }
+    }
   }
 }
 
