@@ -1,8 +1,8 @@
 <div class="row no-gutter collections-tab">
-  <div ng-if="canEdit" class="col-sm-4 col-md-3">
+  <div ng-if="canEdit" class="col-xs-6 col-sm-4 col-md-3">
     <button mrsl-new-collection></button>
   </div>
-  <div class="col-sm-4 col-md-3" bindonce ng-repeat="collection in userCollections">
+  <div class="col-xs-6 col-sm-4 col-md-3" bindonce ng-repeat="collection in userCollections">
     <div mrsl-collection-block="collection"></div>
   </div>
 </div>

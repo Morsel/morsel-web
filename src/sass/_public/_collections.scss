@@ -2,7 +2,7 @@ $collection-block-cover-photo-margin: 1px;
 $collection-block-border-radius: 5px;
 $collection-block-info-height: 60px;
 $collection-block-width: $item-photo-sm*2+$collection-block-cover-photo-margin*4;
-$collection-block-margin: 15px auto;
+$collection-block-padding: 15px;
 
 .collection-detail {
   .profile-container {
@@ -23,7 +23,6 @@ $collection-block-margin: 15px auto;
     &.owns-collection {
       .morsel-block-wrap {
         padding-bottom: 15px;
-        border-bottom: 1px solid $morsel-light;
       }
     }
   }
@@ -58,12 +57,12 @@ $collection-block-margin: 15px auto;
   .new-collection-btn {
     width: $collection-block-width;
     height: $collection-block-info-height+$collection-block-width;
-    margin: $collection-block-margin;
     display: block;
     @include border-radius($collection-block-border-radius);
     background-color: $morsel-new-beige;
     @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.2));
     color: $link-color;
+    margin: $collection-block-padding auto;
     
     i {
       font-size: 60px;
@@ -83,11 +82,11 @@ $collection-block-margin: 15px auto;
 }
 
 .collection-block {
-  border-bottom: 1px solid $morsel-light;
   overflow: auto;
+  padding: $collection-block-padding;
 
   & > a {
-    margin: $collection-block-margin;
+    margin: 0 auto;
     background-color: $morsel-new-beige;
     text-align: center;
     @include box-shadow(0px 1px 7px 0px rgba(0, 0, 0, 0.2));
@@ -142,6 +141,16 @@ $collection-block-margin: 15px auto;
   }
 }
 
+/* allow 2 columns when there's room */
+@media (max-width: ($collection-block-width*2)+($collection-block-padding*2)+20) {
+  .collections-tab {
+    .col-xs-6 {
+      float: none;
+      width: auto;
+    }
+  }
+}
+
 @media (min-width: $screen-sm-min) {
   .collection-detail {
     .profile-container {
@@ -153,7 +162,6 @@ $collection-block-margin: 15px auto;
       &.owns-collection {
         .morsel-block-wrap {
           padding-bottom: 0;
-          border-bottom: none;
 
           &.removed {
             &:after {
@@ -163,10 +171,6 @@ $collection-block-margin: 15px auto;
         }
       }
     }
-  }
-
-  .collection-block {
-    border-bottom: none;
   }
 }
 
