@@ -144,6 +144,11 @@ $collection-block-margin: 15px auto;
 
 @media (min-width: $screen-sm-min) {
   .collection-detail {
+    .profile-container {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
     .collection-morsels {
       &.owns-collection {
         .morsel-block-wrap {

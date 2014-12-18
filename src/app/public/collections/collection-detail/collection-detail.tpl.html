@@ -13,6 +13,7 @@
           <button ng-if="canEdit" mrsl-edit-collection="collection"></button>
         </div>
       </div>
+      <div class="profile-bg" mrsl-responsive-images="{{getUserPhoto()}}" mrsl-ri-image-type="background"></div>
     </div>
     <div ng-show="alertMessage" class="alert alert-{{alertType}}">
       <p ng-bind-html="alertMessage"></p>

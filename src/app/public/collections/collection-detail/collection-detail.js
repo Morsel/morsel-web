@@ -116,4 +116,17 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
       $scope.alertMessage = false;
     }, 8000);
   }
+
+  $scope.getUserPhoto = function() {
+    if($scope.collection.creator.photos) {
+      return [
+        ['default', $scope.collection.creator.photos._80x80],
+        ['screen-md', $scope.collection.creator.photos._144x144]
+      ];
+    } else {
+      return [
+        ['default', MORSELPLACEHOLDER]
+      ];
+    }
+  };
 });
