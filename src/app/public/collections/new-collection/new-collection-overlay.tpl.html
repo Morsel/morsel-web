@@ -6,7 +6,7 @@
   <p class="help-block">Collections are a simple way to curate and bookmark your favorite morsels.</p>
   <form role="form" ng-submit="newCollection()" name="$parent.newCollectionForm" novalidate>
     <div mrsl-base-errors mrsl-val-form="newCollectionForm"></div>
-    <input mrsl-validated-element mrsl-val-form="newCollectionForm" mrsl-val-en-name="Collection Title" mrsl-val-type="text" mrsl-val-name="title" mrsl-val-form-model="newCollection" mrsl-val-placeholder="Give your collection a title" mrsl-val-required="true" />
+    <input mrsl-validated-element mrsl-val-form="newCollectionForm" mrsl-val-en-name="Collection Title" mrsl-val-type="text" mrsl-val-name="title" mrsl-val-form-model="newCollection" mrsl-val-placeholder="Give your collection a title" mrsl-val-required="true" mrsl-val-custom="titleLengthVer" />
     <textarea mrsl-validated-element mrsl-val-form="newCollectionForm" mrsl-val-en-name="Collection Description" mrsl-val-type="text" mrsl-tag-type="textarea" mrsl-val-name="description" mrsl-val-form-model="newCollection" mrsl-val-placeholder="Give your collection a description"></textarea>
     <button mrsl-submit-btn mrsl-submit-btn-form="newCollectionForm" mrsl-submit-btn-copy="Create new collection" mrsl-submit-btn-tooltip-placement="left" mrsl-submit-btn-submit-copy="Creating..."></button>
   </form>

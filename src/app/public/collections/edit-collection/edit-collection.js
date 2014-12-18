@@ -42,11 +42,19 @@ angular.module( 'Morsel.public.collections.editCollection', [] )
           $modalInstance.dismiss('cancel');
         };
 
+        //title length validation
+        $scope.titleLengthVer = {
+          'length': {
+            'max': '70',
+            'message': 'Must be 70 characters or less'
+          }
+        };
+
         $scope.deleteCollection = function() {
           var confirmed = confirm('Are you sure you want to delete this collection?');
 
           if(confirmed) {
-            $scope.editCollectionForm.$setValidity('deleting', true);
+            $scope.editCollectionForm.deleteMorsel.$setValidity('deleting', false);
             ApiCollections.deleteCollection($scope.collection.id).then(onCollectionDeleteSuccess, onCollectionDeleteError);
           }
         };
@@ -60,7 +68,7 @@ angular.module( 'Morsel.public.collections.editCollection', [] )
 
         function onCollectionDeleteError(resp) {
           //make form valid again (until errors show)
-          $scope.editCollectionForm.$setValidity('deleting', true);
+          $scope.editCollectionForm.deleteMorsel.$setValidity('deleting', true);
           
           //remove whatever message is there
           $scope.alertMessage = null;

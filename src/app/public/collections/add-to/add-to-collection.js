@@ -77,6 +77,14 @@ angular.module( 'Morsel.public.collections.addToCollection', [] )
           $modalInstance.dismiss('cancel');
         };
 
+        //title length validation
+        $scope.titleLengthVer = {
+          'length': {
+            'max': '70',
+            'message': 'Must be 70 characters or less'
+          }
+        };
+
         $scope.addingNewCollection = true;
 
         $scope.$watch('collections.selectedCollection', function(newValue, oldValue) {
