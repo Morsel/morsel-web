@@ -52,6 +52,9 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
     $scope.canEdit = true;
   }
 
+  //update page title
+  $scope.pageData.pageTitle = $scope.collection.title+' | Morsel';
+
   $scope.collectionsIncrement = MORSEL_LIST_NUMBER;
 
   $scope.loadCollectionMorsels = function() {

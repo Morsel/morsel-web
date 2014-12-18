@@ -66,18 +66,16 @@ angular.module( 'Morsel.public.profile', [])
 })
 
 .controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth, MORSEL_LIST_NUMBER ) {
-  var name;
-
   $scope.user = profileUserData;
   $scope.isProfessional = $scope.user.professional;
   $scope.currentUser = currentUser;
   $scope.canEdit = $scope.user.id === currentUser.id;
   $scope.$state = $state;
 
-  name = ($scope.user.first_name || $scope.user.last_name) ? $scope.user.first_name+' '+$scope.user.last_name : '';
+  $scope.formattedName = ($scope.user.first_name || $scope.user.last_name) ? $scope.user.first_name+' '+$scope.user.last_name : '';
 
   //update page title
-  $scope.pageData.pageTitle = name+' ('+$scope.user.username+') | Morsel';
+  $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') | Morsel';
 
   //# of morsels to load at a time
   $scope.morselIncrement = MORSEL_LIST_NUMBER;
@@ -105,6 +103,9 @@ angular.module( 'Morsel.public.profile', [])
 })
 
 .controller( 'ProfileMorselsCtrl', function ProfileMorselsCtrl( $scope, ApiUsers) {
+  //update page title
+  $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') | Morsel';
+
   $scope.getMorsels = function(endMorsel) {
     var morselsParams = {
           count: $scope.morselIncrement
@@ -135,6 +136,9 @@ angular.module( 'Morsel.public.profile', [])
 .controller( 'ProfileCollectionsCtrl', function ProfileCollectionsCtrl( $scope, ApiUsers, MORSEL_LIST_NUMBER) {
   $scope.collectionsIncrement = MORSEL_LIST_NUMBER;
 
+  //update page title
+  $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') - Collections | Morsel';
+
   $scope.loadCollections = function() {
     var collectionsParams = {
           count: $scope.collectionsIncrement
@@ -158,6 +162,9 @@ angular.module( 'Morsel.public.profile', [])
 })
 
 .controller( 'ProfilePlacesCtrl', function ProfilePlacesCtrl( $scope, ApiUsers) {
+  //update page title
+  $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') - Places | Morsel';
+
   $scope.loadPlaces = function() {
     if(!$scope.userPlaces) {
       ApiUsers.getPlaces($scope.user.id).then(function(placesResp){
@@ -170,6 +177,9 @@ angular.module( 'Morsel.public.profile', [])
 })
 
 .controller( 'ProfileLikesCtrl', function ProfileLikesCtrl( $scope, ApiUsers) {
+  //update page title
+  $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') - Likes | Morsel';
+
   $scope.loadLikeFeed = function() {
     if(!$scope.likeFeed) {
       ApiUsers.getLikeables($scope.user.id, 'Morsel').then(function(likeableResp){
