@@ -106,7 +106,7 @@ angular.module( 'Morsel.public', [
 .constant('USER_LIST_NUMBER', 20)
 .constant('USER_UPDATE_CHECK_TIME', 5000)
 .constant('COMMENT_LIST_NUMBER', 10)
-.constant('MORSEL_LIST_NUMBER', 2)
+.constant('MORSEL_LIST_NUMBER', 12)
 
 // Default queries
 .value('presetMediaQueries', {

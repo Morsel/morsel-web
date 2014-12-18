@@ -134,19 +134,26 @@ angular.module( 'Morsel.public.profile', [])
 })
 
 .controller( 'ProfileCollectionsCtrl', function ProfileCollectionsCtrl( $scope, ApiUsers, MORSEL_LIST_NUMBER) {
-  $scope.collectionsIncrement = MORSEL_LIST_NUMBER;
+ 
 
   //update page title
   $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') - Collections | Morsel';
 
   $scope.loadCollections = function() {
-    var collectionsParams = {
-          count: $scope.collectionsIncrement
-        };
+    var collectionsParams = {};
 
     //get the next page number
     $scope.collectionsPageNumber = $scope.collectionsPageNumber ? $scope.collectionsPageNumber+1 : 1;
     collectionsParams.page = $scope.collectionsPageNumber;
+
+    //since we have the "create new collection" button, load one less the first time so it fits nicely
+    if($scope.collectionsPageNumber === 1 && $scope.canEdit) {
+       $scope.collectionsIncrement = MORSEL_LIST_NUMBER -1;
+    } else {
+       $scope.collectionsIncrement = MORSEL_LIST_NUMBER;
+    }
+    
+    collectionsParams.count = $scope.collectionsIncrement;
 
     ApiUsers.getCollections($scope.user.id, collectionsParams).then(function(collectionsResp){
       if($scope.userCollections) {
