@@ -27,6 +27,9 @@ This is a table of all event names, properties and descriptions that are being t
 | Explore searched | User performed a search in Explore | view, explore_search_trigger | 12/12/2014 |
 | Followed User | User follows another user | view | 12/12/2014 |
 | Clicked User Profile | User clicks another user's avatar/name | view | 12/12/2014 |
+| Clicked Add to Collection | Users clicks add to collection icon | morsel_id | 12/19/2014 |
+| Added morsel to collection | User added a morsel to a collection | morsel_id, collection_id, made_new_collection | 12/19/2014 |
+| Created new Collection | User made a collection | has_description, view, collection_id | 12/19/2014 |
 
 ### Super Property List
 This is a table of all super properties (properties that are sent with every event) names and descriptions that are being tracked. It should be kept up to date whenever super properties are added/altered
@@ -66,6 +69,10 @@ This is a table of all property names and descriptions that are being tracked. I
 | hashtag | A #hashtag | string | 12/12/2014 |
 | promoted | Whether something is promoted by API | boolean | 12/12/2014 |
 | explore_search_trigger | How the user performed Explore search | "Click result","Form submit" | 12/12/2014 |
+| made_new_collection | Whether a new collection was made | boolean | 12/19/2014 |
+| collection_id | The id of a Collection | numeric | 12/19/2014 |
+| has_description | Whether something has a description | boolean | 12/19/2014 |
+
 
 ### View List
 This is a table of all "views" that appear on the website. The "property name" column is what will appear in Mixpanel under the "view" property, on events that it is worthwhile to measure the view in which they occurred. Note that these are abstract "views" and don't necessarily correspond to states or URLs. It should be kept up to date whenever new "views" are added/altered
@@ -75,4 +82,5 @@ This is a table of all "views" that appear on the website. The "property name" c
 | morsel_details | The details page of a single morsel | 12/12/2014 |
 | explore_morsels | The Explore morsels page | 12/12/2014 |
 | explore_users | The Explore users page | 12/12/2014 |
+| user_profile_collections | Collections tab of user's profile page | 12/19/2014 |
 

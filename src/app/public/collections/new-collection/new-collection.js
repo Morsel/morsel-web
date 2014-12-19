@@ -1,6 +1,6 @@
 angular.module( 'Morsel.public.collections.newCollection', [] )
 
-.directive('mrslNewCollection', function($rootScope, $modal, ApiCollections, HandleErrors, $location){
+.directive('mrslNewCollection', function($rootScope, $modal, ApiCollections, HandleErrors, $location, Mixpanel){
   return {
     restrict: 'A',
     replace: true,
@@ -46,8 +46,12 @@ angular.module( 'Morsel.public.collections.newCollection', [] )
             ApiCollections.createCollection(collectionParams).then(function(resp){
               var collection = resp.data;
 
-              $scope.newCollectionForm.$setValidity('creatingNewCollection', true);
-              //go to new collection
+              Mixpanel.track('Created new Collection', {
+                collection_id: collection.id,
+                view: 'user_profile_collections',
+                has_description: (collection.description && collection.description.length > 0) ? true : false
+              });
+
               $location.path('/'+collection.creator.username.toLowerCase()+'/collections/'+collection.id+'-'+collection.slug);
             }, function(resp){
               $scope.newCollectionForm.$setValidity('creatingNewCollection', true);

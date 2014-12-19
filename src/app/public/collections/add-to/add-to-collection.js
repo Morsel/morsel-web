@@ -1,6 +1,6 @@
 angular.module( 'Morsel.public.collections.addToCollection', [] )
 
-.directive('mrslAddToCollection', function($modal, $rootScope, $location, Auth, AfterLogin, $window, ApiUsers, ApiMorsels, ApiCollections, HandleErrors){
+.directive('mrslAddToCollection', function($modal, $rootScope, $location, Auth, AfterLogin, $window, ApiUsers, ApiMorsels, ApiCollections, HandleErrors, Mixpanel){
   return {
     restrict: 'A',
     scope: {
@@ -47,6 +47,10 @@ angular.module( 'Morsel.public.collections.addToCollection', [] )
       }
 
       scope.beginAddToCollection = function() {
+        Mixpanel.track('Clicked Add to Collection', {
+          morsel_id: scope.morsel.id
+        });
+
         //check if we're logged in
         if(isLoggedIn) {
           openOverlay();
@@ -115,25 +119,33 @@ angular.module( 'Morsel.public.collections.addToCollection', [] )
                 }
               };
 
+              $scope.addToCollectionForm.$setValidity('creatingNewCollection', false);
+
               createCollection(collectionParams);
             }
           } else {
             //selecting an existing collection
             //make sure something is selected
             if($scope.collections.selectedCollection) {
-              $scope.addToCollectionForm.morselExistingCollection.$setValidity('addingToExistingCollection', false);
+              $scope.addToCollectionForm.$setValidity('addingToCollection', false);
 
-              addToCollection($scope.collections.selectedCollection.id);
+              addToCollection($scope.collections.selectedCollection.id, false);
             }
           }
         };
 
-        function addToCollection(collectionId) {
+        function addToCollection(collectionId, madeNewCollection) {
           ApiMorsels.addToCollection(morsel.id, collectionId).then(function(){
-            $scope.addToCollectionForm.morselExistingCollection.$setValidity('addingToExistingCollection', true);
-            closeOverlay();
+            Mixpanel.track('Added morsel to collection', {
+              morsel_id: morsel.id,
+              collection_id: collectionId,
+              made_new_collection: madeNewCollection
+            }, function(){
+              closeOverlay();
+            });
+
           }, function(resp){
-            $scope.addToCollectionForm.morselExistingCollection.$setValidity('addingToExistingCollection', true);
+            $scope.addToCollectionForm.$setValidity('addingToCollection', true);
             HandleErrors.onError(resp.data, $scope.addToCollectionForm);
           });
         }
@@ -144,8 +156,21 @@ angular.module( 'Morsel.public.collections.addToCollection', [] )
 
         function createCollection(collectionsParams) {
           ApiCollections.createCollection(collectionsParams).then(function(resp){
-            addToCollection(resp.data.id);
+            var collection = resp.data;
+
+            $scope.addToCollectionForm.$setValidity('creatingNewCollection', true);
+
+            Mixpanel.track('Created new Collection', {
+              collection_id: collection.id,
+              view: 'morsel_details',
+              has_description: (collectionsParams.collection.description && collectionsParams.collection.description.length > 0) ? true : false
+            });
+
+            $scope.addToCollectionForm.$setValidity('addingToCollection', false);
+
+            addToCollection(collection.id, true);
           }, function(resp){
+            $scope.addToCollectionForm.morselExistingCollection.$setValidity('creatingNewCollection', true);
             HandleErrors.onError(resp.data, $scope.addToCollectionForm);
           });
         }
