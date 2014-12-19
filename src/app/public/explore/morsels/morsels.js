@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.explore.morsels', [])
   });
 })
 
-.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, ApiFeed, $state, Mixpanel){
+.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, $state, Mixpanel, ApiMorsels){
   $scope.morselSearch = {
     exploreIncrement: MORSEL_LIST_NUMBER,
     customFocus: function() {
@@ -41,25 +41,25 @@ angular.module( 'Morsel.public.explore.morsels', [])
   //show suggested users
   $scope.search.hideSuggestedUsers = false;
 
-  $scope.loadDefaultMorsels = function(endFeedItem){
-    var feedParams = {
+  $scope.loadDefaultMorsels = function() {
+    var morselsParams = {
           count: $scope.morselSearch.exploreIncrement
         };
 
-    if(endFeedItem) {
-      feedParams.max_id = parseInt(endFeedItem.id, 10) - 1;
-    }
+    //get the next page number
+    $scope.defaultMorselPageNumber = $scope.defaultMorselPageNumber ? $scope.defaultMorselPageNumber+1 : 1;
+    morselsParams.page = $scope.defaultMorselPageNumber;
 
-    ApiFeed.getAllFeed(feedParams).then(function(feedItemsResp) {
-      if($scope.defaultFeedItems) {
-        //concat them with new data after old data, then reverse with a filter
-        $scope.defaultFeedItems = $scope.defaultFeedItems.concat(feedItemsResp.data);
+    ApiMorsels.search(morselsParams).then(function(morselsData) {
+      if($scope.defaultMorsels) {
+        //concat them with new data after old data
+        $scope.defaultMorsels = $scope.defaultMorsels.concat(morselsData);
       } else {
-        $scope.defaultFeedItems = feedItemsResp.data;
+        $scope.defaultMorsels = morselsData;
       }
     }, function() {
-      //if there's an error retrieving morsels, go to 404
-      $state.go('404');
+      //if there's an error retrieving morsel data, go to explore
+      $state.go('explore.morsels');
     });
   };
 
