@@ -38,8 +38,8 @@ angular.module('Morsel.add.editMorselSummary', [])
 
       scope.save = function(e) {
         //treat null summaries as empty strings so we don't bother updating null values with blanks
-        var newSummary = scope.updatedSummary ? scope.updatedSummary.trim() : '',
-            oldSummary = scope.morsel.summary ? scope.morsel.summary : '',
+        var newSummary = scope.updatedSummary ? scope.updatedSummary.trim() : null,
+            oldSummary = scope.morsel.summary ? scope.morsel.summary : null,
             morselParams = {
               morsel: {
                 summary: newSummary
