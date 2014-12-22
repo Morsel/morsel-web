@@ -13,7 +13,7 @@ angular.module('Morsel.add.editMorselSummary', [])
       //this will be our model
       scope.updatedSummary = scope.morsel.summary;
 
-      scope.placeholder = 'Morsel summary placeholder text';
+      scope.placeholder = 'My take on grandma\'s #pumpkin #pie #recipe for our family #thanksgiving';
 
       scope.edit = function(){
         scope.editing = true;
