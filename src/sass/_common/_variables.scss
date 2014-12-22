@@ -97,6 +97,18 @@ $morsel-hover-time: .1s;
 $morsel-max-height-xs: 250px;
 $morsel-max-height-sm: 320px;
 
+//item photos
+$item-photo-xs: 50;
+$item-photo-sm: 100;
+$item-photo-md: 320;
+$item-photo-lg: 640;
+$item-photo-xl: 992;
+$item-photo-xs-dim: "_"+$item-photo-xs+"x"+$item-photo-xs;
+$item-photo-sm-dim: "_"+$item-photo-sm+"x"+$item-photo-sm;
+$item-photo-md-dim: "_"+$item-photo-md+"x"+$item-photo-md;
+$item-photo-lg-dim: "_"+$item-photo-lg+"x"+$item-photo-lg;
+$item-photo-xl-dim: "_"+$item-photo-xl+"x"+$item-photo-xl;
+
 //users
 $profile-bic-border-width: 2px;
 $profile-pic-xs: 40px + $profile-bic-border-width*2;
@@ -153,7 +165,10 @@ $nav-tabs-active-link-hover-color: white;
 $nav-link-padding: 15px;
 
 //list-groups
-$list-group-bg: $morsel-light-off;
+$list-group-bg: $morsel-background;
+$list-group-border: $morsel-light;
+$list-group-active-bg: $morsel-primary;
+$list-group-link-hover-color: $link-hover-color;
 
 //hr
 $hr-height: 4px;
@@ -172,6 +187,3 @@ $dropdown-link-active-bg: $morsel-primary-light;
 
 // Core Bootstrap variables and mixins
 @import "../../../vendor/bootstrap-sass-official/assets/stylesheets/bootstrap/_variables.scss";
-
-
-

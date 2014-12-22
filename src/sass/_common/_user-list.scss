@@ -12,52 +12,52 @@
       margin-bottom: 15px;
       padding-bottom: 15px;
 
-      .user-extra-info {
-        .user-info-main {
-          margin: 0 8px 0 0;
-        }
-      }
-
-      .user-body {
-        button {
-          float: right;
-          margin: 5px 0 0 5px;
-        }
-      }
-
-      .user-info-main {
-        margin: 0;
-        line-height: $profile-pic-xs;
-
-        a {
-          color: $morsel-dark;
-
-          &:hover {
-            color: $link-hover-color;
-          }
-        }
-      }
-
-      .profile-pic-link {
-        width: $profile-pic-xs;
-        height: $profile-pic-xs;
-      }
-
-      .time-ago {
-        font-style: italic;
-        display: inline-block;
-        color: $morsel-medium;
-      }
-
-      .user-list-text {
-        margin: 5px 0 0;
-      }
-
       &:last-child {
         margin: 0;
         border: 0;
         padding: 0;
       }
+    }
+  }
+
+  .user-info-main {
+    margin: 0;
+    line-height: $profile-pic-xs;
+
+    a {
+      color: $morsel-dark;
+
+      &:hover {
+        color: $link-hover-color;
+      }
+    }
+  }
+
+  .profile-pic-link {
+    width: $profile-pic-xs;
+    height: $profile-pic-xs;
+  }
+
+  .time-ago {
+    font-style: italic;
+    display: inline-block;
+    color: $morsel-medium;
+  }
+
+  .user-list-text {
+    margin: 5px 0 0;
+  }
+
+  .user-extra-info {
+    .user-info-main {
+      margin: 0 8px 0 0;
+    }
+  }
+
+  .user-body {
+    button {
+      float: right;
+      margin: 5px 0 0 5px;
     }
   }
 
@@ -67,12 +67,6 @@
     p {
       margin: 0;
     }
-  }
-
-  .add-comment {
-    padding-top: 15px;
-    overflow: hidden;
-    margin-top: 10px;
   }
 
   & > p {
@@ -87,6 +81,12 @@
       .user-info-main {
         line-height: inherit;
       }
+    }
+
+    .add-comment {
+      padding-top: 15px;
+      overflow: hidden;
+      margin-top: 10px;
     }
   }
 
@@ -106,21 +106,43 @@
 
 @media (min-width: $screen-sm) {
   .user-list {
-    ul {
-      li {
-        .user-body {
-          button {
-            margin-top: 18px;
-          }
-        }
+    .user-body {
+      button {
+        margin-top: 18px;
+      }
+    }
 
-        .user-info-main {
-          line-height: $profile-pic-s;
-        }
+    .user-info-main {
+      line-height: $profile-pic-s;
+    }
 
-        .profile-pic-link {
-          width: $profile-pic-s;
-          height: $profile-pic-s;
+    .profile-pic-link {
+      width: $profile-pic-s;
+      height: $profile-pic-s;
+    }
+
+    &.column-layout {
+      ul {
+        padding: 15px;
+      }
+
+      .user-info .profile-pic-link {
+        float: none;
+        display: block;
+        margin: 0 auto;
+      }
+
+      .user-info-main {
+        line-height: normal;
+        margin-top: 10px;
+      }
+
+      .user-body {
+        text-align: center;
+
+        button {
+          float: none;
+          margin: 10px 0 0;
         }
       }
     }

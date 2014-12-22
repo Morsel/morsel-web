@@ -37,6 +37,7 @@
                   </h6>
                 </div>
                 <span am-time-ago="morsel.published_at" class="time-ago"></span>
+                <p ng-if="morsel.summary" bo-html="formatSummary()" class="morsel-summary" id="morsel-summary"></p>
               </div>
             </div>
           </div>

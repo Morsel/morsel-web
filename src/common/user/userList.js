@@ -9,10 +9,13 @@ angular.module('Morsel.common.userList', [])
       emptyText: '=mrslUserListEmpty',
       userLoadFunc: '=mrslUserListLoadFunc',
       morselTagged: '=mrslUserListTagMorsel',
-      blankLinks: '=mrslUserListBlankLinks'
+      blankLinks: '=mrslUserListBlankLinks',
+      listLayout: '@mrslUserListLayout'
     },
     link: function(scope, element, attrs) {
       scope.userIncrement = USER_LIST_NUMBER;
+
+      scope.listLayoutType = scope.listLayout ? scope.listLayout+'-layout' : '';
     },
     templateUrl: 'common/user/userList.tpl.html'
   };

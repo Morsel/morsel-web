@@ -4,14 +4,15 @@
 @import "_config";
 
 //our general public css
+@import "_public/_collections";
 @import "_public/_event";
 @import "_public/_morsel";
 @import "_public/_morsel-block";
 @import "_public/_profile";
+@import "_public/_search";
 
 //our page-specific public css
 @import "../app/public/activity/_activity";
 @import "../app/public/home/_home";
 @import "../app/public/places/_place";
 @import "../app/public/profile/_profile";
-@import "../app/public/search/_search";

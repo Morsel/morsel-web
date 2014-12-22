@@ -170,6 +170,23 @@ img {
   &:before {
     content: 'by ';
     font-style: normal;
+    color: $morsel-medium;
+  }
+
+  &.white-link {
+    &:after {
+      &:before {
+        color: white;
+      }
+    }
+  }
+
+  &.dark-link {
+    &:after {
+      &:before {
+        color: $morsel-dark;
+      }
+    }
   }
 }
 
@@ -596,6 +613,10 @@ a.dark-link {
     @include container-shadow();
     @include border-bottom-left-radius(5px);
     @include border-bottom-right-radius(5px);
+  }
+
+  .container-round {
+    @include border-radius(5px);
   }
 
   .banner {

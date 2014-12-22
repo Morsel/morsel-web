@@ -15,7 +15,7 @@ angular.module('Morsel.common.morselBlock', [])
             $el = element[0],
             needsBigPicture = $el.offsetWidth > 320;
 
-        if(scope.morsel && scope.morsel.items) {
+        if(scope.morsel) {
           primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.morsel);
 
           if(primaryItemPhotos) {
@@ -29,25 +29,9 @@ angular.module('Morsel.common.morselBlock', [])
               ];
             }
           } else {
-            var lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(scope.morsel.items);
-
-            if(lastItemWithPhotos) {
-              if(needsBigPicture) {
-                return [
-                  ['default', lastItemWithPhotos.photos._640x640]
-                ];
-              } else {
-                return [
-                  ['default', lastItemWithPhotos.photos._320x320]
-                ];
-              }
-            } else {
-              //no items have photos
-
-              return [
-                ['default', MORSELPLACEHOLDER]
-              ];
-            }
+            return [
+              ['default', MORSELPLACEHOLDER]
+            ];
           }
         } else {
           //return blank

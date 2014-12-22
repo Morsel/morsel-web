@@ -290,6 +290,19 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
 
     //explore
     app.get('/explore', function(req, res){
+      res.redirect('/explore/morsels');
+    });
+
+    app.get('/explore*', function(req, res){
+      publicApp.renderPublicPage(res);
+    });
+
+    //hashtags
+    app.get('/hashtags', function(req, res){
+      res.redirect('/explore/morsels');
+    });
+
+    app.get('/hashtags*', function(req, res){
       publicApp.renderPublicPage(res);
     });
 
@@ -346,6 +359,26 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
     //collections (fake events, for now)
     app.get('/collections/:collectionslug', function(req, res){
       publicApp.renderEventPage(res, req.params.collectionslug);
+    });
+
+    //profile page likes
+    app.get('/:username/likes', function(req, res) {
+      publicApp.renderPublicPage(res);
+    });
+
+    //profile page places
+    app.get('/:username/places', function(req, res) {
+      publicApp.renderPublicPage(res);
+    });
+
+    //profile page collections
+    app.get('/:username/collections', function(req, res) {
+      publicApp.renderPublicPage(res);
+    });
+
+    //collection details
+    app.get('/:username/collections/:collectionIdSlug', function(req, res) {
+      publicApp.renderCollectionPage(req, res);
     });
 
     //morsel detail with post id/slug

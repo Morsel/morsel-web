@@ -4,45 +4,16 @@ angular.module( 'Morsel.common.photoHelpers', [])
 .factory('PhotoHelpers', function(MORSELPLACEHOLDER) {
   var photoHelpers = {
     findPrimaryItemPhotos : function(morsel) {
-      var primaryItem;
-
-      if(morsel.items) {
-        primaryItem = _.find(morsel.items, function(i) {
-          return i.id === morsel.primary_item_id;
-        });
-
-        if(primaryItem && primaryItem.photos) {
-          return primaryItem.photos;
-        } else {
-          return null;
-        }
-      } else {
-        return null;
-      }
-    },
-    findLastItemWithPhotos : function(items) {
-      var reverseItems = items.slice(0);
-
-      return _.find(reverseItems, function(i) {
-        return i.photos;
-      });
+      return (morsel && morsel.primary_item_photos) ? morsel.primary_item_photos : null;
     },
     getCoverPhotoArray : function(morsel) {
-      var primaryItemPhotos;
+      var primaryItemPhotos = photoHelpers.findPrimaryItemPhotos(morsel);
 
-      if(morsel && morsel.items) {
-        primaryItemPhotos = photoHelpers.findPrimaryItemPhotos(morsel);
-
-        if(primaryItemPhotos) {
-          return [
-            ['default', primaryItemPhotos._100x100],
-            ['(min-width: 321px)', primaryItemPhotos._320x320]
-          ];
-        } else {
-          return [
-            ['default', MORSELPLACEHOLDER]
-          ];
-        }
+      if(primaryItemPhotos) {
+        return [
+          ['default', primaryItemPhotos._100x100],
+          ['(min-width: 321px)', primaryItemPhotos._320x320]
+        ];
       } else {
         return ['default', MORSELPLACEHOLDER];
       }

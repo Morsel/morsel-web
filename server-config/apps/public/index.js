@@ -2,16 +2,10 @@ var util = require('./../../util');
 var _ = require('underscore');
 
 function getCoverPhoto(morsel) {
-  var primaryItemPhotos = findPrimaryItemPhotos(morsel),
-      lastItemWithPhotos;
+  var primaryItemPhotos = findPrimaryItemPhotos(morsel);
 
   //use their cover photo if there is one
-  if(primaryItemPhotos) {
-    return primaryItemPhotos._992x992;
-  } else {
-    lastItemWithPhotos = findLastItemWithPhotos(morsel.items);
-    return lastItemWithPhotos ? lastItemWithPhotos._992x992 : 'https://www.eatmorsel.com/assets/images/logos/morsel-large.png';
-  }
+  return primaryItemPhotos ? primaryItemPhotos._992x992 : 'https://www.eatmorsel.com/assets/images/logos/morsel-large.png';
 }
 
 function getCollage(morsel) {
@@ -19,23 +13,7 @@ function getCollage(morsel) {
 }
 
 function findPrimaryItemPhotos(morsel) {
-  var primaryItem = _.find(morsel.items, function(i) {
-    return i.id === morsel.primary_item_id;
-  });
-
-  if(primaryItem && primaryItem.photos) {
-    return primaryItem.photos;
-  } else {
-    return null;
-  }
-}
-
-function findLastItemWithPhotos(items) {
-  var reverseItems = items.slice(0);
-
-  return _.find(reverseItems, function(i) {
-    return i.photos;
-  });
+  return (morsel && morsel.primary_item_photos) ? morsel.primary_item_photos : null;
 }
 
 function getFirstDescription(items) {
@@ -275,4 +253,50 @@ module.exports.renderEventPage = function(res, eventSlug) {
     //not a valid event - must be a bad route
     util.render404(res);
   }
+};
+
+module.exports.renderCollectionPage = function(req, res) {
+  var request = require('request'),
+      app = require('./../../server'),
+      username = req.params.username,
+      collectionIdSlug = req.params.collectionIdSlug;
+
+  request(app.locals.apiUrl+'/collections/'+collectionIdSlug+util.apiQuerystring, function (error, response, body) {
+    var collection,
+        collectionMetadata,
+        collectionTitle,
+        collectionDescription,
+        collectionCreator;
+
+    if (!error && response.statusCode == 200) {
+
+      collection = JSON.parse(body).data;
+
+      collectionCreator = collection.creator;
+      collectionTitle = collection.title;
+      collectionDescription = collection.description ? collection.description : 'A collection by '+(collectionCreator.first_name || $collectionCreator.last_name) ? collectionCreator.first_name+' '+collectionCreator.last_name : collectionCreator.username;
+
+      collectionMetadata = {
+        "title": collectionTitle+ ' | Morsel',
+        "description": collectionDescription+' | Morsel',
+        "image": "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "app": {
+          "url": util.appProtocol+collectionCreator.username+'/collections/'+collection.id+'-'+collection.slug
+        },
+        "twitter": {
+          "creator": '@'+(collectionCreator.twitter_username || 'eatmorsel')
+        },
+        "url": app.locals.siteUrl +'/'+collectionCreator.username+'/collections/'+collection.id+'-'+collection.slug
+      };
+
+      collectionMetadata.twitter = _.defaults(collectionMetadata.twitter || {}, util.defaultMetadata.twitter);
+      collectionMetadata.og = _.defaults(collectionMetadata.og || {}, util.defaultMetadata.og);
+      collectionMetadata = _.defaults(collectionMetadata || {}, util.defaultMetadata);
+
+      renderPublicPage(res, collectionMetadata);
+    } else {
+      //not a valid user - must be a bad route
+      util.render404(res);
+    }
+  });
 };

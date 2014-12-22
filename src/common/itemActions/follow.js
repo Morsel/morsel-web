@@ -93,6 +93,8 @@ angular.module( 'Morsel.common.follow', [] )
             
             //emit this so if we're on a profile page, it can update the count
             scope.$emit('users.'+scope.idToFollow+'.followerCount', 'increase');
+            //emit this so Explore page can pick up
+            scope.$emit('explore.user.follow');
 
             deferred.resolve();
           });

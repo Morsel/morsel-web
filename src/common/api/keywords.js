@@ -1,6 +1,6 @@
 angular.module( 'Morsel.common.apiKeywords', [] )
 
-// ApiWorss is the middleman for dealing with /cuisine and /specialties requests
+// ApiKeywords is the middleman for dealing with keyword methods
 .factory('ApiKeywords', function($http, Restangular, $q) {
   var Keywords = {};
 
@@ -72,6 +72,31 @@ angular.module( 'Morsel.common.apiKeywords', [] )
     var deferred = $q.defer();
 
     Restangular.one('users', userId).one('tags', tagId).remove().then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Keywords.getHashtagMorsels = function(hashtag, morselsParams) {
+    var deferred = $q.defer();
+
+   Restangular.one('hashtags', hashtag).one('morsels').get(morselsParams).then(function(resp) {
+      //return resp.data to be consistent with View More functionality. might change eventually
+      deferred.resolve(Restangular.stripRestangular(resp).data);
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+
+  Keywords.hashtagSearch = function(hashtagParams) {
+    var deferred = $q.defer();
+
+   Restangular.one('hashtags').one('search').get(hashtagParams).then(function(resp) {
       deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));

@@ -1,15 +1,18 @@
-<div class="explore header-padding">
-  <h2 class="text-center">Explore morsels</h2>
-  <div class="container morsel-bg container-shadow container-no-padding" ng-style="viewOptions.minimumMainHeight()">
-    <div class="row no-gutter">
-      <div class="col-sm-4 col-md-3" bindonce ng-repeat="feedItem in feedItems">
-        <div mrsl-morsel-block="feedItem.subject" mrsl-morsel-block-spacer="true"></div>
+<div class="container search-page header-padding">
+  <h2 class="text-center col-sm-9 col-sm-offset-3">Explore</h2>
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="list-group search-menu container-shadow">
+        <a href="/explore/morsels" class="list-group-item h6" ui-route="/explore/morsels[\w\/\-]*" ng-class="{active:$uiRoute}">Morsels</a>
+        <a href="/explore/users" class="list-group-item h6" ui-route="/explore/users" ng-class="{active:$uiRoute}">Users</a>
       </div>
+      <div ng-if="!search.hideSuggestedUsers" mrsl-suggested-users="search.suggestedUsers"></div>
     </div>
-    <div ng-if="!feedItems" class="loader"></div>
-    <div mrsl-view-more mrsl-view-more-func="getExploreFeed" mrsl-view-more-data="feedItems" mrsl-view-more-inc="exploreIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
-    <div ng-if="feedItems && feedItems.length === 0" class="empty-state">
-      <p>No morsels</p>
+    <div class="col-sm-9">
+      <div class="search-main container-shadow container-round morsel-bg">
+        <div ui-view="explore-morsels" ng-show="$state.includes('explore.morsels')"></div>
+        <div ui-view="explore-users" ng-show="$state.includes('explore.users')"></div>
+      </div>
     </div>
   </div>
 </div>

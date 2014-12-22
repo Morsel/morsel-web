@@ -1,12 +1,12 @@
-angular.module( 'Morsel.public.search.people.facebook', [])
+angular.module( 'Morsel.public.search.users.facebook', [])
 
 .config(function config( $stateProvider ) {
   //set up an abstract state for our main views
-  $stateProvider.state( 'search.people.facebook', {
+  $stateProvider.state( 'search.users.facebook', {
     url: '/facebook',
     views: {
       "search-results": {
-        controller: 'SearchPeopleFacebookCtrl',
+        controller: 'SearchUsersFacebookCtrl',
         templateUrl: 'app/public/search/results.tpl.html'
       }
     },
@@ -16,7 +16,7 @@ angular.module( 'Morsel.public.search.people.facebook', [])
   });
 })
 
-.controller( 'SearchPeopleFacebookCtrl', function SearchPeopleFacebookCtrl ($scope, searchUser, FacebookApi, $sce, $timeout, ApiUsers, $filter){
+.controller( 'SearchUsersFacebookCtrl', function SearchUsersFacebookCtrl ($scope, searchUser, FacebookApi, $sce, $timeout, ApiUsers, $filter){
   $scope.search.searchPlaceholder = 'Search for Facebook friends on Morsel';
   $scope.searchType = 'facebook';
   $scope.socialSearch = true;

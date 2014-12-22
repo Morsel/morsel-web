@@ -53,12 +53,13 @@ angular.module( 'Morsel.add', [
   'Morsel.add.drafts',
   'Morsel.add.editItemDescription',
   'Morsel.add.editItemPhoto',
+  'Morsel.add.editMorselSummary',
   'Morsel.add.editMorselTitle',
   'Morsel.add.item',
   'Morsel.add.morsel',
   'Morsel.add.new',
-  'Morsel.add.tagPeople',
-  'Morsel.add.tagPersonButton',
+  'Morsel.add.tagUsers',
+  'Morsel.add.tagUserButton',
   'Morsel.add.templates'
 ])
 

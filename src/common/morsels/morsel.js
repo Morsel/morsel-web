@@ -2,7 +2,7 @@ angular.module('Morsel.common.morsel', [])
 
 .constant('COVER_PHOTO_PERCENTAGE', 0.6)
 
-.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels, ApiUsers) {
+.directive('mrslMorsel', function($window, PhotoHelpers, MORSELPLACEHOLDER, Auth, COVER_PHOTO_PERCENTAGE, ApiMorsels, ApiUsers, ParseUserText, $timeout, Mixpanel) {
   var //debounce on page resize/orientation change
       orientationChangeTime = 300;
 
@@ -62,7 +62,7 @@ angular.module('Morsel.common.morsel', [])
       scope.getCoverPhotoArray = function(previewSized) {
         var primaryItemPhotos;
 
-        if(scope.morsel && scope.morsel.items) {
+        if(scope.morsel) {
           primaryItemPhotos = PhotoHelpers.findPrimaryItemPhotos(scope.morsel);
 
           if(primaryItemPhotos) {
@@ -76,31 +76,14 @@ angular.module('Morsel.common.morsel', [])
               ];
             }
           } else {
-            var lastItemWithPhotos = PhotoHelpers.findLastItemWithPhotos(scope.morsel.items);
-
-            if(lastItemWithPhotos) {
-              if(previewSized) {
-                return lastItemWithPhotos.photos._50x50;
-              } else {
-                return [
-                  ['default', lastItemWithPhotos.photos._320x320],
-                  ['(min-width: 321px)', lastItemWithPhotos.photos._640x640],
-                  ['screen-md', lastItemWithPhotos.photos._992x992]
-                ];
-              }
+            //no items have photos
+            if(previewSized) {
+              return MORSELPLACEHOLDER;
             } else {
-              //no items have photos
-              if(previewSized) {
-                return MORSELPLACEHOLDER;
-              } else {
-                return [
-                  ['default', MORSELPLACEHOLDER]
-                ];
-              }
+              return [
+                ['default', MORSELPLACEHOLDER]
+              ];
             }
-            return [
-              ['default', MORSELPLACEHOLDER]
-            ];
           }
         } else {
           //return blank
@@ -126,6 +109,12 @@ angular.module('Morsel.common.morsel', [])
         }
       };
 
+      scope.formatSummary = function() {
+        if(scope.morsel && scope.morsel.summary) {
+          return ParseUserText.hashtags(ParseUserText.addBreakTags(scope.morsel.summary));
+        }
+      };
+
       function updateCoverHeight() {
         scope.layout.coverHeight = window.innerHeight*COVER_PHOTO_PERCENTAGE;
       }
@@ -148,12 +137,22 @@ angular.module('Morsel.common.morsel', [])
         winEl.unbind('orientationchange', onOrientationChange);
         winEl.unbind('resize', onOrientationChange);
       });
+
+      //delay this until directives render
+      $timeout(function(){
+        Mixpanel.track_links('#morsel-summary a', 'Clicked Hashtag', function(el){
+          return {
+            hashtag: el.innerHTML,
+            view: 'morsel_details'
+          };
+        });
+      },0);
     },
     templateUrl: 'common/morsels/morsel.tpl.html'
   };
 })
 
-.directive('mrslItemDescription', function() {
+.directive('mrslItemDescription', function(ParseUserText) {
   return {
     restrict: 'A',
     replace: true,
@@ -163,9 +162,7 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope, element) {
       scope.formatDescription = function() {
         if(scope.item && scope.item.description) {
-          return scope.item.description.replace(/(\r\n|\n|\r)/g,"<br />");
-        } else {
-          return '';
+          return ParseUserText.addBreakTags(scope.item.description);
         }
       };
     },

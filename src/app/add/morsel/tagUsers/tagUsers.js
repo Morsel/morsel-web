@@ -1,9 +1,9 @@
-angular.module( 'Morsel.add.tagPeople', [] )
+angular.module( 'Morsel.add.tagUsers', [] )
 
-.directive('mrslTagPeople', function(ApiMorsels, $modal, $rootScope, USER_LIST_NUMBER){
+.directive('mrslTagUsers', function(ApiMorsels, $modal, $rootScope, USER_LIST_NUMBER){
   return {
     scope: {
-      morsel: '=mrslTagPeople'
+      morsel: '=mrslTagUsers'
     },
     replace: true,
     link: function(scope, element, attrs) {
@@ -43,7 +43,7 @@ angular.module( 'Morsel.add.tagPeople', [] )
               count: USER_LIST_NUMBER
             };
 
-        $scope.heading = 'Tag People';
+        $scope.heading = 'Tag Users';
         $scope.emptyText = 'You haven\'t tagged anyone in this morsel';
         $scope.morselTagged = morsel;
         $scope.blankLinks = true;
@@ -55,7 +55,7 @@ angular.module( 'Morsel.add.tagPeople', [] )
           func: _.debounce(searchUsers, 300)
         };
 
-        $scope.$on('add.tagPeople.changed', function(event){
+        $scope.$on('add.tagUsers.changed', function(event){
           morsel.usersUpdated = true;
         });
 
@@ -100,6 +100,6 @@ angular.module( 'Morsel.add.tagPeople', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
-    templateUrl: 'app/add/morsel/tagPeople/tagPeople.tpl.html'
+    templateUrl: 'app/add/morsel/tagUsers/tagUsers.tpl.html'
   };
 });

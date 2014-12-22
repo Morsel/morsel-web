@@ -90,22 +90,22 @@ angular.module( 'Morsel.public.place', [])
     }
   };
 
-  $scope.initialLoadPeople = function() {
-    $scope.loadPeople(null, true);
+  $scope.initialLoadUsers = function() {
+    $scope.loadUsers(null, true);
   };
 
-  $scope.loadPeople = function(endUser, tabClick) {
+  $scope.loadUsers = function(endUser, tabClick) {
     var usersParams = {
           count: USER_LIST_NUMBER
         };
 
     //if user clicks tab multiple times, shouldn't keep making API call
     if(tabClick) {
-      if ($scope.initiallyLoadedPeople) {
+      if ($scope.initiallyLoadedUsers) {
         return;
       } else {
         //set this so it won't call again
-        $scope.initiallyLoadedPeople = true;
+        $scope.initiallyLoadedUsers = true;
       }
     }
 

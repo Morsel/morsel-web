@@ -16,17 +16,5 @@ angular.module( 'Morsel.common.apiFeed', [] )
     return deferred.promise;
   };
 
-  Feed.getAllFeed = function(feedParams) {
-    var deferred = $q.defer();
-
-    Restangular.one('feed_all').get(feedParams).then(function(resp){
-      deferred.resolve(Restangular.stripRestangular(resp));
-    }, function(resp) {
-      deferred.reject(Restangular.stripRestangular(resp));
-    });
-
-    return deferred.promise;
-  };
-
   return Feed;
 });

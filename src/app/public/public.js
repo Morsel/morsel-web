@@ -1,6 +1,7 @@
 angular.module( 'Morsel.public', [
   //libs
   'angularMoment',
+  'ct.ui.router.extras',
   'duScroll',
   'LocalStorageModule',
   'ngSanitize',
@@ -13,6 +14,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.reverse',
   'Morsel.common.nameMatch',
   //API
+  'Morsel.common.apiCollections',
   'Morsel.common.apiFeed',
   'Morsel.common.apiItems',
   'Morsel.common.apiKeywords',
@@ -29,8 +31,8 @@ angular.module( 'Morsel.public', [
   'Morsel.common.auth',
   'Morsel.common.baseErrors',
   'Morsel.common.comments',
-  'Morsel.common.cuisineUsers',
   'Morsel.common.facebookApi',
+  'Morsel.common.focusMe',
   'Morsel.common.follow',
   'Morsel.common.followedUsers',
   'Morsel.common.followers',
@@ -45,15 +47,16 @@ angular.module( 'Morsel.public', [
   'Morsel.common.morsel',
   'Morsel.common.morselActions',
   'Morsel.common.morselBlock',
+  'Morsel.common.morselGrid',
   'Morsel.common.morselLike',
   'Morsel.common.morselSummary',
   'Morsel.common.morselTaggedUserList',
+  'Morsel.common.parseUserText',
   'Morsel.common.photoHelpers',
   'Morsel.common.placeList',
   'Morsel.common.responsiveImages',
   'Morsel.common.rollbar',
   'Morsel.common.socialSharing',
-  'Morsel.common.specialtyUsers',
   'Morsel.common.submitBtn',
   'Morsel.common.truncate',
   'Morsel.common.userImage',
@@ -63,19 +66,29 @@ angular.module( 'Morsel.public', [
   'Morsel.common.viewMore',
   //app
   'Morsel.public.activity',
+  'Morsel.public.collections.addToCollection',
+  'Morsel.public.collections.collectionBlock',
+  'Morsel.public.collections.collectionDetail',
+  'Morsel.public.collections.editCollection',
+  'Morsel.public.collections.newCollection',
   'Morsel.public.contact',
   'Morsel.public.eventMorsels',
   'Morsel.public.explore',
+  'Morsel.public.explore.morsels',
+  'Morsel.public.explore.morsels.matchingHashtags',
+  'Morsel.public.explore.morsels.searchResults',
+  'Morsel.public.explore.searchBar',
+  'Morsel.public.explore.suggestedUsers',
+  'Morsel.public.explore.users',
   'Morsel.public.feed',
+  'Morsel.public.hashtags',
   'Morsel.public.home',
   'Morsel.public.invite',
   'Morsel.public.notifications',
   'Morsel.public.place',//place comes before morselDetail so /places/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search',//search comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
-  'Morsel.public.search.people',
-  'Morsel.public.search.people.morsel',
-  'Morsel.public.search.people.facebook',
-  'Morsel.public.search.people.twitter',
+  'Morsel.public.search.users',
+  'Morsel.public.search.users.facebook',
   'Morsel.public.profile',//profile comes before morselDetail so /users/:id doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.morselDetail'
 ])
@@ -149,7 +162,8 @@ angular.module( 'Morsel.public', [
   localStorageServiceProvider.prefix = 'mrsl';
 })
 
-.run( function run ($window) {
+.run( function run ($window, $rootScope, $state) {
+  $rootScope.$state = $state;
   $window.moment.lang('en');
 })
 

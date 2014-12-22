@@ -21,9 +21,9 @@
           </li>
           <li ui-route="/explore" ng-class="{active:$uiRoute}">
             {{#if pageType.public}}
-            <a href="/explore">Explore</a>
+            <a href="/explore/morsels">Explore</a>
             {{else}}
-            <a href="/explore" target="_self">Explore</a>
+            <a href="/explore/morsels" target="_self">Explore</a>
             {{/if}}
           </li>
           <li ui-route="/add" ng-class="{active:$uiRoute}" ng-if="isLoggedIn">
@@ -58,6 +58,13 @@
                   <a href="/add/drafts" target="_self">Drafts</a>
                   {{/if}}
                 </li>
+                <li ng-class="{active:$uiRoute}">
+                  {{#if pageType.public}}
+                  <a ng-href="/\{{currentUser.username.toLowerCase()}}/collections">Collections</a>
+                  {{else}}
+                  <a ng-href="/\{{currentUser.username.toLowerCase()}}/collections" target="_self">Collections</a>
+                  {{/if}}
+                </li>
                 <li ui-route="/notifications" ng-class="{active:$uiRoute}">
                   {{#if pageType.public}}
                   <a href="/notifications">Notifications</a>
@@ -74,9 +81,9 @@
                 </li>
                 <li ui-route="/search/[\w\/\-]*" ng-class="{active:$uiRoute}">
                   {{#if pageType.public}}
-                  <a href="/search/people">Find people</a>
+                  <a href="/search/users">Find friends</a>
                   {{else}}
-                  <a href="/search/people" target="_self">Find people</a>
+                  <a href="/search/users" target="_self">Find friends</a>
                   {{/if}}
                 </li>
                 <li class="divider"></li>

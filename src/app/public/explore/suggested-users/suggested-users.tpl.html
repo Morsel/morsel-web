@@ -1,0 +1,9 @@
+<div class="suggested-users">
+  <h4 class="text-center h5" ng-if="suggestedUsers && suggestedUsers.length > 0">Suggested Users</h4>
+  <div class="container-shadow container-round morsel-bg" ng-if="suggestedUsers && suggestedUsers.length > 0">
+    <div mrsl-user-list="suggestedUsers" mrsl-user-list-layout="column"></div>
+    <div class="suggested-users-links">
+      <a href="/search/users">Find Friends</a>
+    </div>
+  </div>
+</div>
