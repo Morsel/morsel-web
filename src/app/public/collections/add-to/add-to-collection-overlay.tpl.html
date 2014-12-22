@@ -7,7 +7,7 @@
   <form role="form" ng-submit="startAddToCollection()" name="$parent.addToCollectionForm" novalidate>
     <div mrsl-base-errors mrsl-val-form="addToCollectionForm"></div>
     <div class="loader" ng-if="!collections.collectionsOptions"></div>
-    <div ng-if="collections.collectionsOptions">
+    <div ng-hide="!collections.collectionsOptions">
       <div class="form-group">
         <label class="control-label required" for="morselExistingCollection">Choose a collection</label>
         <select ng-model="collections.selectedCollection" ng-options="collection.title for collection in collections.collectionsOptions | orderBy:'title'" name="morselExistingCollection" class="form-control" ng-disabled="addToCollectionForm.morselExistingCollection.$invalid">
