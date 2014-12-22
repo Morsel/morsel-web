@@ -1,5 +1,5 @@
 <div class="social-account-toggle">
-  <a ng-hide="authentication" href="/auth/twitter/connect?social=true" target="_self" class="btn btn-social btn-twitter" >{{btnText}}</a>
+  <a ng-hide="authentication" href="/auth/twitter/connect?social=true" target="_self" class="btn btn-block btn-social btn-twitter" >{{btnText}}</a>
   <div ng-show="authentication">
     <p><i class="common-twitter"></i> {{authentication.name}}</p>
     <a class="btn btn-danger" ng-click="remove()">Disconnect</a>
