@@ -22,14 +22,14 @@ This is a table of all event names, properties and descriptions that are being t
 | $signup | User completed final part of signup flow, used for retention. Synonymous with Signup - Completed Step:signup_step=final | | 11/6/2014 |
 | Clicked Masthead Button | User clicked the big button in the masthead | | 11/6/2014 |
 | Published Morsel | User successfully published a morsel |item_count, tagged_users_count, template_id, morsel_id, place_id, minutes_to_publish, has_summary | 11/14/2014 |
-| Clicked hashtag | User clicked a hashtag | view, hashtag | 12/12/2014 |
-| Focused on Explore Search | A user puts cursor into search input on Explore page | view | 12/12/2014 |
-| Explore searched | User performed a search in Explore | view, explore_search_trigger | 12/12/2014 |
-| Followed User | User follows another user | view | 12/12/2014 |
-| Clicked User Profile | User clicks another user's avatar/name | view | 12/12/2014 |
-| Clicked Add to Collection | Users clicks add to collection icon | morsel_id | 12/19/2014 |
-| Added morsel to collection | User added a morsel to a collection | morsel_id, collection_id, made_new_collection | 12/19/2014 |
-| Created new Collection | User made a collection | has_description, view, collection_id | 12/19/2014 |
+| Clicked hashtag | User clicked a hashtag | view, hashtag | 12/22/2014 |
+| Focused on Explore Search | A user puts cursor into search input on Explore page | view | 12/22/2014 |
+| Explore searched | User performed a search in Explore | view, explore_search_trigger | 12/22/2014 |
+| Followed User | User follows another user | view | 12/22/2014 |
+| Clicked User Profile | User clicks another user's avatar/name | view | 12/22/2014 |
+| Clicked Add to Collection | Users clicks add to collection icon | morsel_id | 12/22/2014 |
+| Added morsel to collection | User added a morsel to a collection | morsel_id, collection_id, made_new_collection | 12/22/2014 |
+| Created new Collection | User made a collection | has_description, view, collection_id | 12/22/2014 |
 
 ### Super Property List
 This is a table of all super properties (properties that are sent with every event) names and descriptions that are being tracked. It should be kept up to date whenever super properties are added/altered
@@ -65,13 +65,13 @@ This is a table of all property names and descriptions that are being tracked. I
 | template_id | Which template was used to make a morsel | numeric | 11/14/2014 |
 | place_id | The ID of a Morsel Place | numeric | 11/14/2014 |
 | minutes_to_publish | The time (in minutes) it took a morsel between creation and publish | numeric | 11/14/2014 |
-| has_summary | Whether a morsel has a summary | boolean | 12/12/2014 |
-| hashtag | A #hashtag | string | 12/12/2014 |
-| promoted | Whether something is promoted by API | boolean | 12/12/2014 |
-| explore_search_trigger | How the user performed Explore search | "Click result","Form submit" | 12/12/2014 |
-| made_new_collection | Whether a new collection was made | boolean | 12/19/2014 |
-| collection_id | The id of a Collection | numeric | 12/19/2014 |
-| has_description | Whether something has a description | boolean | 12/19/2014 |
+| has_summary | Whether a morsel has a summary | boolean | 12/22/2014 |
+| hashtag | A #hashtag | string | 12/22/2014 |
+| promoted | Whether something is promoted by API | boolean | 12/22/2014 |
+| explore_search_trigger | How the user performed Explore search | "Click result","Form submit" | 12/22/2014 |
+| made_new_collection | Whether a new collection was made | boolean | 12/22/2014 |
+| collection_id | The id of a Collection | numeric | 12/22/2014 |
+| has_description | Whether something has a description | boolean | 12/22/2014 |
 
 
 ### View List
@@ -79,8 +79,8 @@ This is a table of all "views" that appear on the website. The "property name" c
 
 | Property Name      | Description                  | Date Started |
 | ------------------ | ---------------------------- | ------------ |
-| morsel_details | The details page of a single morsel | 12/12/2014 |
-| explore_morsels | The Explore morsels page | 12/12/2014 |
-| explore_users | The Explore users page | 12/12/2014 |
-| user_profile_collections | Collections tab of user's profile page | 12/19/2014 |
+| morsel_details | The details page of a single morsel | 12/22/2014 |
+| explore_morsels | The Explore morsels page | 12/22/2014 |
+| explore_users | The Explore users page | 12/22/2014 |
+| user_profile_collections | Collections tab of user's profile page | 12/22/2014 |
 
