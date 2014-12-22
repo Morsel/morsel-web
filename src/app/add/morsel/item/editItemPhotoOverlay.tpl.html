@@ -1,6 +1,6 @@
 <div class="modal-header">
   <button type="button" class="close" ng-click="cancel()">&times;</button>
-  <button type="button" class="btn btn-primary" ng-click="changePhoto()" ng-hide="changingPhoto">Change Photo</button>
+  <button type="button" class="btn btn-primary" ng-click="changePhoto()" ng-hide="changingPhoto" ng-bind="item.photos ? 'Change Photo':'Add Photo'"></button>
 </div>
 <div class="modal-body loader loader-dark">
   <div class="alert alert-success fade" ng-if="successfulUpload">Photo successfully uploaded</div>

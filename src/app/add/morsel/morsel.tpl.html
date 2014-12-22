@@ -1,6 +1,6 @@
 <div class="add-morsel header-padding" ng-style="viewOptions.minimumMainHeight()">
   <div class="container container-shadow morsel-bg">
-    <div class="template-help" ng-show="morselDataLoaded && !morselDeleted" mrsl-add-template="morselTemplate" mrsl-add-template-help="true" ng-hide="!morselEditForm.$error.loading"></div>
+    <div class="template-help" ng-show="morselDataLoaded && !morselDeleted && !morselEditForm.$error.loading" mrsl-add-template="morselTemplate" mrsl-add-template-help="true"></div>
     <form name="morselEditForm" ng-submit="popSummaryOverlay()" novalidate>
       <div ng-show="alertMessage" class="alert alert-{{alertType}}">
         <p ng-bind-html="alertMessage"></p>
