@@ -123,7 +123,7 @@ angular.module( 'Morsel.common.follow', [] )
         return deferred.promise;
       }
     },
-    template: '<button type="button" ng-hide="isSelf || (hideIfFollowing && isFollowing)" ng-click="toggleFollow()" class="btn follow-btn {{isFollowing ? \'btn-default\' : \'btn-info\'}}">'+
+    template: '<button type="button" ng-hide="isSelf || (hideIfFollowing && isFollowing)" ng-click="toggleFollow()" class="btn follow-btn {{isFollowing ? \'\' : \'btn-default\'}}">'+
               '{{isFollowing ? \'Following\' : \'Follow\'}}'+
               '</button>'
   };
