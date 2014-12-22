@@ -5,7 +5,8 @@ angular.module( 'Morsel.add.item', [])
     restrict: 'A',
     replace: true,
     scope: {
-      item: '=mrslEditItem'
+      item: '=mrslEditItem',
+      morsel: '=mrslEditItemMorsel'
     },
     link: function(scope, element, attrs) {
       scope.deleteItem = function() {
@@ -15,7 +16,7 @@ angular.module( 'Morsel.add.item', [])
 
       scope.makeCoverPhoto = function() {
         //don't waste an api call - make sure it's not already the primary
-        if(scope.item.id != scope.item.morsel.primary_item_id) {
+        if(scope.item.id != scope.morsel.primary_item_id) {
           scope.$emit('add.item.makeCoverPhoto', scope.item.id);
         }
       };

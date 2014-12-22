@@ -557,7 +557,7 @@ angular.module( 'Morsel.add.morsel', [])
     });
 
     return ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
-      //since the morsel.item.morsel is also changing, update the whole morsel object
+      //update our model
       $scope.morsel = morselData;
       //need to redo some display stuff
       readyMorselForDisplay();
