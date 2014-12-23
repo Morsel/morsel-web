@@ -167,7 +167,7 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME, ApiUsers ) {
   var viewOptions = {
         hideHeader: false,
         headerDropdownOpen: false
@@ -219,6 +219,13 @@ angular.module( 'Morsel.public', [
         Auth.updateUser().then(gotUserData);
       }, USER_UPDATE_CHECK_TIME);
     }
+
+    //display notifications badge
+    ApiUsers.getNotifications().then(function(notificationResp){
+      $scope.notifications = {
+        count: notificationResp.data.length
+      };
+    });
   }
 
   //when a user starts to access a new route

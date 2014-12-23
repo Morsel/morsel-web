@@ -69,7 +69,7 @@ angular.module( 'Morsel.static', [
 .run( function run ($window) {
 })
 
-.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $timeout, USER_UPDATE_CHECK_TIME ) {
+.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $timeout, USER_UPDATE_CHECK_TIME, ApiUsers ) {
   var viewOptions = {
         hideHeader: false,
         headerDropdownOpen: false
@@ -120,6 +120,13 @@ angular.module( 'Morsel.static', [
         Auth.updateUser().then(gotUserData);
       }, USER_UPDATE_CHECK_TIME);
     }
+
+    //display notifications badge
+    ApiUsers.getNotifications().then(function(notificationResp){
+      $scope.notifications = {
+        count: notificationResp.data.length
+      };
+    });
   }
 
   //reset our view options

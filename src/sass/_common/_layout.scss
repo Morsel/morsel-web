@@ -63,6 +63,12 @@
   .header-dropdown {
     position: relative;
 
+    > .badge {
+      position: absolute;
+      right: -7px;
+      top: 0;
+    }
+
     .dropdown-menu {
       margin: 0;
 
@@ -74,6 +80,10 @@
           
           span {
             font-size: 12px;
+          }
+
+          .badge {
+            float: right;
           }
         }
       }
