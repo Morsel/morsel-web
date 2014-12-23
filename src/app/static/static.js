@@ -6,6 +6,7 @@ angular.module( 'Morsel.static', [
   'ui.bootstrap',
   //filters
   //API
+  'Morsel.common.apiNotifications',
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
   //templates
@@ -69,7 +70,7 @@ angular.module( 'Morsel.static', [
 .run( function run ($window) {
 })
 
-.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $timeout, USER_UPDATE_CHECK_TIME, ApiUsers ) {
+.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $timeout, USER_UPDATE_CHECK_TIME, ApiNotifications ) {
   var viewOptions = {
         hideHeader: false,
         headerDropdownOpen: false
@@ -103,6 +104,13 @@ angular.module( 'Morsel.static', [
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
       Mixpanel.identify(currentUser.id);
+
+      //display notifications badge
+      ApiNotifications.getNotificationUnreadCount().then(function(notificationResp){
+        $scope.notifications = {
+          count: notificationResp.data.unread_count
+        };
+      });
     }
 
     if(Auth.isShadowUser()) {
@@ -120,13 +128,6 @@ angular.module( 'Morsel.static', [
         Auth.updateUser().then(gotUserData);
       }, USER_UPDATE_CHECK_TIME);
     }
-
-    //display notifications badge
-    ApiUsers.getNotifications().then(function(notificationResp){
-      $scope.notifications = {
-        count: notificationResp.data.length
-      };
-    });
   }
 
   //reset our view options

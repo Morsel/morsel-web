@@ -1,24 +1,14 @@
 angular.module( 'Morsel.common.activityFeed', [] )
 
-.directive('mrslActivityFeed', function(MORSELPLACEHOLDER, PhotoHelpers){
+.directive('mrslActivityFeed', function(ACTIVITY_LIST_NUMBER){
   return {
     scope: {
       feed: '=mrslActivityFeed',
-      user: '=mrslActivityFeedUser'
+      loadActivity: '=mrslActivityFeedViewMoreFunc'
     },
     replace: true,
     link: function(scope, element, attrs) {
-      scope.morselPlaceholder = MORSELPLACEHOLDER;
-
-      scope.getMorselPhoto = function(morsel) {
-        var primaryPhotos = PhotoHelpers.findPrimaryItemPhotos(morsel);
-
-        if(primaryPhotos) {
-          return primaryPhotos._100x100;
-        } else {
-          return MORSELPLACEHOLDER;
-        }
-      };
+      scope.ACTIVITY_LIST_NUMBER = ACTIVITY_LIST_NUMBER;
     },
     templateUrl: 'common/user/activityFeed.tpl.html'
   };

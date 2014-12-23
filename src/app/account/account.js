@@ -11,6 +11,7 @@ angular.module( 'Morsel.account', [
   //filters
   //API
   'Morsel.common.apiKeywords',
+  'Morsel.common.apiNotifications',
   'Morsel.common.apiPlaces',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
@@ -114,7 +115,7 @@ angular.module( 'Morsel.account', [
   $window.moment.lang('en');
 })
 
-.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack, $timeout, USER_UPDATE_CHECK_TIME, ApiUsers ) {
+.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack, $timeout, USER_UPDATE_CHECK_TIME, ApiNotifications ) {
   var viewOptions = {
         hideHeader: false,
         headerDropdownOpen: false
@@ -149,6 +150,13 @@ angular.module( 'Morsel.account', [
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
       Mixpanel.identify(currentUser.id);
+
+      //display notifications badge
+      ApiNotifications.getNotificationUnreadCount().then(function(notificationResp){
+        $scope.notifications = {
+          count: notificationResp.data.unread_count
+        };
+      });
     }
 
     if(Auth.isShadowUser()) {
@@ -166,13 +174,6 @@ angular.module( 'Morsel.account', [
         Auth.updateUser().then(gotUserData);
       }, USER_UPDATE_CHECK_TIME);
     }
-
-    //display notifications badge
-    ApiUsers.getNotifications().then(function(notificationResp){
-      $scope.notifications = {
-        count: notificationResp.data.length
-      };
-    });
   }
 
   //when a user starts to access a new route

@@ -338,20 +338,30 @@ form {
 .activity-feed {
   $activity-feed-padding-right: $profile-pic-xs + 10px;
 
+  &.notification-feed {
+    padding-top: 0px;
+
+    li {
+      background-color: white;
+      @include transition(background-color 150ms ease-out);
+
+      &.unread {
+        background-color: $morsel-new-beige;
+      }
+    }
+  }
+
   ul {
     margin: 0;
   }
 
   li {
     border-bottom: 1px solid $morsel-light;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
+    padding: 10px;
     list-style: none;
 
     &:last-child {
-      margin: 0;
       border: 0;
-      padding: 0;
     }
 
     .profile-pic-link {

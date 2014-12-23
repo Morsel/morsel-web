@@ -22,16 +22,62 @@ angular.module( 'Morsel.public.notifications', [])
   });
 })
 
-.controller( 'NotificationsCtrl', function NotificationsCtrl( $scope, currentUser, ApiUsers ) {
+.controller( 'NotificationsCtrl', function NotificationsCtrl( $scope, currentUser, ApiNotifications, ACTIVITY_LIST_NUMBER ) {
   $scope.user = currentUser;
+  $scope.ACTIVITY_LIST_NUMBER = ACTIVITY_LIST_NUMBER;
 
-  ApiUsers.getNotifications().then(function(notificationResp){
-    var notificationsFeed = [];
+  $scope.loadNotifications = function() {
+    var notificationsParams = {
+          count: $scope.ACTIVITY_LIST_NUMBER
+        };
 
-    _.each(notificationResp.data, function(notification){
-      notificationsFeed.push(notification.payload);
+    //get the next page number
+    $scope.notificationsPageNumber = $scope.notificationsPageNumber ? $scope.notificationsPageNumber+1 : 1;
+    notificationsParams.page = $scope.notificationsPageNumber;
+
+    ApiNotifications.getNotifications(notificationsParams).then(function(notificationResp){
+      if($scope.notificationsFeed) {
+        //concat them with new data after old data
+        $scope.notificationsFeed = $scope.notificationsFeed.concat(notificationResp.data);
+      } else {
+        $scope.notificationsFeed = notificationResp.data;
+      }
     });
+  };
+  
+  $scope.loadNotifications();
 
-    $scope.notificationsFeed = notificationsFeed;
-  });
+  $scope.markRead = function(notification) {
+    if(!notification.marked_read_at) {
+      ApiNotifications.markNotificationRead(notification.id).then(function(resp){
+        //set this to something to display in UI
+        notification.marked_read_at = true;
+
+        //subtract one from our count in the header
+        $scope.notifications.count--;
+      });
+    }
+  };
+
+  $scope.markAllRead = function() {
+    var latestNotification = _.max($scope.notificationsFeed, function(n) {
+          return n.id;
+        });
+
+    ApiNotifications.markAllNotificationsRead(latestNotification.id).then(function(resp){
+      //set this to something to display in UI
+      _.each($scope.notificationsFeed, function(n) {
+        n.marked_read_at = true;
+      });
+
+      //remove our count in the header
+        $scope.notifications.count = 0;
+    });
+  };
+
+  $scope.hasUnreadNotifications = function() {
+    return _.find($scope.notificationsFeed, function(n) {
+      return !n.marked_read_at;
+    });
+  };
 });

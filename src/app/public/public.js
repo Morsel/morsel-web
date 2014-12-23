@@ -19,6 +19,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.apiItems',
   'Morsel.common.apiKeywords',
   'Morsel.common.apiMorsels',
+  'Morsel.common.apiNotifications',
   'Morsel.common.apiPlaces',
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
@@ -26,6 +27,7 @@ angular.module( 'Morsel.public', [
   //templates
   'templates-public',
   //common
+  'Morsel.common.activity',
   'Morsel.common.activityFeed',
   'Morsel.common.afterLogin',
   'Morsel.common.auth',
@@ -107,6 +109,7 @@ angular.module( 'Morsel.public', [
 .constant('USER_UPDATE_CHECK_TIME', 5000)
 .constant('COMMENT_LIST_NUMBER', 10)
 .constant('MORSEL_LIST_NUMBER', 12)
+.constant('ACTIVITY_LIST_NUMBER', 20)
 
 // Default queries
 .value('presetMediaQueries', {
@@ -167,7 +170,7 @@ angular.module( 'Morsel.public', [
   $window.moment.lang('en');
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME, ApiUsers ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, GA, $modalStack, $rootScope, $state, $timeout, USER_UPDATE_CHECK_TIME, ApiNotifications ) {
   var viewOptions = {
         hideHeader: false,
         headerDropdownOpen: false
@@ -202,6 +205,13 @@ angular.module( 'Morsel.public', [
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
       Mixpanel.identify(currentUser.id);
+
+      //display notifications badge
+      ApiNotifications.getNotificationUnreadCount().then(function(notificationResp){
+        $scope.notifications = {
+          count: notificationResp.data.unread_count
+        };
+      });
     }
 
     if(Auth.isShadowUser()) {
@@ -219,13 +229,6 @@ angular.module( 'Morsel.public', [
         Auth.updateUser().then(gotUserData);
       }, USER_UPDATE_CHECK_TIME);
     }
-
-    //display notifications badge
-    ApiUsers.getNotifications().then(function(notificationResp){
-      $scope.notifications = {
-        count: notificationResp.data.length
-      };
-    });
   }
 
   //when a user starts to access a new route
