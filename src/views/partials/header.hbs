@@ -70,7 +70,7 @@
                   {{#if pageType.public}}
                   <a href="/notifications">Notifications <span class="badge" ng-bind="notifications.count" ng-if="notifications.count > 0"></span></a>
                   {{else}}
-                  <a href="/notifications" target="_self">Notifications <span class="badge" ng-bind="notifications.count"></span></a>
+                  <a href="/notifications" target="_self">Notifications <span class="badge" ng-bind="notifications.count" ng-if="notifications.count > 0"></span></a>
                   {{/if}}
                 </li>
                 <li ui-route="/activity" ng-class="{active:$uiRoute}">
