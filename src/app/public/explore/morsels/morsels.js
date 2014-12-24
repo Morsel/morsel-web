@@ -66,9 +66,10 @@ angular.module( 'Morsel.public.explore.morsels', [])
   //get our full explore feed
   $scope.loadDefaultMorsels();
 
-  $scope.$on('explore.user.follow', function(event, details){
+  $scope.$on('explore.user.follow', function(event, user){
     Mixpanel.track('Followed User', {
-      view: 'explore_morsels'
+      view: 'explore_morsels',
+      promoted: user.promoted ? true : false
     });
   });
 });

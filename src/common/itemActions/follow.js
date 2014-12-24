@@ -4,8 +4,7 @@ angular.module( 'Morsel.common.follow', [] )
 .directive('mrslFollow', function(ApiUsers, ApiPlaces, AfterLogin, $location, Auth, $q, $window){
   return {
     scope: {
-      idToFollow: '=mrslIdToFollow',
-      isFollowing: '=mrslIsFollowing',
+      thingToFollow: '=mrslThingToFollow',
       followType: '@mrslFollowType',
       hideIfFollowing: '@mrslHideIfFollowing'
     },
@@ -24,7 +23,7 @@ angular.module( 'Morsel.common.follow', [] )
           afterLoginCallback = AfterLogin.getCallback();
 
           //make sure it's the right item
-          if(afterLoginCallback.data && (afterLoginCallback.data.id === scope.idToFollow)) {
+          if(afterLoginCallback.data && (afterLoginCallback.data.id === scope.thingToFollow.id)) {
             //make sure we're actually loggeed in just in case
             if(isLoggedIn) {
               performToggleFollow().then(function(){
@@ -36,9 +35,9 @@ angular.module( 'Morsel.common.follow', [] )
         }
 
         //wait until we have the data on who to follow, then decide if we need to show the follow button or not
-        scope.$watch('idToFollow', function(newValue, oldValue) {
+        scope.$watch('thingToFollow', function(newValue, oldValue) {
           if(newValue) {
-            if(currentUser && currentUser.id === scope.idToFollow) {
+            if(currentUser && currentUser.id === scope.thingToFollow.id) {
               scope.isSelf = true;
             }
           }
@@ -57,7 +56,7 @@ angular.module( 'Morsel.common.follow', [] )
             type: 'follow',
             path: currentUrl,
             data: {
-              id: scope.idToFollow
+              id: scope.thingToFollow.id
             }
           });
           
@@ -78,23 +77,23 @@ angular.module( 'Morsel.common.follow', [] )
       function toggleUser() {
         var deferred = $q.defer();
 
-        if(scope.isFollowing) {
-          ApiUsers.unfollowUser(scope.idToFollow).then(function(resp) {
-            scope.isFollowing = false;
+        if(scope.thingToFollow.following) {
+          ApiUsers.unfollowUser(scope.thingToFollow.id).then(function(resp) {
+            scope.thingToFollow.following = false;
 
             //emit this so if we're on a profile page, it can update the count
-            scope.$emit('users.'+scope.idToFollow+'.followerCount', 'decrease');
+            scope.$emit('users.'+scope.thingToFollow.id+'.followerCount', 'decrease');
 
             deferred.resolve();
           });
         } else {
-          ApiUsers.followUser(scope.idToFollow).then(function(resp) {
-            scope.isFollowing = true;
+          ApiUsers.followUser(scope.thingToFollow.id).then(function(resp) {
+            scope.thingToFollow.following = true;
             
             //emit this so if we're on a profile page, it can update the count
-            scope.$emit('users.'+scope.idToFollow+'.followerCount', 'increase');
+            scope.$emit('users.'+scope.thingToFollow.id+'.followerCount', 'increase');
             //emit this so Explore page can pick up
-            scope.$emit('explore.user.follow');
+            scope.$emit('explore.user.follow', scope.thingToFollow);
 
             deferred.resolve();
           });
@@ -106,15 +105,15 @@ angular.module( 'Morsel.common.follow', [] )
       function togglePlace() {
         var deferred = $q.defer();
 
-        if(scope.isFollowing) {
-          ApiPlaces.unfollowPlace(scope.idToFollow).then(function(resp) {
-            scope.isFollowing = false;
+        if(scope.thingToFollow.following) {
+          ApiPlaces.unfollowPlace(scope.thingToFollow.id).then(function(resp) {
+            scope.thingToFollow.following = false;
 
             deferred.resolve();
           });
         } else {
-          ApiPlaces.followPlace(scope.idToFollow).then(function(resp) {
-            scope.isFollowing = true;
+          ApiPlaces.followPlace(scope.thingToFollow.id).then(function(resp) {
+            scope.thingToFollow.following = true;
             
             deferred.resolve();
           });
@@ -123,8 +122,8 @@ angular.module( 'Morsel.common.follow', [] )
         return deferred.promise;
       }
     },
-    template: '<button type="button" ng-hide="isSelf || (hideIfFollowing && isFollowing)" ng-click="toggleFollow()" class="btn follow-btn {{isFollowing ? \'\' : \'btn-default\'}}">'+
-              '{{isFollowing ? \'Following\' : \'Follow\'}}'+
+    template: '<button type="button" ng-hide="isSelf || (hideIfFollowing && thingToFollow.following)" ng-click="toggleFollow()" class="btn follow-btn {{thingToFollow.following ? \'\' : \'btn-default\'}}">'+
+              '{{thingToFollow.following ? \'Following\' : \'Follow\'}}'+
               '</button>'
   };
 });
