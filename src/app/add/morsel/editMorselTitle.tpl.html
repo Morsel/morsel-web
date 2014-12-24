@@ -4,7 +4,7 @@
     <div class="loader saving" ng-show="saving"></div>
     <p ng-hide="editing || saving" class="form-control-static" ng-bind-html="morsel.title ? morsel.title : placeholder" ng-class="{'no-text':!morsel.title}" ng-click="edit()"></p>
     <ng-form ng-show="editing && !saving" name="morselTitleForm">
-      <input type="text" ng-attr-placeholder="{{placeholder}}" ng-model="updatedTitle" name="morselTitle" class="form-control" maxlength="50" mrsl-focus-me="editing"></input>
+      <input type="text" ng-attr-placeholder="{{placeholder}}" ng-model="updatedTitle" name="morselTitle" class="form-control" maxlength="70" mrsl-focus-me="editing"></input>
       <div class="form-group-btns">
         <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
         <button type="submit" class="btn btn-primary" ng-click="save($event)">Save</button>
