@@ -38,7 +38,7 @@
           </li>
           <li ng-if="isLoggedIn">
             <div class="header-dropdown dropdown" is-open="viewOptions.headerDropdownOpen">
-              <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-user-image-size="profile-pic-xs" class="dropdown-toggle"></div>
+              <div mrsl-user-image mrsl-username="currentUser.username" mrsl-user-photos="currentUser.photos"  mrsl-user-image-size="profile-pic-xs" ng-click="trackUserMenuClick($event)" class="dropdown-toggle"></div>
               <span class="badge" ng-bind="notifications.count" ng-if="notifications.count > 0"></span>
               <ul class="dropdown-menu pull-right" role="menu">
                 <li>

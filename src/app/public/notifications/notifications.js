@@ -22,7 +22,7 @@ angular.module( 'Morsel.public.notifications', [])
   });
 })
 
-.controller( 'NotificationsCtrl', function NotificationsCtrl( $scope, currentUser, ApiNotifications, ACTIVITY_LIST_NUMBER ) {
+.controller( 'NotificationsCtrl', function NotificationsCtrl( $scope, currentUser, ApiNotifications, ACTIVITY_LIST_NUMBER, Mixpanel ) {
   $scope.user = currentUser;
   $scope.ACTIVITY_LIST_NUMBER = ACTIVITY_LIST_NUMBER;
 
@@ -53,6 +53,10 @@ angular.module( 'Morsel.public.notifications', [])
         //set this to something to display in UI
         notification.marked_read_at = true;
 
+        Mixpanel.track('Marked notification read', {
+          unread_notification_count: $scope.notifications.count
+        });
+
         //subtract one from our count in the header
         $scope.notifications.count--;
       });
@@ -70,8 +74,12 @@ angular.module( 'Morsel.public.notifications', [])
         n.marked_read_at = true;
       });
 
+      Mixpanel.track('Marked all notifications read', {
+        unread_notification_count: $scope.notifications.count
+      });
+
       //remove our count in the header
-        $scope.notifications.count = 0;
+      $scope.notifications.count = 0;
     });
   };
 

@@ -282,6 +282,17 @@ angular.module( 'Morsel.public', [
     $state.go('404');
   });
 
+  $scope.trackUserMenuClick = function(e) {
+    var $dropdown = e.currentTarget && e.currentTarget.parentElement ? angular.element(e.currentTarget.parentElement) : null;
+
+    //only track opening, not closing
+    if($dropdown && !$dropdown.hasClass('open')) {
+      Mixpanel.track('Opened user dropdown', {
+        unread_notification_count: $scope.notifications ? $scope.notifications.count : null
+      });
+    }
+  };
+
   //reset our view options
   function resetViewOptions() {
     if(!$scope.viewOptions) {

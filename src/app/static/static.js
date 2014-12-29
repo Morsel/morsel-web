@@ -95,6 +95,17 @@ angular.module( 'Morsel.static', [
     console.log('Trouble initiating user...');
   });
 
+  $scope.trackUserMenuClick = function(e) {
+    var $dropdown = e.currentTarget && e.currentTarget.parentElement ? angular.element(e.currentTarget.parentElement) : null;
+
+    //only track opening, not closing
+    if($dropdown && !$dropdown.hasClass('open')) {
+      Mixpanel.track('Opened user dropdown', {
+        unread_notification_count: $scope.notifications ? $scope.notifications.count : null
+      });
+    }
+  };
+
   function gotUserData(currentUser) {
     $scope.currentUser = currentUser;
     $scope.isLoggedIn = Auth.isLoggedIn();
