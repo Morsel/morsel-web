@@ -11,6 +11,7 @@ angular.module( 'Morsel.account', [
   //filters
   //API
   'Morsel.common.apiKeywords',
+  'Morsel.common.apiNotifications',
   'Morsel.common.apiPlaces',
   'Morsel.common.apiUsers',
   'Morsel.common.apiUploads',
@@ -114,7 +115,7 @@ angular.module( 'Morsel.account', [
   $window.moment.lang('en');
 })
 
-.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack, $timeout, USER_UPDATE_CHECK_TIME ) {
+.controller( 'AccountCtrl', function AccountCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack, $timeout, USER_UPDATE_CHECK_TIME, ApiNotifications ) {
   var viewOptions = {
         hideHeader: false,
         headerDropdownOpen: false
@@ -149,6 +150,13 @@ angular.module( 'Morsel.account', [
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
       Mixpanel.identify(currentUser.id);
+
+      //display notifications badge
+      ApiNotifications.getNotificationUnreadCount().then(function(notificationResp){
+        $scope.notifications = {
+          count: notificationResp.data.unread_count
+        };
+      });
     }
 
     if(Auth.isShadowUser()) {
@@ -215,6 +223,17 @@ angular.module( 'Morsel.account', [
   $scope.$on('$stateChangeError', function(e) {
     $state.go('404');
   });
+
+  $scope.trackUserMenuClick = function(e) {
+    var $dropdown = e.currentTarget && e.currentTarget.parentElement ? angular.element(e.currentTarget.parentElement) : null;
+
+    //only track opening, not closing
+    if($dropdown && !$dropdown.hasClass('open')) {
+      Mixpanel.track('Opened user dropdown', {
+        unread_notification_count: $scope.notifications ? $scope.notifications.count : null
+      });
+    }
+  };
 
   //reset our view options
   function resetViewOptions() {

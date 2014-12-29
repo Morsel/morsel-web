@@ -1,48 +1,12 @@
 <div class="activity-feed">
-  <ul ng-if="feed.length > 0">
+  <ul ng-if="feed && feed.length > 0">
     <li bindonce ng-repeat="activity in feed">
-      <div class="user-info">
-        <div mrsl-user-image mrsl-username="activity.creator.username" mrsl-user-photos="activity.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
-        <div class="user-body">
-          <div bo-if="activity.subject_type === 'Item'">
-            <a class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.morsel.id+'-'+activity.subject.morsel.slug">
-              <img bo-src="activity.subject.photos ? activity.subject.photos._100x100 : morselPlaceholder" />
-            </a>
-            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.username"></a> {{activity.action_type === 'Like' ? 'liked':''}}{{activity.action_type === 'Comment' ? 'commented on':''}} <a bo-if="activity.subject.creator.id !== user.id" bo-href="'/'+activity.subject.creator.username.toLowerCase()" bo-text="activity.subject.creator.username+'\'s'"></a> "{{activity.subject.morsel.title+(activity.subject.description ? ': '+activity.subject.description : '') | truncate:80}}"</p>
-            <span am-time-ago="activity.action.created_at" class="time-ago"></span>
-          </div>
-          <div ng-if="activity.subject_type === 'User' && activity.action_type === 'Follow'">
-            <div class="activity-subject" mrsl-user-image mrsl-username="activity.subject.username" mrsl-user-photos="activity.subject.photos" mrsl-user-image-size="profile-pic-s"></div>
-            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.username"></a> followed <span bo-if="activity.subject.id === user.id">you</span><a bo-href="'/'+activity.subject.username.toLowerCase()" bo-if="activity.subject.id != user.id" bo-text="activity.subject.username"></a></p>
-            <span am-time-ago="activity.action.created_at" class="time-ago"></span>
-          </div>
-          <div bo-if="activity.subject_type === 'Place' && activity.action_type === 'Follow'">
-            <a class="activity-subject" bo-href="'/places/'+activity.subject.id+'-'+activity.subject.slug">
-              <img src="/assets/images/icons/place-icon_large.png" />
-            </a>
-            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.username"></a> followed <a bo-href="'/places/'+activity.subject.id+'-'+activity.subject.slug" bo-text="activity.subject.name"></a></p>
-            <span am-time-ago="activity.action.created_at" class="time-ago"></span>
-          </div>
-          <div bo-if="activity.action_type === 'MorselUserTag'">
-            <a class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.id+'-'+activity.subject.slug">
-              <img bo-src="getMorselPhoto(activity.subject)" />
-            </a>
-            <p><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-text="activity.creator.username"></a> tagged you in "{{activity.subject.title | truncate:80}}"</p>
-            <span am-time-ago="activity.action.created_at" class="time-ago"></span>
-          </div>
-          <div bo-if="activity.subject_type === 'Morsel' && activity.action_type === 'Like'">
-            <a class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.id+'-'+activity.subject.slug">
-              <img bo-src="getMorselPhoto(activity.subject)" />
-            </a>
-            <p><span bo-if="activity.creator.id === user.id">You</span><a bo-href="'/'+activity.creator.username.toLowerCase()" bo-if="activity.creator.id !== user.id" bo-text="activity.creator.username"></a> liked <a bo-if="activity.subject.creator.id !== user.id" bo-href="'/'+activity.subject.creator.username.toLowerCase()" bo-text="activity.subject.creator.username+'\'s'"></a> "{{activity.subject.title | truncate:80}}"</p>
-            <span am-time-ago="activity.action.created_at" class="time-ago"></span>
-          </div>
-        </div>
-      </div>
+      <div mrsl-activity="activity"></div>
     </li>
   </ul>
   <div ng-if="!feed" class="loader"></div>
   <div ng-if="feed && feed.length === 0" class="empty-state">
-    <p>No activity to show</p>
+    <p>No activity</p>
   </div>
+  <div mrsl-view-more mrsl-view-more-func="loadActivity" mrsl-view-more-data="feed" mrsl-view-more-inc="ACTIVITY_LIST_NUMBER" mrsl-view-more-copy="View more activity" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
 </div>

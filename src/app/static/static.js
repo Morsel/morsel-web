@@ -6,6 +6,7 @@ angular.module( 'Morsel.static', [
   'ui.bootstrap',
   //filters
   //API
+  'Morsel.common.apiNotifications',
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
   //templates
@@ -69,7 +70,7 @@ angular.module( 'Morsel.static', [
 .run( function run ($window) {
 })
 
-.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $timeout, USER_UPDATE_CHECK_TIME ) {
+.controller( 'StaticCtrl', function StaticCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $timeout, USER_UPDATE_CHECK_TIME, ApiNotifications ) {
   var viewOptions = {
         hideHeader: false,
         headerDropdownOpen: false
@@ -94,6 +95,17 @@ angular.module( 'Morsel.static', [
     console.log('Trouble initiating user...');
   });
 
+  $scope.trackUserMenuClick = function(e) {
+    var $dropdown = e.currentTarget && e.currentTarget.parentElement ? angular.element(e.currentTarget.parentElement) : null;
+
+    //only track opening, not closing
+    if($dropdown && !$dropdown.hasClass('open')) {
+      Mixpanel.track('Opened user dropdown', {
+        unread_notification_count: $scope.notifications ? $scope.notifications.count : null
+      });
+    }
+  };
+
   function gotUserData(currentUser) {
     $scope.currentUser = currentUser;
     $scope.isLoggedIn = Auth.isLoggedIn();
@@ -103,6 +115,13 @@ angular.module( 'Morsel.static', [
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
       Mixpanel.identify(currentUser.id);
+
+      //display notifications badge
+      ApiNotifications.getNotificationUnreadCount().then(function(notificationResp){
+        $scope.notifications = {
+          count: notificationResp.data.unread_count
+        };
+      });
     }
 
     if(Auth.isShadowUser()) {

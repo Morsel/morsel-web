@@ -6,7 +6,7 @@
         <div mrsl-user-image mrsl-username="user.username" mrsl-user-photos="user.photos" mrsl-user-image-size="profile-pic-s" ng-if="!blankLinks"></div>
         <div class="user-body">
           <button ng-if="morselTagged" mrsl-tag-user-btn="morselTagged" mrsl-tag-user-btn-user="user"></button>
-          <button ng-if="!morselTagged" mrsl-follow mrsl-id-to-follow="user.id" mrsl-is-following="user.following"></button>
+          <button ng-if="!morselTagged" mrsl-follow mrsl-thing-to-follow="user"></button>
           <h5 class="user-info-main overflow-ellipsis">
             <a ng-if="!blankLinks" bo-href="'/'+user.username.toLowerCase()" mrsl-users-name="user"></a>
             <a ng-if="blankLinks" bo-href="'/'+user.username.toLowerCase()" target="_blank" mrsl-users-name="user"></a>

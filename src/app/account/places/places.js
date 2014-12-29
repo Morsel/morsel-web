@@ -21,13 +21,17 @@ angular.module( 'Morsel.account.places', [])
   });
 })
 
-.controller( 'ManagePlacesCtrl', function ManagePlacesCtrl( $scope, accountUser, ApiUsers){
-  ApiUsers.getPlaces(accountUser.id).then(function(placesResp){
-    $scope.places = placesResp.data;
-  });
+.controller( 'ManagePlacesCtrl', function ManagePlacesCtrl( $scope, accountUser, ApiUsers, $state){
+  if(accountUser.professional) {
+    ApiUsers.getPlaces(accountUser.id).then(function(placesResp){
+      $scope.places = placesResp.data;
+    });
 
-  $scope.$on('places.add.new', function(e, newPlace) {
-    $scope.alertMessage = 'Successfully added '+newPlace.name+' to your profile';
-    $scope.alertType = 'success';
-  });
+    $scope.$on('places.add.new', function(e, newPlace) {
+      $scope.alertMessage = 'Successfully added '+newPlace.name+' to your profile';
+      $scope.alertType = 'success';
+    });
+  } else {
+    $state.go('account.edit-profile', null, {location:'replace'});
+  }
 });

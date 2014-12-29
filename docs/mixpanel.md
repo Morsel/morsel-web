@@ -30,6 +30,9 @@ This is a table of all event names, properties and descriptions that are being t
 | Clicked Add to Collection | Users clicks add to collection icon | morsel_id | 12/22/2014 |
 | Added morsel to collection | User added a morsel to a collection | morsel_id, collection_id, made_new_collection | 12/22/2014 |
 | Created new Collection | User made a collection | has_description, view, collection_id | 12/22/2014 |
+| Marked notification read | User marks a notification as read | unread_notification_count | 12/29/2014 |
+| Marked all notifications read | User marks all notifications as read | unread_notification_count | 12/29/2014 |
+| Opened user dropdown | User clicked to open menu | unread_notification_count | 12/29/2014 |
 
 ### Super Property List
 This is a table of all super properties (properties that are sent with every event) names and descriptions that are being tracked. It should be kept up to date whenever super properties are added/altered
@@ -72,6 +75,7 @@ This is a table of all property names and descriptions that are being tracked. I
 | made_new_collection | Whether a new collection was made | boolean | 12/22/2014 |
 | collection_id | The id of a Collection | numeric | 12/22/2014 |
 | has_description | Whether something has a description | boolean | 12/22/2014 |
+| unread_notification_count| The number of unread notifications a user has | numeric | 12/29/2014 |
 
 
 ### View List

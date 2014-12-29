@@ -69,9 +69,10 @@ angular.module( 'Morsel.public.explore.users', [])
     }
   }
 
-  $scope.$on('explore.user.follow', function(event, details){
+  $scope.$on('explore.user.follow', function(event, user){
     Mixpanel.track('Followed User', {
-      view: 'explore_users'
+      view: 'explore_users',
+      promoted: user.promoted ? true : false
     });
   });
 });

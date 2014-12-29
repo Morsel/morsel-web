@@ -1,6 +1,20 @@
 <div class="activity header-padding" ng-style="viewOptions.minimumMainHeight()">
   <h2 class="text-center">Notifications</h2>
   <div class="container container-no-padding container-shadow morsel-bg container-max-sm">
-    <div mrsl-activity-feed="notificationsFeed" mrsl-activity-feed-user="user"></div>
+    <div class="activity-feed notification-feed">
+      <div class="clearfix">
+        <button type="button" class="btn btn-link pull-right" ng-click="markAllRead()" ng-if="hasUnreadNotifications()">Mark all as read</button>
+      </div>
+      <ul ng-if="notificationsFeed && notificationsFeed.length > 0">
+        <li bindonce ng-repeat="notification in notificationsFeed" ng-class="{'unread': !notification.marked_read_at}" ng-click="markRead(notification)">
+          <div mrsl-activity="notification.payload"></div>
+        </li>
+      </ul>
+      <div ng-if="!notificationsFeed" class="loader"></div>
+      <div ng-if="notificationsFeed && notificationsFeed.length === 0" class="empty-state">
+        <p>No notifications</p>
+      </div>
+      <div mrsl-view-more mrsl-view-more-func="loadNotifications" mrsl-view-more-data="notificationsFeed" mrsl-view-more-inc="ACTIVITY_LIST_NUMBER" mrsl-view-more-copy="View more notifications" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+    </div>
   </div>
 </div>

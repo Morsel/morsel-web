@@ -1,0 +1,17 @@
+<div class="user-info">
+  <div mrsl-user-image mrsl-username="activity.creator.username" mrsl-user-photos="activity.creator.photos" mrsl-user-image-size="profile-pic-s"></div>
+  <div class="user-body">
+    <div ng-if="activity.subject_type === 'User'" class="activity-subject" mrsl-user-image mrsl-username="activity.subject.username" mrsl-user-photos="activity.subject.photos" mrsl-user-image-size="profile-pic-s"></div>
+    <a bo-if="activity.subject_type === 'Place'" class="activity-subject" bo-href="'/places/'+activity.subject.id+'-'+activity.subject.slug">
+      <img src="/assets/images/icons/place-icon_large.png" />
+    </a>
+    <a bo-if="activity.subject_type === 'Morsel'" class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.id+'-'+activity.subject.slug">
+      <img bo-src="getMorselPhoto(activity.subject)" />
+    </a>
+    <a bo-if="activity.subject_type === 'Item'" class="activity-subject" bo-href="'/'+activity.subject.creator.username.toLowerCase()+'/'+activity.subject.morsel.id+'-'+activity.subject.morsel.slug">
+      <img bo-src="activity.subject.photos ? activity.subject.photos._100x100 : morselPlaceholder" />
+    </a>
+    <p bo-text="activity.message"></p>
+    <span am-time-ago="activity.action.created_at" class="time-ago"></span>
+  </div>
+</div>

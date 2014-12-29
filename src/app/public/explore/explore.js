@@ -27,6 +27,8 @@ angular.module( 'Morsel.public.explore', [])
     //get our promoted folks
     ApiUsers.search({'user[promoted]': true}).then(function(searchResp) {
       $scope.search.defaultSuggestedUsers = _.filter(searchResp.data, function(u) {
+        //mark these users as promoted
+        u.promoted = true;
         return !u.following && (u.id != userData.id);
       }).splice(0, $scope.search.suggestedUserCount);
 
