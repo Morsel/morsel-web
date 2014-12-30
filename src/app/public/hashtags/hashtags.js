@@ -15,21 +15,13 @@ angular.module( 'Morsel.public.hashtags', [])
   });
 })
 
-.controller( 'HashtagsCtrl', function HashtagsCtrl( $scope, $state, $stateParams, MORSEL_LIST_NUMBER, ApiKeywords) {
+.controller( 'HashtagsCtrl', function HashtagsCtrl( $scope, $state, $stateParams, ApiKeywords) {
   $scope.hashtag = $stateParams.hashtag;
 
   $scope.emptyText = 'There are no morsels tagged #'+$stateParams.hashtag+'. <a href="/add" target="_self">Create one now</a>.';
 
-  $scope.getMorsels = function() {
-    var morselsParams = {
-          count: MORSEL_LIST_NUMBER
-        };
-
-    //get the next page number
-    $scope.morselPageNumber = $scope.morselPageNumber ? $scope.morselPageNumber+1 : 1;
-    morselsParams.page = $scope.morselPageNumber;
-
-    ApiKeywords.getHashtagMorsels($scope.hashtag, morselsParams).then(function(morselsData) {
+  $scope.getMorsels = function(params) {
+    ApiKeywords.getHashtagMorsels($scope.hashtag, params).then(function(morselsData) {
       if($scope.morsels) {
         //concat them with new data after old data
         $scope.morsels = $scope.morsels.concat(morselsData);
@@ -41,7 +33,4 @@ angular.module( 'Morsel.public.hashtags', [])
       $state.go('404');
     });
   };
-
-  //load our morsels immediately
-  $scope.getMorsels();
 });

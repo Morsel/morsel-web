@@ -5,7 +5,7 @@
     <a class="list-group-item" bindonce ng-repeat="hashtagResult in promotedHashtags" ng-href="/explore/morsels/search?q={{formatQuery(hashtagResult.name)}}&type=hashtag" ng-click="clickHashtag(hashtagResult.name, true)"><span bo-text="'#'+hashtagResult.name"></span><span class="badge" bo-text="hashtagResult.tags_count"></span></a>
   </div>
   <div ng-if="!promotedHashtags" class="loader"></div>
-  <div mrsl-view-more mrsl-view-more-func="loadPromotedHashtags" mrsl-view-more-data="promotedHashtags" mrsl-view-more-inc="morselSearch.exploreIncrement" mrsl-view-more-copy="View more hashtags" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+  <div mrsl-view-more="loadPromotedHashtags" mrsl-view-more-data="promotedHashtags" mrsl-view-more-copy="View more hashtags" mrsl-view-more-list-type="Hashtags" mrsl-view-more-view="search_matches_morsels" mrsl-view-more-delay="true"></div>
 </div>
 
 <div ng-if="!showPromotedHashtags">
@@ -14,5 +14,5 @@
     <a class="list-group-item" bindonce ng-repeat="hashtagResult in hashtagResults" ng-href="/explore/morsels/search?q={{formatQuery(hashtagResult.name)}}&type=hashtag" ng-click="clickHashtag(hashtagResult.name)"><span bo-text="'#'+hashtagResult.name"></span><span class="badge" bo-text="hashtagResult.tags_count"></span></a>
   </div>
   <div ng-if="!hashtagResults" class="loader"></div>
-  <div mrsl-view-more mrsl-view-more-func="loadHashtagResults" mrsl-view-more-data="hashtagResults" mrsl-view-more-inc="morselSearch.exploreIncrement" mrsl-view-more-copy="View more hashtags" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+  <div mrsl-view-more="loadHashtagResults" mrsl-view-more-data="hashtagResults" mrsl-view-more-copy="View more hashtags" mrsl-view-more-list-type="Hashtags" mrsl-view-more-view="search_matches_morsels" mrsl-view-more-delay="true"></div>
 </div>

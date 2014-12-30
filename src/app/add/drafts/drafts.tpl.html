@@ -14,7 +14,7 @@
       </li>
     </ul>
     <div ng-if="!dataLoaded" class="loader"></div>
-    <div mrsl-view-more mrsl-view-more-func="getDrafts" mrsl-view-more-data="drafts" mrsl-view-more-inc="draftIncrement" mrsl-view-more-copy="View more drafts" mrsl-view-more-order="last"></div>
+    <div mrsl-view-more="getDrafts" mrsl-view-more-data="drafts" mrsl-view-more-copy="View more drafts" mrsl-view-more-list-type="Morsels" mrsl-view-more-view="drafts"></div>
     <div ng-if="drafts && drafts.length === 0" class="empty-state">
       <p>You don't have any drafts. <a href="/add">Create one now</a></p>
     </div>

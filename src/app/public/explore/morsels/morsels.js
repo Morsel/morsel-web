@@ -12,9 +12,8 @@ angular.module( 'Morsel.public.explore.morsels', [])
   });
 })
 
-.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, MORSEL_LIST_NUMBER, $state, Mixpanel, ApiMorsels){
+.controller( 'ExploreMorselsCtrl', function ExploreMorselsCtrl ($scope, $state, Mixpanel, ApiMorsels){
   $scope.morselSearch = {
-    exploreIncrement: MORSEL_LIST_NUMBER,
     customFocus: function() {
       Mixpanel.track('Focused on Explore Search', {
         view: 'explore_morsels'
@@ -41,16 +40,8 @@ angular.module( 'Morsel.public.explore.morsels', [])
   //show suggested users
   $scope.search.hideSuggestedUsers = false;
 
-  $scope.loadDefaultMorsels = function() {
-    var morselsParams = {
-          count: $scope.morselSearch.exploreIncrement
-        };
-
-    //get the next page number
-    $scope.defaultMorselPageNumber = $scope.defaultMorselPageNumber ? $scope.defaultMorselPageNumber+1 : 1;
-    morselsParams.page = $scope.defaultMorselPageNumber;
-
-    ApiMorsels.search(morselsParams).then(function(morselsData) {
+  $scope.loadDefaultMorsels = function(params) {
+    ApiMorsels.search(params).then(function(morselsData) {
       if($scope.defaultMorsels) {
         //concat them with new data after old data
         $scope.defaultMorsels = $scope.defaultMorsels.concat(morselsData);
@@ -62,9 +53,6 @@ angular.module( 'Morsel.public.explore.morsels', [])
       $state.go('explore.morsels');
     });
   };
-
-  //get our full explore feed
-  $scope.loadDefaultMorsels();
 
   $scope.$on('explore.user.follow', function(event, user){
     Mixpanel.track('Followed User', {

@@ -22,20 +22,11 @@ angular.module( 'Morsel.public.notifications', [])
   });
 })
 
-.controller( 'NotificationsCtrl', function NotificationsCtrl( $scope, currentUser, ApiNotifications, ACTIVITY_LIST_NUMBER, Mixpanel ) {
+.controller( 'NotificationsCtrl', function NotificationsCtrl( $scope, currentUser, ApiNotifications, Mixpanel ) {
   $scope.user = currentUser;
-  $scope.ACTIVITY_LIST_NUMBER = ACTIVITY_LIST_NUMBER;
 
-  $scope.loadNotifications = function() {
-    var notificationsParams = {
-          count: $scope.ACTIVITY_LIST_NUMBER
-        };
-
-    //get the next page number
-    $scope.notificationsPageNumber = $scope.notificationsPageNumber ? $scope.notificationsPageNumber+1 : 1;
-    notificationsParams.page = $scope.notificationsPageNumber;
-
-    ApiNotifications.getNotifications(notificationsParams).then(function(notificationResp){
+  $scope.loadNotifications = function(params) {
+    ApiNotifications.getNotifications(params).then(function(notificationResp){
       if($scope.notificationsFeed) {
         //concat them with new data after old data
         $scope.notificationsFeed = $scope.notificationsFeed.concat(notificationResp.data);
@@ -45,8 +36,6 @@ angular.module( 'Morsel.public.notifications', [])
     });
   };
   
-  $scope.loadNotifications();
-
   $scope.markRead = function(notification) {
     if(!notification.marked_read_at) {
       ApiNotifications.markNotificationRead(notification.id).then(function(resp){

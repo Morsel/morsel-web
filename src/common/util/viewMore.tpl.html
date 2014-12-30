@@ -1,4 +1,4 @@
-<div class="view-more-btn" ng-if="viewMoreData && viewMoreFunc">
-  <button type="button" class="btn" ng-class="{'btn-primary': viewMoreBtn, 'btn-link': !viewMoreBtn}" ng-click="loadMore()" ng-hide="loading || allDataLoaded" ng-bind="viewMoreCopy || 'View more'"></button>
+<div class="view-more-btn" ng-if="data && loadFunc">
+  <button type="button" class="btn" ng-class="{'btn-primary': !btnLink, 'btn-link': btnLink}" ng-click="loadMore()" ng-hide="loading || allDataLoaded" ng-bind="copy || 'View more'"></button>
   <div class="loader" ng-show="loading"></div>
 </div>

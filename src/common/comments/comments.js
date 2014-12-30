@@ -89,10 +89,8 @@ angular.module( 'Morsel.common.comments', [] )
         });
       }
 
-      var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, AfterLogin, item, COMMENT_LIST_NUMBER) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, $location, $window, AfterLogin, item) {
         $scope.item = item;
-        //number of comments to load at a time
-        $scope.increment = COMMENT_LIST_NUMBER;
 
         $scope.isLoggedIn = isLoggedIn;
 
@@ -149,16 +147,8 @@ angular.module( 'Morsel.common.comments', [] )
         };
 
         //fetch comments for the item
-        $scope.getComments = function(endComment) {
-          var commentParams = {
-                count: $scope.increment
-              };
-
-          if(endComment) {
-            commentParams.max_id = parseInt(endComment.id, 10) - 1;
-          }
-
-          ApiItems.getComments($scope.item.id, commentParams).then(function(commentResp){
+        $scope.getComments = function(params) {
+          ApiItems.getComments($scope.item.id, params).then(function(commentResp){
             if($scope.item.comments) {
               //concat them with new data after old data, then reverse with a filter
               $scope.item.comments = $scope.item.comments.concat(commentResp.data);
@@ -169,13 +159,9 @@ angular.module( 'Morsel.common.comments', [] )
             hasFetchedComments = true;
           });
         };
-
-        if(!$scope.item.comments) {
-          $scope.getComments();
-        }
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'AfterLogin', 'item', 'COMMENT_LIST_NUMBER'];
+      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'AfterLogin', 'item'];
     },
     template: '<div ng-click="openComments()"><i ng-class="{\'common-comment-empty\':item.comment_count===0, \'common-comment-filled\':item.comment_count > 0}"></i><a ng-show="item.comment_count > 0" class="dark-link">{{item.comment_count}}<span> comment{{item.comment_count===1?\'\':\'s\'}}</span></a><a ng-show="item.comment_count === 0" class="dark-link"><span>Add comment</span></a></div>'
   };

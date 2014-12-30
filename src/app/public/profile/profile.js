@@ -65,7 +65,7 @@ angular.module( 'Morsel.public.profile', [])
   });
 })
 
-.controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth, MORSEL_LIST_NUMBER ) {
+.controller( 'ProfileCtrl', function ProfileCtrl( $scope, ApiUsers, MORSELPLACEHOLDER, profileUserData, currentUser, $state, Auth ) {
   $scope.user = profileUserData;
   $scope.isProfessional = $scope.user.professional;
   $scope.currentUser = currentUser;
@@ -76,9 +76,6 @@ angular.module( 'Morsel.public.profile', [])
 
   //update page title
   $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') | Morsel';
-
-  //# of morsels to load at a time
-  $scope.morselIncrement = MORSEL_LIST_NUMBER;
 
   $scope.$on('users.'+$scope.user.id+'.followerCount', function(event, dir){
     if(dir === 'increase') {
@@ -102,21 +99,12 @@ angular.module( 'Morsel.public.profile', [])
   };
 })
 
-.controller( 'ProfileMorselsCtrl', function ProfileMorselsCtrl( $scope, ApiUsers) {
+.controller( 'ProfileMorselsCtrl', function ProfileMorselsCtrl( $scope, ApiUsers, $state) {
   //update page title
   $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') | Morsel';
 
-  $scope.getMorsels = function(endMorsel) {
-    var morselsParams = {
-          count: $scope.morselIncrement
-        };
-
-    if(endMorsel) {
-      morselsParams.before_id = endMorsel.id;
-      morselsParams.before_date = endMorsel.published_at;
-    }
-
-    ApiUsers.getMorsels($scope.user.id, morselsParams).then(function(morselsData) {
+  $scope.getMorsels = function(params) {
+    ApiUsers.getMorsels($scope.user.id, params).then(function(morselsData) {
       if($scope.morsels) {
         //concat them with new data after old data, then reverse with a filter
         $scope.morsels = morselsData.concat($scope.morsels);
@@ -128,44 +116,30 @@ angular.module( 'Morsel.public.profile', [])
       $state.go('404');
     });
   };
-
-  //load our morsels
-  $scope.getMorsels();
 })
 
-.controller( 'ProfileCollectionsCtrl', function ProfileCollectionsCtrl( $scope, ApiUsers, MORSEL_LIST_NUMBER) {
- 
-
+.controller( 'ProfileCollectionsCtrl', function ProfileCollectionsCtrl( $scope, ApiUsers, COLLECTIONS_LIST_NUMBER, $timeout) {
   //update page title
   $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') - Collections | Morsel';
 
-  $scope.loadCollections = function() {
-    var collectionsParams = {};
+  //since we have the "create new collection" button, load one less the first time so it fits nicely
+  $scope.collectionsIncrement = COLLECTIONS_LIST_NUMBER - 1;
 
-    //get the next page number
-    $scope.collectionsPageNumber = $scope.collectionsPageNumber ? $scope.collectionsPageNumber+1 : 1;
-    collectionsParams.page = $scope.collectionsPageNumber;
-
-    //since we have the "create new collection" button, load one less the first time so it fits nicely
-    if($scope.collectionsPageNumber === 1 && $scope.canEdit) {
-       $scope.collectionsIncrement = MORSEL_LIST_NUMBER -1;
-    } else {
-       $scope.collectionsIncrement = MORSEL_LIST_NUMBER;
-    }
-    
-    collectionsParams.count = $scope.collectionsIncrement;
-
-    ApiUsers.getCollections($scope.user.id, collectionsParams).then(function(collectionsResp){
+  $scope.loadCollections = function(params) {
+    ApiUsers.getCollections($scope.user.id, params).then(function(collectionsResp){
       if($scope.userCollections) {
         //concat them with new data after old data
         $scope.userCollections = $scope.userCollections.concat(collectionsResp.data);
       } else {
         $scope.userCollections = collectionsResp.data;
+
+        $timeout(function() {
+          //update our increment to get the full count next time after storing data
+          $scope.collectionsIncrement = COLLECTIONS_LIST_NUMBER;
+        }, 0);
       }
     });
   };
-
-  $scope.loadCollections();
 })
 
 .controller( 'ProfilePlacesCtrl', function ProfilePlacesCtrl( $scope, ApiUsers) {

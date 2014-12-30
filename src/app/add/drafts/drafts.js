@@ -21,45 +21,42 @@ angular.module( 'Morsel.add.drafts', [])
   });
 })
 
-.controller( 'DraftsCtrl', function DraftsCtrl( $scope, currentUser, MORSEL_LIST_NUMBER, MORSELPLACEHOLDER, ApiMorsels, PhotoHelpers, $q ) {
+.controller( 'DraftsCtrl', function DraftsCtrl( $scope, currentUser, MORSELPLACEHOLDER, ApiMorsels, PhotoHelpers, $q, $state ) {
   var draftPromises = [],
-      allTemplateData;
+      allTemplateData,
+      draftsWatch,
+      draftsLoadDeferred = $q.defer();
 
-  //# of drafts to load at a time
-  $scope.draftIncrement = MORSEL_LIST_NUMBER;
-
-  $scope.getDrafts = function(endDraft) {
-    var draftsParams = {
-          count: $scope.draftIncrement
-        };
-
-    if(endDraft) {
-      draftsParams.before_id = endDraft.id;
-      draftsParams.before_date = endDraft.updated_at;
+  //watch when we get drafts
+  draftsWatch = $scope.$watch('drafts', function(newValue) {
+    if(newValue) {
+      draftsLoadDeferred.resolve();
+      //stop watching
+      draftsWatch();
     }
+  });
 
-    return ApiMorsels.getDrafts(draftsParams).then(function(draftsData) {
+  //load drafts
+  draftPromises.push(draftsLoadDeferred.promise);
+  //load templates
+  draftPromises.push(getMorselTemplates());
+
+  $scope.getDrafts = function(params) {
+    ApiMorsels.getDrafts(params).then(function(draftsData) {
       if($scope.drafts) {
-        //concat them with new data after old data, then reverse with a filter
+        //concat them with new data after old data
         $scope.drafts = $scope.drafts.concat(draftsData);
       } else {
         $scope.drafts = draftsData;
       }
 
-      //if user views more we need to call this again
-      if(endDraft) {
-        readyDraftsForDisplay();
-      }
+      //we need to call this each time
+      readyDraftsForDisplay();
     }, function() {
       //if there's an error retrieving drafts, go to 404
       $state.go('404');
     });
   };
-
-  //load drafts
-  draftPromises.push($scope.getDrafts());
-  //load templates
-  draftPromises.push(getMorselTemplates());
 
   //once all promises are resolved
   $q.all(draftPromises).then(dataLoaded);

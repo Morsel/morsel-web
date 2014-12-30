@@ -22,19 +22,11 @@ angular.module( 'Morsel.public.activity', [])
   });
 })
 
-.controller( 'ActivityCtrl', function ActivityCtrl( $scope, currentUser, ApiUsers, ACTIVITY_LIST_NUMBER ) {
+.controller( 'ActivityCtrl', function ActivityCtrl( $scope, currentUser, ApiUsers ) {
   $scope.user = currentUser;
 
-  $scope.getActivities = function() {
-    var activitiesParams = {
-          count: ACTIVITY_LIST_NUMBER
-        };
-
-    //get the next page number
-    $scope.activitiesPageNumber = $scope.activitiesPageNumber ? $scope.activitiesPageNumber+1 : 1;
-    activitiesParams.page = $scope.activitiesPageNumber;
-
-    ApiUsers.getActivities(activitiesParams).then(function(activityResp){
+  $scope.getActivities = function(params) {
+    ApiUsers.getActivities(params).then(function(activityResp){
       if($scope.myActivityFeed) {
         //concat them with new data after old data
         $scope.myActivityFeed = $scope.myActivityFeed.concat(activityResp.data);
@@ -44,16 +36,8 @@ angular.module( 'Morsel.public.activity', [])
     });
   };
   
-  $scope.getFollowablesActivities = function() {
-    var followablesActivitiesParams = {
-          count: ACTIVITY_LIST_NUMBER
-        };
-
-    //get the next page number
-    $scope.followablesActivitiesPageNumber = $scope.followablesActivitiesPageNumber ? $scope.followablesActivitiesPageNumber+1 : 1;
-    followablesActivitiesParams.page = $scope.followablesActivitiesPageNumber;
-
-    ApiUsers.getFollowablesActivities(followablesActivitiesParams).then(function(followablesActivityResp){
+  $scope.getFollowablesActivities = function(params) {
+    ApiUsers.getFollowablesActivities(params).then(function(followablesActivityResp){
       if($scope.followingFeed) {
         //concat them with new data after old data
         $scope.followingFeed = $scope.followingFeed.concat(followablesActivityResp.data);

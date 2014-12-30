@@ -8,5 +8,5 @@
   <div ng-if="feed && feed.length === 0" class="empty-state">
     <p>No activity</p>
   </div>
-  <div mrsl-view-more mrsl-view-more-func="loadActivity" mrsl-view-more-data="feed" mrsl-view-more-inc="ACTIVITY_LIST_NUMBER" mrsl-view-more-copy="View more activity" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+  <div mrsl-view-more="loadActivity" mrsl-view-more-data="feed" mrsl-view-more-copy="View more activity" mrsl-view-more-list-type="Activities" mrsl-view-more-view="{{view}}"></div>
 </div>

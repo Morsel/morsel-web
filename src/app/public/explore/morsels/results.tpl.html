@@ -1,6 +1,6 @@
 <div mrsl-explore-search-bar="morselSearch.form" mrsl-explore-search-bar-model="morselSearch.model" mrsl-explore-search-bar-placeholder="Search morsels" mrsl-explore-search-bar-search="morselSearch.customSearch" mrsl-explore-search-bar-focus="morselSearch.customFocus" mrsl-explore-search-bar-clear="morselSearch.customClear"></div>
 <div ng-show="$state.is('explore.morsels')">
-  <div ng-show="defaultMorsels" mrsl-morsel-grid="defaultMorsels" mrsl-morsel-grid-view-more-func="loadDefaultMorsels" mrsl-morsel-grid-empty-text="'No morsels available'"></div>
+  <div ng-show="defaultMorsels" mrsl-morsel-grid="defaultMorsels" mrsl-morsel-grid-view-more-func="loadDefaultMorsels" mrsl-morsel-grid-empty-text="'No morsels available'" mrsl-morsel-grid-view="'explore_morsels'"></div>
   <div ng-if="!defaultMorsels" class="loader"></div>
 </div>
 <div ui-view="matching-hashtags" ng-show="$state.includes('explore.morsels.matchingHashtags')"></div>

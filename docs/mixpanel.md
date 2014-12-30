@@ -33,6 +33,7 @@ This is a table of all event names, properties and descriptions that are being t
 | Marked notification read | User marks a notification as read | unread_notification_count | 12/29/2014 |
 | Marked all notifications read | User marks all notifications as read | unread_notification_count | 12/29/2014 |
 | Opened user dropdown | User clicked to open menu | unread_notification_count | 12/29/2014 |
+| Clicked View More | User clicked to paginate a list | list_type, page_number | 12/29/2014 |
 
 ### Super Property List
 This is a table of all super properties (properties that are sent with every event) names and descriptions that are being tracked. It should be kept up to date whenever super properties are added/altered
@@ -76,6 +77,8 @@ This is a table of all property names and descriptions that are being tracked. I
 | collection_id | The id of a Collection | numeric | 12/22/2014 |
 | has_description | Whether something has a description | boolean | 12/22/2014 |
 | unread_notification_count| The number of unread notifications a user has | numeric | 12/29/2014 |
+| list_type | What type of items a list displays | "Morsels", "Users", "Activities", "Notifications", "Collections", "FeedItems", "Hashtags", "Comments" | 12/29/2014 |
+| page_number | The page number being loaded in a paginated list | numeric | 12/29/2014 |
 
 
 ### View List
@@ -87,4 +90,16 @@ This is a table of all "views" that appear on the website. The "property name" c
 | explore_morsels | The Explore morsels page | 12/22/2014 |
 | explore_users | The Explore users page | 12/22/2014 |
 | user_profile_collections | Collections tab of user's profile page | 12/22/2014 |
-
+| search_result_morsels | A grid of morsels resulting from a morsel search | 12/29/2014 |
+| search_result_users | A list of users resulting from a user search | 12/29/2014 |
+| hashtag | A page showing all morsels belonging to a hashtag | 12/29/2014 |
+| feed | A user's feed | 12/29/2014 |
+| user_profile_morsels | Morsels tab of user's profile page | 12/29/2014 |
+| place_profile_morsels | Morsels tab of place's profile page | 12/29/2014 |
+| place_profile_users | Users tab of place's profile page | 12/29/2014 |
+| notifications | The notifications page | 12/29/2014 |
+| search_matches_morsels | View showing possible matches for morsel search | 12/29/2014 |
+| collection_details | The details page of a single collection | 12/29/2014 |
+| activities_following | The activities of users that you are following | 12/29/2014 |
+| activities_my | A user's own activity | 12/29/2014 |
+| drafts | A list of user's drafts | 12/29/2014 |
