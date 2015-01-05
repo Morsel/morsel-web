@@ -20,25 +20,15 @@ angular.module( 'Morsel.public.feed', [])
 })
 
 .controller( 'FeedCtrl', function FeedCtrl( $scope, currentUser, ApiFeed, $interval, Auth ) {
-  var feedFetchCount = 9, //the number of feed items to fetch at a time from the server
-      totalFetchCount = 0, //the total number of feed items that have been fetched from the server
+  var totalFetchCount = 0, //the total number of feed items that have been fetched from the server
       oldestDisplayFeedItemIndex, //keeping track of the index on the right that is rendered
       newFeedItems = [], //hold any feed item data that comes back from the server after the initial load
       newFeedItemCheckTime = 180000; //milliseconds to wait between checks of new feed items from server
 
-  $scope.feedItemIncrement = feedFetchCount; //expose for View More
   $scope.newFeedItemCount = 0; //how many feed items are newer than what's been loaded so far
 
-  $scope.grabOldFeed = function(endFeedItem) {
-    var feedParams = {
-      count: feedFetchCount
-    };
-
-    if(endFeedItem) {
-      feedParams.max_id = parseInt(endFeedItem.id, 10) - 1;
-    }
-
-    ApiFeed.getFeed(feedParams).then(function(feedResp){
+  $scope.grabOldFeed = function(params) {
+    ApiFeed.getFeed(params).then(function(feedResp){
       var feedData = feedResp.data;
 
       _.each(feedData, function(f) {
@@ -65,9 +55,6 @@ angular.module( 'Morsel.public.feed', [])
     });
   };
 
-  //get our initial feed items
-  $scope.grabOldFeed();
-
   //every newFeedItemCheckTime seconds, check for new feed items
   $interval(function(){
     grabNewFeed();
@@ -78,7 +65,7 @@ angular.module( 'Morsel.public.feed', [])
         sinceId;
 
     //grab the newest id in our array
-    if($scope.feedItems.length > 0) {
+    if($scope.feedItems && $scope.feedItems.length > 0) {
       sinceId = $scope.feedItems[0]['id'];
 
       if(sinceId) {

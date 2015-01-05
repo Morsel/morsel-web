@@ -1,6 +1,6 @@
 angular.module('Morsel.common.userList', [])
 
-.directive('mrslUserList', function(USER_LIST_NUMBER) {
+.directive('mrslUserList', function() {
   return {
     restrict: 'A',
     replace: true,
@@ -10,11 +10,11 @@ angular.module('Morsel.common.userList', [])
       userLoadFunc: '=mrslUserListLoadFunc',
       morselTagged: '=mrslUserListTagMorsel',
       blankLinks: '=mrslUserListBlankLinks',
-      listLayout: '@mrslUserListLayout'
+      listLayout: '@mrslUserListLayout',
+      view: '@mrslUserListView',
+      delayStart: '@mrslUserListViewDelay'
     },
     link: function(scope, element, attrs) {
-      scope.userIncrement = USER_LIST_NUMBER;
-
       scope.listLayoutType = scope.listLayout ? scope.listLayout+'-layout' : '';
     },
     templateUrl: 'common/user/userList.tpl.html'

@@ -14,7 +14,7 @@
       <div ng-if="notificationsFeed && notificationsFeed.length === 0" class="empty-state">
         <p>No notifications</p>
       </div>
-      <div mrsl-view-more mrsl-view-more-func="loadNotifications" mrsl-view-more-data="notificationsFeed" mrsl-view-more-inc="ACTIVITY_LIST_NUMBER" mrsl-view-more-copy="View more notifications" mrsl-view-more-order="last" mrsl-view-more-btn="true"></div>
+      <div mrsl-view-more="loadNotifications" mrsl-view-more-data="notificationsFeed" mrsl-view-more-copy="View more notifications" mrsl-view-more-list-type="Notifications" mrsl-view-more-view="notifications"></div>
     </div>
   </div>
 </div>

@@ -28,7 +28,7 @@ angular.module( 'Morsel.public.place', [])
   });
 })
 
-.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth, USER_LIST_NUMBER, MORSEL_LIST_NUMBER ) {
+.controller( 'PlaceCtrl', function PlaceCtrl( $scope, ApiPlaces, MORSELPLACEHOLDER, placeData, currentUser, $state, Auth ) {
   //knock off the protocol so it displays nicer
   if(placeData.information && placeData.information.website_url) {
     placeData.information.website_url_text = placeData.information.website_url.replace(/^.*?:\/\//,'');
@@ -36,29 +36,17 @@ angular.module( 'Morsel.public.place', [])
 
   $scope.place = placeData;
 
-  //# of morsels to load at a time
-  $scope.morselIncrement = MORSEL_LIST_NUMBER;
-
   //update page title
   $scope.pageData.pageTitle = $scope.place.name+($scope.place.city ? ', '+$scope.place.city : '')+($scope.place.state ? ', '+$scope.place.state : '')+' Inspirations, Dishes & Drinks | Morsel';
 
   //for price display
   $scope.priceRange = _.range(0, $scope.place.information.price_tier);
 
-  $scope.getMorsels = function(endMorsel) {
-    var morselsParams = {
-          count: $scope.morselIncrement
-        };
-
-    if(endMorsel) {
-      morselsParams.before_id = endMorsel.id;
-      morselsParams.before_date = endMorsel.published_at;
-    }
-
-    ApiPlaces.getMorsels($scope.place.id, morselsParams).then(function(morselsData) {
+  $scope.getMorsels = function(params) {
+    ApiPlaces.getMorsels($scope.place.id, params).then(function(morselsData) {
       if($scope.morsels) {
-        //concat them with new data after old data, then reverse with a filter
-        $scope.morsels = morselsData.concat($scope.morsels);
+        //concat them with new data after old data
+        $scope.morsels = $scope.morsels.concat(morselsData);
       } else {
         $scope.morsels = morselsData;
       }
@@ -67,9 +55,6 @@ angular.module( 'Morsel.public.place', [])
       $state.go('404');
     });
   };
-
-  //load our morsels immediately (it's the default tab)
-  $scope.getMorsels();
 
   $scope.getPlacePhoto = function() {
     var mapsBaseUrl = 'https://maps.googleapis.com/maps/api/staticmap?maptype=roadmap&format=jpg&zoom=16',
@@ -90,31 +75,8 @@ angular.module( 'Morsel.public.place', [])
     }
   };
 
-  $scope.initialLoadUsers = function() {
-    $scope.loadUsers(null, true);
-  };
-
-  $scope.loadUsers = function(endUser, tabClick) {
-    var usersParams = {
-          count: USER_LIST_NUMBER
-        };
-
-    //if user clicks tab multiple times, shouldn't keep making API call
-    if(tabClick) {
-      if ($scope.initiallyLoadedUsers) {
-        return;
-      } else {
-        //set this so it won't call again
-        $scope.initiallyLoadedUsers = true;
-      }
-    }
-
-
-    if(endUser) {
-      usersParams.max_id = parseInt(endUser.id, 10) - 1;
-    }
-
-    ApiPlaces.getUsers($scope.place.id, usersParams).then(function(usersResp) {
+  $scope.loadUsers = function(params) {
+    ApiPlaces.getUsers($scope.place.id, params).then(function(usersResp) {
       if($scope.placeUsers) {
         $scope.placeUsers = $scope.placeUsers.concat(usersResp.data);
       } else {

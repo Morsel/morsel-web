@@ -2,11 +2,11 @@
   <h2 class="text-center">Activity</h2>
   <div class="container container-no-padding container-shadow morsel-bg container-max-sm">
     <tabset>
-    <tab heading="Following" select="getFollowablesActivities()">
-      <div mrsl-activity-feed="followingFeed" mrsl-activity-feed-view-more-func="getFollowablesActivities"></div>
+    <tab heading="Following">
+      <div mrsl-activity-feed="followingFeed" mrsl-activity-feed-view-more-func="getFollowablesActivities" mrsl-activity-feed-view="activities_following"></div>
     </tab>
-    <tab heading="My Activity" select="getActivities()">
-      <div mrsl-activity-feed="myActivityFeed" mrsl-activity-feed-view-more-func="getActivities"></div>
+    <tab heading="My Activity">
+      <div mrsl-activity-feed="myActivityFeed" mrsl-activity-feed-view-more-func="getActivities" mrsl-activity-feed-view="activities_my"></div>
     </tab>
   </tabset>
 </div>

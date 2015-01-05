@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.explore.users', [])
   });
 })
 
-.controller( 'ExploreUsersCtrl', function ExploreUsersCtrl ($scope, ApiUsers, USER_LIST_NUMBER, SEARCH_CHAR_MINIMUM, Mixpanel){
+.controller( 'ExploreUsersCtrl', function ExploreUsersCtrl ($scope, ApiUsers, SEARCH_CHAR_MINIMUM, Mixpanel, USER_LIST_NUMBER){
   $scope.userSearch = {
     customFocus: function() {
       Mixpanel.track('Focused on Explore Search', {
@@ -29,22 +29,24 @@ angular.module( 'Morsel.public.explore.users', [])
     searchResultUsers: []
   };
 
+  $scope.searchResultUsersWatchExpression = 'viewMore.explore.userSearch';
+
   $scope.$watch('userSearch.model.query', _.debounce(searchMorselUsers, $scope.search.waitTime));
 
   //hide suggested users since they'll be the main content
   $scope.search.hideSuggestedUsers = true;
 
-  $scope.userSearch.loadSearchResultUsers = function(endUser){
-    var userSearchData = {
-          count: USER_LIST_NUMBER,
-          'user[query]': $scope.userSearch.model.query
-        };
-
-    if(endUser) {
-      userSearchData.max_id = parseInt(endUser.id, 10) - 1;
+  $scope.userSearch.loadSearchResultUsers = function(params){
+    if(!params) {
+      params = {
+        count: USER_LIST_NUMBER,
+        page: 1
+      };
     }
+    
+    params['user[query]'] = $scope.userSearch.model.query;
 
-    ApiUsers.search(userSearchData).then(function(searchResp) {
+    ApiUsers.search(params).then(function(searchResp) {
       if($scope.userSearch.searchResultUsers) {
         $scope.userSearch.searchResultUsers = $scope.userSearch.searchResultUsers.concat(searchResp.data);
       } else {

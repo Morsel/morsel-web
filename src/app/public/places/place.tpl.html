@@ -18,21 +18,21 @@
       <tabset class="places-tabs">
         <tab heading="Morsels">
           <div class="row no-gutter">
-            <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in morsels | reverse">
+            <div class="col-sm-4 col-md-3" bindonce ng-repeat="morsel in morsels">
               <div mrsl-morsel-block="morsel" mrsl-morsel-block-spacer="true"></div>
             </div>
           </div>
-          <div mrsl-view-more mrsl-view-more-func="getMorsels" mrsl-view-more-data="morsels" mrsl-view-more-inc="morselIncrement" mrsl-view-more-copy="View more morsels" mrsl-view-more-btn="true"></div>
+          <div mrsl-view-more="getMorsels" mrsl-view-more-data="morsels" mrsl-view-more-copy="View more morsels" mrsl-view-more-list-type="Morsels" mrsl-view-more-view="place_profile_morsels"></div>
           <div ng-show="!morsels" class="loader"></div>
           <div ng-show="morsels && morsels.length === 0" class="empty-state">
             <p bo-if="place.twitter_username">Eek! There are no morsels yet. <a bo-href="'https://twitter.com/home?status=Hey%20%40'+place.twitter_username+'%20I%27d%20love%20to%20see%20your%20food%20and%20drinks%20on%20%40eatmorsel!'" target="_blank">Tell {{place.name}}</a> you want to see their food and drinks on Morsel!</p>
             <p bo-if="!place.twitter_username">Eek! There are no morsels yet.</p>
           </div>
         </tab>
-        <tab heading="Users" select="initialLoadUsers()">
-          <div class="profile-tab-content" mrsl-user-list="placeUsers" mrsl-user-list-empty="'There are no users associated with this place'" mrsl-user-list-load-func="loadUsers"></div>
+        <tab heading="Users">
+          <div class="profile-tab-content" mrsl-user-list="placeUsers" mrsl-user-list-empty="'There are no users associated with this place'" mrsl-user-list-load-func="loadUsers" mrsl-user-list-view="place_profile_users"></div>
         </tab>
-        <tab heading="Details" select="loadDetails()">
+        <tab heading="Details">
           <div class="place-details profile-tab-content">
             <div class="row" bindonce="place">
               <div class="col-sm-6">

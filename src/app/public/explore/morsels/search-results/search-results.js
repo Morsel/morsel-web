@@ -12,7 +12,7 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
   });
 })
 
-.controller( 'ExploreMorselsSearchResultsCtrl', function ExploreMorselsSearchResultsCtrl ($scope, $state, $stateParams, ApiMorsels, MORSEL_LIST_NUMBER, $previousState, ApiKeywords, Auth){
+.controller( 'ExploreMorselsSearchResultsCtrl', function ExploreMorselsSearchResultsCtrl ($scope, $state, $stateParams, ApiMorsels, $previousState, ApiKeywords, Auth){
   var query,
       prevState;
 
@@ -31,16 +31,8 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
         $scope.resultText = 'morsels tagged "#'+$stateParams.q+'"';
         $scope.emptyText = 'There are no morsels tagged "#'+$stateParams.q+'". <a href="/add" target="_self">Create one now</a>.';
 
-        $scope.viewMoreFunc = function() {
-          var morselsParams = {
-                count: MORSEL_LIST_NUMBER
-              };
-
-          //get the next page number
-          $scope.morselPageNumber = $scope.morselPageNumber ? $scope.morselPageNumber+1 : 1;
-          morselsParams.page = $scope.morselPageNumber;
-
-          ApiKeywords.getHashtagMorsels($stateParams.q, morselsParams).then(function(morselsData) {
+        $scope.viewMoreFunc = function(params) {
+          ApiKeywords.getHashtagMorsels($stateParams.q, params).then(function(morselsData) {
             if($scope.morsels) {
               //concat them with new data after old data
               $scope.morsels = $scope.morsels.concat(morselsData);
@@ -58,17 +50,8 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
         $scope.resultText = 'Morsels matching "'+$stateParams.q+'"';
         $scope.emptyText = 'There are no morsels matching "'+$stateParams.q+'". <a href="/add" target="_self">Create one now</a>.';
 
-        $scope.viewMoreFunc = function() {
-          var morselsParams = {
-                count: MORSEL_LIST_NUMBER,
-                'morsel[query]': $stateParams.q
-              };
-
-          //get the next page number
-          $scope.morselPageNumber = $scope.morselPageNumber ? $scope.morselPageNumber+1 : 1;
-          morselsParams.page = $scope.morselPageNumber;
-
-          ApiMorsels.search(morselsParams).then(function(morselsData) {
+        $scope.viewMoreFunc = function(params) {
+          ApiMorsels.search(params).then(function(morselsData) {
             if($scope.morsels) {
               //concat them with new data after old data
               $scope.morsels = $scope.morsels.concat(morselsData);
@@ -83,9 +66,6 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
           });
         };
       }
-
-      //load our morsels immediately
-      $scope.viewMoreFunc();
 
       $scope.goBack = function() {
         //if we came from search results, go back. otherwise (direct URL), go to explore

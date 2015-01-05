@@ -43,7 +43,7 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
   });
 })
 
-.controller( 'CollectionDetailCtrl', function CollectionDetailCtrl( $scope, collection, ApiCollections, $location, MORSEL_LIST_NUMBER, currentUser, $sce, ApiMorsels, $timeout ) {
+.controller( 'CollectionDetailCtrl', function CollectionDetailCtrl( $scope, collection, ApiCollections, $location, currentUser, $sce, ApiMorsels, $timeout ) {
   $scope.collection = collection;
   $scope.currentUser = currentUser;
 
@@ -55,18 +55,8 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
   //update page title
   $scope.pageData.pageTitle = $scope.collection.title+' | Morsel';
 
-  $scope.collectionsIncrement = MORSEL_LIST_NUMBER;
-
-  $scope.loadCollectionMorsels = function() {
-    var morselsParams = {
-          count: $scope.collectionsIncrement
-        };
-
-    //get the next page number
-    $scope.morselsPageNumber = $scope.morselsPageNumber ? $scope.morselsPageNumber+1 : 1;
-    morselsParams.page = $scope.morselsPageNumber;
-
-    ApiCollections.getCollectionMorsels($scope.collection.id, morselsParams).then(function(morselsResp){
+  $scope.loadCollectionMorsels = function(params) {
+    ApiCollections.getCollectionMorsels($scope.collection.id, params).then(function(morselsResp){
       if($scope.morsels) {
         //concat them with new data after old data
         $scope.morsels = $scope.morsels.concat(morselsResp.data);
@@ -84,8 +74,6 @@ angular.module( 'Morsel.public.collections.collectionDetail', [])
       $scope.alertType = 'success';
     }
   });
-
-  $scope.loadCollectionMorsels();
 
   $scope.removeFromCollection = function(morselId){
     var confirmed = confirm('Are you sure you want to remove this morsel from this collection?');

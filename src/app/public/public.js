@@ -105,11 +105,6 @@ angular.module( 'Morsel.public', [
 .constant('DEVICEVALUE', 'web')
 .constant('VERSIONKEY', 'client[version]')
 .constant('VERSIONVALUE', window.MorselConfig.version)
-.constant('USER_LIST_NUMBER', 20)
-.constant('USER_UPDATE_CHECK_TIME', 5000)
-.constant('COMMENT_LIST_NUMBER', 10)
-.constant('MORSEL_LIST_NUMBER', 12)
-.constant('ACTIVITY_LIST_NUMBER', 20)
 
 // Default queries
 .value('presetMediaQueries', {

@@ -13,7 +13,7 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
   });
 })
 
-.controller( 'ExploreMorselsMatchingHashtagsCtrl', function ExploreMorselsMatchingHashtagsCtrl ($scope, ApiKeywords, $state, HandleErrors, SEARCH_CHAR_MINIMUM, $location, Mixpanel){
+.controller( 'ExploreMorselsMatchingHashtagsCtrl', function ExploreMorselsMatchingHashtagsCtrl ($scope, ApiKeywords, $state, HandleErrors, SEARCH_CHAR_MINIMUM, $location, Mixpanel, HASHTAG_LIST_NUMBER){
   $scope.$watch('morselSearch.model.query', _.debounce(searchHashtags, $scope.search.waitTime));
 
   //go to text results immediately upon submitting
@@ -28,20 +28,19 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
   //start this as true
   $scope.showPromotedHashtags = true;
 
-  $scope.loadHashtagResults = function(){
-    var hashtagParams = {
-          count: $scope.morselSearch.exploreIncrement,
-          'keyword[query]': $scope.morselSearch.model.query
-        };
+  $scope.loadHashtagResults = function(params){
+    if(!params) {
+      params = {
+        count: HASHTAG_LIST_NUMBER,
+        page: 1
+      };
+    }
+
+    params['keyword[query]'] = $scope.morselSearch.model.query;
 
     $scope.showPromotedHashtags = false;
 
-    //get the next page number
-    $scope.hashtagResultsPageNumber = $scope.hashtagResultsPageNumber ? $scope.hashtagResultsPageNumber+1 : 1;
-    hashtagParams.page = $scope.hashtagResultsPageNumber;
-
-    ApiKeywords.hashtagSearch(hashtagParams).then(function(hashtagsResp) {
-
+    ApiKeywords.hashtagSearch(params).then(function(hashtagsResp) {
       if($scope.hashtagResults) {
         //concat them with new data after old data
         $scope.hashtagResults = $scope.hashtagResults.concat(hashtagsResp.data);
@@ -53,19 +52,19 @@ angular.module( 'Morsel.public.explore.morsels.matchingHashtags', [])
     });
   };
 
-  $scope.loadPromotedHashtags = function(){
-    var hashtagParams = {
-          count: $scope.morselSearch.exploreIncrement,
-          'keyword[promoted]': true
-        };
+  $scope.loadPromotedHashtags = function(params){
+    if(!params) {
+      params = {
+        count: HASHTAG_LIST_NUMBER,
+        page: 1
+      };
+    }
+    
+    params['keyword[promoted]'] = true;
 
     $scope.showPromotedHashtags = true;
 
-    //get the next page number
-    $scope.promotedHashtagPageNumber = $scope.promotedHashtagPageNumber ? $scope.promotedHashtagPageNumber+1 : 1;
-    hashtagParams.page = $scope.promotedHashtagPageNumber;
-
-    ApiKeywords.hashtagSearch(hashtagParams).then(function(hashtagsResp) {
+    ApiKeywords.hashtagSearch(params).then(function(hashtagsResp) {
       if($scope.promotedHashtags) {
         //concat them with new data after old data
         $scope.promotedHashtags = $scope.promotedHashtags.concat(hashtagsResp.data);

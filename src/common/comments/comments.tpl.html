@@ -3,7 +3,7 @@
   <h4 class="h2 overflow-ellipsis">Comments</h4>
 </div>
 <div class="modal-body user-list comment-list">
-  <div mrsl-view-more mrsl-view-more-func="getComments" mrsl-view-more-data="item.comments" mrsl-view-more-inc="increment" mrsl-view-more-copy="View previous comments" mrsl-view-more-order="last"></div>
+  <div mrsl-view-more="getComments" mrsl-view-more-data="item.comments" mrsl-view-more-copy="View previous comments" mrsl-view-more-list-type="Comments" mrsl-view-more-view="morsel_details" mrsl-view-more-as-link="true"></div>
   <ul ng-show="item.comments.length > 0">
     <li bindonce ng-repeat="comment in item.comments | reverse" class="view-more-list">
       <div class="user-info">

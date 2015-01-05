@@ -7,7 +7,7 @@
   </div>
 </div>
 <div ng-if="!userCollections" class="loader"></div>
-<div mrsl-view-more mrsl-view-more-func="loadCollections" mrsl-view-more-data="userCollections" mrsl-view-more-inc="collectionsIncrement" mrsl-view-more-copy="View more collections" mrsl-view-more-btn="true"></div>
+<div mrsl-view-more="loadCollections" mrsl-view-more-data="userCollections" mrsl-view-more-inc="collectionsIncrement" mrsl-view-more-copy="View more collections" mrsl-view-more-list-type="Collections" mrsl-view-more-view="user_profile_collections"></div>
 <div ng-if="userCollections && userCollections.length === 0" class="empty-state">
   <p bo-if="!canEdit">This user hasn't made any collections yet</p>
 </div>
