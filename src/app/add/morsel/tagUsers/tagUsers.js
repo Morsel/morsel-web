@@ -39,12 +39,9 @@ angular.module( 'Morsel.add.tagUsers', [] )
       };
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, morsel) {
-        var userParams = {
-              count: USER_LIST_NUMBER
-            };
-
         $scope.heading = 'Tag Users';
         $scope.emptyText = 'You haven\'t tagged anyone in this morsel';
+        $scope.view = 'add_tagged_users_list';
         $scope.morselTagged = morsel;
         $scope.blankLinks = true;
         $scope.canSearchUsers = true;
@@ -63,14 +60,17 @@ angular.module( 'Morsel.add.tagUsers', [] )
           $modalInstance.dismiss('cancel');
         };
 
-        $scope.loadUsers = function(endUser) {
-          if(endUser) {
-            userParams.max_id = endUser.id-1;
-          } else {
-            userParams.max_id = null;
+        $scope.loadUsers = function(params) {
+          if(!params) {
+            params = {
+              count: USER_LIST_NUMBER,
+              page: 1
+            };
           }
 
-          ApiMorsels.getEligibleTaggedUsers($scope.morselTagged.id, userParams).then(function(userResp){
+          params['user[query]'] = $scope.searchModel.query;
+
+          ApiMorsels.getEligibleTaggedUsers($scope.morselTagged.id, params).then(function(userResp){
             if($scope.users) {
               $scope.users = $scope.users.concat(userResp.data);
             } else {
@@ -85,7 +85,6 @@ angular.module( 'Morsel.add.tagUsers', [] )
           //only use search if it's >=3 characters, otherwise show everybody
           if($scope.searchModel.query.length >= 3) {
             $scope.users = null;
-            userParams.query = $scope.searchModel.query;
             $scope.loadUsers();
           } else {
             userParams.query = '';
@@ -94,8 +93,6 @@ angular.module( 'Morsel.add.tagUsers', [] )
             _.defer(function(){$scope.$apply();});
           }
         }
-
-        $scope.loadUsers();
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];

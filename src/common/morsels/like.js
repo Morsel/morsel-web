@@ -107,24 +107,16 @@ angular.module( 'Morsel.common.morselLike', [] )
       };
 
       var ModalInstanceCtrl = function ($scope, $modalInstance, morsel) {
-        $scope.users = morsel.likers;
         $scope.heading = 'Likers';
         $scope.emptyText = 'No one has liked this yet';
+        $scope.view = 'likers_list';
 
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
         };
 
-        $scope.loadUsers = function(endUser) {
-          var usersParams = {
-                count: USER_LIST_NUMBER
-              };
-
-          if(endUser) {
-            usersParams.max_id = parseInt(endUser.id, 10) - 1;
-          }
-
-          ApiMorsels.getLikers(morsel.id, usersParams).then(function(likerResp){
+        $scope.loadUsers = function(params) {
+          ApiMorsels.getLikers(morsel.id, params).then(function(likerResp){
             if($scope.users) {
               $scope.users = $scope.users.concat(likerResp.data);
             } else {
@@ -132,8 +124,6 @@ angular.module( 'Morsel.common.morselLike', [] )
             }
           });
         };
-
-        $scope.loadUsers();
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];

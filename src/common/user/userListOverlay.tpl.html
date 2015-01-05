@@ -6,5 +6,5 @@
   <div class="user-search" ng-if="canSearchUsers && searchModel">
     <input type="text" placeholder="Search users" class="form-control" ng-model="searchModel.query" ng-change="searchModel.func()" />
   </div>
-  <div mrsl-user-list="users" mrsl-user-list-load-func="loadUsers" mrsl-user-list-tag-morsel="morselTagged" mrsl-user-list-blank-links="blankLinks"></div>
+  <div mrsl-user-list="users" mrsl-user-list-load-func="loadUsers" mrsl-user-list-tag-morsel="morselTagged" mrsl-user-list-blank-links="blankLinks" mrsl-user-list-view="{{view}}"></div>
 </div>

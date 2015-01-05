@@ -1,6 +1,6 @@
 angular.module('Morsel.common.morselTaggedUserList', [])
 
-.directive('mrslTaggedUserList', function($modal, $rootScope, USER_LIST_NUMBER, ApiMorsels) {
+.directive('mrslTaggedUserList', function($modal, $rootScope, ApiMorsels) {
   return {
     restrict: 'A',
     scope: {
@@ -22,21 +22,14 @@ angular.module('Morsel.common.morselTaggedUserList', [])
       var ModalInstanceCtrl = function ($scope, $modalInstance, morsel) {
         $scope.heading = 'Tagged Users';
         $scope.emptyText = 'There are no users tagged';
+        $scope.view = 'tagged_user_list';
 
         $scope.cancel = function () {
           $modalInstance.dismiss('cancel');
         };
 
-        $scope.loadUsers = function(endUser) {
-          var usersParams = {
-                count: USER_LIST_NUMBER
-              };
-
-          if(endUser) {
-            usersParams.max_id = parseInt(endUser.id, 10) - 1;
-          }
-
-          ApiMorsels.getTaggedUsers(morsel.id, usersParams).then(function(usersResp){
+        $scope.loadUsers = function(params) {
+          ApiMorsels.getTaggedUsers(morsel.id, params).then(function(usersResp){
             if($scope.users) {
               $scope.users = $scope.users.concat(usersResp.data);
             } else {
@@ -44,8 +37,6 @@ angular.module('Morsel.common.morselTaggedUserList', [])
             }
           });
         };
-
-        $scope.loadUsers();
       };
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];

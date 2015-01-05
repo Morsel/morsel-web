@@ -33,7 +33,7 @@ This is a table of all event names, properties and descriptions that are being t
 | Marked notification read | User marks a notification as read | unread_notification_count | 12/29/2014 |
 | Marked all notifications read | User marks all notifications as read | unread_notification_count | 12/29/2014 |
 | Opened user dropdown | User clicked to open menu | unread_notification_count | 12/29/2014 |
-| Clicked View More | User clicked to paginate a list | list_type, page_number | 12/29/2014 |
+| Clicked View More | User clicked to paginate a list | list_type, page_number, view | 12/29/2014 |
 
 ### Super Property List
 This is a table of all super properties (properties that are sent with every event) names and descriptions that are being tracked. It should be kept up to date whenever super properties are added/altered
@@ -103,3 +103,8 @@ This is a table of all "views" that appear on the website. The "property name" c
 | activities_following | The activities of users that you are following | 12/29/2014 |
 | activities_my | A user's own activity | 12/29/2014 |
 | drafts | A list of user's drafts | 12/29/2014 |
+| following_list | A list of users a user follows | 1/5/2015 |
+| followers_list | A list of users following a user | 1/5/2015 |
+| likers_list | A list of users liking a morsel | 1/5/2015 |
+| add_tagged_users_list | A list of eligible tagged users on a morsel | 1/5/2015 |
+| tagged_user_list | A list of all users tagged on a morsel | 1/5/2015 |
