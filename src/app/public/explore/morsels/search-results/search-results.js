@@ -51,6 +51,8 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
         $scope.emptyText = 'There are no morsels matching "'+$stateParams.q+'". <a href="/add" target="_self">Create one now</a>.';
 
         $scope.viewMoreFunc = function(params) {
+          params['morsel[query]'] = $stateParams.q;
+
           ApiMorsels.search(params).then(function(morselsResp) {
             if($scope.morsels) {
               //concat them with new data after old data
