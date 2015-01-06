@@ -331,8 +331,8 @@ angular.module( 'Morsel.add.morsel', [])
   }
 
   function getMorselTemplates() {
-    return ApiMorsels.getTemplates().then(function(templateData) {
-      allTemplateData = templateData;
+    return ApiMorsels.getTemplates().then(function(templateResp) {
+      allTemplateData = templateResp.data;
     }, function() {
       //if there's an error retrieving a morsel, go to drafts
       $state.go('drafts');

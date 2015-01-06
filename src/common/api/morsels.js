@@ -35,7 +35,7 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     var deferred = $q.defer();
 
     RestangularMorsels.one('drafts').get(draftsParams).then(function(resp){
-      deferred.resolve(Restangular.stripRestangular(resp).data);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp){
       deferred.reject(Restangular.stripRestangular(resp));
     });
@@ -47,7 +47,7 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     var deferred = $q.defer();
 
     Restangular.oneUrl('templates', MORSEL_TEMPLATE_DATA_URL).get().then(function(resp) {
-      deferred.resolve(Restangular.stripRestangular(resp).data);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));
     });
@@ -203,8 +203,7 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     var deferred = $q.defer();
 
    RestangularMorsels.one('search').get(morselParams).then(function(resp) {
-      //return resp.data to be consistent with View More functionality. might change eventually
-      deferred.resolve(Restangular.stripRestangular(resp).data);
+      deferred.resolve(Restangular.stripRestangular(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));
     });

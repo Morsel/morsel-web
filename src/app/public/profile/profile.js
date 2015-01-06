@@ -104,12 +104,12 @@ angular.module( 'Morsel.public.profile', [])
   $scope.pageData.pageTitle = $scope.formattedName+' ('+$scope.user.username+') | Morsel';
 
   $scope.getMorsels = function(params) {
-    ApiUsers.getMorsels($scope.user.id, params).then(function(morselsData) {
+    ApiUsers.getMorsels($scope.user.id, params).then(function(morselsResp) {
       if($scope.morsels) {
-        //concat them with new data after old data, then reverse with a filter
-        $scope.morsels = morselsData.concat($scope.morsels);
+        //concat them with new data after old data
+        $scope.morsels = $scope.morsels.concat(morselsResp.data);
       } else {
-        $scope.morsels = morselsData;
+        $scope.morsels = morselsResp.data;
       }
     }, function() {
       //if there's an error retrieving user data (bad username?), go to 404

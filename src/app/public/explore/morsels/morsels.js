@@ -41,12 +41,12 @@ angular.module( 'Morsel.public.explore.morsels', [])
   $scope.search.hideSuggestedUsers = false;
 
   $scope.loadDefaultMorsels = function(params) {
-    ApiMorsels.search(params).then(function(morselsData) {
+    ApiMorsels.search(params).then(function(morselsResp) {
       if($scope.defaultMorsels) {
         //concat them with new data after old data
-        $scope.defaultMorsels = $scope.defaultMorsels.concat(morselsData);
+        $scope.defaultMorsels = $scope.defaultMorsels.concat(morselsResp.data);
       } else {
-        $scope.defaultMorsels = morselsData;
+        $scope.defaultMorsels = morselsResp.data;
       }
     }, function() {
       //if there's an error retrieving morsel data, go to explore
