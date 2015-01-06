@@ -79,12 +79,11 @@ input[type="text"], textarea {
   display: inline-block;
   z-index: 10;
 
-  &.banner-featured {
-    @include replace-text-with-dimensions('graphics/banner-featured-top.png');
-  }
-
   &.banner-draft {
-    @include replace-text-with-dimensions('graphics/banner-draft-top.png');
+    @include replace-text-with-dimensions('graphics/banner-draft-bottom.png');
+    background-size: image-width('graphics/banner-draft-bottom.png')*.7 image-height('graphics/banner-draft-bottom.png')*.7;
+    height: image-height('graphics/banner-draft-bottom.png')*.7;
+    width: image-width('graphics/banner-draft-bottom.png')*.7;
   }
 
   &.banner-cover {
@@ -633,17 +632,15 @@ a.dark-link {
     top: auto;
     bottom: 0;
 
-    &.banner-featured {
-      @include replace-text-with-dimensions('graphics/banner-featured-bottom.png');
-    }
-
-    &.banner-draft {
-      @include replace-text-with-dimensions('graphics/banner-draft-bottom.png');
-    }
-
     &.banner-cover {
       top: 0;
       bottom: auto;
+    }
+
+    &.banner-draft {
+      height: image-height('graphics/banner-draft-bottom.png');
+      width: image-width('graphics/banner-draft-bottom.png');
+      background-size: image-width('graphics/banner-draft-bottom.png') image-height('graphics/banner-draft-bottom.png');
     }
   }
 
