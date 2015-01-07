@@ -43,12 +43,12 @@ angular.module( 'Morsel.public.place', [])
   $scope.priceRange = _.range(0, $scope.place.information.price_tier);
 
   $scope.getMorsels = function(params) {
-    ApiPlaces.getMorsels($scope.place.id, params).then(function(morselsData) {
+    ApiPlaces.getMorsels($scope.place.id, params).then(function(morselsResp) {
       if($scope.morsels) {
         //concat them with new data after old data
-        $scope.morsels = $scope.morsels.concat(morselsData);
+        $scope.morsels = $scope.morsels.concat(morselsResp.data);
       } else {
-        $scope.morsels = morselsData;
+        $scope.morsels = morselsResp.data;
       }
     }, function() {
       //if there's an error retrieving morsels, go to 404

@@ -18,8 +18,8 @@ angular.module( 'Morsel.add.new', [])
         return Auth.getCurrentUserPromise();
       },
       templateData: function(ApiMorsels) {
-        return ApiMorsels.getTemplates().then(function(templateData) {
-          return templateData;
+        return ApiMorsels.getTemplates().then(function(templateResp) {
+          return templateResp.data;
         }, function() {
           //if there's an error retrieving a morsel, go to drafts
           $state.go('drafts');

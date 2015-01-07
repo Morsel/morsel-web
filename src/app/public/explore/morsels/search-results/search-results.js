@@ -32,12 +32,12 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
         $scope.emptyText = 'There are no morsels tagged "#'+$stateParams.q+'". <a href="/add" target="_self">Create one now</a>.';
 
         $scope.viewMoreFunc = function(params) {
-          ApiKeywords.getHashtagMorsels($stateParams.q, params).then(function(morselsData) {
+          ApiKeywords.getHashtagMorsels($stateParams.q, params).then(function(morselsResp) {
             if($scope.morsels) {
               //concat them with new data after old data
-              $scope.morsels = $scope.morsels.concat(morselsData);
+              $scope.morsels = $scope.morsels.concat(morselsResp.data);
             } else {
-              $scope.morsels = morselsData;
+              $scope.morsels = morselsResp.data;
             }
 
             updateSuggestedUsers();
@@ -51,12 +51,14 @@ angular.module( 'Morsel.public.explore.morsels.searchResults', [])
         $scope.emptyText = 'There are no morsels matching "'+$stateParams.q+'". <a href="/add" target="_self">Create one now</a>.';
 
         $scope.viewMoreFunc = function(params) {
-          ApiMorsels.search(params).then(function(morselsData) {
+          params['morsel[query]'] = $stateParams.q;
+
+          ApiMorsels.search(params).then(function(morselsResp) {
             if($scope.morsels) {
               //concat them with new data after old data
-              $scope.morsels = $scope.morsels.concat(morselsData);
+              $scope.morsels = $scope.morsels.concat(morselsResp.data);
             } else {
-              $scope.morsels = morselsData;
+              $scope.morsels = morselsResp.data;
             }
 
             updateSuggestedUsers();

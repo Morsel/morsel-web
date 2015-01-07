@@ -10,11 +10,7 @@ angular.module( 'Morsel.public.home', [])
       }
     },
     data:{ pageTitle: 'A culinary community sharing food stories, cooking inspiration and kitchen hacks' },
-    resolve: {
-      currentUser: function(Auth) {
-        return Auth.getCurrentUserPromise();
-      }
-    }
+    resolve: {}
   })
   //without this state, navigating to the route in hashbang mode (IE9) will give a 404. this fix is hacky and I hate it but until https://github.com/angular-ui/ui-router/issues/185 or https://github.com/angular-ui/ui-router/issues/293 gets solved, or better yet https://github.com/angular/angular.js/pull/5712 it'll have to do
   .state( 'home-no-slash', {
@@ -28,18 +24,55 @@ angular.module( 'Morsel.public.home', [])
     resolve: {
       redirect: function($location) {
         $location.path('/');
-      },
-      currentUser: function(){
-        return {};
       }
     }
   });
 })
 
-.controller( 'HomeCtrl', function HomeCtrl( $scope, currentUser, $location, Restangular, $filter, Mixpanel ) {
-  Mixpanel.track_links('#masthead-btn', 'Clicked Masthead Button', {
-    button_text: 'Create Morsel'
+.controller( 'HomeCtrl', function HomeCtrl( $scope, $location, Restangular, $filter, Mixpanel, AfterLogin, Auth, $window ) {
+  var currentUser,
+      isLoggedIn,
+      afterLoginCallback;
+
+  Auth.getCurrentUserPromise().then(function(userData) {
+    currentUser = userData;
+    isLoggedIn = Auth.isLoggedIn();
+
+    //check for an afterlogin callback on load
+    if(AfterLogin.hasCallback('mastheadCreate')) {
+      afterLoginCallback = AfterLogin.getCallback();
+
+      //make sure we're actually loggeed in just in case
+      if(isLoggedIn) {
+        AfterLogin.removeCallback();
+        goToAdd();
+      }
+    }
   });
+
+  function goToAdd() {
+    $window.location.href = '/add';
+  }
+
+  $scope.createMorsel = function() {
+    Mixpanel.track('Clicked Masthead Button', {
+      button_text: 'Create Morsel'
+    });
+
+    if(isLoggedIn) {
+      goToAdd();
+    } else {
+      var currentUrl = $location.url();
+
+      //if not, set our callback for after we're logged in
+      AfterLogin.setCallback({
+        type: 'mastheadCreate',
+        path: currentUrl
+      });
+
+      $window.location.href = '/join';
+    }
+  };
 
   //pull our data from static data on s3
   Restangular.oneUrl('featuredMorsels', 'https://morsel.s3.amazonaws.com/static-morsels/homepage-morsels.json').get().then(function(resp) {

@@ -42,12 +42,12 @@ angular.module( 'Morsel.add.drafts', [])
   draftPromises.push(getMorselTemplates());
 
   $scope.getDrafts = function(params) {
-    ApiMorsels.getDrafts(params).then(function(draftsData) {
+    ApiMorsels.getDrafts(params).then(function(draftsResp) {
       if($scope.drafts) {
         //concat them with new data after old data
-        $scope.drafts = $scope.drafts.concat(draftsData);
+        $scope.drafts = $scope.drafts.concat(draftsResp.data);
       } else {
-        $scope.drafts = draftsData;
+        $scope.drafts = draftsResp.data;
       }
 
       //we need to call this each time
@@ -62,8 +62,8 @@ angular.module( 'Morsel.add.drafts', [])
   $q.all(draftPromises).then(dataLoaded);
 
   function getMorselTemplates() {
-    return ApiMorsels.getTemplates().then(function(templateData) {
-      allTemplateData = templateData;
+    return ApiMorsels.getTemplates().then(function(templateResp) {
+      allTemplateData = templateResp.data;
     });
   }
 

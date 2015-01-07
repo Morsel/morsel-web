@@ -21,12 +21,12 @@ angular.module( 'Morsel.public.hashtags', [])
   $scope.emptyText = 'There are no morsels tagged #'+$stateParams.hashtag+'. <a href="/add" target="_self">Create one now</a>.';
 
   $scope.getMorsels = function(params) {
-    ApiKeywords.getHashtagMorsels($scope.hashtag, params).then(function(morselsData) {
+    ApiKeywords.getHashtagMorsels($scope.hashtag, params).then(function(morselsResp) {
       if($scope.morsels) {
         //concat them with new data after old data
-        $scope.morsels = $scope.morsels.concat(morselsData);
+        $scope.morsels = $scope.morsels.concat(morselsResp.data);
       } else {
-        $scope.morsels = morselsData;
+        $scope.morsels = morselsResp.data;
       }
     }, function() {
       //if there's an error retrieving morsel data, go to 404

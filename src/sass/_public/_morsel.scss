@@ -18,6 +18,11 @@
   .cover-page {
     .cover-jumbo {
       position: relative;
+
+      .banner {
+        top: auto;
+        bottom: 0;
+      }
     }
 
     .cover-bg {

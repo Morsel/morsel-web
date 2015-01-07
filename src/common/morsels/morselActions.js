@@ -10,7 +10,6 @@ angular.module('Morsel.common.morselActions', [])
     },
     link: function(scope, element) {
       var menuFixed,
-          menuHeight = element.children()[0].offsetHeight,
           relativeWrapMarginBottom = 20;
 
       scope.element = element;
@@ -23,7 +22,8 @@ angular.module('Morsel.common.morselActions', [])
 
       //check if menu has passed spot where it should stay fixed
       menuFixed = _.throttle(function(e) {
-        var offsetWrapTop = scope.element[0].getBoundingClientRect().top;
+        var offsetWrapTop = scope.element[0].getBoundingClientRect().top,
+            menuHeight = scope.element.children()[0].offsetHeight;
 
         //mobile
         if($window.innerHeight < offsetWrapTop + menuHeight) {
