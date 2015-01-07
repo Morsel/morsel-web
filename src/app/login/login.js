@@ -96,8 +96,7 @@ angular.module( 'Morsel.login', [
 })
 
 .controller( 'LoginAppCtrl', function LoginAppCtrl ( $scope, $location, Auth, $window, $document, Mixpanel, $state, GA, $modalStack) {
-  var viewOptions = {},
-      $body = angular.element(document.getElementsByTagName('body'));
+  var viewOptions = {};
 
   //to store things like page title
   $scope.pageData = {
@@ -166,7 +165,7 @@ angular.module( 'Morsel.login', [
     resetViewOptions();
 
     //make sure we're at the top of the page when we change routes
-    $body.scrollTop(0, 0);
+    $document.scrollTop(0, 0);
   });
 
   //if there are internal state issues, go to login
