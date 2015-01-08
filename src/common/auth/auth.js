@@ -285,7 +285,7 @@ angular.module( 'Morsel.common.auth', [] )
     ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance'];
 
     $rootScope.modalInstance = $modal.open({
-      templateUrl: 'common/auth/apiError.tpl.html',
+      templateUrl: 'common/auth/api-error.tpl.html',
       controller: ModalInstanceCtrl,
       resolve: {}
     });

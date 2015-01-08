@@ -181,6 +181,6 @@ angular.module('Morsel.common.morsel', [])
     link: function(scope, element) {
       scope.nextNavigation = scope.navDirection === 'next';
     },
-    templateUrl: 'common/morsels/morselFeedNav.tpl.html'
+    templateUrl: 'common/morsels/morsel-feed-nav.tpl.html'
   };
 });

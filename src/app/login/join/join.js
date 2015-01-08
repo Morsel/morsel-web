@@ -48,7 +48,7 @@ angular.module( 'Morsel.login.join', [])
     views: {
       "basicInfo": {
         controller: 'BasicInfoCtrl',
-        templateUrl: 'app/login/join/basicInfo.tpl.html'
+        templateUrl: 'app/login/join/basic-info.tpl.html'
       }
     }
   })
@@ -57,7 +57,7 @@ angular.module( 'Morsel.login.join', [])
     views: {
       "additionalInfo": {
         controller: 'AdditionalInfoCtrl',
-        templateUrl: 'app/login/join/additionalInfo.tpl.html'
+        templateUrl: 'app/login/join/additional-info.tpl.html'
       }
     }
   });

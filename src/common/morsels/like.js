@@ -96,7 +96,7 @@ angular.module( 'Morsel.common.morselLike', [] )
     link: function(scope, element, attrs) {
       scope.openLikes = function () {
         $rootScope.modalInstance = $modal.open({
-          templateUrl: 'common/user/userListOverlay.tpl.html',
+          templateUrl: 'common/user/user-list-overlay.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             morsel: function () {

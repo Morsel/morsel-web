@@ -152,7 +152,7 @@ angular.module( 'Morsel.add.morsel', [])
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'HandleErrors', 'ApiMorsels', 'morsel'];
 
       $rootScope.modalInstance = $modal.open({
-        templateUrl: 'app/add/morsel/morselSummaryOverlay.tpl.html',
+        templateUrl: 'app/add/morsel/morsel-summary-overlay.tpl.html',
         controller: ModalInstanceCtrl,
         resolve: {
           morsel: function () {
