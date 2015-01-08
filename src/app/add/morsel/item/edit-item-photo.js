@@ -113,8 +113,6 @@ angular.module( 'Morsel.add.editItemPhoto', [] )
           }
         });
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'item', 'itemPhotoForm', 'MORSELPLACEHOLDER', '$window', 'ApiItems', '$timeout'];
     },
     templateUrl: 'app/add/morsel/item/edit-item-photo.tpl.html'
   };

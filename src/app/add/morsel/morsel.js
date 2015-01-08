@@ -148,9 +148,6 @@ angular.module( 'Morsel.add.morsel', [])
       //track that we've finished the main page of content
       Mixpanel.track('Clicked Next (Add)');
 
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'HandleErrors', 'ApiMorsels', 'morsel'];
-
       $rootScope.modalInstance = $modal.open({
         templateUrl: 'app/add/morsel/morsel-summary-overlay.tpl.html',
         controller: ModalInstanceCtrl,

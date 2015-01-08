@@ -160,8 +160,6 @@ angular.module( 'Morsel.common.comments', [] )
           });
         };
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', '$location', '$window', 'AfterLogin', 'item'];
     },
     template: '<div ng-click="openComments()"><i ng-class="{\'common-comment-empty\':item.comment_count===0, \'common-comment-filled\':item.comment_count > 0}"></i><a ng-show="item.comment_count > 0" class="dark-link">{{item.comment_count}}<span> comment{{item.comment_count===1?\'\':\'s\'}}</span></a><a ng-show="item.comment_count === 0" class="dark-link"><span>Add comment</span></a></div>'
   };

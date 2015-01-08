@@ -125,8 +125,6 @@ angular.module( 'Morsel.common.morselLike', [] )
           });
         };
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
     template: '<button type="button" ng-show="morsel.like_count > 0" ng-click="openLikes()" class="btn btn-link btn-xs morsel-like-count">{{morsel.like_count}}<span> like{{morsel.like_count===1?\'\':\'s\'}}</span></button>'
   };

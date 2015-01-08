@@ -94,8 +94,6 @@ angular.module( 'Morsel.add.tagUsers', [] )
           }
         }
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
     templateUrl: 'app/add/morsel/tag-users/tag-users.tpl.html'
   };

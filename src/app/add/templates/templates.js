@@ -55,9 +55,7 @@ angular.module('Morsel.add.templates', [] )
           $modalInstance.dismiss('cancel');
         };
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'templateData', 'justHelp'];
-
+      
       function createMorsel(templateId) {
         var morselParams = {
           morsel: {

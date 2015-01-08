@@ -40,8 +40,6 @@ angular.module( 'Morsel.common.followers', [] )
           });
         };
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'followId'];
     },
     template: '<div class="h3" ng-click="showFollowers()">{{followerCount}}<span class="h6">Followers</span></div>'
   };

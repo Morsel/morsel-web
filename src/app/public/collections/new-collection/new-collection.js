@@ -60,8 +60,6 @@ angular.module( 'Morsel.public.collections.newCollection', [] )
           }
         };
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'ApiCollections'];
     },
     template: '<button type="button" ng-click="openOverlay()" class="new-collection-btn btn btn-lg"><i>&#43;</i><span>Create new collection</span></button>'
   };

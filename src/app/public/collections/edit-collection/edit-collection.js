@@ -120,8 +120,6 @@ angular.module( 'Morsel.public.collections.editCollection', [] )
           $modalInstance.dismiss('close');
         }
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'currentUser', 'collection', 'ApiCollections', 'HandleErrors'];
     },
     template: '<button title="Edit this collection" class="btn btn-link" ng-click="openEditCollectionOverlay()">Edit this collection</button>'
   };

@@ -38,8 +38,6 @@ angular.module('Morsel.common.morselTaggedUserList', [])
           });
         };
       };
-      //we need to implicitly inject dependencies here, otherwise minification will botch them
-      ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
     template: function(tElement, tAttrs) {
       if(tAttrs.mrslTaggedUserListFull) {
