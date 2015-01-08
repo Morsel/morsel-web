@@ -13,7 +13,7 @@ module.exports = function ( grunt ) {
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-karma');
-  grunt.loadNpmTasks('grunt-ngmin');
+  grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-html2js');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
@@ -468,10 +468,10 @@ module.exports = function ( grunt ) {
     },
 
     /**
-     * `ng-min` annotates the sources before minifying. That is, it allows us
+     * `ng-annotate` annotates the sources before minifying. That is, it allows us
      * to code without the array syntax.
      */
-    ngmin: {
+    ngAnnotate: {
       compile: {
         files: [
           {
@@ -497,7 +497,7 @@ module.exports = function ( grunt ) {
       compile: {
         options: {
           banner: '<%= meta.banner %>',
-          mangle: false
+          mangle: true
         },
         files: [{
           '<%= concat.compile_public_js.dest %>': '<%= concat.compile_public_js.dest %>'
@@ -1235,7 +1235,7 @@ module.exports = function ( grunt ) {
    * The `compile` task gets your app ready for deployment by concatenating and
    * minifying your code.
    */
-  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_add_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'concat:compile_static_js', 'concat:compile_add_js', 'ngmin', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'app_add:compile', 'copy:compile_package_json', 'copy:compile_static_templates', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
+  grunt.registerTask( 'compile', [ 'clean:preCompile', 'copy:compile_assets', 'compass:compile', 'concat:compile_public_css', 'concat:compile_account_css', 'concat:compile_login_css', 'concat:compile_static_css', 'concat:compile_add_css', 'concat:compile_public_js', 'concat:compile_account_js', 'concat:compile_login_js', 'concat:compile_static_js', 'concat:compile_add_js', 'ngAnnotate', 'uglify', 'app_public:compile', 'app_account:compile', 'app_login:compile', 'static_pages:compile', 'app_add:compile', 'copy:compile_package_json', 'copy:compile_static_templates', 'copy:compile_server_data', 'copy:compile_seo', 'copy:compile_static_launch', 'appserver:compile', 'clean:postCompile'
   ]);
 
   /**
