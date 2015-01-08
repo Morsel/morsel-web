@@ -8,6 +8,6 @@ angular.module('Morsel.common.placeList', [])
       places: '=mrslPlaceList',
       emptyText: '=mrslPlaceListEmpty'
     },
-    templateUrl: 'common/places/placeList.tpl.html'
+    templateUrl: 'common/places/place-list.tpl.html'
   };
 }]);

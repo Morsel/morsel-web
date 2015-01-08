@@ -39,6 +39,6 @@ angular.module('Morsel.common.morselBlock', [])
         }
       };
     },
-    templateUrl: 'common/morsels/morselBlock.tpl.html'
+    templateUrl: 'common/morsels/morsel-block.tpl.html'
   };
 });

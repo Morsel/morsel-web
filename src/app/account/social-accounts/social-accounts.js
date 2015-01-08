@@ -7,7 +7,7 @@ angular.module( 'Morsel.account.socialAccounts', [])
     views: {
       "account-body": {
         controller: 'SocialAccountsCtrl',
-        templateUrl: 'app/account/socialAccounts/socialAccounts.tpl.html'
+        templateUrl: 'app/account/social-accounts/social-accounts.tpl.html'
       }
     },
     data:{

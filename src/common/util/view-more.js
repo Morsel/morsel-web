@@ -113,6 +113,6 @@ angular.module( 'Morsel.common.viewMore', [
         scope.loadMore();
       }
     },
-    templateUrl: 'common/util/viewMore.tpl.html'
+    templateUrl: 'common/util/view-more.tpl.html'
   };
 });

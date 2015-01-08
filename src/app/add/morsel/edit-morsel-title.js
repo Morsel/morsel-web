@@ -108,6 +108,6 @@ angular.module('Morsel.add.editMorselTitle', [])
         }
       };
     },
-    templateUrl: 'app/add/morsel/editMorselTitle.tpl.html'
+    templateUrl: 'app/add/morsel/edit-morsel-title.tpl.html'
   };
 });

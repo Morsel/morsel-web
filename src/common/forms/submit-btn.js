@@ -56,6 +56,6 @@ angular.module('Morsel.common.submitBtn', [])
         }
       }
     },
-    templateUrl: 'common/forms/submitBtn.tpl.html'
+    templateUrl: 'common/forms/submit-btn.tpl.html'
   };
 }]);

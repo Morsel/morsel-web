@@ -26,7 +26,7 @@ angular.module('Morsel.add.templates', [] )
 
       function showOverlay() {
         $rootScope.modalInstance = $modal.open({
-          templateUrl: 'app/add/templates/templateOverlay.tpl.html',
+          templateUrl: 'app/add/templates/template-overlay.tpl.html',
           controller: ModalInstanceCtrl,
           size: 'lg',
           resolve: {

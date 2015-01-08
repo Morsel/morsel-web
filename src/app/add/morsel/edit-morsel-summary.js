@@ -80,6 +80,6 @@ angular.module('Morsel.add.editMorselSummary', [])
         }
       };
     },
-    templateUrl: 'app/add/morsel/editMorselSummary.tpl.html'
+    templateUrl: 'app/add/morsel/edit-morsel-summary.tpl.html'
   };
 });

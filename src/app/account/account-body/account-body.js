@@ -8,7 +8,7 @@ angular.module( 'Morsel.account.body', [])
     views: {
       "main": {
         controller: 'AccountBodyCtrl',
-        templateUrl: 'app/account/accountBody/account-body.tpl.html'
+        templateUrl: 'app/account/account-body/account-body.tpl.html'
       }
     },
     access: {

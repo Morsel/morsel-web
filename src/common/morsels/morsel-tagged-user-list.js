@@ -9,7 +9,7 @@ angular.module('Morsel.common.morselTaggedUserList', [])
     link: function(scope, element) {
       scope.showTaggedUsers = function(){
         $rootScope.modalInstance = $modal.open({
-          templateUrl: 'common/user/userListOverlay.tpl.html',
+          templateUrl: 'common/user/user-list-overlay.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             morsel: function () {

@@ -12,6 +12,6 @@ angular.module('Morsel.common.morselGrid', [])
     },
     link: function(scope, element) {
     },
-    templateUrl: 'common/morsels/morselGrid.tpl.html'
+    templateUrl: 'common/morsels/morsel-grid.tpl.html'
   };
 });

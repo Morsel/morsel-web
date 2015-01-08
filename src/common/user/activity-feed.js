@@ -10,6 +10,6 @@ angular.module( 'Morsel.common.activityFeed', [] )
     replace: true,
     link: function(scope, element, attrs) {
     },
-    templateUrl: 'common/user/activityFeed.tpl.html'
+    templateUrl: 'common/user/activity-feed.tpl.html'
   };
 });

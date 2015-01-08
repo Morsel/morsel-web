@@ -56,6 +56,6 @@ angular.module( 'Morsel.common.addTwitter', [] )
         HandleErrors.onError(resp.data, scope.form);
       }
     },
-    templateUrl: 'common/social/addTwitter.tpl.html'
+    templateUrl: 'common/social/add-twitter.tpl.html'
   };
 });

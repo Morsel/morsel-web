@@ -7,7 +7,7 @@ angular.module( 'Morsel.account.accountSettings', [])
     views: {
       "account-body": {
         controller: 'AccountSettingsCtrl',
-        templateUrl: 'app/account/accountSettings/accountSettings.tpl.html'
+        templateUrl: 'app/account/account-settings/account-settings.tpl.html'
       }
     },
     data:{

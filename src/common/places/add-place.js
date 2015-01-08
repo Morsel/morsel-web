@@ -10,7 +10,7 @@ angular.module( 'Morsel.common.addPlace', [] )
     link: function(scope, element, attrs) {
       scope.openAddPlaceOverlay = function () {
         $rootScope.modalInstance = $modal.open({
-          templateUrl: 'common/places/addPlace.tpl.html',
+          templateUrl: 'common/places/add-place.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             places: function () {

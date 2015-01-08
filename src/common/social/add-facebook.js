@@ -53,6 +53,6 @@ angular.module( 'Morsel.common.addFacebook', [] )
         HandleErrors.onError(resp.data, scope.form);
       }
     },
-    templateUrl: 'common/social/addFacebook.tpl.html'
+    templateUrl: 'common/social/add-facebook.tpl.html'
   };
 });

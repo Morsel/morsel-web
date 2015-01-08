@@ -17,6 +17,6 @@ angular.module('Morsel.common.userList', [])
     link: function(scope, element, attrs) {
       scope.listLayoutType = scope.listLayout ? scope.listLayout+'-layout' : '';
     },
-    templateUrl: 'common/user/userList.tpl.html'
+    templateUrl: 'common/user/user-list.tpl.html'
   };
 });

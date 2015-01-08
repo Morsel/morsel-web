@@ -6,7 +6,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     views: {
       "main": {
         controller: 'EventMorselsCtrl',
-        templateUrl: 'app/public/events/eventMorsels.tpl.html'
+        templateUrl: 'app/public/events/event-morsels.tpl.html'
       }
     },
     data:{ pageTitle: 'Event' },
@@ -23,7 +23,7 @@ angular.module( 'Morsel.public.eventMorsels', [])
     views: {
       "main": {
         controller: 'EventMorselsCtrl',
-        templateUrl: 'app/public/events/eventMorsels.tpl.html'
+        templateUrl: 'app/public/events/event-morsels.tpl.html'
       }
     },
     data:{ pageTitle: 'Collection' },

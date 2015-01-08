@@ -7,7 +7,7 @@ angular.module( 'Morsel.account.editProfile', [])
     views: {
       "account-body": {
         controller: 'EditProfileCtrl',
-        templateUrl: 'app/account/editProfile/editProfile.tpl.html'
+        templateUrl: 'app/account/edit-profile/edit-profile.tpl.html'
       }
     },
     data:{

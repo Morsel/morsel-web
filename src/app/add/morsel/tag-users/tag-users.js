@@ -24,7 +24,7 @@ angular.module( 'Morsel.add.tagUsers', [] )
 
       scope.popOverlay = function() {
         $rootScope.modalInstance = $modal.open({
-          templateUrl: 'common/user/userListOverlay.tpl.html',
+          templateUrl: 'common/user/user-list-overlay.tpl.html',
           controller: ModalInstanceCtrl,
           resolve: {
             morsel: function () {
@@ -97,6 +97,6 @@ angular.module( 'Morsel.add.tagUsers', [] )
       //we need to implicitly inject dependencies here, otherwise minification will botch them
       ModalInstanceCtrl['$inject'] = ['$scope', '$modalInstance', 'morsel'];
     },
-    templateUrl: 'app/add/morsel/tagUsers/tagUsers.tpl.html'
+    templateUrl: 'app/add/morsel/tag-users/tag-users.tpl.html'
   };
 });

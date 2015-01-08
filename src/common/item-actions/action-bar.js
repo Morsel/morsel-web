@@ -12,6 +12,6 @@ angular.module( 'Morsel.common.itemActionBar', [] )
     },
     link: function(scope, element, attrs) {
     },
-    templateUrl: 'common/itemActions/itemActionBar.tpl.html'
+    templateUrl: 'common/item-actions/item-action-bar.tpl.html'
   };
 });

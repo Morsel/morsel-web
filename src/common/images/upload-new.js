@@ -195,6 +195,6 @@ angular.module( 'Morsel.common.imageUploadNew', [] )
         }, 3000);
       }
     },
-    templateUrl: 'common/images/uploadNew.tpl.html'
+    templateUrl: 'common/images/upload-new.tpl.html'
   };
 });

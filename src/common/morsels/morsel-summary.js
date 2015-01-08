@@ -9,6 +9,6 @@ angular.module('Morsel.common.morselSummary', [])
       morselFeedItemId: '=mrslFeedItemId'
     },
     link: function(scope) {},
-    templateUrl: 'common/morsels/morselSummary.tpl.html'
+    templateUrl: 'common/morsels/morsel-summary.tpl.html'
   };
 });

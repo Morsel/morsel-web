@@ -83,6 +83,6 @@ angular.module('Morsel.add.editItemDescription', [])
         }
       };
     },
-    templateUrl: 'app/add/morsel/item/itemDescription.tpl.html'
+    templateUrl: 'app/add/morsel/item/item-description.tpl.html'
   };
 });

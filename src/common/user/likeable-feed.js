@@ -20,6 +20,6 @@ angular.module( 'Morsel.common.likeableFeed', [] )
         }
       };
     },
-    templateUrl: 'common/user/likeableFeed.tpl.html'
+    templateUrl: 'common/user/likeable-feed.tpl.html'
   };
 });

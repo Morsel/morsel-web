@@ -66,6 +66,6 @@ angular.module('Morsel.common.morselActions', [])
         });
       };
     },
-    templateUrl: 'common/morsels/morselActions.tpl.html'
+    templateUrl: 'common/morsels/morsel-actions.tpl.html'
   };
 });
