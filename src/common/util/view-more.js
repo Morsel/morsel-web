@@ -88,6 +88,12 @@ angular.module( 'Morsel.common.viewMore', [
 
         scope.loading = true;
 
+        //keep track of the page number
+        //start at 1 if there isn't one already, or 2 if we delayed start
+        //timeline pagination doesn't use it, but keep it for mixpanel
+        scope.pageNumber = scope.pageNumber ? scope.pageNumber+1 : (scope.delayStart ? 2 : 1);
+        mixpanelProps.page_number = scope.pageNumber;
+
         if(scope.timeline) {
           if(scope.data) {
             //find our last id
@@ -97,12 +103,8 @@ angular.module( 'Morsel.common.viewMore', [
           //pass back "last" item to our loading function (which it may or may not use) to determine what to load next
           scope.loadFunc(loadMoreParams);
         } else {
-          //keep track of the page number. start at 1 if there isn't one already, or 2 if we delayed start
-          scope.pageNumber = scope.pageNumber ? scope.pageNumber+1 : (scope.delayStart ? 2 : 1);
-
           loadMoreParams.page = scope.pageNumber;
           scope.loadFunc(loadMoreParams);
-          mixpanelProps.page_number = scope.pageNumber;
         }
 
         Mixpanel.track('Clicked View More', mixpanelProps);
