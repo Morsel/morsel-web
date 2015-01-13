@@ -68,7 +68,7 @@ angular.module( 'Morsel.add.tagUsers', [] )
             };
           }
 
-          params['user[query]'] = $scope.searchModel.query;
+          params.query = $scope.searchModel.query;
 
           ApiMorsels.getEligibleTaggedUsers($scope.morselTagged.id, params).then(function(userResp){
             if($scope.users) {
