@@ -5,7 +5,7 @@ function getCoverPhoto(morsel) {
   var primaryItemPhotos = findPrimaryItemPhotos(morsel);
 
   //use their cover photo if there is one
-  return primaryItemPhotos ? primaryItemPhotos._992x992 : 'https://www.eatmorsel.com/assets/images/logos/morsel-large.png';
+  return primaryItemPhotos ? primaryItemPhotos._992x992 : 'https://www.eatmorsel.com/assets/images/logos/morsel-m_500.png';
 }
 
 function getCollage(morsel) {
@@ -166,7 +166,7 @@ module.exports.renderUserPage = function(res, userIdOrUsername) {
       userMetadata = {
         "title": ((user.first_name || user.last_name) ? user.first_name + ' ' + user.last_name : '') + ' (' + user.username + ') | Morsel',
         "description": ((user.first_name || user.last_name) ? user.first_name + ' ' + user.last_name : '') + (user.bio ? ' - ' + user.bio : ''),
-        "image": userImage || "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "image": userImage || "https://www.eatmorsel.com/assets/images/logos/morsel-m_500.png",
         "app": {
           "url": util.appProtocol+'users/'+user.id
         },
@@ -218,7 +218,7 @@ module.exports.renderPlacePage = function(res, placeIdSlug) {
       placeMetadata = {
         "title": placeTitle+ ' Inspirations, Dishes & Drinks | Morsel',
         "description": placeDescription+' | Morsel',
-        "image": "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "image": "https://www.eatmorsel.com/assets/images/logos/morsel-m_500.png",
         "app": {
           "url": util.appProtocol+'places/'+place.id
         },
@@ -279,7 +279,7 @@ module.exports.renderCollectionPage = function(req, res) {
       collectionMetadata = {
         "title": collectionTitle+ ' | Morsel',
         "description": collectionDescription+' | Morsel',
-        "image": "https://www.eatmorsel.com/assets/images/logos/morsel-large.png",
+        "image": "https://www.eatmorsel.com/assets/images/logos/morsel-m_500.png",
         "app": {
           "url": util.appProtocol+collectionCreator.username+'/collections/'+collection.id+'-'+collection.slug
         },
