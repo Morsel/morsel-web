@@ -87,7 +87,7 @@ angular.module( 'Morsel.add.tagUsers', [] )
             $scope.users = null;
             $scope.loadUsers();
           } else {
-            userParams.query = '';
+            $scope.searchModel.query = '';
             $scope.users = [];
             $scope.loadUsers();
             _.defer(function(){$scope.$apply();});
