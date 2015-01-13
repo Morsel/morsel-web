@@ -68,7 +68,9 @@ angular.module( 'Morsel.add.tagUsers', [] )
             };
           }
 
-          params.query = $scope.searchModel.query;
+          if(_.isUndefined(params.query)) {
+            params.query = $scope.searchModel.query;
+          }
 
           ApiMorsels.getEligibleTaggedUsers($scope.morselTagged.id, params).then(function(userResp){
             if($scope.users) {
@@ -82,15 +84,16 @@ angular.module( 'Morsel.add.tagUsers', [] )
         };
 
         function searchUsers() {
+          $scope.users = null;
           //only use search if it's >=3 characters, otherwise show everybody
           if($scope.searchModel.query.length >= 3) {
-            $scope.users = null;
             $scope.loadUsers();
           } else {
-            $scope.searchModel.query = '';
-            $scope.users = [];
-            $scope.loadUsers();
-            _.defer(function(){$scope.$apply();});
+            $scope.loadUsers({
+              count: USER_LIST_NUMBER,
+              page: 1,
+              query: ''
+            });
           }
         }
       };
