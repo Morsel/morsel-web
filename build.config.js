@@ -134,6 +134,7 @@ module.exports = {
         'src/common/morsels/morsel-feed-nav.tpl.html',
         'src/common/places/place-list.tpl.html',
         'src/common/social/social-sharing.tpl.html',
+        'src/common/social/embed-sharing.tpl.html',
         'src/common/user/activity.tpl.html',
         'src/common/user/activity-feed.tpl.html',
         'src/common/user/likeable-feed.tpl.html',
@@ -161,7 +162,10 @@ module.exports = {
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
         'vendor/restangular/dist/restangular.js',
-        'vendor/ui-router-extras/release/ct-ui-router-extras.min.js'
+        'vendor/ui-router-extras/release/ct-ui-router-extras.min.js',
+        'vendor/ng-clip/ngClip.js',
+        'vendor/ng-clip/ZeroClipboard.min.js',
+        'vendor/embed-code/embed.js'
       ],
       css: [
       ],

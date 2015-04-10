@@ -194,7 +194,7 @@ angular.module( 'Morsel.public', [
     $scope.currentUser = currentUser;
     $scope.isLoggedIn = Auth.isLoggedIn();
     $scope.isStaff = Auth.isStaff();
-    
+
     //get and send some super properties to mixpanel
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
@@ -230,7 +230,7 @@ angular.module( 'Morsel.public', [
     var currentLocation = $location.path(),
         nextPath,
         topModal = $modalStack.getTop();
-        
+
     //if non logged in user tries to access a restricted route
     if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
       event.preventDefault();
