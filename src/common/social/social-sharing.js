@@ -132,7 +132,7 @@ angular.module( 'Morsel.common.socialSharing', [] )
 }) /*embed code controller*/
 .controller('ModalInstanceCtrl', function ($scope,$location, $modalInstance) { 
   var locationUrl = $location.$$absUrl;
-  var copyData='<div id="morsel-embed-wrapper"><a id="morsel-embed" href="'+locationUrl+'">Morsel</a></div><script type="text/javascript">(function(d, id, src) {var s = d.getElementById(id);if (!s) {s = d.createElement("script");s.id = id;s.src = src;d.head.appendChild(s);}})(document, "morsel-embed-js", "https://rawgit.com/nishant-n/morsel/staging/embed.js");</script>';  
+  var copyData='<div id="morsel-embed-wrapper"><a id="morsel-embed" href="'+locationUrl+'">Morsel</a></div><script type="text/javascript">(function(d, id, src) {var s = d.getElementById(id);if (!s) {s = d.createElement("script");s.id = id;s.src = src;d.head.appendChild(s);}})(document, "morsel-embed-js", "https://rawgit.com/nishant-n/morsel/production/embed.js");</script>';  
    
   $scope.copyEmbedCode = copyData;
   
