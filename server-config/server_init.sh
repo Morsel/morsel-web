@@ -3,7 +3,7 @@ deploy_dir=$1
 git_repo=$2
 push_shortcut=$3
 
-if [[ ! -e $deploy_dir ]]; then
+if [ ! -e $deploy_dir ]; then
   mkdir $deploy_dir
   cd $deploy_dir
   git init
