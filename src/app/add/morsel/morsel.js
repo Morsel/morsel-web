@@ -104,9 +104,9 @@ angular.module( 'Morsel.add.morsel', [])
 
     //form completed. pop overlay for summary
     $scope.popSummaryOverlay = function() {
-      var ModalInstanceCtrl = function ($scope, $modalInstance, HandleErrors, ApiMorsels, morsel) {
+      var ModalInstanceCtrl = function ($scope, $modalInstance, HandleErrors, ApiMorsels, morsel,Auth) {
         $scope.morsel = morsel;
-        
+
         //model for our summary
         $scope.morselSummary = {
           text: null
@@ -143,20 +143,60 @@ angular.module( 'Morsel.add.morsel', [])
             $modalInstance.dismiss('publish');
           }
         };
+
+        $scope.submitMorsel=function(){
+          var summary = $scope.morselSummary.text ? $scope.morselSummary.text.trim() : null;
+          var morselParams;
+
+            // if we have a new selected place, or new value is none but we used to have a selected place
+          morselParams = {
+            morsel: {
+              //allow setting location to none/personal
+              is_submit: true,
+              summary: summary
+            }
+          };
+          ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
+            $window.onbeforeunload = undefined;
+            $modalInstance.dismiss('publish');
+            $window.location.href = 'add/drafts';
+          }, function(resp) {
+            handleErrors(resp);
+          });
+
+        };
+        Auth.getCurrentUserPromise().then(function(user){
+          ApiMorsels.checkPublish($scope.morsel.id,user.id).then(function(morselData) {
+            if(morselData.data=="OK"){
+              $scope.canSubmit=true;
+            }else{
+              $scope.canSubmit=false;
+            }
+
+          }, function(resp) {
+            handleErrors(resp);
+          });
+        },function(resp){
+
+        });
+
+
       };
 
       //track that we've finished the main page of content
       Mixpanel.track('Clicked Next (Add)');
+      $timeout(function() {
+        $rootScope.modalInstance = $modal.open({
+          templateUrl: 'app/add/morsel/morsel-summary-overlay.tpl.html',
+          controller: ModalInstanceCtrl,
+          resolve: {
+            morsel: function () {
 
-      $rootScope.modalInstance = $modal.open({
-        templateUrl: 'app/add/morsel/morsel-summary-overlay.tpl.html',
-        controller: ModalInstanceCtrl,
-        resolve: {
-          morsel: function () {
-            return $scope.morsel;
+              return $scope.morsel;
+            }
           }
-        }
-      });
+        });
+      },100);
     };
 
     $scope.$on('add.dirty', function(e, data) {
@@ -407,7 +447,7 @@ angular.module( 'Morsel.add.morsel', [])
                 //allow them to publish
                 $scope.social.canPublish.facebook = true;
               }
-              
+
               //apply our changes that invole the DOM
               //$scope.$apply();
             });
@@ -517,7 +557,7 @@ angular.module( 'Morsel.add.morsel', [])
   function onPublishError(resp) {
     //make form valid again (until errors show)
     $scope.morselEditForm.$setValidity('loading', true);
-    
+
     //remove whatever message is there
     $scope.alertMessage = null;
 
@@ -608,7 +648,7 @@ angular.module( 'Morsel.add.morsel', [])
           $scope.morsel.items[i].sort_order++;
         }
       }
-      
+
       //show reorder handles
       $scope.updatingOrder = false;
 
@@ -642,7 +682,7 @@ angular.module( 'Morsel.add.morsel', [])
       $scope.morselDeleted = true;
       $scope.alertMessage = $sce.trustAsHtml('Your morsel has been successfully deleted. Click <a href="/add/drafts">here</a> to return to your drafts.');
       $scope.alertType = 'success';
-      
+
       //decrease our count to display in the menu
       currentUser.draft_count--;
 

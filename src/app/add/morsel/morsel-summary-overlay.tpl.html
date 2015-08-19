@@ -4,11 +4,24 @@
 </div>
 <div class="modal-body">
   <p>Add a summary to your morsel. Include #hashtags to help others discover your content</p>
-  <form role="form" ng-submit="publish()" name="$parent.morselSummaryForm" novalidate>
+  <form role="form" ng-submit="submitMorsel()" name="$parent.morselSummaryForm" novalidate ng-if="canSubmit">
     <div mrsl-base-errors mrsl-val-form="morselSummaryForm"></div>
     <div class="form-group">
       <textarea placeholder="My take on grandma's #pumpkin #pie #recipe for our family #thanksgiving" ng-model="morselSummary.text" name="summary" class="form-control" mrsl-focus-me="true"></textarea>
     </div>
+
+    <button mrsl-submit-btn mrsl-submit-btn-form="morselSummaryForm" mrsl-submit-btn-copy="Submit morsel" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-submit-copy="Updating summary..." ></button>
+  </form>
+
+
+  <form role="form" ng-submit="publish()" name="$parent.morselSummaryForm" novalidate ng-if="!canSubmit">
+    <div mrsl-base-errors mrsl-val-form="morselSummaryForm"></div>
+    <div class="form-group">
+      <textarea placeholder="My take on grandma's #pumpkin #pie #recipe for our family #thanksgiving" ng-model="morselSummary.text" name="summary" class="form-control" mrsl-focus-me="true"></textarea>
+    </div>
+
+    <button mrsl-submit-btn mrsl-submit-btn-form="morselSummaryForm" mrsl-submit-btn-copy="Submit morsel" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-submit-copy="Updating summary..." ng-if="canSubmit"></button>
+
     <button mrsl-submit-btn mrsl-submit-btn-form="morselSummaryForm" mrsl-submit-btn-copy="Publish morsel" mrsl-submit-btn-tooltip-placement="bottom" mrsl-submit-btn-submit-copy="Updating summary..."></button>
   </form>
 </div>
