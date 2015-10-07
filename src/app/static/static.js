@@ -7,6 +7,7 @@ angular.module( 'Morsel.static', [
   //filters
   //API
   'Morsel.common.apiNotifications',
+  'Morsel.common.apiRequests',
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
   //templates

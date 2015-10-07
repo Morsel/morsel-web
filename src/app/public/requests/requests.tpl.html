@@ -1,0 +1,33 @@
+<div class="activity header-padding" ng-style="viewOptions.minimumMainHeight()">
+  <h2 class="text-center">Requests</h2>
+  <div class="container container-no-padding container-shadow morsel-bg container-max-sm">
+    <div class="activity-feed notification-feed">
+      <div class="clearfix">
+
+      </div>
+      <ul ng-if="associatedUsers && associatedUsers.length > 0">
+        <li ng-repeat="activity in associatedUsers" class="ng-scope unread">
+          <div class="user-info ng-isolate-scope">
+            <a ng-attr-title="{{activity.host_user.username}}" class="profile-pic-link profile-pic-s" ng-href="" mrsl-user-image-size="profile-pic-s"  mrsl-username="activity.host_user.username" mrsl-user-image="" title="{{activity.host_user.username}}" href="">
+            <!-- <img class="img-circle" ng-src="{{activity.host_user.user_photo}}" src="{{activity.host_user.user_photo}}"> -->
+            <img class="img-circle" bo-src="activity.host_user.user_photo" />
+            </a>
+            <div class="user-body">
+               <button ng-click="acceptHost(activity)" class="btn {{activity.is_approved== 'true' ?'btn-success': 'btn-primary'}}" type="submit">{{activity.is_approved== 'true' ?'Accepted': 'Permit'}}</button>
+
+              <p align="center">{{activity.host_user.fullname}} has sent a request to associate you with their website. 
+              </p>
+              
+
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div ng-if="!associatedUsers" class="loader"></div>
+      <div ng-if="associatedUsers && associatedUsers.length === 0" class="empty-state">
+        <p>No Requests</p>
+      </div>
+      
+    </div>
+  </div>
+</div>

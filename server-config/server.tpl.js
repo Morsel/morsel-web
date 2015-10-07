@@ -323,6 +323,10 @@ if (cluster.isMaster && ((process.env.NODE_ENV || 'local') !== 'local')) {
       publicApp.renderPublicPage(res);
     });
 
+    app.get('/requests', function(req, res){
+      publicApp.renderPublicPage(res);
+    });
+
     //search
     app.get('/search', function(req, res){
       res.redirect('/search/people');

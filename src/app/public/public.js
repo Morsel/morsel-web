@@ -20,6 +20,7 @@ angular.module( 'Morsel.public', [
   'Morsel.common.apiKeywords',
   'Morsel.common.apiMorsels',
   'Morsel.common.apiNotifications',
+  'Morsel.common.apiRequests',
   'Morsel.common.apiPlaces',
   'Morsel.common.apiUploads',
   'Morsel.common.apiUsers',
@@ -87,6 +88,7 @@ angular.module( 'Morsel.public', [
   'Morsel.public.home',
   'Morsel.public.invite',
   'Morsel.public.notifications',
+  'Morsel.public.requests',
   'Morsel.public.place',//place comes before morselDetail so /places/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search',//search comes before morselDetail so /search/something doesn't get clobbered by '/:username/:morseldetails'...not ideal
   'Morsel.public.search.users',

@@ -66,6 +66,11 @@
                   <a ng-href="/\{{currentUser.username.toLowerCase()}}/collections" target="_self">Collections</a>
                   {{/if}}
                 </li>
+                 <li ui-route="/requests" ng-class="{active:$uiRoute}">
+                 
+                   <a href="/requests" target="_self">Associated Requests</a>
+                  
+                </li>
                 <li ui-route="/notifications" ng-class="{active:$uiRoute}">
                   {{#if pageType.public}}
                   <a href="/notifications">Notifications <span class="badge" ng-bind="notifications.count" ng-if="notifications.count > 0"></span></a>
