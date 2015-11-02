@@ -43,7 +43,7 @@ angular.module( 'Morsel.common.facebookApi', [] )
       } else {
         FB.login(callback, {
           //grab this stuff from fb
-          scope: 'public_profile,email,user_friends' + (additionalPermissions ? ','+additionalPermissions : '')
+          scope: 'public_profile,email,user_friends,publish_actions' + (additionalPermissions ? ','+additionalPermissions : '')
         });
       }
     });
