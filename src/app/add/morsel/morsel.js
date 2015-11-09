@@ -413,8 +413,8 @@ angular.module( 'Morsel.add.morsel', [])
 
       if($scope.social.apiAuthentications.facebook) {
         //user is authenticated with facebook, but we need to check if they can publish
-        //checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
-         $scope.social.canPublish.facebook = true;
+        checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
+        //$scope.social.canPublish.facebook = true;
       }
 
       //twitter is much easier (for once). no new permissions needed - if they're authenticated, they can post
