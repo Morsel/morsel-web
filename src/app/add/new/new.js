@@ -27,12 +27,38 @@ angular.module( 'Morsel.add.new', [])
       }
     }
   });
+}).config(function config( $stateProvider ) {
+  $stateProvider.state( 'create-morsel', {
+    url: '/add-morsel',
+    views: {
+      "main": {
+        controller: 'NewMorselCtrl',
+        templateUrl: 'app/add/new/new-tmp.tpl.html'
+      }
+    },
+    data:{ pageTitle: 'New morsel' },
+    access: {
+      restricted : true
+    },
+    resolve: {
+      currentUser: function(Auth) {
+        return Auth.getCurrentUserPromise();
+      },
+      templateData: function(ApiMorsels) {
+        return ApiMorsels.getTemplates().then(function(templateResp) {
+          return templateResp.data;
+        }, function() {
+          //if there's an error retrieving a morsel, go to drafts
+          $state.go('drafts');
+        });
+      }
+    }
+  });
 })
 
 .controller( 'NewMorselCtrl', function NewMorselCtrl( $scope, currentUser, templateData, ApiMorsels, ApiItems, HandleErrors, $location, $q ) {
   var newMorselData,
       newMorselTemplate;
-
   $scope.templates = templateData;
 
   //catch from our template directive

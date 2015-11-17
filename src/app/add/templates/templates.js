@@ -7,8 +7,12 @@ angular.module('Morsel.add.templates', [] )
     scope: {
       templateData: '=mrslAddTemplate',
       justHelp: '@mrslAddTemplateHelp'
+
     },
     link: function(scope, element, attrs) {
+      if(scope.justHelp=='plugin'){
+        createMorsel(1);
+      }
       scope.templateClick = function () {
         //if it's quick add
         if(scope.templateData.id === 1) {
@@ -55,7 +59,7 @@ angular.module('Morsel.add.templates', [] )
           $modalInstance.dismiss('cancel');
         };
       };
-      
+
       function createMorsel(templateId) {
         var morselParams = {
           morsel: {
