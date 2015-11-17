@@ -28,8 +28,8 @@ angular.module( 'Morsel.add.new', [])
     }
   });
 }).config(function config( $stateProvider ) {
-  $stateProvider.state( 'create-morsel', {
-    url: '/add-morsel',
+  $stateProvider.state( 'addnew', {
+    url: '/addnew',
     views: {
       "main": {
         controller: 'NewMorselCtrl',
