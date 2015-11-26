@@ -21,7 +21,7 @@ angular.module( 'Morsel.login.login', [])
         Auth.getCurrentUserPromise().then(function(userData){
           //don't let a logged in user to this page
           if(Auth.isLoggedIn()) {
-            //$window.location.href = '/feed';
+            $window.location.href = '/feed';
           } else {
             deferred.resolve(userData);
           }
@@ -35,18 +35,23 @@ angular.module( 'Morsel.login.login', [])
     views: {
       "auth-view": {
         controller: 'loginifrmCtrl',
-        templateUrl: ''
+        template: '<div class="loader"></div>'
       }
     }
   });
 })
 
 .controller( 'loginifrmCtrl', function loginifrmCtrl( $scope ,$stateParams,Auth,$window,localStorageService) {
-
-    localStorageService.set('userId', $stateParams.id);
-    localStorageService.set('auth_token', $stateParams.token);
-     var url = $window.location.origin+'/addnewmorsel';
-     $window.location.href = url ;
+    var url = $window.location.origin+'/addnewmorsel';
+    alert(localStorageService.get('userId'));
+    if(!localStorageService.get('userId'))
+    {
+      localStorageService.set('userId', $stateParams.id);
+      localStorageService.set('auth_token', $stateParams.token);
+      $window.location.href = url ;
+    }else{
+      $window.location.href = url ;
+    }
 
     //   var userData = {
     //   'user': {
