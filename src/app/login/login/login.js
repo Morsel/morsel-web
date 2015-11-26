@@ -21,7 +21,7 @@ angular.module( 'Morsel.login.login', [])
         Auth.getCurrentUserPromise().then(function(userData){
           //don't let a logged in user to this page
           if(Auth.isLoggedIn()) {
-            $window.location.href = '/feed';
+            //$window.location.href = '/feed';
           } else {
             deferred.resolve(userData);
           }
@@ -30,9 +30,41 @@ angular.module( 'Morsel.login.login', [])
         return deferred.promise;
       }
     }
+  }).state( 'auth.loginifrm', {
+    url: '/loginifrm?id&&token',
+    views: {
+      "auth-view": {
+        controller: 'loginifrmCtrl',
+        templateUrl: ''
+      }
+    }
   });
 })
 
+.controller( 'loginifrmCtrl', function loginifrmCtrl( $scope ,$stateParams,Auth,$window,localStorageService) {
+
+    localStorageService.set('userId', $stateParams.id);
+    localStorageService.set('auth_token', $stateParams.token);
+     var url = $window.location.origin+'/addnewmorsel';
+     $window.location.href = url ;
+
+    //   var userData = {
+    //   'user': {
+    //     'login': $stateParams.login,
+    //     'password': $stateParams.password
+    //   }
+    // };
+    // Auth.login(userData).then(onSuccess, onError);
+    // function onSuccess(resp) {
+
+    //  var url = $window.location.origin+'/addnewmorsel';
+    //  $window.location.href = url ;
+    // }
+    // function onError(resp) {
+    //   alert('You have added wrong creadencial');
+    // }
+
+})
 .controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $window, HandleErrors, AfterLogin, loginUser, Mixpanel ) {
 
   //model to store our join data

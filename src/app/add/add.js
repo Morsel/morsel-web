@@ -7,11 +7,12 @@ angular.module( 'Morsel.add', [
   'ngSanitize',
   'pasvaz.bindonce',
   'restangular',
+  'ngCkeditor',
   'ui.bootstrap',
   'ui.router',
   'ui.route',
   'ui.sortable',
-  
+
   //filters
   'Morsel.common.reverse',
 
@@ -166,7 +167,7 @@ angular.module( 'Morsel.add', [
     $scope.currentUser = currentUser;
     $scope.isLoggedIn = Auth.isLoggedIn();
     $scope.isStaff = Auth.isStaff();
-    
+
     //get and send some super properties to mixpanel
     if(Auth.isLoggedIn()) {
       //identify our users by their ID, also don't overwrite their id if they log out by wrapping in if
@@ -202,7 +203,7 @@ angular.module( 'Morsel.add', [
     var currentLocation = $location.path(),
         nextPath,
         topModal = $modalStack.getTop();
-        
+
     //if non logged in user tries to access a restricted route
     if(toState.access && toState.access.restricted && !Auth.potentiallyLoggedIn()) {
       event.preventDefault();
