@@ -146,9 +146,17 @@ angular.module( 'Morsel.add.morsel', [])
 
         $scope.submitMorsel=function(){
           var summary = $scope.morselSummary.text ? $scope.morselSummary.text.trim() : null;
-          var morselParams;
+          var hostuser = $scope.morselSummary.host_user ? $scope.morselSummary.host_user : [];
 
-            // if we have a new selected place, or new value is none but we used to have a selected place
+          var morselParams;
+          var morselParamsForHost;
+
+          morselParamsForHost = {
+            morsel: {
+              morsel_host_ids:[hostuser]
+            },
+            morsel_id : $scope.morsel.id
+          };
           morselParams = {
             morsel: {
               //allow setting location to none/personal
@@ -156,6 +164,12 @@ angular.module( 'Morsel.add.morsel', [])
               summary: summary
             }
           };
+
+          ApiMorsels.asscoiateMorselToUser(morselParamsForHost).then(function(morselData) {
+            console.log(morselData);
+          }, function(resp) {
+            handleErrors(resp);
+          });
           ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
             $window.onbeforeunload = undefined;
             $modalInstance.dismiss('publish');
@@ -163,8 +177,8 @@ angular.module( 'Morsel.add.morsel', [])
           }, function(resp) {
             handleErrors(resp);
           });
-
         };
+
         Auth.getCurrentUserPromise().then(function(user){
           ApiMorsels.checkPublish($scope.morsel.id,user.id).then(function(morselData) {
             if(morselData.data=="OK"){
@@ -176,9 +190,29 @@ angular.module( 'Morsel.add.morsel', [])
           }, function(resp) {
             handleErrors(resp);
           });
+
+          ApiMorsels.received_association_requests(user.id).then(function(userData) {
+            console.log(userData);
+            $scope.selectedHosts=[];
+            if(userData.data.length){
+              $scope.morselSummary={};
+              $scope.morselSummary.host_user=userData.data[0].host_user.id;
+              angular.forEach(userData.data,function(item,idx){
+                if(item.is_approved){
+                  $scope.selectedHosts.push(item);
+                }
+              });
+            }
+
+          }, function(resp) {
+            handleErrors(resp);
+          });
+
         },function(resp){
 
         });
+
+
 
 
       };

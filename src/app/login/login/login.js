@@ -37,38 +37,34 @@ angular.module( 'Morsel.login.login', [])
         controller: 'loginifrmCtrl',
         template: '<div class="loader"></div>'
       }
+    },
+    resolve: {
+      //make sure we resolve a user before displaying
+      loginUser:  function(Auth, $window, $q){
+        var deferred = $q.defer();
+
+        Auth.getCurrentUserPromise().then(function(userData){
+          //don't let a logged in user to this page
+
+          if(Auth.isLoggedIn()) {
+            $window.location.href = '/addnewmorsel';
+          } else {
+            deferred.resolve(userData);
+          }
+        });
+
+        return deferred.promise;
+      }
     }
   });
 })
 
 .controller( 'loginifrmCtrl', function loginifrmCtrl( $scope ,$stateParams,Auth,$window,localStorageService) {
+
     var url = $window.location.origin+'/addnewmorsel';
-    alert(localStorageService.get('userId'));
-    if(!localStorageService.get('userId'))
-    {
-      localStorageService.set('userId', $stateParams.id);
-      localStorageService.set('auth_token', $stateParams.token);
-      $window.location.href = url ;
-    }else{
-      $window.location.href = url ;
-    }
-
-    //   var userData = {
-    //   'user': {
-    //     'login': $stateParams.login,
-    //     'password': $stateParams.password
-    //   }
-    // };
-    // Auth.login(userData).then(onSuccess, onError);
-    // function onSuccess(resp) {
-
-    //  var url = $window.location.origin+'/addnewmorsel';
-    //  $window.location.href = url ;
-    // }
-    // function onError(resp) {
-    //   alert('You have added wrong creadencial');
-    // }
-
+    localStorageService.set('userId', $stateParams.id);
+    localStorageService.set('auth_token', $stateParams.token);
+    $window.location.href = url ;
 })
 .controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $window, HandleErrors, AfterLogin, loginUser, Mixpanel ) {
 
