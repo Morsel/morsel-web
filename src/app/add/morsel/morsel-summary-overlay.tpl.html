@@ -8,15 +8,16 @@
     <div mrsl-base-errors mrsl-val-form="morselSummaryForm"></div>
     <div class="form-group">
       <textarea placeholder="My take on grandma's #pumpkin #pie #recipe for our family #thanksgiving" ng-model="morselSummary.text" name="summary" class="form-control" mrsl-focus-me="true"></textarea>
-      <p ng-if="canSubmit" class="margin-paragraph">Select Host to associate morsel: </p>
+      <p ng-if="canSubmit" class="margin-paragraph">Select Host To Submit Morsel: </p>
 
-       <select ng-if="canSubmit" ng-model="morselSummary.host_user" class="form-control">
+       <select multiple ng-if="canSubmit" ng-model="morselSummary.host_user" class="form-control" ng-change="showButtons()">
+        <option value="0">---Select Here To Publish Morsel---</option>
        <option ng-repeat="user in selectedHosts" value="{{user.host_user.id}}">{{user.host_user.fullname}}</option>
      </select>
     </div>
     <div class="inline-btn">
-    <button mrsl-submit-btn mrsl-submit-btn-form="morselSummaryForm" mrsl-submit-btn-copy="Submit morsel"  ng-if="canSubmit" ng-click="submitMorsel()" class="margin-left-btn"></button>
-    <button mrsl-submit-btn mrsl-submit-btn-form="morselSummaryForm" mrsl-submit-btn-copy="Publish morsel"  ng-click="publish()"></button>
+    <button mrsl-submit-btn mrsl-submit-btn-form="morselSummaryForm" mrsl-submit-btn-copy="Submit Morsel"  ng-if="canSubmit && isSubmitMorsel" ng-click="submitMorsel()" class="margin-left-btn"></button>
+    <button mrsl-submit-btn mrsl-submit-btn-form="morselSummaryForm" mrsl-submit-btn-copy="Publish Morsel" ng-if="!isSubmitMorsel"  ng-click="publish()"></button>
     </div>
   </form>
 </div>
