@@ -40,28 +40,21 @@ angular.module( 'Morsel.login.login', [])
     },
     resolve: {
       //make sure we resolve a user before displaying
-      loginUser:  function(Auth, $window, $q){
+      loginSocialUser:  function(Auth, $window, $q){
         var deferred = $q.defer();
-
         Auth.getCurrentUserPromise().then(function(userData){
           //don't let a logged in user to this page
-
-          if(Auth.isLoggedIn()) {
-            $window.location.href = '/addnewmorsel';
-          } else {
-            deferred.resolve(userData);
-          }
+           deferred.resolve(userData);
         });
-
         return deferred.promise;
       }
     }
   });
 })
 
-.controller( 'loginifrmCtrl', function loginifrmCtrl( $scope ,$stateParams,Auth,$window,localStorageService) {
+.controller( 'loginifrmCtrl', function loginifrmCtrl( $scope ,$stateParams,Auth,$window,localStorageService,loginSocialUser) {
 
-    var url = $window.location.origin+'/addnewmorsel';
+    var url = $window.location.origin+'/account/social-accounts';
     localStorageService.set('userId', $stateParams.id);
     localStorageService.set('auth_token', $stateParams.token);
     $window.location.href = url ;
