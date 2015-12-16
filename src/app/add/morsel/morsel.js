@@ -213,8 +213,9 @@ angular.module( 'Morsel.add.morsel', [])
             if(userData.data.length){
               $scope.morselSummary={};
               $scope.morselSummary.host_user=userData.data[0].host_user.id;
+              curent_user_id = localStorage.getItem('mrsl.userId');
               angular.forEach(userData.data,function(item,idx){
-                if(item.is_approved=="true"){
+                if(item.is_approved=="true" && item.host_user.id!=curent_user_id){
                   $scope.selectedHosts.push(item);
                 }
               });
