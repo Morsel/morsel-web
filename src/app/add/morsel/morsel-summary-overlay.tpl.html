@@ -11,8 +11,8 @@
       <p ng-if="canSubmit" class="margin-paragraph">Choose where to publish morsel: </p>
 
        <select multiple ng-if="canSubmit" ng-model="morselSummary.host_user" class="form-control" ng-change="showButtons()">
-       <option value="0">To My Feed and Social Network</option>
-       <option ng-repeat="user in selectedHosts" value="{{user.host_user.id}}">To {{user.host_user.fullname}} and Social Network</option>
+       <option value="0">To my feed and social networks</option>
+       <option ng-repeat="user in selectedHosts" value="{{user.host_user.id}}">To {{user.host_user.fullname}} and social networks</option>
      </select>
     </div>
     <div class="inline-btn">
