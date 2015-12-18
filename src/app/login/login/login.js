@@ -30,9 +30,35 @@ angular.module( 'Morsel.login.login', [])
         return deferred.promise;
       }
     }
+  }).state( 'auth.loginifrm', {
+    url: '/loginifrm?id&&token',
+    views: {
+      "auth-view": {
+        controller: 'loginifrmCtrl',
+        template: '<div class="loader"></div>'
+      }
+    },
+    resolve: {
+      //make sure we resolve a user before displaying
+      loginSocialUser:  function(Auth, $window, $q){
+        var deferred = $q.defer();
+        Auth.getCurrentUserPromise().then(function(userData){
+          //don't let a logged in user to this page
+           deferred.resolve(userData);
+        });
+        return deferred.promise;
+      }
+    }
   });
 })
 
+.controller( 'loginifrmCtrl', function loginifrmCtrl( $scope ,$stateParams,Auth,$window,localStorageService,loginSocialUser) {
+
+    var url = $window.location.origin+'/account/social-accounts';
+    localStorageService.set('userId', $stateParams.id);
+    localStorageService.set('auth_token', $stateParams.token);
+    $window.location.href = url ;
+})
 .controller( 'LoginCtrl', function LoginCtrl( $scope, $stateParams, Auth, $window, HandleErrors, AfterLogin, loginUser, Mixpanel ) {
 
   //model to store our join data

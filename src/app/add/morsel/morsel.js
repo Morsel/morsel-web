@@ -143,12 +143,24 @@ angular.module( 'Morsel.add.morsel', [])
             $modalInstance.dismiss('publish');
           }
         };
-
+         $scope.isSubmitMorsel = false;
         $scope.submitMorsel=function(){
           var summary = $scope.morselSummary.text ? $scope.morselSummary.text.trim() : null;
+          var hostuser = $scope.morselSummary.host_user ? $scope.morselSummary.host_user : [];
           var morselParams;
+          var morselParamsForHost;
 
-            // if we have a new selected place, or new value is none but we used to have a selected place
+          var index = hostuser.indexOf('0');
+          if(index!=-1){
+             hostuser.splice(index, 1);
+          }
+
+          morselParamsForHost = {
+            morsel: {
+              morsel_host_ids:hostuser
+            },
+            morsel_id : $scope.morsel.id
+          };
           morselParams = {
             morsel: {
               //allow setting location to none/personal
@@ -156,6 +168,13 @@ angular.module( 'Morsel.add.morsel', [])
               summary: summary
             }
           };
+
+          ApiMorsels.asscoiateMorselToUser(morselParamsForHost).then(function(morselData){
+
+          }, function(resp) {
+            handleErrors(resp);
+          });
+
           ApiMorsels.updateMorsel($scope.morsel.id, morselParams).then(function(morselData) {
             $window.onbeforeunload = undefined;
             $modalInstance.dismiss('publish');
@@ -165,6 +184,17 @@ angular.module( 'Morsel.add.morsel', [])
           });
 
         };
+
+        $scope.showButtons = function() {
+          var value = $scope.morselSummary.host_user;
+
+          if(value!="0"){
+            $scope.isSubmitMorsel = true;
+          }else{
+            $scope.isSubmitMorsel = false;
+          }
+        };
+
         Auth.getCurrentUserPromise().then(function(user){
           ApiMorsels.checkPublish($scope.morsel.id,user.id).then(function(morselData) {
             if(morselData.data=="OK"){
@@ -176,11 +206,28 @@ angular.module( 'Morsel.add.morsel', [])
           }, function(resp) {
             handleErrors(resp);
           });
+
+          ApiMorsels.received_association_requests(user.id).then(function(userData) {
+            console.log(userData);
+            $scope.selectedHosts=[];
+            if(userData.data.length){
+              $scope.morselSummary={};
+              $scope.morselSummary.host_user=userData.data[0].host_user.id;
+              curent_user_id = localStorage.getItem('mrsl.userId');
+              angular.forEach(userData.data,function(item,idx){
+                if(item.is_approved=="true" && item.host_user.id!=curent_user_id){
+                  $scope.selectedHosts.push(item);
+                }
+              });
+            }
+
+          }, function(resp) {
+            handleErrors(resp);
+          });
+
         },function(resp){
 
         });
-
-
       };
 
       //track that we've finished the main page of content

@@ -19,6 +19,8 @@ angular.module( 'Morsel.common.apiMorsels', [] )
     return Restangular.one('feed').get();
   };
 
+
+
   Morsels.getMorsel = function(morselId) {
     var deferred = $q.defer();
 
@@ -78,6 +80,17 @@ angular.module( 'Morsel.common.apiMorsels', [] )
 
     return deferred.promise;
   };
+
+   Morsels.received_association_requests = function(userId) {
+    var deferred = $q.defer();
+    Restangular.one('users', userId).customGET('received_association_requests').then(function(resp){
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+      deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
   Morsels.updateMorsel = function(morselId, morselParams) {
     var deferred = $q.defer();
 
@@ -85,6 +98,16 @@ angular.module( 'Morsel.common.apiMorsels', [] )
       deferred.resolve(sortMorselItems(resp));
     }, function(resp) {
       deferred.reject(Restangular.stripRestangular(resp));
+    });
+
+    return deferred.promise;
+  };
+  Morsels.asscoiateMorselToUser = function(morselParams) {
+    var deferred = $q.defer();
+    RestangularMorsels.one('associate_morsel_to_user').customPOST(morselParams).then(function(resp) {
+      deferred.resolve(Restangular.stripRestangular(resp));
+    }, function(resp) {
+     deferred.reject(Restangular.stripRestangular(resp));
     });
 
     return deferred.promise;

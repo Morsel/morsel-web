@@ -13,7 +13,7 @@ angular.module( 'Morsel.common.auth', [] )
   //"private" methods
 
   //an anonymous user
-  Auth._blankUser = function() { 
+  Auth._blankUser = function() {
     return {
       'id': '',
       'email': null,
@@ -125,11 +125,10 @@ angular.module( 'Morsel.common.auth', [] )
 
     ApiUsers.loginUser(userData).then(function(loggedInUserResp) {
       Auth._updateUser(loggedInUserResp.data);
-
       deferred.resolve(loggedInUserResp.data);
     }, function(resp){
-      Auth._clearUser();
-      deferred.reject(resp);
+       Auth._clearUser();
+       deferred.reject(resp);
     });
 
     return deferred.promise;
@@ -218,6 +217,7 @@ angular.module( 'Morsel.common.auth', [] )
   };
 
   Auth.getCurrentUserPromise = function() {
+
     return loadedUser.promise;
   };
 

@@ -1,3 +1,12 @@
+.inline-btn{
+  display: flex;
+}
+.margin-left-btn{
+  padding-right:10px;
+}
+.margin-paragraph{
+  margin: 5px;
+}
 .add-morsel {
   .container {
     padding-top: 15px;
@@ -343,7 +352,7 @@
   width: image-width('graphics/sortable.png')/2;
   background: top left url(images/graphics/sortable.png) repeat-y;
   z-index: 10;
-  
+
   &:hover {
     background-position: top right;
   }
@@ -416,7 +425,9 @@
         margin-top: 0;
 
         p {
-          min-height: $add-morsel-item-thumbnail-height;
+
+       /* min-height: $add-morsel-item-thumbnail-height; */
+          min-height: 0;
         }
 
         textarea {

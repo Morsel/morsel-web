@@ -74,10 +74,11 @@ angular.module('Morsel.add.editItemDescription', [])
           });
         }
       };
-      
+
       scope.formatDescription = function() {
         if(scope.item && scope.item.description) {
-          return scope.item.description.replace(/(\r\n|\n|\r)/g,"<br />");
+          //return scope.item.description.replace(/(\r\n|\n|\r)/g,"<br />");
+          return scope.item.description.replace(/(\r\n|\n|\r)/g,"");
         } else {
           return null;
         }

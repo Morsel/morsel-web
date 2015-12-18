@@ -1,8 +1,8 @@
 <div class="form-group item-description">
   <div class="loader saving" ng-show="saving"></div>
-  <p ng-hide="editingDescription || saving" ng-bind-html="item.description ? formatDescription() : placeholderDescription" ng-class="{'no-text':!item.description}" ng-click="edit()"></p>
+  <p style="min-height:0px;" ng-hide="editingDescription || saving" ng-bind-html="item.description ? formatDescription() : placeholderDescription" ng-class="{'no-text':!item.description}" ng-click="edit()"></p>
   <ng-form ng-show="editingDescription && !saving" name="itemDescriptionForm">
-    <textarea ng-attr-placeholder="{{placeholderDescription}}" ng-model="updatedDescription" name="itemDescription" class="form-control" mrsl-focus-me="editingDescription"></textarea>
+    <textarea ng-attr-placeholder="{{placeholderDescription}}" ng-model="updatedDescription" name="itemDescription" class="form-control" mrsl-focus-me="editingDescription" ckeditor="editorOptions"></textarea>
     <div class="form-group-btns">
       <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
       <button type="button" class="btn btn-primary" ng-click="save()">Save</button>
