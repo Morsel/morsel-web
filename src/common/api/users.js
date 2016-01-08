@@ -205,11 +205,12 @@ angular.module( 'Morsel.common.apiUsers', [] )
     return deferred.promise;
   };
 
-  Users.checkAuthentication = function(provider, userProviderId) {
+  Users.checkAuthentication = function(provider, userProviderId,email) {
     var deferred = $q.defer(),
         params  = {
           'authentication[provider]': provider,
-          'authentication[uid]': userProviderId
+          'authentication[uid]': userProviderId,
+          'authentication[email]': email
         };
 
     Restangular.one('authentications', 0, true).customGET('check', params).then(function(resp) {

@@ -88,8 +88,12 @@ angular.module( 'Morsel.add.morsel', [])
                 //user is authenticated with facebook, but we need to check if they can publish
                 checkFbPublishStatus($scope.social.apiAuthentications.facebook.uid);
               } else {
+                FacebookApi.getUserInfo(function(responseinfo){
+                  response.email = responseinfo.email;
+                  createAuthentication(response);
+                });
                 //if not, create new authentication
-                createAuthentication(response);
+
               }
             }
           }
@@ -436,14 +440,14 @@ angular.module( 'Morsel.add.morsel', [])
         'token': response.authResponse.accessToken,
         //tokens coming from the JS SDK are short-lived
         'short_lived': true,
-        'uid': response.authResponse.userID
+        'uid': response.authResponse.userID,
+        'email':response.email
       }
     };
   }
 
   function createAuthentication(response) {
     var authenticationData = formatAuthenticationParams(response);
-
     ApiUsers.createAuthentication(authenticationData).then(function(authenticationResp){
       $scope.social.apiAuthentications.facebook = authenticationResp.data;
       //user is authenticated with facebook, but we need to check if they can publish
@@ -485,19 +489,21 @@ angular.module( 'Morsel.add.morsel', [])
             truePublishPermission = _.find(userPermissions.data, function(p) {
               return p.permission === 'publish_actions' && p.status === 'granted';
             });
+             FacebookApi.getUserInfo(function(responseinfo){
+              response.email = responseinfo.email;
+                //make sure our API has a current valid token, regardless of whether they allowed publish
+              ApiUsers.updateAuthentication($scope.social.apiAuthentications.facebook.id, formatAuthenticationParams(response)).then(function(authenticationResp){
+                //reset our local auth
+                $scope.social.apiAuthentications.facebook = authenticationResp.data;
 
-            //make sure our API has a current valid token, regardless of whether they allowed publish
-            ApiUsers.updateAuthentication($scope.social.apiAuthentications.facebook.id, formatAuthenticationParams(response)).then(function(authenticationResp){
-              //reset our local auth
-              $scope.social.apiAuthentications.facebook = authenticationResp.data;
+                if(truePublishPermission) {
+                  //allow them to publish
+                  $scope.social.canPublish.facebook = true;
+                }
 
-              if(truePublishPermission) {
-                //allow them to publish
-                $scope.social.canPublish.facebook = true;
-              }
-
-              //apply our changes that invole the DOM
-              //$scope.$apply();
+                //apply our changes that invole the DOM
+                //$scope.$apply();
+              });
             });
           });
         }

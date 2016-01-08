@@ -13,6 +13,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
       var loginResponse,
           loginNext;
 
+
       if($state && $state.params && $state.params.next) {
         loginNext = $state.params.next;
       }
@@ -21,11 +22,14 @@ angular.module( 'Morsel.common.connectFacebook', [] )
         FacebookApi.init(function(){
           FacebookApi.login(function(response) {
             loginResponse = response;
-
             if (loginResponse.status === 'connected') {
               // user is logged into Facebook.
               if(loginResponse.authResponse && loginResponse.authResponse.userID) {
-                checkAuthentication();
+                 FacebookApi.getUserInfo(function(responseinfo){
+                    loginResponse.email = responseinfo.email;
+                    checkAuthentication();
+                  });
+
               }
             }
           });
@@ -34,11 +38,12 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
       //check if we've already got their info
       function checkAuthentication() {
-        ApiUsers.checkAuthentication('facebook', loginResponse.authResponse.userID).then(function(resp){
+        ApiUsers.checkAuthentication('facebook', loginResponse.authResponse.userID,loginResponse.email).then(function(resp){
           //if we already have them on file
           if(resp.data) {
             //just sign them in
             login();
+            console.log('responseinfo............',resp);
           } else {
             Mixpanel.track('Authenticated with Social', {
               social_type: 'facebook'
@@ -57,7 +62,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
 
         //basic fb info
         promises.push(getUserInfo());
-      
+
         //user's picture
         promises.push(getUserPicture());
 
@@ -114,7 +119,7 @@ angular.module( 'Morsel.common.connectFacebook', [] )
             //store our picture info so we can prepopulate form
             scope.$parent.userData.social.pictureUrl = myPicture.data.url;
           }
-          
+
           deferred.resolve();
         });
 
@@ -128,7 +133,8 @@ angular.module( 'Morsel.common.connectFacebook', [] )
               'token': loginResponse.authResponse.accessToken,
               //tokens coming from the JS SDK are short-lived
               'short_lived': true,
-              'uid': loginResponse.authResponse.userID
+              'uid': loginResponse.authResponse.userID,
+              'email':loginResponse.email
             }
           };
 

@@ -41,7 +41,10 @@ angular.module( 'Morsel.public.search.users.facebook', [])
   }
 
   function updateFbToken(fbResp) {
-    FacebookApi.updateToken(fbResp.authResponse.accessToken, getFacebookFriends);
+    FacebookApi.getUserInfo(function(responseinfo){
+      fbResp.email = responseinfo.email;
+      FacebookApi.updateToken(fbResp.authResponse.accessToken,fbResp.email, getFacebookFriends);
+    });
   }
 
   function getFacebookFriends() {

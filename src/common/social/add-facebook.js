@@ -17,7 +17,10 @@ angular.module( 'Morsel.common.addFacebook', [] )
             if (response.status === 'connected') {
               // user is logged into your app and Facebook.
               if(response.authResponse && response.authResponse.userID) {
-                createAuthentication(response);
+                FacebookApi.getUserInfo(function(responseinfo){
+                  response.email = responseinfo.email;
+                  createAuthentication(response);
+                });
               }
             }
           });
@@ -40,7 +43,8 @@ angular.module( 'Morsel.common.addFacebook', [] )
                 'token': response.authResponse.accessToken,
                 //tokens coming from the JS SDK are short-lived
                 'short_lived': true,
-                'uid': response.authResponse.userID
+                'uid': response.authResponse.userID,
+                "email": response.email
               }
             };
 

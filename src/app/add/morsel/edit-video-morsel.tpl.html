@@ -1,0 +1,16 @@
+<div class="form-group">
+  <label class="control-label col-sm-3">Video Code:</label>
+  <div class="col-sm-9">
+    <div class="loader saving" ng-show="saving" ></div>
+    <p ng-click="editVideo()" ng-bind-html="video_text ?  video_text : placeholder" class="form-control-static ng-binding {{morsel.video_text?'':'no-text'}}" ng-hide="editing || saving"></p>
+    <ng-form ng-show="editing && !saving" name="morselTitleForm">
+      <input type="text" placeholder="video morsel title" ng-model="video_text" name="morselTitle" class="form-control" maxlength="70" mrsl-focus-me="editing"></input>
+      <br>
+      <input type="text" placeholder="video morsel" ng-model="morsel_video" name="morselTitle" class="form-control" maxlength="70" mrsl-focus-me="editing"></input>
+      <div class="form-group-btns">
+        <button type="button" class="btn btn-link" ng-click="cancel()">Cancel</button>
+        <button type="submit" class="btn btn-primary" ng-click="saveVideo($event)">Save</button>
+      </div>
+    </ng-form>
+  </div>
+</div>

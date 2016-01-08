@@ -183,4 +183,8 @@ angular.module('Morsel.common.morsel', [])
     },
     templateUrl: 'common/morsels/morsel-feed-nav.tpl.html'
   };
-});
+}) .filter('to_trusted', ['$sce', function($sce){
+  return function(text) {
+    return $sce.trustAsHtml(text);
+  };
+}]);

@@ -79,7 +79,7 @@ angular.module('Morsel.add.editMorselTitle', [])
 
         scope.saving = true;
 
-        //check if anything changed before hitting API 
+        //check if anything changed before hitting API
         if(newTitle === oldTitle) {
           scope.editing = false;
           scope.morselTitleForm.morselTitle.$setValidity('morselTitleSaved', true);
@@ -109,5 +109,57 @@ angular.module('Morsel.add.editMorselTitle', [])
       };
     },
     templateUrl: 'app/add/morsel/edit-morsel-title.tpl.html'
+  };
+}).directive('editVideoMorsel', function(ApiMorsels) {
+  return {
+    restrict: 'A',
+    replace: true,
+    scope: {
+      morsel: '=editVideoMorsel'
+    },
+    link: function(scope, element, attrs) {
+      scope.morsel_video=scope.morsel.morsel_video?scope.morsel.morsel_video: null;
+      scope.video_text=scope.morsel.video_text?scope.morsel.video_text: null;
+      scope.placeholder= "Video Title";
+      scope.$watch('video_text', function(newValue){
+        scope.video_text=newValue;
+      });
+      scope.$watch('morsel_video', function(newValue){
+        scope.morsel_video=newValue;
+      });
+      scope.saveVideo = function(e) {
+         e.preventDefault();
+         scope.saving = true;
+        //treat null titles as empty strings so we don't bother updating null values with blanks
+         var morselParams = {
+              morsel: {
+                morsel_video: scope.morsel_video,
+                video_text: scope.video_text
+              }
+            };
+          ApiMorsels.updateMorsel(scope.morsel.id, morselParams).then(function(res) {
+            scope.editing = false;
+            scope.saving = false;
+            scope.video_text=res.video_text;
+            scope.morsel_video=res.morsel_video;
+          }, function(resp) {
+            scope.saving = false;
+            scope.$emit('add.error', resp);
+          });
+
+        //need to prevent this from bubbling up and submitting our main form
+      };
+      scope.editVideo = function(){
+        scope.editing = true;
+      };
+
+      scope.cancel = function(){
+        scope.editing = false;
+        scope.video_text = scope.video_text;
+        scope.morsel_video = scope.morsel_video;
+      };
+
+    },
+    templateUrl: 'app/add/morsel/edit-video-morsel.tpl.html'
   };
 });

@@ -14,7 +14,7 @@ angular.module( 'Morsel.common.facebookApi', [] )
       window.fbAsyncInit = function() {
         FB.init({
           appId      : window.MorselConfig.facebookAppId,
-          cookie     : true,  // enable cookies to allow the server to access 
+          cookie     : true,  // enable cookies to allow the server to access
                               // the session
           xfbml      : false,  // parse social plugins on this page
           version    : 'v2.0' // use version 2.0
@@ -50,12 +50,13 @@ angular.module( 'Morsel.common.facebookApi', [] )
   };
 
   //needs to be called whenever a user logs into facebook while already logged into morsel
-  fb.updateToken = function(token, callback) {
+  fb.updateToken = function(token,email, callback) {
     var authenticationData = {
       'authentication': {
         //tokens coming from the JS SDK are short-lived
         'short_lived': true,
-        'token': token
+        'token': token,
+        'email':email
       }
     };
 

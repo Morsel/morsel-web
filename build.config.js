@@ -55,7 +55,7 @@ module.exports = {
     ctpl: [ 'src/common/**/*.tpl.html' ],
 
     html: [ 'src/views/*.hbs' ],
-    sass: ['src/sass/main.scss', 'src/sass/error-page.scss']
+    sass: ['src/sass/main.scss','src/sass/error-page.scss']
   },
 
   /* files just related to our public app */
@@ -166,16 +166,8 @@ module.exports = {
         'vendor/ui-router-extras/release/ct-ui-router-extras.min.js',
         'vendor/ng-clip/ngClip.js',
         'vendor/ng-clip/ZeroClipboard.min.js',
-        'vendor/embed-code/embed.js',
-        'vendor/ck-editor/ckeditor.js',
-        'vendor/ck-editor/ng-ckeditor.js',
-        'vendor/ck-editor/config.js',
-        'vendor/ck-editor/lang/en.js',
-        'vendor/ck-editor/styles.js',
-        'vendor/ck-editor/skins/moono/editor_gecko.css',
-        'vendor/ck-editor/skins/moono/editor.css',
-        'vendor/ck-editor/contents.css',
-        'vendor/ck-editor/skins/moono/icons.png'
+        'vendor/embed-code/embed.js'
+
       ],
       css: [
       ],
@@ -252,16 +244,8 @@ module.exports = {
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.min.js',
-        'vendor/restangular/dist/restangular.js',
-        'vendor/ck-editor/ckeditor.js',
-        'vendor/ck-editor/ng-ckeditor.js',
-        'vendor/ck-editor/config.js',
-        'vendor/ck-editor/lang/en.js',
-        'vendor/ck-editor/styles.js',
-        'vendor/ck-editor/skins/moono/editor_gecko.css',
-        'vendor/ck-editor/skins/moono/editor.css',
-        'vendor/ck-editor/contents.css',
-        'vendor/ck-editor/skins/moono/icons.png'
+        'vendor/restangular/dist/restangular.js'
+
       ],
       css: [
       ],
@@ -326,16 +310,8 @@ module.exports = {
         'vendor/moment/moment.js',
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.min.js',
-        'vendor/restangular/dist/restangular.js',
-        'vendor/ck-editor/ckeditor.js',
-        'vendor/ck-editor/ng-ckeditor.js',
-        'vendor/ck-editor/config.js',
-        'vendor/ck-editor/lang/en.js',
-        'vendor/ck-editor/styles.js',
-        'vendor/ck-editor/skins/moono/editor_gecko.css',
-        'vendor/ck-editor/skins/moono/editor.css',
-        'vendor/ck-editor/contents.css',
-        'vendor/ck-editor/skins/moono/icons.png'
+        'vendor/restangular/dist/restangular.js'
+
       ],
       css: [
       ],
@@ -374,16 +350,8 @@ module.exports = {
         'vendor/matchMedia/matchMedia.js',
         'vendor/matchMedia/matchMedia.addListener.js',
         'vendor/lodash/dist/lodash.js',
-        'vendor/restangular/dist/restangular.js',
-        'vendor/ck-editor/ckeditor.js',
-        'vendor/ck-editor/ng-ckeditor.js',
-        'vendor/ck-editor/config.js',
-        'vendor/ck-editor/lang/en.js',
-        'vendor/ck-editor/styles.js',
-        'vendor/ck-editor/skins/moono/editor_gecko.css',
-        'vendor/ck-editor/skins/moono/editor.css',
-        'vendor/ck-editor/contents.css',
-        'vendor/ck-editor/skins/moono/icons.png'
+        'vendor/restangular/dist/restangular.js'
+
       ],
       css: [
       ],
@@ -464,20 +432,21 @@ module.exports = {
         'vendor/lodash/dist/lodash.js',
         'vendor/ng-file-upload/angular-file-upload.min.js',
         'vendor/ng-sortable/dist/ng-sortable.min.js',
-        'vendor/restangular/dist/restangular.js',
-        'vendor/ck-editor/ckeditor.js',
-        'vendor/ck-editor/ng-ckeditor.js',
-        'vendor/ck-editor/config.js',
-        'vendor/ck-editor/lang/en.js',
-        'vendor/ck-editor/styles.js',
-        'vendor/ck-editor/skins/moono/editor_gecko.css',
-        'vendor/ck-editor/skins/moono/editor.css',
-        'vendor/ck-editor/contents.css',
-        'vendor/ck-editor/skins/moono/icons.png'
+        'vendor/restangular/dist/restangular.js'
+        // 'vendor/ck-editor/ckeditor.js',
+        // 'vendor/ck-editor/ng-ckeditor.js',
+        // 'vendor/ck-editor/config.js',
+        // 'vendor/ck-editor/lang/en.js'
       ],
+
       css: [
+        // 'vendor/ck-editor/skins/moono/editor_gecko.css',
+        // 'vendor/ck-editor/skins/moono/editor.css',
+        // 'vendor/ck-editor/contents.css'
       ],
       assets: [
+        //'vendor/ck-editor/skins/moono/icons.png'
+
       ]
     }
   },
@@ -546,6 +515,26 @@ module.exports = {
     assets: [
     ]
   },
+
+  ckeditor: {
+    js: [
+      'vendor/ck-editor/ckeditor.js',
+      'vendor/ck-editor/ng-ckeditor.js',
+      'vendor/ck-editor/config.js',
+      'vendor/ck-editor/styles.js'
+      //'vendor/ck-editor/contents.css'
+    ],
+    css: [
+      'vendor/ck-editor/skins/moono/editor_gecko.css',
+      'vendor/ck-editor/skins/moono/editor.css',
+      'vendor/ck-editor/contents.css',
+      'vendor/ck-editor/skins/moono/editor.css'
+    ],
+    assets: [
+
+    ]
+  },
+
 
   /*
    * A list of all the files that we could potentially update regardint the style guide
